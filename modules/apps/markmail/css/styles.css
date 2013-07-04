@@ -1,0 +1,47 @@
+#gadgets .span12{
+	/*border-bottom:1px solid #ccc;*/
+	margin-bottom: 20px;
+}
+
+#sticky{
+	opacity:1;
+	
+}
+#gadgets{
+	 opacity: 1;
+}
+
+.intro{
+	margin-top:20px;
+	
+	padding-bottom:20px;
+}
+.intro h2{
+	font-size:22px !important;
+	border-bottom:1px solid #CCCCCC;
+	margin-bottom:40px;
+}
+
+.intro h2 span{
+	background:#FFFFFF;
+	position:relative;
+	top:20px;
+	padding:0 20px;
+}
+
+iframe{
+	min-height:400px;
+}
+.total-counts {
+	padding-bottom:20px;
+	
+}
+.total-counts div{
+	border:1px solid #FFFFFF;
+	/*cursor: pointer;*/
+}
+
+.total-counts div:hover{
+	background:#F5F5F5;
+	border:1px solid #CCCCCC;
+}

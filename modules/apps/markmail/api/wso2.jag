@@ -1,0 +1,54 @@
+<%
+include_once("markmailAPI.jag")
+//org.wso2.carbon-jira,org.wso2.stratos-dev,org.wso2.carbon-dev,org.wso2-dev
+
+var list = request.getParameter("list");
+var to = request.getParameter("to");
+var from = request.getParameter("from");
+var action = request.getParameter("action");
+
+
+
+if(list !=null){
+	switch (list) {
+        case "commits": 		
+        	list = 'org.wso2.carbon-commits';
+       	break;
+        
+        case "jira":
+        	list = 'org.wso2.carbon-jira';
+        break;
+        
+        case "dev":
+        	list = 'org.wso2-dev';
+        break;
+        
+        case "carbon-dev": 	
+        	list = 'org.wso2.carbon-dev';
+        break;
+        
+        case "architecture":
+            list = 'org.wso2.architecture';
+        break;
+	
+	}
+
+	if(to !=null && from !=null && action==null){
+        	print(markmailAPI.list(list,from,to));    
+	}
+	else if (to !=null && from !=null && action !=null ){
+		
+		switch (action) {
+    		case "sender" :
+    			print(markmailAPI.listSender(list,from,to));
+    			break;
+    		case "totalPosts" :
+    			print(markmailAPI.getTotalPosts(list,from,to));
+    			break;
+    		}
+         					
+    	}
+		
+}
+         						
+%>

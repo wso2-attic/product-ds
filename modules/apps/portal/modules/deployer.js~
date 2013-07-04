@@ -1,0 +1,58 @@
+var site = function (options) {
+    var meta,
+        path = '/_system/governance/sites/' + options.provider + '/' + options.name + '/' + options.version,
+        server = require('/modules/server.js'),
+        site = require('/modules/site-browser.js'),
+        registry = server.registry(),
+        metapath = site.SITE_METADATA + options.site;
+    registry.put(path, {
+        mediaType: 'application/vnd.wso2-site+xml',
+        content: buildSiteRXT(options).toXMLString()
+    });
+    site.authorizeRoles(options.site, options.roles, options.action);
+    site.authorizeUsers(options.site, options.users, options.action);
+
+    meta = registry.exists(metapath) ? parse(registry.content(metapath).toString()) : {};
+    meta.aid = path;
+    registry.put(metapath, {
+        content: stringify(meta)
+    });
+};
+
+var gadget = function (options) {
+    var path = '/_system/governance/gadgets/' + options.provider + '/' + options.name + '/' + options.version,
+        server = require('/modules/server.js'),
+        registry = server.registry();
+    registry.put(path, {
+        mediaType: 'application/vnd.wso2-gadget+xml',
+        content: buildGadgetRXT(options).toXMLString()
+    });
+};
+
+var buildGadgetRXT = function (options) {
+    var rxt = <metadata xmlns="http://www.wso2.org/governance/metadata">
+        <overview>
+            <provider>{options.provider}</provider>
+            <name>{options.name}</name>
+            <version>{options.version}</version>
+            <thumbnail>{options.thumbnail}</thumbnail>
+            <url>{options.url}</url>
+            <status>{options.status}</status>
+        </overview>
+    </metadata>;
+    return rxt;
+};
+
+var buildSiteRXT = function (options) {
+    var rxt = <metadata xmlns="http://www.wso2.org/governance/metadata">
+        <overview>
+            <provider>{options.provider}</provider>
+            <name>{options.name}</name>
+            <version>{options.version}</version>
+            <thumbnail>{options.thumbnail}</thumbnail>
+            <url>{options.url}</url>
+            <status>{options.status}</status>
+        </overview>
+    </metadata>;
+    return rxt;
+};

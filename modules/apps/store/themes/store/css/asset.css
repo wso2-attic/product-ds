@@ -1,0 +1,116 @@
+body .store-left {
+    padding-top: 0;
+}
+.asset-description {
+    position: relative;
+    padding-top: 0;
+}
+.asset-description-header h2 {
+    margin-top: 12px;
+}
+.asset-description-header {
+    background: #fff;
+}
+.asset-description-header .row > div {
+    position: relative;
+    height: 300px;
+}
+.asset-description-header .row {
+    margin-bottom: 0;
+}
+
+#modal-add-gadget code {
+    display: block;
+}
+
+#modal-add-gadget .copy-status {
+    margin-right: 20px;
+}
+
+/*
+ .assetp-properties li:nth-child(even) {
+ background: #f5f5f5;
+ }
+ */
+.assetp-properties .tab-content {
+    overflow: visible;
+}
+
+
+#tab-reviews li {
+    background: none repeat scroll 0 0 transparent;
+    border-bottom: 1px solid #CCCCCC;
+    font-size: 14px;
+    padding: 9px 0 5px;
+}
+#tab-reviews .content {
+    position: relative;
+}
+
+#tab-reviews li p {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+#tab-reviews ul {
+    position: relative;
+}
+
+#tab-reviews .tab-reviewer {
+    color: #888888;
+    font-size: 12px;
+    font-style: italic;
+    text-align: right;
+}
+#tab-review-box {
+    padding: 10px;
+    background: #F5F5F5;
+}
+#tab-review-box .row-fluid {
+    margin-bottom: 0;
+}
+
+#reviews-loader {
+    display: none;
+}
+
+.asset-banner {
+    left: -15px;
+}
+
+.asset-intro-box {
+    left: 564px;
+}
+
+a.btn-embed {
+    border-radius: 4px 4px 4px 4px;
+    color: #AAAAAA;
+    font-size: 18px;
+    letter-spacing: 3px;
+    padding: 10px;
+    background: #ECF0F1;
+    margin-top: 0;
+    display: inline-block;
+}
+
+a.btn-embed:hover {
+    background: #ECF0F1;
+    color: #2C3238;
+}
+
+a.site{
+display:none;
+}
+
+textarea.site{
+dsplay:none;
+}
+
+.embed-snippet{
+
+}
+
+@media all and (max-width: 1225px) {
+    .asset-intro-box {
+        
+    }
+}

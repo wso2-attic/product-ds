@@ -1,0 +1,76 @@
+<%
+
+var markmailAPI = {
+
+	list:function (group,from,to) {
+
+	   
+	    var result = get("http://wso2.markmail.org/graph.xqy?q=list%3A"+group+"%20date%3A"+from+"-"+to, null,"xml");
+		var xml= result.data;
+		var arry = new Array();
+		for(var i=0; i<xml.data.length();i++){
+			if(xml.data[i].@selected==1){
+				var obj = { month : xml.data[i].@name, count : xml.data[i].@value };
+				arry[i] = obj;
+			}
+		}
+
+ 	return {
+ 		 title:xml.Yheaders.@title,
+ 		 list: group,
+         msg: arry
+        };
+	},
+	
+
+	listSender:function (group,from,to) {
+
+		
+		var result = get("http://wso2.markmail.org/facets.xqy?q=list%3A"+group+"%202012%20date%3A"+from+"-"+to+"%20&type=senders&mode=json", null,"json"); 
+		var arry = new Array();
+
+		var outresult = result.data.facets.senders;
+		if(outresult != null){
+			var countmsg= result.data.facets.senders.item;
+		
+			for(var i=0; i<outresult.item.length;i++){
+				var emails = outresult.item[i].url.toString().split("\"");
+				var emailid= decodeURI(emails[1]).replace("%40","@");
+				var obj = { email : emailid, count : outresult.item[i].value };
+				arry[i] = obj;
+
+			}
+		}
+		
+	 	return {
+	 		 title:"Senders from "+from+" to "+to,
+	 		 list: group,
+	         msg: arry
+	        };
+	},
+	
+	getTotalPosts:function (group,from,to) {
+      
+        var result = get("http://wso2.markmail.org/graph.xqy?q=list%3A"+group+"%20date%3A"+from+"-"+to, null,"xml");
+		var xml= result.data;
+		var arry = new Array();
+		var count = 0;
+		
+		for(var i=0; i<xml.data.length();i++){
+			if(xml.data[i].@selected==1){
+				count += parseInt(xml.data[i].@value);
+
+			}
+		}
+		
+		return {
+	 		 count:count,
+	 		 list: group
+	 	}
+		
+	}
+	
+	
+
+}
+%>

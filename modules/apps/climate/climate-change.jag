@@ -1,0 +1,66 @@
+<%
+
+var scripts = [];
+var styles = [];
+
+include("includes/header.jag");
+
+%>
+
+			<div class="row">
+				<div class="span12">
+					<h1>Climate Change</h1>
+					
+					 <div id="map_canvas"></div>
+				</div>
+
+			</div>
+
+			
+			<div id="map-tip">
+				<span><i class="icon-map-marker icon-large"></i> Select a Country to begin</span> <i data-dismiss="alert" class="icon-remove close" type="button">
+							</i>
+					
+			</div>
+			
+			<div id="sticky-anchor"></div>
+			<div id="sticky" class="row">
+				<div class="span12">
+					<div id="timeslider">
+						<div class="layout-slider">
+							<input id="Slider1" type="slider" name="area" value="25;75" />
+						</div>
+						<span class="slider-year">Year range</span>
+					</div>
+				</div>
+			</div>
+
+<%
+var optionsG0 = { id: "g0", container: "gadgetarea-0", userPrefs: {} };
+ues.gadgets.addGadget("http://localhost:9763/portal/gadgets/agricultural-land/agricultural-land.xml", optionsG0);
+%>
+<div id="gadgetarea-0" style="width:50%; float:left;"></div>
+<%
+var optionsG1 = { id: "g1", container: "gadgetarea-1", userPrefs: {} };
+ues.gadgets.addGadget("http://localhost:9763/portal/gadgets/co2-emission/co2-emission.xml", optionsG1);
+%>
+<div id="gadgetarea-1" style="width:50%; float:right;"></div>
+<%
+var optionsG2 = { id: "g2", container: "gadgetarea-2", userPrefs: {} };
+ues.gadgets.addGadget("http://localhost:9763/portal/gadgets/energy-use/energy-use.xml", optionsG2);
+%>
+<div id="gadgetarea-2" style="clear:both"></div>
+<%
+var optionsG3 = { id: "g3", container: "gadgetarea-3", userPrefs: {} };
+ues.gadgets.addGadget("http://localhost:9763/portal/gadgets/greenhouse-gas/greenhouse-gas.xml", optionsG3);
+%>
+<div id="gadgetarea-3" style="clear:both"></div>
+
+
+
+<%
+include("includes/footer.jag");
+%>
+
+
+

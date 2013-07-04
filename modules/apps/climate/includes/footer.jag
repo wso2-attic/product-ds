@@ -1,0 +1,64 @@
+			<footer>
+				<div class="row">
+					<div class="span5">
+						<p>
+							&copy; 2013 WSO2 Inc. All Rights Reserved.
+						</p>
+					</div>
+					<div class="span7 txt-right">
+						<a id="btn-github" class="border-radius-4 btn-footer" href="#"><i class="icon-github"></i> View Project on GitHub</a>
+						<button id="btn-follow" class="border-radius-4 btn-footer">
+							Follow WSO2 <a href="#"> <i class="icon-twitter"></i> </a><a href="#"> <i class="icon-facebook"></i> </a>
+						</button>
+					</div>
+				</div>
+			</footer>
+
+</div>
+		<!-- /container -->
+		
+		<script src="js/jquery-1.8.3.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="js/jshashtable-2.1_src.js"></script>
+		<script type="text/javascript" src="js/jquery.numberformatter-1.2.3.js"></script>
+		<script type="text/javascript" src="js/tmpl.js"></script>
+		<script type="text/javascript" src="js/jquery.dependClass-0.1.js"></script>
+		<script type="text/javascript" src="js/draggable-0.1.js"></script>
+		<script type="text/javascript" src="js/jquery.slider.js"></script>
+		<script type="text/javascript" src="js/jquery.gridster.js"></script>
+		
+		<script>
+			$(".gridster ul").gridster({
+				widget_margins : [10, 10],
+				widget_base_dimensions : [570, 10]
+			});
+		</script>
+		
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
+		<script type="text/javascript" src="js/climate-change.js"></script>
+		<%
+		if(scripts){
+
+			for(var i=0; i<scripts.length; i++){
+				print('<script type="text/javascript" src="' + scripts[i] + '"></script>');
+			}
+		}
+		%>
+
+				<!-- imports needed for gadget rendering -->
+
+
+		<script type="text/javascript" src="/portal/lib/gadget-rendering/js/external/head.min.js"></script>
+		<script type="text/javascript" src="/portal/lib/gadget-rendering/js/main.js"></script>
+
+		<!-- styles -->
+		<link rel="stylesheet" type="text/css" href="/portal/lib/gadget-rendering/css/style.css">
+		<link rel="stylesheet" type="text/css" href="/portal/lib/gadget-rendering/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/portal/lib/gadget-rendering/css/font-awesome.css">
+		<!-- END imports needed for gadget rendering -->
+		
+
+	</body>
+</html>

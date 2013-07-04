@@ -1,0 +1,21 @@
+{
+	"sites": [
+		{
+			"name": 'Markmail',
+			"tags": "report,mail,markMail",
+			"rate": 3,
+			"attributes": {
+				"overview_status": "CREATED",
+				"overview_name": 'Markmail',
+				"overview_version": '1.0.0',
+				"overview_url": 'http://localhost:9763/markmail/',
+				"overview_provider": 'admin',
+				"images_thumbnail": 'http://localhost:9763/portal/sites/mark-mail/thumbnail.jpg',
+				"images_banner": 'http://localhost:9763/portal/sites/mark-mail/banner.jpg',
+                "overview_description": "Markmail is a microsite that provides a glance at WSO2 Engineering. " +
+"User can choose preferred time period to analyze the displayed data like, commit, architecture descussions etc. This microsite can be taken as a sample when creating sites in UES",
+
+            }
+		}
+	]
+}

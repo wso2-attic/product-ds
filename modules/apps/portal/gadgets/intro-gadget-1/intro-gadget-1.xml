@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="Intro Gadget 1" height="350"  description="simple gadget sample" >
+        <Require feature="pubsub-2">
+            <Param name="topics">
+                <![CDATA[
+				<Topic title="geodata" name="org.uec.geo.intro1"
+				description="Subscribes to geo data" type="object"
+				subscribe="true"/>
+				]]>
+            </Param>
+        </Require>
+        <Require feature="dynamic-height"/>
+    </ModulePrefs>
+    <Content type="html">
+        <![CDATA[
+       <head>
+            <link href="/portal/themes/portal/css/flot-graph.css" rel="stylesheet" type="text/css">
+	        <script language="javascript" type="text/javascript" src="../../js/flot/excanvas.min.js"></script>
+	        <script language="javascript" type="text/javascript" src="/portal/js/flot/jquery.js"></script>
+	        <script language="javascript" type="text/javascript" src="/portal/js/flot/jquery.flot.js"></script>
+		    <script src="/portal/gadgets/intro-gadget-1/js/intro-gadget-1.js"></script>
+		     <style>
+		    	h5{
+		    	 color: #333333;
+    			font-size: 15px;
+    			padding-top: 12px;
+		    	}
+		    	h5 small{
+		    	 color: #aaa;
+    			font-size: 12px;
+    			display:block;
+    			 margin-top: -6px;
+		    	}
+		    	#placeholder{
+		    	width: 100%; height: 240px; margin: 2px auto 0px auto;_margin-left:-150px;
+		    	}
+		    </style>
+       <head>
+
+        <body>
+        <div style="display: block; text-align:center; font-size: 12pt"><h5>Exports of goods and services <small>(USD billions)</small></h5>
+		    <div id="placeholder" class="demo-placeholder" style="height:90%"></div>
+		</div>
+		</body>
+
+		]]>
+    </Content>
+</Module>

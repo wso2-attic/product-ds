@@ -1,0 +1,55 @@
+<h2>{{t "My Bookmarks"}}</h2>
+<div id="myasset-container" class="row-fluid">
+	<div class="span12">
+		{{#if userAssets}}
+		{{#itr userAssets}}
+		<h3 class="asset-title-separator asset-type-{{key}}">{{cap key}}s</h3>
+		{{#slice value size="3"}}
+		<div class="row-fluid">
+			{{#each .}}
+			{{#attributes}}
+			<div class="span4 store-my-item">
+			<div class="row-fluid">
+				<div class="store-my-item-thumbnail span6">
+					<a href="{{url "/asset/"}}{{../../../key}}?asset={{../path}}"><img src="{{url images_thumbnail}}"></a>
+				</div>
+				<div class="store-my-item-info span6">
+					<a class="asset-title" href="{{url "/asset/"}}{{../../../key}}?asset={{../path}}"> 
+						<strong>{{overview_name}}</strong>
+					</a>
+					<br> 
+					<small>by {{overview_provider}}</small>
+					<div class="btn-group">
+						<a class="btn btn-popover btn-mini {{../../../key}}" data-content='&lt;iframe src="{{../../../../URL}}/gadgets/ifr?url={{overview_url}}"&gt;&lt;/iframe&gt;' data-toggle="popover" data-placement="bottom" title="{{t "Embed this"}} {{../../../key}}">
+							<i class="icon-angle-left"></i> <i class="icon-angle-right"></i>
+						</a>
+
+						<a class="btn btn-mini" data-toggle="tooltip" title="{{t "View"}} {{../../../key}}" href="{{url "/asset/"}}{{../../../key}}?asset={{../path}}">
+							<i class="icon-eye-open"></i>
+						</a>
+						<a class="btn btn-mini asset-remove-btn" type="{{../../../key}}" data-aid="{{../path}}" data-toggle="tooltip" title="{{t "Remove"}} {{../../../key}}">
+							<i class="icon-remove"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+			</div>
+			{{/attributes}}
+			{{/each}}
+		</div>
+		{{/slice}}
+		<hr>
+		{{/itr}}
+		{{else}}
+		<div id="no-data-my-items" class="no-data">
+			<i class="icon-inbox"></i>
+			<p>
+            {{t "You still haven't Bookmark any from the Store."}}
+			</p>
+			<p>
+				<a href="../store/assets/gadget/" class="btn btn-primary">{{t "Bookmark now"}}</a>
+			</p>
+		</div>
+		{{/if}}
+	</div>
+</div>

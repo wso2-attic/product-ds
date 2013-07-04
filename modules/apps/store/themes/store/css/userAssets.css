@@ -1,0 +1,33 @@
+.store-my-item img {
+    width: 128px;
+    float: left;
+    margin-right: 15px;
+}
+
+.store-my-item a.asset-title {
+        color: #333333;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+#no-data-my-items, #no-data-my-items a {
+    font-size: 18px;
+}
+
+#no-data-my-items .btn-primary {
+    padding: 10px 20px;
+}
+
+.store-my-item .btn-group {
+    display: block;
+    margin-top: 20px;
+}
+
+a.site{
+display:none;
+}
+.store-my-item{
+	position:relative;
+}

@@ -1,0 +1,246 @@
+ @media screen {
+                @font-face {
+                    font-family: 'Lato';
+                    font-style: normal;
+                    font-weight: normal;
+                    src: local('Lato'), local('Lato'), url('../font/Lato-Regular.ttf') format('truetype');
+                }
+                
+                  @font-face {
+                    font-family: 'Lato';
+                    font-style: normal;
+                    font-weight: bold;
+                    src: local('Lato'), local('Lato'), url('../font/Lato-Bold.ttf') format('truetype');
+                }
+            }
+
+
+a, a:visited, a:active {
+    color:#16a085;
+}
+.alert-info {
+    position:relative;
+}
+    .alert-info .close {
+        position:absolute;
+        right:15px;
+        top:10px;
+    }
+    .alert-info span {
+        display:block;
+        margin:0 auto;
+        text-align:center;
+        width:300px;
+    }
+body {
+    font:15px/1.531 'Lato', sans-serif;
+    color:#34495E;
+    height:100%;
+    background-color:#ecf0f1 !important;
+    padding-left: 25px;
+}
+.border-radius-4 {
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+}
+#btn-follow {
+    border:1px solid #ccc;
+    color:#979797;
+    background:#ffffff;
+}
+    #btn-follow a {
+        padding:0 5px;
+    }
+.btn-footer {
+    font-weight:600;
+    padding:5px;
+}
+    .btn-footer  i {
+        font-size:22px;
+        line-height:22px;
+        vertical-align:middle;
+    }
+    .btn-footer:hover {
+        text-decoration:none;
+        opacity:.8;
+    }
+#btn-github {
+    background:#16a085;
+    margin-right:20px;
+    color:#ffffff;
+}
+#btn-github {
+    background:#31B2FD;
+    margin-right:20px;
+    color:#ffffff;
+}
+.modal {
+    border-radius:0;
+    z-index: 99;
+    
+}
+.modal-backdrop{
+    z-index: 95;
+}
+
+.navbar-fixed-top, .navbar-fixed-bottom{
+    z-index: 90;
+}
+.btn{
+    border-radius:3px !important;
+     background-image: none;
+}
+.btn-primary {
+    background:none repeat scroll 0 0 #16a085;
+    color:#FFFFFF;
+    text-shadow:none;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled]{
+   background:#07BFAC;
+}
+
+
+footer {
+    border-top:1px solid #16a085;
+    padding-top:30px;
+    width:100%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:50px;
+}
+    footer.container {
+        width:100%;
+    }
+    footer.row {
+        margin:0 auto;
+    }
+
+h1, h2, h3, h4 {
+    margin-bottom:20px;
+}
+html {
+    height:100%;
+}
+iframe {
+    border:none;
+}
+.jslider .jslider-pointer {
+    background-position:-44px -55px !important;
+}
+.jslider .jslider-pointer-hover {
+    background-position:-76px -55px !important;
+}
+.jslider .jslider-value {
+    top:-29px !important;
+}
+.jslider .jslider-value, .jslider .jslider-label {
+    font-size:12px;
+}
+.jslider_round_plastic .jslider-pointer {
+    height:38px !important;
+    margin-left:-8px;
+    top:-7px !important;
+    width:28px !important;
+}
+li {
+    list-style:none;
+}
+
+.layout {
+    padding:50px;
+    font-family:Georgia, serif;
+}
+.layout-slider {
+    margin-bottom:60px;
+    width:80%;
+    margin-left:auto;
+    margin-right:auto;
+}
+.layout-slider-settings {
+    font-size:12px;
+    padding-bottom:10px;
+}
+    .layout-slider-settings pre {
+        font-family:Courier;
+    }
+    
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+    border-radius:0;
+}
+
+.txt-center {
+    text-align:center;
+}
+.txt-right {
+    text-align:right;
+}
+ul {
+    margin:0;
+}
+    ul li {
+        list-style:none;
+    }
+    
+.error {
+    background: none repeat scroll 0 0 #FFF0C4;
+    border-top: 1px solid #F2C976;
+    color: #333333;
+    font-size: 13px;
+    padding: 0 6px;
+    margin-top:0;
+} 
+.elfinder .container-fluid{
+    padding:0;
+}
+
+#logo-wso2{
+      background: url("../img/wso2-logo-small.png") no-repeat scroll left top transparent;
+    display: inline-block;
+    height: 17px;
+    width: 41px;
+    margin-top:4px;
+}
+#logo-wso2:hover{
+    background-position:left -18px;
+}
+.row-white{
+    background: #FFFFFF;
+     border: 1px solid #DDDDDD;
+}
+.row-footer{
+  border-bottom:1px solid #ddd !important;
+    border-top:0;
+    padding:15px 0;
+    color:#7f8c8d;
+    background:#FFFFFF;
+       margin-bottom: 20px;
+}
+.row-footer ul{
+margin-right: 18px;
+}
+.row-footer li{
+    display: inline-block;
+    margin-left:20px;
+}
+.row-footer li:last-child{
+        float: right;
+}
+.row-footer li a{
+    color:#7f8c8d;
+}
+.row-footer li a:hover{
+    color:#16a085;
+    text-decoration: none;
+}
+.autosave-wrapper{
+    font-size: 9px;
+    left: 1px;
+    top: 5px;
+    position: absolute;
+}
+.autosave{
+    color : #aaa;
+}
+

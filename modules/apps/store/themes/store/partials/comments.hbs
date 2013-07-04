@@ -1,0 +1,31 @@
+{{#if user}}
+<div id="tab-review-box">
+    <div class="row-fluid">
+        <div class="span12">
+            <form id="form-review">
+                <textarea name="review-text" class="span12 content required"></textarea>
+                <a class="btn btn-primary" href="#">
+                     {{t "Add Review"}}
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+{{/if}}
+{{#with comments}}
+<ul>
+    <li id="reviews-loader" class="overlay"><img src="{{url "/themes/store/img/preloader-40x40.gif"}}"></li>
+    {{#each .}}
+        <li>
+            <p class="tab-review">
+                {{content}}
+            </p>
+
+            <p class="tab-reviewer">
+                <strong>{{created.author}}</strong> <span>{{created.time}}</span>
+            </p>
+        </li>
+    {{/each}}
+</ul>
+{{/with}}
+

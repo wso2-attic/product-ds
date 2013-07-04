@@ -1,0 +1,66 @@
+<%
+
+var scripts = ['js/gadgetPresenter.js'];
+var styles = [];
+
+//include("includes/header.jag");
+
+%>
+
+			<div class="row">
+				<div class="span12">
+					<h1>Climate Change</h1>
+					
+					 <div id="map_canvas"></div>
+				</div>
+
+			</div>
+
+			
+			<div id="map-tip">
+				<span><i class="icon-map-marker icon-large"></i> Select a Country to begin</span> <i data-dismiss="alert" class="icon-remove close" type="button">
+							</i>
+					
+			</div>
+			
+			<div id="sticky-anchor"></div>
+			<div id="sticky" class="row">
+				<div class="span12">
+					<div id="timeslider">
+						<div class="layout-slider">
+							<input id="Slider1" type="slider" name="area" value="25;75" />
+						</div>
+						<span class="slider-year">Year range</span>
+					</div>
+				</div>
+			</div>
+
+			<!--div id="gadgets" class="row">
+			
+				<div class="gridster span12">
+					<ul>
+						<li data-row="1" data-col="1" data-sizex="1" data-sizey="13">
+							<div id="gadgetArea-0" class="gadget"></div>
+						</li>
+						<li data-row="1" data-col="2" data-sizex="1" data-sizey="13">
+							<div id="gadgetArea-1" class="gadget"></div>
+						</li>
+						<li data-row="2" data-col="1" data-sizex="1" data-sizey="13">
+							<div id="gadgetArea-2" class="gadget"></div>
+						</li>
+						<li data-row="2" data-col="2" data-sizex="1" data-sizey="13">
+							<div id="gadgetArea-3" class="gadget"></div>
+						</li>
+						<li data-row="3" data-col="1" data-sizex="2" data-sizey="13">
+							<div id="gadgetArea-4" class="gadget"></div>
+						</li>
+					</ul>
+				</div>		
+			</div-->
+
+<%
+include("includes/footer.jag");
+%>
+
+
+
