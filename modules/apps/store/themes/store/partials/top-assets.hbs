@@ -1,4 +1,4 @@
-
+{{#if recent}}
 <div id="asset-slideshow-cont">
 	<div class="html_carousel">
 		<div id="asset-slideshow">
@@ -36,10 +36,11 @@
 
 	</div>
 </div>
+{{/if}}
 
 {{#itr recentAssets}}
 <div class="assets-container">
-	<h3 class="asset-title-separator asset-type-{{key}}"><span>Recent {{cap key}}s</span><div class="pagination top-asset-slideshow-pag" id="top-asset-slideshow-pag-{{key}}"></div></h3>
+    <h3 class="asset-title-separator asset-type-{{key}}"><span>{{#if ../recent}}Recent {{/if}}{{cap key}}s</span><div class="pagination top-asset-slideshow-pag" id="top-asset-slideshow-pag-{{key}}"></div></h3>
 
 	<div class="top-asset-slideshow-cont">
 		<div class="html_carousel">

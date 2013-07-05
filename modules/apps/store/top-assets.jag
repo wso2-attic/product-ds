@@ -4,7 +4,19 @@
 
 var caramel;
 ( function() {
-	var gadgets, sites, paging, count, current, total, loggedUser, type = "gadget", options = {}, log = new Log(), user = require('/modules/user.js'), configs = require('/store.js').config(), store = require('/modules/store.js'), site = require('/modules/site.js'), tag = request.getParameter('tag'), ssoLogin = require('/modules/sso-login.js'), ssoUser = session.get('LOGGED_IN_USER');
+	var gadgets, sites, paging, count, current, total, loggedUser,
+            recent = false,
+            type = "gadget",
+            options = {},
+            log = new Log(),
+            user = require('/modules/user.js'),
+            configs = require('/store.js').config(),
+            store = require('/modules/store.js'),
+            site = require('/modules/site.js'),
+            tag = request.getParameter('tag'),
+            query = request.getParameter('query'),
+            ssoLogin = require('/modules/sso-login.js'),
+            ssoUser = session.get('LOGGED_IN_USER');
 	caramel = require('caramel');
 	sso = configs.ssoConfiguration.enabled;
 	loggedUser = (sso && ssoUser) ? {
@@ -17,8 +29,24 @@ var caramel;
 		response.sendError(404, 'Requested page cannot be found');
 		return;
 	}
-	gadgets = store.assets("gadget", paging);
-	sites = store.assets("site", paging);
+
+    if (query) {
+        gadgets = store.search({
+            query: query,
+            type: 'gadget'
+        }, paging);
+        sites = store.search({
+            query: query,
+            type: 'site'
+        }, paging);
+    } else if (tag) {
+        gadgets = store.tagged('gadget', tag, paging);
+        sites = store.tagged('site', tag, paging);
+    } else {
+        recent = true;
+        gadgets = store.assets("gadget", paging);
+        sites = store.assets("site", paging);
+    }
 	recentGadgets = store.recentAssets("gadget", 3);
 	recentSites = store.recentAssets("site", 3);
 	var recentAssets = recentGadgets.concat(recentSites);
@@ -40,7 +68,8 @@ var caramel;
 				gadget : gadgets,
 				site : sites
 			},
-			popularAssets : store.popularAssets(type)
+			popularAssets : store.popularAssets(type),
+            recent : recent
 		},
 		tags : {
 			url : '/assets/' + type + '?page=1&tag=',

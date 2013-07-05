@@ -10,6 +10,7 @@ var currentPage = function (assets,sso,user) {
     var out  = {
         'recentAssets': assets.recentAssets,
         'popularAssets': assets.popularAssets,
+        'recent': assets.recent,
         'sso': sso,
         'user': user
     };
