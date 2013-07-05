@@ -37,6 +37,11 @@ display:none;
 	left: 0;
 }
 
+.asset-in-site{
+	width: 100% !important;
+	left: 0;
+}
+
 .own-asset-slideshow-cont .asset{
     width:200px;
     margin-right: 17px;
