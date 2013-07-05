@@ -33,7 +33,7 @@ display:none;
 }
 
 .asset-in-gadget{
-	width: 900px;
+	width: 100% !important;
 	left: 0;
 }
 
