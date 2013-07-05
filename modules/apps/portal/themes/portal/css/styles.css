@@ -82,11 +82,11 @@ body {
 }
 .modal {
     border-radius:0;
-    z-index: 9005;
+    /*z-index: 9005;*/
 
 }
 .modal-backdrop{
-    z-index: 9004;
+    /*z-index: 9004;*/
 }
 
 .navbar-fixed-top, .navbar-fixed-bottom{
@@ -405,5 +405,10 @@ label.error{
     }
 }
 */
+
+/* fixing the book icon in the footer */
+.icon-book {
+    padding-right: 5px;
+}
 
 

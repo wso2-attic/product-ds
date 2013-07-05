@@ -102,13 +102,16 @@ display:none;
 }
 
 textarea.site{
-dsplay:none;
+display:none;
 }
 
 .embed-snippet{
 
 }
 
+label.error{
+display:none;
+}
 @media all and (max-width: 1225px) {
     .asset-intro-box {
         

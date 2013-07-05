@@ -130,7 +130,7 @@ h1, h2, h3, h4 {
 }
 
 .asset-grid {
-    height: 74%;
+    height: 90%;
     overflow: auto;
     position: relative;
     width: 100%;
@@ -336,6 +336,7 @@ h1, h2, h3, h4 {
 	margin-left:6px;
 }
 .inp-add-ext-url{
+	height:30px!important;
 	margin-bottom:0!important;
 }
 .asset-byUrl .control-label{
@@ -383,7 +384,7 @@ div.icon-external-link-sign {
     overflow-y: hidden;
     padding: 0;
     position: absolute;
-    top: 68px;
+    top: 60px;
     width: 100%;
 }
 @media all and (max-width: 850px) {

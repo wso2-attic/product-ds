@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Module specificationVersion='2'>
+<Module>
     <ModulePrefs title="WSO2 Store Assets" height="350" description="wso2 store sample with pubsub-2">
         <Require feature="pubsub-2">
             <Param name="topics">
@@ -111,7 +111,7 @@
 	<div class="row-fluid show-asset-col-wrapper">
 		<div class="span2 show-asset-left-col">
 			<div>
-				<h4 class="icon icon-tags">All Tags (<span id="tag-num-span">25</span>)</h4>
+				<h4 class="tags-area-text"><span class="icon icon-tags"><span>All Tags (<span id="tag-num-span">25</span>)</h4>
 				<ul id="ul-modal-tags">
 
 				</ul>

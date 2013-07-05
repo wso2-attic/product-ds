@@ -1,14 +1,8 @@
 
-.brand:after {
-    content: "IDE beta";
-    font-size: 15px;
-    height: 20px;
-    left: 208px;
-    opacity: 0.5;
-    position: absolute;
-    right: 0;
-    top: 14px;
-    width: 80px;
+
+.navbar .brand{
+     background:url('../img/logo-ide.png') no-repeat top left;
+     width:250px;
 }
 #tabs-files {
     background: #ECF0F1;
