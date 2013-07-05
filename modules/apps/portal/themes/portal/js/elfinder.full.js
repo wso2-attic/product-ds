@@ -8597,6 +8597,7 @@ elFinder.prototype.commands.indent = function () {
         } else {
             cm.autoFormatRange(form, to);
         }
+        cm.setCursor(form);
         cm.focus();
 
     }
