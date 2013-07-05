@@ -4822,7 +4822,7 @@ $.fn.elfindercwd = function(fm, options) {
 			 **/
 			templates = {
 				icon : '<div id="{hash}" class="'+clFile+' {permsclass} {dirclass} ui-corner-all" title="{tooltip}"><div class="elfinder-cwd-file-wrapper ui-corner-all"><div class="elfinder-cwd-icon {mime} ui-corner-all" unselectable="on" {style}/>{marker}</div><div class="elfinder-cwd-filename" title="{name}">{name}</div></div>',
-				row  : '<tr id="{hash}" class="'+clFile+' {permsclass} {dirclass}" title="{tooltip}"> <td><input type="checkbox" class="chk-asset"></td> <td class="td-left"><div class="elfinder-cwd-file-wrapper"><span class="elfinder-cwd-icon {mime}"/>{marker}<span class="elfinder-cwd-filename">{name}</span></div></td><td class="td-left"><a class="appUrl" href="{url}" target="_blank">{url}</a></td><td>{perms}</td><td>{date}</td><td>{size}</td></tr>'
+				row  : '<tr id="{hash}" class="'+clFile+' {permsclass} {dirclass}" title="{tooltip}"><td class="td-left"><div class="elfinder-cwd-file-wrapper"><span class="elfinder-cwd-icon {mime}"/>{marker}<span class="elfinder-cwd-filename">{name}</span></div></td><td class="td-left"><a class="appUrl" href="{url}" target="_blank">{url}</a></td><td>{perms}</td><td>{date}</td><td>{size}</td></tr>'
 			},
 
 			permsTpl = fm.res('tpl', 'perms'),
@@ -5344,7 +5344,7 @@ $.fn.elfindercwd = function(fm, options) {
 
 				wrapper[list ? 'addClass' : 'removeClass']('elfinder-cwd-wrapper-list');
 
-				list && cwd.html('<table><thead><tr class="ui-state-default"><td><input id="chk-select-all" type="checkbox"></td><td class="td-left">'+msg.name+'</td><td class="td-left">'+msg.url+'</td><td>'+msg.perm+'</td><td>'+msg.mod+'</td><td>'+msg.size+'</td></tr></thead><tbody/></table>');
+				list && cwd.html('<table><thead><tr class="ui-state-default"><td class="td-left">'+msg.name+'</td><td class="td-left">'+msg.url+'</td><td>'+msg.perm+'</td><td>'+msg.mod+'</td><td>'+msg.size+'</td></tr></thead><tbody/></table>');
 
 				buffer = $.map(files, function(f) { return any || f.phash == phash ? f : null; });
 

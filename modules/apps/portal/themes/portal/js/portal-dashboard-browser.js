@@ -36,75 +36,69 @@ $(function() {
 				oldSchool : false
 			}
 		},
-		/*
+
 		handlers : {
-		select : function(event, elfinderInstance) {
-		var selected = event.data.selected;
+			select : function(event, elfinderInstance) {
+				var selected = event.data.selected;
 
-		if (selected.length) {
-		console.log(elfinderInstance.file(selected[0]));
-		var sel = elfinderInstance.file(selected[0]);
-		var tr = $('#' + sel.hash);
-		var checkbox = tr.find('.chk-asset');
-		checkbox.prop('checked', !checkbox.prop('checked'));
+				if (selected.length) {
+					$('#inp-sel-length').val(selected.length);
+				}
 
-		}
-
-		}
+			}
 		},
-		*/
+
 		//allowShortcuts: false,
 
 		resizable : false
 	}).elfinder('instance');
 
+	var siteToHighlight;
 
-    var siteToHighlight;
+	elf.bind('sync', function() {
+		if (siteToHighlight) {
+			var el = $('#' + siteToHighlight);
+			el.addClass('site-just-created');
+			setTimeout(function() {
+				el.removeClass('site-just-created');
+			}, 5000);
+		}
+		siteToHighlight = null;
+	});
 
-    elf.bind('sync', function() {
-        if(siteToHighlight){
-            var el = $('#'+siteToHighlight);
-            el.addClass('site-just-created');
-            setTimeout(function(){
-                el.removeClass('site-just-created');
-            },5000);
-        }
-        siteToHighlight = null;
-    });
+	createApp = function() {
+		if (!$('#btn-new-app').hasClass("disabled")) {
+			var type = $('#inp-title').attr('data-type');
+			var layout = $('#inp-layout').val();
 
-    createApp = function() {
-        if (!$('#btn-new-app').hasClass("disabled")) {
-            var type = $('#inp-title').attr('data-type');
-            var layout = $('#inp-layout').val();
+			if (!$('#form-new-app').valid())
+				return;
 
-            if (!$('#form-new-app').valid())
-                return;
+			$('#btn-new-app').text("Hold on...").addClass("disabled");
 
-            $('#btn-new-app').text("Hold on...").addClass("disabled");
+			var dashboard = $('#inp-title').val();
 
-            var dashboard = $('#inp-title').val();
-
-            $.post('apis/browser.jag', {
-                action : "createSite",
-                site : dashboard
-            }, function(result) {
-                if (result.created != true) {
-                    $('#new-app-alert').html('Another app called <strong>' + dashboard + '</strong> already exists. Please enter a different name').fadeIn();
-                    $('#btn-new-app').text("Create new app").removeClass("disabled");
-                    return;
-                }
-                $('.modal').modal('hide');
-                $('#btn-new-app').text('Create new app').removeClass("disabled");
-                elf.sync();
-                siteToHighlight = result.id;
-            });
-            // opening window inside callback triggers popup blocker
-            if (type == 'dashboard') {
-                var win = window.open(caramel.context + '/designer.jag?dashboard=' + dashboard + '&layout=' + layout, '_blank');
-                win.focus();
-            }
-        }
-    };
+			$.post('apis/browser.jag', {
+				action : "createSite",
+				site : dashboard
+			}, function(result) {
+				if (result.created != true) {
+					$('#new-app-alert').html('Another app called <strong>' + dashboard + '</strong> already exists. Please enter a different name').fadeIn();
+					$('#btn-new-app').text("Create new app").removeClass("disabled");
+					return;
+				}
+				$('.modal').modal('hide');
+				$('#btn-new-app').text('Create new app').removeClass("disabled");
+				elf.sync();
+				siteToHighlight = result.id;
+			});
+			// opening window inside callback triggers popup blocker
+			if (type == 'dashboard') {
+				var win = window.open(caramel.context + '/designer.jag?dashboard=' + dashboard + '&layout=' + layout, '_blank');
+				win.focus();
+			}
+		}
+	};
 
 	// adding niceScroll plugin to elfinder
 	$(".elfinder-navbar, .elfinder-cwd-wrapper").niceScroll();
@@ -119,7 +113,6 @@ $(function() {
 	});
 
 	$('#elfinder').on('click', '.elfinder-cwd-file', function(e) {
-		alert("DSF");
 		e.preventDefault();
 
 	});
@@ -132,7 +125,7 @@ $(function() {
 	input.bind('keyup', function(e) {
 		if (e.keyCode === 13) {
 			//	e.preventDefault();
-			createApp();
+
 		} else {
 			$.post('apis/browser.jag', {
 				action : 'checkSite',
@@ -150,7 +143,10 @@ $(function() {
 		}
 	});
 
-    $('#form-new-app').submit(function(){return false;});
+	$('#form-new-app').submit(function() {
+		createApp();
+		return false;
+	});
 
 	$('#menu-new-app li a').click(function() {
 		var type = $(this).attr('data-app');
@@ -201,15 +197,7 @@ $(function() {
 		}
 		var selected, pathHash;
 
-		if ($('.elfinder-cwd-wrapper-list').length == 1) {
-			selected = $('.chk-asset').filter(':checked');
-
-		} else {
-			selected = $('.ui-selected');
-
-		}
-
-		var length = selected.length;
+		var length = $('#inp-sel-length').val();
 
 		if (length < 1) {
 			$('#modal-alert').find('.alert-block').show().removeClass("alert-success").addClass("alert-error").html("<p class='alert-message'>Please select an asset to publish</p>");
@@ -219,6 +207,7 @@ $(function() {
 			$('#modal-alert').find('.alert-block').show().removeClass("alert-success").addClass("alert-error").html("<p class='alert-message'>You can only publish one asset at a time</p>");
 			$('#modal-alert').modal("show");
 		} else {
+			selected = $('.ui-selected');
 			pathHash = selected.closest('tr').attr('id') ? selected.closest('tr').attr('id').substr(3) : selected.attr('id').substr(3);
 			$('#asset-path-hash').val(pathHash);
 			$('#modal-publish').modal('show');
@@ -241,25 +230,18 @@ $(function() {
 	var selectedSite = function() {
 		var selected;
 
-		if ($('.elfinder-cwd-wrapper-list').length == 1) {
-			selected = $('.chk-asset').filter(':checked').closest('tr');
+		selected = $('.ui-selected');
 
-		} else {
-			selected = $('.ui-selected');
-		}
 		return $('.elfinder-cwd-filename', selected).html();
 	};
 
 	var selectedSiteUrl = function() {
 		var selected;
 		var siteUrl;
-		if ($('.elfinder-cwd-wrapper-list').length == 1) {
-			selected = $('.chk-asset').filter(':checked').closest('tr');
-			siteUrl = $('.appUrl', selected).attr('href');
-		} else {
-			selected = $('.ui-selected');
-			siteUrl = "/" + $('.elfinder-cwd-filename', selected).html();
-		}
+
+		selected = $('.ui-selected');
+		siteUrl = "/" + $('.elfinder-cwd-filename', selected).html();
+
 		return siteUrl;
 	};
 
