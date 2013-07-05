@@ -3,13 +3,14 @@
 	<div class="span12">
 		{{#if userAssets}}
 		{{#itr userAssets}}
-		<h3 class="asset-title-separator asset-type-{{key}}">{{cap key}}s</h3>
+		<h3 class="asset-title-separator asset-type-{{key}}">{{cap key}}s<div class="pagination own-asset-slideshow-pag" id="own-asset-slideshow-pag-{{key}}"></div></h3>
+		<div class="html_carousel"> <div class="asset-in-{{key}}" id="asset-in-{{key}}">
 		{{#slice value size="3"}}
 		<div class="row-fluid">
 			{{#each .}}
 			{{#attributes}}
 			<div class="span4 store-my-item">
-			<div class="row-fluid">
+			<div>
 				<div class="store-my-item-thumbnail span6">
 					<a href="{{url "/asset/"}}{{../../../key}}?asset={{../path}}"><img src="{{url images_thumbnail}}"></a>
 				</div>
@@ -37,7 +38,7 @@
 			{{/attributes}}
 			{{/each}}
 		</div>
-		{{/slice}}
+		{{/slice}}</div></div>
 		<hr>
 		{{/itr}}
 		{{else}}
