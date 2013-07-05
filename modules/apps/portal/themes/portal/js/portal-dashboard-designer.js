@@ -214,8 +214,10 @@ $(function() {
 		var idStr = 'gadgetArea-d' + id;
 		gadgetDiv.html('<div id="' + idStr + '">');
         UESContainer.renderGadget(idStr, url, pref || {}, function (gadgetInfo) {
-			parentEl.find('h3').text(gadgetInfo.meta.modulePrefs.title);
-			parentEl.find('.show-widget-pref').show();
+            if (gadgetInfo.meta.modulePrefs) {
+                parentEl.find('h3').text(gadgetInfo.meta.modulePrefs.title);
+                parentEl.find('.show-widget-pref').show();
+            }
 		});
 	}
 
