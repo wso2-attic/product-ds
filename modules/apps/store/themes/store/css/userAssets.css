@@ -31,3 +31,6 @@ display:none;
 .store-my-item{
 	position:relative;
 }
+body{
+    background-image:none;
+}
