@@ -4,97 +4,95 @@
 
 		<div class="container-fluid">
 
-			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
 			{{#unless guest}}
 			<a class="brand" href="#"></a>
 			{{/unless}}
 
 			{{#if bookmarks}}
-			<div class="nav-collapse collapse">
-				<ul class="nav dropdown">
-					<li>
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">{{t "My Bookmarks"}} <b
-						class="caret"></b></a>
-						<ul id="dropdown-bookmarks" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 
-							{{#bookmarks}}
-							<li class="dropdown-submenu">
-								<a tabindex="-1" href="#">{{this}}</a>
-								<ul class="dropdown-menu">
-									<li>
-										<a tabindex="-1" href="#">{{t "View"}}</a>
-									</li>
-									<li>
-										<a tabindex="-1" href="#">{{t "Copy to workspace"}}</a>
-									</li>
-									<li>
-										<a tabindex="-1" href="#">{{t "Edit"}}</a>
-									</li>
-								</ul>
-							</li>
+			<ul class="nav dropdown">
+				<li>
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">{{t "My Bookmarks"}} <b
+					class="caret"></b></a>
+					<ul id="dropdown-bookmarks" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 
-							{{/bookmarks}}
+						{{#bookmarks}}
+						<li class="dropdown-submenu">
+							<a tabindex="-1" href="#">{{this}}</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a tabindex="-1" href="#">{{t "View"}}</a>
+								</li>
+								<li>
+									<a tabindex="-1" href="#">{{t "Copy to workspace"}}</a>
+								</li>
+								<li>
+									<a tabindex="-1" href="#">{{t "Edit"}}</a>
+								</li>
+							</ul>
+						</li>
 
-						</ul>
+						{{/bookmarks}}
 
-					</li>
+					</ul>
 
-				</ul>
-			</div>
+				</li>
+
+			</ul>
+
 			{{/if}}
 
-			<div class="nav-collapse collapse">
-				<ul class="nav pull-right">
+			<ul class="nav pull-right">
 
-					<li class="nav-separator">
-						<a href="/store?user={{user.username}}" target="_blank"><i class="icon-shopping-cart"></i> {{t "Store"}}</a>
+				<li class="nav-separator">
+					<a href="/store?user={{user.username}}" target="_blank"><i class="icon-shopping-cart"></i> {{t "Store"}}</a>
 
-					</li>
+				</li>
 
-					{{#if guest}}
+				{{#if guest}}
 
-					{{#if sso}}
-					<li>
-						<a href="#" id="sso-login">{{t "Sign in"}}</a>
-						<form id="sso-login-form" method="post" action="{{ssoIdpURL}}" style="display: none;">
-							<input type="hidden" name="SAMLRequest" value="{{ssoEncodedRequest}}"/>
-							<input type="hidden" name="RelayState" value="{{ssoRelayState}}"/>
-							<input type="hidden" name="SSOAuthSessionID" value="{{ssoSessionId}}"/>
-						</form>
-					</li>
-					<li>
-						<a href="{{url "/login.jag"}}" id="btn-register" class="btn btn-primary">{{t "Register"}}</a>
-					</li>
-					{{else}}
-					<li>
-						<a href="#" data-toggle="modal" data-target="#modal-login" >{{t "Sign in"}}</a>
-					</li>
-					<li>
-						<a id="btn-register" class="btn btn-primary"  data-toggle="modal" data-target="#modal-register">{{t "Register"}}</a>
-					</li>
-					{{/if}}
+				{{#if sso}}
+				<li>
+					<a href="#" id="sso-login">{{t "Sign in"}}</a>
+					<form id="sso-login-form" method="post" action="{{ssoIdpURL}}" style="display: none;">
+						<input type="hidden" name="SAMLRequest" value="{{ssoEncodedRequest}}"/>
+						<input type="hidden" name="RelayState" value="{{ssoRelayState}}"/>
+						<input type="hidden" name="SSOAuthSessionID" value="{{ssoSessionId}}"/>
+					</form>
+				</li>
+				<li>
+					<a href="{{url "/login.jag"}}" id="btn-register" class="btn btn-primary">{{t "Register"}}</a>
+				</li>
+				{{else}}
+				<li>
+					<a href="#" data-toggle="modal" data-target="#modal-login" >{{t "Sign in"}}</a>
+				</li>
+				<li>
+					<a id="btn-register" class="btn btn-primary"  data-toggle="modal" data-target="#modal-register">{{t "Register"}}</a>
+				</li>
+				{{/if}}
 
-					{{else}}
-					<li>
+				{{else}}
+				<li>
 
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> {{user.username}} <b class="caret"></b></a>
-						<ul class="dropdown-menu dropdown-account" role="menu" aria-labelledby="dLabel">
-							<li>
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> {{user.username}} <b class="caret"></b></a>
+					<ul class="dropdown-menu dropdown-account" role="menu" aria-labelledby="dLabel">
+						<li>
 
-								{{#if sso}}
-								<a href="{{url "/logout.jag"}}"><i class="icon-signout"></i> {{t "Sign out"}}</a>
-								{{else}}
-								<a id="btn-signout"><i class="icon-signout"></i> {{t "Sign out"}}</a>
-								{{/if}}
+							{{#if sso}}
+							<a href="{{url "/logout.jag"}}"><i class="icon-signout"></i> {{t "Sign out"}}</a>
+							{{else}}
+							<a id="btn-signout"><i class="icon-signout"></i> {{t "Sign out"}}</a>
+							{{/if}}
 
-							</li>
+						</li>
 
-						</ul>
+					</ul>
 
-					</li>
-					{{/if}}
-				</ul>
-			</div>
+				</li>
+				{{/if}}
+			</ul>
+
 			<!--/.nav-collapse -->
 		</div>
 	</div>
@@ -103,58 +101,56 @@
 
 		<div class="container-fluid">
 
-			<a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
-
 			<div class="row-fluid">
 
 				<div class="span5">
 					<input id="inp-designer-title" type="text" value="{{dashboard}}">
 				</div>
 				<div class="span7">
-					<div class="nav-collapse collapse">
-						<ul class="nav pull-right">
 
-							<li class="dropdown">
-								<a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-plus"></i> Add Block <b class="caret"></b></a>
-								<ul class="dropdown-menu dropdown-share">
-									<form>
-										<li>
-											<h4>Define gadget size in grid</h4>
+					<ul class="nav pull-right">
 
-										</li>
-										<li>
+						<li class="dropdown">
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-plus"></i> Add Block <b class="caret"></b></a>
+							<ul class="dropdown-menu dropdown-share">
+								<form>
+									<li>
+										<h4>Define gadget size in grid</h4>
 
-											<div id="dummy-gadget-wrapper">
-												<div id="dummy-gadget-container" class="ui-widget-content">
-													<div id="dummy-gadget"  class="ui-widget-content">
-														<div id="dummy-size">
-															1x1
-														</div>
+									</li>
+									<li>
+
+										<div id="dummy-gadget-wrapper">
+											<div id="dummy-gadget-container" class="ui-widget-content">
+												<div id="dummy-gadget"  class="ui-widget-content">
+													<div id="dummy-size">
+														1x1
 													</div>
 												</div>
 											</div>
-										</li>
+										</div>
+									</li>
 
-										<li>
-											<button id="btn-add-dummy-gadget" class="btn btn-primary">
-												Add Empty Block
-											</button>
-										</li>
-									</form>
-								</ul>
+									<li>
+										<button id="btn-add-dummy-gadget" class="btn btn-primary">
+											Add Empty Block
+										</button>
+									</li>
+								</form>
+							</ul>
 
-							</li>
+						</li>
 
-							<li id="btn-save">
-								<a href="#"><i class="icon-save"></i> Save</a>
-							</li>
+						<li id="btn-save">
+							<a href="#"><i class="icon-save"></i> Save</a>
+						</li>
 
-							<li>
-								<a id="btn-preview-dash" href="#" data-toggle="tooltip" title="Please Save first" class="disabled"><i class="icon-eye-open"></i> View</a>
-							</li>
+						<li>
+							<a id="btn-preview-dash" href="#" data-toggle="tooltip" title="Please Save first" class="disabled"><i class="icon-eye-open"></i> View</a>
+						</li>
 
-						</ul>
-					</div>
+					</ul>
+
 				</div>
 			</div>
 
@@ -166,23 +162,21 @@
 
 		<div class="container-fluid">
 
-			<a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
-
 			<div class="row-fluid">
 
 				<div class="span5">
 
 				</div>
 				<div class="span7">
-					<div class="nav-collapse collapse">
-						<ul class="nav pull-right">
 
-							<li>
-								<a href="#" id="btn-exit-view" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-magic"></i> Personalize</a>
+					<ul class="nav pull-right">
 
-							</li>
-						</ul>
-					</div>
+						<li>
+							<a href="#" id="btn-exit-view" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-magic"></i> Personalize</a>
+
+						</li>
+					</ul>
+
 				</div>
 			</div>
 

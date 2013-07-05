@@ -95,8 +95,12 @@ var e = session.get('error') || {};
 			      	</div>
 				</div>
 				
-				<div class="row row-footer">
-					<div class="span8">
+				
+		
+		
+    		</div>
+    		<div class="row row-footer">
+					<div class="span8 offset2">
 						<div class="footer row-fluid">
 							<div class="span12">
 								<div class="row-fluid">
@@ -125,10 +129,10 @@ var e = session.get('error') || {};
 					</div>
 					
 				</div>
-		
-		
-    		</div>
     	</div>
+    	
+    	
+			
 		
     </div> <!-- /container -->
 

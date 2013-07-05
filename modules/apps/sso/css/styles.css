@@ -24,7 +24,7 @@ body {
 }
 
 .form-signin {
-    background: url(../img/form-separator.png) top center repeat-y;
+    background: url(../img/form-separator.png)  49% top repeat-y;
 }
 .form-signin > .span12, .footer > .span12 {
     padding: 15px 30px;
@@ -73,9 +73,7 @@ body {
     border-top: 0;
     color: #7f8c8d;
 }
-.row-footer ul {
-    margin-right: 18px;
-}
+
 .row-footer li {
     display: inline-block;
     margin-left: 20px;
@@ -96,8 +94,13 @@ body {
     border: 1px solid #ddd;
 }
 
-.footer {
-    border-top: 1px solid #DDDDDD;
+.container > .row.row-footer > .span8 {
+    background: none;
+    border: none;
+}
+.container > .row.row-footer > .span8 .span12 {
+    padding-left: 0;
+    padding-right: 0;
 }
 .footer ul {
     text-align: right;
@@ -130,13 +133,14 @@ label.error {
     display: inline-block;
     padding-top: 11px;
 }
-label{
-height: 20px;
+label {
+    height: 20px;
 }
 
-#registerForm .span6{
-    padding-left:0;
+#registerForm .span6 {
+    padding-left: 0;
 }
+
 @media (max-width: 767px) {
     .form-signin {
         background-image: none;
