@@ -75,16 +75,13 @@ var e = session.get('error') || {};
                                             }%>
 									        <div class="control"><label>Username</label><input id="reg-username" name="username" type="text" class="input-block-level required usrName" placeholder="Username"></div>
 									        <div class="control">
-									        	<div class="row-fluid">
-									        		<div class="span6">
-									        			<label>Password</label>
-									        			<input id="reg-password" name="password" type="password" class="input-block-level required span12">
-									        		</div>
-									        		<div class="span6">
-									        			<label>Confirm password</label>
-									        			<input id="reg-password2" name="password2" type="password" class="input-block-level required span12" equalTo="#reg-password">
-									        		</div>
-									        	</div>
+									        	<label>Password</label>
+									        	<input id="reg-password" name="password" type="password" class="input-block-level required span12">
+									        </div>
+									        <div class="control">			
+							        			<label>Confirm password</label>
+									        	<input id="reg-password2" name="password2" type="password" class="input-block-level required span12" equalTo="#reg-password">	
+									        </div>
 									        	
 									        	
 									        	<input id="reg-action" name="action" type="hidden" value="register">
