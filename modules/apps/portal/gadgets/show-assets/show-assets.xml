@@ -61,8 +61,8 @@
 
 <script id="no-search-template" type="text/x-html-template">
    	<div class="my-items-empty">
-		<div class="icon icon-empty"></div>
-		<h3>no search results</h3>
+		<div class="icon icon-no-results"></div>
+		<h3>No search results.<h3>
 	</div>
 </script>
 
@@ -144,8 +144,8 @@
 						<div class="icon icon-external-link-sign"></div>
 						<h3>Add an external gadget to the dashboard </h3>
 						<form id="add-ext" class="add-ext-asset">
-						    			<input name="add-ext-url" class="span6 inp-add-ext-url required url pull-left" id="add-ext-url" type="text" placeholder="URL">
-						    			<input name="add-ext-btn" id="add-ext-btn" class="btn select-btn btn-primary" type="button" value="Add Gadget">
+						    			<span class="add-ext-url-parent"><input name="add-ext-url" class="span6 inp-add-ext-url required url pull-left" id="add-ext-url" type="text" placeholder="URL" required></span>
+						    			<span class="span4"><input name="add-ext-btn" id="add-ext-btn" class="btn select-btn btn-primary" type="button" value="Add Gadget"></span>
 						</form>
 					
 					</div>
