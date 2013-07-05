@@ -336,6 +336,7 @@ h1, h2, h3, h4 {
 	margin-left:6px;
 }
 .inp-add-ext-url{
+	height:30px!important;
 	margin-bottom:0!important;
 }
 .asset-byUrl .control-label{
