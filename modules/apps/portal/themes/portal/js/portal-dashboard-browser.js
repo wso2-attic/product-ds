@@ -66,7 +66,11 @@ $(function() {
             var el = $('#'+siteToHighlight);
             el.addClass('site-just-created');
             setTimeout(function(){
+                el.addClass('site-just-after-created');
+            },100);
+            setTimeout(function(){
                 el.removeClass('site-just-created');
+                el.removeClass('site-just-after-created');
             },5000);
         }
         siteToHighlight = null;
