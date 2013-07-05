@@ -67,7 +67,7 @@ $(function () {
                 }
             });
             theme.loading($('#assets-container').parent());
-        } else {
+        } else if($('#search').val().length > 0 && $('#search').val() != undefined){
             url = caramel.url('/assets/all/?query=' + $('#search').val());
             caramel.data({
                 title: null,
