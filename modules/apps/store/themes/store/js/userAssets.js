@@ -1,14 +1,6 @@
 $(function(){
 	
-$("#top-asset-slideshow-gadget").carouFredSel({
-		items:4,
-		width:"100%",
-		infinite: false,
-		auto : false,
-		circular: false,		
-		pagination  : "#top-asset-slideshow-pag-gadget"
 
-	});
 
 $('button[data-toggle=tooltip]').tooltip();
 
@@ -28,7 +20,7 @@ $(document).on('click', '#myasset-container .btn-embed', function() {
     $(this).closest('.store-my-item').find('.embed-snippet').toggle(50);
     return false;
 });
-
+/*
 	$("#asset-in-gadget").carouFredSel({
 		items:1,
 		width:"300px",
@@ -50,5 +42,5 @@ $(document).on('click', '#myasset-container .btn-embed', function() {
 
 	});
 	
-
+*/
 });

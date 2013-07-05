@@ -63,35 +63,5 @@ var adjustStoreRight = function(){
 	
 }
 $(function(){
-	//$(".btn-popover").popover();
-	var isVisible = false;
-	var clickedAway = false;
-
-	$('.btn-popover').popover({
-		html: false,
-		trigger: 'manual'
-	    }).click(function(e) {
-		$(this).popover('show');
-		clickedAway = false
-		isVisible = true
-		e.preventDefault()
-		    $('.popover').bind('click',function() {
-		        clickedAway = false
-		        //alert('popover has been clicked!');
-		    });
-	    });
-
-	$(document).click(function(e) {
-	  if(isVisible && clickedAway)
-	  {
-	    $('.btn-popover').popover('hide')
-	    isVisible = clickedAway = false
-	  }
-	  else
-	  {
-	    clickedAway = true
-	  }
-	});
-
+	$('.btn-popover').popover({ html: false });
 });
-
