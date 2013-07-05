@@ -134,6 +134,15 @@ $(function () {
     	$('.embed-snippet').toggle(400);
     	return false;
     });
+	
+	$('#tab-review-box').live('click', function(e){
+	if($('#comment-content').hasClass('user-review')) {
+	$(".btn-review").removeClass("btn-primary");
+	$(".btn-review").addClass("disabled");
+	$('.error-text').show();
+	return false;
+	}
+    });
 
     /*    $('#btn-copy-gadget-code').click(function(){
      var script = $('#modal-add-gadget code').html().trim();

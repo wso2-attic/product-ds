@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Module specificationVersion='2'>
+<Module>
     <ModulePrefs title="WSO2 Store Assets" height="350" description="wso2 store sample with pubsub-2">
         <Require feature="pubsub-2">
             <Param name="topics">
