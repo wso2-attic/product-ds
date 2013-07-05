@@ -82,6 +82,7 @@ var e = session.get('error') || {};
 							        			<label>Confirm password</label>
 									        	<input id="reg-password2" name="password2" type="password" class="input-block-level required" equalTo="#reg-password">	
 									        </div>
+									        <div>
 									        	<input id="reg-action" name="action" type="hidden" value="register">
 									        </div>
 									        <button id="registrationSubmit" class="btn btn-large btn-primary pull-right" type="submit">Register</button>

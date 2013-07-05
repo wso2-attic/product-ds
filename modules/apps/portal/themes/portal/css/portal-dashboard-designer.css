@@ -545,9 +545,10 @@ body {
     width: 219px;
 }
 
-.li-edit-dashboard > a {
+.li-edit-dashboard > a.float-left-link {
+	padding:10px 0!important;
     position: absolute;
-    right: -115px;
+    right: -100px;
     transition: right 0.5s ease 0s;
     width: 116px;
 }

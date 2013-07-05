@@ -336,6 +336,7 @@ h1, h2, h3, h4 {
 	margin-left:6px;
 }
 .inp-add-ext-url{
+	height:30px!important;
 	margin-bottom:0!important;
 }
 .asset-byUrl .control-label{
@@ -385,6 +386,36 @@ div.icon-external-link-sign {
     position: absolute;
     top: 60px;
     width: 100%;
+}
+.icon-no-results{
+	background-position:0px -270px;
+    height: 108px;
+    margin: 0 auto;
+    text-align: center;
+    width: 125px;
+}
+label.error {
+    background: none repeat scroll 0 0 #F2DEDE;
+    border-radius: 0 0 4px 4px;
+    border-top: 1px solid #EED3D7;
+    color: #B94A48;
+    display: inline-block;
+    height: 18px;
+    left: 10px;
+    padding: 0 10px 2px;
+    position: absolute;
+    top: 25px;
+}
+.error {
+    background: none repeat scroll 0 0 #FFF0C4;
+    border-top: 1px solid #F2C976;
+    color: #333333;
+    font-size: 13px;
+    margin-top: 0;
+    padding: 0 6px;
+}
+.add-ext-url-parent{
+	position:relative;
 }
 @media all and (max-width: 850px) {
     .asset-info h5 {

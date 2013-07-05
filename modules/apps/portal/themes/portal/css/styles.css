@@ -406,4 +406,9 @@ label.error{
 }
 */
 
+/* fixing the book icon in the footer */
+.icon-book {
+    padding-right: 5px;
+}
+
 
