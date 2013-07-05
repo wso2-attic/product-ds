@@ -40,7 +40,7 @@ var renderAssets, mouseStop, isAssertTrue, addAssert;
 		    top : -200
 		}, 200);
                 that.find('.asset-details').animate({
-                    top: 1
+                    top: 0
                 }, 200);
             }, 300);
         }).mouseleave(function () {

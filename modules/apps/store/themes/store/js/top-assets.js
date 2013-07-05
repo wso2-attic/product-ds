@@ -93,7 +93,7 @@ var mouseStop = function() {
 		}, 200);
 		details = $(this).find('.asset-details');
 		details.animate({
-			top : 1
+			top : 0
 		}, 200);
 		opened = true;
 	}).mouseleave(function() {

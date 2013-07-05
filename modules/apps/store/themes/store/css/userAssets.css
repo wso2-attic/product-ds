@@ -23,6 +23,8 @@
 .store-my-item .btn-group {
     display: block;
     margin-top: 20px;
+    position:absolute;
+    bottom:5px;
 }
 
 a.site{
@@ -70,4 +72,17 @@ display:none;
 }
 .own-asset-slideshow-pag a.selected{
     background-position:center left;
+}
+.popover-title{
+    padding:3px;
+}
+.popover{
+      height: 88px;
+    left: -108px;
+    top: -83px !important;
+}
+.popover-content{
+    height: 52px;
+    overflow-y: auto;
+    padding: 5px;
 }
