@@ -18,21 +18,28 @@ Handlebars.registerHelper('slice', function (context, block) {
     }
     return html;
 });
-/**
+/*
  * END: form caramel module caramel/scripts/caramel.handlebars.js
  */
 
 
-// same as url, but TLD is optional
+/**
+ * START: form http://code.google.com/p/jqueryjs/source/browse/trunk/plugins/validate/additional-methods.js?r=6307
+ */
 jQuery.validator.addMethod("url2", function (value, element, param) {
     return this.optional(element) || /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)*(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(value);
 }, jQuery.validator.messages.url);
+/*
+ * END: form http://code.google.com/p/jqueryjs/source/browse/trunk/plugins/validate/additional-methods.js?r=6307
+ */
 
 var toFade = [];
 var assets;
 var currantPage;
 var isMyAssetsShown = true;
 var tabSwitched = false;
+var tagToBeLoaded = null;
+var queryToBeLoaded = null;
 
 $(function () {
     var assetTmpl = Handlebars.compile($('#asset-template').html());
@@ -45,6 +52,7 @@ $(function () {
     var ADD_EXT_BTN = $('#add-ext-btn');
     var ADD_EXT_URL = $('#add-ext-url');
     var EXT_FORM = $('#add-ext');
+    var SEARCH_TEXT = $('#inp-search-gadget');
 
     var getAssetGrid = function () {
         return ( isMyAssetsShown ? MY_ASSET : STORE_ASSET);
@@ -132,11 +140,14 @@ $(function () {
     /**
      * load name list for all pages and shows the first of them.
      *
+     * @param {?string=} query Search query. should be null if tag argument is present.
      * @param {?string=} tag Filer by tag if passed or show all otherwise.
      */
-    var loadPages = function (tag) {
+    var loadPages = function (query, tag) {
+        var data = query ? {query:query} : {};
         $.ajax({
             url: API_URL + ( isMyAssetsShown ? 'myAsset/' : ( tag ? 'tag/' + tag + '/' + type : 'asset/' + type)),
+            data: data,
             success: function (data) {
                 toFade = [];
                 if (isMyAssetsShown) {
@@ -147,24 +158,34 @@ $(function () {
 
                 currantPage = -1;
 
-                var grid = getAssetGrid().html(gridTmpl(assets));
-                grid.find('.asset-box').each(function (i, box) {
-                    $(box).data(assets[i]);
-                });
+                if(assets.length>0){
+                    var grid = getAssetGrid().html(gridTmpl(assets));
+                    grid.find('.asset-box').each(function (i, box) {
+                        $(box).data(assets[i]);
+                    });
 
-                loadPage(0);
+                    loadPage(0);
 
-                grid.find('.page-num').on('click', function () {
-                    loadPage(Number($(this).text()) - 1);
-                });
-                grid.niceScroll();
+                    grid.find('.page-num').on('click', function () {
+                        loadPage(Number($(this).text()) - 1);
+                    });
+
+                    grid.niceScroll();
+                }else{
+                    if(isMyAssetsShown){
+                        getAssetGrid().html($('#no-my-items-template').html());
+                    }else{
+                        getAssetGrid().html($('#no-search-template').html());
+                    }
+                }
+
+                //TODO: move this.
                 $('#ul-modal-tags').niceScroll();
             },
             dataType: 'json'
         });
     };
 
-    var tagToBeLoaded = null;
     //loads all asset names and loads the first page.
     loadPages();
 
@@ -172,7 +193,8 @@ $(function () {
         isMyAssetsShown = ($(this).attr('id') == 'my-tab');
         if (!tabSwitched) {
             tabSwitched = true;
-            loadPages(tagToBeLoaded);
+            loadPages(queryToBeLoaded, tagToBeLoaded);
+            queryToBeLoaded = null;
             tagToBeLoaded = null;
         }
     });
@@ -192,14 +214,15 @@ $(function () {
                 } else {
                     $('.tag-box > a').removeClass('selected');
                     a.addClass('selected');
+                    if (STORE_ASSET.is(":visible")) {
+                        loadPages(null, tagName);
+                    } else {
+                        tagToBeLoaded = tagName;
+                        STORE_TAB.tab('show');
+                    }
                 }
+                SEARCH_TEXT.val('');
 
-                if (STORE_ASSET.is(":visible")) {
-                    loadPages(tagName);
-                } else {
-                    tagToBeLoaded = tagName;
-                    STORE_TAB.tab('show');
-                }
             });
             $('#tag-num-span').text(data.length);
         },
@@ -237,6 +260,19 @@ $(function () {
     ADD_EXT_URL.on('keypress', function (e) {
         if (e.keyCode === 13) {
             submitExtUrl();
+        }
+    });
+
+    SEARCH_TEXT.on('keypress', function (e) {
+        if (e.keyCode === 13) {
+            var query = SEARCH_TEXT.val();
+            $('.tag-box > a').removeClass('selected');
+            if (STORE_ASSET.is(":visible")) {
+                loadPages(query);
+            } else {
+                queryToBeLoaded = query;
+                STORE_TAB.tab('show');
+            }
         }
     });
 

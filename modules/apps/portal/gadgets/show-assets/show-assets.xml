@@ -31,8 +31,7 @@
 </script>
 
 <script id="grid-template" type="text/x-handlebars-template">
-    {{#if .}}
-    	 {{#slice . size="12"}}
+    {{#slice . size="12"}}
     <div class="span12 page" style="display: none">
         {{#slice . size="3"}}
         <div class="row-fluid">
@@ -44,22 +43,28 @@
     </div>
     {{/slice}}
 
-    {{else}}
-   	<div class="my-items-empty">
-		<div class="icon icon-empty"></div>
-		<h3>You don't have any saved Store items</h3>
-		<button class="btn btn-primary btn-large btn-browse" href="#">Browse Store items</button>
-	</div>
-
-    {{/if}}
-
     <div class="page-num-list">
         {{#slice . size="12"}}
         <a href="#" class="page-num">{{sliceIndex}}</a>
         {{/slice}}
     </div>
 
-    </script>
+</script>
+
+<script id="no-my-items-template" type="text/x-html-template">
+   	<div class="my-items-empty">
+		<div class="icon icon-empty"></div>
+		<h3>You don't have any saved Store items</h3>
+		<button class="btn btn-primary btn-large btn-browse" href="#">Browse Store items</button>
+	</div>
+</script>
+
+<script id="no-search-template" type="text/x-html-template">
+   	<div class="my-items-empty">
+		<div class="icon icon-empty"></div>
+		<h3>no search results</h3>
+	</div>
+</script>
 
 <script id="pagination-template" type="text/x-handlebars-template">
 
