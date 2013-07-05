@@ -2,8 +2,7 @@
 <Module>
 	<ModulePrefs title="WSO2 Carbon Commits List Discussion"
                  height="350" tags="charts,wso2,visualization"
-                 description="This is a sample gadget ships with the store; This gadget visualize the frequency of commit mails, and popular commiters
-                 in WSO2 Carbon Platform">
+                 description="This is a sample gadget that is shipped with the store. This gadget visualizes the frequency of commit mails and popular commiters in WSO2 Carbon Platform">
 		<Require feature="pubsub-2">
 			<Param name="topics">
 				<![CDATA[
@@ -49,7 +48,7 @@
 				<div id="desc-wso2" class="two-col-gadget push-right">
 					<div id="desc-wso2-text">
 						<h3>About this list</h3>
-						<p>carbon-commits@wso2.org is a mailing list to discuss about the architecture of WSO2 products</p>
+						<p>carbon-commits@wso2.org is a mailing list logs all the platform commits</p>
 					</div>
 					<div id="senders">
 						<h3>Top Contributors</h3>

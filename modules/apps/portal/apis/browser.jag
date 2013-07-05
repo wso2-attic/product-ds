@@ -10,6 +10,7 @@
             dst = request.getParameter('dst'),
             init = (request.getParameter('init') == '1'),
             cut = request.getParameter('cut'),
+            //base64 = require('/modules/base64.js'),
             br = require('/modules/site-browser.js');
     if (!require('/modules/user.js').current()) {
         response.sendError(401, 'Unauthorized');
@@ -22,7 +23,10 @@
         print({hasSite: br.checkSite(site)});
         return;
     }else  if (action === 'createSite') {
-        print(br.createSite(site));
+        print({
+            id: 'l1_' + br.encodePath(site),
+            created: br.createSite(site)
+        });
         return;
     }
 

@@ -29,7 +29,7 @@ include("includes/header.jag");
 
 			<div class="row">
 				<div class="span12">
-					<h1>WSO2 Time Line</h1>
+					<h1>WSO2 Timeline</h1>
 
 				</div>
 

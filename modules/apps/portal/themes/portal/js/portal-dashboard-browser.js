@@ -1,4 +1,5 @@
 var elf;
+var createApp;
 
 $(function() {
 	//initialize elfinder plugin
@@ -56,6 +57,54 @@ $(function() {
 
 		resizable : false
 	}).elfinder('instance');
+
+
+    var siteToHighlight;
+
+    elf.bind('sync', function() {
+        if(siteToHighlight){
+            var el = $('#'+siteToHighlight);
+            el.addClass('site-just-created');
+            setTimeout(function(){
+                el.removeClass('site-just-created');
+            },5000);
+        }
+        siteToHighlight = null;
+    });
+
+    createApp = function() {
+        if (!$('#btn-new-app').hasClass("disabled")) {
+            var type = $('#inp-title').attr('data-type');
+            var layout = $('#inp-layout').val();
+
+            if (!$('#form-new-app').valid())
+                return;
+
+            $('#btn-new-app').text("Hold on...").addClass("disabled");
+
+            var dashboard = $('#inp-title').val();
+
+            $.post('apis/browser.jag', {
+                action : "createSite",
+                site : dashboard
+            }, function(result) {
+                if (result.created != true) {
+                    $('#new-app-alert').html('Another app called <strong>' + dashboard + '</strong> already exists. Please enter a different name').fadeIn();
+                    $('#btn-new-app').text("Create new app").removeClass("disabled");
+                    return;
+                }
+                $('.modal').modal('hide');
+                $('#btn-new-app').text('Create new app').removeClass("disabled");
+                elf.sync();
+                siteToHighlight = result.id;
+            });
+            // opening window inside callback triggers popup blocker
+            if (type == 'dashboard') {
+                var win = window.open(caramel.context + '/designer.jag?dashboard=' + dashboard + '&layout=' + layout, '_blank');
+                win.focus();
+            }
+        }
+    };
 
 	// adding niceScroll plugin to elfinder
 	$(".elfinder-navbar, .elfinder-cwd-wrapper").niceScroll();
@@ -275,36 +324,3 @@ $(function() {
 
 });
 
-var createApp = function() {
-	if (!$('#btn-new-app').hasClass("disabled")) {
-		var type = $('#inp-title').attr('data-type');
-		var layout = $('#inp-layout').val();
-
-		if (!$('#form-new-app').valid())
-			return;
-
-		$('#btn-new-app').text("Hold on...").addClass("disabled");
-
-		var dashboard = $('#inp-title').val();
-
-		$.post('apis/browser.jag', {
-			action : "createSite",
-			site : dashboard
-		}, function(result) {
-			if (result != true) {
-				$('#new-app-alert').html('Another app called <strong>' + dashboard + '</strong> already exists. Please enter a different name').fadeIn();
-				$('#btn-new-app').text("Create new app").removeClass("disabled");
-				return;
-			}
-			$('.modal').modal('hide');
-			$('#btn-new-app').text('Create new app').removeClass("disabled");
-			elf.sync();
-
-		});
-		// opening window inside callback triggers popup blocker
-		if (type == 'dashboard') {
-			var win = window.open(caramel.context + '/designer.jag?dashboard=' + dashboard + '&layout=' + layout, '_blank');
-			win.focus();
-		}
-	}
-};
