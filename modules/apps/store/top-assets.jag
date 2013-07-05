@@ -6,7 +6,7 @@ var caramel;
 ( function() {
 	var gadgets, sites, paging, count, current, total, loggedUser,
             recent = false,
-            type = "gadget",
+            type = 'gadget',
             options = {},
             log = new Log(),
             user = require('/modules/user.js'),
@@ -44,13 +44,16 @@ var caramel;
         sites = store.tagged('site', tag, paging);
     } else {
         recent = true;
-        gadgets = store.assets("gadget", paging);
-        sites = store.assets("site", paging);
+        gadgets = store.assets('gadget', paging);
+        sites = store.assets('site', paging);
     }
-	recentGadgets = store.recentAssets("gadget", 3);
-	recentSites = store.recentAssets("site", 3);
-	var recentAssets = recentGadgets.concat(recentSites);
-
+	recentGadgets = store.recentAssets('gadget', 3);
+	recentSites = store.recentAssets('site', 3);
+	recentAssets = recentGadgets.concat(recentSites);
+	popularGadgets = store.popularAssets('gadget');
+	popularSites = store.popularAssets('site');
+	popularAssets = popularGadgets.concat(popularSites);
+	
 	caramel.render({
 		title : 'Store | User Engagement Center',
 		user : loggedUser,
@@ -68,7 +71,7 @@ var caramel;
 				gadget : gadgets,
 				site : sites
 			},
-			popularAssets : store.popularAssets(type),
+			popularAssets : popularAssets,
             recent : recent
 		},
 		tags : {
