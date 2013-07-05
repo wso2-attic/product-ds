@@ -90,5 +90,13 @@ form{
     background-position: 0px -273px;
 }
 .site-just-created{
-    color : #ff0000;
+	background:  #FFF8BF!important;
+}
+.site-just-after-created{
+        background:  #FFFFFF!important;
+     -webkit-transition-OUT: background 4s linear;
+     -moz-transition: background 4s linear;
+     -o-transition: background 4s linear;
+     -ms-transition: background 4s linear;
+     transition: background 4s linear;
 }

@@ -42,7 +42,7 @@ body {
     color:#34495E;
     height:100%;
     background-color:#ecf0f1 !important;
-    padding-left: 25px;
+    /*padding-left: 25px;*/
 }
 .border-radius-4 {
     border-radius:4px;
