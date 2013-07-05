@@ -45,6 +45,7 @@
 	<div class="top-asset-slideshow-cont">
 		<div class="html_carousel">
 			<div id="top-asset-slideshow-{{key}}">
+                {{#if value}}
 				{{#each value}}
 				{{#attributes}}
 				<div class="slide asset" data-path="{{../path}}" data-type="{{../type}}">
@@ -97,6 +98,9 @@
 				</div>
 				{{/attributes}}
 				{{/each}}
+                {{else}}
+                    <div>{{t "We couldn't find anything for you."}}</div>
+                {{/if}}
 			</div>
 			<div class="clearfix"></div>
 
