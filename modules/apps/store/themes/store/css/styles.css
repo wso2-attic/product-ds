@@ -927,6 +927,7 @@ div.rating-cancel, div.star-rating {
 }
 .nav-tabs li {
     margin-bottom: -2px;
+    position: relative;
 }
 
 .nav-tabs > li > a {
@@ -950,13 +951,29 @@ div.rating-cancel, div.star-rating {
     margin-left: -15px;
     margin-right: 15px;
 }
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover {
+.nav-tabs > li.active > a {
+    color: #009E92;
+    border:none;
+}
+.nav-tabs > li.active > a:hover {
     border-color: #009E92;
     border-image: none;
     border-style: none none solid;
     border-width: medium medium 4px;
     color: #009E92;
 }
+
+.nav-tabs > li.active:after {
+    background: none repeat scroll 0 0 #009F93;
+    bottom: -1px;
+    content: "";
+    display: inline-block;
+    height: 4px;
+    left: -15px;
+    position: absolute;
+    right: 15px;
+}
+
 .btn-added {
     margin-top: 0;
     display: inline-block;
@@ -1016,8 +1033,8 @@ div.rating-cancel, div.star-rating {
 .popover-content {
     font-size: 12px;
     white-space: normal;
-	word-wrap: break-word;    
-	word-break: break-all;
+    word-wrap: break-word;
+    word-break: break-all;
 }
 /* Specify class=linenums on a pre to get line numbering */
 ol.linenums {

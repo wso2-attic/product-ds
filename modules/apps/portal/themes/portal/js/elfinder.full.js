@@ -1137,7 +1137,7 @@ window.elFinder = function(node, opts) {
 		.done(function(odata, pdata) {
 			var diff = self.diff(odata.files.concat(pdata && pdata.tree ? pdata.tree : []));
 
-			diff.added.push(odata.cwd)
+			diff.added.push(odata.cwd)           
 			diff.removed.length && self.remove(diff);
 			diff.added.length   && self.add(diff);
 			diff.changed.length && self.change(diff);

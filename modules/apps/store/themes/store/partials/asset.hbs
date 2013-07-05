@@ -72,7 +72,11 @@
                     </div>
                     <div class="tab-pane" id="tab-reviews">
 
-                        <div class="content"></div>
+                       	{{#if ../../inDashboard}}
+                       		 <div id="comment-content" class="content"></div>
+						{{else}}
+							<div id="comment-content" class="content user-review"></div>
+						{{/if}}
                     </div>
 
                 </div>
