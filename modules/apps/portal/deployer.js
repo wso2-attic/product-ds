@@ -17,7 +17,7 @@ var populate = function () {
         repo = new File(repoPath),
         deployer = require('/modules/deployer.js'),
         context = caramel.configs().context,
-        base = portal.server.https + context + gadgetRxtPath;
+        base = portal.server.http + context + gadgetRxtPath;
 
     if (repo.isDirectory()) {
         gadgets = repo.listFiles();
