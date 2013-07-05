@@ -10,8 +10,7 @@
                 "overview_version": "1.0.0",
                 "overview_url": "http://localhost:9763/climate/",
                 "overview_provider": "admin",
-                "overview_description": "Climate Change is a microsite that visualize the statistics of various geological locations on climate change. " +
-                "User can choose the country and the preferred time period to analyze the displayed data. This microsite can be taken as a sample when creating sites in UES",
+                "overview_description": "Climate Change is a microsite that visualizes the statistics of various geological locations on climate change. A user can choose the country and the preferred time period to analyze the displayed data. This microsite can be taken as a sample when creating sites in UES",
                 "images_thumbnail": "http://localhost:9763/portal/sites/climate/thumbnail.jpg",
                 "images_banner": "http://localhost:9763/portal/sites/climate/banner.jpg"
                 }
@@ -27,8 +26,7 @@
                 "overview_provider": 'admin',
                 "images_thumbnail": 'http://localhost:9763/portal/sites/mark-mail/thumbnail.jpg',
                 "images_banner": 'http://localhost:9763/portal/sites/mark-mail/banner.jpg',
-                "overview_description": "Markmail is a microsite that provides a glance at WSO2 Engineering. " +
-                "User can choose preferred time period to analyze the displayed data like, commit, architecture descussions etc. This microsite can be taken as a sample when creating sites in UES",
+                "overview_description": "Markmail is a microsite that provides a snapshot view of WSO2 Engineering. A user can choose a preferred time period to analyze the displayed data such as, commits, architecture discussions etc. This microsite can be taken as a sample when creating sites in UES"
 
             }
         }
