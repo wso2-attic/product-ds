@@ -547,9 +547,9 @@ body {
 
 .li-edit-dashboard > a {
     position: absolute;
-    right: -174px;
+    right: -115px;
     transition: right 0.5s ease 0s;
-    width: 175px;
+    width: 116px;
 }
 
 .li-edit-dashboard > a:hover {
