@@ -217,7 +217,7 @@ $(function() {
 	$('#btn-publish-site').click(function() {
 		if (!$('#form-publish-app').valid())
 			return;
-		var i, length, rolez = [], userz = [], site = selectedSite(), type = $('#sel-publish-type').val(), action = $('#sel-publish-permission').val(), name = $('#inp-publish-name').val(), version = "1.0.0", desc = $("#inp-publish-desc").val() || "No Description Available", url = $('#inp-publish-url').val(), thumbnail = $('#inp-publish-thumbnail').val(), imageUrl = $("#inp-publish-imageurl").val(), roles = $('#inp-publish-roles').tokenInput("get"), users = $('#inp-publish-users').tokenInput("get");
+		var i, length, rolez = [], userz = [], site = selectedSite(), type = $('#sel-publish-type').val(), action = $('#sel-publish-permission').val(), name = $('#inp-publish-name').val(), version = "1.0.0", desc = $("#inp-publish-desc").val() || "No Description Available", url = $('#inp-publish-url').val(), thumbnail = $('#inp-publish-thumbnail').val() || "/themes/store/img/default_thumb.jpg", imageUrl = $("#inp-publish-imageurl").val() || "/themes/store/img/default_banner.jpg", roles = $('#inp-publish-roles').tokenInput("get"), users = $('#inp-publish-users').tokenInput("get");
 
 		length = roles.length;
 		for ( i = 0; i < length; i++) {
