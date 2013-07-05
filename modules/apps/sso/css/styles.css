@@ -130,7 +130,7 @@ label.error {
 }
 
 .lblRemember {
-    display: inline-block;
+    display: none;
     padding-top: 11px;
 }
 label {
