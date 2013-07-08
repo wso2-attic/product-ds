@@ -484,7 +484,12 @@ $(function() {
 			layout.enable();
 			$('#grid-guides').fadeIn("slow");
 			$('.close-widget').show();
-			$('.show-widget-pref').show();
+			$('.show-widget-pref').each(function(){
+                var $this = $(this);
+                if($this.parents('.grid_header').siblings('.designer-placeholder').length == 0){
+                    $this.show();
+                }
+            });
 			$('.layout_block .btn-add-gadget').show();
 			$('.layout_block').removeClass('layout_block_view');
 			$('.gadget-controls').append('<li><a href="#" class="close-widget"><i class="icon-remove"></i></a></li>');
