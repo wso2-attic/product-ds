@@ -83,13 +83,13 @@
 							<a href="#" class="btn disabled btn-added">{{t "Bookmarked"}}</a>
 							{{else}}
 							
-							{{# if ../../../../sso}}			
+							{{# if ../../../../../sso}}					
 							<a href="{{url "/login.jag"}}"  class="btn btn-primary asset-add-btn">{{>process-asset-text}} {{../../type}} </a>
 							{{else}}
 							
 							<a href="#" class="btn btn-primary asset-add-btn">{{>process-asset-text}} {{../../type}} </a>
 							{{/if}}
-							{{# if ../../../../user.username}}		
+							{{# if ../../../../../user.username}}		
 							<a href="#" class="btn btn-primary asset-add-btn">{{>process-asset-text}} {{../../type}} </a>
 							{{/if}}{{/if}}
 
