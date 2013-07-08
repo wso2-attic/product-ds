@@ -138,7 +138,7 @@ $(function () {
     	return false;
     });
 	
-	$('#tab-review-box').live('click', function(e){
+	$('#tab-review-box').live('focus', function(e){
 	if($('#comment-content').hasClass('user-review')) {
 	$(".btn-review").removeClass("btn-primary");
 	$(".btn-review").addClass("disabled");
