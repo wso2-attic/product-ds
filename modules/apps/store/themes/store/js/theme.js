@@ -64,4 +64,14 @@ var adjustStoreRight = function(){
 }
 $(function(){
 	$('.btn-popover').popover({ html: false });
+	$('.popover-content').live("click",function(){
+		var selectedTxt = $(this).text();
+		//console.info(selectedTxt);
+		var textArea = "<textarea class='popover-textarea'>"+selectedTxt+"</textarea>"
+		$(this).text("").append(textArea);
+		$(".popover-textarea").select();
+		$(".popover").on("mouseleave",function(){
+			$(".popover-content").text(selectedTxt);
+		});	
+	});
 });
