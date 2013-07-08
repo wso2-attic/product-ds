@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    UESContainer.renderGadget('store-gadget-div', portalGadgets.store);
 
 	// counters when generating node IDs
 	var nodeCounter = 0;
