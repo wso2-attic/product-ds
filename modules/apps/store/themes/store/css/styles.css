@@ -1081,6 +1081,14 @@ ol.linenums li {
     line-height: 20px;
     text-shadow: 0 1px 0 #fff;
 }
+
+.popover-textarea{
+	font-size: 12px;
+    height: 100%;
+    position: relative;
+    right: 6px;
+    width: 100%;
+}
 @media all and (max-width: 980px) {
     .asset {
         height: 217px !important;
