@@ -32,21 +32,23 @@ $(document).ready(function() {
 		scrollorama = scrollorama || $.scrollorama({
 			blocks : '.scrollblock'
 		});
-
-		scrollorama.animate('#feature-2-store', {
-			delay : 100,
-			duration : 200,
-			property : 'opacity',
-			start : 0,
-			end : 1
-		});
-		scrollorama.animate('#feature-2-store', {
+		/*
+		scrollorama.animate('#feature-dashboard', {
 			delay : 100,
 			duration : 200,
 			property : 'top',
 			start : -400,
-			end : 20
+			end : 0
 		});
+		
+		scrollorama.animate('#feature-jaggery', {
+			delay : 100,
+			duration : 200,
+			property : 'top',
+			start : -400,
+			end : 0
+		});
+		*/
 	}
 	
 	

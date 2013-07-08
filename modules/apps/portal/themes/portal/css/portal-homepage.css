@@ -1,10 +1,10 @@
 @media (max-width: 979px) {
-    #feature-1-pollution, #feature-1-populations { 
+    #feature-pollution, #feature-populations { 
         width:250px;
     }
 }
 
-#feature-1-pollution {
+#feature-pollution {
     left:100px;
     position:absolute;
     bottom:20px;
@@ -22,7 +22,7 @@
 }
 
 
-#feature-1-populations {
+#feature-populations {
     right:0;
     position:absolute;
     bottom:40px;
@@ -42,7 +42,7 @@
 
 
 
-#feature-1-slider {
+#feature-slider {
     right:200px;
     position:absolute;
     background:none repeat scroll 0 0 #FFFFFF;
@@ -60,12 +60,12 @@
 }
 
 
-#feature-2-store {
+#feature-store {
     opacity:1;
 }
 
 
-#feature-3-responsive {
+#feature-responsive {
     right:0;
     position:absolute;
     top:20px;
@@ -76,13 +76,16 @@
     line-height:24px;
 
 }
+.feature-desc > h2, .feature-desc >  p{
+    padding: 0 30px;
+}
 
 
 .hero-cont {
     padding:0;
 }
 .hero-screens {
-    margin-top:42px;
+    margin-top:46px;
     text-align:right;
 }
 
@@ -96,6 +99,8 @@
     color:#ffffff;
     text-align:left;
     margin-bottom:48px;
+    margin-top:24px;
+    
 }
     .hero-unit .btn-try-samples {
         padding:6px;
@@ -116,12 +121,14 @@
     .hero-unit h1 {
         font-size:36px;
         margin-top:32px;
+         text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
     }
     .hero-unit p {
         font-size:0.86em;
         font-style:italic;
-        line-height:normal;
+        line-height:22px;
         margin-top:29px;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
     }
         .hero-unit p a {
             color:#FFFFFF;
@@ -133,14 +140,19 @@
 }
 .scrollblock {
     position:relative;
-    margin:0;
     left:0;
     right:0;
-    height:380px;
+    height:342px;
     overflow:hidden;
+}
+.scrollblock > div{
+    margin-top:36px;
 }
 .scrollblock3 {
     height:300px;
+}
+.scrollblock-gadgets{
+    height:360px;
 }
 /*
 .separator {
@@ -219,8 +231,32 @@ background-image: url("../img/separator-line.png");
 .gadget{
     height:100%;
 }
+.row-features > .span12, .row-footer > .span12{
+    background:#FFFFFF !important;
+}
+.row-features > .span12 > .row{
+    border-bottom:1px solid #ECF0F1;
+}
+.row-features > .span12 > .row > .span6{
+    margin-top:20px;
+}
+.row-features >  .span12 > .row {
+    overflow:hidden;
+}
+.feature-desc > h2{
+    margin-top:50px;
+}
+.row-footer{
+    background:none !important;
+    padding:0;
+    border:none !important;
+    
+}
+.row-footer div{
+    padding:5px 0;
+}
 @media (max-width: 480px) {
-    #feature-1-slider  
+    #feature-slider  
         left:0;
     right:0;
     margin:0 auto;
