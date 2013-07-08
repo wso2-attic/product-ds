@@ -48,7 +48,7 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.artifactId}</Bundle-Name>
                         <Private-Package>org.wso2.ues.styles.internal</Private-Package>
-                        <Bundle-Activator>main.org.ues.admin.styles.internal.Activator</Bundle-Activator>
+                        <Bundle-Activator>org.wso.ues.admin.styles.internal.Activator</Bundle-Activator>
                         <Import-Package>
                             org.osgi.framework,
                             org.osgi.service.http,
@@ -56,7 +56,7 @@
                             javax.servlet.*;version="2.4.0",
                             *;resolution:=optional
                         </Import-Package>
-                        <!--<Fragment-Host>org.wso2.carbon.ui</Fragment-Host>-->
+                        <Fragment-Host>org.wso2.carbon.ui</Fragment-Host>
                         <Carbon-Component>UIBundle</Carbon-Component>
                     </instructions>
                 </configuration>

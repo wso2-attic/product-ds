@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1373280269864
+Bnd-LastModified: 1373282797004
 Build-Jdk: 1.6.0_32
 Built-By: nuwanbando
-Bundle-Activator: main.org.ues.admin.styles.internal.Activator
+Bundle-Activator: org.wso.ues.admin.styles.internal.Activator
 Bundle-Description: WSO2 User Engagement Server
 Bundle-License: http://www.apache.org/licenses/LICENSE-2.0
 Bundle-ManifestVersion: 2
@@ -11,6 +11,7 @@ Bundle-SymbolicName: org.wso2.ues.admin.styles
 Bundle-Version: 1.0.0
 Carbon-Component: UIBundle
 Created-By: Apache Maven Bundle Plugin
-Import-Package: main.org.ues.admin.styles.internal;resolution:=optional,
- org.osgi.framework,org.osgi.service.http,org.wso2.carbon.ui
+Fragment-Host: org.wso2.carbon.ui
+Import-Package: org.osgi.framework,org.osgi.service.http,org.wso.ues.adm
+ in.styles.internal;resolution:=optional,org.wso2.carbon.ui
 Tool: Bnd-1.50.0
