@@ -10,18 +10,18 @@
 		
 			{{#each value}}
 			{{#attributes}}
-			<div class="span4 store-my-item">
+			<!--div class="row-fluid"-->
+			<div class="span2 store-my-item">
 			
-				<div class="store-my-item-thumbnail span6">
-					<a href="{{url "/asset/"}}{{../../key}}?asset={{../path}}"><img src="{{url images_thumbnail}}"></a>
+				<div class="store-my-item-thumbnail span2">
+					<a href="{{url "/asset/"}}{{../../key}}?asset={{../path}}"><img src="{{images_thumbnail}}"></a>
 				</div>
-				<div class="store-my-item-info span6">
+				<div class="store-my-item-info span2">
 					<a class="asset-title" href="{{url "/asset/"}}{{../../key}}?asset={{../path}}"> 
 						<strong>{{overview_name}}</strong>
 					</a>
-					<br> 
 					<small>by {{overview_provider}}</small>
-					<div class="btn-group">
+					<br><div class="btn-group">
 						<a class="btn btn-popover btn-mini {{../../key}}" data-content='&lt;iframe src="{{../../../../URL}}/gadgets/ifr?url={{overview_url}}"&gt;&lt;/iframe&gt;' data-toggle="popover" data-placement="top" title="{{t "Embed this"}} {{../../key}}">
 							<i class="icon-angle-left"></i> <i class="icon-angle-right"></i>
 						</a>
@@ -36,6 +36,7 @@
 				</div>
 			
 			</div>
+			<!--/div-->
 			{{/attributes}}
 			{{/each}}
 		</div></div></div>
