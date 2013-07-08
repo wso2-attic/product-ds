@@ -41,7 +41,7 @@
                 <exclude>**/carbon.xml</exclude>
                 <exclude>**/registry.xml</exclude>
                 <exclude>**/axis2/axis2.xml</exclude>
-                <exclude>**/ciphertool.bat</exclude>
+                <!--exclude>**/ciphertool.bat</exclude-->
                 <exclude>**/master-datasources.xml</exclude>
                 <exclude>**/org.wso2.carbon.identity.relyingparty.ui-3.1.0.SNAPSHOT.jar</exclude>
                 <exclude>**/org.wso2.carbon.identity.user.registration.ui-3.1.0.SNAPSHOT.jar</exclude>
@@ -51,10 +51,10 @@
         <fileSet>
             <directory>target/wso2carbon-core-${carbon.kernal.version}</directory>
             <outputDirectory>wso2ues-${pom.version}</outputDirectory>
-            <excludes>
+            <!--excludes>
                 <exclude>**/wso2server.bat</exclude>
                 <exclude>**/ciphertool.sh</exclude>
-            </excludes>
+            </excludes-->
             <includes>
                 <include>**/*.sh</include>
             </includes>

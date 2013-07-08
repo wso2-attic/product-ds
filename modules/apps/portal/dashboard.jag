@@ -6,7 +6,8 @@ var caramel;
             log = new Log(),
             user = require('/modules/user.js').current(),
             configs = require('/portal.js').config(),
-            ssoUser = session.get('LOGGED_IN_USER');
+            ssoUser = session.get('LOGGED_IN_USER'),
+            loggedUser;
 
     caramel = require('caramel');
 

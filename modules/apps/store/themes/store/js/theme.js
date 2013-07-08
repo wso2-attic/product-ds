@@ -63,35 +63,15 @@ var adjustStoreRight = function(){
 	
 }
 $(function(){
-	//$(".btn-popover").popover();
-	var isVisible = false;
-	var clickedAway = false;
-
-	$('.btn-popover').popover({
-		html: false,
-		trigger: 'manual'
-	    }).click(function(e) {
-		$(this).popover('show');
-		clickedAway = false
-		isVisible = true
-		e.preventDefault()
-		    $('.popover').bind('click',function() {
-		        clickedAway = false
-		        //alert('popover has been clicked!');
-		    });
-	    });
-
-	$(document).click(function(e) {
-	  if(isVisible && clickedAway)
-	  {
-	    $('.btn-popover').popover('hide')
-	    isVisible = clickedAway = false
-	  }
-	  else
-	  {
-	    clickedAway = true
-	  }
+	$('.btn-popover').popover({ html: false });
+	$('.popover-content').live("click",function(){
+		var selectedTxt = $(this).text();
+		var $textArea = $("<textarea>",{class:"popover-textarea", val:selectedTxt});
+		$(this).text("").append($textArea);	
+		$(".popover-textarea").height($(".popover-textarea")[0].scrollHeight);
+		$(".popover-textarea").select();
+		$(".popover").on("mouseleave",function(){
+			$(".popover-content").text(selectedTxt);
+		});	
 	});
-
 });
-

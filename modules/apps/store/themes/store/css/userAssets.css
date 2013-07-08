@@ -22,7 +22,8 @@
 
 .store-my-item .btn-group {
     display: block;
-    margin-top: 20px;
+    margin-top: 10px;    
+    bottom:5px;
 }
 
 a.site{
@@ -32,33 +33,20 @@ display:none;
 	position:relative;
 }
 
-.asset-in-gadget{
-	width: 100% !important;
-	left: 0;
-}
-
-.asset-in-site{
-	width: 100% !important;
-	left: 0;
-}
-
 .own-asset-slideshow-cont .asset{
     width:200px;
     margin-right: 17px;
     display: inline-block;
 }
+
 .own-asset-slideshow-cont .asset:first-child{
     margin-left:10px;
 }
 
-
-.own-asset-slideshow-pag {
-    height: 39px;
-    margin: 0;
-    position: absolute;
-    right: 10px;
-    top: 0;
+.own-asset-slideshow-pag a.selected{
+    background-position:center left;
 }
+
 .own-asset-slideshow-pag a{
     width:8px;
     height:39px;
@@ -68,6 +56,22 @@ display:none;
     display:inline-block;
     float:left;
 }
-.own-asset-slideshow-pag a.selected{
-    background-position:center left;
+
+.own-asset-slideshow-pag {
+    height: 39px;
+    margin: 0;
+    position: absolute;
+    right: 10px;
+    top: 0;
+}
+
+.caroufredsel_wrapper{
+	height: 220px !important; 
+}
+
+.popover.fade.top.in{
+	left: -65px !important; 
+}
+.arrow{
+	left: 32% !important; 
 }

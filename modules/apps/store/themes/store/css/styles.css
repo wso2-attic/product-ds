@@ -835,32 +835,40 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 }
 .asset-intro-box {
     position: absolute;
-    right: -20px;
+    right: 0;
     bottom: 0;
-    top: 0;
-    left: 580px;
-    padding: 20px;
+   height:48px;
+    left: 0;
+    padding: 10px;
     border-left: 1px solid #ECF0F1;
     border-bottom: 1px solid #ECF0F1;
+    background:#FFFFFF;
+   /* display:none;*/
 }
 div.rating-cancel, div.star-rating {
     background-color: #fff !important;
     margin-top: 2px;
 }
 .asset-intro-box img {
-    width: 75px;
+    width: 50px;
     border: 1px solid #FFFFFF;
+    vertical-align:top;
+    float: left;
 }
 .asset-intro-box h3 {
-    margin-bottom: 5px;
     line-height: normal;
     max-height: 59px;
     overflow: hidden;
+    font-size:18px;
+    margin-left:10px;
+    display: inline-block;
+    margin-bottom:0;
 }
 .asset-intro-box small {
-    display: block;
+    display: inline-block;
     line-height: 1.2;
     color: #7f8c8d;
+    float:left;
 }
 .asset-intro-box .asset-rating {
     margin-top: 10px;
@@ -877,22 +885,28 @@ div.rating-cancel, div.star-rating {
 }
 
 .assets-container {
-    margin-top: 40px;
+    margin-top: 24px;
 }
-
+#asset-slideshow-next{
+    background: url('../img/asset_slideshow_controls_left.png') no-repeat center left;
+}
+#asset-slideshow-prev{
+    background: url('../img/asset_slideshow_controls_right.png') no-repeat center left;
+}
 #asset-slideshow-next, #asset-slideshow-prev {
     position: absolute;
     top: 0;
     z-index: 999;
     font-size: 0;
-    width: 40px;
-    height: 299px;
-    background: url('../img/asset-slideshow-controls.png') no-repeat center left;
+    width: 143px;
+    height: 276px;
+    
     opacity: .8;
-    transition: opacity .2s;
+    /*transition: opacity .2s;*/
+    background-color:#ffffff;
 }
 #asset-slideshow-next:hover, #asset-slideshow-prev:hover {
-    opacity: 1;
+   /* opacity: 1;*/
 }
 #asset-slideshow-next {
     left: 0;
@@ -903,21 +917,42 @@ div.rating-cancel, div.star-rating {
 }
 
 #asset-slideshow-cont {
-    height: 276px;
+    height: 300px;
     display: block;
     overflow: hidden;
+  /*  box-shadow:0 2px 2px rgba(0,0,0,.3);*/
 }
+
+#asset-slideshow-cont:after{
+    content:"";
+    width:104%;
+    position:absolute;
+    left:-15px;
+    right:20px;
+    height:1px;
+    background:#ddd;
+    top:300px;
+}
+
+
 #asset-slideshow .slide {
     position: relative;
     height: 300px;
+    width:580px;
+    display: inline-block;
+    overflow:hidden;
 }
+#asset-slideshow-cont .html_carousel{
+    margin-left:-440px;
+}
+/*
 #asset-slideshow-cont .html_carousel {
     position: absolute;
     left: -15px;
     right: -15px;
     top: 0;
 }
-
+*/
 #container-assets {
     margin-top: 35px;
 }
@@ -1045,6 +1080,14 @@ ol.linenums li {
     color: #656565;
     line-height: 20px;
     text-shadow: 0 1px 0 #fff;
+}
+
+.popover-textarea{
+	font-size: 12px;
+    height: 100%;
+    position: relative;
+    right: 6px;
+    width: 100%;
 }
 @media all and (max-width: 980px) {
     .asset {

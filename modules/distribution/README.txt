@@ -35,6 +35,7 @@ http://docs.wso2.org/wiki/display/UES100/Installation+Prerequisites
 
 Known Issues
 ------------
+https://wso2.org/jira/issues/?filter=11174
 
 
 WSO2 User Engagement Server Binary Distribution Directory Structure
@@ -51,12 +52,11 @@ WSO2 User Engagement Server Binary Distribution Directory Structure
         ├── README.txt
         ├── release-notes.html
         ├── repository       // repository
-        ├── solr
         ├── tmp
         ├── webapp-mode
 
 
-- bin
+    - bin
       Contains various scripts .sh & .bat scripts.
 
     - dbscripts

@@ -65,12 +65,14 @@
     </pluginRepositories>
 
     <modules>
-	<module>modules/features/ues</module>
+        <module>modules/components/ues-admin</module>
+	    <module>modules/features/ues</module>
         <module>modules/p2-profile-gen</module>
         <module>modules/distribution</module>
     </modules>
 
     <properties>
+        <ues.version>1.0.0</ues.version>
         <carbon.kernal.version>4.1.0</carbon.kernal.version>
         <carbon.platform.version>4.1.0</carbon.platform.version>
 

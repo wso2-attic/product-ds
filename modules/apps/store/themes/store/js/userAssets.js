@@ -1,14 +1,6 @@
 $(function(){
 	
-$("#top-asset-slideshow-gadget").carouFredSel({
-		items:4,
-		width:"100%",
-		infinite: false,
-		auto : false,
-		circular: false,		
-		pagination  : "#top-asset-slideshow-pag-gadget"
 
-	});
 
 $('button[data-toggle=tooltip]').tooltip();
 
@@ -30,22 +22,24 @@ $(document).on('click', '#myasset-container .btn-embed', function() {
 });
 
 	$("#asset-in-gadget").carouFredSel({
-		items:1,
-		width:"300px",
-		infinite: true,
+		items:4,
+		width:"100%",
+		height:"300px",
+		infinite: false,
 		auto : false,
-		circular: true,		
+		circular: false,		
 		pagination  : "#own-asset-slideshow-pag-gadget"
 
 	});
 	
 	
 	$("#asset-in-site").carouFredSel({
-		items:1,
-		width:"300px",
-		infinite: true,
+		items:4,
+		width:"100%",
+		height:"300px",
+		infinite: false,
 		auto : false,
-		circular: true,		
+		circular: false,		
 		pagination  : "#own-asset-slideshow-pag-site"
 
 	});

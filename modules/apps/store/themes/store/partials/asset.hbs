@@ -5,10 +5,10 @@
                 <div class="row">
                     <div class="span9">
                         <div class="asset-banner">
-                            <img src="{{#if images_banner}}{{url images_banner}}{{/if}}">
+                            <img src="{{#if images_banner}}{{images_banner}}{{/if}}">
                         </div>
                         <div class="asset-intro-box">
-                            <img src="{{#if images_thumbnail}}{{url images_thumbnail}}{{/if}}">
+                            <img src="{{#if images_thumbnail}}{{images_thumbnail}}{{/if}}">
 
                             <h3>{{overview_name}}</h3>
                             <small> {{t "Version"}} 1.0.0</small>
@@ -26,7 +26,7 @@
                                    value="4"/>
 							<input class="auto-submit-star" name="star2" type="radio" class="star"
                                    value="5"/>
-						</span>  <div class="rate-num-assert"><small>({{../../rating.user}})</small></div>
+						</span>  <div class="rate-num-assert">({{../../rating.user}})</div>
                         {{else}}
                             <div class="asset-rating-{{../../rating.average}}star"></div>
                         {{/if}}
@@ -41,7 +41,7 @@
                              data-aid="{{../../path}}" data-type="{{../../type}}"> {{t "Bookmark "}}</a>
 			{{/if}}
 				  {{#if ../../user}}
-			      <a class="btn btn-popover btn-embed {{../../type}}" href="#" data-toggle="popover"  data-content='&lt;iframe src="{{../../../embedURL}}"&gt;<br />&lt;/iframe&gt;' data-placement="bottom" title="{{t "Embed this Gadget"}}"><i
+			      <a class="btn btn-popover btn-embed {{../../type}}" href="#" data-toggle="popover"  data-content='&lt;iframe src="{{../../../embedURL}}"&gt;&lt;/iframe&gt;' data-placement="bottom" title="{{t "Embed this Gadget"}}"><i
                               class="icon-angle-left"></i><i class="icon-angle-right"></i></a>
                            	
 				  {{/if}}
