@@ -22,8 +22,7 @@
 
 .store-my-item .btn-group {
     display: block;
-    margin-top: 20px;
-    position:absolute;
+    margin-top: 10px;    
     bottom:5px;
 }
 
@@ -64,4 +63,15 @@ display:none;
     position: absolute;
     right: 10px;
     top: 0;
+}
+
+.caroufredsel_wrapper{
+	height: 220px !important; 
+}
+
+.popover.fade.top.in{
+	left: -65px !important; 
+}
+.arrow{
+	left: 32% !important; 
 }
