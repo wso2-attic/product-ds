@@ -1,6 +1,9 @@
-WSO2 User Engagement Server 1.0.0
+WSO2 User Engagement Server ${product.version}
 ----------------------
-Welcome to the WSO2 User Engagement Server 1.0.0 release
+
+${buildNumber}
+
+Welcome to the WSO2 User Engagement Server ${product.version} release
 
 Key Features
 ------------
