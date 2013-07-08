@@ -40,45 +40,52 @@ $(function() {
 	 */
 
 	$("#asset-slideshow").carouFredSel({
-		items : 1,
+		items : {
+			visible : 3,
+			start : 2
+		},
 		height : 300,
-		scroll : {
-			fx : "crossfade"
-		},
-
-		auto : {
-			duration : 1000,
-			timeoutDuration : 2000,
-			pauseOnHover : true
-		},
+		scroll : 1,
+		/*
+		 auto : {
+		 duration : 1000,
+		 timeoutDuration : 2000,
+		 pauseOnHover : true
+		 }
+		 */
+		auto : false,
 		prev : {
-			button : "#asset-slideshow-prev",
+			button : "#asset-slideshow-next",
 			key : "left"
 		},
 		next : {
-			button : "#asset-slideshow-next",
+			button : "#asset-slideshow-prev",
 			key : "right"
 		}
 
-	});
+	})/*.find(".slide").hover(function() {
+		$(this).find(".asset-intro-box").slideDown();
+	}, function() {
+		$(this).find(".asset-intro-box").slideUp();
+	})*/;
 	
 	$("#top-asset-slideshow-gadget").carouFredSel({
-		items:4,
-		width:"100%",
-		infinite: false,
+		items : 4,
+		width : "100%",
+		infinite : false,
 		auto : false,
-		circular: false,		
-		pagination  : "#top-asset-slideshow-pag-gadget"
+		circular : false,
+		pagination : "#top-asset-slideshow-pag-gadget"
 
 	});
-	
+
 	$("#top-asset-slideshow-site").carouFredSel({
-		items:4,
-		width:"100%",
-		infinite: false,
+		items : 4,
+		width : "100%",
+		infinite : false,
 		auto : false,
-		circular: false,		
-		pagination  : "#top-asset-slideshow-pag-site"
+		circular : false,
+		pagination : "#top-asset-slideshow-pag-site"
 
 	});
 
