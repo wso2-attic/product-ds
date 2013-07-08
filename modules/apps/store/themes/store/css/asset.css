@@ -109,6 +109,10 @@ display:none;
 
 }
 
+.rate-num-assert{
+font-size:smaller;
+}
+
 label.error{
 display:none;
 }

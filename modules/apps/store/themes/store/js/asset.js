@@ -15,7 +15,10 @@ $(function () {
     $($('input', el)[rating - 1]).attr('checked', 'checked');
 
     $('.auto-submit-star').rating({
-        callback: function (value, link) {
+        callback: function (value, link) {		
+		if(value==undefined){
+			value=0;
+		}
         	$('.rate-num-assert').html('('+value+')');
             caramel.post('/apis/rate', {
                 asset: $('#assetp-tabs').data('aid'),
