@@ -7,7 +7,7 @@ table#main-table td#header {
 
 table#main-table td#menu-panel {
     border-right: solid 1px #6F97CD;
-    background-image: url(../images/app-server-menu-panel-bg.gif);
+    /*background-image: url(../images/app-server-menu-panel-bg.gif);*/
     background-position: right top;
     background-repeat: repeat-y;
 }
@@ -20,9 +20,9 @@ div#header-div {
 }
 
 div#header-div div.left-logo {
-    background-image: url(../images/app-server-header-logo.gif);
+    background-image: url(../images/logo.png);
     width: 200px;
-    margin:10px 20px 8px !important;
+    margin:12px 20px !important;
 }
 
 div#header-div div.right-logo {
@@ -147,7 +147,7 @@ div#menu ul.sub li.normal ul.sub li.normal ul.sub li a.menu-default {
 /* ------------- footer styles -------------------- */
 
 div#footer-div div.footer-content div.poweredby {
-    background-image: url( ../images/axis2-powered.gif);
+    /*background-image: url( ../images/axis2-powered.gif);*/
 }
 
 /* ---- login styles ----- */
@@ -205,7 +205,7 @@ div#workArea table.styledLeft  .tableEvenRow {
 
 
 div#workArea table.styledLeft tbody tr td.middle-header {
-    background-image:url("../images/app-server-table-header.gif");
+    /*background-image:url("../images/app-server-table-header.gif");*/
     border-bottom:1px solid #A7A9AC;
     border-left:1px solid #cccccc;
     border-right:1px solid #cccccc;
@@ -214,13 +214,13 @@ div#workArea table.styledLeft tbody tr td.middle-header {
     line-height:22px;
 }
 div#workArea table.styledLeft tbody tr td.buttonRow {
-    background-image:url("../images/app-server-buttonRow-bg.gif");
+    /*background-image:url("../images/app-server-buttonRow-bg.gif");*/
     background-color: #F5F5F6;
     padding-bottom:5px;
     padding-top:5px;
 }
 .button {
-    background-image:url("../images/app-server-button-bg.gif");
+    /*background-image:url("../images/app-server-button-bg.gif");*/
     background-position:left bottom;
     border:1px solid #666666;
     padding:2px 5px;
@@ -237,7 +237,7 @@ div#header-div {
 }
 
 body {
-    background-image:url("../images/bg.png");
+    /*background-image:url("../images/bg.png");*/
     font-family:Arial !important;
 }
 
