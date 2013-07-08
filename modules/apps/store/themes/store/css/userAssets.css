@@ -1,6 +1,3 @@
-body{
-    background-image:none;
-}
 .store-my-item img {
     width: 128px;
     float: left;
@@ -37,3 +34,34 @@ display:none;
 	position:relative;
 }
 
+.own-asset-slideshow-cont .asset{
+    width:200px;
+    margin-right: 17px;
+    display: inline-block;
+}
+
+.own-asset-slideshow-cont .asset:first-child{
+    margin-left:10px;
+}
+
+.own-asset-slideshow-pag a.selected{
+    background-position:center left;
+}
+
+.own-asset-slideshow-pag a{
+    width:8px;
+    height:39px;
+    font-size:0;
+    background:url(../img/asset-slideshow-pag.png) no-repeat center right;
+    margin-left:8px;
+    display:inline-block;
+    float:left;
+}
+
+.own-asset-slideshow-pag {
+    height: 39px;
+    margin: 0;
+    position: absolute;
+    right: 10px;
+    top: 0;
+}

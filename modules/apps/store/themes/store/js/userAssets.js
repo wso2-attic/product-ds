@@ -20,27 +20,28 @@ $(document).on('click', '#myasset-container .btn-embed', function() {
     $(this).closest('.store-my-item').find('.embed-snippet').toggle(50);
     return false;
 });
-/*
+
 	$("#asset-in-gadget").carouFredSel({
-		items:1,
-		width:"300px",
-		infinite: true,
+		items:2,
+		width:"100%",
+		//height:"300px",
+		infinite: false,
 		auto : false,
-		circular: true,		
+		circular: false,		
 		pagination  : "#own-asset-slideshow-pag-gadget"
 
 	});
 	
 	
 	$("#asset-in-site").carouFredSel({
-		items:1,
-		width:"300px",
-		infinite: true,
+		items:2,
+		width:"100%",
+		infinite: false,
 		auto : false,
-		circular: true,		
+		circular: false,		
 		pagination  : "#own-asset-slideshow-pag-site"
 
 	});
 	
-*/
+
 });

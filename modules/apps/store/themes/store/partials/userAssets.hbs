@@ -1,44 +1,44 @@
 <h2>{{t "My Bookmarks"}}</h2>
-<div id="myasset-container" class="row-fluid">
-	<div class="span12">
+<div id="myasset-container" class="row">
+	<div class="span9">
 		{{#if userAssets}}
 		{{#itr userAssets}}
-		<h3 class="asset-title-separator asset-type-{{key}}">{{cap key}}s</h3>
-		<div class="html_carousel"> <div class="asset-in-{{key}}" id="asset-in-{{key}}">
-		{{#slice value size="3"}}
-		<div class="row-fluid">
-			{{#each .}}
+		<h3 class="asset-title-separator asset-type-{{key}}">{{cap key}}s</span><div class="pagination own-asset-slideshow-pag" id="own-asset-slideshow-pag-{{key}}"></div></h3>
+		<div class="top-asset-slideshow-cont">
+		<div class="html_carousel">
+		<div class="asset-in-{{key}}" id="asset-in-{{key}}">
+		
+			{{#each value}}
 			{{#attributes}}
 			<div class="span4 store-my-item">
-			<div>
+			
 				<div class="store-my-item-thumbnail span6">
-					<a href="{{url "/asset/"}}{{../../../key}}?asset={{../path}}"><img src="{{url images_thumbnail}}"></a>
+					<a href="{{url "/asset/"}}{{../../key}}?asset={{../path}}"><img src="{{url images_thumbnail}}"></a>
 				</div>
 				<div class="store-my-item-info span6">
-					<a class="asset-title" href="{{url "/asset/"}}{{../../../key}}?asset={{../path}}"> 
+					<a class="asset-title" href="{{url "/asset/"}}{{../../key}}?asset={{../path}}"> 
 						<strong>{{overview_name}}</strong>
 					</a>
 					<br> 
 					<small>by {{overview_provider}}</small>
 					<div class="btn-group">
-						<a class="btn btn-popover btn-mini {{../../../key}}" data-content='&lt;iframe src="{{../../../../URL}}/gadgets/ifr?url={{overview_url}}"&gt;&lt;/iframe&gt;' data-toggle="popover" data-placement="top" title="{{t "Embed this"}} {{../../../key}}">
+						<a class="btn btn-popover btn-mini {{../../key}}" data-content='&lt;iframe src="{{../../../../URL}}/gadgets/ifr?url={{overview_url}}"&gt;&lt;/iframe&gt;' data-toggle="popover" data-placement="top" title="{{t "Embed this"}} {{../../key}}">
 							<i class="icon-angle-left"></i> <i class="icon-angle-right"></i>
 						</a>
 
-						<a class="btn btn-mini" data-toggle="tooltip" title="{{t "View"}} {{../../../key}}" href="{{url "/asset/"}}{{../../../key}}?asset={{../path}}">
+						<a class="btn btn-mini" data-toggle="tooltip" title="{{t "View"}} {{../../key}}" href="{{url "/asset/"}}{{../../key}}?asset={{../path}}">
 							<i class="icon-eye-open"></i>
 						</a>
-						<a class="btn btn-mini asset-remove-btn" type="{{../../../key}}" data-aid="{{../path}}" data-toggle="tooltip" title="{{t "Remove"}} {{../../../key}}">
+						<a class="btn btn-mini asset-remove-btn" type="{{../../key}}" data-aid="{{../path}}" data-toggle="tooltip" title="{{t "Remove"}} {{../../key}}">
 							<i class="icon-remove"></i>
 						</a>
 					</div>
 				</div>
-			</div>
+			
 			</div>
 			{{/attributes}}
 			{{/each}}
-		</div>
-		{{/slice}}</div></div>
+		</div></div></div>
 		<hr>
 		{{/itr}}
 		{{else}}
