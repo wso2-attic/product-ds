@@ -21,9 +21,7 @@
 }
 
 .store-my-item .btn-group {
-    display: block;
-    margin-top: 10px;    
-    bottom:5px;
+    display: block; 
 }
 
 a.site{
@@ -31,6 +29,17 @@ display:none;
 }
 .store-my-item{
 	position:relative;
+	width:200px;
+	height:237px;
+	float:left;
+	display:block;
+	margin-right:20px;
+}
+
+.store-my-item small{
+    clear: both;
+    display:block;
+    line-height: 0 !important;
 }
 
 .own-asset-slideshow-cont .asset{
