@@ -64,7 +64,7 @@ include("includes/header.jag");
 <div id="dev-div"></div>
 <div id="jira-div"></div>
 <script>
-var portalUrl = '<%= url %>' + '/portal/gadgets/';
+var portalUrl = '<%= url %>' + '/markmail/gadgets/';
 UESContainer.renderGadget('architect-div', portalUrl + 'wso2-architecture/wso2-architecture.xml');
 UESContainer.renderGadget('commits-div', portalUrl + 'wso2-carbon-commits/wso2-carbon-commits.xml');
 UESContainer.renderGadget('dev-div', portalUrl + 'wso2-carbon-dev/wso2-carbon-dev.xml');
