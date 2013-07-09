@@ -115,8 +115,7 @@ $(document).ready(function () {
                         success: function (data) {
 
                             obj['senders'] = data.msg;
-                            ues.gadgets.gadgetContainer.inlineClient.publish(channel, obj);
-
+                            UESContainer.inlineClient.publish(channel, obj);
                         }
                     });
 

@@ -3,7 +3,8 @@
 var scripts = [];
 //var scripts = [];
 var styles = [];
-
+var process = require('process');
+var url = 'http://' + process.getProperty('server.host') + ':' +process.getProperty('http.port');
 include("includes/header.jag");
 
 %>
@@ -58,29 +59,17 @@ include("includes/header.jag");
 
 <div class="span12">
 
-					<%
-var optionsG0 = { id: "g0", container: "gadgetarea-0", userPrefs: {} };
-ues.gadgets.addGadget("http://localhost:9763/markmail/gadgets/wso2-architecture/wso2-architecture.xml", optionsG0);
-%>
-<div id="gadgetarea-0"></div>
- <%
-var optionsG1 = { id: "g1", container: "gadgetarea-1", userPrefs: {} };
-ues.gadgets.addGadget("http://localhost:9763/markmail/gadgets/wso2-carbon-commits/wso2-carbon-commits.xml", optionsG1);
-%>
-<div id="gadgetarea-1"> </div>
-
-<%
-var optionsG2 = { id: "g2", container: "gadgetarea-2", userPrefs: {} };
-ues.gadgets.addGadget("http://localhost:9763/markmail/gadgets/wso2-carbon-dev/wso2-carbon-dev.xml", optionsG2);
-%>
-<div id="gadgetarea-2"></div>
-
-<%
-var optionsG3 = { id: "g3", container: "gadgetarea-3", userPrefs: {} };
-ues.gadgets.addGadget("http://localhost:9763/markmail/gadgets/wso2-jira/wso2-jira.xml", optionsG3);
-%>
-<div id="gadgetarea-3"></div>
-
+<div id="architect-div"></div>
+<div id="commits-div"> </div>
+<div id="dev-div"></div>
+<div id="jira-div"></div>
+<script>
+var portalUrl = '<%= url %>' + '/portal/gadgets/';
+UESContainer.renderGadget('architect-div', portalUrl + 'wso2-architecture/wso2-architecture.xml');
+UESContainer.renderGadget('commits-div', portalUrl + 'wso2-carbon-commits/wso2-carbon-commits.xml');
+UESContainer.renderGadget('dev-div', portalUrl + 'wso2-carbon-dev/wso2-carbon-dev.xml');
+UESContainer.renderGadget('jira-div', portalUrl + 'wso2-jira/wso2-jira.xml');
+</script>
 
 </div>
 
