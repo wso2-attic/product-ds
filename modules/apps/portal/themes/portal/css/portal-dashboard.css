@@ -61,6 +61,7 @@ form{
     border-radius: 4px 4px 4px 4px;
     transition: border-color .3s;
 }
+
 .designer-plus {
     background: url(../img/designer-sprite.png) no-repeat;
     background-position: 0 -364px;
@@ -89,6 +90,23 @@ form{
 .designer-layouts-4 {
     background-position: 0px -273px;
 }
+
+
+.designer-layouts-1.designer-layouts-selected{ 
+    background-position: -81px 0px;
+}
+.designer-layouts-2.designer-layouts-selected{ 
+    background-position: -81px -91px;
+}
+
+.designer-layouts-3.designer-layouts-selected{ 
+    background-position: -81px -182px;
+}
+
+.designer-layouts-4.designer-layouts-selected{ 
+    background-position: -81px -273px;
+}
+
 .site-just-created{
 	background:  #FFF8BF!important;
 }

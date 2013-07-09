@@ -1,4 +1,4 @@
-{{#if recent}}
+{{#if popularAssets}}
 <div id="asset-slideshow-cont">
 	<div class="html_carousel">
 		<div id="asset-slideshow">
@@ -10,18 +10,22 @@
 				</div>
 				<div class="asset-intro-box">
 					<img src="{{images_thumbnail}}">
-					<h3>{{overview_name}}</h3>
-					<small> Version {{overview_version}} </small>
-					<small> by {{overview_provider}} </small>
+					<h3><span>{{overview_name}}</span> 
+						<small>{{overview_version}}</small>			
+					</h3>
+					
 					{{/attributes}}
+					<br>
 					<span class="star-rating">
 						<div class="asset-rating">
 							<div class="asset-rating-{{rating.average}}star">
 
 							</div>
-						</div> </span>
+						</div> 
+						<small> by {{attributes.overview_provider}} </small>
+					</span>
 
-					<a data-type="gadget" data-aid="{{path}}" data-toggle="modal" href="#modal-add-gadget" class="btn btn-primary" id="btn-add-gadget"> {{>process-asset-text}}  </a>
+					<a data-type="gadget" class="btn btn-primary" id="btn-add-gadget" href="{{url "/asset"}}/{{type}}?asset={{path}}">View</a>
 
 				</div>
 
@@ -37,7 +41,9 @@
 	</div>
 </div>
 {{/if}}
-
+<div id="slideshow-clearfix">
+	
+</div>
 {{#itr recentAssets}}
 <div class="assets-container">
     <h3 class="asset-title-separator asset-type-{{key}}"><span>{{#if ../recent}}Recent {{/if}}{{cap key}}s</span><div class="pagination top-asset-slideshow-pag" id="top-asset-slideshow-pag-{{key}}"></div></h3>

@@ -53,7 +53,7 @@ var caramel;
 	popularGadgets = store.popularAssets('gadget');
 	popularSites = store.popularAssets('site');
 	popularAssets = popularGadgets.concat(popularSites);
-	
+
 	caramel.render({
 		title : 'Store | User Engagement Center',
 		user : loggedUser,

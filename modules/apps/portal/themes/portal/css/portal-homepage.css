@@ -60,7 +60,7 @@
     border-width:5px;
     border-style:solid;
     border-radius:10px;
-    bottom:209px;
+    bottom:235px;
     z-index:10;
 }
 
@@ -299,6 +299,17 @@ background-image: url("../img/separator-line.png");
     margin-left:-14px;
     top:-10px !important;
     width:28px !important;
+    
+     -moz-animation-duration: .5s;
+    -webkit-animation-duration: .5s;
+    -moz-animation-name: zoomInOut;
+    -webkit-animation-name: zoomInOut;
+    -moz-animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+    
+    
 }
 
 .jslider .jslider-scale ins{
@@ -307,6 +318,74 @@ background-image: url("../img/separator-line.png");
 .jslider .jslider-label{
     display:none !important;
 }
+/*
+.pointer-circle {
+    background: none repeat scroll 0 0 #009E92;
+    border-radius: 100px 100px 100px 100px;
+    display: block;
+    height: 34px;
+    left: -3px;
+    opacity: 0.5;
+    position: absolute;
+    top: -5px;
+    width: 34px;
+    
+     -moz-animation-duration: .5s;
+    -webkit-animation-duration: .5s;
+    -moz-animation-name: zoomInOut;
+    -webkit-animation-name: zoomInOut;
+    -moz-animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+}
+
+
+.jslider:hover .pointer-circle{
+    -webkit-animation-play-state: paused;
+}
+@-moz-keyframes zoomInOut {
+    from {
+    -moz-transform: scale(1);
+    }
+
+    to {
+    -moz-transform: scale(1.1);
+    }
+}
+
+@-webkit-keyframes zoomInOut {
+    from {
+    -webkit-transform: scale(1);
+    }
+
+    to {
+    -webkit-transform: scale(1.1);
+    }
+}
+
+
+
+*/
+
+.gps_ring {
+    border: 3px solid #999;
+    -webkit-border-radius: 30px;
+    height: 18px;
+    width: 18px;
+    position: absolute;
+    left:20px;
+    top:214px;
+    -webkit-animation: pulsate 1s ease-out;
+    -webkit-animation-iteration-count: infinite; 
+    opacity: 0.0
+}
+@-webkit-keyframes pulsate {
+    0% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
+    50% {opacity: 1.0;}
+    100% {-webkit-transform: scale(1.2, 1.2); opacity: 0.0;}
+}
+
 @media (max-width: 480px) {
     #feature-slider  
         left:0;

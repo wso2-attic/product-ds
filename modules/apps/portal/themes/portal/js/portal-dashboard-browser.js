@@ -299,8 +299,8 @@ $(function() {
 
 	$('.designer-layouts').live('click', function() {
 		var layoutType = $(this).attr('data-layout');
-		$('.designer-layouts').empty();
-		$(this).append('<div class="designer-plus"></div>');
+		$('.designer-layouts').removeClass('designer-layouts-selected');
+		$(this).addClass('designer-layouts-selected');
 		$('#inp-layout').val(layoutType);
 	});
 
