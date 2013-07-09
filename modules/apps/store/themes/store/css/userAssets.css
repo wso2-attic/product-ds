@@ -78,9 +78,14 @@ display:none;
 	height: 220px !important; 
 }
 
-.popover.fade.top.in{
-	left: -65px !important; 
+.popover{	
+	left: 0px !important; 
+	width: 190px;
 }
 .arrow{
-	left: 32% !important; 
+	left: 18% !important; 
+}
+
+.asset-in-site{
+	left: 0px !important; 
 }
