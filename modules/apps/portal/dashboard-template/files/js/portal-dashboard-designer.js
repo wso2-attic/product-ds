@@ -151,6 +151,7 @@ $(function() {
 							'data-col' : w.x,
 							'data-row' : w.y,
 							'data-url' : w.url,
+                            'data-title' : w.title,
 							'data-prefs' : w.prefs
 						});
 
@@ -211,7 +212,7 @@ $(function() {
 				if (url != '') {
 					insertGadget($(widget), url, {
 						prefs : prefs
-					});
+					},$(widget).attr('data-title'));
 				}
 
 			});
@@ -302,13 +303,18 @@ $(function() {
 
 	var id = 1;
 
-	function insertGadget(parentEl, url, pref) {
+	function insertGadget(parentEl, url, pref,title) {
 		id++;
 		var gadgetDiv = parentEl.find('.add-gadget-item');
 		var idStr = 'gadgetArea-d' + id;
 		gadgetDiv.html('<div id="' + idStr + '">');
 		UESContainer.renderGadget(idStr, url, pref || {}, function(gadgetInfo) {
-			parentEl.find('h3').text(gadgetInfo.meta.modulePrefs.title);
+            var titleEl = parentEl.find('h3');
+            if(title){
+                titleEl.text(title);
+            }else{
+                titleEl.text(gadgetInfo.meta.modulePrefs.title);
+            }
 		});
 	}
 
