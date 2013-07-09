@@ -131,24 +131,7 @@ html {
 iframe {
     border:none;
 }
-.jslider .jslider-pointer {
-    background-position:-44px -55px !important;
-}
-.jslider .jslider-pointer-hover {
-    background-position:-76px -55px !important;
-}
-.jslider .jslider-value {
-    top:-29px !important;
-}
-.jslider .jslider-value, .jslider .jslider-label {
-    font-size:12px;
-}
-.jslider_round_plastic .jslider-pointer {
-    height:38px !important;
-    margin-left:-8px;
-    top:-7px !important;
-    width:28px !important;
-}
+
 li {
     list-style:none;
 }

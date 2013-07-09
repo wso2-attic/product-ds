@@ -843,7 +843,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     border-left: 1px solid #ECF0F1;
     border-bottom: 1px solid #ECF0F1;
     background:#FFFFFF;
-   /* display:none;*/
+   display:none;
 }
 div.rating-cancel, div.star-rating {
     background-color: #fff !important;

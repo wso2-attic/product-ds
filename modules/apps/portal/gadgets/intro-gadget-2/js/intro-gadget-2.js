@@ -22,29 +22,34 @@ function callbackGadget2(topic, obj, subscriberData) {
 	$.plot("#placeholder", [data], {
 		series : {
 			lines : {
-				show : true
+				show : true,
+				lineWidth : 6
 			},
 			points : {
-				show : true
+				show : true,
+				radius:5
 			},
-			color: '#009E90'
+			color : '#2980b9'
 		},
 
 		grid : {
 			hoverable : true,
-			clickable : true
+			clickable : true,
+			show : false
 		},
 
 		yaxis : {
 			show : true,
 			tickFormatter : function suffixFormatter(val, axis) {
 				return val / 1000000;
-			}
+			},
+			tickLength : 0
 		},
 		xaxis : {
 			show : true,
 			ticks : 4,
-			tickDecimals : 0
+			tickDecimals : 0,
+			tickLength : 0
 		}
 	}, colors = ['red', 'orange', 'green', 'blue', 'purple']);
 
@@ -57,7 +62,7 @@ function callbackGadget2(topic, obj, subscriberData) {
 				$("#tooltip").remove();
 				var x = item.datapoint[0], y = item.datapoint[1];
 
-				showTooltip(item.pageX, item.pageY, x + " , " + y);
+				showTooltip(item.pageX, item.pageY, '<strong>' + x + "</strong><small>USD " + (y) + "</small>");
 			}
 		} else {
 			$("#tooltip").remove();
@@ -67,8 +72,12 @@ function callbackGadget2(topic, obj, subscriberData) {
 
 	function showTooltip(x, y, contents) {
 		$("<div id='tooltip'>" + contents + "</div>").css({
-			top : y + 5,
-			left : x + 5
+			top : y - 68,
+			left : x - 40,
+			opacity : 1,
+			background : 'white',
+			border : 'none',
+			padding : '8px 8px 18px'
 		}).appendTo("body").fadeIn(200);
 	}
 
