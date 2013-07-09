@@ -21,6 +21,14 @@ $(document).on('click', '#myasset-container .btn-embed', function() {
     return false;
 });
 
+$('.popover-content').live("click",function(event){
+	$('.arrow').css({"display":"none"});
+});
+
+$(".popover-content").live("mouseleave",function(){
+	$('.arrow').css({"display":"block"});
+});
+
 	$("#asset-in-gadget").carouFredSel({
 		items:4,
 		infinite: false,
