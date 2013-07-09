@@ -23,8 +23,7 @@ $(document).on('click', '#myasset-container .btn-embed', function() {
 
 	$("#asset-in-gadget").carouFredSel({
 		items:4,
-		width:"100%",
-		height:"300px",
+		
 		infinite: false,
 		auto : false,
 		circular: false,		

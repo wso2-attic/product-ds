@@ -27,12 +27,12 @@
     <!--
        Product Name
     -->
-    <Name>Jaggery Runtime</Name>
+    <Name>${product.name}</Name>
 
     <!--
        Product Version
     -->
-    <Version>0.9.0.ALPHA2-wso2v1</Version>
+    <Version>${product.version}</Version>
 
     <!--
        Host name or IP address of the machine hosting this server
