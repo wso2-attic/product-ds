@@ -34,6 +34,7 @@ $(function () {
                     pagination: "#top-asset-slideshow-pag-site"
 
                 });
+				mouseStop();
                 /*el.append(result.paging);
                  caramel.js($('body'), data.body['assets'].resources.js, 'assets', function () {
                  mouseStop();
