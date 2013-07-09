@@ -501,8 +501,10 @@ $(function() {
             });
             $('h3').each(function(){
                 var $this = $(this);
-                $this.parent().append('<input value="' + $this.text() + '">');
-                $this.remove();
+                if($this.parents('.grid_header').siblings('.designer-placeholder').length == 0){
+                    $this.parent().append('<input value="' + $this.text() + '">');
+                    $this.remove();
+                }
             });
 			$('.layout_block .btn-add-gadget').show();
 			$('.layout_block').removeClass('layout_block_view');
@@ -664,6 +666,11 @@ $(function() {
 				var gadgetLi = lastClickedGadgetButton.parents('li');
 
 				gadgetLi.data('gadgetInfo', gadgetInfo);
+                var h3 = gadgetLi.find('h3');
+                if(h3){
+                    h3.parent().append('<input type="text">');
+                    h3.remove()
+                }
 				insertGadget(gadgetLi, gadgetInfo.attributes.overview_url);
 				var placeholder = lastClickedGadgetButton.siblings('.designer-placeholder');
 				lastClickedGadgetButton.remove();

@@ -216,7 +216,7 @@ $(function() {
 		gadgetDiv.html('<div id="' + idStr + '">');
         UESContainer.renderGadget(idStr, url, pref || {}, function (gadgetInfo) {
             if (gadgetInfo.meta.modulePrefs) {
-                parentEl.find('input').val(gadgetInfo.meta.modulePrefs.title);
+                parentEl.find('.grid_header').append('<input value="' + gadgetInfo.meta.modulePrefs.title + '">');
                 parentEl.find('.show-widget-pref').show();
             }
 		});
