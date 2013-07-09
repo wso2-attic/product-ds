@@ -22,26 +22,48 @@
 	        <script language="javascript" type="text/javascript" src="/portal/js/flot/jquery.flot.js"></script>
 		    <script src="/portal/gadgets/intro-gadget-2/js/intro-gadget-2.js"></script>
 		   <style>
+		    	body{
+		     	background:#edf8ff;
+		     	color:#34495E;
+		     	}
 		    	h5{
-		    	 color: #333333;
-    			font-size: 15px;
-    			padding-top: 12px;
+			border-bottom: 1px solid #EDEDED;
+			padding-bottom: 7px;
+			padding-left: 20px;
+			padding-top: 10px;
+			text-align: left;
 		    	}
-		    	h5 small{
-		    	 color: #aaa;
-    			font-size: 12px;
-    			display:block;
-    			 margin-top: -6px;
-		    	}
+		    	
 		    	#placeholder{
 		    	width: 100%; height: 240px; margin: 2px auto 0px auto;_margin-left:-150px;
 		    	}
+		    	#tooltip {
+		    	background:url('img/tooltip.png') no-repeat bottom center !important;
+		    	}
+		    	#tooltip strong{
+		    	font-size:13px;
+		    	font-weight:bold;
+		    	clear:both;
+		    	display:block;
+		    	}
+		    	#tooltip small{
+		    	font-size:12px;
+		    	}
+		    	#shadow{
+		    	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.05);
+    			height: 100%;
+    			position: absolute;
+    			right: 0;
+    			top: 0;
+    			width: 37px;
+    			}
 		    </style>
 		</head>
 
         <body>
-        <div style="display: block; text-align:center; font-size: 12pt"><h5>GDP per capita<small>(USD millions)</small></h5>
-		    <div id="placeholder" class="demo-placeholder"></div>
+        <div style="display: block; text-align:center; font-size: 12pt"><h5><img src="img/title.png"></h5>
+        	    <div id="shadow"></div>
+		    <div id="placeholder" class="demo-placeholder" style="height:50%; width:243px; margin-left:20px;"></div>
 		<div>
 		</body>
 

@@ -63,6 +63,9 @@ var adjustStoreRight = function(){
 	
 }
 $(function(){
+	$("#myasset-container .btn-popover").on("click",function(){
+		$('.popover').hide();
+	});
 	$('.btn-popover').popover({ html: false });
 	$('.popover-content').live("click",function(){
 		var selectedTxt = $(this).text();
