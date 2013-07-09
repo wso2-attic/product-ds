@@ -214,7 +214,7 @@ $(function() {
                     $w.find('.designer-placeholder').remove();
 					insertGadget($w, url, {
 						prefs : prefs
-					},$(widget).attr('data-title'));
+					},$w.attr('data-title'));
 				}
 
 			});
