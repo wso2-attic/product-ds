@@ -200,16 +200,18 @@ $(function() {
 			var widgets = $('.layouts_grid').find('.layout_block');
 
 			$.each(widgets, function(i, widget) {
-				var wid = $(widget).attr('data-wid');
+                var $w = $(widget);
+                var wid = $w.attr('data-wid');
 				if (wid > newWid) {
 					newWid = wid;
 				}
 
-				var url = $(widget).attr('data-url');
-				var prefs = JSON.parse($(widget).attr('data-prefs').replace(/'/g, '"'));
-				var gadgetArea = $(widget).find('.add-gadget-item');
+				var url = $w.attr('data-url');
+				var prefs = JSON.parse($w.attr('data-prefs').replace(/'/g, '"'));
+				var gadgetArea = $w.find('.add-gadget-item');
 				if (url != '') {
-					insertGadget($(widget), url, {
+                    $w.find('.designer-placeholder').remove();
+					insertGadget($w, url, {
 						prefs : prefs
 					});
 				}
