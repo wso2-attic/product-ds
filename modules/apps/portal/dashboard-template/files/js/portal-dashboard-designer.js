@@ -248,6 +248,7 @@ $(function() {
 					wid : currentWidgetId || widgetId++,
 					x : wgd.col,
 					y : wgd.row,
+                    title: $w.find('input').val(),
 					width : wgd.size_x,
 					height : wgd.size_y,
 					prefs : JSON.stringify(prefs).replace(/"/g, "'"),
@@ -484,6 +485,11 @@ $(function() {
 			$('.layout_block').addClass('layout_block_view');
 			$('.gadget-controls li:last-child').remove();
 
+            $('.grid_header > input').each(function(){
+                var $this = $(this);
+                $this.parent().append('<h3>'+$this.val()+'</h3>');
+                $this.remove();
+            });
 		} else if (mode == 'design') {
 			$('#dashboardName').hide();
 			$('.sub-navbar-designer').fadeIn();
@@ -494,6 +500,13 @@ $(function() {
                 var $this = $(this);
                 if($this.parents('.grid_header').siblings('.designer-placeholder').length == 0){
                     $this.show();
+                }
+            });
+            $('h3').each(function(){
+                var $this = $(this);
+                if($this.parents('.grid_header').siblings('.designer-placeholder').length == 0){
+                    $this.parent().append('<input value="'+$this.text()+'">');
+                    $this.remove();
                 }
             });
 			$('.layout_block .btn-add-gadget').show();
