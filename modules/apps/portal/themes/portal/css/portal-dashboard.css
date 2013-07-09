@@ -72,7 +72,6 @@ form{
     height: 68px;
 }
 
-
 .designer-layouts:hover {
     border: 5px solid #16A085;
 }
@@ -91,7 +90,9 @@ form{
     background-position: 0px -273px;
 }
 
-
+.designer-layouts-selected{
+    border: 5px solid #16A085; 
+}
 .designer-layouts-1.designer-layouts-selected{ 
     background-position: -81px 0px;
 }

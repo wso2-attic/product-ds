@@ -56,11 +56,11 @@
     -moz-border-left-colors:none;
     -moz-border-right-colors:none;
     -moz-border-top-colors:none;
-    border-color:rgba(127,140,141, .1);
+    border-color:rgba(127,140,141, .15);
     border-width:5px;
     border-style:solid;
     border-radius:10px;
-    bottom:235px;
+    bottom:214px;
     z-index:10;
 }
 
