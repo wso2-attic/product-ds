@@ -310,12 +310,9 @@ $(function() {
 		var idStr = 'gadgetArea-d' + id;
 		gadgetDiv.html('<div id="' + idStr + '">');
 		UESContainer.renderGadget(idStr, url, pref || {}, function(gadgetInfo) {
-            var titleEl = parentEl.find('h3');
-            if(title){
-                titleEl.text(title);
-            }else{
-                titleEl.text(gadgetInfo.meta.modulePrefs.title);
-            }
+            var visibleTitle = title || gadgetInfo.meta.modulePrefs.title;
+            parentEl.find('h3').text(visibleTitle);
+            parentEl.find('input').val(visibleTitle);
 		});
 	}
 
@@ -504,10 +501,8 @@ $(function() {
             });
             $('h3').each(function(){
                 var $this = $(this);
-                if($this.parents('.grid_header').siblings('.designer-placeholder').length == 0){
-                    $this.parent().append('<input value="'+$this.text()+'">');
-                    $this.remove();
-                }
+                $this.parent().append('<input value="' + $this.text() + '">');
+                $this.remove();
             });
 			$('.layout_block .btn-add-gadget').show();
 			$('.layout_block').removeClass('layout_block_view');
