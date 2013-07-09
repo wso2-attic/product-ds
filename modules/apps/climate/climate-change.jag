@@ -1,11 +1,11 @@
 <%
-
 var scripts = [];
 var styles = [];
-
+var process = require('process');
+var url = 'http://' + process.getProperty('server.host') + ':' +process.getProperty('http.port');
 include("includes/header.jag");
-
 %>
+
 
 			<div class="row">
 				<div class="span12">
@@ -35,29 +35,18 @@ include("includes/header.jag");
 				</div>
 			</div>
 
-<%
-var optionsG0 = { id: "g0", container: "gadgetarea-0", userPrefs: {} };
-ues.gadgets.addGadget("http://localhost:9763/portal/gadgets/agricultural-land/agricultural-land.xml", optionsG0);
-%>
-<div id="gadgetarea-0" style="width:50%; float:left;"></div>
-<%
-var optionsG1 = { id: "g1", container: "gadgetarea-1", userPrefs: {} };
-ues.gadgets.addGadget("http://localhost:9763/portal/gadgets/co2-emission/co2-emission.xml", optionsG1);
-%>
-<div id="gadgetarea-1" style="width:50%; float:right;"></div>
-<%
-var optionsG2 = { id: "g2", container: "gadgetarea-2", userPrefs: {} };
-ues.gadgets.addGadget("http://localhost:9763/portal/gadgets/energy-use/energy-use.xml", optionsG2);
-%>
-<div id="gadgetarea-2" style="clear:both"></div>
-<%
-var optionsG3 = { id: "g3", container: "gadgetarea-3", userPrefs: {} };
-ues.gadgets.addGadget("http://localhost:9763/portal/gadgets/greenhouse-gas/greenhouse-gas.xml", optionsG3);
-%>
-<div id="gadgetarea-3" style="clear:both"></div>
+<div id="land-div" style="width:50%; float:left;"></div>
+<div id="emission-div" style="width:50%; float:right;"></div>
+<div id="energy-div" style="clear:both"></div>
+<div id="gas-div" style="clear:both"></div>
 
-
-
+<script>
+var portalUrl = '<%= url %>' + '/portal/gadgets/';
+UESContainer.renderGadget('land-div', portalUrl + 'agricultural-land/agricultural-land.xml');
+UESContainer.renderGadget('emission-div', portalUrl + 'co2-emission/co2-emission.xml');
+UESContainer.renderGadget('energy-div', portalUrl + 'energy-use/energy-use.xml');
+UESContainer.renderGadget('gas-div', portalUrl + 'greenhouse-gas/greenhouse-gas.xml');
+</script>
 <%
 include("includes/footer.jag");
 %>

@@ -47,18 +47,5 @@
 		}
 		%>
 
-				<!-- imports needed for gadget rendering -->
-
-
-		<script type="text/javascript" src="/portal/lib/gadget-rendering/js/external/head.min.js"></script>
-		<script type="text/javascript" src="/portal/lib/gadget-rendering/js/main.js"></script>
-
-		<!-- styles -->
-		<link rel="stylesheet" type="text/css" href="/portal/lib/gadget-rendering/css/style.css">
-		<link rel="stylesheet" type="text/css" href="/portal/lib/gadget-rendering/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="/portal/lib/gadget-rendering/css/font-awesome.css">
-		<!-- END imports needed for gadget rendering -->
-		
-
 	</body>
 </html>

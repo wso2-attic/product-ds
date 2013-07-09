@@ -101,7 +101,7 @@ $(document).ready(function () {
                     obj = data[1];
                     console.log("Channel:" + indicators[i].channel);
                     console.log(obj);
-                    ues.gadgets.gadgetContainer.inlineClient.publish(indicators[i].channel, obj);
+                    UESContainer.inlineClient.publish(indicators[i].channel, obj);
                 };
             })(i));
         }
