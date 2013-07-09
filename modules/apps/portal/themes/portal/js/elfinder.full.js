@@ -1137,8 +1137,9 @@ window.elFinder = function(node, opts) {
 		.done(function(odata, pdata) {
 			var diff = self.diff(odata.files.concat(pdata && pdata.tree ? pdata.tree : []));
 
-			diff.added.push(odata.cwd)           
-			diff.removed.length && self.remove(diff);
+			diff.added.push(odata.cwd)
+            // commenting  this to fix https://wso2.org/jira/browse/UES-224
+			//diff.removed.length && self.remove(diff);
 			diff.added.length   && self.add(diff);
 			diff.changed.length && self.change(diff);
 			return dfrd.resolve(diff);
