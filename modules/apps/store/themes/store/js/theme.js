@@ -70,6 +70,9 @@ $(function(){
 		$(this).text("").append($textArea);	
 		$(".popover-textarea").height($(".popover-textarea")[0].scrollHeight);
 		$(".popover-textarea").select();
+		$(".popover").on("click",function(){
+			$(".popover-textarea").text(selectedTxt);
+		});
 		$(".popover").on("mouseleave",function(){
 			$(".popover-content").text(selectedTxt);
 		});	
