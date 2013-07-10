@@ -112,7 +112,6 @@ $(function () {
 
     $('#tab-review-box').find('.btn-primary').live('click', function (e) {
         if (!$("#form-review").valid()) return;
-		console.log("adding reviews");
         caramel.post('/apis/comment', {
             asset: $('#assetp-tabs').data('aid'),
             content: $('#tab-review-box').find('.content').val()
@@ -141,7 +140,6 @@ $(function () {
 	
 	$('#tab-review-box').live('focus', function(e){
 	if($('#comment-content').hasClass('user-review')) {
-	console.log("Goes");
 	$(".btn-review").removeClass("btn-primary");
 	$(".btn-review").addClass("disabled");
 	$('.error-text').show();
