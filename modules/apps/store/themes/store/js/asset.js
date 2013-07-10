@@ -112,6 +112,7 @@ $(function () {
 
     $('#tab-review-box').find('.btn-primary').live('click', function (e) {
         if (!$("#form-review").valid()) return;
+		console.log("adding reviews");
         caramel.post('/apis/comment', {
             asset: $('#assetp-tabs').data('aid'),
             content: $('#tab-review-box').find('.content').val()
@@ -140,12 +141,27 @@ $(function () {
 	
 	$('#tab-review-box').live('focus', function(e){
 	if($('#comment-content').hasClass('user-review')) {
+	console.log("Goes");
 	$(".btn-review").removeClass("btn-primary");
 	$(".btn-review").addClass("disabled");
 	$('.error-text').show();
 	return false;
 	}
     });
+	
+	$('.text-review-box').live('keyup focus', function(e){
+	    var chars = this.value.length;
+		var limit = 500;
+                if (chars > limit) {
+                    src.value = src.value.substr(0, limit);
+                    chars = limit;
+                }
+				$("#charCount").html( limit - chars );
+		return false;
+	
+    });
+	
+	
 
     /*    $('#btn-copy-gadget-code').click(function(){
      var script = $('#modal-add-gadget code').html().trim();
@@ -170,4 +186,8 @@ $(function () {
      $('.asset-description-header').removeClass('asset-description-header-scroll');
      }
      })*/
+	 
+	 
+
+
 });

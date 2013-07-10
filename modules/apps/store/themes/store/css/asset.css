@@ -159,6 +159,11 @@ display:none;
     width: auto;
     margin-bottom: 15px;
 }
+.text-review-box-charCount-msg{
+	text-align: right;
+    width: 50%;
+    float: right;
+ }
 
 .asset-description-header .asset-introduction-box {
         left: 59% !important;
