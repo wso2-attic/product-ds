@@ -214,7 +214,11 @@ $(function() {
 					insertGadget($w, url, {
 						prefs : prefs
 					});
-				}
+				}else{
+                    if($w.find('.designer-placeholder').length==0){
+                        $w.append('<div class="designer-placeholder"></div> <button class="btn btn-add-gadget">Add Gadget</button>');
+                    }
+                }
 
 			});
 
