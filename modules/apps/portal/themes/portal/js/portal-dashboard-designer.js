@@ -60,6 +60,7 @@ $(function() {
                 wid: widgetId++,
                 x: wgd.col,
                 y: wgd.row,
+                title: $w.find('input').val(),
                 width: wgd.size_x,
                 height: wgd.size_y,
                 prefs: JSON.stringify(prefs).replace(/"/g, "'"),
@@ -215,7 +216,7 @@ $(function() {
 		gadgetDiv.html('<div id="' + idStr + '">');
         UESContainer.renderGadget(idStr, url, pref || {}, function (gadgetInfo) {
             if (gadgetInfo.meta.modulePrefs) {
-                parentEl.find('h3').text(gadgetInfo.meta.modulePrefs.title);
+                parentEl.find('.grid_header').append('<input class="gadget-title-txt" value="' + gadgetInfo.meta.modulePrefs.title + '">');
                 parentEl.find('.show-widget-pref').show();
             }
 		});
