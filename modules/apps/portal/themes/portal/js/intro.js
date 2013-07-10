@@ -93,6 +93,8 @@ $(document).ready(function() {
 		}
 	});
 	$("#SliderSingle").slider('value', 1);
+	
+	//$('.jslider-pointer').append($('<div>').addClass('gps_ring'));
 
 	$('a[href*=#]').each(function() {
 		var thisPath = filterPath(this.pathname) || locationPath;

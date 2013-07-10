@@ -4,7 +4,7 @@
 
 var caramel;
 ( function() {
-	var gadgets, sites, paging, count, current, total, loggedUser,
+	var gadgets, sites, paging, count, current, total, loggedUser, popularAssets,
             recent = false,
             type = 'gadget',
             options = {},
@@ -50,10 +50,13 @@ var caramel;
 	recentGadgets = store.recentAssets('gadget', 3);
 	recentSites = store.recentAssets('site', 3);
 	recentAssets = recentGadgets.concat(recentSites);
+
+	if(!query){
 	popularGadgets = store.popularAssets('gadget');
 	popularSites = store.popularAssets('site');
 	popularAssets = popularGadgets.concat(popularSites);
-	
+	}
+
 	caramel.render({
 		title : 'Store | User Engagement Center',
 		user : loggedUser,

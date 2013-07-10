@@ -146,6 +146,20 @@ $(function () {
 	return false;
 	}
     });
+	
+	$('.text-review-box').live('keyup focus', function(e){
+	    var chars = this.value.length;
+		var limit = 500;
+                if (chars > limit) {
+                    src.value = src.value.substr(0, limit);
+                    chars = limit;
+                }
+				$("#charCount").html( limit - chars );
+		return false;
+	
+    });
+	
+	
 
     /*    $('#btn-copy-gadget-code').click(function(){
      var script = $('#modal-add-gadget code').html().trim();
@@ -170,4 +184,8 @@ $(function () {
      $('.asset-description-header').removeClass('asset-description-header-scroll');
      }
      })*/
+	 
+	 
+
+
 });

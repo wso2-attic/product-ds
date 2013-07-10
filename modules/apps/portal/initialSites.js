@@ -20,10 +20,10 @@ var populateSites = function() {
 			provider : sites.sites[i].attributes.overview_provider,
 			version : sites.sites[i].attributes.overview_version,
             description : sites.sites[i].attributes.overview_description,
-			url : sites.sites[i].attributes.overview_url,
-			thumbnail : sites.sites[i].attributes.images_thumbnail,
-			banner : sites.sites[i].attributes.images_banner,
-			status : sites.sites[i].attributes.overview_status,
+			url : portal.server.http + sites.sites[i].attributes.overview_url,
+			thumbnail : portal.server.http + sites.sites[i].attributes.images_thumbnail,
+			banner : portal.server.http + sites.sites[i].attributes.images_banner,
+			status : sites.sites[i].attributes.overview_status
 		});
 	}
 

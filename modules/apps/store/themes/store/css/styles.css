@@ -837,13 +837,14 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     position: absolute;
     right: 0;
     bottom: 0;
-   height:48px;
+    height: 50px;
     left: 0;
     padding: 10px;
     border-left: 1px solid #ECF0F1;
     border-bottom: 1px solid #ECF0F1;
-    background:#FFFFFF;
-   /* display:none;*/
+    background: #FFFFFF;
+   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    display:none;
 }
 div.rating-cancel, div.star-rating {
     background-color: #fff !important;
@@ -852,24 +853,33 @@ div.rating-cancel, div.star-rating {
 .asset-intro-box img {
     width: 50px;
     border: 1px solid #FFFFFF;
-    vertical-align:top;
+    vertical-align: top;
     float: left;
 }
 .asset-intro-box h3 {
     line-height: normal;
     max-height: 59px;
     overflow: hidden;
-    font-size:18px;
-    margin-left:10px;
-    display: inline-block;
-    margin-bottom:0;
+    font-size: 18px;
+    margin: 4px 0 0 10px;
+    float: left;
+}
+.asset-intro-box h3 span{
+    max-width:324px;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+        display: inline-block;
 }
 .asset-intro-box small {
-    display: inline-block;
     line-height: 1.2;
     color: #7f8c8d;
-    float:left;
 }
+.asset-intro-box small:last-child{
+    margin-left:10px;
+}
+
 .asset-intro-box .asset-rating {
     margin-top: 10px;
     width: auto;
@@ -887,72 +897,83 @@ div.rating-cancel, div.star-rating {
 .assets-container {
     margin-top: 24px;
 }
-#asset-slideshow-next{
-    background: url('../img/asset_slideshow_controls_left.png') no-repeat center left;
+#asset-slideshow-next {
+    background: url('../img/asset_slideshow_controls_left.png') no-repeat 11% center;
 }
-#asset-slideshow-prev{
+#asset-slideshow-prev {
     background: url('../img/asset_slideshow_controls_right.png') no-repeat center left;
 }
 #asset-slideshow-next, #asset-slideshow-prev {
+    background-color: rgba(255,255,255,.8);
+    font-size: 0;
+    height: 299px;
     position: absolute;
     top: 0;
+    width: 163px;
     z-index: 999;
-    font-size: 0;
-    width: 143px;
-    height: 276px;
-    
-    opacity: .8;
-    /*transition: opacity .2s;*/
-    background-color:#ffffff;
 }
 #asset-slideshow-next:hover, #asset-slideshow-prev:hover {
-   /* opacity: 1;*/
+    /* opacity: 1;*/
 }
 #asset-slideshow-next {
     left: 0;
 }
 #asset-slideshow-prev {
     right: 0;
-    background-position: center right;
+    background-position: 88% center;
 }
 
 #asset-slideshow-cont {
     height: 300px;
     display: block;
     overflow: hidden;
-  /*  box-shadow:0 2px 2px rgba(0,0,0,.3);*/
+    /*  box-shadow:0 2px 2px rgba(0,0,0,.3);*/
+    left: -15px;
+    position: absolute;
+    right: -21px;
+}
+#slideshow-clearfix {
+    margin-top: 320px;
+}
+#asset-slideshow-cont:after {
+    content: "";
+    width: 104%;
+    position: absolute;
+    left: -15px;
+    right: 20px;
+    height: 1px;
+    background: #ccc;
+    top: 300px;
 }
 
-#asset-slideshow-cont:after{
-    content:"";
-    width:104%;
-    position:absolute;
-    left:-15px;
-    right:20px;
-    height:1px;
-    background:#ddd;
-    top:300px;
+#asset-slideshow-cont .asset-rating {
+    float: left;
+    margin: 4px 0 0 9px;
+    width:88px;
 }
-
-
+#asset-slideshow-cont #btn-add-gadget {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+}
 #asset-slideshow .slide {
     position: relative;
     height: 300px;
-    width:580px;
+    width: 580px;
     display: inline-block;
-    overflow:hidden;
+    overflow: hidden;
 }
-#asset-slideshow-cont .html_carousel{
-    margin-left:-440px;
+#asset-slideshow-cont .html_carousel {
+    margin-left: -417px;
 }
 /*
-#asset-slideshow-cont .html_carousel {
-    position: absolute;
-    left: -15px;
-    right: -15px;
-    top: 0;
-}
-*/
+ #asset-slideshow-cont .html_carousel {
+ position: absolute;
+ left: -15px;
+ right: -15px;
+ top: 0;
+ }
+ */
 #container-assets {
     margin-top: 35px;
 }
@@ -985,12 +1006,19 @@ div.rating-cancel, div.star-rating {
 .nav-tabs > li > a:first-child {  
     border: none;
 }
+/*
+.nav-tabs > li.active > a {
+    color: #009E92;
+    border: none;
+}
+*/
 
 .nav-tabs > li.active > a {
   border: none;
    border-color:red;
   color: #009E92;
   margin-left: 0px;
+
 }
 
 .nav-tabs > li.active > a:hover {
@@ -1044,7 +1072,7 @@ div.rating-cancel, div.star-rating {
 /** prettyprint styles */
 .prettyprint {
     padding: 8px;
-    background-color: ##F2F3F7;
+    background-color: #F2F3F7;
     border: 1px solid #E7E7EB;
 }
 .prettyprint.linenums {
@@ -1084,8 +1112,8 @@ ol.linenums li {
     text-shadow: 0 1px 0 #fff;
 }
 
-.popover-textarea{
-	font-size: 12px;
+.popover-textarea {
+    font-size: 12px;
     height: 100%;
     position: relative;
     right: 6px;
