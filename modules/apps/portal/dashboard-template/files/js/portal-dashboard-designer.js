@@ -504,7 +504,7 @@ $(function() {
             $('h3').each(function(){
                 var $this = $(this);
                 if($this.parents('.grid_header').siblings('.designer-placeholder').length == 0){
-                    $this.parent().append('<input value="' + $this.text() + '">');
+                    $this.parent().append('<input class="gadget-title-txt" value="' + $this.text() + '">');
                     $this.remove();
                 }
             });
@@ -670,7 +670,7 @@ $(function() {
 				gadgetLi.data('gadgetInfo', gadgetInfo);
                 var h3 = gadgetLi.find('h3');
                 if(h3){
-                    h3.parent().append('<input type="text">');
+                    h3.parent().append('<input class="gadget-title-txt">');
                     h3.remove()
                 }
 				insertGadget(gadgetLi, gadgetInfo.attributes.overview_url);

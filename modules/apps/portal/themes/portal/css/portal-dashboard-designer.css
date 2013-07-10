@@ -636,10 +636,32 @@ body {
     background: #999;
     list-style: none;
 }
-
+.gadget-title-txt{
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #FFFFFF;
+    box-shadow: none;
+    font-family: inherit;
+    font-size: 24.5px;
+    margin-top: 6px;
+    padding: 6px 2px;
+    text-overflow: ellipsis;
+    text-rendering: optimizelegibility;
+    transition: border-color 0.5s ease 0s;
+    width:auto;
+	overflow: hidden;
+	margin-left:6px;
+	max-width:76%;
+}
+.gadget-title-txt:hover{
+	background: none repeat scroll 0 0 #F9F9F9;
+    border-color: #CCCCCC;
+}
 @media all and (max-width: 1225px) {
     .grid_header h3 {
         font-size: 18px;
         height: 40px;
     }
+	.gadget-title-txt{
+		font-size: 18px;
+	}
 }
