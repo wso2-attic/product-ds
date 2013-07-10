@@ -26,8 +26,10 @@ $(document).ready(function () {
             var text = kmlEvent.featureData.snippet;
             cc = text.match(/[A-Z]{3}/).toString();
             range = '1992:2008';
+		$(".climate-gadget-container").show();
             showSticky();
             updateGadgets();
+		$(".climate-gadget-title").show()
         });
 
     }();

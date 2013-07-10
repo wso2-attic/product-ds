@@ -34,12 +34,24 @@ include("includes/header.jag");
 					</div>
 				</div>
 			</div>
-
-<div id="land-div" style="width:50%; float:left;"></div>
-<div id="emission-div" style="width:50%; float:right;"></div>
-<div id="energy-div" style="clear:both"></div>
-<div id="gas-div" style="clear:both"></div>
-
+<div class="climate-gadget-container">
+	<div class="climate-gadget-wrapper climate-gadget-two-col" style="width:50%; float:left;">
+		<h3 class="climate-gadget-title">Agricultural Land</h3>
+		<div id="land-div" class="climate-app-gadget"></div>
+	</div>
+	<div class="climate-gadget-wrapper climate-gadget-two-col" style="width:50%; float:right;">
+		<h3 class="climate-gadget-title">CO2 Gas Emission</h3>
+		<div id="emission-div" class="climate-app-gadget"></div> 
+	</div>
+	<div class="climate-gadget-wrapper" style="clear:both">
+		<h3 class="climate-gadget-title">Energy Use</h3>
+		<div id="energy-div" class="climate-app-gadget"></div>
+	</div>
+	<div class="climate-gadget-wrapper" style="clear:both">
+		<h3 class="climate-gadget-title">Greenhouse gas emission</h3>
+		<div id="gas-div" class="climate-app-gadget"></div>
+	</div>
+</div>
 <script>
 var portalUrl = '<%= url %>' + '/portal/gadgets/';
 UESContainer.renderGadget('land-div', portalUrl + 'agricultural-land/agricultural-land.xml');
