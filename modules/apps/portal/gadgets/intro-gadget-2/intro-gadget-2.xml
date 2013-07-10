@@ -35,7 +35,7 @@
 		    	}
 		    	
 		    	#placeholder{
-		    	width: 100%; height: 240px; margin: 2px auto 0px auto;_margin-left:-150px;
+		    	width: 243px; height: 50%; margin: 2px auto 0px 0px;_margin-left:-150px;
 		    	}
 		    	#tooltip {
 		    	background:url('img/tooltip.png') no-repeat bottom center !important;
@@ -57,13 +57,16 @@
     			top: 0;
     			width: 37px;
     			}
+    			.flot-text{
+    			color:#EDF8FF !important;
+    			}
 		    </style>
 		</head>
 
         <body>
         <div style="display: block; text-align:center; font-size: 12pt"><h5><img src="img/title.png"></h5>
         	    <div id="shadow"></div>
-		    <div id="placeholder" class="demo-placeholder" style="height:50%; width:243px; margin-left:20px; _margin-left:-130px;"></div>
+		    <div id="placeholder" class="demo-placeholder"></div>
 		<div>
 		</body>
 

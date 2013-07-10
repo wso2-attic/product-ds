@@ -35,7 +35,8 @@ function callbackGadget2(topic, obj, subscriberData) {
 		grid : {
 			hoverable : true,
 			clickable : true,
-			show : false
+			show : true,
+			color: '#EDF8FF'
 		},
 
 		yaxis : {
