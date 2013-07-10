@@ -485,6 +485,8 @@ $(function() {
 			$('.gadget-controls li:last-child').remove();
 
 		} else if (mode == 'design') {
+			var title = $('#dashboardName').find('span').text();
+			$('#inp-designer-title').val(title);
 			$('#dashboardName').hide();
 			$('.sub-navbar-designer').fadeIn();
 			layout.enable();
