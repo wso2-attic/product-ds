@@ -63,7 +63,7 @@
         <body>
         <div style="display: block; text-align:center; font-size: 12pt"><h5><img src="img/title.png"></h5>
         	    <div id="shadow"></div>
-		    <div id="placeholder" class="demo-placeholder" style="height:50%; width:243px; margin-left:20px;"></div>
+		    <div id="placeholder" class="demo-placeholder" style="height:50%; width:243px; margin-left:20px; _margin-left:-130px;"></div>
 		<div>
 		</body>
 
