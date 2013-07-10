@@ -9,6 +9,7 @@
 }
 #gadgets{
 	 opacity: 1;
+	position:relative;
 }
 
 .intro{
@@ -45,3 +46,25 @@ iframe{
 	background:#F5F5F5;
 	border:1px solid #CCCCCC;
 }
+.markmail-gadget-wrapper{position:relative;margin:20px auto;}
+.markmail-gadget-wrapper h3{
+    font-weight: normal;
+    left: 0;
+    margin: 0;
+    overflow: hidden;
+    padding-left: 10px;
+    padding-top: 7px;
+    position: absolute;
+    right: 82px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.markmail-app-gadget{
+	position:relative;
+	top:44px;
+	bottom:0;
+	width:100%;
+}
+.markmail-gadget-title{
+}
+.markmail-gadget-container{position:relative;}

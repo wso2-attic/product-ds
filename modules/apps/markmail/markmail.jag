@@ -8,61 +8,66 @@ var url = 'http://' + process.getProperty('server.host') + ':' +process.getPrope
 include("includes/header.jag");
 
 %>
-	<div class="container">
-
-    <div id="introModal" class="modal hide fade">
-	    <div class="modal-header">
+<div class="container">
+	<div id="introModal" class="modal hide fade">
+		<div class="modal-header">
 		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 		    <h3 class="txt-center">A gadget is worth a thousand pages </h3>
-	    </div>
-	    <div class="modal-body">
-		   <div class="intro txt-center">
+	    	</div>
+	<div class="modal-body">
+		<div class="intro txt-center">
 				<p>At WSO2 we have many highly active mailing lists for various topics such as Carbon Dev, Architecture, Stratos Dev and Carbon Jira. Therefore many emails are exchanged back and forth on a daily basis among the WSO2 community. Due to the high volume of such emails it is a cumbersome task to locate exact content any member wants in his/her inbox. Furthermore, getting an overview of what is going on at WSO2 is a time consuming task because it takes some effort to skim through the mail archives</p>
 
 				<p>This page is a sample that addresses all these inefficiencies by giving the user a bird’s eye view of all the activities in the mailing lists, using <strong>Gadgets</strong>. The user can now make quick decisions within a few seconds--all it takes is a glance at the dashboard!</p>
 				<hr>
 				<p><a id="btn-show-dash" href="#" class="btn btn-large btn-primary" data-dismiss="modal" aria-hidden="true">Show me the dashboard</a>
+		</div>
+	</div>
+
+</div>
+
+
+<div class="row">
+	<div class="span12">
+		<h1>WSO2 Timeline</h1>
+	</div>
+</div>
+<div id="sticky-anchor"></div>
+<div id="sticky" class="row">
+	<div class="span12">
+		<div id="timeslider">
+			<div class="layout-slider">
+				<input id="Slider1" type="slider" name="area" value="25;75" />
+			</div>
+			<span class="slider-year">Time period</span>
+		</div>
+	</div>
+</div>
+
+<div class="row total-counts">
+</div>
+<div id="gadgets" class="row">
+	<div class="span12">
+		<div class="markmail-gadget-container">
+			<div class="markmail-gadget-wrapper">
+				<h3 class="markmail-gadget-title">WSO2 Architecture List Discussion</h3>
+				<div id="architect-div" class="markmail-app-gadget"></div>
+			</div>
+			<div class="markmail-gadget-wrapper">
+				<h3 class="markmail-gadget-title">WSO2 Carbon Commits List</h3>
+				<div id="commits-div" class="markmail-app-gadget"> </div>
+			</div>
+			<div class="markmail-gadget-wrapper">
+				<h3 class="markmail-gadget-title">WSO2 Carbon Dev List Discussion</h3>
+				<div id="dev-div" class="markmail-app-gadget"></div>
+			</div>
+			<div class="markmail-gadget-wrapper">
+				<h3 class="markmail-gadget-title">WSO2 Jira</h3>
+				<div id="jira-div"  class="markmail-app-gadget"></div>
 			</div>
 		</div>
-
-    </div>
-
-
-			<div class="row">
-				<div class="span12">
-					<h1>WSO2 Timeline</h1>
-
-				</div>
-
-			</div>
-
-
-			<div id="sticky-anchor"></div>
-			<div id="sticky" class="row">
-				<div class="span12">
-					<div id="timeslider">
-						<div class="layout-slider">
-							<input id="Slider1" type="slider" name="area" value="25;75" />
-						</div>
-						<span class="slider-year">Time period</span>
-					</div>
-				</div>
-			</div>
-
-			<div class="row total-counts">
-
-
-
-			</div>
-
-			<div id="gadgets" class="row">
-
-<div class="span12">
-
-<div id="architect-div"></div>
-<div id="commits-div"> </div>
-<div id="dev-div"></div>
-<div id="jira-div"></div>
+	</div>
+</div>
 <script>
 var portalUrl = '<%= url %>' + '/markmail/gadgets/';
 UESContainer.renderGadget('architect-div', portalUrl + 'wso2-architecture/wso2-architecture.xml');
@@ -70,12 +75,8 @@ UESContainer.renderGadget('commits-div', portalUrl + 'wso2-carbon-commits/wso2-c
 UESContainer.renderGadget('dev-div', portalUrl + 'wso2-carbon-dev/wso2-carbon-dev.xml');
 UESContainer.renderGadget('jira-div', portalUrl + 'wso2-jira/wso2-jira.xml');
 </script>
-
-</div>
-
-
 <%
 include("includes/footer.jag");
 %>
 
-</div>
+

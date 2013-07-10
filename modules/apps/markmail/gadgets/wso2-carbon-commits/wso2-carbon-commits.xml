@@ -71,10 +71,10 @@
 		}
 		
 		</style>
-		<div id="chart-wso2" style="width: 50%; float:left; height: 330px; margin: 30px auto 0px auto;"></div>
+		<div id="chart-wso2" style="width: 50%; float:left; height: 330px;"></div>
 		<div id="legendNode"></div>
 		
-		<div id="desc-wso2" style="width: 50%;  float:right; height: 330px; margin: 30px auto 0px auto;">
+		<div id="desc-wso2" style="width: 50%;  float:right; height: 330px;">
 			<h2>About this list</h2>
 			<p>carbon-commits@wso2.org is a mailing list logs all the platform commits</p>
 
