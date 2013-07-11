@@ -24,7 +24,7 @@
 		<script src="/portal/js/dojo/dojo/dojo.js"></script>
 		<script src="/portal/gadgets/agricultural-land/js/agri.js"></script>
 		
-		<div id="chart-agri" style="width: 100%; height: 240px; margin: 30px auto 0px auto;"></div>
+		<div id="chart-agri" style="width: 100%; height: 100%;"></div>
 		]]>
 	</Content>
 </Module>

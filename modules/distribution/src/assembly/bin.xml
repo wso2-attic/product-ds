@@ -60,7 +60,7 @@
             </includes>
             <fileMode>755</fileMode>
         </fileSet>
-        <!--fileSet>
+        <fileSet>
             <directory>
                 ../p2-profile-gen/target/wso2carbon-core-${wso2carbon.kernal.version}/dbscripts/identity/
             </directory>
@@ -68,7 +68,10 @@
             <includes>
                 <include>**/**.sql</include>
             </includes>
-        </fileSet-->
+            <excludes>
+                <exclude>**/oracle.sql</exclude>
+            </excludes>
+        </fileSet>
         <!--Multitenancy related file -->
         <fileSet>
             <directory>
@@ -140,14 +143,17 @@
                 <include>*/**</include>
             </includes>
         </fileSet>
-        <!--fileSet>
+        <fileSet>
             <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/dbscripts/identity/
             </directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/dbscripts/identity</outputDirectory>
             <includes>
                 <include>**/**.sql</include>
             </includes>
-        </fileSet-->
+            <excludes>
+                <exclude>**/oracle.sql</exclude>
+            </excludes>
+        </fileSet>
         <!--copy jaxrs web app for OAuth feature-->
         <fileSet>
             <directory>
@@ -359,6 +365,12 @@
             <outputDirectory>wso2ues-${pom.version}/repository/database</outputDirectory>
             <fileMode>644</fileMode>
         </file>
+        <file>
+            <source>src/repository/dbscripts/oracle.sql</source>
+            <outputDirectory>wso2ues-${pom.version}/dbscripts/identity</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+
 
         <!--        <file>
             <source>conf/wso2is-user-certs.jks</source>
