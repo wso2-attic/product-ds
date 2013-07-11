@@ -398,11 +398,11 @@ h3.asset-title-separator {
 }
 
 .store-left h3.asset-type-gadget {
- background: url("../img/icon-bar-gadget.png") no-repeat scroll 2px 1px #F7F9F9;
+ background: url("../img/icon-bar-gadget.png") no-repeat scroll 2px 1px rgb(235, 243, 243);
 }
 
 .store-left h3.asset-type-site {
- background: url("../img/icon-bar-site.png") no-repeat scroll 2px 1px #F7F9F9;
+ background: url("../img/icon-bar-site.png") no-repeat scroll 2px 1px rgb(235, 243, 243);
 }
 
 #search {

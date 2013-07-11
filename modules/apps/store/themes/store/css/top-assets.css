@@ -3,8 +3,9 @@
     margin-right: 17px;
     display: inline-block;
 }
+
 .top-asset-slideshow-cont .asset:first-child{
-    margin-left:10px;
+    margin-left:5px;
 }
 
 
