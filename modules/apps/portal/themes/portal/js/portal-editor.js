@@ -239,7 +239,7 @@ $(document).ready(function() {
 
 		if ($('#tabs-files').length == 0) {
 			$('#editor-start').remove();
-			$('#editor-page').append('<ul class="nav nav-tabs" id="tabs-files">  </ul>  <div class="tab-content CodeMirrorTabs"> <div style="display: none" class="alert"></div> </div>');
+			$('#editor-page').append('<div style="display: none" class="alert-bar"></div><ul class="nav nav-tabs" id="tabs-files">  </ul>  <div class="tab-content CodeMirrorTabs"></div>');
 		}
 		if (!isFileLoaded(file.hash)) {
 			async.parallel([async.apply(loadContent, file.hash, 'old'), async.apply(loadContentInfo, file.hash)], function(e, r) {
@@ -428,14 +428,6 @@ $(document).ready(function() {
 	$(window).resize(codeMirrorResize);
 	$(window).load(codeMirrorResize);
 
-	var showAlert = function(msg, type) {
-		type = type || 'info';
-		$('.tab-content .alert').html(msg).removeClass().addClass('alert').addClass(type).stop().show().animate({
-			right : '-3px'
-		}, 500).delay(2000).animate({
-			right : -$(this).width()
-		}, 200,function(){$(this).hide()});
-	}
 	function codeMirrorResize() {
 		var height = $(window).height();
 		$('.tab-content .CodeMirror').height(height - 140);
@@ -500,7 +492,7 @@ $(document).ready(function() {
 				eventRegistered = true;
 			}
 		} else {
-			showAlert('You must first define &lt;head&gt;', 'alert-error');
+			showAlert('Please define &lt;head&gt; before inserting a Gadget', 'alert-error', '.alert-bar');
 		}
 
 	});

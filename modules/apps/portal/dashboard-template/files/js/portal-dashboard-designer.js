@@ -655,7 +655,7 @@ $(function() {
 			if (result) {
 				setTimeout(function() {
 					icon.removeClass().addClass('icon-save');
-				}, 3000);
+				}, 1500);
 			}
 		}).error(function(error) {
 			console.log(error);
