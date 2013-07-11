@@ -276,4 +276,18 @@ $(document).ready(function () {
     setTimeout(updateGadgets, 3000);
 
 });
+var getScale = function(){
+	var scale = [];
+	var d1 = 2005, d2 = new Date().getFullYear(); 
+	for(var y = d1; y <= d2; y++){ scale.push(y) }
+	return scale;
+};
+var monthDiff = function(d1, d2) {
+    var months;
+	d1 = new Date(d1.getFullYear(), 01)
+    months = (d2.getFullYear() - d1.getFullYear()) * 12;
+    //months -= d1.getMonth() + 1;
+    //months += d2.getMonth();
+    return months <= 0 ? 0 : months;
+}
 
