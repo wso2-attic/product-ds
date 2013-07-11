@@ -9,9 +9,12 @@
     };
 
     History.pushState = function (state, title, url) {
+        var o;
         if (identicalRequest(url)) {
+            o = History.getLastSavedState();
+            o.data = state;
             History.Adapter.trigger(window, 'statechange');
-            return History.getLastSavedState();
+            return o;
         }
         return old.call(this, state, title, url);
     };
