@@ -2,7 +2,6 @@
 var site_url = '/climate/';
 
 %>
-<% var ues = require("ues"); %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +30,8 @@ var site_url = '/climate/';
 		<link rel="stylesheet" href="css/jquery.gridster.min.css" type="text/css">
 		<link href="css/styles.css" rel="stylesheet">
 
+		<script type="text/javascript" src="/portal/lib/gadget-rendering/shindig.js"></script>
+		<script type="text/javascript" src="/portal/lib/gadget-rendering/UESContainer.js"></script>
 <%
 if(styles){
 
@@ -47,10 +48,6 @@ if(styles){
 
 		<!-- Fav and touch icons -->
 		<link rel="shortcut icon" href="ico/favicon.ico">
-		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<%=site_url%>ico/apple-touch-icon-144-precomposed.png">
-		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%=site_url%>ico/apple-touch-icon-114-precomposed.png">
-		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%=site_url%>ico/apple-touch-icon-72-precomposed.png">
-		<link rel="apple-touch-icon-precomposed" href="<%=site_url%>ico/apple-touch-icon-57-precomposed.png">
 	</head>
 
 	<body>

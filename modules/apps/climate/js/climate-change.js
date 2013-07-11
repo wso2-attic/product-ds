@@ -26,8 +26,10 @@ $(document).ready(function () {
             var text = kmlEvent.featureData.snippet;
             cc = text.match(/[A-Z]{3}/).toString();
             range = '1992:2008';
+		$(".climate-gadget-container").show();
             showSticky();
             updateGadgets();
+		$(".climate-gadget-title").show()
         });
 
     }();
@@ -101,7 +103,7 @@ $(document).ready(function () {
                     obj = data[1];
                     console.log("Channel:" + indicators[i].channel);
                     console.log(obj);
-                    ues.gadgets.gadgetContainer.inlineClient.publish(indicators[i].channel, obj);
+                    UESContainer.inlineClient.publish(indicators[i].channel, obj);
                 };
             })(i));
         }

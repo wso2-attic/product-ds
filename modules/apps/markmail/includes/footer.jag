@@ -5,10 +5,15 @@
 							&copy; 2013 WSO2 Inc. All Rights Reserved.
 						</p>
 					</div>
+					<div class="span7 txt-right">
+						<a id="btn-github" class="border-radius-4 btn-footer" href="https://github.com/wso2/ues/tree/master/modules/apps/markmail" target="_blank"><i class="icon-github"></i> View Project on GitHub</a>
+						<span id="btn-follow" class="border-radius-4 btn-footer">
+							Follow WSO2 <a href="https://twitter.com/wso2" target="_blank"> <i class="icon-twitter"></i> </a><a href="https://www.facebook.com/WSO2Inc" target="_blank"> <i class="icon-facebook"></i> </a>
+						</span>
+					</div>
 				</div>
 			</footer>
 
-</div>
 		<!-- /container -->
 		
 		<script src="js/jquery-1.8.3.min.js"></script>
@@ -25,14 +30,6 @@
 		
 
 <script type="text/javascript" src="js/markmail.js"></script>
-<script type="text/javascript" src="/portal/lib/gadget-rendering/js/external/head.min.js"></script>
-<script type="text/javascript" src="/portal/lib/gadget-rendering/js/main.js"></script>
-
-<!-- styles -->
-<link rel="stylesheet" type="text/css" href="/portal/lib/gadget-rendering/css/style.css">
-<link rel="stylesheet" type="text/css" href="/portal/lib/gadget-rendering/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/portal/lib/gadget-rendering/css/font-awesome.css">
-<!-- END imports needed for gadget rendering -->
 
 
 
