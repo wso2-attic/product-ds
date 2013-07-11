@@ -266,7 +266,7 @@ h1:hover, h2:hover, h3:hover {
 
 .container > .row {
     background: #FFFFFF;
-    border: 1px solid #ddd;
+	border:1px solid #ccc;
     border-bottom: 0;
 }
 .container:not(#container-search) > .row > div:first-child {
@@ -945,7 +945,7 @@ div.rating-cancel, div.star-rating {
     background: #ccc;
     top: 300px;
 }
- */
+
 #asset-slideshow-cont:after {
 	background:none repeat scroll 0 0 #BBBBBB;
 	bottom:0;
