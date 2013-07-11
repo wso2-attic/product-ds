@@ -115,8 +115,7 @@ $(document).ready(function () {
                         success: function (data) {
 
                             obj['senders'] = data.msg;
-                            ues.gadgets.gadgetContainer.inlineClient.publish(channel, obj);
-
+                            UESContainer.inlineClient.publish(channel, obj);
                         }
                     });
 
@@ -237,28 +236,28 @@ $(document).ready(function () {
 
     $("#Slider1").slider({
         from: 0,
-        to: 84,
-        step: 1,
-        dimension: '',
-        scale: scale,
-        limits: false,
-        calculate: function (value) {
-            var year = Math.floor(value / 12);
-            return year + 2005 + ' ' + month[value % 12];
-        },
-        skin: 'round_plastic',
-        callback: function (value) {
+		to: monthDiff(new Date(2005, 01),new Date()),
+		step: 1,
+		dimension: '',
+		scale: getScale(),
+		limits: false,
+		calculate: function (value) {
+		    var year = Math.floor(value / 12);
+		    return year + 2005 + ' ' + month[value % 12];
+		},
+		skin: 'round_plastic',
+		callback: function (value) {
 
-            var split = value.split(';');
+		    var split = value.split(';');
 
-            from = (2005 + Math.floor(split[0] / 12));
-            to = (2005 + Math.floor(split[1] / 12));
+		    from = (2005 + Math.floor(split[0] / 12));
+		    to = (2005 + Math.floor(split[1] / 12));
 
-            var m1 = 1 + (split[0] % 12);
-            from += m1 < 10 ? "0" + m1 : m1;
+		    var m1 = 1 + (split[0] % 12);
+		    from += m1 < 10 ? "0" + m1 : m1;
 
-            var m2 = 1 + (split[1] % 12);
-            to += m2 < 10 ? "0" + m2 : m2;
+		    var m2 = 1 + (split[1] % 12);
+		    to += m2 < 10 ? "0" + m2 : m2;
 
             updateGadgets();
 
@@ -267,7 +266,9 @@ $(document).ready(function () {
         }
     });
 
-    $("#Slider1").slider('value', 10, 60);
+    $("#Slider1").slider('value', 12, 84);
+	from = from || "200601"; 
+		to = to || "201201";
 
     /*	$(window).bind('resize', responsivegadget);
      $(document).bind('ready', responsivegadget);
@@ -275,4 +276,18 @@ $(document).ready(function () {
     setTimeout(updateGadgets, 3000);
 
 });
+var getScale = function(){
+	var scale = [];
+	var d1 = 2005, d2 = new Date().getFullYear(); 
+	for(var y = d1; y <= d2; y++){ scale.push(y) }
+	return scale;
+};
+var monthDiff = function(d1, d2) {
+    var months;
+	d1 = new Date(d1.getFullYear(), 01)
+    months = (d2.getFullYear() - d1.getFullYear()) * 12;
+    //months -= d1.getMonth() + 1;
+    //months += d2.getMonth();
+    return months <= 0 ? 0 : months;
+}
 

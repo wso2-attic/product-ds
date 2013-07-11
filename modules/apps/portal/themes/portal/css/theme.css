@@ -374,7 +374,7 @@
 }
 .newFileName {
     margin: -26px 34px;
-    position: fixed;
+    position: absolute;
     width: auto;
 }
 

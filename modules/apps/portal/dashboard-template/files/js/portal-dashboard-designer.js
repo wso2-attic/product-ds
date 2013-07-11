@@ -212,6 +212,7 @@ $(function() {
 				var gadgetArea = $w.find('.add-gadget-item');
 				if (url != '') {
                     $w.find('.designer-placeholder').remove();
+                    $w.find('.btn-add-gadget').remove();
 					insertGadget($w, url, {
 						prefs : prefs
 					},$w.attr('data-title'));
@@ -655,7 +656,7 @@ $(function() {
 			if (result) {
 				setTimeout(function() {
 					icon.removeClass().addClass('icon-save');
-				}, 3000);
+				}, 1500);
 			}
 		}).error(function(error) {
 			console.log(error);

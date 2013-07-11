@@ -24,7 +24,7 @@
 		<script src="/portal/js/dojo/dojo/dojo.js"></script>
 		<script src="/portal/gadgets/co2-emission/js/co2.js"></script>
 
-		<div id="chart-co2" style="width: 100%; height: 240px; margin: 30px auto 0px auto;"></div>
+		<div id="chart-co2" style="width: 100%; height: 100%;"></div>
 		]]>
 	</Content>
 </Module>

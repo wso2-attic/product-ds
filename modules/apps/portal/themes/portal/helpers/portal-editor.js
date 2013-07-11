@@ -6,7 +6,7 @@ var resources = function (page, meta) {
             'codemirror/mode/css.js', 'codemirror/mode/htmlmixed.js', 'codemirror/hint/show-hint.js',
             'codemirror/hint/javascript-hint.js', 'codemirror/hint/html-hint.js', 'codemirror/mode/htmlembedded.js',
             'codemirror/addon/formatting.js', 'gadgetInclude.js','gadgetContainer.js','diff/diff.js',
-            'autosave.js','portal-editor.js', 'jquery.validate.js'
+            'autosave.js','portal-editor.js', 'jquery.validate.js', 'alert.js'
         ],
         css: [//'bootstrap-responsive.min.css', 'bootstrap.css'],
             'elfinderTheme.css', 'elfinder.min.css' , 'theme.css','portal-editor.css',
