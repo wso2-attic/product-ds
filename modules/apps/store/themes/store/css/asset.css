@@ -92,6 +92,17 @@ a.btn-embed {
     display: inline-block;
 }
 
+a.btn-href {
+    border-radius: 4px 4px 4px 4px;
+    color: #AAAAAA;
+    font-size: 18px;
+    letter-spacing: 3px;
+    padding: 10px;
+    background: #ECF0F1;
+    margin-top: 0;
+    display: inline-block;
+}
+
 a.btn-embed:hover {
     background: #ECF0F1;
     color: #2C3238;
