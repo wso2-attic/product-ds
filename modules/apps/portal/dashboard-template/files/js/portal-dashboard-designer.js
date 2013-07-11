@@ -63,16 +63,12 @@ $(function() {
 	function resize() {
 		var newDimensions = calculateNewDimensions();
 
-		//window.setTimeout(function() {
 		layout.resize_widget_dimensions({
 			widget_base_dimensions : newDimensions[0],
 			widget_margins : newDimensions[1]
 		});
-		//}, 2000);
 
 		drawGrid(newDimensions[0][0]);
-
-		//		refreshAllGadgets();
 
 		clearTimeout(timeOut);
 		timeOut = setTimeout(setGridOffsetTop, 500);
@@ -94,8 +90,6 @@ $(function() {
 		}
 	}
 
-	//var itemTmp = Handlebars.compile($('#item-template').html());
-
 	$('#dummy-gadget').resizable({
 		grid : dummy_gadget_block,
 		containment : "#dummy-gadget-container",
@@ -109,13 +103,6 @@ $(function() {
 			});
 		}
 	});
-	/*
-	 var registerEventsToWidget = function(widget) {
-	 var addGadgetBtn = $(widget).find('.btn-add-gadget');
-	 addGadgetBtn.live('click', onGadgetSelectButton);
-	 };
-
-	 */
 
 	$('.btn-add-gadget').live('click', onGadgetSelectButton);
 
@@ -132,7 +119,6 @@ $(function() {
 				var defaultWidgets = layout.serialize();
 
 				$.each(userWidgets, function(i, w) {
-					//var _widget = {};
 
 					if (w.wid > newWid) {
 
@@ -140,13 +126,9 @@ $(function() {
 					}
 
 					//find w in defaultWidgets, if found copy attributes to _widget
-					//if (isWidgetFound(w, defaultWidgets, _widget)) {
 					if (isWidgetFound(w, defaultWidgets)) {
 
-						//if (_widget) {
-
-						//update coords in default grid for _widget
-
+  						//update coords in default grid 
 						$('.layout_block[data-wid="' + w.wid + '"]').attr({
 							'data-col' : w.x,
 							'data-row' : w.y,
@@ -155,28 +137,17 @@ $(function() {
 							'data-prefs' : w.prefs
 						});
 
-						//}
 					} else {
 						//add user widget to grid
-						var newWidget = widgetTemplateBlank2(w);
-						//$('#layouts_grid ul').append(newWidget);
-
 						layout.add_widget(widgetTemplate2({
 							wid : w.wid,
 							url : w.url,
 							prefs : w.prefs
 						}), w.width, w.height, w.x, w.y);
-
 					}
-
 				});
 
-				//applyGridster();
-
-				//skip static widgets
-				//for(var i=4; i< widgets.length; i++){
 				$.each(defaultWidgets, function(i, w) {
-					//var _widget = {};
 					// skip static widgets
 					if (w.y == 1) {
 						return true;
@@ -222,8 +193,6 @@ $(function() {
 		}).error(function(error) {
 			console.log(error);
 		});
-
-		//changeMode('view');
 
 		setGridOffsetTop();
 
@@ -421,23 +390,7 @@ $(function() {
 	changeMode('view');
 
 	$(window).bind('resize', resize);
-	//$(window).bind('load', checkMode);
-	/*
-	 $("#btnSetLayout").click(function() {
-
-	 $('#modal-gadget-size').modal('show');
-
-	 });
-	 */
-	/*
-	 var itemTmp = '<li data-url="http://localhost:9763/portal/gadgets/show-assets/show-assets.xml" class="layout_block"> \
-	 <div class="grid_header"> \
-	 <span style="float: right;"><a class="close-widget" href="#"><i class="icon-remove"></i></a></span> \
-	 </div> \
-	 <div class="add-gadget-item"> \
-	 </div> \
-	 </li>';
-	 */
+	
 	$('#btn-add-dummy-gadget').click(function(e) {
 		e.preventDefault();
 		var $dummy = $('#dummy-size');
@@ -517,12 +470,6 @@ $(function() {
 	}
 
 	function checkMode() {
-		/*
-		 if (window.location.hash) {
-		 var hash = window.location.hash.substr(1);
-		 changeMode(hash);
-		 }
-		 */
 		var mode = $('#inp-view-mode').val();
 		changeMode(mode);
 	}
