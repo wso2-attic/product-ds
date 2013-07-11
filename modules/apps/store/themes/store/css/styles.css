@@ -1043,7 +1043,8 @@ div.rating-cancel, div.star-rating {
     margin-top: 0;
     display: inline-block;
     font-size: 16px;
-    bottom: -1px;
+    /*bottom: -1px;*/
+    bottom:20px;
     font-weight: 600;
     left: 15px;
     padding: 10px;
