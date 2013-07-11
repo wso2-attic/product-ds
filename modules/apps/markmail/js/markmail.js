@@ -236,28 +236,28 @@ $(document).ready(function () {
 
     $("#Slider1").slider({
         from: 0,
-        to: 84,
-        step: 1,
-        dimension: '',
-        scale: scale,
-        limits: false,
-        calculate: function (value) {
-            var year = Math.floor(value / 12);
-            return year + 2005 + ' ' + month[value % 12];
-        },
-        skin: 'round_plastic',
-        callback: function (value) {
+		to: monthDiff(new Date(2005, 01),new Date()),
+		step: 1,
+		dimension: '',
+		scale: getScale(),
+		limits: false,
+		calculate: function (value) {
+		    var year = Math.floor(value / 12);
+		    return year + 2005 + ' ' + month[value % 12];
+		},
+		skin: 'round_plastic',
+		callback: function (value) {
 
-            var split = value.split(';');
+		    var split = value.split(';');
 
-            from = (2005 + Math.floor(split[0] / 12));
-            to = (2005 + Math.floor(split[1] / 12));
+		    from = (2005 + Math.floor(split[0] / 12));
+		    to = (2005 + Math.floor(split[1] / 12));
 
-            var m1 = 1 + (split[0] % 12);
-            from += m1 < 10 ? "0" + m1 : m1;
+		    var m1 = 1 + (split[0] % 12);
+		    from += m1 < 10 ? "0" + m1 : m1;
 
-            var m2 = 1 + (split[1] % 12);
-            to += m2 < 10 ? "0" + m2 : m2;
+		    var m2 = 1 + (split[1] % 12);
+		    to += m2 < 10 ? "0" + m2 : m2;
 
             updateGadgets();
 
@@ -266,7 +266,9 @@ $(document).ready(function () {
         }
     });
 
-    $("#Slider1").slider('value', 10, 60);
+    $("#Slider1").slider('value', 12, 84);
+	from = from || "200601"; 
+		to = to || "201201";
 
     /*	$(window).bind('resize', responsivegadget);
      $(document).bind('ready', responsivegadget);
