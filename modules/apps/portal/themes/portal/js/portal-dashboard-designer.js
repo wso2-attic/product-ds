@@ -50,24 +50,25 @@ $(function() {
 
 		serialize_params : function($w, wgd) {
 			//apparently $('.x').data() is not equals to $($('.x').get(0)).data() . why?
-            var gadgetInfo = $($w.get(0)).data('gadgetInfo');
-            var wclass = ($(wgd.el[0]).attr('class').indexOf('static') != -1) ? 'static' : '';
-            var gadgetId = $w.find(".add-gadget-item > div").attr('id');
-            var gadgetRenderInfo =  UESContainer.getGadgetInfo(gadgetId);
-            var prefs = gadgetRenderInfo && gadgetRenderInfo.opt.prefs || {};
+			var gadgetInfo = $($w.get(0)).data('gadgetInfo');
+			var wclass = ($(wgd.el[0]).attr('class').indexOf('static') != -1) ? 'static' : '';
+			var gadgetId = $w.find(".add-gadget-item > div").attr('id');
+			var gadgetRenderInfo = UESContainer.getGadgetInfo(gadgetId);
+			var prefs = gadgetRenderInfo && gadgetRenderInfo.opt.prefs || {};
 
-            return {
-                wid: widgetId++,
-                x: wgd.col,
-                y: wgd.row,
-                width: wgd.size_x,
-                height: wgd.size_y,
-                prefs: JSON.stringify(prefs).replace(/"/g, "'"),
-                wclass: wclass,
-                url: gadgetInfo && gadgetInfo.attributes.overview_url
-            };
+			return {
+				wid : widgetId++,
+				x : wgd.col,
+				y : wgd.row,
+				title : $w.find('input').val(),
+				width : wgd.size_x,
+				height : wgd.size_y,
+				prefs : JSON.stringify(prefs).replace(/"/g, "'"),
+				wclass : wclass,
+				url : gadgetInfo && gadgetInfo.attributes.overview_url
+			};
 
-        },
+		},
 		max_cols : 6,
 		max_size_x : 6
 	}).data('gridster');
@@ -213,11 +214,11 @@ $(function() {
 		var gadgetDiv = parentEl.find('.add-gadget-item');
 		var idStr = 'gadgetArea-d' + id;
 		gadgetDiv.html('<div id="' + idStr + '">');
-        UESContainer.renderGadget(idStr, url, pref || {}, function (gadgetInfo) {
-            if (gadgetInfo.meta.modulePrefs) {
-                parentEl.find('h3').text(gadgetInfo.meta.modulePrefs.title);
-                parentEl.find('.show-widget-pref').show();
-            }
+		UESContainer.renderGadget(idStr, url, pref || {}, function(gadgetInfo) {
+			if (gadgetInfo.meta.modulePrefs) {
+				parentEl.find('.grid_header').append('<input class="gadget-title-txt" value="' + gadgetInfo.meta.modulePrefs.title + '">');
+				parentEl.find('.show-widget-pref').show();
+			}
 		});
 	}
 
@@ -381,68 +382,70 @@ $(function() {
 		$('.gs_w').show();
 	});
 
-    var formArrayToPref = function (a) {
-        var o = {};
-        $.each(a, function () {
-            if (o[this.name] !== undefined) {
-                if (!o[this.name].push) {
-                    o[this.name] = [o[this.name]];
-                }
-                o[this.name].push(this.value || '');
-            } else {
-                o[this.name] = this.value || '';
-            }
-        });
-        return o;
-    };
+	var formArrayToPref = function(a) {
+		var o = {};
+		$.each(a, function() {
+			if (o[this.name] !== undefined) {
+				if (!o[this.name].push) {
+					o[this.name] = [o[this.name]];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
 
 	$('.show-widget-pref').live('click', function(e) {
 		e.preventDefault();
-        var $this = $(this);
-        var widget = $this.closest('.gs_w');
+		var $this = $(this);
+		var widget = $this.closest('.gs_w');
 		var id = widget.find(".add-gadget-item > div").attr('id');
 		var info = UESContainer.getGadgetInfo(id);
 		if (info) {
 			var prefCont = widget.find('.gadget-pref-cont');
 
-            var hidePref =  function(){
-                prefCont.empty();
-                prefCont.hide();
-                widget.find('.grid_header_controls').removeClass('grid_header_controls-show');
-                $this.attr('data-collapse', true);
-            };
+			var hidePref = function() {
+				prefCont.empty();
+				prefCont.hide();
+				widget.find('.grid_header_controls').removeClass('grid_header_controls-show');
+				$this.attr('data-collapse', true);
+			};
 
-            var savePref =  function(e){
-                e.preventDefault();
-                var newPref = formArrayToPref(prefCont.find('form').serializeArray());
-                UESContainer.redrawGadget(id, {prefs:newPref});
-                hidePref();
-            };
+			var savePref = function(e) {
+				e.preventDefault();
+				var newPref = formArrayToPref(prefCont.find('form').serializeArray());
+				UESContainer.redrawGadget(id, {
+					prefs : newPref
+				});
+				hidePref();
+			};
 
 			if ($this.attr('data-collapse') == 'false') {
-                hidePref();
-                return;
+				hidePref();
+				return;
 			}
 
-            var prefInfo = info.meta.userPrefs;
-            var currentPref = info.opt.prefs || {};
-            var html = '<form>';
+			var prefInfo = info.meta.userPrefs;
+			var currentPref = info.opt.prefs || {};
+			var html = '<form>';
 
-            for (prefName in prefInfo) {
-                var pref = prefInfo[prefName];
-                var prefId = 'gadget-pref-' + id + '-' + prefName;
-                html += '<label  for="' + prefId + '">' + pref.displayName + '</label>';
-                html += '<input name="' + prefName + '" type="text" id="' + prefId + '" value="' + (currentPref[prefName] || pref.defaultValue ) + '">';
-            }
-            html += '<br><button class="btn btn-cancel-pref">Cancel</button>';
-            html += '<button class="btn btn-primary btn-save-pref">Save</button>';
-            html += '</form>';
-            prefCont.html(html);
-            prefCont.find('.btn-cancel-pref').on('click', function(e){
-                e.preventDefault();
-                hidePref();
-            });
-            prefCont.find('.btn-save-pref').on('click', savePref);
+			for (prefName in prefInfo) {
+				var pref = prefInfo[prefName];
+				var prefId = 'gadget-pref-' + id + '-' + prefName;
+				html += '<label  for="' + prefId + '">' + pref.displayName + '</label>';
+				html += '<input name="' + prefName + '" type="text" id="' + prefId + '" value="' + (currentPref[prefName] || pref.defaultValue ) + '">';
+			}
+			html += '<br><button class="btn btn-cancel-pref">Cancel</button>';
+			html += '<button class="btn btn-primary btn-save-pref">Save</button>';
+			html += '</form>';
+			prefCont.html(html);
+			prefCont.find('.btn-cancel-pref').on('click', function(e) {
+				e.preventDefault();
+				hidePref();
+			});
+			prefCont.find('.btn-save-pref').on('click', savePref);
 			prefCont.show();
 			widget.find('.grid_header_controls').addClass('grid_header_controls-show');
 			$this.attr('data-collapse', false);
@@ -529,17 +532,20 @@ $(function() {
 
 		$.post('apis/dashboard/' + dashboard, {
 			layout : JSON.stringify(data)
-		}, function(response) {
-			if (response != true) {
-
-			}
-
+		}).done(function(response) {
 			setTimeout(function() {
 				icon.removeClass().addClass('icon-save');
 				$("#btn-preview-dash").removeClass('disabled').tooltip('destroy').data('tooltip', 'hide');
 			}, 6000);
+		}).fail(function(xhr, textStatus, errorThrown) {
+			icon.removeClass().addClass('icon-save');
+			// Session unavailable
+			if(xhr.status == 401){
+				showAlert('Session timed out. Please login again.', 'alert-error', '.alert-bar');
+			} else {
+				showAlert('Error occured while saving dashboard. Please retry or re-login.', 'alert-error', '.alert-bar');
+			}
 		});
-
 	});
 
 });

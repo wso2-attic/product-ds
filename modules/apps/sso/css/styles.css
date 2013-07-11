@@ -141,6 +141,10 @@ label {
     padding-left: 0;
 }
 
+.sso-footer{
+	background :none!important;
+	border:none!important;
+}
 @media (max-width: 767px) {
     .form-signin {
         background-image: none;

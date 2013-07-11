@@ -2,7 +2,6 @@
 <script id="item-template" type="text/x-handlebars-template">
     <li class="layout_block">
         <div class="grid_header">
-            <h3></h3>
             <span class="grid_header_controls">
                 <a class="show-widget-pref" data-collapse="true"><i class="icon-cog"></i></a>
                 <a class="expand-widget"><i class="icon-resize-full"></i></a>
@@ -41,6 +40,7 @@
 	<span id="dashboardName"></span>
 	<div class="layouts_grid" id="layouts_grid">
 		<input type="hidden" id="inp-layout" value="{{layout}}">
+		<div style="display: none" class="alert-bar"></div>
 		<ul>
 			<div id="grid-guides"></div>
 			<li data-row="1" data-col="1" data-sizex="2" data-sizey="1" class="layout_block static">

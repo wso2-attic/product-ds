@@ -190,9 +190,9 @@ if (!user) {
     <div class="row-fluid">
 
         <div class="span12">
-
 <input type="hidden" value="design" id="inp-view-mode" />
 <input type="hidden" value="{{appName}}" id="inp-dashboard" />
+<iframe style="display: none;height: 0;width: 0;" src="{{httpServerUrl}}/store/hidden-logger.jag?user=<%=session.get('LOGGED_IN_USER')%>"></iframe>
 
 <div id="gridster-cont" class="container-fluid">
 	<div id="dashboardName"><i class="icon-th-large"></i> <span></span></div>
@@ -203,7 +203,7 @@ if (!user) {
             
 			{{#each widgets}}
             <li class="layout_block {{wclass}}" data-sizey="{{height}}" data-sizex="{{width}}" data-col="{{x}}" data-row="{{y}}"
-                data-url="{{url}}" data-wid="{{wid}}" data-prefs="{{prefs}}">
+                data-url="{{url}}" data-wid="{{wid}}" data-prefs="{{prefs}}" data-title="{{title}}">
                 <div class="grid_header">
            			<h3></h3>
             		<span class="grid_header_controls">
@@ -261,7 +261,7 @@ if (!user) {
 <script id="widget-template" type="text/x-handlebars-template">
 	<li class="layout_block">
 		<div class="grid_header">
-            <h3></h3>
+            <input class="gadget-title-txt">
             <span class="grid_header_controls">
                 <a class="show-widget-pref" data-collapse="true"><i class="icon-cog"></i></a>
                 <a class="expand-widget"><i class="icon-resize-full"></i></a>
@@ -286,7 +286,7 @@ if (!user) {
 <script id="widget-template2" type="text/x-handlebars-template">
 	<li class="layout_block" data-wid="[[wid]]" data-url="[[url]]" data-prefs="[[prefs]]">
 		<div class="grid_header">
-            <h3></h3>
+            <input class="gadget-title-txt">
             <span class="grid_header_controls">
                 <a class="show-widget-pref" data-collapse="true"><i class="icon-cog"></i></a>
                 <a class="expand-widget"><i class="icon-resize-full"></i></a>
@@ -305,10 +305,9 @@ if (!user) {
 </script>
 
 <script id="widget-template-blank2" type="text/x-handlebars-template">
-
 	<li class="layout_block" data-url="[[url]]" data-row="[[y]]" data-col="[[x]]" data-sizex="[[width]]" data-sizey="[[height]]" data-wid="[[wid]]" data-prefs="[[prefs]]">
 		<div class="grid_header">
-            <h3></h3>
+            <input class="gadget-title-txt">
             <span class="grid_header_controls">
                 <a class="show-widget-pref" data-collapse="true"><i class="icon-cog"></i></a>
                 <a class="expand-widget"><i class="icon-resize-full"></i></a>
@@ -323,28 +322,6 @@ if (!user) {
 	
 		</div>
 	</li>
-</script>
-
-<script id="widget-template-blank" type="text/x-handlebars-template">
-	[[#each .]]
-	<li class="layout_block" data-url="[[url]]" data-row="[[y]]" data-col="[[x]]" data-sizex="[[width]]" data-sizey="[[height]]" data-wid="[[wid]]" data-prefs="[[prefs]]">
-		<div class="grid_header">
-            <h3></h3>
-            <span class="grid_header_controls">
-                <a class="show-widget-pref" data-collapse="true"><i class="icon-cog"></i></a>
-                <a class="expand-widget"><i class="icon-resize-full"></i></a>
-                <a class="shrink-widget"><i class="icon-resize-small"></i></a>
-                <a class="close-widget" href="#"><i class="icon-remove"></i></a>
-            </span>
-        </div>
-        <div class="gadget-pref-cont">
-        	
-        </div>
-		<div class="add-gadget-item">
-	
-		</div>
-	</li>
-	[[/each]]
 </script>
 
 <!-- /container -->

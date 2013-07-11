@@ -63,13 +63,19 @@ var adjustStoreRight = function(){
 	
 }
 $(function(){
+	$("#myasset-container .btn-popover").on("click",function(){
+		$('.popover').hide();
+	});
 	$('.btn-popover').popover({ html: false });
 	$('.popover-content').live("click",function(){
 		var selectedTxt = $(this).text();
-		var $textArea = $("<textarea>",{class:"popover-textarea", val:selectedTxt});
+		var $textArea = $("<textarea>").addClass('popover-textarea').val(selectedTxt);
 		$(this).text("").append($textArea);	
 		$(".popover-textarea").height($(".popover-textarea")[0].scrollHeight);
 		$(".popover-textarea").select();
+		$(".popover").on("click",function(){
+			$(".popover-textarea").text(selectedTxt);
+		});
 		$(".popover").on("mouseleave",function(){
 			$(".popover-content").text(selectedTxt);
 		});	

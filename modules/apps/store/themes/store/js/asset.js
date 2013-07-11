@@ -138,14 +138,28 @@ $(function () {
     	return false;
     });
 	
-	$('#tab-review-box').live('focus', function(e){
+	
+	$('.text-review-box').live('keyup focus', function(e){	
 	if($('#comment-content').hasClass('user-review')) {
-	$(".btn-review").removeClass("btn-primary");
-	$(".btn-review").addClass("disabled");
-	$('.error-text').show();
-	return false;
+		$(".btn-review").removeClass("btn-primary");
+		$(".btn-review").addClass("disabled");
+		$('.text-review-box-charCount-msg').hide();
+		$('.error-text').show();	
+		return false;
 	}
+	    var chars = this.value.length;
+		$('.text-review-box-charCount-msg').show();
+		var limit = 490;
+                if (chars > limit) {
+                    src.value = src.value.substr(0, limit);
+                    chars = limit;
+                }
+				$("#charCount").html( limit - chars );
+		return false;
+	
     });
+	
+	
 
     /*    $('#btn-copy-gadget-code').click(function(){
      var script = $('#modal-add-gadget code').html().trim();
@@ -170,4 +184,8 @@ $(function () {
      $('.asset-description-header').removeClass('asset-description-header-scroll');
      }
      })*/
+	 
+	 
+
+
 });

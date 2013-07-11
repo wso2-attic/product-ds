@@ -11,7 +11,7 @@ var render = function (theme, data, meta, require) {
         body: [
             {
                 partial: 'portal-homepage',
-                context: {}
+                context: data['portal-homepage']
             }
         ]
     });

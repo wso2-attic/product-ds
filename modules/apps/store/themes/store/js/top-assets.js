@@ -63,11 +63,11 @@ $(function() {
 			key : "right"
 		}
 
-	})/*.find(".slide").hover(function() {
-		$(this).find(".asset-intro-box").slideDown();
+	}).find(".slide").hover(function() {
+		$(this).find(".asset-intro-box").slideDown("fast");
 	}, function() {
-		$(this).find(".asset-intro-box").slideUp();
-	})*/;
+		$(this).find(".asset-intro-box").slideUp("fast");
+	});
 	
 	$("#top-asset-slideshow-gadget").carouFredSel({
 		items : 4,

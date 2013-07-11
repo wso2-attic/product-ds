@@ -21,7 +21,7 @@ var caramel;
     }
 
     var path = request.getParameter('path');
-
+    
     caramel.render({
         'navigation': {
             guest: true,
@@ -29,11 +29,11 @@ var caramel;
             sso: sso,
             ssoEncodedRequest: ssoLogin.ssoEncodedRequest,
             ssoRelayState: ssoLogin.ssoRelayState,
-            ssoSessionId: ssoLogin.ssoSessionId,
+            ssoSessionId: ssoLogin.ssoSessionId, 
             ssoIdpURL: ssoLogin.ssoIdpURL
         },
         'title': 'Welcome | User Engagement Server',
-        'portal-homepage': {}
+        'portal-homepage': {httpUrl:configs.server.http}
     });
 
 }());

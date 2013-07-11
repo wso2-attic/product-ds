@@ -151,6 +151,7 @@ $(function() {
 							'data-col' : w.x,
 							'data-row' : w.y,
 							'data-url' : w.url,
+                            'data-title' : w.title,
 							'data-prefs' : w.prefs
 						});
 
@@ -200,18 +201,21 @@ $(function() {
 			var widgets = $('.layouts_grid').find('.layout_block');
 
 			$.each(widgets, function(i, widget) {
-				var wid = $(widget).attr('data-wid');
+                var $w = $(widget);
+                var wid = $w.attr('data-wid');
 				if (wid > newWid) {
 					newWid = wid;
 				}
 
-				var url = $(widget).attr('data-url');
-				var prefs = JSON.parse($(widget).attr('data-prefs').replace(/'/g, '"'));
-				var gadgetArea = $(widget).find('.add-gadget-item');
+				var url = $w.attr('data-url');
+				var prefs = JSON.parse($w.attr('data-prefs').replace(/'/g, '"'));
+				var gadgetArea = $w.find('.add-gadget-item');
 				if (url != '') {
-					insertGadget($(widget), url, {
+                    $w.find('.designer-placeholder').remove();
+                    $w.find('.btn-add-gadget').remove();
+					insertGadget($w, url, {
 						prefs : prefs
-					});
+					},$w.attr('data-title'));
 				}
 
 			});
@@ -247,6 +251,7 @@ $(function() {
 					wid : currentWidgetId || widgetId++,
 					x : wgd.col,
 					y : wgd.row,
+                    title: $w.find('input').val(),
 					width : wgd.size_x,
 					height : wgd.size_y,
 					prefs : JSON.stringify(prefs).replace(/"/g, "'"),
@@ -302,13 +307,15 @@ $(function() {
 
 	var id = 1;
 
-	function insertGadget(parentEl, url, pref) {
+	function insertGadget(parentEl, url, pref,title) {
 		id++;
 		var gadgetDiv = parentEl.find('.add-gadget-item');
 		var idStr = 'gadgetArea-d' + id;
 		gadgetDiv.html('<div id="' + idStr + '">');
 		UESContainer.renderGadget(idStr, url, pref || {}, function(gadgetInfo) {
-			parentEl.find('h3').text(gadgetInfo.meta.modulePrefs.title);
+            var visibleTitle = title || gadgetInfo.meta.modulePrefs.title;
+            parentEl.find('h3').text(visibleTitle);
+            parentEl.find('input').val(visibleTitle);
 		});
 	}
 
@@ -478,7 +485,14 @@ $(function() {
 			$('.layout_block').addClass('layout_block_view');
 			$('.gadget-controls li:last-child').remove();
 
+            $('.grid_header > input').each(function(){
+                var $this = $(this);
+                $this.parent().append('<h3>'+$this.val()+'</h3>');
+                $this.remove();
+            });
 		} else if (mode == 'design') {
+			var title = $('#dashboardName').find('span').text();
+			$('#inp-designer-title').val(title);
 			$('#dashboardName').hide();
 			$('.sub-navbar-designer').fadeIn();
 			layout.enable();
@@ -488,6 +502,13 @@ $(function() {
                 var $this = $(this);
                 if($this.parents('.grid_header').siblings('.designer-placeholder').length == 0){
                     $this.show();
+                }
+            });
+            $('h3').each(function(){
+                var $this = $(this);
+                if($this.parents('.grid_header').siblings('.designer-placeholder').length == 0){
+                    $this.parent().append('<input class="gadget-title-txt" value="' + $this.text() + '">');
+                    $this.remove();
                 }
             });
 			$('.layout_block .btn-add-gadget').show();
@@ -635,7 +656,7 @@ $(function() {
 			if (result) {
 				setTimeout(function() {
 					icon.removeClass().addClass('icon-save');
-				}, 3000);
+				}, 1500);
 			}
 		}).error(function(error) {
 			console.log(error);
@@ -650,6 +671,11 @@ $(function() {
 				var gadgetLi = lastClickedGadgetButton.parents('li');
 
 				gadgetLi.data('gadgetInfo', gadgetInfo);
+                var h3 = gadgetLi.find('h3');
+                if(h3){
+                    h3.parent().append('<input class="gadget-title-txt">');
+                    h3.remove()
+                }
 				insertGadget(gadgetLi, gadgetInfo.attributes.overview_url);
 				var placeholder = lastClickedGadgetButton.siblings('.designer-placeholder');
 				lastClickedGadgetButton.remove();
