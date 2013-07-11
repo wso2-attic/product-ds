@@ -542,6 +542,8 @@ var filterSites = function (sites) {
                 } else {
                     edit.push(site);
                 }
+            } else if (um.isAuthorized(role, permission, EDIT_SITE)) {
+                self.push(site);
             } else if (u.isAuthorized(permission, ACCESS_SITE)) {
                 access.push(site);
             }
