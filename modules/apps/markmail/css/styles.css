@@ -1,3 +1,7 @@
+body {
+    color: #333333;
+    font-family: 'Open Sans',sans-serif;
+}
 #gadgets .span12{
 	/*border-bottom:1px solid #ccc;*/
 	margin-bottom: 20px;
@@ -46,7 +50,7 @@ iframe{
 	background:#F5F5F5;
 	border:1px solid #CCCCCC;
 }
-.markmail-gadget-wrapper{position:relative;margin:20px auto;}
+.markmail-gadget-wrapper{position:relative;margin:40px auto;overflow:hidden;height:370px;}
 .markmail-gadget-wrapper h3{
     font-weight: normal;
     left: 0;
@@ -64,7 +68,65 @@ iframe{
 	top:44px;
 	bottom:0;
 	width:100%;
+	height: 335px;
 }
 .markmail-gadget-title{
 }
 .markmail-gadget-container{position:relative;}
+.btn-footer {
+	font-weight: 600;
+	padding: 5px;
+}
+.btn-footer  i {
+	font-size: 22px;
+	line-height: 22px;
+	vertical-align: middle;
+}
+.btn-footer:hover {
+	text-decoration: none;
+	opacity: .8;
+}
+#btn-github {
+	background: #009f93;
+	margin-right: 20px;
+	color: #ffffff;
+}
+#btn-follow {
+	border: 1px solid #ccc;
+	color: #979797;
+	background: #ffffff;
+}
+#btn-follow a {
+	padding: 0 5px;
+}
+#btn-follow a:hover{
+	text-decoration:none;
+}
+.border-radius-4 {
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+footer {
+	border-top: 1px solid #009f93;
+	padding-top: 30px;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 50px;
+}
+footer.container {
+	width: 100%;
+}
+footer.row {
+	margin: 0 auto;
+}
+.txt-right {
+	text-align: right;
+}
+footer a, a:visited{
+color: #009F93;
+}
+footer a:hover{
+color: #0088CC;
+}
