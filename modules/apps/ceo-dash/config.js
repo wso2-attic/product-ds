@@ -17,7 +17,7 @@ var config;
             }
             return  value;
         });
-        // log.info(config);
+         //log.info(config);
         return config;
     };
 })();
