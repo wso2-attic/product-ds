@@ -375,6 +375,9 @@ label.error{
 .info-mandatory > .mandatory{
 	top: 4px;
 }
+.success-msg-icon{
+	margin-right:8px;
+}
 /*
 @media all and (min-height: 780px){
     #modal-add-gadget.modal.fade.in {

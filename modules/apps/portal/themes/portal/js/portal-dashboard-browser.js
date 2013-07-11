@@ -278,7 +278,7 @@ $(function() {
 			if (data.error) {
 				modal.find('.alert-block').show().removeClass("alert-success").addClass("alert-error").html("<p class='alert-message'>Error publishing the " + type + " : " + name + "</p>");
 			} else {
-				modal.find('.alert-block').show().removeClass("alert-error").addClass("alert-success").html("<p class='alert-message'>" + type + " : " + name + " successfully published.</p>");
+				modal.find('.alert-block').show().removeClass("alert-error").addClass("alert-success").html("<p class='alert-message'><i class='icon icon-ok-circle icon-large success-msg-icon'></i>" + type + " &quot;" + name + "&quot; successfully published.</p>");
 			}
 			modal.modal('show');
 		});
