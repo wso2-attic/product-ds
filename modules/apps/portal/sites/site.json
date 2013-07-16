@@ -1,35 +1,6 @@
 {
     "sites": [
         {
-            "name": "ClimateApp",
-            "tags": "report,climate",
-            "rate": 4,
-            "attributes": {
-                "overview_status": "CREATED",
-                "overview_name": "ClimateApp",
-                "overview_version": "1.0.0",
-                "overview_url": "/climate/",
-                "overview_provider": "admin",
-                "overview_description": "Climate Change is a microsite that visualizes the statistics of various geological locations on climate change. A user can choose the country and the preferred time period to analyze the displayed data. This microsite can be taken as a sample when creating sites in UES",
-                "images_thumbnail": "/portal/sites/climate/thumbnail.jpg",
-                "images_banner": "/portal/sites/climate/banner.jpg"
-                }
-        },{
-            "name": 'Markmail',
-            "tags": "report,mail,markMail",
-            "rate": 3,
-            "attributes": {
-                "overview_status": "CREATED",
-                "overview_name": 'Markmail',
-                "overview_version": '1.0.0',
-                "overview_url": '/markmail/',
-                "overview_provider": 'admin',
-                "images_thumbnail": '/portal/sites/mark-mail/thumbnail.jpg',
-                "images_banner": '/portal/sites/mark-mail/banner.jpg',
-                "overview_description": "Markmail is a microsite that provides a snapshot view of WSO2 Engineering. A user can choose a preferred time period to analyze the displayed data such as, commits, architecture discussions etc. This microsite can be taken as a sample when creating sites in UES"
-
-            }
-        } ,{
             "name": 'CEO Dashboard',
             "tags": "dashboard,ceo,gadgets,analytics",
             "rate": 4,
