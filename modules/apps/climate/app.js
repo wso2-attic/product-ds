@@ -20,24 +20,24 @@ process.setProperty('https.port', httpsPort.toString());
 
 
 caramel.configs({
-    context: '/portal',
+    context: '/test',
     negotiation: true,
     themer: function () {
-        return 'portal';
+        return 'test';
     }
 });
 
-var configs = require('climate.js').config();
-var portal = require('portal.js');
+var configs = require('/config.js').config();
+var portal = require('/modules/portal.js');
 
 configs.login = portal.login;
 configs.logout = portal.logout;
 configs.register = portal.register;
 
-var server = require('server.js');
+var server = require('/modules/server.js');
 server.init(configs);
 
-var user = require('user.js');
+var user = require('/modules/user.js');
 user.init(configs);
 
 portal.init(configs);
