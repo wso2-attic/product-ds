@@ -92,6 +92,7 @@ var addSSOConfig = function () {
 };
 
 var logPortalUrl = function () {
+	var log = new Log();
     log.info("UES Portal URL : " + portal.server.http + caramel.configs().context);
 };
 
