@@ -86,9 +86,9 @@ hr.emboss {
     background: url("../img/logo.png") no-repeat scroll 0 0 transparent;
     color: #FFFFFF;
     height: 24px;
-    margin: 11px 0 0 0;
+    margin: 11px 10px 0 0;
     padding: 0;
-    width: 158px;
+    width: 230px;
 }
 
 .navbar .nav > li > a {
