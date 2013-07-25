@@ -904,7 +904,7 @@ div.rating-cancel, div.star-rating {
     background: url('../img/asset_slideshow_controls_right.png') no-repeat center left;
 }
 #asset-slideshow-next, #asset-slideshow-prev {
-    background-color: rgba(255,255,255,.8);
+    background-color: rgba(255,255,255,.6);
     font-size: 0;
     height: 299px;
     position: absolute;
