@@ -79,15 +79,7 @@
         <!-- jaggery versions -->
         <jaggery.feature.version>0.9.0.ALPHA4.wso2v1</jaggery.feature.version>
 
-        <!-- patch versions -->
-        <patch.version.401>4.0.1</patch.version.401>
-        <patch.version.402>4.0.2</patch.version.402>
-		<patch.version.403>4.0.3</patch.version.403>
-        <patch.version.404>4.0.4</patch.version.404>
-        <patch.version.405>4.0.5</patch.version.405>
-		<patch.version.406>4.0.6</patch.version.406>
-		<patch.version.407>4.0.7</patch.version.407>
-		<patch.version.408>4.0.8</patch.version.408>
+        <!-- patch versions -->       
         <carbon.p2.plugin.version>1.5.3</carbon.p2.plugin.version>
 		<stratos.version>2.2.0</stratos.version>
 
