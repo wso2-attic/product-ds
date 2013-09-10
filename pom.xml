@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wso2.ues</groupId>
     <artifactId>wso2ues-parent</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0.wso2v1</version>
     <packaging>pom</packaging>
 	<name>WSO2 User Engagement Server - Parent</name>
     <url>http://wso2.org/projects/appserver/java</url>
@@ -72,7 +72,7 @@
     </modules>
 
     <properties>
-        <ues.version>1.0.0</ues.version>
+        <ues.version>1.0.0.wso2v1</ues.version>
         <carbon.kernal.version>4.2.0</carbon.kernal.version>
         <carbon.platform.version>4.2.0</carbon.platform.version>
 
