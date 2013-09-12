@@ -20,13 +20,13 @@
     <ServiceProviders>
         <ServiceProvider>
             <Issuer>store</Issuer>
-            <AssertionConsumerService>https://192.168.219.1:9443/store/acs.jag</AssertionConsumerService>
+            <AssertionConsumerService>https://localhost:9443/store/acs.jag</AssertionConsumerService>
             <SignResponse>true</SignResponse>
             <CustomLoginPage>/store/login.jag</CustomLoginPage>
         </ServiceProvider>
         <ServiceProvider>
             <Issuer>portal</Issuer>
-            <AssertionConsumerService>https://192.168.219.1:9443/portal/acs.jag</AssertionConsumerService>
+            <AssertionConsumerService>https://localhost:9443/portal/acs.jag</AssertionConsumerService>
             <SignResponse>true</SignResponse>
             <CustomLoginPage>/portal/login.jag</CustomLoginPage>
         </ServiceProvider>
