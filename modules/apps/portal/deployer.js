@@ -97,7 +97,7 @@ var logPortalUrl = function () {
 };
 
 populate();
-addSSOConfig();
+//addSSOConfig();
 setInterval(function () {
     //TEMP fix for task not clearing properly during server shutdown
     try {

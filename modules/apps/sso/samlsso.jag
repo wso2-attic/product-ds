@@ -49,6 +49,9 @@ var SAMLSSOProviderConstants = Packages.org.wso2.carbon.identity.sso.saml.common
         {
         	isPost=true;
         }
+
+        log.info(samlRequest);
+
         var signInRespDTO = ssoService.validateRequest(samlRequest, "", ssoTokenID, rpSessionId, authMode,isPost);
         session.put('signInRespDTO', signInRespDTO);
         session.put('relayState', relayState);

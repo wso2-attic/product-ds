@@ -7,8 +7,7 @@ var caramel;
             sso,
             log = new Log(),
             configs = require('/portal.js').config(),
-            user = require('/modules/user.js').current(),
-            ssoLogin = require('/modules/sso-login.js');
+            user = require('/modules/user.js').current();
     userSSO = session.get("Loged");
     caramel = require('caramel');
     context = caramel.configs().context;
@@ -26,11 +25,7 @@ var caramel;
         'navigation': {
             guest: true,
             path: path,
-            sso: sso,
-            ssoEncodedRequest: ssoLogin.ssoEncodedRequest,
-            ssoRelayState: ssoLogin.ssoRelayState,
-            ssoSessionId: ssoLogin.ssoSessionId, 
-            ssoIdpURL: ssoLogin.ssoIdpURL
+            sso: sso
         },
         'title': 'Welcome | User Engagement Server',
         'portal-homepage': {httpUrl:configs.server.http}

@@ -7,8 +7,7 @@ var caramel;
             sso,
             log = new Log(),
             configs = require('/portal.json'),
-            user = require('/modules/user.js').current(),
-            ssoLogin = require('/modules/sso-login.js');
+            user = require('/modules/user.js').current();
     userSSO = session.get("Loged");
     caramel = require('caramel');
 

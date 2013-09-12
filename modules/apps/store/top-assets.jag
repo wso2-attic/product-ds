@@ -15,7 +15,6 @@ var caramel;
             site = require('/modules/site.js'),
             tag = request.getParameter('tag'),
             query = request.getParameter('query'),
-            ssoLogin = require('/modules/sso-login.js'),
             ssoUser = session.get('LOGGED_IN_USER');
 	caramel = require('caramel');
 	sso = configs.ssoConfiguration.enabled;
@@ -63,10 +62,6 @@ var caramel;
 		sso:sso,
 		navigation : site.navigation({
 			sso : sso,
-			ssoEncodedRequest : ssoLogin.ssoEncodedRequest,
-			ssoRelayState : ssoLogin.ssoRelayState,
-			ssoSessionId : ssoLogin.ssoSessionId,
-			ssoIdpURL : ssoLogin.ssoIdpURL,
 			user : loggedUser
 		}),
 		topAssets : {

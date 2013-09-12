@@ -17,18 +17,18 @@
  -->
 <SSOIdentityProviderConfig>
     <TenantRegistrationPage>https://stratos-local.wso2.com/carbon/tenant-register/select_domain.jsp</TenantRegistrationPage>
-
-    <!--ServiceProviders>
-        <ServiceProvider>
-            <Issuer>portal</Issuer>
-	    <AssertionConsumerService>http://localhost:9763/portal/sso.jag</AssertionConsumerService>
-            <CustomLoginPage>ssoApp/login_processor.jag</CustomLoginPage>
-        </ServiceProvider>
+    <ServiceProviders>
         <ServiceProvider>
             <Issuer>store</Issuer>
-	    <AssertionConsumerService>http://localhost:9763/store/sso.jag</AssertionConsumerService>
-            <CustomLoginPage>ssoApp/login_processor.jag</CustomLoginPage>
+            <AssertionConsumerService>https://192.168.219.1:9443/store/acs.jag</AssertionConsumerService>
+            <SignResponse>true</SignResponse>
+            <CustomLoginPage>/store/login.jag</CustomLoginPage>
         </ServiceProvider>
-    </ServiceProviders-->
+        <ServiceProvider>
+            <Issuer>portal</Issuer>
+            <AssertionConsumerService>https://192.168.219.1:9443/portal/acs.jag</AssertionConsumerService>
+            <SignResponse>true</SignResponse>
+            <CustomLoginPage>/portal/login.jag</CustomLoginPage>
+        </ServiceProvider>
+    </ServiceProviders>
 </SSOIdentityProviderConfig>
-

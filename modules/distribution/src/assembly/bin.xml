@@ -187,9 +187,16 @@
         </fileSet>
 		<fileSet>
             <directory>src/repository/conf</directory>
-            <outputDirectory>wso2ues-${pom.version}/repository/conf</outputDirectory>
+            <outputDirectory>wso2ues-${pom.version}/repository/conf/</outputDirectory>
             <includes>
                 <include>**/sso-idp-config.xml</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>src/repository/conf</directory>
+            <outputDirectory>wso2ues-${pom.version}/repository/conf/security/</outputDirectory>
+            <includes>
+                <include>**/application-authenticators.xml</include>
             </includes>
         </fileSet>
         <fileSet>
@@ -209,14 +216,6 @@
     </fileSets>
 
     <dependencySets>
-
-        <!--        <dependencySet>
-            <outputDirectory>wso2ues-${pom.version}/repository/deployment/server/webapps</outputDirectory>
-            <outputFileNameMapping>ROOT.war</outputFileNameMapping>
-            <includes>
-                <include>org.apache.shindig:shindig-server:war</include>
-            </includes>
-        </dependencySet>-->
 
         <dependencySet>
             <outputDirectory>wso2ues-${pom.version}/lib/endorsed</outputDirectory>
@@ -243,11 +242,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
-        <!--        <file>
-            <source>target/shindig</source>
-            <outputDirectory>wso2ues-${pom.version}/repository/deployment/server/webapps/ROOT</outputDirectory>
-        </file>-->
 
         <file>
             <source>INSTALL.txt</source>

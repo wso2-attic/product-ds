@@ -47,7 +47,7 @@ var e = session.get('error') || {};
 							<div class="span12">
 								<div class="row-fluid">
 									<div class="span6">
-										<form id="loginForm" action="samlsso.jag" method="POST" >
+										<form id="loginForm" action="/admin/commonauth" method="POST" >
 									        <h2 class="form-signin-heading">Sign in</h2>
 									        <% if(e.error && e.type == 'loginError'){ %>
 									            <div class="alert alert-error"><%= e.msg %></div>
@@ -60,6 +60,7 @@ var e = session.get('error') || {};
 									        <label class="checkbox lblRemember">
 									          <input type="checkbox" value="remember-me"> Remember me
 									        </label>
+									        <input type="hidden" name="sessionDataKey"  value="<%=request.getParameter("sessionDataKey")%>">
 									        <button class="btn btn-large pull-right" type="submit">Sign in</button>
 								    	</form>
 									</div>
