@@ -11,6 +11,10 @@
               display_name="Data Source"
               default_value="/portal/gadgets/bubble-chart/datasource/dataFile3.jag">
     </UserPref>
+    <UserPref name="options"
+              display_name="Chart Options"
+              default_value="/portal/gadgets/bubble-chart/js/options-bubble.js">
+    </UserPref>
     <UserPref name="updateGraph"
               display_name="Update Interval (s)"
               default_value="No">
@@ -33,8 +37,13 @@
 	<script language="javascript" type="text/javascript" src="js/flot/jumflot/jquery.flot.bubbles.js"></script>
 	<script language="javascript" type="text/javascript" src="js/flot/jquery.flot.navigate.js"></script>
 	<script language="javascript" type="text/javascript" src="js/flot/jquery.flot.resize.js"></script>
-	<script language="javascript" type="text/javascript" src="js/options-bubble.js"></script>
 	<script language="javascript" type="text/javascript" src="js/flot-chart-core.js"></script>
+	<script language="javascript" type="text/javascript">
+        var prefs = new gadgets.Prefs();
+        var src =  pref.getString("options");
+        document.write('<' + 'script language="javascript" src="' + src + '"' +
+                   ' type="text/javascript"><' + '/script>');
+    </script>
 </head>
 
 <body>
