@@ -125,6 +125,15 @@
 								<feaureArtifactDef>
                                    org.wso2.carbon:org.wso2.stratos.identity.saml2.sso.mgt.feature:${stratos.version}
                                 </feaureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.stratos.common.feature:${stratos.version}
+                                </featureArtifactDef>
+                                <!--featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.stratos.common.server.feature:${stratos.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.stratos.common.ui.feature:${stratos.version}
+                                </featureArtifactDef-->
 								<!--feaureArtifactDef>
                                    org.wso2.carbon:org.wso2.carbon.core.ui.feature:${carbon.platform.version}
                                 </feaureArtifactDef-->								
@@ -244,6 +253,18 @@
                                    <id>org.wso2.stratos.identity.saml2.sso.mgt.feature.group</id>
                                     <version>${stratos.version}</version>
                                 </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.stratos.common.feature.group</id>
+                                    <version>${stratos.version}</version>
+                                </feature>
+                                <!--feature>
+                                    <id>org.wso2.carbon.stratos.common.server.feature.group</id>
+                                    <version>${stratos.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.stratos.common.ui.feature.group</id>
+                                    <version>${stratos.version}</version>
+                                </feature-->
 								<feature>
                                     <id>org.wso2.carbon.identity.sso.saml.feature.group</id>
                                     <version>${carbon.platform.version}</version>

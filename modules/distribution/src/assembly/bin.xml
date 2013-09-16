@@ -62,7 +62,7 @@
         </fileSet>
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${wso2carbon.kernal.version}/dbscripts/identity/
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/dbscripts/identity/
             </directory>
             <outputDirectory>wso2ues-${pom.version}/dbscripts/identity</outputDirectory>
             <includes>
@@ -75,15 +75,10 @@
         <!--Multitenancy related file -->
         <fileSet>
             <directory>
-                ../p2-profile-gen/target/wso2carbon-core-${wso2carbon.kernal.version}/repository/conf/multitenancy/
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/repository/conf/multitenancy
             </directory>
             <outputDirectory>wso2ues-${pom.version}/repository/conf/multitenancy</outputDirectory>
-            <includes>
-                <include>**/stratos.xml</include>
-                <include>**/multitenancy-packages.xml</include>
-                <include>**/usage-throttling-agent-config.xml</include>
-                <include>**/cloud-services-desc.xml</include>
-            </includes>
+            <fileMode>755</fileMode>
         </fileSet>
 
         <fileSet>
