@@ -47,6 +47,6 @@
         "identityAlias": "wso2carbon",
         "responseSigningEnabled": "true",
         "keyStoreName": "/repository/resources/security/wso2carbon.jks",
-        "appAcs" : "%https.host%/ceo-dash/sso.jag"
+        "appAcs" : "%https.host%/ceo-dash/acs.jag"
     }
 }

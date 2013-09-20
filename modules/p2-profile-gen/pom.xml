@@ -125,27 +125,12 @@
 								<feaureArtifactDef>
                                    org.wso2.carbon:org.wso2.stratos.identity.saml2.sso.mgt.feature:${stratos.version}
                                 </feaureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.stratos.common.feature:${stratos.version}
-                                </featureArtifactDef>
-                                <!--featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.stratos.common.server.feature:${stratos.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.stratos.common.ui.feature:${stratos.version}
-                                </featureArtifactDef-->
-								<!--feaureArtifactDef>
-                                   org.wso2.carbon:org.wso2.carbon.core.ui.feature:${carbon.platform.version}
-                                </feaureArtifactDef-->								
-                                <!--feaureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.identity.authenticator.token.feature:${patch.version.402}
-                                </feaureArtifactDef>                                
-                                <feaureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.identity.oauth.feature:${patch.version.405}
-                                </feaureArtifactDef-->								
 								<feaureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.identity.core.feature:${carbon.platform.version}
                                 </feaureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.stratos.common.feature:${stratos.version}
+                                </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.governance.metadata.server.feature:${carbon.platform.version}
                                 </featureArtifactDef>
@@ -219,15 +204,7 @@
                                     <id>org.wso2.carbon.security.mgt.feature.group</id>
                                     <version>${carbon.platform.version}</version>
                                 </feature>
-                                <!--feature>
-                                    <id>org.wso2.carbon.identity.authenticator.token.feature.group</id>
-                                    <version>${patch.version.402}</version>
-                                </feature>                                
-                                <feature>
-                                    <id>org.wso2.carbon.identity.oauth.feature.group</id>
-                                    <version>${patch.version.405}</version>
-                                </feature-->
-								
+
 								<!-- sso -->
                                 <feature>
                                     <id>org.wso2.carbon.identity.application.authenticator.basicauth.server.feature.group</id>
@@ -257,14 +234,6 @@
                                     <id>org.wso2.carbon.stratos.common.feature.group</id>
                                     <version>${stratos.version}</version>
                                 </feature>
-                                <!--feature>
-                                    <id>org.wso2.carbon.stratos.common.server.feature.group</id>
-                                    <version>${stratos.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.stratos.common.ui.feature.group</id>
-                                    <version>${stratos.version}</version>
-                                </feature-->
 								<feature>
                                     <id>org.wso2.carbon.identity.sso.saml.feature.group</id>
                                     <version>${carbon.platform.version}</version>

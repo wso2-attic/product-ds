@@ -138,10 +138,11 @@ var create;
 
         var appName64 = BASE64.encode(appName).replace(/=/g, '');
         DEPLOYER.sso({'issuer': appName,
-            'consumerUrl': PORTAL.ssoConfiguration.appAcsHost + '/' + appName + '/sso',
+            'consumerUrl': PORTAL.ssoConfiguration.appAcsHost + '/' + appName + '/acs',
             'doSign': 'true',
             'singleLogout': 'true',
             'useFQUsername': 'true',
+            'doSignResponse': 'true',
             'issuer64': appName64});
 
         layoutDef['appName'] = appName;

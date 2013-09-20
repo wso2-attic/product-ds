@@ -102,7 +102,11 @@ var sso = function (options) {
         server = require('/modules/server.js'),
         registry = server.systemRegistry();
     registry.put(path, {
-        properties: {'Issuer': options.issuer, 'SAMLSSOAssertionConsumerURL': options.consumerUrl, 'doSignAssertions': options.doSign, 'doSingleLogout': options.singleLogout, 'useFullyQualifiedUsername': options.useFQUsername}
+        properties: {'Issuer': options.issuer, 'SAMLSSOAssertionConsumerURL': options.consumerUrl,
+            'doSignAssertions': options.doSign,
+            'doSingleLogout': options.singleLogout,
+            'useFullyQualifiedUsername': options.useFQUsername,
+            'doSignResponse': options.doSignResponse}
     });
 };
 

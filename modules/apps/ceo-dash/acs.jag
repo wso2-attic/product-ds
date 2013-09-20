@@ -1,7 +1,7 @@
 <%
 (function () {
     var log = new Log(),
-            configs = require('/store.json'),
+            configs = require('/config.json'),
             samlResponse = request.getParameter('SAMLResponse'),
             sessionId = session.getId(),
             samlRequest = request.getParameter('SAMLRequest'),
@@ -35,14 +35,21 @@
                         session.put("LOGGED_IN_USER", sessionObj.loggedInUser);
                         session.put("Loged", "true");
 
-                        sso_sessions[sso_sessions[sessionObj.sessionIndex] = sessionObj.sessionId] = sessionObj.sessionIndex;
+                        //sso_sessions[sessionObj.sessionIndex] = sessionObj.sessionId;
 
+                        log.info("session index :: " + sessionObj.sessionIndex);
+                        log.info("session :: " + sessionObj.sessionId);
+
+                        log.info("real session :: " + session.getId());
+
+
+                        sso_sessions[sso_sessions[sessionObj.sessionIndex] = sessionObj.sessionId] = sessionObj.sessionIndex;
 
                         var user = require('/modules/user.js');
 
                         if (user.loginWithSAML(sessionObj.loggedInUser)) {
                             log.info('user is set :::' + sessionObj.loggedInUser);
-                            response.sendRedirect('/store');
+                            response.sendRedirect('/ceo-dash');
                         }
 
                     }
@@ -51,7 +58,7 @@
 
         } else {
             session.invalidate();
-            response.sendRedirect('/store');
+            response.sendRedirect('/ceo-dash');
         }
     }
 
@@ -65,7 +72,7 @@
         delete application.get('sso_sessions')[index];
 
 
-        log.info('store Session Id :::' + jSessionId);
+        log.info('portal Session Id :::' + jSessionId);
 
         session.invalidate();
     }

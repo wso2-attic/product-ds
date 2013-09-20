@@ -14,5 +14,6 @@ sso({'issuer': 'ceo-dash',
     'doSign': 'true',
     'singleLogout': 'true',
     'useFQUsername': 'true',
+    'doSignResponse': 'true',
     'issuer64': ''});
 
