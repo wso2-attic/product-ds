@@ -77,13 +77,13 @@
                                 <featureArtifactDef>caramel:caramel.feature:${caramel.feature.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.governance.metadata.feature:${carbon.platform.version}
+                                    org.wso2.carbon:org.wso2.carbon.governance.metadata.feature:${carbon.patchrelease.version.421}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.registry.associations.dependencies.feature:${carbon.platform.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.registry.community.features.feature:${carbon.platform.version}
+                                    org.wso2.carbon:org.wso2.carbon.registry.community.features.feature:${carbon.patchrelease.version.421}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.registry.extensions.feature:${carbon.platform.version}
@@ -132,7 +132,7 @@
                                     org.wso2.carbon:org.wso2.carbon.stratos.common.feature:${stratos.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.governance.metadata.server.feature:${carbon.platform.version}
+                                    org.wso2.carbon:org.wso2.carbon.governance.metadata.server.feature:${carbon.patchrelease.version.421}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.event.server.feature:${carbon.platform.version}
@@ -248,7 +248,7 @@
                                 </feature-->
                                 <feature>
                                     <id>org.wso2.carbon.governance.metadata.server.feature.group</id>
-                                    <version>${carbon.platform.version}</version>
+                                    <version>${carbon.patchrelease.version.421}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.event.server.feature.group</id>
