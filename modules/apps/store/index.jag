@@ -1,5 +1,6 @@
 <%
 //auto rediecting the user to SSO
+//fake-comment
 var user = request.getParameter('user'),
         loged = session.get('Loged');
 if (user && !loged) {
