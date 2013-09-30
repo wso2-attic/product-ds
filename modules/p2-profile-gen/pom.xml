@@ -89,7 +89,7 @@
                                     org.wso2.carbon:org.wso2.carbon.registry.extensions.feature:${carbon.platform.version}
                                 </featureArtifactDef>
                                 <feaureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.registry.core.feature:${carbon.platform.version}
+                                    org.wso2.carbon:org.wso2.carbon.registry.core.feature:${carbon.patchrelease.version.421}
                                 </feaureArtifactDef>
                                 <feaureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.registry.ui.menu.feature:${carbon.platform.version}
@@ -178,7 +178,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.core.feature.group</id>
-                                    <version>${carbon.platform.version}</version>
+                                    <version>${carbon.patchrelease.version.421}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.ui.menu.feature.group</id>
