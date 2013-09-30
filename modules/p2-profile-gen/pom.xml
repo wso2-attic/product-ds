@@ -135,7 +135,7 @@
                                     org.wso2.carbon:org.wso2.carbon.governance.metadata.server.feature:${carbon.patchrelease.version.421}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.event.server.feature:${carbon.platform.version}
+                                    org.wso2.carbon:org.wso2.carbon.event.server.feature:${carbon.patchrelease.version.421}
                                 </featureArtifactDef>
                             </featureArtifacts>
 
@@ -252,7 +252,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.event.server.feature.group</id>
-                                    <version>${carbon.platform.version}</version>
+                                    <version>${carbon.patchrelease.version.421}</version>
                                 </feature>
                             </features>
 
