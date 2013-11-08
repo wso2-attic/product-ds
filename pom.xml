@@ -83,6 +83,7 @@
         <!-- patch versions -->       
         <carbon.p2.plugin.version>1.5.3</carbon.p2.plugin.version>
 		<stratos.version>2.2.0</stratos.version>
+		<carbon.patched.version.421>4.2.1</carbon.patched.version.421>
 
         <!-- maven plugin versions -->
         <build-helper-maven-plugin.version>1.7</build-helper-maven-plugin.version>
