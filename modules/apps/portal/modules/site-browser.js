@@ -36,11 +36,12 @@ var checkSite = function (name) {
     return !site.loadSite(name);
 };
 
-var createSite = function (name) {
+var createSite = function (name, username) {
     var site = require('/modules/site.js'),
-        um = require('/modules/server.js').userManager(),
-        user = require('/modules/user.js'),
-        role = user.privateRole(user.current().username);
+        store = require('store'),
+        um = store.server.userManager(tenantId()),
+        user = store.user,
+        role = user.privateRole(username);
     if (site.loadSite(name)) {
         return false;
     }
@@ -68,28 +69,28 @@ var createSite = function (name) {
 };
 
 var addUserSite = function (name) {
-    var server = require('/modules/server.js'),
-        registry = server.systemRegistry();
+    var server = require('store').server,
+        registry = server.systemRegistry(tenantId());
     registry.put(USER_SITES_PATH + name, {
         collection: true
     });
 };
 
 var removeUserSite = function (name) {
-    var server = require('/modules/server.js'),
-        registry = server.systemRegistry();
+    var server = require('store').server,
+        registry = server.systemRegistry(tenantId());
     registry.remove(USER_SITES_PATH + name);
 };
 
 var isUserSite = function (name) {
-    var server = require('/modules/server.js'),
-        registry = server.systemRegistry();
+    var server = require('store').server,
+        registry = server.systemRegistry(tenantId());
     return registry.exists(USER_SITES_PATH + name);
 };
 
 var authorizeRoles = function (name, roles, action) {
     var i,
-        um = require('/modules/server.js').userManager(),
+        um = require('store').server.userManager(tenantId()),
         length = roles.length;
     for (i = 0; i < length; i++) {
         um.authorizeRole(roles[i], SITE_PERMISSIONS + name, action);
@@ -98,8 +99,9 @@ var authorizeRoles = function (name, roles, action) {
 
 var authorizeUsers = function (name, users, action) {
     var i,
-        prefix = require('/modules/user.js').USER_ROLE_PREFIX,
-        um = require('/modules/server.js').userManager(),
+        store = require('store'),
+        prefix = store.user.USER_ROLE_PREFIX,
+        um = store.server.userManager(tenantId()),
         length = users.length;
     for (i = 0; i < length; i++) {
         um.authorizeRole(prefix + users[i], SITE_PERMISSIONS + name, action);
@@ -287,10 +289,11 @@ var parsePath = function (path) {
  */
 var filterPath = function (path) {
     var site = require('/modules/site.js');
-    return path.substring(site.SITES_HOME.length);
+    return path.substring(site.appsRoot().length);
 };
 
 var encodePath = function (path) {
+    //TODO: there is an issue with this regex. i.e. it removes all '_' like chars in the filename
     return base64.encode(path.replace(/[^.a-z0-9\s+\/\- ]|\.\./gi, '')).replace(/[^A-Za-z0-9]/g, '');
 
 };
@@ -516,13 +519,14 @@ var removeEach = function (paths) {
  * */
 var filterSites = function (sites) {
     var i, site, permission, sitez, name, admin,
-        server = require('/modules/server.js'),
-        registry = server.systemRegistry(),
-        user = require('/modules/user.js'),
+        store = require('store'),
+        server = store.server,
+        registry = server.systemRegistry(tenantId()),
+        user = store.user,
         space = require('/modules/portal.js').storeSpace(),
-        assets = space.get('userAssets'),
-        u = user.current(),
-        um = server.userManager(),
+        assets = '{}', //space.get('userAssets'), //TODO
+        u = server.current(session), //TODO
+        um = server.userManager(tenantId()),
         role = user.privateRole(u.username),
         length = sites.length,
         self = [],
@@ -564,12 +568,16 @@ var filterSites = function (sites) {
 
 var siteId = function (name) {
     var meta,
-        server = require('/modules/server.js'),
-        registry = server.systemRegistry(),
+        server = require('store').server,
+        registry = server.systemRegistry(tenantId()),
         path = SITE_METADATA + name;
     if (!registry.exists(path)) {
         return null;
     }
     meta = parse(registry.content(path).toString());
     return meta.aid;
+};
+
+var tenantId = function() {
+    return require('/modules/site.js').tenantId();
 };

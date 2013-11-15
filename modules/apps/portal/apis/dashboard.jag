@@ -2,15 +2,9 @@
 response.addHeader("Access-Control-Allow-Origin", "*");
 response.addHeader("Content-Type", "application/json");
 
-(function () {
+require('/modules/portal.js').exec(function (ctx) {
 
-    var nonSsoUser = require('/modules/user.js').current(),
-        configs = require('/portal.js').config(),
-        ssoUser = session.get('LOGGED_IN_USER'),
-        sso = configs.ssoConfiguration.enabled,
-        user = (sso && ssoUser) ? {username: ssoUser} : nonSsoUser;
-
-    if (!user) {
+    if (!ctx.user) {
         response.sendError(401, 'Unauthorized');
         return;
     }
@@ -23,9 +17,9 @@ response.addHeader("Content-Type", "application/json");
     if (request.getMethod() == 'POST' && matcher.match('/{context}/apis/dashboard/{appName}')) {
         var appName = matcher.elements().appName;
         var layoutDef = parse(request.getParameter("layout"));
-        print(dashboard.create(appName,layoutDef));
+        print(dashboard.create(appName, layoutDef));
     } else {
         response.sendError(404, 'API Endpoint Not Found');
     }
-})();
+}, request, response, session);
 %>

@@ -28,13 +28,14 @@ var roles = function (query) {
 
 var data = function () {
     var t, data, server, um, roles, prefix, index, i, length, rolez, role,
-        user = require('/modules/user.js');
+        store = require('store'),
+        user = store.user;
     data = application.get(PUBLISHER_CACHE);
     t = new Date().getTime();
     if (data && ((t - data.updated) > PUBLISHER_CACHE_PERIOD)) {
         return data;
     }
-    server = require('/modules/server.js');
+    server = store.server;
     um = server.userManager();
     prefix = user.USER_ROLE_PREFIX;
     index = prefix.length;

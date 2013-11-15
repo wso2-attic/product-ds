@@ -17,7 +17,7 @@ var getDashboardLayout, setDashboardLayout;
 			var server = new CARBON.server.Server(null);
 			var newReg = new CARBON.registry.Registry(server, {
 				username : userName,
-				tenantId : CARBON.server.tenantId()
+				tenantId : require('/modules/site.js').tenantId()
 			});
 			session.put(USER_REGISTRY_KEY, newReg);
 			return newReg;

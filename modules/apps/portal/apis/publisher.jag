@@ -1,10 +1,10 @@
 <%
-(function () {
+require('/modules/portal.js').exec(function (ctx) {
     var action, query, publisher,
             user = require('/modules/user.js'),
             matcher = new URIMatcher(request.getRequestURI());
 
-    if (!user.current()) {
+    if (!ctx.user) {
         response.sendError(401, 'Unauthorized');
         return;
     }
@@ -42,5 +42,5 @@
         return;
     }
     response.sendError(404, 'API Endpoint Not Found');
-}());
+}, request, response, session);
 %>

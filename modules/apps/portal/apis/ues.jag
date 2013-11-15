@@ -2,11 +2,10 @@
 response.addHeader("Access-Control-Allow-Origin", "*");
 response.addHeader("Content-Type", "application/json");
 
-(function () {
+require('/modules/portal.js').exec(function (ctx) {
 
-    var ssoUser = session.get('LOGGED_IN_USER'),
-            user = ssoUser,
-            layout;
+    var layout,
+            user = ctx.user;
 
     if (!user) {
         //response.sendError(401, 'Unauthorized');
@@ -43,5 +42,5 @@ response.addHeader("Content-Type", "application/json");
     } else {
         response.sendError(404, 'API Endpoint Not Found');
     }
-})();
+}, request, response, session);
 %>

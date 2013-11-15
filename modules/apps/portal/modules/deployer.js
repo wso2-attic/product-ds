@@ -2,7 +2,7 @@ var site = function (options) {
     var meta, tag, tags,
         carbon = require('carbon'),
         path = '/_system/governance/sites/' + options.provider + '/' + options.name + '/' + options.version,
-        server = require('/modules/server.js'),
+        server = require('store').server,
         site = require('/modules/site-browser.js'),
         registry = server.systemRegistry(),
         um = server.userManager(),
@@ -41,7 +41,7 @@ var gadget = function (options) {
     var tag, tags,
         carbon = require('carbon'),
         path = '/_system/governance/gadgets/' + options.provider + '/' + options.name + '/' + options.version,
-        server = require('/modules/server.js'),
+        server = require('store').server,
         um = server.userManager(),
         registry = server.systemRegistry();
     registry.put(path, {
@@ -99,7 +99,7 @@ var buildSiteRXT = function (options) {
 
 var sso = function (options) {
     var path = '/_system/config/repository/identity/SAMLSSO/' + options.issuer64,
-        server = require('/modules/server.js'),
+        server = require('store').server,
         registry = server.systemRegistry();
     registry.put(path, {
         properties: {'Issuer': options.issuer, 'SAMLSSOAssertionConsumerURL': options.consumerUrl,

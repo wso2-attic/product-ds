@@ -3,41 +3,11 @@
         "https": "%https.host%",
         "http": "%http.host%"
     },
-    "roles": {
-        "portal": {
-            "/permission/admin/login": ["ui.execute"]
-        }
-    },
+    "tenantConfigs": "/_system/config/portal/configs/portal.json",
     "adminRole": "admin",
     "user": {
         "username": "admin",
         "password": "admin"
-    },
-    "userRoles": ["portal"],
-    "permissions": {
-        "login": {
-            "/permission/admin/login": ["ui.execute"]
-        }
-    },
-    "userSpace": {
-        "space": "portal",
-        "options": {
-            "type": "registry",
-            "serverUrl": "%https.host%/admin",
-            "path": "/_system/governance/users",
-            "username": "admin",
-            "password": "admin"
-        }
-    },
-    "storeSpace": {
-        "space": "store",
-        "options": {
-            "type": "registry",
-            "serverUrl": "%https.host%/admin",
-            "path": "/_system/governance/users",
-            "username": "admin",
-            "password": "admin"
-        }
     },
     "ssoConfiguration" : {
         "enabled" : true,

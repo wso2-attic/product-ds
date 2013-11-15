@@ -1,6 +1,6 @@
 <%
-(function(){
-    var user = session.get("LOGGED_IN_USER");
+require('/modules/portal.js').exec(function (ctx) {
+    var user = ctx.user;
     if(user === null) {
         response.sendRedirect('/portal');
     } else {
@@ -37,5 +37,5 @@
 
          <%
     }
-}());
+}, request, response, session);
 %>

@@ -2,19 +2,18 @@
 var caramel;
 
 
-(function () {
+require('/modules/portal.js').exec(function (ctx) {
     var context,
             sso,
             log = new Log(),
             configs = require('/portal.js').config(),
-            user = require('/modules/user.js').current();
-    userSSO = session.get("Loged");
+            user = ctx.user;
     caramel = require('caramel');
     context = caramel.configs().context;
 
     sso = configs.ssoConfiguration.enabled;
 
-    if (user || userSSO) {
+    if (user) {
         response.sendRedirect(context + '/dashboard.jag');
         return;
     }
@@ -31,5 +30,5 @@ var caramel;
         'portal-homepage': {httpUrl:configs.server.http}
     });
 
-}());
+}, request, response, session);
 %>

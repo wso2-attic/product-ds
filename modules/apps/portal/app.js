@@ -34,10 +34,9 @@ configs.login = portal.login;
 configs.logout = portal.logout;
 configs.register = portal.register;
 
-var server = require('/modules/server.js');
-server.init(configs);
+var mod = require('store');
+mod.server.init(configs);
 
-var user = require('/modules/user.js');
-user.init(configs);
+mod.user.init(configs);
 
 portal.init(configs);

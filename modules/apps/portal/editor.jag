@@ -1,12 +1,11 @@
 <%
 var caramel;
 
-(function () {
+require('/modules/portal.js').exec(function (ctx) {
     var context,
-            user = require('/modules/user.js').current(),
+            user = ctx.user,
             ues = require('ues'),
-            ssoUser = session.get('LOGGED_IN_USER'),
-            sso, loggedUser;
+            sso;
     caramel = require('caramel');
     context = caramel.configs().context;
 
@@ -39,14 +38,11 @@ var caramel;
     }
 
     sso = configs.ssoConfiguration.enabled;
-    if (!ssoUser && !user) {
+    if (!user) {
         context = caramel.configs().context;
         response.sendRedirect(context + '?path=' + context + '/dashboard.jag');
         return;
     }
-
-    loggedUser = (sso && ssoUser) ? {username: ssoUser} : user;
-
 
     var optionsG1 = {
         id: 'g0',
@@ -61,11 +57,11 @@ var caramel;
     siteInfo.gadgetCode = gadgetCode;
 
     caramel.render({
-        'navigation': {user: loggedUser, sso: sso},
+        'navigation': {user: user, sso: sso},
         'title': 'Editor | User Engagement Server',
         'portal-editor': siteInfo
     });
 
-}());
+}, request, response, session);
 %>
 

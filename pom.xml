@@ -8,7 +8,7 @@
     <artifactId>wso2ues-parent</artifactId>
     <version>1.0.1</version>
     <packaging>pom</packaging>
-	<name>WSO2 User Engagement Server - Parent</name>
+    <name>WSO2 User Engagement Server - Parent</name>
     <url>http://wso2.org/projects/appserver/java</url>
     <description>WSO2 User Engagement Server</description>
 
@@ -67,23 +67,27 @@
     <modules>
         <module>modules/components/ues-admin</module>
         <module>modules/components/sso-common</module>
-	    <module>modules/features/ues</module>
+        <module>modules/features/ues</module>
         <module>modules/p2-profile-gen</module>
         <module>modules/distribution</module>
     </modules>
 
     <properties>
         <ues.version>1.0.1</ues.version>
+        <es.version>1.0.0</es.version>
         <carbon.kernal.version>4.2.0</carbon.kernal.version>
         <carbon.platform.version>4.2.0</carbon.platform.version>
 
         <!-- jaggery versions -->
-        <jaggery.feature.version>0.9.0.ALPHA4.wso2v1</jaggery.feature.version>
+        <jaggery.feature.version>0.9.0-SNAPSHOT-10252013</jaggery.feature.version>
 
-        <!-- patch versions -->       
+        <!-- patch versions -->
+        <!-- patch versions -->
+        <patch.version.421>4.2.1</patch.version.421>
+        <patch.version.422>4.2.2</patch.version.422>
         <carbon.p2.plugin.version>1.5.3</carbon.p2.plugin.version>
-		<stratos.version>2.2.0</stratos.version>
-		<carbon.patched.version.421>4.2.1</carbon.patched.version.421>
+        <stratos.version>2.2.0</stratos.version>
+        <stratos.patch.version.221>2.2.1</stratos.patch.version.221>
 
         <!-- maven plugin versions -->
         <build-helper-maven-plugin.version>1.7</build-helper-maven-plugin.version>
@@ -104,9 +108,9 @@
         <maven-project-info-report-plugin.version>2.4</maven-project-info-report-plugin.version>
         <maven-buildnumber-plugin.version>1.1</maven-buildnumber-plugin.version>
         <maven-dependency-plugin.version>2.4</maven-dependency-plugin.version>
-        <caramel.feature.version>0.9.0.ALPHA1.wso2v1</caramel.feature.version>
-		<wso2.slf4j.version>1.5.10.wso2v1</wso2.slf4j.version>
-		<!--sso.hostobjects.version>4.2.0</sso.hostobjects.version-->
+        <caramel.feature.version>1.0.0</caramel.feature.version>
+        <wso2.slf4j.version>1.5.10.wso2v1</wso2.slf4j.version>
+        <!--sso.hostobjects.version>4.2.0</sso.hostobjects.version-->
 
         <rhino.osgi.version>1.7.0.R4.wso2v1</rhino.osgi.version>
         <commons-codec.osgi.version>1.4.0.wso2v1</commons-codec.osgi.version>

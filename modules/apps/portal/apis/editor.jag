@@ -1,7 +1,7 @@
 <%
 var base64 = require('../modules/base64.js');
 var br = require('/modules/site-browser.js');
-(function () {
+require('/modules/portal.js').exec(function (ctx) {
     var data, i, length, file, files, nodeOffset,
             log = new Log(),
             pathHash = request.getParameter('pathhash'),
@@ -9,7 +9,7 @@ var br = require('/modules/site-browser.js');
             site = request.getParameter('page'),
             data = request.getParameter('data'),
             mod = require('/modules/site.js');
-    if (!require('/modules/user.js').current()) {
+    if (!ctx.user) {
         response.sendError(401, 'Unauthorized');
         return;
     }
@@ -48,8 +48,10 @@ var br = require('/modules/site-browser.js');
     if (action == 'get_content') {
 
         var parsed = br.parsePath(br.decode(pathHash));
+        ctx.log.info('===============================================');
+        ctx.log.info(br.decode(pathHash));
         var version = request.getParameter('version');
-        if(version=='new'){
+        if (version == 'new') {
             parsed.path += '.swp';
         }
 
@@ -60,16 +62,16 @@ var br = require('/modules/site-browser.js');
         var r = file.readAll();
         print(r);
         file.close();
-        
+
         return;
     }
-     if (action == 'get_path') {
+    if (action == 'get_path') {
 
         var parsed = br.parsePath(br.decode(pathHash));
-		var r = parsed.site + parsed.path;
+        var r = parsed.site + parsed.path;
 
         print(r);
-     
+
         return;
     }
     if (action === 'put_collection') {
@@ -102,5 +104,5 @@ var br = require('/modules/site-browser.js');
         return;
     }
     response.sendError(404, 'Requested action not found');
-}());
+}, request, response, session);
 %>

@@ -10,7 +10,7 @@ var USER_ROLE_PREFIX = 'private_';
 
 var init = function (options) {
     var role, roles, user,
-        server = require('/modules/server.js'),
+        server = require('store').server,
         um = server.userManager();
     roles = options.roles;
     for (role in roles) {
@@ -38,7 +38,7 @@ var login = function (username, password) {
         authorized = false,
         opts = options(),
         carbon = require('carbon'),
-        server = require('/modules/server.js'),
+        server = require('store').server,
         serv = server.server(),
         um = server.userManager();
     if (!serv.authenticate(username, password)) {
@@ -76,7 +76,7 @@ var login = function (username, password) {
 
 var isAuthorized = function (permission, action) {
     var user = current(),
-        server = require('/modules/server.js'),
+        server = require('store').server,
         um = server.userManager();
     user = user ? user.username : options().user.username;
     return um.getUser(user).isAuthorized(permission, action);
@@ -110,7 +110,7 @@ var logout = function () {
 };
 
 var userExists = function (username) {
-    var server = require('/modules/server.js');
+    var server = require('store').server;
     return server.userManager().userExists(username);
 };
 
@@ -120,7 +120,7 @@ var privateRole = function (username) {
 
 var register = function (username, password) {
     var user, role, id, perms, r, p,
-        server = require('/modules/server.js'),
+        server = require('store').server,
         um = server.userManager(),
         opts = options();
     um.addUser(username, password, opts.userRoles);
@@ -164,7 +164,7 @@ var loginWithSAML = function (username) {
         authorized = false,
         opts = options(),
         carbon = require('carbon'),
-        server = require('/modules/server.js'),
+        server = require('store').server,
         serv = server.server(),
         um = server.userManager();
 

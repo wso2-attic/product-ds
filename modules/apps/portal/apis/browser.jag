@@ -1,5 +1,5 @@
 <%
-(function () {
+require('/modules/portal.js').exec(function (ctx) {
     var target = request.getParameter('target'),
             targets = request.getParameter('targets[]'),
             action = request.getParameter('action'),
@@ -10,9 +10,10 @@
             dst = request.getParameter('dst'),
             init = (request.getParameter('init') == '1'),
             cut = request.getParameter('cut'),
-            //base64 = require('/modules/base64.js'),
+            tenantId = ctx.tenantId;
+    //base64 = require('/modules/base64.js'),
             br = require('/modules/site-browser.js');
-    if (!require('/modules/user.js').current()) {
+    if (!ctx.user) {
         response.sendError(401, 'Unauthorized');
         return;
     }
@@ -22,7 +23,7 @@
     if (action === 'checkSite') {
         print({hasSite: br.checkSite(site)});
         return;
-    }else  if (action === 'createSite') {
+    } else if (action === 'createSite') {
         print({
             id: 'l1_' + br.encodePath(site),
             created: br.createSite(site)
@@ -52,7 +53,7 @@
                 print(br.mkfile(target, name));
                 return;
             } else if (cmd == 'paste') {
-                if(cut == '1')
+                if (cut == '1')
                     print(br.cut(src, dst, targets));
                 else
                     print(br.copy(src, dst, targets));
@@ -75,6 +76,5 @@
     }
 
     response.sendError(404, 'Request action not found');
-
-}());
+}, request, response, session);
 %>

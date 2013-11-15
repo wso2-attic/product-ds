@@ -25,15 +25,23 @@ var JAGGERY_APPS_DIR = 'repository/deployment/server/jaggeryapps';
  */
 var JAGGERY_CONF = '/jaggery.conf';
 
+var tenantId = function () {
+    //TODO: this is due to a bug in carbon.server.tenantId() method. Need to replace this after that's fixed.
+    return org.wso2.carbon.context.PrivilegedCarbonContext.getThreadLocalCarbonContext().getTenantId();
+};
+
 /**
  * File system path for the Jaggery apps directory.
  */
-var SITES_HOME = (function () {
+var appsRoot = function () {
     var process = require('process');
+    var tid = tenantId();
+    var carbon = require('carbon');
     var home = process.getProperty('carbon.home');
     home = home.replace(/[\\]/g, '/').replace(/^[\/]/g, '');
-    return 'file:///' + home + '/' + JAGGERY_APPS_DIR;
-}());
+    return 'file:///' + home + '/' + (tid == carbon.server.superTenant.tenantId ?
+        'repository/deployment/server/jaggeryapps' : 'repository/tenants/' + tid + '/jaggeryapps');
+};
 
 /**
  * Build the site path by site name.
@@ -41,7 +49,7 @@ var SITES_HOME = (function () {
  * @return {string}
  */
 var sitePath = function (name) {
-    return SITES_HOME + '/' + name;
+    return appsRoot() + '/' + name;
 };
 
 /**
@@ -88,7 +96,7 @@ var loadConfig = function (name) {
  * @return {*}
  */
 var listSites = function () {
-    var file = new File(SITES_HOME);
+    var file = new File(appsRoot());
     return file.isExists() ? file.listFiles() : [];
 };
 
@@ -228,6 +236,7 @@ var listFiles = function (site, path) {
         paths = [],
         p = sitePath(site),
         f = new File(p + path);
+    new Log().info((p + path));
     if (!f) {
         return paths;
     }
@@ -252,13 +261,13 @@ var moveFile = function (site, file, dest) {
 };
 
 /**
- * Filter out a given path by removing SITES_HOME path.
+ * Filter out a given path by removing appsRoot path.
  * @param site
  * @param path
  * @return {String}
  */
 var filterPath = function (site, path) {
-    return path.substring(SITES_HOME.length + 1 + site.length);
+    return path.substring(appsRoot().length + 1 + site.length);
 };
 
 /**

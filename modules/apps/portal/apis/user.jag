@@ -1,9 +1,9 @@
 <%
-(function () {
+require('/modules/portal.js').exec(function (ctx) {
     var action, data, message, exists,
             error = false,
             log = new Log(),
-            user = require('/modules/user.js'),
+            user = require('store').user,
             matcher = new URIMatcher(request.getRequestURI());
 
     if (matcher.match('/{context}/apis/user/{action}')) {
@@ -75,5 +75,5 @@
         return;
     }
     response.sendError(404, 'API Endpoint Not Found');
-}());
+}, request, response, session);
 %>
