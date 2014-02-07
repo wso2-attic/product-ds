@@ -8,7 +8,8 @@ var caramel;
             ssoUser = session.get('LOGGED_IN_USER'),
             mode = 'design',
             dashboard = request.getParameter("dashboard"),
-   			layout = request.getParameter("layout");
+            layout = request.getParameter("layout"),
+            datasource_config = require('datasource-config.json');
 
     caramel = require('caramel');
 
@@ -36,7 +37,8 @@ var caramel;
         'portal-dashboard-designer': {
             dashboard: dashboard,
             layout: layout,
-            mode: mode
+            mode: mode,
+            datasource_config: datasource_config
         }
     });
 

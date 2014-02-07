@@ -1,6 +1,7 @@
 var gadgetRxtPath = '/gadgets/';
 
 var repoPath = '/gadgets';
+var relativeRepoPath = 'gadgets/';
 
 var lastUpdated = 0;
 
@@ -48,7 +49,10 @@ var populate = function () {
                     url: path + name + '.xml',
                     thumbnail: path + 'thumbnail.jpg',
                     banner: path + 'banner.jpg',
-                    status: 'CREATED'
+                    status: 'CREATED',
+                    dataformat: relativeRepoPath + name + '/datasource/data-format.json',
+                    chartoptions :gadgetRxtPath + name + '/config/chart-options.json'
+
                 });
             }
         }

@@ -1,0 +1,128 @@
+<%
+var log = new Log();
+var data = request.getContent();
+var action = request.getParameter('action');
+
+response.addHeader("Content-Type", "application/json");
+
+
+(function () {
+    log.info(stringify(action))
+
+    if (action == "queryDb") {
+
+        //TODO : refactor to avoid hard coding
+        var db = new Database(data.conSettings.ConnectionURL, data.conSettings.Username, data.conSettings.Password);
+        var result = db.query(data.queryData.SQLStatement + " limit 1");
+        db.close();
+        var names = [];
+
+        result.forEach(function (sp) {
+            for (var o in sp) {
+                names.push(o); // the property name
+            }
+        });
+
+        log.info(stringify(names))
+        print(names);
+        return;
+
+    } else if (action == "createJag") {
+
+        /** @type {{ createDir:function, loadFile:function }} */
+        var site = require('/modules/site.js');
+
+        var result = {};
+
+        try {
+            var path = "/gadgetDataApis/" +
+                       data.mappingData[0][data.dataColumns[0]] + "VS" + data.mappingData[0][data.dataColumns[1]] + "/" +
+                       data.mappingData[0][data.dataColumns[0]] + "VS" + data.mappingData[0][data.dataColumns[1]] + ".jag";
+
+            var parts = path.split('/');
+            var dirPath = '';
+            for (var i = 0; i < parts.length - 1; i++) {
+                var part = parts[i];
+                dirPath = dirPath + '/' + part;
+                try {
+                    //TODO : get the gadget title at the mapping and create a folder name with that
+                    site.createDir(data.appName, dirPath);
+                } catch (e) {
+                    // ASSUME: Error is due to dir already existing, thus ignore
+                }
+            }
+
+            var pathToOptions = "/gadgetDataApis/" + data.mappingData[0][data.dataColumns[0]] + "VS" + data.mappingData[0][data.dataColumns[1]] + "/" +
+                    'chart-options.json';
+            var file = site.loadFile('portal',data.chartOptions);
+            file.open("r");
+            site.createFile(data.appName,pathToOptions,file.getStream());
+            file.close();
+
+            log.info("~~~~~~~~~~~~~~ data labels ~~~~~~~~~~~~~~~~~~~~~ "+stringify(data.dataLabels));
+
+
+            var jagFileData = '\<\%\n' +
+
+                    'function getDBData() {\n' +
+                    '   var dataColumns = JSON.parse(\''+stringify(data.dataColumns)+'\');\n' +
+                    '   var mapping = JSON.parse(\''+stringify(data.mappingData)+'\');\n' +
+                    '   var result = [];\n' +
+                    '   var ticks = [];\n' +
+                    '   var output = {};\n' +
+
+                    '   var db = new Database("' + data.conSettings.ConnectionURL + '", "' + data.conSettings.Username + '", "' + data.conSettings.Password + '");\n' +
+                    '   var dbResult = db.query("' + data.queryData.SQLStatement + '");\n' +
+                    '   db.close();\n' +
+
+                    '   for (var i = 0; i < dbResult.length; i++) {\n' +
+                    '       for (var j = 0; j < mapping.length; j++) {\n' +
+                    '           if(!result[j]){\n' +
+                    '              result[j] = [];\n' +
+                    '           }\n' +
+                    '           result[j].push([i+1, dbResult[i][mapping[j][dataColumns[1]]]]);\n' +
+                    '           ticks.push([i+1, dbResult[i][mapping[j][dataColumns[0]]]]);\n' +
+                    '       }\n' +
+                    '   }\n' +
+
+
+                    '   for (var j = 0; j < mapping.length; j++) {\n' +
+                    '       var tmpObj = {};\n' +
+                    '       tmpObj["label"] = mapping[j]["Series Label"];\n' +
+                    '       tmpObj["data"] = result[j];\n' +
+                    '       output["series"+j] = tmpObj;\n' +
+                    '   }\n' +
+
+                    ' var chartOptions = require("chart-options.json")\n'+
+                    ' chartOptions["xaxis"]["axisLabel"]= "' + data.dataLabels["X-Axis Label"] + '";\n' +
+                    ' chartOptions["yaxis"]["axisLabel"]= "' + data.dataLabels["Y-Axis Label"]+ '";\n' +
+                    ' chartOptions["xaxis"]["ticks"]= ticks;\n' +
+                    ' return {0: output, 1: chartOptions};\n'+
+                    '}\n' +
+                    'print(getDBData());\n' +
+                    '\%\>';
+
+
+            site.createFile(data.appName, path, jagFileData);
+
+            log.info("==========================file write successfull==============================");
+            result.jagPath = "/"+ data.appName + path+"";
+            log.info("==========================path  =============================="+result.jagPath);
+
+            print(result);
+
+
+        } catch (error) {
+            response.sendError(404, 'Request processing error');
+        } finally {
+
+        }
+
+        return;
+    }
+
+    response.sendError(404, 'Request action not found');
+
+
+})();
+%>

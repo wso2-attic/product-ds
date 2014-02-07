@@ -57,7 +57,8 @@ var createSite = function (name) {
                         "urlPatterns": ["/*"],
                         "methods": ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS", "TRACE", "CONNECT", "PATCH"]
                     },
-                    "authRoles": [role]
+                    //"authRoles": [role]
+                    "users": [user.current().username]
                 }
             }
         ]

@@ -1,7 +1,7 @@
 <%
 var user = require('/modules/user.js').current();
 if (!user) {
-    response.sendRedirect('/{{appName}}/login');
+response.sendRedirect('/{{appName}}/login');
 }
 %>
 <!DOCTYPE html>
@@ -42,214 +42,311 @@ if (!user) {
           href="img/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
 
-    
+
 </head>
 
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-inverse navbar-fixed-top">
 
-	<div class="navbar-inner">
+    <div class="navbar-inner">
 
-		<div class="container-fluid">
+        <div class="container-fluid">
 
-			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
-			
-			<a class="brand" href="#"></a>
-			
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
 
-			
+            <a class="brand" href="#"></a>
 
-			<div class="nav-collapse collapse">
-				<ul class="nav pull-right">
 
-					<li class="nav-separator">
 
-						<a href="/store?user=<%=session.get('LOGGED_IN_USER')%>" target="_blank"><i class="icon-shopping-cart"></i> Store</a>
 
-					</li>
+            <div class="nav-collapse collapse">
+                <ul class="nav pull-right">
 
-					
-					<li>
+                    <li class="nav-separator">
 
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> <%= session.get("LOGGED_IN_USER") %> <b class="caret"></b></a>
-						<ul class="dropdown-menu dropdown-account" role="menu" aria-labelledby="dLabel">
-							<li>
+                        <a href="/store?user=<%=session.get('LOGGED_IN_USER')%>" target="_blank"><i class="icon-shopping-cart"></i> Store</a>
 
-								
-								<a href="/{{appName}}/logout.jag"><i class="icon-signout"></i> Sign out</a>
-								
+                    </li>
 
-							</li>
 
-						</ul>
+                    <li>
 
-					</li>
-					
-				</ul>
-			</div>
-			<!--/.nav-collapse -->
-		</div>
-	</div>
-	
-	<div class="navbar-inner sub-navbar-designer">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> <%= session.get("LOGGED_IN_USER") %> <b class="caret"></b></a>
+                        <ul class="dropdown-menu dropdown-account" role="menu" aria-labelledby="dLabel">
+                            <li>
 
-		<div class="container-fluid">
 
-			<a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+                                <a href="/{{appName}}/logout.jag"><i class="icon-signout"></i> Sign out</a>
 
-			<div class="row-fluid">
 
-				<div class="span5">
-					<input id="inp-designer-title" type="text" value="{{title}}">
-				</div>
-				<div class="span7">
-					<div class="nav-collapse collapse">
-						<ul class="nav pull-right">
+                            </li>
 
-							<li class="dropdown">
-								<a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-plus"></i> Add Block <b class="caret"></b></a>
-								<ul class="dropdown-menu dropdown-share">
-									<form>
-										<li>
-											<h4>Define gadget size in grid</h4>
+                        </ul>
 
-										</li>
-										<li>
+                    </li>
 
-											<div id="dummy-gadget-wrapper">
-												<div id="dummy-gadget-container" class="ui-widget-content">
-													<div id="dummy-gadget"  class="ui-widget-content">
-														<div id="dummy-size">
-															1x1
-														</div>
-													</div>
-												</div>
-											</div>
-										</li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
 
-										<li>
-											<button id="btn-add-dummy-gadget" class="btn btn-primary">
-												Add Empty Block
-											</button>
-										</li>
-									</form>
-								</ul>
+    <div class="navbar-inner sub-navbar-designer">
 
-							</li>
+        <div class="container-fluid">
 
-							<li id="btn-save">
-								<a href="#"><i class="icon-save"></i> Save</a>
-							</li>
-							<li>
-								<a id="btn-exit-editor" href="#"><i class="icon-signout"></i> Exit Editor</a>
-							</li>
+            <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
 
-						</ul>
-					</div>
-				</div>
-			</div>
+            <div class="row-fluid">
 
-			<!--/.nav-collapse -->
-		</div>
-	</div>
-	
-	<div class="navbar-inner sub-navbar-designer-view">
+                <div class="span5">
+                    <input id="inp-designer-title" type="text" value="{{title}}">
+                </div>
+                <div class="span7">
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right">
 
-		<div class="container-fluid">
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-plus"></i> Add Block <b class="caret"></b></a>
+                                <ul class="dropdown-menu dropdown-share">
+                                    <form>
+                                        <li>
+                                            <h4>Define gadget size in grid</h4>
 
-			<a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+                                        </li>
+                                        <li>
 
-			<div class="row-fluid">
+                                            <div id="dummy-gadget-wrapper">
+                                                <div id="dummy-gadget-container" class="ui-widget-content">
+                                                    <div id="dummy-gadget"  class="ui-widget-content">
+                                                        <div id="dummy-size">
+                                                            1x1
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
 
-				<div class="span5">
-					
-				</div>
-				<div class="span7">
-					<div class="nav-collapse collapse">
-						<ul class="nav pull-right">
+                                        <li>
+                                            <button id="btn-add-dummy-gadget" class="btn btn-primary">
+                                                Add Empty Block
+                                            </button>
+                                        </li>
+                                    </form>
+                                </ul>
 
-							<li class="li-edit-dashboard">
-								<a href="#" id="btn-exit-view" data-toggle="dropdown" class="dropdown-toggle float-left-link"><i class="icon-magic"></i> Personalize</a>
-								
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
+                            </li>
 
-			<!--/.nav-collapse -->
-		</div>
-	</div>
+                            <li id="btn-save">
+                                <a href="#"><i class="icon-save"></i> Save</a>
+                            </li>
+                            <li>
+                                <a id="btn-exit-editor" href="#"><i class="icon-signout"></i> Exit Editor</a>
+                            </li>
 
-	
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+
+    <div class="navbar-inner sub-navbar-designer-view">
+
+        <div class="container-fluid">
+
+            <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+
+            <div class="row-fluid">
+
+                <div class="span5">
+
+                </div>
+                <div class="span7">
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right">
+
+                            <li class="li-edit-dashboard">
+                                <a href="#" id="btn-exit-view" data-toggle="dropdown" class="dropdown-toggle float-left-link"><i class="icon-magic"></i> Personalize</a>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+
+
 </div>
 
 
 <div class="container-fluid">
-    
+
     <div class="row-fluid">
 
         <div class="span12">
-<input type="hidden" value="design" id="inp-view-mode" />
-<input type="hidden" value="{{appName}}" id="inp-dashboard" />
-<iframe style="display: none;height: 0;width: 0;" src="{{httpServerUrl}}/store/hidden-logger.jag?user=<%=session.get('LOGGED_IN_USER')%>"></iframe>
+            <input type="hidden" value="design" id="inp-view-mode" />
+            <input type="hidden" value="{{appName}}" id="inp-dashboard" />
+            <iframe style="display: none;height: 0;width: 0;" src="{{httpServerUrl}}/store/hidden-logger.jag?user=<%=session.get('LOGGED_IN_USER')%>"></iframe>
 
-<div id="gridster-cont" class="container-fluid">
-	<div id="dashboardName"><i class="icon-th-large"></i> <span></span></div>
-	<div class="layouts_grid" id="layouts_grid">
-		<input type="hidden" id="inp-layout" value="grid">
-		<ul>
-			<div id="grid-guides"></div>
-            
-			{{#each widgets}}
-            <li class="layout_block {{wclass}}" data-sizey="{{height}}" data-sizex="{{width}}" data-col="{{x}}" data-row="{{y}}"
-                data-url="{{url}}" data-wid="{{wid}}" data-prefs="{{prefs}}" data-title="{{title}}">
-                <div class="grid_header">
-           			<h3></h3>
+            <div id="gridster-cont" class="container-fluid">
+                <div id="dashboardName"><i class="icon-th-large"></i> <span></span></div>
+                <div class="layouts_grid" id="layouts_grid">
+                    <input type="hidden" id="inp-layout" value="grid">
+                    <ul>
+                        <div id="grid-guides"></div>
+
+                        {{#each widgets}}
+                            <li class="layout_block {{wclass}}" data-sizey="{{height}}" data-sizex="{{width}}" data-col="{{x}}" data-row="{{y}}"
+                                data-url="{{url}}" data-wid="{{wid}}" data-prefs="{{prefs}}" data-title="{{title}}">
+                                <div class="grid_header">
+                                    <h3></h3>
             		<span class="grid_header_controls">
                 		<a class="show-widget-pref" data-collapse="true"><i class="icon-cog"></i></a>
                 		<a class="expand-widget"><i class="icon-resize-full"></i></a>
                 		<a class="shrink-widget"><i class="icon-resize-small"></i></a>
                 		<a class="close-widget" href="#"><i class="icon-remove"></i></a>
             		</span>
-        		</div>
-        		<div class="gadget-pref-cont">
-        	
-        		</div>
-                {{#unless wclass}}
+                                </div>
+                                <div class="gadget-pref-cont">
 
-                <div class="add-gadget-item">
+                                </div>
+                                {{#unless wclass}}
+
+                                    <div class="add-gadget-item">
+
+                                    </div>
+                                {{/unless}}
+                                {{#unless url}}
+                                    <div class="designer-placeholder">
+
+                                    </div>
+
+                                    <button class="btn btn-add-gadget">Add Gadget</button>
+                                {{/unless}}
+                            </li>
+                        {{/each}}
+
+
+
+                    </ul>
+                </div>
+
+            </div>
+            <!-- /container -->
+
+
+            <!-- Modal -->
+            <!--<div id="modal-add-gadget" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel" aria-hidden="true">-->
+            <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">-->
+            <!--<i class="icon-remove"></i>-->
+            <!--</button>-->
+            <!--<div id="store-gadget-div"></div>-->
+
+            <!--</div>-->
+
+
+            <!--------------------------------------- start gadget-gen-ui---------------------------------------------->
+
+            <!-- Modal -->
+            <div id="modal-flow-start" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel" aria-hidden="true">
+                <div><h2>create new gadget</h2></div>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="icon-remove"></i>
+                </button>
+                <div class= "gadget-gen-ui">
+                    <div>Select data source</div>
+                    <div id="data_source_drop_dwn-div">
+
+                    </div>
 
                 </div>
-                {{/unless}}
-                {{#unless url}}
-                 <div class="designer-placeholder">
 
-        		</div>
+                <div>
+                    <button id="add-gadget-btn-next" style="display: inline-block;color:#07052E;position: relative;right: -20px">Next</button>
 
-       			<button class="btn btn-add-gadget">Add Gadget</button>
-         		{{/unless}}
-            </li>
-            {{/each}}
-
-					
-			
-		</ul>
-	</div>
-
-</div>
-<!-- /container -->
+                </div>
+                <!--<div id="store-gadget-div"></div>-->
+            </div>
 
 
-<!-- Modal -->
-<div id="modal-add-gadget" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel" aria-hidden="true">
-	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-		<i class="icon-remove"></i>
-	</button>
-	<div id="store-gadget-div"></div>
 
-</div>
 
+            <!-- Modal -->
+            <div id="modal-create-new-connection" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel" aria-hidden="true">
+                <div><h2>create new connection</h2></div>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="icon-remove"></i>
+                </button>
+                <div id="modal-create-new-connection-data"></div>
+
+
+                <div>
+        <button id="create-connection-btn-back" style="display: inline-block;color:#07052E;position: relative;right: -20px">Back</button>
+                    <button id="create-connection-btn-next" style="display: inline-block;color:#07052E;position: relative;right: -20px">Next</button>
+
+                </div>
+                <!--<div id="store-gadget-div"></div>-->
+            </div>
+
+            <!-- Modal -->
+            <div id="modal-sql-query-editor" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel" aria-hidden="true">
+                <div><h2>SQL Editor</h2></div>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="icon-remove"></i>
+                </button>
+                <!--<div>
+                    <div>sql statement</div>
+                    <div><input type="text" id="sqlStatement" /></div>
+                </div-->
+                <div id="modal-sql-query-editor-data"></div>
+
+
+
+                <div>
+                    <button id="sql-connection-btn-back" style="display: inline-block;color:#07052E;position: relative;right: -20px">Back</button>
+                    <button id="sql-connection-btn-next" style="display: inline-block;color:#07052E;position: relative;right: -20px">Next</button>
+
+                </div>
+                <!--<div id="store-gadget-div"></div>-->
+            </div>
+
+
+            <div id="modal-add-gadget" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel" aria-hidden="true">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="icon-remove"></i>
+                </button>
+                <div id="store-gadget-div"></div>
+                <div>
+                    <button id="add-gadget-window-btn-back" style="display: inline-block;color:#07052E;position: relative;right: -20px">Back</button>
+
+                </div>
+            </div>
+
+
+            <!-- Modal -->
+            <div id="modal-data-mapper" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel" aria-hidden="true">
+                <div><h2>Data mapping</h2></div>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="icon-remove"></i>
+                </button>
+                <div id="modal-data-mapping"></div>
+                <div id="modal-data-mapping-extension-space"></div>
+
+                <div>
+                    <button id="flow-finish-btn-back" style="display: inline-block;color:#07052E;position: relative;right: -20px">Back</button>
+                    <button id="flow-finish-btn-next" style="display: inline-block;color:#07052E;position: relative;right: -20px">Next</button>
+
+                </div>
+                <!--<div id="store-gadget-div"></div>-->
+            </div>
+
+            <!--------------------------------end of the gadget-gen-ui--------------------------------------------->
 
 
         </div>
@@ -259,8 +356,8 @@ if (!user) {
 </div>
 
 <script id="widget-template" type="text/x-handlebars-template">
-	<li class="layout_block">
-		<div class="grid_header">
+    <li class="layout_block">
+        <div class="grid_header">
             <input class="gadget-title-txt">
             <span class="grid_header_controls">
                 <a class="show-widget-pref" data-collapse="true"><i class="icon-cog"></i></a>
@@ -270,22 +367,22 @@ if (!user) {
             </span>
         </div>
         <div class="gadget-pref-cont">
-        	
-        </div>
-		<div class="designer-placeholder">
-	
-		</div>
-		<div class="add-gadget-item">
-	
-		</div>
-		<button class="btn btn-add-gadget">Add Gadget</button>
 
-	</li>
+        </div>
+        <div class="designer-placeholder">
+
+        </div>
+        <div class="add-gadget-item">
+
+        </div>
+        <button class="btn btn-add-gadget">Add Gadget</button>
+
+    </li>
 </script>
 
 <script id="widget-template2" type="text/x-handlebars-template">
-	<li class="layout_block" data-wid="[[wid]]" data-url="[[url]]" data-prefs="[[prefs]]">
-		<div class="grid_header">
+    <li class="layout_block" data-wid="[[wid]]" data-url="[[url]]" data-prefs="[[prefs]]">
+        <div class="grid_header">
             <input class="gadget-title-txt">
             <span class="grid_header_controls">
                 <a class="show-widget-pref" data-collapse="true"><i class="icon-cog"></i></a>
@@ -295,18 +392,18 @@ if (!user) {
             </span>
         </div>
         <div class="gadget-pref-cont">
-        	
-        </div>
-		<div class="add-gadget-item">
-	
-		</div>
 
-	</li>
+        </div>
+        <div class="add-gadget-item">
+
+        </div>
+
+    </li>
 </script>
 
 <script id="widget-template-blank2" type="text/x-handlebars-template">
-	<li class="layout_block" data-url="[[url]]" data-row="[[y]]" data-col="[[x]]" data-sizex="[[width]]" data-sizey="[[height]]" data-wid="[[wid]]" data-prefs="[[prefs]]">
-		<div class="grid_header">
+    <li class="layout_block" data-url="[[url]]" data-row="[[y]]" data-col="[[x]]" data-sizex="[[width]]" data-sizey="[[height]]" data-wid="[[wid]]" data-prefs="[[prefs]]">
+        <div class="grid_header">
             <input class="gadget-title-txt">
             <span class="grid_header_controls">
                 <a class="show-widget-pref" data-collapse="true"><i class="icon-cog"></i></a>
@@ -316,12 +413,12 @@ if (!user) {
             </span>
         </div>
         <div class="gadget-pref-cont">
-        	
+
         </div>
-		<div class="add-gadget-item">
-	
-		</div>
-	</li>
+        <div class="add-gadget-item">
+
+        </div>
+    </li>
 </script>
 
 <!-- /container -->
@@ -338,10 +435,10 @@ if (!user) {
 <script src="js/shindig.js"></script>
 <script src="js/UESContainer.js"></script>
 <script src="js/portal-dashboard-designer.js"></script>
+<script src="js/caramel-client.js"></script>
 <script>
     UESContainer.renderGadget('store-gadget-div', "{{showAssetGadget}}");
 </script>
 
 </body>
 </html>
-

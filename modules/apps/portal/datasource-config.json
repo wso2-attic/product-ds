@@ -1,0 +1,27 @@
+{
+    "dataSources": [
+        "RDBMS", "REST API", "Cassandra"
+    ],
+
+    "dataSourcesDescriptions": {
+        "RDBMS": [
+            "ConnectionURL",
+            "Username",
+            "Password"
+        ],
+
+        "REST API": [
+            "ConnectionURL"
+        ],
+
+        "Cassandra": []
+
+    },
+
+    "datasourceWindow_3" : {
+        "RDBMS": [
+            "SQLStatement"
+        ]
+    }
+}
+
