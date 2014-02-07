@@ -7,8 +7,6 @@ response.addHeader("Content-Type", "application/json");
 
 
 (function () {
-    log.info(stringify(action))
-
     if (action == "queryDb") {
 
         //TODO : refactor to avoid hard coding
@@ -22,8 +20,6 @@ response.addHeader("Content-Type", "application/json");
                 names.push(o); // the property name
             }
         });
-
-        log.info(stringify(names))
         print(names);
         return;
 
@@ -59,9 +55,6 @@ response.addHeader("Content-Type", "application/json");
             site.createFile(data.appName,pathToOptions,file.getStream());
             file.close();
 
-            log.info("~~~~~~~~~~~~~~ data labels ~~~~~~~~~~~~~~~~~~~~~ "+stringify(data.dataLabels));
-
-
             var jagFileData = '\<\%\n' +
 
                     'function getDBData() {\n' +
@@ -69,19 +62,29 @@ response.addHeader("Content-Type", "application/json");
                     '   var mapping = JSON.parse(\''+stringify(data.mappingData)+'\');\n' +
                     '   var result = [];\n' +
                     '   var ticks = [];\n' +
+                    '   var tickTmp = [];\n'+
+
                     '   var output = {};\n' +
 
                     '   var db = new Database("' + data.conSettings.ConnectionURL + '", "' + data.conSettings.Username + '", "' + data.conSettings.Password + '");\n' +
                     '   var dbResult = db.query("' + data.queryData.SQLStatement + '");\n' +
                     '   db.close();\n' +
 
-                    '   for (var i = 0; i < dbResult.length; i++) {\n' +
+                    '   for (var i = 0,k = 0; i < dbResult.length; i++) {\n' +
                     '       for (var j = 0; j < mapping.length; j++) {\n' +
                     '           if(!result[j]){\n' +
                     '              result[j] = [];\n' +
                     '           }\n' +
-                    '           result[j].push([i+1, dbResult[i][mapping[j][dataColumns[1]]]]);\n' +
-                    '           ticks.push([i+1, dbResult[i][mapping[j][dataColumns[0]]]]);\n' +
+                    '           if(tickTmp[dbResult[i][mapping[j][dataColumns[0]]]]){\n' +
+                    '               var keyVal = tickTmp[dbResult[i][mapping[j][dataColumns[0]]]];\n' +
+                    '               result[j].push([keyVal, dbResult[i][mapping[j][dataColumns[1]]]]);\n' +
+                    '           } else {\n' +
+                    '               tickTmp[dbResult[i][mapping[j][dataColumns[0]]]] = k+1;\n' +
+                    '               ticks.push([k+1, dbResult[i][mapping[j][dataColumns[0]]]]);\n' +
+                    '               result[j].push([k+1, dbResult[i][mapping[j][dataColumns[1]]]]);\n' +
+                    '               k++;\n' +
+                    '           }\n' +
+
                     '       }\n' +
                     '   }\n' +
 
@@ -104,10 +107,8 @@ response.addHeader("Content-Type", "application/json");
 
 
             site.createFile(data.appName, path, jagFileData);
-
-            log.info("==========================file write successfull==============================");
             result.jagPath = "/"+ data.appName + path+"";
-            log.info("==========================path  =============================="+result.jagPath);
+            log.info("File created successfully at "+result.jagPath);
 
             print(result);
 
