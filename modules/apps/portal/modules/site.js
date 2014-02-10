@@ -236,7 +236,6 @@ var listFiles = function (site, path) {
         paths = [],
         p = sitePath(site),
         f = new File(p + path);
-    new Log().info((p + path));
     if (!f) {
         return paths;
     }

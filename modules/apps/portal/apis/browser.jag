@@ -10,7 +10,7 @@ require('/modules/portal.js').exec(function (ctx) {
             dst = request.getParameter('dst'),
             init = (request.getParameter('init') == '1'),
             cut = request.getParameter('cut'),
-            tenantId = ctx.tenantId;
+            tenantId = ctx.tenantId,
     //base64 = require('/modules/base64.js'),
             br = require('/modules/site-browser.js');
     if (!ctx.user) {
@@ -26,7 +26,7 @@ require('/modules/portal.js').exec(function (ctx) {
     } else if (action === 'createSite') {
         print({
             id: 'l1_' + br.encodePath(site),
-            created: br.createSite(site)
+            created: br.createSite(site, ctx.user.username)
         });
         return;
     }

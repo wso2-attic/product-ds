@@ -11,12 +11,12 @@
         "/css/style-gadgets.css",
         "/css/navigation.css",
         "/css/bootstrap-responsive.min.css",
-	"/css/bootstrap.min.css",
-	"/css/jquery.gridster.min.css",
+        "/css/bootstrap.min.css",
+        "/css/jquery.gridster.min.css",
         "/css/font-awesome.css",
         "/css/font-awesome.min.css",
         "/css/font-awesome-ie7.css",
-	"/css/font-awesome-ie7.min.css",
+        "/css/font-awesome-ie7.min.css",
         "/css/portal-dashboard-navigation.css",
         "/css/portal-dashboard-designer.css",
         "/css/styles.css",
@@ -47,12 +47,16 @@
         "/js/portal-dashboard-designer.js",
         "/js/navigation.js",
         "/js/UESContainer.js",
+        "/js/caramel-client.js",
         "/js/shindig.js"
     ],
 
     "copyRoot": [
+        "/datasource-config.json",
         "/apis/ues.jag",
+        "/apis/gadget-gen.jag",
         "/modules/ues.js",
+        "/modules/site.js",
         "/modules/server.js",
         "/modules/user.js"
     ]

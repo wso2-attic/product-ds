@@ -11,10 +11,10 @@
               display_name="Data Source"
               default_value="/portal/gadgets/bar-chart/datasource/dataFile4.jag">
     </UserPref>
-    <UserPref name="options"
+    <!--UserPref name="options"
               display_name="Chart Options"
               default_value="/portal/gadgets/bar-chart/js/options-bar.js">
-    </UserPref>
+    </UserPref-->
     <UserPref name="updateGraph"
               display_name="Update Interval (s)"
               default_value="No">
@@ -32,13 +32,10 @@
 	<script language="javascript" type="text/javascript" src="js/flot/jquery.flot.js"></script>
 	<script language="javascript" type="text/javascript" src="js/flot/jquery.flot.selection.js"></script>
 	<script language="javascript" type="text/javascript" src="js/flot/jquery.flot.resize.js"></script>
+	<script language="javascript" type="text/javascript" src="js/flot/jquery.flot.axislabels.js"></script>
+	<script language="javascript" type="text/javascript" src="js/flot/jquery.flot.orderBars.js"></script>
 	<script language="javascript" type="text/javascript" src="js/flot-chart-core.js"></script>
-	<script language="javascript" type="text/javascript">
-        var prefs = new gadgets.Prefs();
-        var src =  pref.getString("options");
-        document.write('<' + 'script language="javascript" src="' + src + '"' +
-                   ' type="text/javascript"><' + '/script>');
-    </script>
+
 </head>
 
 <body>
@@ -48,11 +45,20 @@
 					<button class="pause btn btn-mini">Pause</button>
 					<button class="reset btn btn-mini">reset</button>
 				</div>
-				<div id="optionsRight" class="seriesContainer"></div>
-				
+				<div id="optionsRight" class="seriesContainer">
+				    <div class="btn-group">
+				    <a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="#">
+				    Series
+				    <span class="caret"></span>
+				    </a>
+				    <ul class="dropdown-menu series-toggle pull-right" role="menu" aria-labelledby="dLabel">
+
+					</ul>
+				    </div>
+				</div>
+
 			</div>
 			<div id="placeholder" class="demo-placeholder" style="height:90%"></div>
-			<div id="overview" class="demo-placeholder"></div>
 
 	</div>
 </body>

@@ -124,8 +124,6 @@ var exec = function (fn, request, response, session) {
         tenantId: tenant.tenantId,
         username: user ? user.username : carbon.user.anonUser
     }, function () {
-        new Log().info(Packages.org.wso2.carbon.context.PrivilegedCarbonContext.getThreadLocalCarbonContext().getTenantId());
-        new Log().info(require('carbon').server.tenantDomain());
         var configs = require('/portal.js').config();
         return fn.call(null, {
             tenant: tenant,

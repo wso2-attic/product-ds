@@ -48,8 +48,6 @@ require('/modules/portal.js').exec(function (ctx) {
     if (action == 'get_content') {
 
         var parsed = br.parsePath(br.decode(pathHash));
-        ctx.log.info('===============================================');
-        ctx.log.info(br.decode(pathHash));
         var version = request.getParameter('version');
         if (version == 'new') {
             parsed.path += '.swp';
