@@ -53,7 +53,12 @@
 
 				{{#if sso}}
 				<li>
-					<a href="{{url "/login"}}" id="sso-login">{{t "Sign in"}}</a>
+                    <a href="{{url "/login"}}" id="sso-login">{{t "Sign in"}}</a>
+					<form id="sso-login-form" method="post" action="{{ssoIdpURL}}" style="display: none;">
+						<input type="hidden" name="SAMLRequest" value="{{ssoEncodedRequest}}"/>
+						<input type="hidden" name="RelayState" value="{{ssoRelayState}}"/>
+						<input type="hidden" name="SSOAuthSessionID" value="{{ssoSessionId}}"/>
+					</form>
 				</li>
 				<li>
 					<a href="{{url "/login"}}" id="btn-register" class="btn btn-primary">{{t "Register"}}</a>

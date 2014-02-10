@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.wso2.ues</groupId>
         <artifactId>wso2ues-parent</artifactId>
-        <version>1.0.1</version>
+        <version>1.5.0</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <version>1.0.1</version>
+    <version>1.5.0</version>
     <artifactId>p2-profile-gen</artifactId>
     <packaging>pom</packaging>
     <name>UES - Profile Generation</name>
