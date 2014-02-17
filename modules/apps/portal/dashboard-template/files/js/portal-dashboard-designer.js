@@ -1,6 +1,6 @@
 var layout, dummy_gadget_block = 50, block_params = {
-    max_width : 6,
-    max_height : 6
+    max_width: 6,
+    max_height: 6
 }, MARGINS_RATIO = 0.1, COLS = block_params.max_width;
 
 var onShowAssetLoad, tmpGadgetInfo;
@@ -9,11 +9,11 @@ var flow_data = {};
 var metadata;
 var caramel = {};
 
-(function($) {
+(function ($) {
 
     var extensions = {
 
-        resize_widget_dimensions : function(options) {
+        resize_widget_dimensions: function (options) {
             if (options.widget_margins) {
                 this.options.widget_margins = options.widget_margins;
             }
@@ -26,7 +26,7 @@ var caramel = {};
             this.min_widget_height = (this.options.widget_margins[1] * 2) + this.options.widget_base_dimensions[1];
 
             var serializedGrid = this.serialize();
-            this.$widgets.each($.proxy(function(i, widget) {
+            this.$widgets.each($.proxy(function (i, widget) {
                 var $widget = $(widget);
                 var data = serializedGrid[i];
                 this.resize_widget($widget, data.sizex, data.sizey);
@@ -43,7 +43,7 @@ var caramel = {};
 
 var newWid = 0;
 
-$(function() {
+$(function () {
     var $STORE_MODAL = $('#modal-add-gadget');
     var $LAYOUTS_GRID = $('#layouts_grid');
     var newDimensions = calculateNewDimensions();
@@ -60,7 +60,10 @@ $(function() {
         var containerWidth = $('#layouts_grid').innerWidth();
         var newMargin = containerWidth * MARGINS_RATIO / (COLS * 2);
         var newSize = containerWidth * (1 - MARGINS_RATIO) / COLS;
-        return [[newSize, newSize], [newMargin, newMargin]];
+        return [
+            [newSize, newSize],
+            [newMargin, newMargin]
+        ];
     }
 
     var timeOut;
@@ -69,8 +72,8 @@ $(function() {
         var newDimensions = calculateNewDimensions();
 
         layout.resize_widget_dimensions({
-            widget_base_dimensions : newDimensions[0],
-            widget_margins : newDimensions[1]
+            widget_base_dimensions: newDimensions[0],
+            widget_margins: newDimensions[1]
         });
 
         drawGrid(newDimensions[0][0]);
@@ -96,15 +99,15 @@ $(function() {
     }
 
     $('#dummy-gadget').resizable({
-        grid : dummy_gadget_block,
-        containment : "#dummy-gadget-container",
-        stop : function(event, ui) {
+        grid: dummy_gadget_block,
+        containment: "#dummy-gadget-container",
+        stop: function (event, ui) {
             var h = Math.round($(this).height()) / dummy_gadget_block;
             var w = Math.round($(this).width()) / dummy_gadget_block;
             var display = w + "x" + h;
             $(this).find('#dummy-size').html(display).attr({
-                'data-w' : w,
-                'data-h' : h
+                'data-w': w,
+                'data-h': h
             });
         }
     });
@@ -119,7 +122,7 @@ $(function() {
         gadgetRendered = false;
         //$STORE_MODAL.modal('show');
 
-        if(!metadata){
+        if (!metadata) {
             caramel.ajax({
                 type: 'POST',
                 url: "../datasource-config.json",
@@ -128,26 +131,21 @@ $(function() {
                 dataType: 'json'
             });
 
-        }else{
+        } else {
             genDataSourceDropdown(metadata);
         }
-
     }
 
 
     var genDataSourceDropdown = function (datasourceData) {
         metadata = datasourceData;
+        var windowData = {
+            dataSource: metadata.dataSources
+        }
 
-        var divCont = '<select id="data_source_drop_dwn">';
-
-        metadata.dataSources.forEach(function (sp) {
-            divCont += '<option value="'+sp+'">'+sp+'</option>';
-        });
-
-        divCont += '</select>';
-
-        $('#data_source_drop_dwn-div').html(divCont);
-
+        var source = $("#select-data-source").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+        var template = Handlebars.compile(source);
+        $('#data_source_drop_dwn-div').html(template(windowData));
         $('#modal-flow-start').modal('show');
 
     };
@@ -155,18 +153,14 @@ $(function() {
     var selectDatasourcesNextClick = function () {
         var selectedVal = $('#data_source_drop_dwn').find(":selected").text();
         flow_data.dataSource = selectedVal;
-        var nextWindowData = metadata.dataSourcesDescriptions[flow_data.dataSource];
 
-        var result = '';
-        $.each(nextWindowData, function (i, field) {
-            result += '<div>';
-            result += '<div>' + field + '</div>'
-            result += '<div><input type="text"/></div>'
-            result += '</div>';
-        });
+        var nextWindowData = {
+            createConnection: metadata.dataSourcesDescriptions[flow_data.dataSource]
+        };
 
-
-        $('#modal-create-new-connection-data').html(result);
+        var source = $("#create-new-connection").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+        var template = Handlebars.compile(source);
+        $('#modal-create-new-connection-data').html(template(nextWindowData));
 
         $('#modal-flow-start').modal('hide');
         $('#modal-create-new-connection').modal('show');
@@ -181,17 +175,16 @@ $(function() {
         });
 
         flow_data.conSettings = conSettings;
-        var nextWindowData = metadata.datasourceWindow_3[flow_data.dataSource];
-        if (nextWindowData) {
-            var result = '';
-            $.each(nextWindowData, function (i, field) {
-                result += '<div>';
-                result += '<div>' + field + '</div>'
-                result += '<div><input type="text" id=' + field + ' /></div>'
-                result += '</div>';
-            });
 
-            $('#modal-sql-query-editor-data').html(result);
+        var window3Data = metadata.datasourceWindow_3[flow_data.dataSource];
+        if (window3Data) {
+            var nextWindowData = {
+                sqlEditor: window3Data
+            };
+
+            var source = $("#sql-query-editor").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+            var template = Handlebars.compile(source);
+            $('#modal-sql-query-editor-data').html(template(nextWindowData));
 
             $('#modal-create-new-connection').modal('hide');
             $('#modal-sql-query-editor').modal('show');
@@ -251,7 +244,7 @@ $(function() {
 
                 gadgetLi.data('gadgetInfo', gadgetInfo);
                 var h3 = gadgetLi.find('h3');
-                if(h3){
+                if (h3) {
                     h3.parent().append('<input class="gadget-title-txt">');
                     h3.remove()
                 }
@@ -265,7 +258,7 @@ $(function() {
         console.log("")
         caramel.ajax({
             type: 'POST',
-            url: "../../portal/"+tmpGadgetInfo.attributes.overview_dataformat,
+            url: "../../portal/" + tmpGadgetInfo.attributes.overview_dataformat,
             success: generateDataMapping,
             contentType: 'application/json',
             dataType: 'json'
@@ -274,63 +267,44 @@ $(function() {
     }
 
     var generateDataMapping = function (tableData) {
-        var divCont = populateMappingRow(tableData.dataColumns, true);
-        flow_data.dataColumns = tableData.dataColumns;
-
+        var divCont = populateMappingRow(tableData.dataColumns, flow_data.column_headers, true);
         $('#modal-data-mapping').html(divCont);
 
-        var addExtention = '<div>';
+        flow_data.dataColumns = tableData.dataColumns;
 
-        addExtention += '<div id="data-labels">';
-        $.each(tableData.dataLabels, function (i, field) {
-            addExtention += '<div>';
-            addExtention += '<div>' + field + '</div>';
-            addExtention += '<div><input type="text"/></div>';
-            addExtention += '</div>';
-        });
-        addExtention += '</div>';
+        var nextWindowData = {
+            dataLabels: tableData.dataLabels
+        };
 
-        addExtention += '<div><div>Update Interval</div><div><input type="text" id="refresh-sequence-input"/></div></div>';
-        addExtention += '<div><button id="mapping-add-series-btn" style="display: inline-block;color:#07052E;position: relative;right:-20px">+</button></div>';
+        var source = $("#data-mapping-extension").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+        var template = Handlebars.compile(source);
+        $('#modal-data-mapping-extension-space').html(template(nextWindowData));
 
-        addExtention += '</div>';
-
-        $('#modal-data-mapping-extension-space').html(addExtention);   //bind the first series to the element
         $('#mapping-add-series-btn').bind('click', addSeriesBtnClick);  //To add more series
         $STORE_MODAL.modal('hide');
         $('#modal-data-mapper').modal('show');
     }
 
-    var populateMappingRow = function (dataColumns, isFirst) {
-        var result = '<div>';
-
-        result += '<div>';
-        result += '<div>Series Label</div>';
-        result += '<div><input type="text"/></div>'
-        result += '</div>';
-
-        $.each(dataColumns, function (i, field) {
-            if (i != 0 || isFirst) {
-                result += '<div>';
-                result += '<div>' + field + '</div>';
-                result += '<div><select>';
-
-
-                flow_data.column_headers.forEach(function (sp) {
-                    result += '<option value="' + sp + '">' + sp + '</option>';
-                });
-                result += '</select></div>';
-                result += '</div>';
-            }
-
-        });
-        result += '</div>';
-        return result;
+    var populateMappingRow = function (dataColumns, columnHeaders, isFirst) {
+        var columns = [];
+        if (!isFirst) {
+            var cloneDataColumns = dataColumns.slice(1);
+            columns = cloneDataColumns;
+        } else {
+            columns = dataColumns;
+        }
+        var nextWindowData = {
+            dataColumns: columns,
+            columnHeaders: columnHeaders
+        };
+        var source = $("#data-mapping").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+        var template = Handlebars.compile(source);
+        return template(nextWindowData);
 
     }
 
     var addSeriesBtnClick = function () {
-        var divCont = populateMappingRow(flow_data.dataColumns, false);
+        var divCont = populateMappingRow(flow_data.dataColumns, flow_data.column_headers, false);
         $('#modal-data-mapping').append(divCont);
     }
 
@@ -359,10 +333,7 @@ $(function() {
                 series[$(this).children()[0].innerHTML] = $(this).find(":selected").text();
             });
             mappingData.push(series);
-            console.log("~~~~~~~~~~~~~~ inside series~~~~~~~~~~~~~~~~~~~~~~~~~~~ " + series);
-            console.log("~~~~~~~~~~~~~~ inside ~~~~~~~~~~~~~~~~~~~~~~~~~~~ " + mappingData);
         });
-        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ " + mappingData);
 
         var dashboard = $('#inp-dashboard').val();
         flow_data.refreshSequence = $('#refresh-sequence-input').val();
@@ -433,13 +404,13 @@ $(function() {
 
         applyGridster();
 
-        $.get('apis/ues/layout/', {}, function(result) {
+        $.get('apis/ues/layout/', {},function (result) {
             if (result) {
 
                 var userWidgets = result.widgets;
                 var defaultWidgets = layout.serialize();
 
-                $.each(userWidgets, function(i, w) {
+                $.each(userWidgets, function (i, w) {
 
                     if (w.wid > newWid) {
 
@@ -451,24 +422,24 @@ $(function() {
 
                         //update coords in default grid
                         $('.layout_block[data-wid="' + w.wid + '"]').attr({
-                            'data-col' : w.x,
-                            'data-row' : w.y,
-                            'data-url' : w.url,
-                            'data-title' : w.title,
-                            'data-prefs' : w.prefs
+                            'data-col': w.x,
+                            'data-row': w.y,
+                            'data-url': w.url,
+                            'data-title': w.title,
+                            'data-prefs': w.prefs
                         });
 
                     } else {
                         //add user widget to grid
                         layout.add_widget(widgetTemplate2({
-                            wid : w.wid,
-                            url : w.url,
-                            prefs : w.prefs
+                            wid: w.wid,
+                            url: w.url,
+                            prefs: w.prefs
                         }), w.width, w.height, w.x, w.y);
                     }
                 });
 
-                $.each(defaultWidgets, function(i, w) {
+                $.each(defaultWidgets, function (i, w) {
                     // skip static widgets
                     if (w.y == 1) {
                         return true;
@@ -492,7 +463,7 @@ $(function() {
 
             var widgets = $('.layouts_grid').find('.layout_block');
 
-            $.each(widgets, function(i, widget) {
+            $.each(widgets, function (i, widget) {
                 var $w = $(widget);
                 var wid = $w.attr('data-wid');
                 if (wid > newWid) {
@@ -506,13 +477,13 @@ $(function() {
                     $w.find('.designer-placeholder').remove();
                     $w.find('.btn-add-gadget').remove();
                     insertGadget($w, url, {
-                        prefs : prefs
-                    },$w.attr('data-title'));
+                        prefs: prefs
+                    }, $w.attr('data-title'));
                 }
 
             });
 
-        }).error(function(error) {
+        }).error(function (error) {
                 console.log(error);
             });
 
@@ -524,10 +495,10 @@ $(function() {
 
         var widgetId = 500;
         layout = $('.layouts_grid ul').gridster({
-            widget_base_dimensions : newDimensions[0],
-            widget_margins : newDimensions[1],
+            widget_base_dimensions: newDimensions[0],
+            widget_margins: newDimensions[1],
 
-            serialize_params : function($w, wgd) {
+            serialize_params: function ($w, wgd) {
                 //apparently $('.x').data() is not equals to $($('.x').get(0)).data() . why?
                 var gadgetInfo = $($w.get(0)).data('gadgetInfo');
                 var wclass = ($(wgd.el[0]).attr('class').indexOf('static') != -1) ? 'static' : '';
@@ -538,27 +509,27 @@ $(function() {
                 var url = $(wgd.el[0]).attr('data-url');
 
                 return {
-                    wid : currentWidgetId || widgetId++,
-                    x : wgd.col,
-                    y : wgd.row,
+                    wid: currentWidgetId || widgetId++,
+                    x: wgd.col,
+                    y: wgd.row,
                     title: $w.find('input').val(),
-                    width : wgd.size_x,
-                    height : wgd.size_y,
-                    prefs : JSON.stringify(prefs).replace(/"/g, "'"),
-                    wclass : wclass,
-                    url : gadgetInfo && gadgetInfo.attributes.overview_url || url
+                    width: wgd.size_x,
+                    height: wgd.size_y,
+                    prefs: JSON.stringify(prefs).replace(/"/g, "'"),
+                    wclass: wclass,
+                    url: gadgetInfo && gadgetInfo.attributes.overview_url || url
                 };
 
             },
             //min_rows : block_params.max_height,
-            max_cols : 6,
-            max_size_x : 6
+            max_cols: 6,
+            max_size_x: 6
         }).data('gridster');
     }
 
     function isWidgetFound(w, defaultWidgets) {
         var _widget = {};
-        $.each(defaultWidgets, function(i, _w) {
+        $.each(defaultWidgets, function (i, _w) {
             if (_w.wid == w.wid) {
                 //_widget = {};
                 _widget.x = _w.x;
@@ -567,7 +538,7 @@ $(function() {
             }
         });
 
-        if ( typeof _widget.x != 'undefined' || typeof _widget.y != 'undefined') {
+        if (typeof _widget.x != 'undefined' || typeof _widget.y != 'undefined') {
             return true;
         }
 
@@ -597,12 +568,12 @@ $(function() {
 
     var id = 1;
 
-    function insertGadget(parentEl, url, pref,title) {
+    function insertGadget(parentEl, url, pref, title) {
         id++;
         var gadgetDiv = parentEl.find('.add-gadget-item');
         var idStr = 'gadgetArea-d' + id;
         gadgetDiv.html('<div id="' + idStr + '">');
-        UESContainer.renderGadget(idStr, url, pref || {}, function(gadgetInfo) {
+        UESContainer.renderGadget(idStr, url, pref || {}, function (gadgetInfo) {
             var visibleTitle = title || gadgetInfo.meta.modulePrefs.title;
             parentEl.find('h3').text(visibleTitle);
             parentEl.find('input').val(visibleTitle);
@@ -611,7 +582,7 @@ $(function() {
 
     function refreshAllGadgets() {
         var iframes = $('iframe').not('#__gadget_gadget-content-g1');
-        $.each(iframes, function(i, w) {
+        $.each(iframes, function (i, w) {
             //			refreshGadget(w);
         });
     }
@@ -620,12 +591,12 @@ $(function() {
         console.log(">>>Gadget refreshed");
         var parentLi = $(iframe).closest('li');
 
-        $(iframe).ready(function() {
+        $(iframe).ready(function () {
 
             $(iframe).height(parentLi.height() - 90);
         });
 
-        if ( typeof $(iframe).get(0) != 'undefined') {
+        if (typeof $(iframe).get(0) != 'undefined') {
             $(iframe).get(0).contentDocument.location.reload(true);
         }
     }
@@ -634,75 +605,90 @@ $(function() {
         var layoutFormat;
         switch (layoutType) {
             case 'rows':
-                layoutFormat = [{
-                    "x" : 1,
-                    "y" : 2,
-                    "width" : 6,
-                    "height" : 2
-                }, {
-                    "x" : 1,
-                    "y" : 4,
-                    "width" : 6,
-                    "height" : 2
-                }, {
-                    "x" : 1,
-                    "y" : 6,
-                    "width" : 6,
-                    "height" : 2
-                }];
+                layoutFormat = [
+                    {
+                        "x": 1,
+                        "y": 2,
+                        "width": 6,
+                        "height": 2
+                    },
+                    {
+                        "x": 1,
+                        "y": 4,
+                        "width": 6,
+                        "height": 2
+                    },
+                    {
+                        "x": 1,
+                        "y": 6,
+                        "width": 6,
+                        "height": 2
+                    }
+                ];
                 break;
             case 'columns':
-                layoutFormat = [{
-                    "x" : 1,
-                    "y" : 2,
-                    "width" : 2,
-                    "height" : 6
-                }, {
-                    "x" : 3,
-                    "y" : 2,
-                    "width" : 2,
-                    "height" : 6
-                }, {
-                    "x" : 5,
-                    "y" : 2,
-                    "width" : 2,
-                    "height" : 6
-                }];
+                layoutFormat = [
+                    {
+                        "x": 1,
+                        "y": 2,
+                        "width": 2,
+                        "height": 6
+                    },
+                    {
+                        "x": 3,
+                        "y": 2,
+                        "width": 2,
+                        "height": 6
+                    },
+                    {
+                        "x": 5,
+                        "y": 2,
+                        "width": 2,
+                        "height": 6
+                    }
+                ];
                 break;
             default:
             case 'grid':
 
-                layoutFormat = [{
-                    "x" : 1,
-                    "y" : 2,
-                    "width" : 2,
-                    "height" : 2
-                }, {
-                    "x" : 3,
-                    "y" : 2,
-                    "width" : 2,
-                    "height" : 2
-                }, {
-                    "x" : 5,
-                    "y" : 2,
-                    "width" : 2,
-                    "height" : 2
-                }, {
-                    "x" : 1,
-                    "y" : 4,
-                    "width" : 2,
-                    "height" : 2
-                }, {
-                    "x" : 3,
-                    "y" : 4,
-                    "width" : 2,
-                    "height" : 2
-                }, {
-                    "x" : 5,
-                    "y" : 4,
-                    "width" : 2,
-                    "height" : 2
-                }];
+                layoutFormat = [
+                    {
+                        "x": 1,
+                        "y": 2,
+                        "width": 2,
+                        "height": 2
+                    },
+                    {
+                        "x": 3,
+                        "y": 2,
+                        "width": 2,
+                        "height": 2
+                    },
+                    {
+                        "x": 5,
+                        "y": 2,
+                        "width": 2,
+                        "height": 2
+                    },
+                    {
+                        "x": 1,
+                        "y": 4,
+                        "width": 2,
+                        "height": 2
+                    },
+                    {
+                        "x": 3,
+                        "y": 4,
+                        "width": 2,
+                        "height": 2
+                    },
+                    {
+                        "x": 5,
+                        "y": 4,
+                        "width": 2,
+                        "height": 2
+                    }
+                ];
                 break;
         }
         return layoutFormat;
@@ -713,7 +699,7 @@ $(function() {
 
     $(window).bind('resize', resize);
 
-    $('#btn-add-dummy-gadget').click(function(e) {
+    $('#btn-add-dummy-gadget').click(function (e) {
         e.preventDefault();
         var $dummy = $('#dummy-size');
         var w = Number($dummy.attr('data-w'));
@@ -723,21 +709,21 @@ $(function() {
         //registerEventsToWidget(widget);
     });
 
-    $("#btn-exit-editor").click(function() {
-        $('.sub-navbar-designer').slideUp("fast", function() {
+    $("#btn-exit-editor").click(function () {
+        $('.sub-navbar-designer').slideUp("fast", function () {
             changeMode('view');
 
         });
     });
 
-    $("#btn-exit-view").click(function() {
-        $('.sub-navbar-designer-view').slideUp("fast", function() {
+    $("#btn-exit-view").click(function () {
+        $('.sub-navbar-designer-view').slideUp("fast", function () {
             changeMode('design');
 
         });
     });
 
-    $('.close-widget').live('click', function(e) {
+    $('.close-widget').live('click', function (e) {
         e.preventDefault();
         var widget = $(this).closest('.gs_w');
         layout.remove_widget($(widget));
@@ -759,9 +745,9 @@ $(function() {
             $('.layout_block').addClass('layout_block_view');
             $('.gadget-controls li:last-child').remove();
 
-            $('.grid_header > input').each(function(){
+            $('.grid_header > input').each(function () {
                 var $this = $(this);
-                $this.parent().append('<h3>'+$this.val()+'</h3>');
+                $this.parent().append('<h3>' + $this.val() + '</h3>');
                 $this.remove();
             });
         } else if (mode == 'design') {
@@ -772,15 +758,15 @@ $(function() {
             layout.enable();
             $('#grid-guides').fadeIn("slow");
             $('.close-widget').show();
-            $('.show-widget-pref').each(function(){
+            $('.show-widget-pref').each(function () {
                 var $this = $(this);
-                if($this.parents('.grid_header').siblings('.designer-placeholder').length == 0){
+                if ($this.parents('.grid_header').siblings('.designer-placeholder').length == 0) {
                     $this.show();
                 }
             });
-            $('h3').each(function(){
+            $('h3').each(function () {
                 var $this = $(this);
-                if($this.parents('.grid_header').siblings('.designer-placeholder').length == 0){
+                if ($this.parents('.grid_header').siblings('.designer-placeholder').length == 0) {
                     $this.parent().append('<input class="gadget-title-txt" value="' + $this.text() + '">');
                     $this.remove();
                 }
@@ -803,14 +789,14 @@ $(function() {
         var sizey = parseInt($('.static').height());
 
         $('.layouts_grid').animate({
-            'margin-top' : "-" + (sizey - 80) + "px"
+            'margin-top': "-" + (sizey - 80) + "px"
         });
 
     }
 
-    var formArrayToPref = function(a) {
+    var formArrayToPref = function (a) {
         var o = {};
-        $.each(a, function() {
+        $.each(a, function () {
             if (o[this.name] !== undefined) {
                 if (!o[this.name].push) {
                     o[this.name] = [o[this.name]];
@@ -823,7 +809,7 @@ $(function() {
         return o;
     };
 
-    $('.show-widget-pref').live('click', function(e) {
+    $('.show-widget-pref').live('click', function (e) {
         e.preventDefault();
         var $this = $(this);
         var widget = $this.closest('.gs_w');
@@ -832,19 +818,19 @@ $(function() {
         if (info) {
             var prefCont = widget.find('.gadget-pref-cont');
 
-            var hidePref = function() {
+            var hidePref = function () {
                 prefCont.empty();
                 prefCont.hide();
                 widget.find('.grid_header_controls').removeClass('grid_header_controls-show');
                 $this.attr('data-collapse', true);
             };
 
-            var savePref = function(e) {
+            var savePref = function (e) {
 
                 e.preventDefault();
                 var newPref = formArrayToPref(prefCont.find('form').serializeArray());
                 UESContainer.redrawGadget(id, {
-                    prefs : newPref
+                    prefs: newPref
                 });
                 hidePref();
 
@@ -869,7 +855,7 @@ $(function() {
             html += '<button class="btn btn-primary btn-save-pref">Save</button>';
             html += '</form>';
             prefCont.html(html);
-            prefCont.find('.btn-cancel-pref').on('click', function(e) {
+            prefCont.find('.btn-cancel-pref').on('click', function (e) {
                 e.preventDefault();
                 hidePref();
             });
@@ -880,12 +866,12 @@ $(function() {
         }
     });
 
-    $('.expand-widget').live('click', function(e) {
+    $('.expand-widget').live('click', function (e) {
         e.preventDefault();
         var widget = $(this).closest('.gs_w');
         widget.addClass('maximized-view');
         var widgetEl = widget.get(0);
-        $('.gs_w').each(function(i, el) {
+        $('.gs_w').each(function (i, el) {
             if (el != widgetEl) {
                 $(el).hide();
             }
@@ -893,7 +879,7 @@ $(function() {
         UESContainer.maximizeGadget(widget.find(".add-gadget-item > div").attr('id'));
     });
 
-    $('.shrink-widget').live('click', function(e) {
+    $('.shrink-widget').live('click', function (e) {
         e.preventDefault();
         var widget = $(this).closest('.gs_w');
         widget.removeClass('maximized-view');
@@ -901,7 +887,7 @@ $(function() {
         UESContainer.restoreGadget(widget.find(".add-gadget-item > div").attr('id'));
     });
 
-    $('#btn-save').click(function(e) {
+    $('#btn-save').click(function (e) {
         e.preventDefault();
 
         var icon = $(this).find('i');
@@ -914,24 +900,23 @@ $(function() {
         widgets.splice(0, 4);
 
         var _layout = {
-            title : title,
-            widgets : widgets
+            title: title,
+            widgets: widgets
         };
 
         $.post('apis/ues/layout/' + dashboard, {
-            layout : JSON.stringify(_layout)
-        }, function(result) {
+            layout: JSON.stringify(_layout)
+        },function (result) {
             if (result) {
-                setTimeout(function() {
+                setTimeout(function () {
                     icon.removeClass().addClass('icon-save');
                 }, 1500);
             }
-        }).error(function(error) {
+        }).error(function (error) {
                 console.log(error);
             });
 
     });
-
 
 
 });
