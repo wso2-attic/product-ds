@@ -29,40 +29,41 @@ response.addHeader("Content-Type", "application/json");
         var site = require('/modules/site.js');
 
         var result = {};
-
         try {
-            var path = "/gadgetDataApis/" +
-                       data.mappingData[0][data.dataColumns[0]] + "VS" + data.mappingData[0][data.dataColumns[1]] + "/" +
-                       data.mappingData[0][data.dataColumns[0]] + "VS" + data.mappingData[0][data.dataColumns[1]] + ".jag";
+            var uuid = require('uuid');
+            var resource_id = uuid.generate();
 
-            var parts = path.split('/');
+            var folderName = data.mappingData[0][data.dataColumns[0]] + "VS" + data.mappingData[0][data.dataColumns[1]];
+            var path = "/gadgetDataApis/" + folderName + "_" + resource_id + "/";
+
+            var pathToDataJag = path + folderName + ".jag";
+
+            var parts = pathToDataJag.split('/');
             var dirPath = '';
             for (var i = 0; i < parts.length - 1; i++) {
                 var part = parts[i];
                 dirPath = dirPath + '/' + part;
                 try {
-                    //TODO : get the gadget title at the mapping and create a folder name with that
                     site.createDir(data.appName, dirPath);
                 } catch (e) {
                     // ASSUME: Error is due to dir already existing, thus ignore
                 }
             }
 
-            var pathToOptions = "/gadgetDataApis/" + data.mappingData[0][data.dataColumns[0]] + "VS" + data.mappingData[0][data.dataColumns[1]] + "/" +
-                    'chart-options.json';
-            var file = site.loadFile('portal',data.chartOptions);
+            var pathToOptions = path + 'chart-options.json';
+            var file = site.loadFile('portal', data.chartOptions);
             file.open("r");
-            site.createFile(data.appName,pathToOptions,file.getStream());
+            site.createFile(data.appName, pathToOptions, file.getStream());
             file.close();
 
             var jagFileData = '\<\%\n' +
 
                     'function getDBData() {\n' +
-                    '   var dataColumns = JSON.parse(\''+stringify(data.dataColumns)+'\');\n' +
-                    '   var mapping = JSON.parse(\''+stringify(data.mappingData)+'\');\n' +
+                    '   var dataColumns = JSON.parse(\'' + stringify(data.dataColumns) + '\');\n' +
+                    '   var mapping = JSON.parse(\'' + stringify(data.mappingData) + '\');\n' +
                     '   var result = [];\n' +
                     '   var ticks = [];\n' +
-                    '   var tickTmp = [];\n'+
+                    '   var tickTmp = [];\n' +
 
                     '   var output = {};\n' +
 
@@ -77,11 +78,21 @@ response.addHeader("Content-Type", "application/json");
                     '           }\n' +
                     '           if(tickTmp[dbResult[i][mapping[j][dataColumns[0]]]]){\n' +
                     '               var keyVal = tickTmp[dbResult[i][mapping[j][dataColumns[0]]]];\n' +
-                    '               result[j].push([keyVal, dbResult[i][mapping[j][dataColumns[1]]]]);\n' +
+                    '               if(dataColumns[2]){ \n' +
+                    '                  result[j].push([keyVal, dbResult[i][mapping[j][dataColumns[1]]], dbResult[i][mapping[j][dataColumns[2]]] ]);\n' +
+                    '               } \n' +
+                    '               else{ \n' +
+                    '                   result[j].push([keyVal, dbResult[i][mapping[j][dataColumns[1]]]]);\n' +
+                    '               } \n' +
                     '           } else {\n' +
                     '               tickTmp[dbResult[i][mapping[j][dataColumns[0]]]] = k+1;\n' +
                     '               ticks.push([k+1, dbResult[i][mapping[j][dataColumns[0]]]]);\n' +
-                    '               result[j].push([k+1, dbResult[i][mapping[j][dataColumns[1]]]]);\n' +
+                    '               if(dataColumns[2]){ \n' +
+                    '                   result[j].push([k+1, dbResult[i][mapping[j][dataColumns[1]]], dbResult[i][mapping[j][dataColumns[2]]] ]);\n' +
+                    '               } \n' +
+                    '               else { \n' +
+                    '                   result[j].push([k+1, dbResult[i][mapping[j][dataColumns[1]]]]);\n' +
+                    '               } \n' +
                     '               k++;\n' +
                     '           }\n' +
 
@@ -96,19 +107,19 @@ response.addHeader("Content-Type", "application/json");
                     '       output["series"+j] = tmpObj;\n' +
                     '   }\n' +
 
-                    ' var chartOptions = require("chart-options.json")\n'+
+                    ' var chartOptions = require("chart-options.json")\n' +
                     ' chartOptions["xaxis"]["axisLabel"]= "' + data.dataLabels["X-Axis Label"] + '";\n' +
-                    ' chartOptions["yaxis"]["axisLabel"]= "' + data.dataLabels["Y-Axis Label"]+ '";\n' +
+                    ' chartOptions["yaxis"]["axisLabel"]= "' + data.dataLabels["Y-Axis Label"] + '";\n' +
                     ' chartOptions["xaxis"]["ticks"]= ticks;\n' +
-                    ' return {0: output, 1: chartOptions};\n'+
+                    ' return {0: output, 1: chartOptions};\n' +
                     '}\n' +
                     'print(getDBData());\n' +
                     '\%\>';
 
 
-            site.createFile(data.appName, path, jagFileData);
-            result.jagPath = "/"+ data.appName + path+"";
-            log.info("File created successfully at "+result.jagPath);
+            site.createFile(data.appName, pathToDataJag, jagFileData);
+            result.jagPath = "/" + data.appName + pathToDataJag + "";
+            log.info("File created successfully at " + result.jagPath);
 
             print(result);
 
