@@ -1,0 +1,50 @@
+{
+    "legend": {
+        "show": true
+    },
+    "series": {
+        "bubbles": {
+            "active": true,
+            "show": true,
+            "linewidth": 2
+        },
+        "editMode": "xy"
+    },
+    "colors" :["#FA0B43","#41E328","#F5A00C","#061DA2"],
+    "grid": {
+        "hoverable": true,
+        "clickable": true,
+        "backgroundColor": "#333333"
+    },
+    "yaxis": {
+
+        "axisLabel": "Y Axis Label",
+        "axisLabelUseCanvas": true,
+        "axisLabelFontSizePixels": 12,
+        "axisLabelFontFamily": "Verdana, Arial, Helvetica, Tahoma, sans-serif",
+        "axisLabelPadding": 5,
+        "show": true,
+        "tickDecimals": 0,
+        "zoomRange": false,
+        "panRange": false
+    },
+    "xaxis": {
+
+        "axisLabel": "X Axis Label",
+        "axisLabelUseCanvas": true,
+        "axisLabelFontSizePixels": 12,
+        "axisLabelFontFamily": "Verdana, Arial, Helvetica, Tahoma, sans-serif",
+        "axisLabelPadding": 5,
+        "show": true,
+        "tickLength": 0,
+        "ticks": null,
+        "panRange": null
+
+    },
+    "zoom": {
+        "interactive": true
+    },
+    "selection": {
+        "mode": null
+    }
+}
