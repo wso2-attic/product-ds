@@ -52,11 +52,10 @@ response.sendRedirect('/{{appName}}/login');
 
         <div class="container-fluid">
 
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span>
+                <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
 
             <a class="brand" href="#"></a>
-
-
 
 
             <div class="nav-collapse collapse">
@@ -64,14 +63,16 @@ response.sendRedirect('/{{appName}}/login');
 
                     <li class="nav-separator">
 
-                        <a href="/store?user=<%=session.get('LOGGED_IN_USER')%>" target="_blank"><i class="icon-shopping-cart"></i> Store</a>
+                        <a href="/store?user=<%=session.get('LOGGED_IN_USER')%>" target="_blank"><i
+                                class="icon-shopping-cart"></i> Store</a>
 
                     </li>
 
 
                     <li>
 
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> <%= session.get("LOGGED_IN_USER") %> <b class="caret"></b></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> <%=
+                            session.get("LOGGED_IN_USER") %> <b class="caret"></b></a>
                         <ul class="dropdown-menu dropdown-account" role="menu" aria-labelledby="dLabel">
                             <li>
 
@@ -95,7 +96,8 @@ response.sendRedirect('/{{appName}}/login');
 
         <div class="container-fluid">
 
-            <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+            <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar"> <span class="icon-bar"></span>
+                <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
 
             <div class="row-fluid">
 
@@ -107,7 +109,8 @@ response.sendRedirect('/{{appName}}/login');
                         <ul class="nav pull-right">
 
                             <li class="dropdown">
-                                <a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-plus"></i> Add Block <b class="caret"></b></a>
+                                <a href="#" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-plus"></i> Add
+                                    Block <b class="caret"></b></a>
                                 <ul class="dropdown-menu dropdown-share">
                                     <form>
                                         <li>
@@ -118,7 +121,7 @@ response.sendRedirect('/{{appName}}/login');
 
                                             <div id="dummy-gadget-wrapper">
                                                 <div id="dummy-gadget-container" class="ui-widget-content">
-                                                    <div id="dummy-gadget"  class="ui-widget-content">
+                                                    <div id="dummy-gadget" class="ui-widget-content">
                                                         <div id="dummy-size">
                                                             1x1
                                                         </div>
@@ -157,7 +160,8 @@ response.sendRedirect('/{{appName}}/login');
 
         <div class="container-fluid">
 
-            <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+            <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar"> <span class="icon-bar"></span>
+                <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
 
             <div class="row-fluid">
 
@@ -169,7 +173,8 @@ response.sendRedirect('/{{appName}}/login');
                         <ul class="nav pull-right">
 
                             <li class="li-edit-dashboard">
-                                <a href="#" id="btn-exit-view" data-toggle="dropdown" class="dropdown-toggle float-left-link"><i class="icon-magic"></i> Personalize</a>
+                                <a href="#" id="btn-exit-view" data-toggle="dropdown"
+                                   class="dropdown-toggle float-left-link"><i class="icon-magic"></i> Personalize</a>
 
                             </li>
                         </ul>
@@ -190,9 +195,10 @@ response.sendRedirect('/{{appName}}/login');
     <div class="row-fluid">
 
         <div class="span12">
-            <input type="hidden" value="design" id="inp-view-mode" />
-            <input type="hidden" value="{{appName}}" id="inp-dashboard" />
-            <iframe style="display: none;height: 0;width: 0;" src="{{httpServerUrl}}/store/hidden-logger.jag?user=<%=session.get('LOGGED_IN_USER')%>"></iframe>
+            <input type="hidden" value="design" id="inp-view-mode"/>
+            <input type="hidden" value="{{appName}}" id="inp-dashboard"/>
+            <iframe style="display: none;height: 0;width: 0;"
+                    src="{{httpServerUrl}}/store/hidden-logger.jag?user=<%=session.get('LOGGED_IN_USER')%>"></iframe>
 
             <div id="gridster-cont" class="container-fluid">
                 <div id="dashboardName"><i class="icon-th-large"></i> <span></span></div>
@@ -202,7 +208,8 @@ response.sendRedirect('/{{appName}}/login');
                         <div id="grid-guides"></div>
 
                         {{#each widgets}}
-                            <li class="layout_block {{wclass}}" data-sizey="{{height}}" data-sizex="{{width}}" data-col="{{x}}" data-row="{{y}}"
+                            <li class="layout_block {{wclass}}" data-sizey="{{height}}" data-sizex="{{width}}"
+                                data-col="{{x}}" data-row="{{y}}"
                                 data-url="{{url}}" data-wid="{{wid}}" data-prefs="{{prefs}}" data-title="{{title}}">
                                 <div class="grid_header">
                                     <h3></h3>
@@ -233,7 +240,6 @@ response.sendRedirect('/{{appName}}/login');
                         {{/each}}
 
 
-
                     </ul>
                 </div>
 
@@ -254,13 +260,14 @@ response.sendRedirect('/{{appName}}/login');
             <!--------------------------------------- start gadget-gen-ui---------------------------------------------->
 
             <!-- Modal -->
-            <div id="modal-flow-start" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel" aria-hidden="true">
+            <div id="modal-flow-start" class="modal hide fade" tabindex="-1" role="dialog"
+                 aria-labelledby="publishModalLabel" aria-hidden="true">
                 <div><h2>create new gadget</h2></div>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     <i class="icon-remove"></i>
                 </button>
-                <div class= "gadget-gen-ui">
-                    <div>Select data source</div>
+                <div class="gadget-gen-ui" style="padding-left: 10px">
+                    <div >Select data source</div>
                     <div id="data_source_drop_dwn-div">
 
                     </div>
@@ -268,17 +275,18 @@ response.sendRedirect('/{{appName}}/login');
                 </div>
 
                 <div>
-                    <button id="add-gadget-btn-next" style="display: inline-block;color:#07052E;position: relative;right: -20px">Next</button>
+                    <button id="add-gadget-btn-next"
+                            style="display: inline-block;color:#07052E;position: relative;right: -20px">Next
+                    </button>
 
                 </div>
                 <!--<div id="store-gadget-div"></div>-->
             </div>
 
 
-
-
             <!-- Modal -->
-            <div id="modal-create-new-connection" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel" aria-hidden="true">
+            <div id="modal-create-new-connection" class="modal hide fade" tabindex="-1" role="dialog"
+                 aria-labelledby="publishModalLabel" aria-hidden="true">
                 <div><h2>create new connection</h2></div>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     <i class="icon-remove"></i>
@@ -287,15 +295,20 @@ response.sendRedirect('/{{appName}}/login');
 
 
                 <div>
-        <button id="create-connection-btn-back" style="display: inline-block;color:#07052E;position: relative;right: -20px">Back</button>
-                    <button id="create-connection-btn-next" style="display: inline-block;color:#07052E;position: relative;right: -20px">Next</button>
+                    <button id="create-connection-btn-back"
+                            style="display: inline-block;color:#07052E;position: relative;right: -20px">Back
+                    </button>
+                    <button id="create-connection-btn-next"
+                            style="display: inline-block;color:#07052E;position: relative;right: -20px">Next
+                    </button>
 
                 </div>
                 <!--<div id="store-gadget-div"></div>-->
             </div>
 
             <!-- Modal -->
-            <div id="modal-sql-query-editor" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel" aria-hidden="true">
+            <div id="modal-sql-query-editor" class="modal hide fade" tabindex="-1" role="dialog"
+                 aria-labelledby="publishModalLabel" aria-hidden="true">
                 <div><h2>SQL Editor</h2></div>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     <i class="icon-remove"></i>
@@ -307,30 +320,37 @@ response.sendRedirect('/{{appName}}/login');
                 <div id="modal-sql-query-editor-data"></div>
 
 
-
                 <div>
-                    <button id="sql-connection-btn-back" style="display: inline-block;color:#07052E;position: relative;right: -20px">Back</button>
-                    <button id="sql-connection-btn-next" style="display: inline-block;color:#07052E;position: relative;right: -20px">Next</button>
+                    <button id="sql-connection-btn-back"
+                            style="display: inline-block;color:#07052E;position: relative;right: -20px">Back
+                    </button>
+                    <button id="sql-connection-btn-next"
+                            style="display: inline-block;color:#07052E;position: relative;right: -20px">Next
+                    </button>
 
                 </div>
                 <!--<div id="store-gadget-div"></div>-->
             </div>
 
 
-            <div id="modal-add-gadget" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel" aria-hidden="true">
+            <div id="modal-add-gadget" class="modal hide fade" tabindex="-1" role="dialog"
+                 aria-labelledby="publishModalLabel" aria-hidden="true">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     <i class="icon-remove"></i>
                 </button>
                 <div id="store-gadget-div"></div>
                 <div>
-                    <button id="add-gadget-window-btn-back" style="display: inline-block;color:#07052E;position: relative;right: -20px">Back</button>
+                    <button id="add-gadget-window-btn-back"
+                            style="display: inline-block;color:#07052E;position: relative;right: -20px">Back
+                    </button>
 
                 </div>
             </div>
 
 
             <!-- Modal -->
-            <div id="modal-data-mapper" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel" aria-hidden="true">
+            <div id="modal-data-mapper" class="modal hide fade" tabindex="-1" role="dialog"
+                 aria-labelledby="publishModalLabel" aria-hidden="true">
                 <div><h2>Data mapping</h2></div>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     <i class="icon-remove"></i>
@@ -339,8 +359,12 @@ response.sendRedirect('/{{appName}}/login');
                 <div id="modal-data-mapping-extension-space"></div>
 
                 <div>
-                    <button id="flow-finish-btn-back" style="display: inline-block;color:#07052E;position: relative;right: -20px">Back</button>
-                    <button id="flow-finish-btn-next" style="display: inline-block;color:#07052E;position: relative;right: -20px">Next</button>
+                    <button id="flow-finish-btn-back"
+                            style="display: inline-block;color:#07052E;position: relative;right: -20px">Back
+                    </button>
+                    <button id="flow-finish-btn-next"
+                            style="display: inline-block;color:#07052E;position: relative;right: -20px">Next
+                    </button>
 
                 </div>
                 <!--<div id="store-gadget-div"></div>-->
@@ -402,7 +426,8 @@ response.sendRedirect('/{{appName}}/login');
 </script>
 
 <script id="widget-template-blank2" type="text/x-handlebars-template">
-    <li class="layout_block" data-url="[[url]]" data-row="[[y]]" data-col="[[x]]" data-sizex="[[width]]" data-sizey="[[height]]" data-wid="[[wid]]" data-prefs="[[prefs]]">
+    <li class="layout_block" data-url="[[url]]" data-row="[[y]]" data-col="[[x]]" data-sizex="[[width]]"
+        data-sizey="[[height]]" data-wid="[[wid]]" data-prefs="[[prefs]]">
         <div class="grid_header">
             <input class="gadget-title-txt">
             <span class="grid_header_controls">
@@ -419,6 +444,76 @@ response.sendRedirect('/{{appName}}/login');
 
         </div>
     </li>
+</script>
+
+<script id="select-data-source" type="text/x-handlebars-template">
+    <select id="data_source_drop_dwn">
+        [[#each dataSource]]
+        <option>[[this]]</option>
+        [[/each]]
+    </select>
+</script>
+
+<script id="create-new-connection" type="text/x-handlebars-template">
+    [[#each createConnection]]
+    <div>
+        <div style="padding-left: 10px; display: inline">[[this]]</div>
+        <div style="padding-left: 10px; display: inline"><input type="text"/></div>
+    </div>
+    [[/each]]
+</script>
+
+<script id="sql-query-editor" type="text/x-handlebars-template">
+    [[#each sqlEditor]]
+    <div>
+        <div style="padding-left: 10px; display:inline-block;">[[this]]</div>
+        <div style="padding-left: 10px; display:inline-block;"><input type="text"/></div>
+    </div>
+    [[/each]]
+</script>
+
+<script id="data-mapping" type="text/x-handlebars-template">
+    <div>
+        <div>
+            <div style="padding-left: 10px; padding-top: 30px; display:inline-block;">Series Label</div>
+            <div style="padding-left: 10px; padding-top: 30px;display:inline-block;"><input type="text"/></div>
+        </div>
+        [[#each dataColumns]]
+        <div>
+            <div style="padding-left: 10px; display:inline-block;">[[this]]</div>
+            <div style="padding-left: 10px; display:inline-block;">
+                <select>
+                    [[#each ../columnHeaders]]
+                    <option>[[this]]</option>
+                    [[/each]]
+                </select>
+            </div>
+        </div>
+        [[/each]]
+    </div>
+</script>
+
+<script id="data-mapping-extension" type="text/x-handlebars-template">
+    <div>
+        <div id="data-labels" style="padding-top: 20px">
+            [[#each dataLabels]]
+            <div>
+                <div style=" padding-left: 10px; display:inline-block;">[[this]]</div>
+                <div style="padding-left: 10px; display:inline-block;"><input type="text"/></div>
+            </div>
+            [[/each]]
+        </div>
+        <div>
+            <div style="padding-left: 10px; display:inline-block;">Update Interval</div>
+            <div style="padding-left: 10px; display:inline-block;"><input type="text" id="refresh-sequence-input"/>
+            </div>
+        </div>
+        <div style="padding-bottom: 10px;">
+            <button id="mapping-add-series-btn"
+                    style="display: inline-block;color:#07052E;position: relative;right:-20px">+
+            </button>
+        </div>
+    </div>
 </script>
 
 <!-- /container -->

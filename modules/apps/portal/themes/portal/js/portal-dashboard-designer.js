@@ -164,18 +164,14 @@ $(function () {
     var selectDatasourcesNextClick = function () {
         var selectedVal = $('#data_source_drop_dwn').find(":selected").text();
         flow_data.dataSource = selectedVal;
-        var nextWindowData = metadata.dataSourcesDescriptions[flow_data.dataSource];
 
-        var result = '';
-        $.each(nextWindowData, function (i, field) {
-            result += '<div>';
-            result += '<div style="padding-left: 10px; display: inline">' + field + '</div>'
-            result += '<div style="padding-left: 10px; display: inline"><input type="text"/></div>'
-            result += '</div>';
-        });
+        var nextWindowData = {
+            createConnection: metadata.dataSourcesDescriptions[flow_data.dataSource]
+        };
 
-
-        $('#modal-create-new-connection-data').html(result);
+        var source = $("#create-new-connection").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+        var template = Handlebars.compile(source);
+        $('#modal-create-new-connection-data').html(template(nextWindowData));
 
         $('#modal-flow-start').modal('hide');
         $('#modal-create-new-connection').modal('show');
@@ -190,17 +186,16 @@ $(function () {
         });
 
         flow_data.conSettings = conSettings;
-        var nextWindowData = metadata.datasourceWindow_3[flow_data.dataSource];
-        if (nextWindowData) {
-            var result = '';
-            $.each(nextWindowData, function (i, field) {
-                result += '<div>';
-                result += '<div style="padding-left: 10px; display:inline-block;">' + field + '</div>'
-                result += '<div style="padding-left: 10px; display:inline-block;"><input type="text" id=' + field + ' /></div>'
-                result += '</div>';
-            });
 
-            $('#modal-sql-query-editor-data').html(result);
+        var window3Data = metadata.datasourceWindow_3[flow_data.dataSource];
+        if (window3Data) {
+            var nextWindowData = {
+                sqlEditor: window3Data
+            };
+
+            var source = $("#sql-query-editor").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+            var template = Handlebars.compile(source);
+            $('#modal-sql-query-editor-data').html(template(nextWindowData));
 
             $('#modal-create-new-connection').modal('hide');
             $('#modal-sql-query-editor').modal('show');
@@ -275,64 +270,44 @@ $(function () {
     }
 
     var generateDataMapping = function (tableData) {
-        var divCont = populateMappingRow(tableData.dataColumns, true);
-        flow_data.dataColumns = tableData.dataColumns;
-
+        var divCont = populateMappingRow(tableData.dataColumns, flow_data.column_headers, true);
         $('#modal-data-mapping').html(divCont);
 
-        var addExtention = '<div>';
+        flow_data.dataColumns = tableData.dataColumns;
 
-        addExtention += '<div id="data-labels" style="padding-top: 20px">';
-        $.each(tableData.dataLabels, function (i, field) {
-            addExtention += '<div >';
-            addExtention += '<div style=" padding-left: 10px; display:inline-block;">' + field + '</div>';
-            addExtention += '<div style="padding-left: 10px; display:inline-block;"><input type="text"/></div>';
-            addExtention += '</div>';
-        });
-        addExtention += '</div>';
+        var nextWindowData = {
+            dataLabels: tableData.dataLabels
+        };
 
-        addExtention += '<div><div style="padding-left: 10px; display:inline-block;">Update Interval</div>' +
-            '<div style="padding-left: 10px; display:inline-block;"><input type="text" id="refresh-sequence-input"/></div></div>';
-        addExtention += '<div style="padding-bottom: 10px;"><button id="mapping-add-series-btn" style="display: inline-block;color:#07052E;position: relative;right:-20px">+</button></div>';
+        var source = $("#data-mapping-extension").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+        var template = Handlebars.compile(source);
+        $('#modal-data-mapping-extension-space').html(template(nextWindowData));
 
-        addExtention += '</div>';
-
-        $('#modal-data-mapping-extension-space').html(addExtention);   //bind the first series to the element
         $('#mapping-add-series-btn').bind('click', addSeriesBtnClick);  //To add more series
         $STORE_MODAL.modal('hide');
         $('#modal-data-mapper').modal('show');
     }
 
-    var populateMappingRow = function (dataColumns, isFirst) {
-        var result = '<div>';
+    var populateMappingRow = function (dataColumns, columnHeaders, isFirst) {
+        var columns = [];
+        if (!isFirst) {
+            var cloneDataColumns = dataColumns.slice(1);
+            columns = cloneDataColumns;
+        } else {
+            columns = dataColumns;
+        }
+        var nextWindowData = {
+            dataColumns: columns,
+            columnHeaders: columnHeaders
+        };
+        var source = $("#data-mapping").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+        var template = Handlebars.compile(source);
+        return template(nextWindowData);
 
-        result += '<div>';
-        result += '<div style="padding-left: 10px; padding-top: 30px; display:inline-block;">Series Label</div>';
-        result += '<div style="padding-left: 10px; padding-top: 30px;display:inline-block;"><input type="text"/></div>'
-        result += '</div>';
-
-        $.each(dataColumns, function (i, field) {
-            if (i != 0 || isFirst) {
-                result += '<div>';
-                result += '<div style="padding-left: 10px; display:inline-block;">' + field + '</div>';
-                result += '<div style="padding-left: 10px; display:inline-block;"><select>';
-
-
-                flow_data.column_headers.forEach(function (sp) {
-                    result += '<option value="' + sp + '">' + sp + '</option>';
-                });
-                result += '</select></div>';
-                result += '</div>';
-            }
-
-        });
-        result += '</div>';
-        return result;
 
     }
-
     var addSeriesBtnClick = function () {
-        var divCont = populateMappingRow(flow_data.dataColumns, false);
+        var divCont = populateMappingRow(flow_data.dataColumns, flow_data.column_headers, false);
         $('#modal-data-mapping').append(divCont);
     }
 
