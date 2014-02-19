@@ -104,7 +104,9 @@
         "axisLabelFontFamily": "Arial",
         "axisLabelPadding": 5,
 
-        "panRange": null
+        "panRange": null,
+
+        "rotateTicks": 0
     },
     "pan": {
         "interactive": true
