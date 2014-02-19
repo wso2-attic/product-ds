@@ -36,8 +36,8 @@
 	<script language="javascript" type="text/javascript" src="js/flot/jumflot/jquery.flot.mouse.js"></script>
 	<script language="javascript" type="text/javascript" src="js/flot/jumflot/jquery.flot.bubbles.js"></script>
 	<script language="javascript" type="text/javascript" src="js/flot/jquery.flot.navigate.js"></script>
-	<script language="javascript" type="text/javascript" src="js/flot/jquery.flot.axislabels.js"></script>
 	<script language="javascript" type="text/javascript" src="js/flot/jquery.flot.resize.js"></script>
+	<script language="javascript" type="text/javascript" src="js/flot/jquery.flot.axislabels.js"></script>
 	<script language="javascript" type="text/javascript" src="js/flot-chart-core.js"></script>
 
 </head>
