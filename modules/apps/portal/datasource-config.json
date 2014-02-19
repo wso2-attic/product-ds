@@ -5,13 +5,13 @@
 
     "dataSourcesDescriptions": {
         "RDBMS": [
-            "ConnectionURL",
+            "Connection URL",
             "Username",
             "Password"
         ],
 
         "REST API": [
-            "ConnectionURL"
+            "Connection URL"
         ],
 
         "Cassandra": []
@@ -20,7 +20,7 @@
 
     "datasourceWindow_3" : {
         "RDBMS": [
-            "SQLStatement"
+            "SQL Statement"
         ]
     }
 }

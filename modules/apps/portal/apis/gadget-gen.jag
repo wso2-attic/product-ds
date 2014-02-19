@@ -10,8 +10,8 @@ response.addHeader("Content-Type", "application/json");
     if (action == "queryDb") {
 
         //TODO : refactor to avoid hard coding
-        var db = new Database(data.conSettings.ConnectionURL, data.conSettings.Username, data.conSettings.Password);
-        var result = db.query(data.queryData.SQLStatement + " limit 1");
+        var db = new Database(data.conSettings['Connection URL'], data.conSettings.Username, data.conSettings.Password);
+        var result = db.query(data.queryData['SQL Statement'] + " limit 1");
         db.close();
         var names = [];
 
@@ -67,8 +67,8 @@ response.addHeader("Content-Type", "application/json");
 
                     '   var output = {};\n' +
 
-                    '   var db = new Database("' + data.conSettings.ConnectionURL + '", "' + data.conSettings.Username + '", "' + data.conSettings.Password + '");\n' +
-                    '   var dbResult = db.query("' + data.queryData.SQLStatement + '");\n' +
+                    '   var db = new Database("' + data.conSettings["Connection URL"] + '", "' + data.conSettings.Username + '", "' + data.conSettings.Password + '");\n' +
+                    '   var dbResult = db.query("' + data.queryData["SQL Statement"] + '");\n' +
                     '   db.close();\n' +
 
                     '   for (var i = 0,k = 0; i < dbResult.length; i++) {\n' +
