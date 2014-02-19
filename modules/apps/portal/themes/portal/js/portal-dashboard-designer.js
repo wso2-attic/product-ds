@@ -215,8 +215,8 @@ $(function () {
     //Next click of 3rd window (SQL query window)
     var sqlQueryBtnNextClick = function () {
         var queryData = {};
-        $('#modal-sql-query-editor-data').children().each(function () {
-            queryData[$(this).children()[0].innerHTML] = $(this).find('input').val();
+        $('#modal-sql-query-editor-data').find('.control-group').each(function () {
+            queryData[$(this).find('label').html()] = $(this).find('input').val();
         });
 
         flow_data.queryData = queryData;
