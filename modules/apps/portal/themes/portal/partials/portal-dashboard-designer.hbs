@@ -51,16 +51,7 @@
 </script>
 
 <script id="sql-query-editor" type="text/x-handlebars-template">
-	<form class="form-horizontal">		
-    [[#each createConnection]]
- 	<div class="control-group">
-		<label class="control-label">[[this]]</label>
-		<div class="controls">
-			<input type="text"/>
-		</div>
-	</div>
-    [[/each]]
-
+	<form class="form-horizontal">
     [[#each sqlEditor]]
     <div class="control-group">
 		<label class="control-label">[[this]]</label>
