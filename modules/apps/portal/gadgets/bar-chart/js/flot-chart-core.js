@@ -117,6 +117,7 @@ function onDataReceived(series) {
     options = series[1];
     var chartOptions = options;
     var _chartData = [];
+    console.log("~~~~~~~~~~~~~ inside ondata recieved ~~~~~~~~~~~~~~~~~~~~~~~~~~"+JSON.stringify(chartData))
     addSeriesCheckboxes(chartData);
     $.each(chartData, function (key, val) {
         _chartData.push(chartData[key]);
@@ -137,6 +138,7 @@ function showTooltip(x, y, contents) {
 }
 function addSeriesCheckboxes(data) {
     // insert checkboxes
+    console.log("~~~~~~~~~~~inside add series ~~~~~~~~~~~~~ "+JSON.stringify(data));
     var seriesContainer = $("#optionsRight .series-toggle");
     seriesContainer.html("");
     var objCount = 0;
@@ -146,7 +148,9 @@ function addSeriesCheckboxes(data) {
         }
     }
     if (objCount > 1) {
+        console.log("~~~~object count >1 ~~~~~~~~~~~~~")
         $.each(data, function (key, val) {
+            console.log("~~~~~~key~~~~~~ "+ key + "~~~~~~~~~label~~~~~~~"+val.label)
             seriesContainer.append("<li><input type='checkbox' name='" + key +
                 "' checked='checked' id='id" + key + "'></input>" +
                 "<label for='id" + key + "' class='seriesLabel'>"
