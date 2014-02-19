@@ -181,8 +181,8 @@ $(function () {
     //Next click of 2nd window (Create Connection window)
     var createConnBtnNextClick = function () {
         var conSettings = {};
-        $('#modal-create-new-connection-data').children().each(function () {
-            conSettings[$(this).children()[0].innerHTML] = $(this).find('input').val();
+        $('#modal-create-new-connection-data').find('.control-group').each(function () {
+            conSettings[$(this).find('label').html()] = $(this).find('input').val();
         });
 
         flow_data.conSettings = conSettings;
