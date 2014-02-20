@@ -117,6 +117,7 @@ function onDataReceived(series) {
     options = series[1];
     var chartOptions = options;
     var _chartData = [];
+    console.log("~~~~~~~~~~~~~ inside ondata recieved ~~~~~~~~~~~~~~~~~~~~~~~~~~"+JSON.stringify(chartData))
     addSeriesCheckboxes(chartData);
     $.each(chartData, function (key, val) {
         _chartData.push(chartData[key]);

@@ -37,21 +37,30 @@
 </script>
 
 <script id="create-new-connection" type="text/x-handlebars-template">
+	
+	<form class="form-horizontal">		
     [[#each createConnection]]
-    <div>
-        <div style="padding-left: 10px; display: inline">[[this]]</div>
-        <div style="padding-left: 10px; display: inline"><input type="text"/></div>
-    </div>
+ 	<div class="control-group">
+		<label class="control-label">[[this]]</label>
+		<div class="controls">
+			<input type="text"/>
+		</div>
+	</div>
     [[/each]]
+    </form>
 </script>
 
 <script id="sql-query-editor" type="text/x-handlebars-template">
+	<form class="form-horizontal">
     [[#each sqlEditor]]
-    <div>
-        <div style="padding-left: 10px; display:inline-block;">[[this]]</div>
-        <div style="padding-left: 10px; display:inline-block;"><input type="text"/></div>
-    </div>
+    <div class="control-group">
+		<label class="control-label">[[this]]</label>
+		<div class="controls">
+			<input type="text"/>
+		</div>
+	</div>
     [[/each]]
+     </form>
 </script>
 
 <script id="data-mapping" type="text/x-handlebars-template">
@@ -193,80 +202,83 @@
 
 <!-- Modal -->
 <div id="modal-flow-start" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel"
-     aria-hidden="true">
-    <div style="padding-left: 10px;"><h2>create new gadget</h2></div>
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-        <i class="icon-remove"></i>
-    </button>
-    <div class="gadget-gen-ui">
-        <div style="display: inline; padding-left: 10px;">Select data source</div>
-        <div style="display: inline">
-            <select id="data_source_drop_dwn">
+aria-hidden="true">
 
-                {{#each datasource_config.dataSources}}
-                    <option value="{{this}}">{{this}}</option>
-                {{/each}}
-            </select>
-        </div>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+			<i class="icon-remove"></i>
+		</button>
+		<h3>Create new gadget</h3>
+	</div>
+	<div class="modal-body">
+		<div class="gadget-gen-ui">
 
-    </div>
+			<form class="form-horizontal">
+				<div class="control-group">
+					<label class="control-label" for="inputEmail">Select data source</label>
+					<div class="controls">
+						<select id="data_source_drop_dwn">
 
-    <div style="padding-left: 10px;padding-bottom: 10px">
-        <button id="add-gadget-btn-next" style="display: inline-block;color:#07052E;position: relative;right: -20px">
-            Next
-        </button>
+							{{#each datasource_config.dataSources}}
+							<option value="{{this}}">{{this}}</option>
+							{{/each}}
+						</select>
+					</div>
+				</div>
+			</form>
 
-    </div>
-    <!--<div id="store-gadget-div"></div>-->
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button id="add-gadget-btn-next" class="btn btn-primary">
+			Next
+		</button>
+	</div>
 </div>
 
 
 <!-- Modal -->
 <div id="modal-create-new-connection" class="modal hide fade" tabindex="-1" role="dialog"
-     aria-labelledby="publishModalLabel" aria-hidden="true">
-    <div style="padding-left: 10px;"><h2>create new connection</h2></div>
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-        <i class="icon-remove"></i>
-    </button>
-    <div id="modal-create-new-connection-data"></div>
+aria-labelledby="publishModalLabel" aria-hidden="true">
 
-
-    <div style="padding-left: 10px;padding-bottom: 10px">
-        <button id="create-connection-btn-back"
-                style="display: inline-block;color:#07052E;position: relative;right: -20px">Back
-        </button>
-        <button id="create-connection-btn-next"
-                style="display: inline-block;color:#07052E;position: relative;right: -20px">Next
-        </button>
-
-    </div>
-    <!--<div id="store-gadget-div"></div>-->
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+			<i class="icon-remove"></i>
+		</button>
+		<h3>Create new connection</h3>
+	</div>
+	<div class="modal-body">
+		<div id="modal-create-new-connection-data"></div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" id="create-connection-btn-back">
+			Back
+		</button>
+		<button class="btn btn-primary" id="create-connection-btn-next">
+			Next
+		</button>
+	</div>
 </div>
 
 <!-- Modal -->
 <div id="modal-sql-query-editor" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel"
      aria-hidden="true">
-    <div style="padding-left: 10px;"><h2>SQL Editor</h2></div>
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-        <i class="icon-remove"></i>
-    </button>
-    <!--<div>
-        <div>sql statement</div>
-        <div><input type="text" id="sqlStatement" /></div>
-    </div-->
-    <div id="modal-sql-query-editor-data"></div>
-
-
-    <div style="padding-left: 10px;padding-bottom: 10px">
-        <button id="sql-connection-btn-back"
-                style="display: inline-block;color:#07052E;position: relative;right: -20px">Back
+     
+     <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+			<i class="icon-remove"></i>
+		</button>
+		<h3>SQL Editor</h3>
+	</div>
+	<div class="modal-body">
+		  <div id="modal-sql-query-editor-data"></div>
+	</div>
+	<div class="modal-footer">
+		  <button id="sql-connection-btn-back" class="btn btn-primary">Back
         </button>
-        <button id="sql-connection-btn-next"
-                style="display: inline-block;color:#07052E;position: relative;right: -20px">Next
+        <button id="sql-connection-btn-next" class="btn btn-primary">Next
         </button>
-
-    </div>
-    <!--<div id="store-gadget-div"></div>-->
+	</div>
 </div>
 
 
@@ -288,24 +300,27 @@
 
 <!-- Modal -->
 <div id="modal-data-mapper" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel"
-     aria-hidden="true">
-    <div style="padding-left: 10px;"><h2>Data mapping</h2></div>
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-        <i class="icon-remove"></i>
-    </button>
-    <div id="modal-data-mapping"></div>
-    <div id="modal-data-mapping-extension-space"></div>
+aria-hidden="true">
 
-    <div style="padding-left: 10px;padding-bottom: 10px">
-        <button id="flow-finish-btn-back" style="display: inline-block;color:#07052E;position: relative;right: -20px">
-            Back
-        </button>
-        <button id="flow-finish-btn-next" style="display: inline-block;color:#07052E;position: relative;right: -20px">
-            Next
-        </button>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+			<i class="icon-remove"></i>
+		</button>
+		<h3>Data mapping</h3>
 
-    </div>
-    <!--<div id="store-gadget-div"></div>-->
+	</div>
+	<div class="modal-body">
+		<div id="modal-data-mapping"></div>
+		<div id="modal-data-mapping-extension-space"></div>
+	</div>
+	<div class="modal-footer">
+		<button id="flow-finish-btn-back" class="btn btn-primary">
+			Back
+		</button>
+		<button id="flow-finish-btn-next" class="btn btn-primary">
+			Next
+		</button>
+	</div>
 </div>
 
 <!--------------------------------end of the gadget-gen-ui--------------------------------------------->
@@ -313,29 +328,27 @@
 <!-- Modal -->
 <div id="modal-new-dir" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
 
-    <div class="modal-body">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-            <i class="icon-remove"></i>
-        </button>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+			<i class="icon-remove"></i>
+		</button>
+	</div>
+	<div class="modal-body">
+		<form class="form-horizontal">
+			<div class="control-group">
+				<label class="control-label" for="inp-title">{{t "Enter new directory name"}}</label>
 
-        <div>
-            <form class="form-horizontal">
-                <div class="control-group">
-                    <label class="control-label" for="inp-title">{{t "Enter new directory name"}}</label>
-
-                    <div class="controls">
-                        <input type="text" id="inp-title" class="input-xlarge">
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="modal-footer">
-
-        <button id="btn-new-site" class="btn btn-primary">
-            {{t "Create directory"}}
-        </button>
-    </div>
+				<div class="controls">
+					<input type="text" id="inp-title" class="input-xlarge">
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button id="btn-new-site" class="btn btn-primary">
+			{{t "Create directory"}}
+		</button>
+	</div>
 </div>
 
 
