@@ -119,7 +119,6 @@ var exec = function (fn, request, response, session) {
         carbon = require('carbon'),
         tenant = es.server.tenant(request, session),
         user = es.server.current(session);
-    log.info(tenant);
     es.server.sandbox({
         tenantId: tenant.tenantId,
         username: user ? user.username : carbon.user.anonUser
