@@ -51,7 +51,6 @@ $(function () {
         widget_margins: newDimensions[1],
 
         serialize_params: function ($w, wgd) {
-            //apparently $('.x').data() is not equals to $($('.x').get(0)).data() . why?
             var gadgetInfo = $($w.get(0)).data('gadgetInfo');
             var wclass = ($(wgd.el[0]).attr('class').indexOf('static') != -1) ? 'static' : '';
             var gadgetId = $w.find(".add-gadget-item > div").attr('id');
@@ -341,8 +340,8 @@ $(function () {
         flow_data.refreshSequence = $('#refresh-sequence-input').val();
 
         var labelData = {};
-        $('#data-labels').children().each(function () {
-            labelData[$(this).children()[0].innerHTML] = $(this).find('input').val();
+        $('#data-labels').find('.control-group').each(function () {
+            labelData[$(this).find('label').html()] = $(this).find('input').val();
         });
 
         flow_data.mappingData = mappingData;
