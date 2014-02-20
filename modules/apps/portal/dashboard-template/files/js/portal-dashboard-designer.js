@@ -170,8 +170,8 @@ $(function () {
     //Next click of 2nd window (Create Connection window)
     var createConnBtnNextClick = function () {
         var conSettings = {};
-        $('#modal-create-new-connection-data').children().each(function () {
-            conSettings[$(this).children()[0].innerHTML] = $(this).find('input').val();
+        $('#modal-create-new-connection-data').find('.control-group').each(function () {
+            conSettings[ $(this).find('label').html()] = $(this).find('input').val();
         });
 
         flow_data.conSettings = conSettings;
@@ -204,8 +204,8 @@ $(function () {
     //Next click of 3rd window (SQL query window)
     var sqlQueryBtnNextClick = function () {
         var queryData = {};
-        $('#modal-sql-query-editor-data').children().each(function () {
-            queryData[$(this).children()[0].innerHTML] = $(this).find('input').val();
+        $('#modal-sql-query-editor-data').find('.control-group').each(function () {
+            queryData[$(this).find('label').html()] = $(this).find('input').val();
         });
 
         flow_data.queryData = queryData;
@@ -339,8 +339,8 @@ $(function () {
         flow_data.refreshSequence = $('#refresh-sequence-input').val();
 
         var labelData = {};
-        $('#data-labels').children().each(function () {
-            labelData[$(this).children()[0].innerHTML] = $(this).find('input').val();
+        $('#data-labels').find('.control-group').each(function () {
+             labelData[$(this).find('label').html()] = $(this).find('input').val();
         });
 
         flow_data.mappingData = mappingData;
@@ -499,7 +499,6 @@ $(function () {
             widget_margins: newDimensions[1],
 
             serialize_params: function ($w, wgd) {
-                //apparently $('.x').data() is not equals to $($('.x').get(0)).data() . why?
                 var gadgetInfo = $($w.get(0)).data('gadgetInfo');
                 var wclass = ($(wgd.el[0]).attr('class').indexOf('static') != -1) ? 'static' : '';
                 var gadgetId = $w.find(".add-gadget-item > div").attr('id');
@@ -764,7 +763,7 @@ $(function () {
                     $this.show();
                 }
             });
-            $('h3').each(function () {
+            $('.layout_block .grid_header h3').each(function () {
                 var $this = $(this);
                 if ($this.parents('.grid_header').siblings('.designer-placeholder').length == 0) {
                     $this.parent().append('<input class="gadget-title-txt" value="' + $this.text() + '">');

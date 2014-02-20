@@ -38,7 +38,7 @@
 
 <script id="create-new-connection" type="text/x-handlebars-template">
 	
-	<form class="form-horizontal">		
+	<div class="form-horizontal">		
     [[#each createConnection]]
  	<div class="control-group">
 		<label class="control-label">[[this]]</label>
@@ -47,62 +47,88 @@
 		</div>
 	</div>
     [[/each]]
-    </form>
+    </div>
 </script>
 
 <script id="sql-query-editor" type="text/x-handlebars-template">
-	<form class="form-horizontal">
-    [[#each sqlEditor]]
-    <div class="control-group">
-		<label class="control-label">[[this]]</label>
-		<div class="controls">
-			<input type="text"/>
+
+	<div class="form-horizontal">		
+	    [[#each createConnection]]
+	 	<div class="control-group">
+			<label class="control-label">[[this]]</label>
+			<div class="controls">
+				<input type="text"/>
+			</div>
 		</div>
-	</div>
-    [[/each]]
-     </form>
+	    [[/each]]
+
+	    [[#each sqlEditor]]
+	    <div class="control-group">
+			<label class="control-label">[[this]]</label>
+			<div class="controls">
+				<input type="text"/>
+			</div>
+		</div>
+	    [[/each]]
+     </div>
 </script>
 
 <script id="data-mapping" type="text/x-handlebars-template">
-    <div>
-        <div>
-            <div style="padding-left: 10px; padding-top: 30px; display:inline-block;">Series Label</div>
-            <div style="padding-left: 10px; padding-top: 30px;display:inline-block;"><input type="text"/></div>
-        </div>
-        [[#each dataColumns]]
-        <div>
-            <div style="padding-left: 10px; display:inline-block;">[[this]]</div>
-            <div style="padding-left: 10px; display:inline-block;">
-                <select>
-                    [[#each ../columnHeaders]]
-                    <option>[[this]]</option>
-                    [[/each]]
-                </select>
-            </div>
-        </div>
-        [[/each]]
-    </div>
+	
+	<div class="form-horizontal">
+		 <div class="control-group">
+			<label class="control-label">Series Label</label>
+			<div class="controls">
+				<input type="text"/>
+			</div>
+		</div>
+		
+		 [[#each dataColumns]]
+		 
+		  <div class="control-group">
+			<label class="control-label">[[this]]</label>
+			<div class="controls">
+				 <select>
+	                    [[#each ../columnHeaders]]
+	                    <option>[[this]]</option>
+	                    [[/each]]
+	                </select>
+			</div>
+		</div>
+	    [[/each]]
+   </div>
 </script>
 
 <script id="data-mapping-extension" type="text/x-handlebars-template">
     <div>
-        <div id="data-labels" style="padding-top: 20px">
-            [[#each dataLabels]]
-            <div>
-                <div style=" padding-left: 10px; display:inline-block;">[[this]]</div>
-                <div style="padding-left: 10px; display:inline-block;"><input type="text"/></div>
-            </div>
+        <div class="form-horizontal" id="data-labels">
+            [[#each dataLabels]] 
+			<div class="control-group">
+				<label class="control-label">[[this]]</label>
+				<div class="controls">
+					<input type="text"/>
+				</div>
+			</div>
             [[/each]]
         </div>
-        <div>
-            <div style="padding-left: 10px; display:inline-block;">Update Interval</div>
-            <div style="padding-left: 10px; display:inline-block;"><input type="text" id="refresh-sequence-input"/>
-            </div>
+        <div class="form-horizontal">
+        	<div class="control-group">
+				<label class="control-label">Update Interval</label>
+				<div class="controls">
+					<input type="text" id="refresh-sequence-input"/>
+				</div>
+			</div>
         </div>
-        <div style="padding-bottom: 10px;">
-            <button id="mapping-add-series-btn"
-                    style="display: inline-block;color:#07052E;position: relative;right:-20px">+
+        <hr>
+        <div class="form-horizontal">
+        	<div class="control-group">
+				<label class="control-label"></label>
+				<div class="controls">
+					<button class="btn" id="mapping-add-series-btn">+
             </button>
+				</div>
+			</div>
+            
         </div>
     </div>
 </script>
@@ -156,7 +182,7 @@
             </p>
         </div>
         <div>
-            <form class="form-horizontal">
+            <div class="form-horizontal">
                 <div class="control-group">
                     <label class="control-label" for="inputEmail">Property 1</label>
 
@@ -179,7 +205,7 @@
 
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
     <div class="modal-footer">
@@ -213,7 +239,7 @@ aria-hidden="true">
 	<div class="modal-body">
 		<div class="gadget-gen-ui">
 
-			<form class="form-horizontal">
+			<div class="form-horizontal">
 				<div class="control-group">
 					<label class="control-label" for="inputEmail">Select data source</label>
 					<div class="controls">
@@ -225,7 +251,7 @@ aria-hidden="true">
 						</select>
 					</div>
 				</div>
-			</form>
+			</div>
 
 		</div>
 	</div>
@@ -283,18 +309,19 @@ aria-labelledby="publishModalLabel" aria-hidden="true">
 
 
 <div id="modal-add-gadget" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel"
-     aria-hidden="true">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-        <i class="icon-remove"></i>
-    </button>
-    <div id="store-gadget-div"></div>
+aria-hidden="true">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+		<i class="icon-remove"></i>
+	</button>
+	<div id="store-gadget-div"></div>
 
-    <div style="padding-left: 10px;padding-bottom: 10px">
-        <button id="add-gadget-window-btn-back"
-                style="display: inline-block;color:#07052E;position: relative;right: -20px">Back
-        </button>
+	<div class="modal-footer">
+		<button class="btn btn-primary" id="add-gadget-window-btn-back">
+			Back
+		</button>
 
-    </div>
+	</div>
+
 </div>
 
 
@@ -334,7 +361,7 @@ aria-hidden="true">
 		</button>
 	</div>
 	<div class="modal-body">
-		<form class="form-horizontal">
+		<div class="form-horizontal">
 			<div class="control-group">
 				<label class="control-label" for="inp-title">{{t "Enter new directory name"}}</label>
 
@@ -342,7 +369,7 @@ aria-hidden="true">
 					<input type="text" id="inp-title" class="input-xlarge">
 				</div>
 			</div>
-		</form>
+		</div>
 	</div>
 	<div class="modal-footer">
 		<button id="btn-new-site" class="btn btn-primary">
