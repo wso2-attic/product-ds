@@ -11,12 +11,13 @@
         "container": null
     },
     "series": {
-        "bubbles": {
-            "active": true,
+        "shadowSize": 1,
+        "bars": {
             "show": true,
-            "linewidth": 2
-        },
-        "editMode": "xy"
+            "barWidth": 0.13,
+            "order": 1,
+            "horizontal": true
+        }
     },
     "colors": ["#FA0B43", "#41E328", "#F5A00C", "#061DA2","#C921E6", "#21CCE6","#55FFBB"],
     "grid": {
@@ -107,7 +108,9 @@
         "panRange": null,
 
         "rotateTicks": 0
-
+    },
+    "pan": {
+        "interactive": true
     },
     "zoom": {
         "interactive": true

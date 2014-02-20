@@ -1,42 +1,116 @@
+//refer flot api to know what each option does http://flot.googlecode.com/svn/trunk/API.txt
 {
     "legend": {
-        "show": true
+        "show": true,
+        "labelFormatter": null,
+        "labelBoxBorderColor": "#E9E8E8",
+        "noColumns": 1,
+        "position": "ne",
+        "backgroundColor": "#FFFFFF",
+        "backgroundOpacity": 0.8,
+        "container": null
     },
     "series": {
         "lines": {
-            "show": true
+            "show": true,
+            "lineWidth": 0.8,
+            "fill": null,
+            "fillColor": null
         },
         "points": {
-            "show": true
+            "radius": 3,
+            "show": true,
+            "fill": true,
+            "symbol": "circle"
         }
     },
+    "colors": ["#FA0B43", "#41E328", "#F5A00C", "#061DA2", "#C921E6", "#21CCE6", "#55FFBB"],
     "grid": {
+        "show": true,
+        "aboveData": false,
+        "color": "#000000",
+        "backgroundColor": "#333333",
+        "labelMargin": 8,
+        "axisMargin": null,
+        "markings": null,
+        "borderWidth": 0.2,
+        "borderColor": "#FFFFFF",
+        "minBorderMargin": null,
+        "clickable": false,
         "hoverable": true,
-        "clickable": true
+        "autoHighlight": true,
+        "mouseActiveRadius": 0.1
     },
     "yaxis": {
-
-        "axisLabel": "Y-axis Label",
-        "axisLabelUseCanvas": true,
-        "axisLabelFontSizePixels": 12,
-        "axisLabelFontFamily": "Verdana, Arial, Helvetica, Tahoma, sans-serif",
-        "axisLabelPadding": 5,
         "show": true,
+        "position": "left",
+        "mode": null,
+
+        "color": null,
+        "tickColor": null,
+
+        "font": null,
+        "min": null,
+        "max": null,
+        "autoscaleMargin": 0.05,
+
+        "transform": null,
+        "inverseTransform": null,
+
+        "ticks": null,
+        "tickLength": 0,
         "tickDecimals": 0,
+        "tickFormatter": null,
+        "tickLength": null,
+
+        "labelWidth": null,
+        "labelHeight": null,
+        "reserveSpace": null,
+
+        "axisLabel": "Y Axis Label",
+        "axisLabelUseCanvas": true,
+        "axisLabelFontSizePixels": 14,
+        "axisLabelFontFamily": "Arial",
+        "axisLabelPadding": 5,
+
+        "panRange": null,
         "zoomRange": false
     },
     "xaxis": {
-
-        "axisLabel": "X-axis Label",
-        "axisLabelUseCanvas": true,
-        "axisLabelFontSizePixels": 12,
-        "axisLabelFontFamily": "Verdana, Arial, Helvetica, Tahoma, sans-serif",
-        "axisLabelPadding": 5,
         "show": true,
-        "tickDecimals": 0,
-        "min": null ,
+        "position": "bottom",
+        "mode": null,
+
+        "color": null,
+        "tickColor": null,
+
+        "font": null,
+        "min": null,
         "max": null,
-        "ticks": null
+        "autoscaleMargin": 0.1,
+
+        "transform": null,
+        "inverseTransform": null,
+
+        "ticks": null,
+        "tickLength": 0,
+        "tickDecimals": null,
+        "tickFormatter": null,
+        "tickLength": null,
+
+        "labelWidth": null,
+        "labelHeight": null,
+        "reserveSpace": null,
+
+        "axisLabel": "X Axis Label",
+        "axisLabelUseCanvas": true,
+        "axisLabelFontSizePixels": 14,
+        "axisLabelFontFamily": "Arial",
+        "axisLabelPadding": 5,
+
+        "panRange": null,
+
+        "rotateTicks": 0
     },
     "zoom": {
         "interactive": true

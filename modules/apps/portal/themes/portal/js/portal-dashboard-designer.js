@@ -289,7 +289,7 @@ $(function () {
 
     var populateMappingRow = function (dataColumns, columnHeaders, isFirst) {
         var columns = [];
-        if (!isFirst) {
+        if (!isFirst && dataColumns.length > 1) {
             var cloneDataColumns = dataColumns.slice(1);
             columns = cloneDataColumns;
         } else {
@@ -347,6 +347,7 @@ $(function () {
         flow_data.mappingData = mappingData;
         flow_data.dataLabels = labelData;
         flow_data.appName = dashboard;
+        flow_data.chartType = tmpGadgetInfo.attributes.overview_name;
         flow_data.chartOptions = tmpGadgetInfo.attributes.overview_chartoptions;
 
         caramel.ajax({
