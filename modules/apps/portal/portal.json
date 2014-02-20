@@ -22,7 +22,7 @@
         "appAcsHost" : "%https.host%"
     },
     "portalGadgets" : {
-        "store" : "%http.host%/portal/gadgets/show-assets/show-assets.xml",
+        "store" : "%http.host%/publisher/config/defaults/gadgets/show-assets/show-assets.xml",
         "intro0": "%http.host%/portal/gadgets/intro-gadget-1/intro-gadget-1.xml",
         "intro1": "%http.host%/portal/gadgets/intro-gadget-2/intro-gadget-2.xml"
     }

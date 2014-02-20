@@ -7,6 +7,13 @@ response.addHeader("Content-Type", "application/json");
 
 
 (function () {
+
+    var loadOptions = function(path) {
+        //TODO: fix this properly
+        var result = get('https://localhost:9443/publisher' + path);
+        return result.data;
+    };
+
     if (action == "queryDb") {
 
         //TODO : refactor to avoid hard coding
@@ -51,10 +58,8 @@ response.addHeader("Content-Type", "application/json");
             }
 
             var pathToOptions = path + 'chart-options.json';
-            var file = site.loadFile('portal', data.chartOptions);
-            file.open("r");
-            site.createFile(data.appName, pathToOptions, file.getStream());
-            file.close();
+            site.createFile(data.appName, pathToOptions, loadOptions(data.chartOptions));
+            //TODO : move this content into a file
 
             var jagFileData = '\<\%\n' +
 

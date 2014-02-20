@@ -259,9 +259,9 @@ $(function () {
 
     var getDataFormat = function () {
         console.log("")
-        caramel.ajax({
+        $.ajax({
             type: 'POST',
-            url: tmpGadgetInfo.attributes.overview_dataformat,
+            url: '/publisher' + tmpGadgetInfo.attributes.overview_dataformat,
             success: generateDataMapping,
             contentType: 'application/json',
             dataType: 'json'

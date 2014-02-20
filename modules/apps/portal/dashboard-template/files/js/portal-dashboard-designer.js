@@ -258,7 +258,7 @@ $(function () {
         console.log("")
         caramel.ajax({
             type: 'POST',
-            url: "../../portal/" + tmpGadgetInfo.attributes.overview_dataformat,
+            url: "../../publisher/" + tmpGadgetInfo.attributes.overview_dataformat,
             success: generateDataMapping,
             contentType: 'application/json',
             dataType: 'json'
