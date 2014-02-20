@@ -96,6 +96,8 @@ response.addHeader("Content-Type", "application/json");
 
                     '                }    \n' +
                     '            }      \n' +
+                     '           chartOptions["xaxis"]["axisLabel"]= "' + data.dataLabels["X-Axis Label"] + '";\n' +
+                    '            chartOptions["yaxis"]["axisLabel"]= "' + data.dataLabels["Y-Axis Label"] + '";\n' +
                     '            chartOptions["yaxis"]["ticks"]= ticks;\n' +
                     '            break; \n' +
                     '        case "Bubble Chart":     \n' +
@@ -118,9 +120,17 @@ response.addHeader("Content-Type", "application/json");
                     '                }   \n' +
                     '            }      \n' +
                     '            chartOptions["xaxis"]["ticks"]= ticks;\n' +
+                     '           chartOptions["xaxis"]["axisLabel"]= "' + data.dataLabels["X-Axis Label"] + '";\n' +
+                    '            chartOptions["yaxis"]["axisLabel"]= "' + data.dataLabels["Y-Axis Label"] + '";\n' +
                     '            break;    \n' +
                     '        case "Pie Chart":     \n' +
-
+                    '              for (var i = 0; i < dbResult.length; i++) {    \n' +
+                    '                   for (var j = 0; j < mapping.length; j++) {    \n' +
+                    '                       if (!result[j]) {      \n' +
+                    '                            result[j] = dbResult[i][mapping[j][dataColumns[0]]]    \n' +
+                    '                       }     \n' +
+                    '                   }    \n' +
+                    '             }     \n' +
                     '            break;     \n' +
                     '        default:       \n' +
                     '            for (var i = 0, k = 0; i < dbResult.length; i++) {     \n' +
@@ -142,6 +152,8 @@ response.addHeader("Content-Type", "application/json");
                     '                }        \n' +
                     '            }         \n' +
                     '            chartOptions["xaxis"]["ticks"]= ticks;\n' +
+                     '           chartOptions["xaxis"]["axisLabel"]= "' + data.dataLabels["X-Axis Label"] + '";\n' +
+                    '            chartOptions["yaxis"]["axisLabel"]= "' + data.dataLabels["Y-Axis Label"] + '";\n' +
                     '            break;     \n' +
                     '    }         \n' +
 
@@ -154,8 +166,7 @@ response.addHeader("Content-Type", "application/json");
                     '    }       \n' +
 
 
-                    ' chartOptions["xaxis"]["axisLabel"]= "' + data.dataLabels["X-Axis Label"] + '";\n' +
-                    ' chartOptions["yaxis"]["axisLabel"]= "' + data.dataLabels["Y-Axis Label"] + '";\n' +
+
                     ' return {0: output, 1: chartOptions};\n' +
                     '}\n' +
                     'print(getDBData());\n' +

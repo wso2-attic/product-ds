@@ -290,7 +290,7 @@ $(function () {
 
     var populateMappingRow = function (dataColumns, columnHeaders, isFirst) {
         var columns = [];
-        if (!isFirst) {
+        if (!isFirst && dataColumns.length > 1) {
             var cloneDataColumns = dataColumns.slice(1);
             columns = cloneDataColumns;
         } else {
