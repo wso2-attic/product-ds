@@ -61,56 +61,101 @@ response.addHeader("Content-Type", "application/json");
                     'function getDBData() {\n' +
                     '   var dataColumns = JSON.parse(\'' + stringify(data.dataColumns) + '\');\n' +
                     '   var mapping = JSON.parse(\'' + stringify(data.mappingData) + '\');\n' +
-                    '   var result = [];\n' +
-                    '   var ticks = [];\n' +
-                    '   var tickTmp = [];\n' +
-
-                    '   var output = {};\n' +
+                    '   var type = JSON.parse(\'' + stringify(data.chartType) + '\');\n' +
 
                     '   var db = new Database("' + data.conSettings["Connection URL"] + '", "' + data.conSettings.Username + '", "' + data.conSettings.Password + '");\n' +
                     '   var dbResult = db.query("' + data.queryData["SQL Statement"] + '");\n' +
                     '   db.close();\n' +
 
-                    '   for (var i = 0,k = 0; i < dbResult.length; i++) {\n' +
-                    '       for (var j = 0; j < mapping.length; j++) {\n' +
-                    '           if(!result[j]){\n' +
-                    '              result[j] = [];\n' +
-                    '           }\n' +
-                    '           if(tickTmp[dbResult[i][mapping[j][dataColumns[0]]]]){\n' +
-                    '               var keyVal = tickTmp[dbResult[i][mapping[j][dataColumns[0]]]];\n' +
-                    '               if(dataColumns[2]){ \n' +
-                    '                  result[j].push([keyVal, dbResult[i][mapping[j][dataColumns[1]]], dbResult[i][mapping[j][dataColumns[2]]] ]);\n' +
-                    '               } \n' +
-                    '               else{ \n' +
-                    '                   result[j].push([keyVal, dbResult[i][mapping[j][dataColumns[1]]]]);\n' +
-                    '               } \n' +
-                    '           } else {\n' +
-                    '               tickTmp[dbResult[i][mapping[j][dataColumns[0]]]] = k+1;\n' +
-                    '               ticks.push([k+1, dbResult[i][mapping[j][dataColumns[0]]]]);\n' +
-                    '               if(dataColumns[2]){ \n' +
-                    '                   result[j].push([k+1, dbResult[i][mapping[j][dataColumns[1]]], dbResult[i][mapping[j][dataColumns[2]]] ]);\n' +
-                    '               } \n' +
-                    '               else { \n' +
-                    '                   result[j].push([k+1, dbResult[i][mapping[j][dataColumns[1]]]]);\n' +
-                    '               } \n' +
-                    '               k++;\n' +
-                    '           }\n' +
+                    '  var result = []; \n' +
+                    '  var ticks = [];  \n' +
+                    '  var tickTmp = []; \n' +
+                    '  var output = {};  \n' +
 
-                    '       }\n' +
-                    '   }\n' +
+                    '  var chartOptions = require("chart-options.json")\n' +
+
+                    '  switch (type) { \n' +
+                    '        case "Horizontal Bar Chart": \n' +
+
+                    '            for (var i = 0, k = 0; i < dbResult.length; i++) {  \n' +
+                    '                for (var j = 0; j < mapping.length; j++) {  \n' +
+                    '                    if (!result[j]) {  \n' +
+                    '                        result[j] = [];  \n' +
+                    '                    }   \n' +
+
+                    '                    if (tickTmp[dbResult[i][mapping[j][dataColumns[0]]]]) {   \n' +
+                    '                        var keyVal = tickTmp[dbResult[i][mapping[j][dataColumns[0]]]];  \n' +
+                    '                        result[j].push([dbResult[i][mapping[j][dataColumns[1]]], keyVal]);   \n' +
+
+                    '                    } else {   \n' +
+                    '                        tickTmp[dbResult[i][mapping[j][dataColumns[0]]]] = k + 1;   \n' +
+                    '                        ticks.push([k + 1, dbResult[i][mapping[j][dataColumns[0]]]]);   \n' +
+                    '                        result[j].push([dbResult[i][mapping[j][dataColumns[1]]], k + 1]);   \n' +
+                    '                        k++;   \n' +
+                    '                    }   \n' +
+
+                    '                }    \n' +
+                    '            }      \n' +
+                    '            chartOptions["yaxis"]["ticks"]= ticks;\n' +
+                    '            break; \n' +
+                    '        case "Bubble Chart":     \n' +
+                    '            for (var i = 0, k = 0; i < dbResult.length; i++) {    \n' +
+                    '                for (var j = 0; j < mapping.length; j++) {   \n' +
+                    '                    if (!result[j]) {      \n' +
+                    '                        result[j] = [];   \n' +
+                    '                   }     \n' +
+                    '                    if (tickTmp[dbResult[i][mapping[j][dataColumns[0]]]]) {    \n' +
+                    '                        var keyVal = tickTmp[dbResult[i][mapping[j][dataColumns[0]]]];  \n' +
+                    '                        result[j].push([keyVal, dbResult[i][mapping[j][dataColumns[1]]], dbResult[i][mapping[j][dataColumns[2]]] ]);  \n' +
+
+                    '                    } else {   \n' +
+                    '                        tickTmp[dbResult[i][mapping[j][dataColumns[0]]]] = k + 1;     \n' +
+                    '                       ticks.push([k + 1, dbResult[i][mapping[j][dataColumns[0]]]]);   \n' +
+                    '                        result[j].push([k + 1, dbResult[i][mapping[j][dataColumns[1]]], dbResult[i][mapping[j][dataColumns[2]]] ]);   \n' +
+                    '                        k++;    \n' +
+                    '                    }   \n' +
+
+                    '                }   \n' +
+                    '            }      \n' +
+                    '            chartOptions["xaxis"]["ticks"]= ticks;\n' +
+                    '            break;    \n' +
+                    '        case "Pie Chart":     \n' +
+
+                    '            break;     \n' +
+                    '        default:       \n' +
+                    '            for (var i = 0, k = 0; i < dbResult.length; i++) {     \n' +
+                    '                for (var j = 0; j < mapping.length; j++) {      \n' +
+                    '                    if (!result[j]) {     \n' +
+                    '                        result[j] = [];   \n' +
+                    '                    }      \n' +
+                    '                    if (tickTmp[dbResult[i][mapping[j][dataColumns[0]]]]) {     \n' +
+                    '                        var keyVal = tickTmp[dbResult[i][mapping[j][dataColumns[0]]]];    \n' +
+                    '                        result[j].push([keyVal, dbResult[i][mapping[j][dataColumns[1]]]]);     \n' +
+
+                    '                    } else {      \n' +
+                    '                        tickTmp[dbResult[i][mapping[j][dataColumns[0]]]] = k + 1;      \n' +
+                    '                        ticks.push([k + 1, dbResult[i][mapping[j][dataColumns[0]]]]);       \n' +
+                    '                        result[j].push([k + 1, dbResult[i][mapping[j][dataColumns[1]]]]);        \n' +
+                    '                        k++;    \n' +
+                    '                    }     \n' +
+
+                    '                }        \n' +
+                    '            }         \n' +
+                    '            chartOptions["xaxis"]["ticks"]= ticks;\n' +
+                    '            break;     \n' +
+                    '    }         \n' +
 
 
-                    '   for (var j = 0; j < mapping.length; j++) {\n' +
-                    '       var tmpObj = {};\n' +
-                    '       tmpObj["label"] = mapping[j]["Series Label"];\n' +
-                    '       tmpObj["data"] = result[j];\n' +
-                    '       output["series"+j] = tmpObj;\n' +
-                    '   }\n' +
+                    '    for (var j = 0; j < mapping.length; j++) {       \n' +
+                    '        var tmpObj = {};          \n' +
+                    '        tmpObj["label"] = mapping[j]["Series Label"];   \n' +
+                    '        tmpObj["data"] = result[j];         \n' +
+                    '        output["series" + j] = tmpObj;       \n' +
+                    '    }       \n' +
 
-                    ' var chartOptions = require("chart-options.json")\n' +
+
                     ' chartOptions["xaxis"]["axisLabel"]= "' + data.dataLabels["X-Axis Label"] + '";\n' +
                     ' chartOptions["yaxis"]["axisLabel"]= "' + data.dataLabels["Y-Axis Label"] + '";\n' +
-                    ' chartOptions["xaxis"]["ticks"]= ticks;\n' +
                     ' return {0: output, 1: chartOptions};\n' +
                     '}\n' +
                     'print(getDBData());\n' +
