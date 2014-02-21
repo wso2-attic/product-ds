@@ -162,6 +162,15 @@ response.addHeader("Content-Type", "application/json");
                     '        var tmpObj = {};          \n' +
                     '        tmpObj["label"] = mapping[j]["Series Label"];   \n' +
                     '        tmpObj["data"] = result[j];         \n' +
+                    '        if(type == "Line Plus Bar Chart"){         \n' +
+                    '           if(j==0){         \n' +
+                    '               tmpObj["bars"] = { "show" : true};         \n' +
+                    '           }         \n' +
+                    '          else {        \n' +
+                    '            tmpObj["lines"] = { "show" : true};        \n' +
+                    '            tmpObj["points"] = { "show" : true};        \n' +
+                    '           }         \n' +
+                    '        }         \n' +
                     '        output["series" + j] = tmpObj;       \n' +
                     '    }       \n' +
 

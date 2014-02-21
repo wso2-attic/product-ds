@@ -30,7 +30,19 @@ function getRandomData() {
     }
 
     return [
-        {"series1":{ label: "sin(x sin(x))", data: data1 , lines: { show: true } , color: "#f00" } , "series2":{label: "cos(x cos(x))", data: data2 ,bars: { show: true } }}
+        {
+            "series1": {
+                label: "sin(x sin(x))",
+                data: data1,
+                lines: { show: true },
+                color: "#f00"
+            },
+            "series2": {
+                label: "cos(x cos(x))",
+                data: data2,
+                bars: { show: true }
+            }
+        }
     ];
 
 }
