@@ -2,6 +2,7 @@
 var log = new Log();
 var data = request.getContent();
 var action = request.getParameter('action');
+var mode = request.getParameter('mode');
 
 response.addHeader("Content-Type", "application/json");
 
@@ -22,6 +23,35 @@ response.addHeader("Content-Type", "application/json");
         });
         print(names);
         return;
+        
+ 	} else if (action == "queryDbAll") {
+
+        //TODO : refactor to avoid hard coding
+        
+        try{
+        var db = new Database(data.conSettings['Connection URL'], data.conSettings.Username, data.conSettings.Password);
+        var result = db.query(data.queryData['SQL Statement'] + " limit 50");
+        db.close();
+       } catch(e){
+       	print('Error while retrieving data.');
+       	return;
+       }
+        
+        var output = {};
+        
+        output.tableHeaders = Object.keys(result[0]);
+        output.tableRows = [];
+
+		for(var i in result){
+			_obj = [];
+			for(var k in result[i]){
+				_obj.push(result[i][k])
+			}
+			 output.tableRows.push(_obj);
+		}
+       
+        print(output);
+        return;
 
     } else if (action == "createJag") {
 
@@ -34,9 +64,13 @@ response.addHeader("Content-Type", "application/json");
             var resource_id = uuid.generate();
 
             var folderName = data.mappingData[0][data.dataColumns[0]] + "VS" + data.mappingData[0][data.dataColumns[1]];
-            var path = "/gadgetDataApis/" + folderName + "_" + resource_id + "/";
-
-            var pathToDataJag = path + folderName + ".jag";
+            if(mode == 'preview'){
+            	 var path =  "/gadgetDataApis/";
+            	 var pathToDataJag = path + "gadgetPreviewTemp.jag";
+            } else {
+            	var path = "/gadgetDataApis/" + folderName + "_" + resource_id + "/";
+            	var pathToDataJag = path + folderName + ".jag";
+            }
 
             var parts = pathToDataJag.split('/');
             var dirPath = '';

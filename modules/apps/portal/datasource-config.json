@@ -1,27 +1,27 @@
 {
-    "dataSources": [
-        "RDBMS", "REST API", "Cassandra"
-    ],
+	"dataSources": [
+		{
+			"dataSource": "RDBMS",
+			"icon": "icon-rdbms"
+		}, {
+			"dataSource": "REST API",
+			"icon": "icon-rest"
+		}, {
+			"dataSource": "Cassandra",
+			"icon": "icon-cassandra"
+		}
+	],
 
-    "dataSourcesDescriptions": {
-        "RDBMS": [
-            "Connection URL",
-            "Username",
-            "Password"
-        ],
+	"dataSourcesDescriptions": {
+		"RDBMS": ["Connection URL", "Username", "Password"],
 
-        "REST API": [
-            "Connection URL"
-        ],
+		"REST API": ["Connection URL"],
 
-        "Cassandra": []
+		"Cassandra": []
+	},
 
-    },
-
-    "datasourceWindow_3" : {
-        "RDBMS": [
-            "SQL Statement"
-        ]
-    }
+	"datasourceWindow_3": {
+		"RDBMS": ["SQL Statement"]
+	}
 }
 

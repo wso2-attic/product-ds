@@ -152,14 +152,121 @@ $(function () {
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~start gadget-gen ui~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     //Select Datasource window
-    function onGadgetSelectButton() {
-        lastClickedGadgetButton = $(this);
-        //$STORE_MODAL.modal('show');
-        $('#modal-flow-start').modal('show');
 
-    }
+		function onGadgetSelectButton() {
+			lastClickedGadgetButton = $(this);
+			//$STORE_MODAL.modal('show');
+			//$('#modal-flow-start').modal('show');
+			$('#modal-add-gadget-wizard').modal('show');
+		}
+
+
+
+	 $("#wizard-add-gadget").steps({
+                headerTag: "h3",
+                bodyTag: "section",
+                transitionEffect: "fade",
+                onStepChanging: function (event, currentIndex, newIndex)
+                {
+                	//console.log(event);
+                	//console.log(currentIndex);
+                	//console.log(newIndex);
+                   // $("#form-2").validate().settings.ignore = ":disabled,:hidden";
+                    //return $("#form-2").valid();
+                  
+                    switch(newIndex){
+                    	case 1:
+                    	
+	                    	var dsType = $('#wizard-dsTypeSel').val();
+	                    	
+	                    	if(flow_data.dataSource == dsType){
+	                    		return true;
+	                    	}
+	        				flow_data.dataSource = dsType;
+	
+					        var nextWindowData = {
+					            createConnection: metadata.dataSourcesDescriptions[dsType]
+					        };
+					
+					        var source = $("#create-new-connection").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+					        var template = Handlebars.compile(source);
+					        $('#wizard-add-gadget-p-1').html(template(nextWindowData));
+
+                    	break;
+                    	
+                    	case 2:
+                    	
+	                    	
+	                    	if (flow_data.queryData) {
+								return true;
+							}
+							var conSettings = {};
+					        $('#wizard-add-gadget-p-1').find('.control-group').each(function () {
+					            conSettings[$(this).find('label').html()] = $(this).find('input').val();
+					        });
+					
+					
+							
+
+					        flow_data.conSettings = conSettings;
+					       
+					        var window3Data = metadata.datasourceWindow_3[flow_data.dataSource];
+					        if (window3Data) {
+					            var nextWindowData = {
+					                sqlEditor: window3Data
+					            };
+					
+					            var source = $("#sql-query-editor").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+					            var template = Handlebars.compile(source);
+					            $('#wizard-add-gadget-p-2').html(template(nextWindowData));
+					
+					          //  $('#modal-create-new-connection').modal('hide');
+					            //$('#modal-sql-query-editor').modal('show');
+					        }
+					        else {
+					           // $('#modal-create-new-connection').modal('hide');
+					           // $STORE_MODAL.modal('show');
+					           //alert("Select gadget");
+					        }
+				        
+                   	
+                    	break;
+                    	
+                    	case 4:
+                    	
+                    	getDataFormat();
+
+                    	break;
+                    }
+                    
+					if (newIndex == 4) {
+						$('#wizard-add-gadget-btn-next').hide();
+						$('#wizard-add-gadget-btn-finish').show();
+					} else {
+						$('#wizard-add-gadget-btn-next').show();
+						$('#wizard-add-gadget-btn-finish').hide();
+					}
+                    
+                    return true;
+                }
+                /*
+                , onFinishing: function (event, currentIndex)
+                                {
+                                   // $("#form-2").validate().settings.ignore = ":disabled";
+                                   // return $("#form-2").valid();
+                                   processFieldMapping('dashboard');
+                                   return true;
+                                },
+                                onFinished: function (event, currentIndex)
+                                {
+                                    //alert("Submitted!");
+                                    $('#modal-add-gadget-wizard').modal('hide');
+                                }*/
+                
+            });
 
     //Next click of first window (Data source window)
+/*
     var selectDatasourcesNextClick = function () {
         var selectedVal = $('#data_source_drop_dwn').find(":selected").text();
         flow_data.dataSource = selectedVal;
@@ -175,43 +282,49 @@ $(function () {
         $('#modal-flow-start').modal('hide');
         $('#modal-create-new-connection').modal('show');
 
-    };
+    };*/
+
 
     //Next click of 2nd window (Create Connection window)
+   /*
     var createConnBtnNextClick = function () {
-        var conSettings = {};
-        $('#modal-create-new-connection-data').find('.control-group').each(function () {
-            conSettings[$(this).find('label').html()] = $(this).find('input').val();
-        });
-
-        flow_data.conSettings = conSettings;
-
-        var window3Data = metadata.datasourceWindow_3[flow_data.dataSource];
-        if (window3Data) {
-            var nextWindowData = {
-                sqlEditor: window3Data
-            };
-
-            var source = $("#sql-query-editor").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
-            var template = Handlebars.compile(source);
-            $('#modal-sql-query-editor-data').html(template(nextWindowData));
-
-            $('#modal-create-new-connection').modal('hide');
-            $('#modal-sql-query-editor').modal('show');
-        }
-        else {
-            $('#modal-create-new-connection').modal('hide');
-            $STORE_MODAL.modal('show');
-        }
-    };
+           var conSettings = {};
+           $('#modal-create-new-connection-data').find('.control-group').each(function () {
+               conSettings[$(this).find('label').html()] = $(this).find('input').val();
+           });
+   
+           flow_data.conSettings = conSettings;
+   
+           var window3Data = metadata.datasourceWindow_3[flow_data.dataSource];
+           if (window3Data) {
+               var nextWindowData = {
+                   sqlEditor: window3Data
+               };
+   
+               var source = $("#sql-query-editor").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+               var template = Handlebars.compile(source);
+               $('#modal-sql-query-editor-data').html(template(nextWindowData));
+   
+               $('#modal-create-new-connection').modal('hide');
+               $('#modal-sql-query-editor').modal('show');
+           }
+           else {
+               $('#modal-create-new-connection').modal('hide');
+               $STORE_MODAL.modal('show');
+           }
+       };*/
+   
 
     //Back click of 2nd window (Create connection window)
+/*
     var createConnBtnBackClick = function () {
         $('#modal-create-new-connection').modal('hide');
         $('#modal-flow-start').modal('show');
-    };
+    };*/
+
 
     //Next click of 3rd window (SQL query window)
+/*
     var sqlQueryBtnNextClick = function () {
         var queryData = {};
         $('#modal-sql-query-editor-data').find('.control-group').each(function () {
@@ -229,35 +342,41 @@ $(function () {
             dataType: 'json'
         });
 
-    };
+    };*/
 
+
+/*
     var processSqlQueryResponse = function (data) {
         flow_data.column_headers = data;
         $('#modal-sql-query-editor').modal('hide');
         $STORE_MODAL.modal('show');
 
-    }
+    }*/
+
 
     //Back click of the 3rd window (SQL query window)
+   /*
     var sqlQueryBtnBackClick = function () {
-        $('#modal-sql-query-editor').modal('hide');
-        $('#modal-create-new-connection').modal('show');
-
-    };
+           $('#modal-sql-query-editor').modal('hide');
+           $('#modal-create-new-connection').modal('show');
+   
+       };*/
+   
 
     //Next Click of 4th window (Gadget store window)
     onShowAssetLoad = function () {
-        var cWindow = $('#modal-add-gadget').find('iframe').get(0).contentWindow;
+    	console.log("----------------------------------onShowAssetLoad----------------------------");
+        var cWindow = $('#store-gadget-div').find('iframe').get(0).contentWindow;
         if (cWindow.addListener) {
             cWindow.addListener(function (gadgetInfo) {
                 tmpGadgetInfo = gadgetInfo;
-                getDataFormat();        //get the data format that the chart requires (x-axis, y-axis etc)
+                //getDataFormat();        //get the data format that the chart requires (x-axis, y-axis etc)
+                console.log("tmpGadgetInfo set");
             });
         }
     };
 
     var getDataFormat = function () {
-        console.log("")
         caramel.ajax({
             type: 'POST',
             url: tmpGadgetInfo.attributes.overview_dataformat,
@@ -283,8 +402,8 @@ $(function () {
         $('#modal-data-mapping-extension-space').html(template(nextWindowData));
 
         $('#mapping-add-series-btn').bind('click', addSeriesBtnClick);  //To add more series
-        $STORE_MODAL.modal('hide');
-        $('#modal-data-mapper').modal('show');
+       // $STORE_MODAL.modal('hide');
+       // $('#modal-data-mapper').modal('show');
     }
 
     var populateMappingRow = function (dataColumns, columnHeaders, isFirst) {
@@ -311,19 +430,27 @@ $(function () {
     }
 
     //Back click of the 4th window (Gadget store window)
+  /*
     var gadgetWindowBtnBackClick = function () {
-        $STORE_MODAL.modal('hide');
-        $('#modal-sql-query-editor').modal('show');
-
-    };
+          $STORE_MODAL.modal('hide');
+          $('#modal-sql-query-editor').modal('show');
+  
+      };*/
+  
 
     //Finish button of 5 th window (Data mapping window)
+  /*
     var flowFinishBtnNextClick = function () {
-        processFieldMapping();
-    };
+          processFieldMapping();
+      };*/
+  
 
-    var processFieldMapping = function () {
+    var processFieldMapping = function (mode) {
         var mappingData = [];
+        var url = "apis/gadgetGen?action=createJag";
+        
+        url = (mode == 'preview')? url + '&mode=preview':url;
+        
         $('#modal-data-mapping').children().each(function () {
             var series = {}
             if (mappingData[0]) {
@@ -352,50 +479,99 @@ $(function () {
 
         caramel.ajax({
             type: 'POST',
-            url: "apis/gadgetGen?action=createJag",
+            url: url,
             data: JSON.stringify(flow_data),
-            success: insertGadgetToDashBoard,
+            success: insertGadgetToTarget(mode),
             contentType: 'application/json',
             dataType: 'json'
         });
 
     }
 
-    var insertGadgetToDashBoard = function (data) {
+    
+
+	var insertGadgetToTarget = function(mode) {
+
+		return function(data) {
+			var modPrefs = {};
+			var prefs = {};
+			prefs.dataSource = data.jagPath;
+			prefs.updateGraph = flow_data.refreshSequence;
+			modPrefs.prefs = prefs;
+
+			var gadgetLi;
+
+			//$('#modal-data-mapper').modal('hide');
+
+			if (mode == 'preview') {
+				gadgetLi = $('#gadget-preview');
+				gadgetLi.data('gadgetInfo', tmpGadgetInfo);
+				insertGadgetPreview(gadgetLi, tmpGadgetInfo.attributes.overview_url, modPrefs);
+			} else {
+				gadgetLi = lastClickedGadgetButton.parents('li');
+				gadgetLi.data('gadgetInfo', tmpGadgetInfo);
+				insertGadget(gadgetLi, tmpGadgetInfo.attributes.overview_url, modPrefs);
+				var placeholder = lastClickedGadgetButton.siblings('.designer-placeholder');
+				lastClickedGadgetButton.remove();
+				placeholder.remove();
+				$('#modal-add-gadget-wizard').modal('hide');
+			}
+		}
+	}
+
+
+    /*
+    var insertGadgetToPreview = function (data) {
         var modPrefs = {};
         var prefs = {};
         prefs.dataSource = data.jagPath;
         prefs.updateGraph = flow_data.refreshSequence;
         modPrefs.prefs = prefs;
 
-        $('#modal-data-mapper').modal('hide');
-        var gadgetLi = lastClickedGadgetButton.parents('li');
+        //$('#modal-data-mapper').modal('hide');
+        //var gadgetLi = lastClickedGadgetButton.parents('li');
+        var gadgetLi = $('#gadget-preview');
         gadgetLi.data('gadgetInfo', tmpGadgetInfo);
-        insertGadget(gadgetLi, tmpGadgetInfo.attributes.overview_url, modPrefs);
-        var placeholder = lastClickedGadgetButton.siblings('.designer-placeholder');
-        lastClickedGadgetButton.remove();
-        placeholder.remove();
+        insertGadgetPreview(gadgetLi, tmpGadgetInfo.attributes.overview_url, modPrefs);
+        //var placeholder = lastClickedGadgetButton.siblings('.designer-placeholder');
+        //lastClickedGadgetButton.remove();
+        //placeholder.remove();
 
     }
-
+*/
     //Back button of 5 th window (Data Mapping window)
+   /*
     var flowFinishWindowBackClick = function () {
-        $('#modal-data-mapper').modal('hide');
-        $STORE_MODAL.modal('show');
-    };
-
-    $('#add-gadget-btn-next').bind('click', selectDatasourcesNextClick);
-
-    $('#create-connection-btn-next').bind('click', createConnBtnNextClick);
-    $('#create-connection-btn-back').bind('click', createConnBtnBackClick);
-
-    $('#sql-connection-btn-next').bind('click', sqlQueryBtnNextClick);
-    $('#sql-connection-btn-back').bind('click', sqlQueryBtnBackClick);
-
-    $('#add-gadget-window-btn-back').bind('click', gadgetWindowBtnBackClick);
-
-    $('#flow-finish-btn-next').bind('click', flowFinishBtnNextClick);
-    $('#flow-finish-btn-back').bind('click', flowFinishWindowBackClick);
+           $('#modal-data-mapper').modal('hide');
+           $STORE_MODAL.modal('show');
+       };
+   
+       $('#add-gadget-btn-next').bind('click', selectDatasourcesNextClick);
+   
+       $('#create-connection-btn-next').bind('click', createConnBtnNextClick);
+       $('#create-connection-btn-back').bind('click', createConnBtnBackClick);
+   
+       $('#sql-connection-btn-next').bind('click', sqlQueryBtnNextClick);
+       $('#sql-connection-btn-back').bind('click', sqlQueryBtnBackClick);
+   
+       $('#add-gadget-window-btn-back').bind('click', gadgetWindowBtnBackClick);
+   
+       $('#flow-finish-btn-next').bind('click', flowFinishBtnNextClick);
+       $('#flow-finish-btn-back').bind('click', flowFinishWindowBackClick);*/
+   
+    
+    
+    
+    $('#wizard-add-gadget-btn-prev').click(function(){
+    	$('a[href=#previous]').click();
+    });
+     $('#wizard-add-gadget-btn-next').click(function(){
+    	$('a[href=#next]').click();
+    });
+    $('#wizard-add-gadget-btn-finish').click(function(){
+    	processFieldMapping('dashboard');
+    });
+    
 
     //------------------------------------------------------------------------end of gadget-gen ui -------------------------------
 
@@ -440,6 +616,23 @@ $(function () {
             if (gadgetInfo.meta.modulePrefs) {
                 parentEl.find('.grid_header').append('<input class="gadget-title-txt" value="' + gadgetInfo.meta.modulePrefs.title + '">');
                 parentEl.find('.show-widget-pref').show();
+            }
+        });
+    }
+    
+    function insertGadgetPreview(parentEl, url, pref) {
+      
+     
+        var idStr = 'gadgetArea-preview';
+        if($('#' + idStr).length){
+        	 UESContainer.redrawGadget(idStr, pref);
+        	return;
+        }
+        parentEl.html('<div id="' + idStr + '">');
+        UESContainer.renderGadget(idStr, url, pref || {}, function (gadgetInfo) {
+            if (gadgetInfo.meta.modulePrefs) {
+                //parentEl.find('.grid_header').append('<input class="gadget-title-txt" value="' + gadgetInfo.meta.modulePrefs.title + '">');
+                //parentEl.find('.show-widget-pref').show();
             }
         });
     }
@@ -622,6 +815,52 @@ $(function () {
         $(widget).remove();
         $('.gs_w').show();
     });
+    
+   
+
+	$('body').on('click', '.wizard-dsType', function(e) {
+		e.preventDefault();
+		$('.wizard-dsType').removeClass('active');
+		$(this).toggleClass('active');
+		$('#wizard-dsTypeSel').val($(this).attr('data-dsType'));
+	}); 
+
+
+	$('body').on('click', '.btn-execQuery', function() {
+		//var query = $(this).closest('.inp-query').val();
+
+ 		var queryData = {};
+        $('#wizard-add-gadget-p-2').find('.control-group').each(function () {
+            queryData[$(this).find('label').html()] = $(this).find('input').val() || $(this).find('textarea').val();
+        });
+
+        flow_data.queryData = queryData;       
+        
+		caramel.ajax({
+			type : 'POST',
+			url : "apis/gadgetGen?action=queryDbAll",
+			data : JSON.stringify(flow_data),
+			success : renderDatasetTable,
+			contentType : 'application/json',
+			dataType : 'json'
+		});
+
+	}); 
+	
+	$('#btn-preview-gadget').click(function(){
+		processFieldMapping('preview');
+	});
+
+
+	var renderDatasetTable = function(result){
+		$('#wizard-add-gadget-p-2 .well').animate({'margin-top':0});
+		
+		flow_data.column_headers = result.tableHeaders;
+		  var source = $("#sql-query-table").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+				            var template = Handlebars.compile(source);
+				            $('#sql-editor-dataset').html(template(result));
+	}
+
 
     var formArrayToPref = function (a) {
         var o = {};
