@@ -61,7 +61,7 @@ h1, h2, h3, h4 {
     text-shadow: none;
     padding:2px 5px;
 }
-.asset-box .select-btn:hover {
+.asset-box .select-btn:hover , .asset-box .select-btn.active {
     background: #16A085;
     color: #FFFFFF;
 }

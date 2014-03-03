@@ -82,7 +82,7 @@
             {{/rating}}
         </h5>
         <small>by {{overview_provider}}</small>
-        <button class="btn select-btn">Add Gadget</button>
+        <button class="btn select-btn">Select Gadget</button>
     </div>
     {{/attributes}}
 </script>

@@ -354,6 +354,10 @@ label.error {
 #modal-add-gadget-wizard .modal-body {
     max-height: 565px;
 }
+
+#modal-add-gadget-wizard form{
+    margin:0;
+}
 #modal-add-gadget-wizard .modal-body .content {
     overflow-y: auto;
     overflow-x: hidden;
@@ -519,8 +523,10 @@ margin-top: 128px;
     border-top: 1px solid #3DAA96;
 }
 .wizard > .steps .error a, .wizard > .steps .error a:hover, .wizard > .steps .error a:active {
-    background: none repeat scroll 0 0 #FF3111;
+    background: none repeat scroll 0 0 #FF4C00;
     color: #FFFFFF;
+    border-color:#FF4C00;
+    font-size:15px;
 }
 .wizard > .content {
     display: block;
@@ -538,7 +544,7 @@ margin-top: 128px;
 }
 .wizard > .content > .body {
     float: left;
-    height: 98%;
+    height: 100%;
     padding: 0;
     position: absolute;
     width: 100%;
@@ -562,7 +568,7 @@ margin-top: 128px;
 .wizard > .content > .body input[type="checkbox"] {
     display: inline-block;
 }
-.wizard > .content > .body input.error {
+.wizard > .content > .body input.error, .wizard > .content > .body textarea.error {
     background: none repeat scroll 0 0 #FBE3E4;
     border: 1px solid #FBC2C4;
     color: #8A1F11;
@@ -573,9 +579,7 @@ margin-top: 128px;
     text-align:left;
 }
 .wizard > .content > .body label.error {
-    color: #8A1F11;
     display: inline-block;
-    margin-left: 1.5em;
 }
 .wizard > .actions {
     display: block;
@@ -694,7 +698,16 @@ margin-top: 128px;
 #gadgetArea-preview {
     height: 100%;
 }
-
+#gadget-preview-placeholder{
+     border: 3px dashed #CCCCCC;
+    height: 100%;
+    padding: 59px;
+}
+#gadget-preview-placeholder p{
+     font-size: 18px;
+    margin-top: 127px;
+    text-align: center;
+}
 @media all and (max-width: 1225px) {
     #modal-add-gadget {
         left: 2%;

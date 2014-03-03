@@ -132,6 +132,8 @@ $(function () {
         if (target.hasClass('select-btn')) {
             var event = jQuery.Event('assetSelect');
             $(document).trigger(event, $(e.target).parents('.asset-box').data());
+            $('.select-btn').text('Select Gadget').removeClass('active');
+            target.text('Gadget Selected').addClass('active');
         } else if (target.hasClass('btn-browse')) {
             STORE_TAB.click();
         }

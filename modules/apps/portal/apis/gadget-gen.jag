@@ -217,7 +217,7 @@ response.addHeader("Content-Type", "application/json");
 
 
             site.createFile(data.appName, pathToDataJag, jagFileData);
-            result.jagPath = "/" + data.appName + pathToDataJag + "";
+            result.jagPath = data.appName + pathToDataJag + "";
             log.info("File created successfully at " + result.jagPath);
 
             print(result);
