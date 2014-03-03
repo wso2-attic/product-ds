@@ -48,7 +48,7 @@ if (samlResponse != null) {
         session.put("Loged", "true");
         var username = ssoRelyingParty.getLoggedInUser(sessionId);
 
-        var user = require('/modules/user.js');
+        var user = require('store').user;
 
         if (user.loginWithSAML(username)) {
             response.sendRedirect('/{{appName}}');

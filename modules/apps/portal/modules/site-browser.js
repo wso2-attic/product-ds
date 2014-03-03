@@ -41,6 +41,7 @@ var createSite = function (name, username) {
         store = require('store'),
         um = store.server.userManager(tenantId()),
         user = store.user,
+        server = store.server,
         role = user.privateRole(username);
     if (site.loadSite(name)) {
         return false;
@@ -59,7 +60,7 @@ var createSite = function (name, username) {
                         "methods": ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS", "TRACE", "CONNECT", "PATCH"]
                     },
                     //"authRoles": [role]
-                    "users": [user.current().username]
+                    "users": [server.current(session).username]
                 }
             }
         ]
