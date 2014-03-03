@@ -7,6 +7,8 @@ var onShowAssetLoad, tmpGadgetInfo;
 
 var flow_data = {};
 
+var steps;
+
 var applySteps;
 
 (function($) {
@@ -159,9 +161,17 @@ $(function() {
 		$('#modal-add-gadget-wizard').modal('show');
 	}
 
+	$('#modal-add-gadget-wizard').on('hidden', function(){
+		flow_data = {};
+		$( "#wizard-add-gadget" ).steps('reset');
+		$('#wizard-add-gadget > .steps > ul > li.done').removeClass('done').addClass('disabled');
+		$('.wizard-dsType').removeClass('active');
+		$('#wizard-dsTypeSel').val('');
+	});
+
 	applySteps = function() {
 
-		$("#wizard-add-gadget").steps({
+		steps = $("#wizard-add-gadget").steps({
 			headerTag : "h3",
 			bodyTag : "section",
 			transitionEffect : "fade",
