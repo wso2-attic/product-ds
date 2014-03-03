@@ -7,10 +7,6 @@ var onShowAssetLoad, tmpGadgetInfo;
 
 var flow_data = {};
 
-var steps;
-
-var applySteps;
-
 (function($) {
 
 	var extensions = {
@@ -161,94 +157,91 @@ $(function() {
 		$('#modal-add-gadget-wizard').modal('show');
 	}
 
-	$('#modal-add-gadget-wizard').on('hidden', function(){
+
+	$('#modal-add-gadget-wizard').on('hidden', function() {
 		flow_data = {};
-		$( "#wizard-add-gadget" ).steps('reset');
+		$("#wizard-add-gadget").steps('reset');
 		$('#wizard-add-gadget > .steps > ul > li.done').removeClass('done').addClass('disabled');
 		$('.wizard-dsType').removeClass('active');
 		$('#wizard-dsTypeSel').val('');
+
+		$('#gadgetArea-preview').html($("#gadgetPreviewPlaceholder").html());
 	});
 
-	applySteps = function() {
+	$("#wizard-add-gadget").steps({
+		headerTag : "h3",
+		bodyTag : "section",
+		transitionEffect : "fade",
+		onStepChanging : function(event, currentIndex, newIndex) {
 
-		steps = $("#wizard-add-gadget").steps({
-			headerTag : "h3",
-			bodyTag : "section",
-			transitionEffect : "fade",
-			onStepChanging : function(event, currentIndex, newIndex) {
+			if (newIndex == 4) {
+				$('#wizard-add-gadget-btn-next').hide();
+				$('#wizard-add-gadget-btn-finish').show();
+			} else {
+				$('#wizard-add-gadget-btn-next').show();
+				$('#wizard-add-gadget-btn-finish').hide();
+			}
 
-				if (newIndex == 4) {
-					$('#wizard-add-gadget-btn-next').hide();
-					$('#wizard-add-gadget-btn-finish').show();
-				} else {
-					$('#wizard-add-gadget-btn-next').show();
-					$('#wizard-add-gadget-btn-finish').hide();
-				}
+			switch(newIndex) {
+				case 1:
 
-				switch(newIndex) {
-					case 1:
+					var dsType = $('#wizard-dsTypeSel').val();
 
-						var dsType = $('#wizard-dsTypeSel').val();
+					if (flow_data.dataSource != dsType) {
 
-						if (flow_data.dataSource != dsType) {
+						flow_data.dataSource = dsType;
 
-							flow_data.dataSource = dsType;
+						var nextWindowData = {
+							createConnection : metadata.dataSourcesDescriptions[dsType]
+						};
 
+						var source = $("#create-new-connection").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+						var template = Handlebars.compile(source);
+						$('#wizard-add-gadget-p-1').html(template(nextWindowData));
+					}
+					break;
+
+				case 2:
+
+					if (!flow_data.queryData) {
+
+						var conSettings = {};
+						$('#wizard-add-gadget-p-1').find('.control-group').each(function() {
+							conSettings[$(this).find('label').html()] = $(this).find('input').val();
+						});
+
+						flow_data.conSettings = conSettings;
+
+						var window3Data = metadata.datasourceWindow_3[flow_data.dataSource];
+						if (window3Data) {
 							var nextWindowData = {
-								createConnection : metadata.dataSourcesDescriptions[dsType]
+								sqlEditor : window3Data
 							};
 
-							var source = $("#create-new-connection").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+							var source = $("#sql-query-editor").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
 							var template = Handlebars.compile(source);
-							$('#wizard-add-gadget-p-1').html(template(nextWindowData));
+							$('#wizard-add-gadget-p-2').html(template(nextWindowData));
+
+							//  $('#modal-create-new-connection').modal('hide');
+							//$('#modal-sql-query-editor').modal('show');
+						} else {
+							// $('#modal-create-new-connection').modal('hide');
+							// $STORE_MODAL.modal('show');
+							//alert("Select gadget");
 						}
-						break;
+					}
 
-					case 2:
+					break;
 
-						if (!flow_data.queryData) {
+				case 4:
 
-							var conSettings = {};
-							$('#wizard-add-gadget-p-1').find('.control-group').each(function() {
-								conSettings[$(this).find('label').html()] = $(this).find('input').val();
-							});
-
-							flow_data.conSettings = conSettings;
-
-							var window3Data = metadata.datasourceWindow_3[flow_data.dataSource];
-							if (window3Data) {
-								var nextWindowData = {
-									sqlEditor : window3Data
-								};
-
-								var source = $("#sql-query-editor").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
-								var template = Handlebars.compile(source);
-								$('#wizard-add-gadget-p-2').html(template(nextWindowData));
-
-								//  $('#modal-create-new-connection').modal('hide');
-								//$('#modal-sql-query-editor').modal('show');
-							} else {
-								// $('#modal-create-new-connection').modal('hide');
-								// $STORE_MODAL.modal('show');
-								//alert("Select gadget");
-							}
-						}
-
-						break;
-
-					case 4:
-
-						getDataFormat();
-
-						break;
-				}
-
-				return $('#form-wizard').valid();
+					getDataFormat();
+					break;
 			}
-		});
-	}
-	
-	applySteps();
+
+			return $('#form-wizard').valid();
+		}
+	});
 
 	//Next click of first window (Data source window)
 	/*
