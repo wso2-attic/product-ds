@@ -177,7 +177,7 @@ ul li {
 
 .error {
     background: none repeat scroll 0 0 #FFF0C4;
-    border-top: 1px solid #F2C976;
+    border-top: 1px solid #FBC2C4;
     color: #333333;
     font-size: 13px;
     padding: 0 6px;
@@ -523,9 +523,9 @@ margin-top: 128px;
     border-top: 1px solid #3DAA96;
 }
 .wizard > .steps .error a, .wizard > .steps .error a:hover, .wizard > .steps .error a:active {
-    background: none repeat scroll 0 0 #FF4C00;
-    color: #FFFFFF;
-    border-color:#FF4C00;
+    background: none repeat scroll 0 0 #F2DEDE;
+    color: #B94A48;
+    border-color:#F2DEDE;
     font-size:15px;
 }
 .wizard > .content {

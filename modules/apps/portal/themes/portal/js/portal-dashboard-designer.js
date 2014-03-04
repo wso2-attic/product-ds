@@ -166,6 +166,10 @@ $(function() {
 		$('#wizard-dsTypeSel').val('');
 
 		$('#gadgetArea-preview').html($("#gadgetPreviewPlaceholder").html());
+		
+		var cWindow = $('#store-gadget-div').find('iframe').get(0).contentWindow;
+		cWindow.deselectGadget();
+
 	});
 
 	$("#wizard-add-gadget").steps({
