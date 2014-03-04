@@ -169,6 +169,9 @@ $(function() {
 		
 		var cWindow = $('#store-gadget-div').find('iframe').get(0).contentWindow;
 		cWindow.deselectGadget();
+		
+		$('#wizard-add-gadget-btn-prev').addClass('disabled');
+		
 
 	});
 
