@@ -249,7 +249,7 @@ $(function () {
 
             }
 
-            return $('#form-wizard').valid();
+            return (currentIndex > newIndex) ? true : $('#form-wizard').valid();
         }
     });
 
