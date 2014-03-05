@@ -58,6 +58,8 @@
         "/modules/ues.js",
         "/modules/site.js",
         "/modules/server.js",
-        "/modules/user.js"
+        "/modules/user.js",
+        "/modules/datasource-handler.js",
+        "/modules/chart-processor.js",
     ]
 }
