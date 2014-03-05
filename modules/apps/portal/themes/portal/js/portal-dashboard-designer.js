@@ -155,8 +155,6 @@ $(function () {
 
     function onGadgetSelectButton() {
         lastClickedGadgetButton = $(this);
-        //$STORE_MODAL.modal('show');
-        //$('#modal-flow-start').modal('show');
         $('#modal-add-gadget-wizard').modal('show');
     }
 
@@ -255,98 +253,6 @@ $(function () {
         }
     });
 
-    //Next click of first window (Data source window)
-    /*
-     var selectDatasourcesNextClick = function () {
-     var selectedVal = $('#data_source_drop_dwn').find(":selected").text();
-     flow_data.dataSource = selectedVal;
-
-     var nextWindowData = {
-     createConnection: metadata.dataSourcesDescriptions[flow_data.dataSource]
-     };
-
-     var source = $("#create-new-connection").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
-     var template = Handlebars.compile(source);
-     $('#modal-create-new-connection-data').html(template(nextWindowData));
-
-     $('#modal-flow-start').modal('hide');
-     $('#modal-create-new-connection').modal('show');
-
-     };*/
-
-    //Next click of 2nd window (Create Connection window)
-    /*
-     var createConnBtnNextClick = function () {
-     var conSettings = {};
-     $('#modal-create-new-connection-data').find('.control-group').each(function () {
-     conSettings[$(this).find('label').html()] = $(this).find('input').val();
-     });
-
-     flow_data.conSettings = conSettings;
-
-     var window3Data = metadata.datasourceWindow_3[flow_data.dataSource];
-     if (window3Data) {
-     var nextWindowData = {
-     sqlEditor: window3Data
-     };
-
-     var source = $("#sql-query-editor").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
-     var template = Handlebars.compile(source);
-     $('#modal-sql-query-editor-data').html(template(nextWindowData));
-
-     $('#modal-create-new-connection').modal('hide');
-     $('#modal-sql-query-editor').modal('show');
-     }
-     else {
-     $('#modal-create-new-connection').modal('hide');
-     $STORE_MODAL.modal('show');
-     }
-     };*/
-
-    //Back click of 2nd window (Create connection window)
-    /*
-     var createConnBtnBackClick = function () {
-     $('#modal-create-new-connection').modal('hide');
-     $('#modal-flow-start').modal('show');
-     };*/
-
-    //Next click of 3rd window (SQL query window)
-    /*
-     var sqlQueryBtnNextClick = function () {
-     var queryData = {};
-     $('#modal-sql-query-editor-data').find('.control-group').each(function () {
-     queryData[$(this).find('label').html()] = $(this).find('input').val();
-     });
-
-     flow_data.queryData = queryData;
-
-     caramel.ajax({
-     type: 'POST',
-     url: "apis/gadgetGen?action=queryDb",
-     data: JSON.stringify(flow_data),
-     success: processSqlQueryResponse,
-     contentType: 'application/json',
-     dataType: 'json'
-     });
-
-     };*/
-
-    /*
-     var processSqlQueryResponse = function (data) {
-     flow_data.column_headers = data;
-     $('#modal-sql-query-editor').modal('hide');
-     $STORE_MODAL.modal('show');
-
-     }*/
-
-    //Back click of the 3rd window (SQL query window)
-    /*
-     var sqlQueryBtnBackClick = function () {
-     $('#modal-sql-query-editor').modal('hide');
-     $('#modal-create-new-connection').modal('show');
-
-     };*/
-
     //Next Click of 4th window (Gadget store window)
     onShowAssetLoad = function () {
         var cWindow = $('#store-gadget-div').find('iframe').get(0).contentWindow;
@@ -392,8 +298,6 @@ $(function () {
             processFieldMapping('preview');
         });
 
-        // $STORE_MODAL.modal('hide');
-        // $('#modal-data-mapper').modal('show');
     }
     var newlabelID = 0;
 
@@ -420,19 +324,6 @@ $(function () {
         var divCont = populateMappingRow(flow_data.dataColumns, flow_data.column_headers, false);
         $('#modal-data-mapping').append(divCont);
     }
-    //Back click of the 4th window (Gadget store window)
-    /*
-     var gadgetWindowBtnBackClick = function () {
-     $STORE_MODAL.modal('hide');
-     $('#modal-sql-query-editor').modal('show');
-
-     };*/
-
-    //Finish button of 5 th window (Data mapping window)
-    /*
-     var flowFinishBtnNextClick = function () {
-     processFieldMapping();
-     };*/
 
     var processFieldMapping = function (mode) {
         var mappingData = [];
@@ -519,44 +410,6 @@ $(function () {
             dataType: 'json'
         });
     }
-    /*
-     var insertGadgetToPreview = function (data) {
-     var modPrefs = {};
-     var prefs = {};
-     prefs.dataSource = data.jagPath;
-     prefs.updateGraph = flow_data.refreshSequence;
-     modPrefs.prefs = prefs;
-
-     //$('#modal-data-mapper').modal('hide');
-     //var gadgetLi = lastClickedGadgetButton.parents('li');
-     var gadgetLi = $('#gadget-preview');
-     gadgetLi.data('gadgetInfo', tmpGadgetInfo);
-     insertGadgetPreview(gadgetLi, tmpGadgetInfo.attributes.overview_url, modPrefs);
-     //var placeholder = lastClickedGadgetButton.siblings('.designer-placeholder');
-     //lastClickedGadgetButton.remove();
-     //placeholder.remove();
-
-     }
-     */
-    //Back button of 5 th window (Data Mapping window)
-    /*
-     var flowFinishWindowBackClick = function () {
-     $('#modal-data-mapper').modal('hide');
-     $STORE_MODAL.modal('show');
-     };
-
-     $('#add-gadget-btn-next').bind('click', selectDatasourcesNextClick);
-
-     $('#create-connection-btn-next').bind('click', createConnBtnNextClick);
-     $('#create-connection-btn-back').bind('click', createConnBtnBackClick);
-
-     $('#sql-connection-btn-next').bind('click', sqlQueryBtnNextClick);
-     $('#sql-connection-btn-back').bind('click', sqlQueryBtnBackClick);
-
-     $('#add-gadget-window-btn-back').bind('click', gadgetWindowBtnBackClick);
-
-     $('#flow-finish-btn-next').bind('click', flowFinishBtnNextClick);
-     $('#flow-finish-btn-back').bind('click', flowFinishWindowBackClick);*/
 
     $('#wizard-add-gadget-btn-prev').click(function () {
         $('a[href=#previous]').click();
@@ -599,12 +452,9 @@ $(function () {
 
     UESContainer.renderGadget('store-gadget-div', portalGadgets.store);
 
+	//id to be use in dynamically added gadgets.
     var id = 1;
-    //id to be use in dynamically added gadgets.
-
-    var id = 1;
-    //id to be use in dynamically added gadgets.
-
+    
     function insertGadget(parentEl, url, pref) {
         id++;
         var gadgetDiv = parentEl.find('.add-gadget-item');
@@ -622,8 +472,7 @@ $(function () {
 
         var idStr = 'gadgetArea-preview';
         if ($('#' + idStr).length) {
-            UESContainer.redrawGadget(idStr, pref);
-            return;
+            UESContainer.removeGadget(idStr);
         }
         parentEl.html('<div id="' + idStr + '">');
         UESContainer.renderGadget(idStr, url, pref || {}, function (gadgetInfo) {
@@ -761,18 +610,7 @@ $(function () {
         }
         return layoutFormat;
     }
-
-    drawGadgets();
-
-    $(window).bind('resize', resize);
-    $(window).bind('load', checkMode);
-    /*
-     $("#btnSetLayout").click(function() {
-
-     $('#modal-gadget-size').modal('show');
-
-     });
-     */
+   
     $('#btn-add-dummy-gadget').click(function (e) {
         e.preventDefault();
         var $dummy = $('#dummy-size');
@@ -783,13 +621,7 @@ $(function () {
         $('.dropdown.open .dropdown-toggle').dropdown('toggle');
     });
 
-    /*
-     $("#btn-exit-editor").click(function() {
-     $('.sub-navbar-designer').slideUp("fast", function() {
-     changeMode('view');
 
-     });
-     });*/
 
     $('#btn-preview-dash').click(function () {
         if ($(this).data('tooltip') == 'hide') {
@@ -1017,6 +849,11 @@ $(function () {
                 }
             });
     });
+    
+    drawGadgets();
+
+    $(window).bind('resize', resize);
+    $(window).bind('load', checkMode);
 
 });
 
