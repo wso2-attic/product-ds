@@ -386,9 +386,10 @@ $(function () {
                 gadgetLi.data('gadgetInfo', tmpGadgetInfo);
                 insertGadgetPreview(gadgetLi, data.gadgetLocation + tmpGadgetInfo.attributes.overview_url, modPrefs);
             } else {
+                tmpGadgetInfo.attributes.overview_url =  data.gadgetLocation + tmpGadgetInfo.attributes.overview_url
                 gadgetLi = lastClickedGadgetButton.parents('li');
                 gadgetLi.data('gadgetInfo', tmpGadgetInfo);
-                insertGadget(gadgetLi, data.gadgetLocation + tmpGadgetInfo.attributes.overview_url, modPrefs);
+                insertGadget(gadgetLi, tmpGadgetInfo.attributes.overview_url, modPrefs);
                 var placeholder = lastClickedGadgetButton.siblings('.designer-placeholder');
                 lastClickedGadgetButton.remove();
                 placeholder.remove();
@@ -662,6 +663,8 @@ $(function () {
 
         flow_data.appName = $('#inp-dashboard').val();
         flow_data.queryData = queryData;
+
+        isSelectionChanged = true;
 
         caramel.ajax({
             type: 'POST',
