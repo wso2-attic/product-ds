@@ -384,6 +384,7 @@ $(function () {
     }
 
     var deleteTempFiles = function () {
+    	tmpGadgetInfo = {};
         caramel.ajax({
             type: 'POST',
             url: 'apis/gadgetGen?action=deleteTemp',
