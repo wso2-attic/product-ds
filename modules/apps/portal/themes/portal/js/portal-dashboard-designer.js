@@ -387,6 +387,7 @@ $(function () {
                 insertGadgetPreview(gadgetLi, data.gadgetLocation + tmpGadgetInfo.attributes.overview_url, modPrefs);
             } else {
                 tmpGadgetInfo.attributes.overview_url =  data.gadgetLocation + tmpGadgetInfo.attributes.overview_url
+                console.log("~~~~~~~~~~~~~~~~~~~~~~~~~ overview_url~~~~~~~~~~~~~~  "+tmpGadgetInfo.attributes.overview_url)
                 gadgetLi = lastClickedGadgetButton.parents('li');
                 gadgetLi.data('gadgetInfo', tmpGadgetInfo);
                 insertGadget(gadgetLi, tmpGadgetInfo.attributes.overview_url, modPrefs);
@@ -399,6 +400,7 @@ $(function () {
     }
 
     var deleteTempFiles = function () {
+        tmpGadgetInfo = {};
         caramel.ajax({
             type: 'POST',
             url: 'apis/gadgetGen?action=deleteTemp',
