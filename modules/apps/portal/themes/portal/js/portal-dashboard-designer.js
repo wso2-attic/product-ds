@@ -429,6 +429,49 @@ $(function () {
         $('#wizard-add-gadget-btn-prev').removeClass().addClass('btn btn-primary btn-large ' + cssClass);
 
     })
+    
+     $('body').on('click', '.wizard-dsType', function (e) {
+        e.preventDefault();
+        $('.wizard-dsType').removeClass('active');
+        $(this).toggleClass('active');
+        $('#wizard-dsTypeSel').val($(this).attr('data-dsType'));
+    });
+
+    $('body').on('click', '.btn-execQuery', function (e) {
+        //var query = $(this).closest('.inp-query').val();
+        e.preventDefault();
+        var queryData = {};
+        $('#wizard-add-gadget-p-2').find('.control-group').each(function () {
+            queryData[$(this).find('label').html()] = $(this).find('input').val() || $(this).find('textarea').val();
+        });
+
+        flow_data.appName = $('#inp-dashboard').val();
+        flow_data.queryData = queryData;
+
+        isSelectionChanged = true;
+
+        caramel.ajax({
+            type: 'POST',
+            url: "apis/gadgetGen?action=queryDbAll",
+            data: JSON.stringify(flow_data),
+            success: renderDatasetTable,
+            contentType: 'application/json',
+            dataType: 'json'
+        });
+
+    });
+
+    var renderDatasetTable = function (result) {
+        $('#wizard-add-gadget-p-2 .well').animate({
+            'margin-top': 0
+        });
+
+        flow_data.column_headers = result.tableHeaders;
+        var source = $("#sql-query-table").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+        var template = Handlebars.compile(source);
+        $('#sql-editor-dataset').html(template(result));
+    }
+    
     //------------------------------------------------------------------------end of gadget-gen ui -------------------------------
 
     var eventRegistered = false;
@@ -648,47 +691,6 @@ $(function () {
         $('.gs_w').show();
     });
 
-    $('body').on('click', '.wizard-dsType', function (e) {
-        e.preventDefault();
-        $('.wizard-dsType').removeClass('active');
-        $(this).toggleClass('active');
-        $('#wizard-dsTypeSel').val($(this).attr('data-dsType'));
-    });
-
-    $('body').on('click', '.btn-execQuery', function (e) {
-        //var query = $(this).closest('.inp-query').val();
-        e.preventDefault();
-        var queryData = {};
-        $('#wizard-add-gadget-p-2').find('.control-group').each(function () {
-            queryData[$(this).find('label').html()] = $(this).find('input').val() || $(this).find('textarea').val();
-        });
-
-        flow_data.appName = $('#inp-dashboard').val();
-        flow_data.queryData = queryData;
-
-        isSelectionChanged = true;
-
-        caramel.ajax({
-            type: 'POST',
-            url: "apis/gadgetGen?action=queryDbAll",
-            data: JSON.stringify(flow_data),
-            success: renderDatasetTable,
-            contentType: 'application/json',
-            dataType: 'json'
-        });
-
-    });
-
-    var renderDatasetTable = function (result) {
-        $('#wizard-add-gadget-p-2 .well').animate({
-            'margin-top': 0
-        });
-
-        flow_data.column_headers = result.tableHeaders;
-        var source = $("#sql-query-table").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
-        var template = Handlebars.compile(source);
-        $('#sql-editor-dataset').html(template(result));
-    }
     var formArrayToPref = function (a) {
         var o = {};
         $.each(a, function () {
