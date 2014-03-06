@@ -56,9 +56,7 @@
     ],
 
     "copyRoot": [
-    	"/portal.json",
-    	"/portal.js",
-        "/datasource-config.json",
+    	"/datasource-config.json",
         "/apis/ues.jag",
         "/apis/gadget-gen.jag",
         "/modules/ues.js",
