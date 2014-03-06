@@ -124,7 +124,6 @@ $(function () {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~start gadget-gen ui~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     //Select Datasource window
-    //Select Datasource window
     function onGadgetSelectButton() {
         lastClickedGadgetButton = $(this);
         gadgetRendered = false;
@@ -444,7 +443,24 @@ $(function () {
         });
 
     });
+	
+	$('#modal-add-gadget-wizard').on('hidden', function () {
+        flow_data = {};
+        $("#wizard-add-gadget").steps('reset');
+        $('#wizard-add-gadget > .steps > ul > li.done').removeClass('done').addClass('disabled');
+        $('.wizard-dsType').removeClass('active');
+        $('#wizard-dsTypeSel').val('');
 
+        $('#gadgetArea-preview').html($("#gadgetPreviewPlaceholder").html());
+
+        var cWindow = $('#store-gadget-div').find('iframe').get(0).contentWindow;
+        cWindow.deselectGadget();
+
+        $('#wizard-add-gadget-btn-prev').addClass('disabled');
+
+
+    });
+    
     var renderDatasetTable = function (result) {
         $('#wizard-add-gadget-p-2 .well').animate({
             'margin-top': 0
@@ -620,12 +636,6 @@ $(function () {
     var lastClickedGadgetButton = null;
     var gadgetRendered;
 
-//	function onGadgetSelectButton() {
-//		lastClickedGadgetButton = $(this);
-//		gadgetRendered = false;
-//
-//		$STORE_MODAL.modal('show');
-//	}
 
     var id = 1;
 
