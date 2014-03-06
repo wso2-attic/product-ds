@@ -12,8 +12,7 @@ response.sendRedirect('/{{appName}}/login');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    f
-
+ 
     <!-- Le styles -->
     <!-- END imports needed for gadget rendering -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -274,7 +273,7 @@ response.sendRedirect('/{{appName}}/login');
                     <form id="form-wizard">
                         <div id="wizard-add-gadget">
                             <h3>Select Data Source</h3>
-                            <section id="datasource-step">
+                            <section>
 
                             </section>
 
@@ -329,6 +328,7 @@ response.sendRedirect('/{{appName}}/login');
                     </button>
                 </div>
             </div>
+
             <!--------------------------------end of the gadget-gen-ui--------------------------------------------->
 
 
@@ -364,7 +364,7 @@ response.sendRedirect('/{{appName}}/login');
 </script>
 
 <script id="widget-template2" type="text/x-handlebars-template">
-    <li class="layout_block" data-wid="[[wid]]" data-url="[[url]]" data-prefs="[[prefs]]">
+    <li class="layout_block" data-wid="{{wid}}" data-url="{{url}}" data-prefs="{{prefs}}">
         <div class="grid_header">
             <input class="gadget-title-txt">
             <span class="grid_header_controls">
@@ -385,8 +385,8 @@ response.sendRedirect('/{{appName}}/login');
 </script>
 
 <script id="widget-template-blank2" type="text/x-handlebars-template">
-    <li class="layout_block" data-url="[[url]]" data-row="[[y]]" data-col="[[x]]" data-sizex="[[width]]"
-        data-sizey="[[height]]" data-wid="[[wid]]" data-prefs="[[prefs]]">
+    <li class="layout_block" data-url="{{url}}" data-row="{{y}}" data-col="{{x}}" data-sizex="{{width}}"
+        data-sizey="{{height}}" data-wid="{{wid}}" data-prefs="{{prefs}}">
         <div class="grid_header">
             <input class="gadget-title-txt">
             <span class="grid_header_controls">
@@ -557,7 +557,7 @@ response.sendRedirect('/{{appName}}/login');
             </div>
         </div>
         <hr>
-        <div class="form-inline pull-right">
+        <div class="form-inline">
 
             <button class="btn" id="mapping-add-series-btn">
                 +
@@ -577,19 +577,20 @@ response.sendRedirect('/{{appName}}/login');
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="js/jquery-1.8.3.min.js"></script>
-<script src="js/jquery.steps.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/navigation.js"></script>
 <script src="js/jquery-ui-1.10.1.custom.min.js"></script>
 <script src="js/jquery.gridster.with-extras.min.js"></script>
 <script src="js/handlebars.js"></script>
 <script src="js/shindig.js"></script>
+<script>
+	var caramel = caramel || {}; caramel.context = "/{{appName}}"; caramel.url = function (path) { return this.context + (path.charAt(0) !== '/' ? '/' : '') + path; };
+</script>
 <script src="js/UESContainer.js"></script>
+<script src="js/jquery.validate.js"></script>
+<script src="js/jquery.steps.js"></script>
 <script src="js/portal-dashboard-designer.js"></script>
 <script src="js/caramel-client.js"></script>
-<script>
-    UESContainer.renderGadget('store-gadget-div', "{{showAssetGadget}}");
-</script>
 
 </body>
 </html>

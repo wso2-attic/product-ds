@@ -7,7 +7,7 @@ var onShowAssetLoad, tmpGadgetInfo, isSelectionChanged = false;
 
 var flow_data = {};
 var metadata;
-var caramel = {};
+var caramel = caramel || {};
 
 (function ($) {
 
@@ -121,18 +121,18 @@ $(function () {
 
     $('.btn-add-gadget').live('click', onGadgetSelectButton);
 
-    //---------------------------------- start gadget-gen-ui -----------------------------------------
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~start gadget-gen ui~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+    //Select Datasource window
     //Select Datasource window
     function onGadgetSelectButton() {
         lastClickedGadgetButton = $(this);
         gadgetRendered = false;
-        //$STORE_MODAL.modal('show');
 
         if (!metadata) {
             caramel.ajax({
                 type: 'POST',
-                url: "../datasource-config.json",
+                url: "datasource-config.json",
                 success: genDataSourceDropdown,
                 contentType: 'application/json',
                 dataType: 'json'
@@ -152,128 +152,115 @@ $(function () {
 
         var source = $("#select-data-source").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
         var template = Handlebars.compile(source);
-        $('#datasource-step').html(template(windowData));
-        //$('#modal-flow-start').modal('show');
+        $('#wizard-add-gadget-p-0').html(template(windowData));
         $('#modal-add-gadget-wizard').modal('show');
 
     };
 
-    var selectDatasourcesNextClick = function () {
-        var selectedVal = $('#data_source_drop_dwn').find(":selected").text();
-        flow_data.dataSource = selectedVal;
+    $("#wizard-add-gadget").steps({
+        headerTag: "h3",
+        bodyTag: "section",
+        transitionEffect: "fade",
+        onStepChanging: function (event, currentIndex, newIndex) {
 
-        var nextWindowData = {
-            createConnection: metadata.dataSourcesDescriptions[flow_data.dataSource]
-        };
+            if (newIndex == 4) {
+                $('#wizard-add-gadget-btn-next').hide();
+                $('#wizard-add-gadget-btn-finish').show();
+            } else {
+                $('#wizard-add-gadget-btn-next').show();
+                $('#wizard-add-gadget-btn-finish').hide();
+            }
 
-        var source = $("#create-new-connection").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
-        var template = Handlebars.compile(source);
-        $('#modal-create-new-connection-data').html(template(nextWindowData));
+            switch (newIndex) {
+                case 1:
 
-        $('#modal-flow-start').modal('hide');
-        $('#modal-create-new-connection').modal('show');
+                    var dsType = $('#wizard-dsTypeSel').val();
 
-    };
+                    if (flow_data.dataSource != dsType) {
 
-    //Next click of 2nd window (Create Connection window)
-    var createConnBtnNextClick = function () {
-        var conSettings = {};
-        $('#modal-create-new-connection-data').find('.control-group').each(function () {
-            conSettings[$(this).find('label').html()] = $(this).find('input').val();
-        });
+                        flow_data.dataSource = dsType;
 
-        flow_data.conSettings = conSettings;
+                        var nextWindowData = {
+                            createConnection: metadata.dataSourcesDescriptions[dsType]
+                        };
 
-        var window3Data = metadata.datasourceWindow_3[flow_data.dataSource];
-        if (window3Data) {
-            var nextWindowData = {
-                sqlEditor: window3Data
-            };
+                        var source = $("#create-new-connection").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+                        var template = Handlebars.compile(source);
+                        $('#wizard-add-gadget-p-1').html(template(nextWindowData));
+                    }
+                    break;
 
-            var source = $("#sql-query-editor").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
-            var template = Handlebars.compile(source);
-            $('#modal-sql-query-editor-data').html(template(nextWindowData));
+                case 2:
 
-            $('#modal-create-new-connection').modal('hide');
-            $('#modal-sql-query-editor').modal('show');
+                    if (!flow_data.queryData) {
+
+                        var conSettings = {};
+                        $('#wizard-add-gadget-p-1').find('.control-group').each(function () {
+                            conSettings[$(this).find('label').html()] = $(this).find('input').val();
+                        });
+
+                        flow_data.conSettings = conSettings;
+
+                        var window3Data = metadata.datasourceWindow_3[flow_data.dataSource];
+                        if (window3Data) {
+                            var nextWindowData = {
+                                sqlEditor: window3Data
+                            };
+
+                            var source = $("#sql-query-editor").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+                            var template = Handlebars.compile(source);
+                            $('#wizard-add-gadget-p-2').html(template(nextWindowData));
+
+                        } else {
+ 
+                        }
+                    }
+
+                    break;
+                    
+                    
+                case 3:
+                	if($('#__gadget_store-gadget-div').length < 1){
+                		UESContainer.renderGadget('store-gadget-div', "http://localhost:9763/portal/gadgets/show-assets/show-assets.xml");
+                	}
+                	                    
+                    break;
+
+                case 4:
+                    if (isSelectionChanged) {
+                        getDataFormat();
+                    }
+                    break;
+
+            }
+
+            return (currentIndex > newIndex) ? true : $('#form-wizard').valid();
         }
-        else {
-            $('#modal-create-new-connection').modal('hide');
-            $STORE_MODAL.modal('show');
-        }
-    };
-
-    //Back click of 2nd window (Create connection window)
-    var createConnBtnBackClick = function () {
-        $('#modal-create-new-connection').modal('hide');
-        $('#modal-flow-start').modal('show');
-    };
-
-    //Next click of 3rd window (SQL query window)
-    var sqlQueryBtnNextClick = function () {
-        var queryData = {};
-        $('#modal-sql-query-editor-data').find('.control-group').each(function () {
-            queryData[$(this).find('label').html()] = $(this).find('input').val();
-        });
-
-        flow_data.queryData = queryData;
-
-        caramel.ajax({
-            type: 'POST',
-            url: "../apis/gadgetGen?action=queryDb",
-            data: JSON.stringify(flow_data),
-            success: processSqlQueryResponse,
-            contentType: 'application/json',
-            dataType: 'json'
-        });
-
-    };
-
-    var processSqlQueryResponse = function (data) {
-        flow_data.column_headers = data;
-        $('#modal-sql-query-editor').modal('hide');
-        $STORE_MODAL.modal('show');
-
-    }
-
-    //Back click of the 3rd window (SQL query window)
-    var sqlQueryBtnBackClick = function () {
-        $('#modal-sql-query-editor').modal('hide');
-        $('#modal-create-new-connection').modal('show');
-
-    };
+    });
 
     //Next Click of 4th window (Gadget store window)
     onShowAssetLoad = function () {
-        var cWindow = $('#modal-add-gadget').find('iframe').get(0).contentWindow;
+        var cWindow = $('#store-gadget-div').find('iframe').get(0).contentWindow;
         if (cWindow.addListener) {
             cWindow.addListener(function (gadgetInfo) {
-                var gadgetLi = lastClickedGadgetButton.parents('li');
-
-                gadgetLi.data('gadgetInfo', gadgetInfo);
-                var h3 = gadgetLi.find('h3');
-                if (h3) {
-                    h3.parent().append('<input class="gadget-title-txt">');
-                    h3.remove()
-                }
                 tmpGadgetInfo = gadgetInfo;
-                getDataFormat();        //get the data format that the chart requires (x-axis, y-axis etc)
+                isSelectionChanged = true;
+
             });
         }
     };
 
     var getDataFormat = function () {
-        console.log("")
+        isSelectionChanged = false;
         caramel.ajax({
             type: 'POST',
-            url: "../../portal/" + tmpGadgetInfo.attributes.overview_dataformat,
+            url: '../portal/' + tmpGadgetInfo.attributes.overview_dataformat,
             success: generateDataMapping,
             contentType: 'application/json',
             dataType: 'json'
         });
 
     }
-
     var generateDataMapping = function (tableData) {
         var divCont = populateMappingRow(tableData.dataColumns, flow_data.column_headers, true);
         $('#modal-data-mapping').html(divCont);
@@ -288,10 +275,16 @@ $(function () {
         var template = Handlebars.compile(source);
         $('#modal-data-mapping-extension-space').html(template(nextWindowData));
 
-        $('#mapping-add-series-btn').bind('click', addSeriesBtnClick);  //To add more series
-        $STORE_MODAL.modal('hide');
-        $('#modal-data-mapper').modal('show');
+        $('#mapping-add-series-btn').bind('click', addSeriesBtnClick);
+        //To add more series
+
+        $('#btn-preview-gadget').bind('click', function (e) {
+            e.preventDefault();
+            processFieldMapping('preview');
+        });
+
     }
+    var newlabelID = 0;
 
     var populateMappingRow = function (dataColumns, columnHeaders, isFirst) {
         var columns = [];
@@ -302,6 +295,7 @@ $(function () {
             columns = dataColumns;
         }
         var nextWindowData = {
+            id: newlabelID++,
             dataColumns: columns,
             columnHeaders: columnHeaders
         };
@@ -310,26 +304,18 @@ $(function () {
         return template(nextWindowData);
 
     }
-
-    var addSeriesBtnClick = function () {
+    var addSeriesBtnClick = function (e) {
+        e.preventDefault();
         var divCont = populateMappingRow(flow_data.dataColumns, flow_data.column_headers, false);
         $('#modal-data-mapping').append(divCont);
     }
 
-    //Back click of the 4th window (Gadget store window)
-    var gadgetWindowBtnBackClick = function () {
-        $STORE_MODAL.modal('hide');
-        $('#modal-sql-query-editor').modal('show');
-
-    };
-
-    //Finish button of 5 th window (Data mapping window)
-    var flowFinishBtnNextClick = function () {
-        processFieldMapping();
-    };
-
-    var processFieldMapping = function () {
+    var processFieldMapping = function (mode) {
         var mappingData = [];
+        var url = 'apis/gadgetGen?action=createJag';
+
+        url = (mode == 'preview') ? url + '&mode=preview' : url;
+
         $('#modal-data-mapping').children().each(function () {
             var series = {}
             if (mappingData[0]) {
@@ -342,71 +328,136 @@ $(function () {
             });
             mappingData.push(series);
         });
-
         var dashboard = $('#inp-dashboard').val();
+        flow_data.chartTitle = $('#chart-title-input').val();
         flow_data.refreshSequence = $('#refresh-sequence-input').val();
 
         var labelData = {};
-        $('#data-labels').children().each(function () {
-            labelData[$(this).children()[0].innerHTML] = $(this).find('input').val();
+        $('#data-labels').find('.control-group').each(function () {
+            labelData[$(this).find('label').html()] = $(this).find('input').val();
         });
 
         flow_data.mappingData = mappingData;
         flow_data.dataLabels = labelData;
-        flow_data.appName = dashboard;
+        flow_data.chartLocation = tmpGadgetInfo.attributes.overview_location;
         flow_data.chartType = tmpGadgetInfo.attributes.overview_name;
         flow_data.chartOptions = tmpGadgetInfo.attributes.overview_chartoptions;
 
         caramel.ajax({
             type: 'POST',
-            url: "../apis/gadgetGen?action=createJag",
+            url: url,
             data: JSON.stringify(flow_data),
-            success: insertGadgetToDashBoard,
+            success: insertGadgetToTarget(mode),
             contentType: 'application/json',
             dataType: 'json'
         });
 
     }
+    var insertGadgetToTarget = function (mode) {
 
-    var insertGadgetToDashBoard = function (data) {
-        var modPrefs = {};
-        var prefs = {};
-        prefs.dataSource = data.jagPath;
-        prefs.updateGraph = flow_data.refreshSequence;
-        modPrefs.prefs = prefs;
+        return function (data) {
+            var modPrefs = {};
+            var prefs = {};
+            prefs.dataSource = data.jagPath;
+            prefs.updateGraph = flow_data.refreshSequence;
+            modPrefs.prefs = prefs;
 
-        $('#modal-data-mapper').modal('hide');
-        var gadgetLi = lastClickedGadgetButton.parents('li');
-        gadgetLi.data('gadgetInfo', tmpGadgetInfo);
-        insertGadget(gadgetLi, tmpGadgetInfo.attributes.overview_url, modPrefs);
-        var placeholder = lastClickedGadgetButton.siblings('.designer-placeholder');
-        lastClickedGadgetButton.remove();
-        placeholder.remove();
+            var gadgetLi;
 
+            //$('#modal-data-mapper').modal('hide');
+
+            if (mode == 'preview') {
+                gadgetLi = $('#gadget-preview');
+                gadgetLi.data('gadgetInfo', tmpGadgetInfo);
+                insertGadgetPreview(gadgetLi, data.gadgetLocation + tmpGadgetInfo.attributes.overview_url, modPrefs);
+            } else {
+                tmpGadgetInfo.attributes.overview_url =  data.gadgetLocation + tmpGadgetInfo.attributes.overview_url
+                gadgetLi = lastClickedGadgetButton.parents('li');
+                gadgetLi.data('gadgetInfo', tmpGadgetInfo);
+                insertGadget(gadgetLi, tmpGadgetInfo.attributes.overview_url, modPrefs);
+                var placeholder = lastClickedGadgetButton.siblings('.designer-placeholder');
+                lastClickedGadgetButton.remove();
+                placeholder.remove();
+                deleteTempFiles();
+            }
+        }
     }
 
-    //Back button of 5 th window (Data Mapping window)
-    var flowFinishWindowBackClick = function () {
-        $('#modal-data-mapper').modal('hide');
-        $STORE_MODAL.modal('show');
-    };
+    var deleteTempFiles = function () {
+        caramel.ajax({
+            type: 'POST',
+            url: 'apis/gadgetGen?action=deleteTemp',
+            data: flow_data.appName,
+            success: function () {
+                $('#modal-add-gadget-wizard').modal('hide');
+                flow_data = {};
+            },
+            contentType: 'application/json',
+            dataType: 'json'
+        });
+    }
 
-    $('#add-gadget-btn-next').bind('click', selectDatasourcesNextClick);
+    $('#wizard-add-gadget-btn-prev').click(function () {
+        $('a[href=#previous]').click();
+    });
+    $('#wizard-add-gadget-btn-next').click(function () {
+        $('a[href=#next]').click();
+    });
+    $('#wizard-add-gadget-btn-finish').click(function () {
+        processFieldMapping('dashboard');
+    });
 
-    $('#create-connection-btn-next').bind('click', createConnBtnNextClick);
-    $('#create-connection-btn-back').bind('click', createConnBtnBackClick);
+    $('#wizard-add-gadget-btn-prev, #wizard-add-gadget-btn-next').bind('click', function () {
+        var cssClass = $('.actions > ul > li').eq(0).attr('class');
+        $('#wizard-add-gadget-btn-prev').removeClass().addClass('btn btn-primary btn-large ' + cssClass);
 
-    $('#sql-connection-btn-next').bind('click', sqlQueryBtnNextClick);
-    $('#sql-connection-btn-back').bind('click', sqlQueryBtnBackClick);
+    })
+    
+     $('body').on('click', '.wizard-dsType', function (e) {
+        e.preventDefault();
+        $('.wizard-dsType').removeClass('active');
+        $(this).toggleClass('active');
+        $('#wizard-dsTypeSel').val($(this).attr('data-dsType'));
+    });
 
-    $('#add-gadget-window-btn-back').bind('click', gadgetWindowBtnBackClick);
+    $('body').on('click', '.btn-execQuery', function (e) {
+        //var query = $(this).closest('.inp-query').val();
+        e.preventDefault();
+        var queryData = {};
+        $('#wizard-add-gadget-p-2').find('.control-group').each(function () {
+            queryData[$(this).find('label').html()] = $(this).find('input').val() || $(this).find('textarea').val();
+        });
 
-    $('#flow-finish-btn-next').bind('click', flowFinishBtnNextClick);
-    $('#flow-finish-btn-back').bind('click', flowFinishWindowBackClick);
+        flow_data.appName = $('#inp-dashboard').val();
+        flow_data.queryData = queryData;
 
+        isSelectionChanged = true;
+
+        caramel.ajax({
+            type: 'POST',
+            url: "apis/gadgetGen?action=queryDbAll",
+            data: JSON.stringify(flow_data),
+            success: renderDatasetTable,
+            contentType: 'application/json',
+            dataType: 'json'
+        });
+
+    });
+
+    var renderDatasetTable = function (result) {
+        $('#wizard-add-gadget-p-2 .well').animate({
+            'margin-top': 0
+        });
+
+        flow_data.column_headers = result.tableHeaders;
+        var source = $("#sql-query-table").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+        var template = Handlebars.compile(source);
+        $('#sql-editor-dataset').html(template(result));
+    }
+    
     //------------------------------------------------------------------------end of gadget-gen ui -------------------------------
-
-
+    
+    
     var eventRegistered = false;
     // is an event is resisted to show-asset gadget to get the selected gadget.
     function drawGadgets() {
@@ -588,6 +639,21 @@ $(function () {
             parentEl.find('input').val(visibleTitle);
         });
     }
+    
+    function insertGadgetPreview(parentEl, url, pref) {
+
+        var idStr = 'gadgetArea-preview';
+        if ($('#' + idStr).length) {
+            UESContainer.removeGadget(idStr);
+        }
+        parentEl.html('<div id="' + idStr + '">');
+        UESContainer.renderGadget(idStr, url, pref || {}, function (gadgetInfo) {
+            if (gadgetInfo.meta.modulePrefs) {
+                //parentEl.find('.grid_header').append('<input class="gadget-title-txt" value="' + gadgetInfo.meta.modulePrefs.title + '">');
+                //parentEl.find('.show-widget-pref').show();
+            }
+        });
+    }
 
     function refreshAllGadgets() {
         var iframes = $('iframe').not('#__gadget_gadget-content-g1');
@@ -702,7 +768,7 @@ $(function () {
         }
         return layoutFormat;
     }
-
+    
     drawGadgets();
     changeMode('view');
 
@@ -773,7 +839,7 @@ $(function () {
                     $this.show();
                 }
             });
-            $('h3').each(function () {
+            $('.layout_block .grid_header h3').each(function () {
                 var $this = $(this);
                 if ($this.parents('.grid_header').siblings('.designer-placeholder').length == 0) {
                     $this.parent().append('<input class="gadget-title-txt" value="' + $this.text() + '">');
