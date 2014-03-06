@@ -3,7 +3,7 @@ var layout, dummy_gadget_block = 50, block_params = {
     max_height: 6
 }, MARGINS_RATIO = 0.1, COLS = block_params.max_width;
 
-var onShowAssetLoad, tmpGadgetInfo;
+var onShowAssetLoad, tmpGadgetInfo, isSelectionChanged = false;
 
 var flow_data = {};
 var metadata;
@@ -48,6 +48,8 @@ $(function () {
     var $LAYOUTS_GRID = $('#layouts_grid');
     var newDimensions = calculateNewDimensions();
 
+    var widgetId = 1;
+
     var widgetTemplate = Handlebars.compile($('#widget-template').html());
     var widgetTemplate2 = Handlebars.compile($('#widget-template2').html());
     var widgetTemplateBlank = Handlebars.compile($('#widget-template-blank').html());
@@ -77,6 +79,11 @@ $(function () {
         });
 
         drawGrid(newDimensions[0][0]);
+
+        var iframes = $('iframes');
+        $.each(iframes, function (i, w) {
+            //refreshGadget(i);
+        });
 
         clearTimeout(timeOut);
         timeOut = setTimeout(setGridOffsetTop, 500);
@@ -145,8 +152,9 @@ $(function () {
 
         var source = $("#select-data-source").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
         var template = Handlebars.compile(source);
-        $('#data_source_drop_dwn-div').html(template(windowData));
-        $('#modal-flow-start').modal('show');
+        $('#datasource-step').html(template(windowData));
+        //$('#modal-flow-start').modal('show');
+        $('#modal-add-gadget-wizard').modal('show');
 
     };
 
