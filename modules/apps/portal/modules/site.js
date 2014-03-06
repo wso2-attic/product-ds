@@ -158,10 +158,7 @@ var createFile = function (site, file, content) {
  */
 var createDir = function (site, dir) {
     var p = sitePath(site),
-        file = new File(p + dir);
-    if (file.isExists()) {
-        throw new Error('File/Directory with the specified name, already exists');
-    }
+    file = new File(p + dir);
     file.mkdir();
     return file;
 };
@@ -244,10 +241,10 @@ var loadFile = function (site, file) {
  * @return {File}
  */
 var isFileExists = function (site, file) {
-    var exists = true ;
+    var exists = true;
     var f = new File(filePath(site, file));
     if (!f.isExists()) {
-       exists = false;
+        exists = false;
     }
     return exists;
 };
@@ -336,21 +333,21 @@ var copyDir = function (src, dstSite, dst) {
  * @param site
  * @param path
  */
-    /*
-var createDirStructure = function (site, path) {
-    var parts = path.split('/');
-    var dirPath = '';
-    for (var i = 0; i < parts.length - 1; i++) {
-        var part = parts[i];
-        dirPath = dirPath + '/' + part;
-        try {
-            createDir(site, dirPath);
-        } catch (e) {
-            // ASSUME: Error is due to dir already existing, thus ignore
-        }
-    }
-}
-*/
+/*
+ var createDirStructure = function (site, path) {
+ var parts = path.split('/');
+ var dirPath = '';
+ for (var i = 0; i < parts.length - 1; i++) {
+ var part = parts[i];
+ dirPath = dirPath + '/' + part;
+ try {
+ createDir(site, dirPath);
+ } catch (e) {
+ // ASSUME: Error is due to dir already existing, thus ignore
+ }
+ }
+ }
+ */
 
 /**
  * Duplicates a dir/file
