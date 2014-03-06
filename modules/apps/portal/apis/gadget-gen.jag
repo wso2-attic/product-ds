@@ -8,7 +8,6 @@
             site = require('/modules/site.js'),
             uuid = require('uuid'),
             process = require('process'),
-            portal = require('/portal.js').config(),
             dbHandlers = '/modules/db-handlers/',
             chartProcessors = '/modules/flot-charts/';
 
@@ -91,6 +90,11 @@
 
             var gadgetTemplateDir = site.loadFile('portal', data.chartLocation);
             site.copyDir(gadgetTemplateDir, data.appName, pathToGadgetTemplate)       //copy gadget template to /gadget/my_gadget/public
+
+            site.removeDir(data.appName, pathToGadgetTemplate + data.chartLocation.split('/')[2] + '/datasource/')
+            site.removeDir(data.appName, pathToGadgetTemplate + data.chartLocation.split('/')[2] + '/config/')
+            site.removeDir(data.appName, pathToGadgetTemplate + data.chartLocation.split('/')[2] + '/banner.jpg')
+            site.removeDir(data.appName, pathToGadgetTemplate + data.chartLocation.split('/')[2] + '/thumbnail.jpg')
 
             var processor = require('/modules/chart-processor.js');
             var chartProcessorType = chartProcessors + processor.getChartProcessor(chartType)
