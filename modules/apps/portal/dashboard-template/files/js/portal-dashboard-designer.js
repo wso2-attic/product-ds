@@ -443,7 +443,7 @@ $(function () {
         });
 
     });
-	
+    
 	$('#modal-add-gadget-wizard').on('hidden', function () {
         flow_data = {};
         $("#wizard-add-gadget").steps('reset');
@@ -576,7 +576,6 @@ $(function () {
             widget_margins: newDimensions[1],
 
             serialize_params: function ($w, wgd) {
-                //apparently $('.x').data() is not equals to $($('.x').get(0)).data() . why?
                 var gadgetInfo = $($w.get(0)).data('gadgetInfo');
                 var wclass = ($(wgd.el[0]).attr('class').indexOf('static') != -1) ? 'static' : '';
                 var gadgetId = $w.find(".add-gadget-item > div").attr('id');
