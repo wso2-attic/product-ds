@@ -100,7 +100,8 @@
 
 <script id="gadgetPreviewPlaceholder" type="text/x-handlebars-template">
     <div id="gadget-preview-placeholder">
-        <p class="muted">Map data for the gadget and click on <strong>Preview</strong> to render the gadget preview here</p>
+        <p class="muted">Map data for the gadget and click on <strong>Preview</strong> to render the gadget preview here
+        </p>
     </div>
 </script>
 <script id="data-mapping" type="text/x-handlebars-template">
@@ -133,6 +134,15 @@
 
 <script id="data-mapping-extension" type="text/x-handlebars-template">
     <div>
+        <div class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label">Chosen Gadget Type</label>
+
+                <div class="controls">
+                    <label class="control-label">[[gadget_type]]</label>
+                </div>
+            </div>
+        </div>
         <div class="form-horizontal">
             <div class="control-group">
                 <label class="control-label">Chart Title</label>

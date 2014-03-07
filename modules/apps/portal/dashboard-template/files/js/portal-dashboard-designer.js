@@ -267,6 +267,7 @@ $(function () {
         flow_data.dataColumns = tableData.dataColumns;
 
         var nextWindowData = {
+            gadget_type : tmpGadgetInfo.attributes.overview_name,
             dataLabels: tableData.dataLabels
         };
 
