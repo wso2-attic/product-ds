@@ -31,9 +31,9 @@ function togglePause(btnElm) {
     else {
         if (isNumber(pref.getString("updateGraph")) && !(pref.getString("updateGraph") == "0")) {
             delay = setTimeout(function () {
-                fetchData()
-            },
-            pref.getString("updateGraph") * 1000);
+                    fetchData()
+                },
+                pref.getString("updateGraph") * 1000);
         }
     }
 }
@@ -60,7 +60,7 @@ var drawChart = function (data, options) {
                 var x = item.datapoint[0],
                     y = item.datapoint[1];
 
-                showTooltip(item.pageX, item.pageY,y);
+                showTooltip(item.pageX, item.pageY, y);
             }
         } else {
             $("#tooltip").remove();
@@ -160,6 +160,11 @@ function filterSeries(data) {
     seriesContainer.find("input:checked").each(function () {
         var key = $(this).attr("name");
         if (key && data[key]) {
+            var pausebtn = $("button.pause");
+            if (!pausebtn.hasClass('btn-warning')) {
+                $(pausebtn).toggleClass('btn-warning');
+            }
+            togglePause(pausebtn);
             filteredData.push(data[key]);
         }
         drawChart(filteredData, options);

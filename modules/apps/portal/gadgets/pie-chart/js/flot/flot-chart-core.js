@@ -160,6 +160,11 @@ function filterSeries(data) {
     seriesContainer.find("input:checked").each(function () {
         var key = $(this).attr("name");
         if (key && data[key]) {
+            var pausebtn = $("button.pause");
+            if (!pausebtn.hasClass('btn-warning')) {
+                $(pausebtn).toggleClass('btn-warning');
+            }
+            togglePause(pausebtn);
             filteredData.push(data[key]);
         }
         drawChart(filteredData, options);
