@@ -394,7 +394,7 @@ $(function () {
                 var placeholder = lastClickedGadgetButton.siblings('.designer-placeholder');
                 lastClickedGadgetButton.remove();
                 placeholder.remove();
-               // deleteTempFiles();
+                deleteTempFiles();
             }
         }
     }
@@ -513,7 +513,7 @@ $(function () {
                 parentEl.find('.show-widget-pref').show();
             }
         });
-        deleteTempFiles();
+        //deleteTempFiles();
     }
 
     function insertGadgetPreview(parentEl, url, pref) {

@@ -378,7 +378,7 @@ $(function () {
                 var placeholder = lastClickedGadgetButton.siblings('.designer-placeholder');
                 lastClickedGadgetButton.remove();
                 placeholder.remove();
-
+                deleteTempFiles();
             }
         }
     }
@@ -494,7 +494,6 @@ $(function () {
 
                         newWid = w.wid;
                     }
-
                     //find w in defaultWidgets, if found copy attributes to _widget
                     if (isWidgetFound(w, defaultWidgets)) {
 
@@ -549,6 +548,7 @@ $(function () {
                 }
 
                 var url = $w.attr('data-url');
+                var title = $w.attr('data-title');
                 var prefs = JSON.parse($w.attr('data-prefs').replace(/'/g, '"'));
                 var gadgetArea = $w.find('.add-gadget-item');
                 if (url != '') {
@@ -556,7 +556,7 @@ $(function () {
                     $w.find('.btn-add-gadget').remove();
                     insertGadget($w, url, {
                         prefs: prefs
-                    }, $w.attr('data-title'));
+                    }, title);
                 }
 
             });
@@ -584,7 +584,6 @@ $(function () {
                 var prefs = gadgetRenderInfo && gadgetRenderInfo.opt.prefs || {};
                 var currentWidgetId = $(wgd.el[0]).attr('data-wid');
                 var url = $(wgd.el[0]).attr('data-url');
-
                 return {
                     wid: currentWidgetId || widgetId++,
                     x: wgd.col,
@@ -646,10 +645,12 @@ $(function () {
         gadgetDiv.html('<div id="' + idStr + '">');
         UESContainer.renderGadget(idStr, url, pref || {}, function (gadgetInfo) {
             var visibleTitle = title || gadgetInfo.meta.modulePrefs.title;
+            parentEl.find('.grid_header').append('<input type="hidden" class="gadget-title-txt" value="' + visibleTitle + '">');
             parentEl.find('h3').text(visibleTitle);
             parentEl.find('input').val(visibleTitle);
+            parentEl.find('.show-widget-pref').show();
         });
-        deleteTempFiles();
+
     }
     
     function insertGadgetPreview(parentEl, url, pref) {
