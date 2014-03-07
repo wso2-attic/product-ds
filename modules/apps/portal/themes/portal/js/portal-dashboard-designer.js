@@ -390,11 +390,11 @@ $(function () {
                 tmpGadgetInfo.attributes.overview_url_temp =  data.gadgetLocation + tmpGadgetInfo.attributes.overview_url
                 gadgetLi = lastClickedGadgetButton.parents('li');
                 gadgetLi.data('gadgetInfo', tmpGadgetInfo);
-                insertGadget(gadgetLi, tmpGadgetInfo.attributes.overview_url_temp, modPrefs);
+                insertGadget(gadgetLi, tmpGadgetInfo.attributes.overview_url_temp, modPrefs, flow_data.chartTitle);
                 var placeholder = lastClickedGadgetButton.siblings('.designer-placeholder');
                 lastClickedGadgetButton.remove();
                 placeholder.remove();
-                deleteTempFiles();
+               // deleteTempFiles();
             }
         }
     }
@@ -501,17 +501,19 @@ $(function () {
 	//id to be use in dynamically added gadgets.
     var id = 1;
     
-    function insertGadget(parentEl, url, pref) {
+    function insertGadget(parentEl, url, pref, title) {
         id++;
         var gadgetDiv = parentEl.find('.add-gadget-item');
         var idStr = 'gadgetArea-d' + id;
         gadgetDiv.html('<div id="' + idStr + '">');
         UESContainer.renderGadget(idStr, url, pref || {}, function (gadgetInfo) {
             if (gadgetInfo.meta.modulePrefs) {
-                parentEl.find('.grid_header').append('<input class="gadget-title-txt" value="' + gadgetInfo.meta.modulePrefs.title + '">');
+                //parentEl.find('.grid_header').append('<input class="gadget-title-txt" value="' + gadgetInfo.meta.modulePrefs.title + '">');
+                parentEl.find('.grid_header').append('<input class="gadget-title-txt" value="' + title + '">');
                 parentEl.find('.show-widget-pref').show();
             }
         });
+        deleteTempFiles();
     }
 
     function insertGadgetPreview(parentEl, url, pref) {
