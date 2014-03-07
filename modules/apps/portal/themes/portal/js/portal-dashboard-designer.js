@@ -66,7 +66,7 @@ $(function () {
                 height: wgd.size_y,
                 prefs: JSON.stringify(prefs).replace(/"/g, "'"),
                 wclass: wclass,
-                url: gadgetInfo && gadgetInfo.attributes.overview_url
+                url: gadgetInfo && gadgetInfo.attributes.overview_url_temp
             };
 
         },
@@ -386,11 +386,10 @@ $(function () {
                 gadgetLi.data('gadgetInfo', tmpGadgetInfo);
                 insertGadgetPreview(gadgetLi, data.gadgetLocation + tmpGadgetInfo.attributes.overview_url, modPrefs);
             } else {
-                tmpGadgetInfo.attributes.overview_url =  data.gadgetLocation + tmpGadgetInfo.attributes.overview_url
-                console.log("~~~~~~~~~~~~~~~~~~~~~~~~~ overview_url~~~~~~~~~~~~~~  "+tmpGadgetInfo.attributes.overview_url)
+                tmpGadgetInfo.attributes.overview_url_temp =  data.gadgetLocation + tmpGadgetInfo.attributes.overview_url
                 gadgetLi = lastClickedGadgetButton.parents('li');
                 gadgetLi.data('gadgetInfo', tmpGadgetInfo);
-                insertGadget(gadgetLi, tmpGadgetInfo.attributes.overview_url, modPrefs);
+                insertGadget(gadgetLi, tmpGadgetInfo.attributes.overview_url_temp, modPrefs);
                 var placeholder = lastClickedGadgetButton.siblings('.designer-placeholder');
                 lastClickedGadgetButton.remove();
                 placeholder.remove();
