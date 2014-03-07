@@ -39,10 +39,10 @@
         <div class="span6 offset3 form-horizontal">
             [[#each createConnection]]
             <div class="control-group">
-                <label class="control-label">[[this]]</label>
+                <label class="control-label">[[this.label]]</label>
 
                 <div class="controls">
-                    <input name="[[this]]" type="text" class="required"/>
+                    <input name="[[this.label]]" type="[[this.type]]" class="required"/>
                 </div>
             </div>
             [[/each]]
@@ -56,9 +56,9 @@
             <div class="span12 well">
                 [[#each sqlEditor]]
                 <div class="control-group">
-                    <label class="control-label">[[this]]</label>
+                    <label class="control-label">[[this.label]]</label>
 
-                    <textarea name="[[this]]" class="inp-query span12 required" rows="2"/>
+                    <textarea name="[[this.label]]" class="inp-query span12 required" rows="2"/>
                     </textarea>
                     <button class="btn btn-execQuery pull-right">
                         Run
