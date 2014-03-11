@@ -657,7 +657,7 @@ $(function () {
             parentEl.find('#header_label').hide();
             parentEl.find('#gadget_title_div').show();
         }
-        deleteTempFiles();
+       // deleteTempFiles();
     }
     
     function insertGadgetPreview(parentEl, url, pref) {

@@ -14,7 +14,6 @@
     response.addHeader('Content-Type', 'application/json');
 
     if (action == 'queryDbAll') {
-        log.info("~~~~~~~~~~~~~~~~~~~~~~~ at queryDbAll")
         var dbHandler = null,
                 result = null;
 
@@ -55,7 +54,6 @@
         return;
 
     } else if (action == 'createJag') {
-        log.info("~~~~~~~~~~~~~~~~~~~~~~~ at createJag")
         var result = {};
         try {
 
@@ -169,9 +167,12 @@
         return;
     }
     else if (action == 'deleteTemp'){
-    log.info("~~~~~~~~~~~~~~~~~~~~~~~ at delete temp")
         var tempGadgetsLocation = '/gadgets/temp/';
-        site.removeDir(data,tempGadgetsLocation);
+        try{
+            site.removeDir(data,tempGadgetsLocation);
+        }catch(e){
+           log.info('Temp files already deleted')
+        }
         return;
     }
 
