@@ -212,7 +212,8 @@ response.sendRedirect('/{{appName}}/login');
                                 data-col="{{x}}" data-row="{{y}}"
                                 data-url="{{url}}" data-wid="{{wid}}" data-prefs="{{prefs}}" data-title="{{title}}">
                                 <div class="grid_header">
-                                    <h3></h3>
+                                    <div id="header_label"><h3>{{title}}</h3></div>
+                                    <div id="gadget_title_div"><input class="gadget-title-txt"></div>
             		<span class="grid_header_controls">
                 		<a class="show-widget-pref" data-collapse="true"><i class="icon-cog"></i></a>
                 		<a class="expand-widget"><i class="icon-resize-full"></i></a>

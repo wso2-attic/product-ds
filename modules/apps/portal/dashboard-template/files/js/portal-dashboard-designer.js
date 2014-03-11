@@ -454,8 +454,12 @@ $(function () {
 
         $('#gadgetArea-preview').html($("#gadgetPreviewPlaceholder").html());
 
-        var cWindow = $('#store-gadget-div').find('iframe').get(0).contentWindow;
+        var iframe1 = $('#store-gadget-div').find('iframe').get(0);
+
+        if (iframe1) {
+            var cWindow = iframe1.contentWindow;
         cWindow.deselectGadget();
+        }
 
         $('#wizard-add-gadget-btn-prev').addClass('disabled');
 
@@ -645,12 +649,15 @@ $(function () {
         gadgetDiv.html('<div id="' + idStr + '">');
         UESContainer.renderGadget(idStr, url, pref || {}, function (gadgetInfo) {
             var visibleTitle = title || gadgetInfo.meta.modulePrefs.title;
-            parentEl.find('.grid_header').append('<input type="hidden" class="gadget-title-txt" value="' + visibleTitle + '">');
             parentEl.find('h3').text(visibleTitle);
             parentEl.find('input').val(visibleTitle);
-            parentEl.find('.show-widget-pref').show();
-        });
 
+        });
+        if(flow_data.mode == 'design'){
+            parentEl.find('#header_label').hide();
+            parentEl.find('#gadget_title_div').show();
+        }
+        deleteTempFiles();
     }
     
     function insertGadgetPreview(parentEl, url, pref) {
@@ -820,6 +827,7 @@ $(function () {
     });
 
     function changeMode(mode) {
+        flow_data.mode = mode;
         if (mode == 'view') {
             var title = $('#inp-designer-title').val();
             $('#dashboardName').find('span').text(title);
@@ -833,10 +841,10 @@ $(function () {
             $('.layout_block').addClass('layout_block_view');
             $('.gadget-controls li:last-child').remove();
 
-            $('.grid_header > input').each(function () {
+            $('.grid_header input').each(function () {
                 var $this = $(this);
-                $this.parent().append('<h3>' + $this.val() + '</h3>');
-                $this.remove();
+                $this.parent().parent().find('#header_label').show();//append('<h3>' + $this.val() + '</h3>');
+                $this.parent().hide();
             });
         } else if (mode == 'design') {
             var title = $('#dashboardName').find('span').text();
@@ -854,9 +862,9 @@ $(function () {
             });
             $('.layout_block .grid_header h3').each(function () {
                 var $this = $(this);
-                if ($this.parents('.grid_header').siblings('.designer-placeholder').length == 0) {
-                    $this.parent().append('<input class="gadget-title-txt" value="' + $this.text() + '">');
-                    $this.remove();
+                if ($this.parent().parents('.grid_header').siblings('.designer-placeholder').length == 0) {
+                    $this.parent().parent().find('#gadget_title_div').show();//append('<input class="gadget-title-txt" value="' + $this.text() + '">');
+                    $this.parent().hide();
                 }
             });
             $('.layout_block .btn-add-gadget').show();
@@ -986,6 +994,13 @@ $(function () {
         //var widgets = JSON.stringify(layout.serialize());
         var widgets = layout.serialize();
         widgets.splice(0, 4);
+        $('.layout_block .grid_header h3').each(function () {
+            var $this = $(this);
+            if ($this.parent().parents('.grid_header').siblings('.designer-placeholder').length == 0) {
+                var editedTitle = $this.parent().parent().find('input').val();
+                $this.text(editedTitle);
+            }
+        });
 
         var _layout = {
             title: title,
