@@ -114,6 +114,7 @@
         <process.feature.version>1.0.0-SNAPSHOT</process.feature.version>
         <carbon.feature.version>1.0.0-SNAPSHOT</carbon.feature.version>
         <event.feature.version>1.0.0-SNAPSHOT</event.feature.version>
+        <uuid.feature.version>1.0.0-SNAPSHOT</uuid.feature.version>
         <login.feature.version>1.0.0-SNAPSHOT</login.feature.version>
         <permission.feature.version>1.0.0-SNAPSHOT</permission.feature.version>
         <registration.feature.version>1.0.0-SNAPSHOT</registration.feature.version>
