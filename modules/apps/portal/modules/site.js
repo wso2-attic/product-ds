@@ -166,13 +166,30 @@ var createFile = function (site, file, content) {
  */
 var createDir = function (site, dir) {
     var p = sitePath(site),
-        file = new File(p + dir);
-    if (file.isExists()) {
-        throw new Error('File/Directory with the specified name, already exists');
-    }
+    file = new File(p + dir);
     file.mkdir();
     return file;
 };
+
+/**
+ * copy dir structure from a source to a destination
+ * @param site
+ * @param path
+ */
+var createDirStructure = function (site, path) {
+    var parts = path.split('/');
+    var dirPath = '';
+    for (var i = 0; i < parts.length - 1; i++) {
+        var part = parts[i];
+        dirPath = dirPath + '/' + part;
+        try {
+            createDir(site, dirPath);
+        } catch (e) {
+            // ASSUME: Error is due to dir already existing, thus ignore
+        }
+    }
+}
+
 
 /**
  * Removes the given directory from the specified site.
@@ -223,6 +240,21 @@ var loadFile = function (site, file) {
         throw new Error('Specified file "' + file + '" cannot be found');
     }
     return f;
+};
+
+/**
+ * Check the existence of the file from the given site.
+ * @param site
+ * @param file
+ * @return {File}
+ */
+var isFileExists = function (site, file) {
+    var exists = true;
+    var f = new File(filePath(site, file));
+    if (!f.isExists()) {
+        exists = false;
+    }
+    return exists;
 };
 
 /**
@@ -304,6 +336,26 @@ var copyDir = function (src, dstSite, dst) {
     }
 };
 
+/**
+ * copy dir structure from a source to a destination
+ * @param site
+ * @param path
+ */
+/*
+ var createDirStructure = function (site, path) {
+ var parts = path.split('/');
+ var dirPath = '';
+ for (var i = 0; i < parts.length - 1; i++) {
+ var part = parts[i];
+ dirPath = dirPath + '/' + part;
+ try {
+ createDir(site, dirPath);
+ } catch (e) {
+ // ASSUME: Error is due to dir already existing, thus ignore
+ }
+ }
+ }
+ */
 
 /**
  * Duplicates a dir/file

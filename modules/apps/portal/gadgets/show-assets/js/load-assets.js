@@ -123,12 +123,18 @@ $(function () {
             func(p);
         });
     };
+    var deselectGadget = function () {
+       $('.select-btn').text('Select Gadget').removeClass('active');
+       console.log("Gadget deselected");
+    };
 
     var fireEvent = function (e) {
         var target = $(e.target);
         if (target.hasClass('select-btn')) {
             var event = jQuery.Event('assetSelect');
             $(document).trigger(event, $(e.target).parents('.asset-box').data());
+            $('.select-btn').text('Select Gadget').removeClass('active');
+            target.text('Gadget Selected').addClass('active');
         } else if (target.hasClass('btn-browse')) {
             STORE_TAB.click();
         }
@@ -275,6 +281,7 @@ $(function () {
 
     //exposing function to global scope.
     window.addListener = addListener;
+    window.deselectGadget = deselectGadget;
 
     parent['onShowAssetLoad'] && parent['onShowAssetLoad']();
 });

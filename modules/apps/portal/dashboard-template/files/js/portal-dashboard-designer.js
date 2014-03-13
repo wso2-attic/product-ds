@@ -3,11 +3,11 @@ var layout, dummy_gadget_block = 50, block_params = {
     max_height: 6
 }, MARGINS_RATIO = 0.1, COLS = block_params.max_width;
 
-var onShowAssetLoad, tmpGadgetInfo;
+var onShowAssetLoad, tmpGadgetInfo, isQueryRan = false, isSelectionChanged = false;
 
 var flow_data = {};
 var metadata;
-var caramel = {};
+var caramel = caramel || {};
 
 (function ($) {
 
@@ -41,12 +41,19 @@ var caramel = {};
     $.extend($.Gridster, extensions);
 })(jQuery);
 
+$.validator.addMethod("alphanumeric", function(value, element) {
+    return this.optional(element) || /^[a-z0-9\-]+$/i.test(value);
+}, "Must be alphanumeric.");
+
+
 var newWid = 0;
 
 $(function () {
     var $STORE_MODAL = $('#modal-add-gadget');
     var $LAYOUTS_GRID = $('#layouts_grid');
     var newDimensions = calculateNewDimensions();
+
+    var widgetId = 1;
 
     var widgetTemplate = Handlebars.compile($('#widget-template').html());
     var widgetTemplate2 = Handlebars.compile($('#widget-template2').html());
@@ -77,6 +84,11 @@ $(function () {
         });
 
         drawGrid(newDimensions[0][0]);
+
+        var iframes = $('iframes');
+        $.each(iframes, function (i, w) {
+            //refreshGadget(i);
+        });
 
         clearTimeout(timeOut);
         timeOut = setTimeout(setGridOffsetTop, 500);
@@ -114,18 +126,17 @@ $(function () {
 
     $('.btn-add-gadget').live('click', onGadgetSelectButton);
 
-    //---------------------------------- start gadget-gen-ui -----------------------------------------
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~start gadget-gen ui~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     //Select Datasource window
     function onGadgetSelectButton() {
         lastClickedGadgetButton = $(this);
         gadgetRendered = false;
-        //$STORE_MODAL.modal('show');
 
         if (!metadata) {
             caramel.ajax({
                 type: 'POST',
-                url: "../datasource-config.json",
+                url: "datasource-config.json",
                 success: genDataSourceDropdown,
                 contentType: 'application/json',
                 dataType: 'json'
@@ -145,127 +156,153 @@ $(function () {
 
         var source = $("#select-data-source").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
         var template = Handlebars.compile(source);
-        $('#data_source_drop_dwn-div').html(template(windowData));
-        $('#modal-flow-start').modal('show');
+        $('#wizard-add-gadget-p-0').html(template(windowData));
+        $('#modal-add-gadget-wizard').modal('show');
 
     };
 
-    var selectDatasourcesNextClick = function () {
-        var selectedVal = $('#data_source_drop_dwn').find(":selected").text();
-        flow_data.dataSource = selectedVal;
+    $("#wizard-add-gadget").steps({
+        headerTag: "h3",
+        bodyTag: "section",
+        transitionEffect: "fade",
+        onStepChanging: function (event, currentIndex, newIndex) {
 
-        var nextWindowData = {
-            createConnection: metadata.dataSourcesDescriptions[flow_data.dataSource]
-        };
+            if (newIndex == 4) {
+                $('#wizard-add-gadget-btn-next').hide();
+                $('#wizard-add-gadget-btn-finish').show();
+            } else {
+                $('#wizard-add-gadget-btn-next').show();
+                $('#wizard-add-gadget-btn-finish').hide();
+            }
 
-        var source = $("#create-new-connection").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
-        var template = Handlebars.compile(source);
-        $('#modal-create-new-connection-data').html(template(nextWindowData));
+            switch (currentIndex) {
+                case 0:
+                    var dsType = $('#wizard-dsTypeSel').val();
+                    flow_data.dataSource = dsType;
+                    break;
 
-        $('#modal-flow-start').modal('hide');
-        $('#modal-create-new-connection').modal('show');
+                case 1:
+                    var conSettings = {};
+                    $('#wizard-add-gadget-p-1').find('.control-group').each(function () {
+                        conSettings[$(this).find('label').html()] = $(this).find('input').val();
+                    });
 
-    };
+                    flow_data.conSettings = conSettings;
+                    break;
 
-    //Next click of 2nd window (Create Connection window)
-    var createConnBtnNextClick = function () {
-        var conSettings = {};
-        $('#modal-create-new-connection-data').find('.control-group').each(function () {
-            conSettings[ $(this).find('label').html()] = $(this).find('input').val();
-        });
+                case 2:
+                    if (!isQueryRan) {
+                        var queryData = {};
+                        $('#wizard-add-gadget-p-2').find('.control-group').each(function () {
+                            queryData[$(this).find('label').html()] = $(this).find('input').val() || $(this).find('textarea').val();
+                        });
 
-        flow_data.conSettings = conSettings;
+                        flow_data.appName = $('#inp-dashboard').val();
+                        flow_data.queryData = queryData;
+                        getQueryData();
+                    }
+                    break;
 
-        var window3Data = metadata.datasourceWindow_3[flow_data.dataSource];
-        if (window3Data) {
-            var nextWindowData = {
-                sqlEditor: window3Data
-            };
+            }
 
-            var source = $("#sql-query-editor").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
-            var template = Handlebars.compile(source);
-            $('#modal-sql-query-editor-data').html(template(nextWindowData));
 
-            $('#modal-create-new-connection').modal('hide');
-            $('#modal-sql-query-editor').modal('show');
+            switch (newIndex) {
+                case 1:
+
+
+                    var nextWindowData = {
+                        createConnection: metadata.dataSourcesDescriptions[flow_data.dataSource]
+                    };
+
+                    var source = $("#create-new-connection").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+                    var template = Handlebars.compile(source);
+                    $('#wizard-add-gadget-p-1').html(template(nextWindowData));
+
+                    break;
+
+                case 2:
+
+                    if (!flow_data.queryData) {
+                        var window3Data = metadata.datasourceWindow_3[flow_data.dataSource];
+                        if (window3Data) {
+                            var nextWindowData = {
+                                sqlEditor: window3Data
+                            };
+
+                            var source = $("#sql-query-editor").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+                            var template = Handlebars.compile(source);
+                            $('#wizard-add-gadget-p-2').html(template(nextWindowData));
+
+                            $('.inp-query').change(function () {
+                                isQueryRan = false;
+                            });
+
+                            //  $('#modal-create-new-connection').modal('hide');
+                            //$('#modal-sql-query-editor').modal('show');
+                        } else {
+                            // $('#modal-create-new-connection').modal('hide');
+                            // $STORE_MODAL.modal('show');
+                            //alert("Select gadget");
+                        }
+                    }
+
+                    break;
+
+                case 4:
+                    if (isSelectionChanged || isQueryRan) {
+                        getDataFormat();
+                    }
+                    break;
+
+            }
+
+            return (currentIndex > newIndex) ? true : $('#form-wizard').valid({
+                rules : {
+                    chartTitle : {
+                        alphanumeric : true
+                    }
+                }
+            });
         }
-        else {
-            $('#modal-create-new-connection').modal('hide');
-            $STORE_MODAL.modal('show');
-        }
-    };
-
-    //Back click of 2nd window (Create connection window)
-    var createConnBtnBackClick = function () {
-        $('#modal-create-new-connection').modal('hide');
-        $('#modal-flow-start').modal('show');
-    };
-
-    //Next click of 3rd window (SQL query window)
-    var sqlQueryBtnNextClick = function () {
-        var queryData = {};
-        $('#modal-sql-query-editor-data').find('.control-group').each(function () {
-            queryData[$(this).find('label').html()] = $(this).find('input').val();
-        });
-
-        flow_data.queryData = queryData;
-
-        caramel.ajax({
-            type: 'POST',
-            url: "../apis/gadgetGen?action=queryDb",
-            data: JSON.stringify(flow_data),
-            success: processSqlQueryResponse,
-            contentType: 'application/json',
-            dataType: 'json'
-        });
-
-    };
-
-    var processSqlQueryResponse = function (data) {
-        flow_data.column_headers = data;
-        $('#modal-sql-query-editor').modal('hide');
-        $STORE_MODAL.modal('show');
-
-    }
-
-    //Back click of the 3rd window (SQL query window)
-    var sqlQueryBtnBackClick = function () {
-        $('#modal-sql-query-editor').modal('hide');
-        $('#modal-create-new-connection').modal('show');
-
-    };
+    });
 
     //Next Click of 4th window (Gadget store window)
     onShowAssetLoad = function () {
-        var cWindow = $('#modal-add-gadget').find('iframe').get(0).contentWindow;
+        var cWindow = $('#store-gadget-div').find('iframe').get(0).contentWindow;
         if (cWindow.addListener) {
             cWindow.addListener(function (gadgetInfo) {
-                var gadgetLi = lastClickedGadgetButton.parents('li');
-
-                gadgetLi.data('gadgetInfo', gadgetInfo);
-                var h3 = gadgetLi.find('h3');
-                if (h3) {
-                    h3.parent().append('<input class="gadget-title-txt">');
-                    h3.remove()
-                }
                 tmpGadgetInfo = gadgetInfo;
-                getDataFormat();        //get the data format that the chart requires (x-axis, y-axis etc)
+                isSelectionChanged = true;
+
             });
         }
     };
-
-    var getDataFormat = function () {
-        console.log("")
+    var getQueryData = function () {
         caramel.ajax({
             type: 'POST',
-            url: "../../publisher/" + tmpGadgetInfo.attributes.overview_dataformat,
+            url: "apis/gadgetGen?action=queryDbAll",
+            data: JSON.stringify(flow_data),
+            success: function (result) {
+                flow_data.column_headers = result.tableHeaders;
+            },
+            contentType: 'application/json',
+            dataType: 'json'
+        });
+        isQueryRan = true;
+    }
+
+    var getDataFormat = function () {
+        isSelectionChanged = false;
+        isQueryRan = false;
+        caramel.ajax({
+            type: 'POST',
+            url: '../portal/' + tmpGadgetInfo.attributes.overview_dataformat,
             success: generateDataMapping,
             contentType: 'application/json',
             dataType: 'json'
         });
 
     }
-
     var generateDataMapping = function (tableData) {
         var divCont = populateMappingRow(tableData.dataColumns, flow_data.column_headers, true);
         $('#modal-data-mapping').html(divCont);
@@ -273,6 +310,7 @@ $(function () {
         flow_data.dataColumns = tableData.dataColumns;
 
         var nextWindowData = {
+            gadget_type: tmpGadgetInfo.attributes.overview_name,
             dataLabels: tableData.dataLabels
         };
 
@@ -280,20 +318,28 @@ $(function () {
         var template = Handlebars.compile(source);
         $('#modal-data-mapping-extension-space').html(template(nextWindowData));
 
-        $('#mapping-add-series-btn').bind('click', addSeriesBtnClick);  //To add more series
-        $STORE_MODAL.modal('hide');
-        $('#modal-data-mapper').modal('show');
+        $('#mapping-add-series-btn').bind('click', addSeriesBtnClick);
+        //To add more series
+
+        $('#btn-preview-gadget').bind('click', function (e) {
+            e.preventDefault();
+            $('.gadget-preview-loader').fadeIn("fast");
+            processFieldMapping('preview');
+        });
+
     }
+    var newlabelID = 0;
 
     var populateMappingRow = function (dataColumns, columnHeaders, isFirst) {
         var columns = [];
-        if (!isFirst) {
+        if (!isFirst && dataColumns.length > 1) {
             var cloneDataColumns = dataColumns.slice(1);
             columns = cloneDataColumns;
         } else {
             columns = dataColumns;
         }
         var nextWindowData = {
+            id: newlabelID++,
             dataColumns: columns,
             columnHeaders: columnHeaders
         };
@@ -302,26 +348,18 @@ $(function () {
         return template(nextWindowData);
 
     }
-
-    var addSeriesBtnClick = function () {
+    var addSeriesBtnClick = function (e) {
+        e.preventDefault();
         var divCont = populateMappingRow(flow_data.dataColumns, flow_data.column_headers, false);
         $('#modal-data-mapping').append(divCont);
     }
 
-    //Back click of the 4th window (Gadget store window)
-    var gadgetWindowBtnBackClick = function () {
-        $STORE_MODAL.modal('hide');
-        $('#modal-sql-query-editor').modal('show');
-
-    };
-
-    //Finish button of 5 th window (Data mapping window)
-    var flowFinishBtnNextClick = function () {
-        processFieldMapping();
-    };
-
-    var processFieldMapping = function () {
+    var processFieldMapping = function (mode) {
         var mappingData = [];
+        var url = 'apis/gadgetGen?action=createJag';
+
+        url = (mode == 'preview') ? url + '&mode=preview' : url;
+
         $('#modal-data-mapping').children().each(function () {
             var series = {}
             if (mappingData[0]) {
@@ -334,66 +372,178 @@ $(function () {
             });
             mappingData.push(series);
         });
-
         var dashboard = $('#inp-dashboard').val();
+        flow_data.chartTitle = $('#chart-title-input').val();
         flow_data.refreshSequence = $('#refresh-sequence-input').val();
 
         var labelData = {};
         $('#data-labels').find('.control-group').each(function () {
-             labelData[$(this).find('label').html()] = $(this).find('input').val();
+            labelData[$(this).find('label').html()] = $(this).find('input').val();
         });
 
         flow_data.mappingData = mappingData;
         flow_data.dataLabels = labelData;
-        flow_data.appName = dashboard;
+        flow_data.chartLocation = tmpGadgetInfo.attributes.overview_location;
+        flow_data.chartType = tmpGadgetInfo.attributes.overview_name;
         flow_data.chartOptions = tmpGadgetInfo.attributes.overview_chartoptions;
 
         caramel.ajax({
             type: 'POST',
-            url: "../apis/gadgetGen?action=createJag",
+            url: url,
             data: JSON.stringify(flow_data),
-            success: insertGadgetToDashBoard,
+            success: insertGadgetToTarget(mode),
             contentType: 'application/json',
             dataType: 'json'
         });
 
     }
+    var insertGadgetToTarget = function (mode) {
 
-    var insertGadgetToDashBoard = function (data) {
-        var modPrefs = {};
-        var prefs = {};
-        prefs.dataSource = data.jagPath;
-        prefs.updateGraph = flow_data.refreshSequence;
-        modPrefs.prefs = prefs;
+        return function (data) {
+            var modPrefs = {};
+            var prefs = {};
+            prefs.dataSource = data.jagPath;
+            prefs.updateGraph = flow_data.refreshSequence;
+            modPrefs.prefs = prefs;
 
-        $('#modal-data-mapper').modal('hide');
-        var gadgetLi = lastClickedGadgetButton.parents('li');
-        gadgetLi.data('gadgetInfo', tmpGadgetInfo);
-        insertGadget(gadgetLi, tmpGadgetInfo.attributes.overview_url, modPrefs);
-        var placeholder = lastClickedGadgetButton.siblings('.designer-placeholder');
-        lastClickedGadgetButton.remove();
-        placeholder.remove();
+            var gadgetLi;
 
+            //$('#modal-data-mapper').modal('hide');
+
+            if (mode == 'preview') {
+                gadgetLi = $('#gadget-preview');
+                gadgetLi.data('gadgetInfo', tmpGadgetInfo);
+                insertGadgetPreview(gadgetLi, data.gadgetLocation + tmpGadgetInfo.attributes.overview_url, modPrefs);
+            } else {
+                tmpGadgetInfo.attributes.overview_url_temp = data.gadgetLocation + tmpGadgetInfo.attributes.overview_url
+                gadgetLi = lastClickedGadgetButton.parents('li');
+                gadgetLi.data('gadgetInfo', tmpGadgetInfo);
+                insertGadget(gadgetLi, tmpGadgetInfo.attributes.overview_url_temp, modPrefs, flow_data.chartTitle);
+                var placeholder = lastClickedGadgetButton.siblings('.designer-placeholder');
+                lastClickedGadgetButton.remove();
+                placeholder.remove();
+                deleteTempFiles();
+            }
+        }
     }
 
-    //Back button of 5 th window (Data Mapping window)
-    var flowFinishWindowBackClick = function () {
-        $('#modal-data-mapper').modal('hide');
-        $STORE_MODAL.modal('show');
-    };
+    var deleteTempFiles = function () {
+        tmpGadgetInfo = {};
+        caramel.ajax({
+            type: 'POST',
+            url: 'apis/gadgetGen?action=deleteTemp',
+            data: flow_data.appName,
+            success: function () {
+                $('#modal-add-gadget-wizard').modal('hide');
+                flow_data = {};
+            },
+            contentType: 'application/json',
+            dataType: 'json'
+        });
+    }
 
-    $('#add-gadget-btn-next').bind('click', selectDatasourcesNextClick);
+    $('#wizard-add-gadget-btn-prev').click(function () {
+        $('a[href=#previous]').click();
+    });
+    $('#wizard-add-gadget-btn-next').click(function () {
+        $('a[href=#next]').click();
+    });
+    $('#wizard-add-gadget-btn-finish').click(function () {
+        processFieldMapping('dashboard');
+    });
 
-    $('#create-connection-btn-next').bind('click', createConnBtnNextClick);
-    $('#create-connection-btn-back').bind('click', createConnBtnBackClick);
+    $('#wizard-add-gadget-btn-prev, #wizard-add-gadget-btn-next').bind('click', function () {
+        var cssClass = $('.actions > ul > li').eq(0).attr('class');
+        $('#wizard-add-gadget-btn-prev').removeClass().addClass('btn btn-primary btn-large ' + cssClass);
 
-    $('#sql-connection-btn-next').bind('click', sqlQueryBtnNextClick);
-    $('#sql-connection-btn-back').bind('click', sqlQueryBtnBackClick);
+    })
 
-    $('#add-gadget-window-btn-back').bind('click', gadgetWindowBtnBackClick);
+    $('body').on('click', '.wizard-dsType', function (e) {
+        e.preventDefault();
+        $('.wizard-dsType').removeClass('active');
+        $(this).toggleClass('active');
+        $('#wizard-dsTypeSel').val($(this).attr('data-dsType'));
+    });
 
-    $('#flow-finish-btn-next').bind('click', flowFinishBtnNextClick);
-    $('#flow-finish-btn-back').bind('click', flowFinishWindowBackClick);
+    $('body').on('click', '.btn-validateCon', function (e) {
+        e.preventDefault();
+        var conSettings = {};
+        $('#wizard-add-gadget-p-1').find('.control-group').each(function () {
+            conSettings[$(this).find('label').html()] = $(this).find('input').val();
+        });
+
+        flow_data.conSettings = conSettings;
+
+        caramel.ajax({
+            type: 'POST',
+            url: "apis/gadgetGen?action=validateCon",
+            data: JSON.stringify(flow_data),
+            success: function (result) {
+                alert(result.message);
+            },
+            contentType: 'application/json',
+            dataType: 'json'
+        });
+    });
+
+    $('body').on('click', '.btn-execQuery', function (e) {
+        e.preventDefault();
+        var queryData = {};
+        $('#wizard-add-gadget-p-2').find('.control-group').each(function () {
+            queryData[$(this).find('label').html()] = $(this).find('input').val() || $(this).find('textarea').val();
+        });
+
+        flow_data.appName = $('#inp-dashboard').val();
+        flow_data.queryData = queryData;
+
+        isSelectionChanged = true;
+
+        caramel.ajax({
+            type: 'POST',
+            url: "apis/gadgetGen?action=queryDbAll",
+            data: JSON.stringify(flow_data),
+            success: renderDatasetTable,
+            contentType: 'application/json',
+            dataType: 'json'
+        });
+
+        isQueryRan = true;
+
+
+    });
+
+    $('#modal-add-gadget-wizard').on('hidden', function () {
+        flow_data = {};
+        $("#wizard-add-gadget").steps('reset');
+        $('#wizard-add-gadget > .steps > ul > li.done').removeClass('done').addClass('disabled');
+        $('.wizard-dsType').removeClass('active');
+        $('#wizard-dsTypeSel').val('');
+
+        $('#gadgetArea-preview').html($("#gadgetPreviewPlaceholder").html());
+
+        var iframe1 = $('#store-gadget-div').find('iframe').get(0);
+
+        if (iframe1) {
+            var cWindow = iframe1.contentWindow;
+            cWindow.deselectGadget();
+        }
+
+        $('#wizard-add-gadget-btn-prev').addClass('disabled');
+
+
+    });
+
+    var renderDatasetTable = function (result) {
+        isQueryRan = true;
+        $('#wizard-add-gadget-p-2 .well').animate({
+            'margin-top': 0
+        });
+
+        flow_data.column_headers = result.tableHeaders;
+        var source = $("#sql-query-table").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+        var template = Handlebars.compile(source);
+        $('#sql-editor-dataset').html(template(result));
+    }
 
     //------------------------------------------------------------------------end of gadget-gen ui -------------------------------
 
@@ -416,7 +566,6 @@ $(function () {
 
                         newWid = w.wid;
                     }
-
                     //find w in defaultWidgets, if found copy attributes to _widget
                     if (isWidgetFound(w, defaultWidgets)) {
 
@@ -471,6 +620,7 @@ $(function () {
                 }
 
                 var url = $w.attr('data-url');
+                var title = $w.attr('data-title');
                 var prefs = JSON.parse($w.attr('data-prefs').replace(/'/g, '"'));
                 var gadgetArea = $w.find('.add-gadget-item');
                 if (url != '') {
@@ -478,7 +628,7 @@ $(function () {
                     $w.find('.btn-add-gadget').remove();
                     insertGadget($w, url, {
                         prefs: prefs
-                    }, $w.attr('data-title'));
+                    }, title);
                 }
 
             });
@@ -506,7 +656,6 @@ $(function () {
                 var prefs = gadgetRenderInfo && gadgetRenderInfo.opt.prefs || {};
                 var currentWidgetId = $(wgd.el[0]).attr('data-wid');
                 var url = $(wgd.el[0]).attr('data-url');
-
                 return {
                     wid: currentWidgetId || widgetId++,
                     x: wgd.col,
@@ -516,7 +665,7 @@ $(function () {
                     height: wgd.size_y,
                     prefs: JSON.stringify(prefs).replace(/"/g, "'"),
                     wclass: wclass,
-                    url: gadgetInfo && gadgetInfo.attributes.overview_url || url
+                    url: gadgetInfo && gadgetInfo.attributes.overview_url_temp || url
                 };
 
             },
@@ -558,12 +707,7 @@ $(function () {
     var lastClickedGadgetButton = null;
     var gadgetRendered;
 
-//	function onGadgetSelectButton() {
-//		lastClickedGadgetButton = $(this);
-//		gadgetRendered = false;
-//
-//		$STORE_MODAL.modal('show');
-//	}
+    UESContainer.renderGadget('store-gadget-div', store_url);
 
     var id = 1;
 
@@ -576,6 +720,28 @@ $(function () {
             var visibleTitle = title || gadgetInfo.meta.modulePrefs.title;
             parentEl.find('h3').text(visibleTitle);
             parentEl.find('input').val(visibleTitle);
+
+        });
+        if (flow_data.mode == 'design') {
+            parentEl.find('#header_label').hide();
+            parentEl.find('#gadget_title_div').show();
+        }
+        // deleteTempFiles();
+    }
+
+    function insertGadgetPreview(parentEl, url, pref) {
+
+        var idStr = 'gadgetArea-preview';
+        if ($('#' + idStr).length) {
+            UESContainer.removeGadget(idStr);
+        }
+        parentEl.html('<div id="' + idStr + '">');
+        UESContainer.renderGadget(idStr, url, pref || {}, function (gadgetInfo) {
+            $('.gadget-preview-loader').fadeOut("fast");
+            if (gadgetInfo.meta.modulePrefs) {
+                //parentEl.find('.grid_header').append('<input class="gadget-title-txt" value="' + gadgetInfo.meta.modulePrefs.title + '">');
+                //parentEl.find('.show-widget-pref').show();
+            }
         });
     }
 
@@ -731,6 +897,7 @@ $(function () {
     });
 
     function changeMode(mode) {
+        flow_data.mode = mode;
         if (mode == 'view') {
             var title = $('#inp-designer-title').val();
             $('#dashboardName').find('span').text(title);
@@ -744,10 +911,10 @@ $(function () {
             $('.layout_block').addClass('layout_block_view');
             $('.gadget-controls li:last-child').remove();
 
-            $('.grid_header > input').each(function () {
+            $('.grid_header input').each(function () {
                 var $this = $(this);
-                $this.parent().append('<h3>' + $this.val() + '</h3>');
-                $this.remove();
+                $this.parent().parent().find('#header_label').show();//append('<h3>' + $this.val() + '</h3>');
+                $this.parent().hide();
             });
         } else if (mode == 'design') {
             var title = $('#dashboardName').find('span').text();
@@ -765,9 +932,9 @@ $(function () {
             });
             $('.layout_block .grid_header h3').each(function () {
                 var $this = $(this);
-                if ($this.parents('.grid_header').siblings('.designer-placeholder').length == 0) {
-                    $this.parent().append('<input class="gadget-title-txt" value="' + $this.text() + '">');
-                    $this.remove();
+                if ($this.parent().parents('.grid_header').siblings('.designer-placeholder').length == 0) {
+                    $this.parent().parent().find('#gadget_title_div').show();//append('<input class="gadget-title-txt" value="' + $this.text() + '">');
+                    $this.parent().hide();
                 }
             });
             $('.layout_block .btn-add-gadget').show();
@@ -897,6 +1064,13 @@ $(function () {
         //var widgets = JSON.stringify(layout.serialize());
         var widgets = layout.serialize();
         widgets.splice(0, 4);
+        $('.layout_block .grid_header h3').each(function () {
+            var $this = $(this);
+            if ($this.parent().parents('.grid_header').siblings('.designer-placeholder').length == 0) {
+                var editedTitle = $this.parent().parent().find('input').val();
+                $this.text(editedTitle);
+            }
+        });
 
         var _layout = {
             title: title,

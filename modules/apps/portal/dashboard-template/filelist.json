@@ -7,6 +7,9 @@
         "/img/dummy-grid.png",
         "/img/wso2-logo-small.png",
         "/img/designer-sprite.png",
+        "/img/wizard-btn-cassandra.png",
+        "/img/wizard-btn-rdbms.png",
+        "/img/wizard-btn-rest.png",
         "/css/",
         "/css/style-gadgets.css",
         "/css/navigation.css",
@@ -48,16 +51,21 @@
         "/js/navigation.js",
         "/js/UESContainer.js",
         "/js/caramel-client.js",
-        "/js/shindig.js"
+        "/js/shindig.js",
+        "/js/jquery.steps.js"
     ],
 
     "copyRoot": [
-        "/datasource-config.json",
+    	"/datasource-config.json",
         "/apis/ues.jag",
         "/apis/gadget-gen.jag",
         "/modules/ues.js",
         "/modules/site.js",
         "/modules/server.js",
-        "/modules/user.js"
+        "/modules/user.js",
+        "/modules/datasource-handler.js",
+        "/modules/chart-processor.js",
+        "/modules/pinch.min.js",
+        "/modules/db-handlers/rdbms-handler.js"
     ]
 }

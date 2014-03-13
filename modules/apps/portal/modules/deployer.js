@@ -72,6 +72,7 @@ var buildGadgetRXT = function (options) {
             <description>{options.description}</description>
             <dataformat>{options.dataformat}</dataformat>
             <chartoptions>{options.chartoptions}</chartoptions>
+            <location>{options.location}</location>
         </overview>
         <images>
             <thumbnail>{options.thumbnail}</thumbnail>

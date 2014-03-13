@@ -13,7 +13,7 @@ require('/app.js');
 var portal = require('/portal.js').config();
 
 var populate = function () {
-    var i, name, length, gadgets, file, path, xml,
+    var i, name, length, gadgets, file, path, xml, location
         log = new Log('portal.deployer'),
         repo = new File(repoPath),
         deployer = require('/modules/deployer.js'),
@@ -33,6 +33,7 @@ var populate = function () {
                 if (existingSession) {
                     log.info('Deploying Gadget : ' + name);
                 }
+                location = repoPath + '/' + name;
                 path = base + name + '/';
                 file.open('r');
                 var fileContent = file.readAll();
@@ -46,12 +47,13 @@ var populate = function () {
                     provider: portal.user.username,
                     version: '1.0.0',
                     description: xml.*::ModulePrefs.@description,
-                    url: path + name + '.xml',
+                    url: name + '/' + name + '.xml',
                     thumbnail: path + 'thumbnail.jpg',
                     banner: path + 'banner.jpg',
                     status: 'CREATED',
                     dataformat: relativeRepoPath + name + '/datasource/data-format.json',
-                    chartoptions :gadgetRxtPath + name + '/config/chart-options.json'
+                    chartoptions: gadgetRxtPath + name + '/config/chart-options.json',
+                    location: location
 
                 });
             }
