@@ -41,6 +41,11 @@ var caramel = caramel || {};
     $.extend($.Gridster, extensions);
 })(jQuery);
 
+$.validator.addMethod("alphanumeric", function(value, element) {
+        return this.optional(element) || /^[a-z0-9\-]+$/i.test(value);
+    }, "Must be alphanumeric.");
+    
+    
 var newWid = 0;
 
 $(function () {
@@ -251,7 +256,13 @@ $(function () {
 
             }
 
-            return (currentIndex > newIndex) ? true : $('#form-wizard').valid();
+            return (currentIndex > newIndex) ? true : $('#form-wizard').valid({
+				rules : {
+					chartTitle : {
+						alphanumeric : true
+					}
+				}
+			});
         }
     });
 
@@ -701,7 +712,7 @@ $(function () {
 
     function insertGadget(parentEl, url, pref, title) {
         id++;
-        var gadgetDiv = parentEl.find('.add-gadget-item');            g
+        var gadgetDiv = parentEl.find('.add-gadget-item');
         var idStr = 'gadgetArea-d' + id;
         gadgetDiv.html('<div id="' + idStr + '">');
         UESContainer.renderGadget(idStr, url, pref || {}, function (gadgetInfo) {
