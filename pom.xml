@@ -79,7 +79,7 @@
         <carbon.platform.version>4.2.0</carbon.platform.version>
 
         <!-- jaggery versions -->
-        <jaggery.feature.version>0.9.0-SNAPSHOT-10252013</jaggery.feature.version>
+        <jaggery.feature.version>0.9.0-SNAPSHOT</jaggery.feature.version>
 
         <!-- patch versions -->
         <!-- patch versions -->
@@ -111,6 +111,8 @@
         <caramel.feature.version>1.1.0-SNAPSHOT</caramel.feature.version>
         <handlebars.feature.version>1.0.0-SNAPSHOT</handlebars.feature.version>
         <markdown.feature.version>1.0.0-SNAPSHOT</markdown.feature.version>
+        <process.feature.version>1.0.0-SNAPSHOT</process.feature.version>
+        <carbon.feature.version>1.0.0-SNAPSHOT</carbon.feature.version>
         <event.feature.version>1.0.0-SNAPSHOT</event.feature.version>
         <login.feature.version>1.0.0-SNAPSHOT</login.feature.version>
         <permission.feature.version>1.0.0-SNAPSHOT</permission.feature.version>
