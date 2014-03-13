@@ -323,6 +323,7 @@ $(function () {
 
         $('#btn-preview-gadget').bind('click', function (e) {
             e.preventDefault();
+            $('.gadget-preview-loader').fadeIn("fast");
             processFieldMapping('preview');
         });
 
@@ -736,6 +737,7 @@ $(function () {
         }
         parentEl.html('<div id="' + idStr + '">');
         UESContainer.renderGadget(idStr, url, pref || {}, function (gadgetInfo) {
+        	$('.gadget-preview-loader').fadeOut("fast");
             if (gadgetInfo.meta.modulePrefs) {
                 //parentEl.find('.grid_header').append('<input class="gadget-title-txt" value="' + gadgetInfo.meta.modulePrefs.title + '">');
                 //parentEl.find('.show-widget-pref').show();
