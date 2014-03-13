@@ -46,8 +46,11 @@
                 </div>
             </div>
             [[/each]]
+            <button class="btn btn-validateCon pull-right">
+                Validate Connection
+            </button>
         </div>
-    </div>
+     </div>
 </script>
 
 <script id="sql-query-editor" type="text/x-handlebars-template">
@@ -77,7 +80,7 @@
 
 <script id="sql-query-table" type="text/x-handlebars-template">
     [[#if error]]
-    <div class="alert alert-error">
+    <div class=".alert-block alert-error">
         [[message]]
     </div>
     [[else]]

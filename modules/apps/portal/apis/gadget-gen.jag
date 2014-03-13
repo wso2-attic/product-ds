@@ -13,7 +13,32 @@
 
     response.addHeader('Content-Type', 'application/json');
 
-    if (action == 'queryDbAll') {
+    if (action == 'validateCon') {
+        var dbHandler = null,
+                result = null,
+                message = "";
+
+        var handler = require('/modules/datasource-handler.js');
+        var dbHandlerType = dbHandlers + handler.getDatasourceHandler(data.dataSource);
+        switch (data.dataSource) {
+            case 'RDBMS':
+            {
+                dbHandler = require(dbHandlerType);
+                result = dbHandler.validateConnection(data.conSettings);
+                if (result) {
+                    message = "Successfully connected to the database"
+                } else {
+                    message = "Connection failed !!!"
+                }
+                break;
+            }
+            default:
+                break;
+        }
+        print({'message':message})
+        return;
+    }
+    else if (action == 'queryDbAll') {
         var dbHandler = null,
                 result = null;
 
@@ -25,10 +50,10 @@
             {
                 try {
                     dbHandler = require(dbHandlerType);
-                    data.queryData['SQL Statement'] += ' limit 5';
+                    data.queryData['SQL Statement'] = data.queryData['SQL Statement'].replace(/^\s\s*/, '').replace(/\s\s*$/, '') + ' limit 5';
                     result = dbHandler.getData(data.conSettings, data.queryData)
                 } catch (e) {
-                    print('Error while retrieving data.');
+                    print({'error': true, 'message': e});
                     return;
                 }
                 break;

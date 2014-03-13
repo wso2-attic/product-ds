@@ -440,6 +440,9 @@ response.sendRedirect('/{{appName}}/login');
                 </div>
             </div>
             [[/each]]
+            <button class="btn btn-validateCon pull-right">
+                Validate Connection
+            </button>
         </div>
     </div>
 </script>
@@ -471,7 +474,7 @@ response.sendRedirect('/{{appName}}/login');
 
 <script id="sql-query-table" type="text/x-handlebars-template">
     [[#if error]]
-    <div class="alert alert-error">
+    <div class=".alert-block alert-error">
         [[message]]
     </div>
     [[else]]
@@ -601,6 +604,9 @@ response.sendRedirect('/{{appName}}/login');
 <script src="js/jquery.steps.js"></script>
 <script src="js/portal-dashboard-designer.js"></script>
 <script src="js/caramel-client.js"></script>
+<script>
+    var store_url =  "{{showAssetGadget}}";
+</script>
 
 </body>
 </html>

@@ -3,7 +3,7 @@ var layout, dummy_gadget_block = 50, block_params = {
     max_height: 6
 }, MARGINS_RATIO = 0.1, COLS = block_params.max_width;
 
-var onShowAssetLoad, tmpGadgetInfo, isSelectionChanged = false;
+var onShowAssetLoad, tmpGadgetInfo, isQueryRan = false, isSelectionChanged = false;
 
 var flow_data = {};
 var metadata;
@@ -170,36 +170,54 @@ $(function () {
                 $('#wizard-add-gadget-btn-finish').hide();
             }
 
+            switch (currentIndex) {
+                case 0:
+                    var dsType = $('#wizard-dsTypeSel').val();
+                    flow_data.dataSource = dsType;
+                    break;
+
+                case 1:
+                    var conSettings = {};
+                    $('#wizard-add-gadget-p-1').find('.control-group').each(function () {
+                        conSettings[$(this).find('label').html()] = $(this).find('input').val();
+                    });
+
+                    flow_data.conSettings = conSettings;
+                    break;
+
+                case 2:
+                    if (!isQueryRan) {
+                        var queryData = {};
+                        $('#wizard-add-gadget-p-2').find('.control-group').each(function () {
+                            queryData[$(this).find('label').html()] = $(this).find('input').val() || $(this).find('textarea').val();
+                        });
+
+                        flow_data.appName = $('#inp-dashboard').val();
+                        flow_data.queryData = queryData;
+                        getQueryData();
+                    }
+                    break;
+
+            }
+
+
             switch (newIndex) {
                 case 1:
 
-                    var dsType = $('#wizard-dsTypeSel').val();
-
-                    if (flow_data.dataSource != dsType) {
-
-                        flow_data.dataSource = dsType;
-
+                  
                         var nextWindowData = {
-                            createConnection: metadata.dataSourcesDescriptions[dsType]
+                        createConnection: metadata.dataSourcesDescriptions[flow_data.dataSource]
                         };
 
                         var source = $("#create-new-connection").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
                         var template = Handlebars.compile(source);
                         $('#wizard-add-gadget-p-1').html(template(nextWindowData));
-                    }
+                  
                     break;
 
                 case 2:
 
                     if (!flow_data.queryData) {
-
-                        var conSettings = {};
-                        $('#wizard-add-gadget-p-1').find('.control-group').each(function () {
-                            conSettings[$(this).find('label').html()] = $(this).find('input').val();
-                        });
-
-                        flow_data.conSettings = conSettings;
-
                         var window3Data = metadata.datasourceWindow_3[flow_data.dataSource];
                         if (window3Data) {
                             var nextWindowData = {
@@ -210,23 +228,23 @@ $(function () {
                             var template = Handlebars.compile(source);
                             $('#wizard-add-gadget-p-2').html(template(nextWindowData));
 
+                            $('.inp-query').change(function () {
+                                isQueryRan = false;
+                            });
+
+                            //  $('#modal-create-new-connection').modal('hide');
+                            //$('#modal-sql-query-editor').modal('show');
                         } else {
- 
+                            // $('#modal-create-new-connection').modal('hide');
+                            // $STORE_MODAL.modal('show');
+                            //alert("Select gadget");
                         }
                     }
 
                     break;
-                    
-                    
-                case 3:
-                	if($('#__gadget_store-gadget-div').length < 1){
-                		UESContainer.renderGadget('store-gadget-div', "http://localhost:9763/portal/gadgets/show-assets/show-assets.xml");
-                	}
-                	                    
-                    break;
 
                 case 4:
-                    if (isSelectionChanged) {
+                    if (isSelectionChanged || isQueryRan) {
                         getDataFormat();
                     }
                     break;
@@ -248,9 +266,23 @@ $(function () {
             });
         }
     };
+    var getQueryData = function () {
+        caramel.ajax({
+            type: 'POST',
+            url: "apis/gadgetGen?action=queryDbAll",
+            data: JSON.stringify(flow_data),
+            success: function (result) {
+                flow_data.column_headers = result.tableHeaders;
+            },
+            contentType: 'application/json',
+            dataType: 'json'
+        });
+        isQueryRan = true;
+    }
 
     var getDataFormat = function () {
         isSelectionChanged = false;
+        isQueryRan = false;
         caramel.ajax({
             type: 'POST',
             url: '../portal/' + tmpGadgetInfo.attributes.overview_dataformat,
@@ -267,7 +299,7 @@ $(function () {
         flow_data.dataColumns = tableData.dataColumns;
 
         var nextWindowData = {
-            gadget_type : tmpGadgetInfo.attributes.overview_name,
+            gadget_type: tmpGadgetInfo.attributes.overview_name,
             dataLabels: tableData.dataLabels
         };
 
@@ -371,10 +403,10 @@ $(function () {
                 gadgetLi.data('gadgetInfo', tmpGadgetInfo);
                 insertGadgetPreview(gadgetLi, data.gadgetLocation + tmpGadgetInfo.attributes.overview_url, modPrefs);
             } else {
-                tmpGadgetInfo.attributes.overview_url_temp =  data.gadgetLocation + tmpGadgetInfo.attributes.overview_url
+                tmpGadgetInfo.attributes.overview_url_temp = data.gadgetLocation + tmpGadgetInfo.attributes.overview_url
                 gadgetLi = lastClickedGadgetButton.parents('li');
                 gadgetLi.data('gadgetInfo', tmpGadgetInfo);
-                insertGadget(gadgetLi, tmpGadgetInfo.attributes.overview_url_temp, modPrefs,flow_data.chartTitle);
+                insertGadget(gadgetLi, tmpGadgetInfo.attributes.overview_url_temp, modPrefs, flow_data.chartTitle);
                 var placeholder = lastClickedGadgetButton.siblings('.designer-placeholder');
                 lastClickedGadgetButton.remove();
                 placeholder.remove();
@@ -384,7 +416,7 @@ $(function () {
     }
 
     var deleteTempFiles = function () {
-    	tmpGadgetInfo = {};
+        tmpGadgetInfo = {};
         caramel.ajax({
             type: 'POST',
             url: 'apis/gadgetGen?action=deleteTemp',
@@ -413,16 +445,36 @@ $(function () {
         $('#wizard-add-gadget-btn-prev').removeClass().addClass('btn btn-primary btn-large ' + cssClass);
 
     })
-    
-     $('body').on('click', '.wizard-dsType', function (e) {
+
+    $('body').on('click', '.wizard-dsType', function (e) {
         e.preventDefault();
         $('.wizard-dsType').removeClass('active');
         $(this).toggleClass('active');
         $('#wizard-dsTypeSel').val($(this).attr('data-dsType'));
     });
 
+    $('body').on('click', '.btn-validateCon', function (e) {
+        e.preventDefault();
+        var conSettings = {};
+        $('#wizard-add-gadget-p-1').find('.control-group').each(function () {
+            conSettings[$(this).find('label').html()] = $(this).find('input').val();
+        });
+
+        flow_data.conSettings = conSettings;
+
+        caramel.ajax({
+            type: 'POST',
+            url: "apis/gadgetGen?action=validateCon",
+            data: JSON.stringify(flow_data),
+            success: function (result) {
+                alert(result.message);
+            },
+            contentType: 'application/json',
+            dataType: 'json'
+        });
+    });
+
     $('body').on('click', '.btn-execQuery', function (e) {
-        //var query = $(this).closest('.inp-query').val();
         e.preventDefault();
         var queryData = {};
         $('#wizard-add-gadget-p-2').find('.control-group').each(function () {
@@ -443,9 +495,12 @@ $(function () {
             dataType: 'json'
         });
 
+		isQueryRan = true;
+
+
     });
-    
-	$('#modal-add-gadget-wizard').on('hidden', function () {
+
+    $('#modal-add-gadget-wizard').on('hidden', function () {
         flow_data = {};
         $("#wizard-add-gadget").steps('reset');
         $('#wizard-add-gadget > .steps > ul > li.done').removeClass('done').addClass('disabled');
@@ -458,15 +513,16 @@ $(function () {
 
         if (iframe1) {
             var cWindow = iframe1.contentWindow;
-        cWindow.deselectGadget();
+            cWindow.deselectGadget();
         }
 
         $('#wizard-add-gadget-btn-prev').addClass('disabled');
 
 
     });
-    
+
     var renderDatasetTable = function (result) {
+        isQueryRan = true;
         $('#wizard-add-gadget-p-2 .well').animate({
             'margin-top': 0
         });
@@ -476,10 +532,10 @@ $(function () {
         var template = Handlebars.compile(source);
         $('#sql-editor-dataset').html(template(result));
     }
-    
+
     //------------------------------------------------------------------------end of gadget-gen ui -------------------------------
-    
-    
+
+
     var eventRegistered = false;
     // is an event is resisted to show-asset gadget to get the selected gadget.
     function drawGadgets() {
@@ -639,12 +695,13 @@ $(function () {
     var lastClickedGadgetButton = null;
     var gadgetRendered;
 
+    UESContainer.renderGadget('store-gadget-div', store_url);
 
     var id = 1;
 
     function insertGadget(parentEl, url, pref, title) {
         id++;
-        var gadgetDiv = parentEl.find('.add-gadget-item');
+        var gadgetDiv = parentEl.find('.add-gadget-item');            g
         var idStr = 'gadgetArea-d' + id;
         gadgetDiv.html('<div id="' + idStr + '">');
         UESContainer.renderGadget(idStr, url, pref || {}, function (gadgetInfo) {
@@ -653,13 +710,13 @@ $(function () {
             parentEl.find('input').val(visibleTitle);
 
         });
-        if(flow_data.mode == 'design'){
+        if (flow_data.mode == 'design') {
             parentEl.find('#header_label').hide();
             parentEl.find('#gadget_title_div').show();
         }
-       // deleteTempFiles();
+        // deleteTempFiles();
     }
-    
+
     function insertGadgetPreview(parentEl, url, pref) {
 
         var idStr = 'gadgetArea-preview';
@@ -788,7 +845,7 @@ $(function () {
         }
         return layoutFormat;
     }
-    
+
     drawGadgets();
     changeMode('view');
 
