@@ -441,7 +441,7 @@ $(function() {
         caramel.ajax({
             type : 'POST',
             url : 'apis/gadgetGen?action=deleteTemp',
-            data : flow_data.appName,
+            data : JSON.stringify(flow_data.appName),
             success : function() {
                 $('#modal-add-gadget-wizard').modal('hide');
                 flow_data = {};

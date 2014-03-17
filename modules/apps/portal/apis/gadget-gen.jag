@@ -87,8 +87,8 @@
                     resource_id = uuid.generate(),
                     chartType = data.chartType,
                     newGadgetFolderName = (data.chartTitle).replace(/ /g, "_"),
-                    dataFileName = 'dataApi.jag',
-                    dataFileNamePreview = 'dataApi_preview_temp.jag',
+                    dataFileName = 'data-api.jag',
+                    dataFileNamePreview = 'data-api-preview-temp.jag',
                     localIP = process.getProperty('server.host'),
                     httpPort = process.getProperty('http.port');
 
