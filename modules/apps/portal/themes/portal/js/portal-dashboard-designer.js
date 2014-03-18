@@ -330,6 +330,7 @@ $(function() {
         $('#modal-data-mapping-extension-space').html(template(nextWindowData));
 
         $('#mapping-add-series-btn').bind('click', addSeriesBtnClick);
+        $('#mapping-remove-series-btn').bind('click', removeSeriesBtnClick);
         //To add more series
 
         $('#btn-preview-gadget').bind('click', function(e) {
@@ -364,6 +365,14 @@ $(function() {
         var divCont = populateMappingRow(flow_data.dataColumns, flow_data.column_headers, false);
         $('#modal-data-mapping').append(divCont);
     }
+
+    var removeSeriesBtnClick = function (e) {
+        e.preventDefault();
+        if ($("#modal-data-mapping .form-horizontal").length > 1) {
+            $("#modal-data-mapping .form-horizontal").last().remove();
+        }
+    }
+
     var processFieldMapping = function(mode) {
         var mappingData = [];
         var url = 'apis/gadgetGen?action=createJag';

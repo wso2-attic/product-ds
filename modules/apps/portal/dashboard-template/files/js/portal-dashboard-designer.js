@@ -45,7 +45,6 @@ $.validator.addMethod("alphanumeric", function(value, element) {
     return this.optional(element) || /^[\w\-\s]+$/.test(value);
 }, "Must be alphanumeric.");
 
-
 var newWid = 0;
 
 $(function () {
@@ -319,7 +318,7 @@ $(function () {
         $('#modal-data-mapping-extension-space').html(template(nextWindowData));
 
         $('#mapping-add-series-btn').bind('click', addSeriesBtnClick);
-        //To add more series
+        $('#mapping-remove-series-btn').bind('click', removeSeriesBtnClick);
 
         $('#btn-preview-gadget').bind('click', function (e) {
             e.preventDefault();
@@ -352,6 +351,13 @@ $(function () {
         e.preventDefault();
         var divCont = populateMappingRow(flow_data.dataColumns, flow_data.column_headers, false);
         $('#modal-data-mapping').append(divCont);
+    }
+
+    var removeSeriesBtnClick = function (e) {
+        e.preventDefault();
+        if ($("#modal-data-mapping .form-horizontal").length > 1) {
+            $("#modal-data-mapping .form-horizontal").last().remove();
+        }
     }
 
     var processFieldMapping = function (mode) {
