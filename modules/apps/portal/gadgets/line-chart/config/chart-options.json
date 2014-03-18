@@ -111,6 +111,9 @@
 
         "rotateTicks": 0
     },
+    "pan": {
+        "interactive": true
+    },
     "zoom": {
         "interactive": true
     },
