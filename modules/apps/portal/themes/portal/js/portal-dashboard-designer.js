@@ -222,7 +222,7 @@ $(function() {
 
             switch (newIndex) {
                 case 1:
-
+                    if(!flow_data.conSettings){
                     var nextWindowData = {
                         createConnection : metadata.dataSourcesDescriptions[flow_data.dataSource]
                     };
@@ -230,6 +230,7 @@ $(function() {
                     var source = $("#create-new-connection").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
                     var template = Handlebars.compile(source);
                     $('#wizard-add-gadget-p-1').html(template(nextWindowData));
+                    }
                     break;
 
                 case 2:
