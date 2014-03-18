@@ -42,7 +42,7 @@ var caramel = caramel || {};
 })(jQuery);
 
 $.validator.addMethod("alphanumeric", function(value, element) {
-    return this.optional(element) || /^[a-z0-9\-]+$/i.test(value);
+    return this.optional(element) || /^[\w\-\s]+$/.test(value);
 }, "Must be alphanumeric.");
 
 
@@ -432,7 +432,7 @@ $(function () {
         caramel.ajax({
             type: 'POST',
             url: 'apis/gadgetGen?action=deleteTemp',
-            data: flow_data.appName,
+            data: JSON.stringify(flow_data.appName),
             success: function () {
                 $('#modal-add-gadget-wizard').modal('hide');
                 flow_data = {};

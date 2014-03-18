@@ -39,7 +39,7 @@ var flow_data = {};
 })(jQuery);
 
 $.validator.addMethod("alphanumeric", function(value, element) {
-    return this.optional(element) || /^[a-z0-9\-]+$/i.test(value);
+    return this.optional(element) || /^[\w\-\s]+$/.test(value);
 }, "Must be alphanumeric.");
 
 

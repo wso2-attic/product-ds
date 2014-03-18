@@ -57,7 +57,6 @@
 
     "copyRoot": [
     	"/datasource-config.json",
-        "/apis/ues.jag",
         "/apis/gadget-gen.jag",
         "/modules/ues.js",
         "/modules/site.js",
