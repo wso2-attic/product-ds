@@ -445,21 +445,32 @@ body {
 .layout_block.static {
 	visibility:hidden;
 }
-.layout_block .btn-add-gadget {
-	display:none;
-	font-size:16px;
-	font-weight:bold;
+.layout_block .gadget-add-btn-cont {
+
 	left:50%;
 	margin-left:-75px;
-	margin-top:62px;
-	padding:5px;
+	margin-top:0px;
+	
 	position:absolute;
 	text-align:center;
 	top:50%;
-	width:149px;
+	width:155px;
+	margin-top: -32px;
 }
-.layout_block:hover .btn-add-gadget {
-	display:block;
+.gadget-add-btn-cont .btn{
+    font-size:34px;
+    width:70px;
+    height:70px;
+    color:#CCCCCC;
+    display:inline-block;
+    border:3px solid #ccc;
+    background: transparent;
+    transition: all .3s ease;
+    margin: 3px;
+}
+.gadget-add-btn-cont .btn:hover{
+    color:#333;
+    border-color:#333;
 }
 .layout_block:hover .grid_header_controls {
 	display:block;
@@ -615,6 +626,11 @@ body {
 	border-radius:0;
 	padding:0;
 	line-height: 45px;
+}
+.layout_block .tooltip {
+    width: 150px !important;
+    font-size:14px;
+    
 }
 @media all and(max-width:1225px) {
 	.grid_header h3 {
