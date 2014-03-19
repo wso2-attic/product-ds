@@ -38,7 +38,7 @@
         "clickable": false,
         "hoverable": true,
         "autoHighlight": true,
-        "mouseActiveRadius": 0.1
+        "mouseActiveRadius": 10
     },
     "yaxis": {
         "show": true,
