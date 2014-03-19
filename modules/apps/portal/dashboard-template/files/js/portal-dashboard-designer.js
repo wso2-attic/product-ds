@@ -3,7 +3,7 @@ var layout, dummy_gadget_block = 50, block_params = {
     max_height: 6
 }, MARGINS_RATIO = 0.1, COLS = block_params.max_width;
 
-var onShowAssetLoad, tmpGadgetInfo, isQueryRan = false, isSelectionChanged = false;
+var onShowAssetLoad, tmpGadgetInfo, isQueryChanged = false, isQueryRan = false, isGadgetChanged = false;
 
 var flow_data = {};
 var metadata;
@@ -190,7 +190,7 @@ $(function () {
                     break;
 
                 case 2:
-                    if (!isQueryRan) {
+                    if (isQueryChanged) {
                         var queryData = {};
                         $('#wizard-add-gadget-p-2').find('.control-group').each(function () {
                             queryData[$(this).find('label').html()] = $(this).find('input').val() || $(this).find('textarea').val();
@@ -233,7 +233,9 @@ $(function () {
                             $('#wizard-add-gadget-p-2').html(template(nextWindowData));
 
                             $('.inp-query').change(function () {
+                                isQueryChanged = true;
                                 isQueryRan = false;
+                                $('#sql-editor-dataset').empty();
                             });
 
                             //  $('#modal-create-new-connection').modal('hide');
@@ -248,7 +250,8 @@ $(function () {
                     break;
 
                 case 4:
-                    if (isSelectionChanged || isQueryRan) {
+                    if (isGadgetChanged || isQueryRan) {
+                        UESContainer.removeGadget('gadgetArea-preview');
                         getDataFormat();
                     }
                     break;
@@ -271,7 +274,7 @@ $(function () {
         if (cWindow.addListener) {
             cWindow.addListener(function (gadgetInfo) {
                 tmpGadgetInfo = gadgetInfo;
-                isSelectionChanged = true;
+                isGadgetChanged = true;
 
             });
         }
@@ -287,11 +290,12 @@ $(function () {
             contentType: 'application/json',
             dataType: 'json'
         });
+        isQueryChanged = false;
         isQueryRan = true;
     }
 
     var getDataFormat = function () {
-        isSelectionChanged = false;
+        isGadgetChanged = false;
         isQueryRan = false;
         caramel.ajax({
             type: 'POST',
@@ -502,7 +506,7 @@ $(function () {
         flow_data.appName = $('#inp-dashboard').val();
         flow_data.queryData = queryData;
 
-        isSelectionChanged = true;
+        //isGadgetChanged = true;
 
         caramel.ajax({
             type: 'POST',
@@ -513,8 +517,9 @@ $(function () {
             dataType: 'json'
         });
 
-        isQueryRan = true;
-
+        if(isQueryChanged){
+            isQueryRan = true;
+        }
 
     });
 
@@ -540,7 +545,6 @@ $(function () {
     });
 
     var renderDatasetTable = function (result) {
-        isQueryRan = true;
         $('#wizard-add-gadget-p-2 .well').animate({
             'margin-top': 0
         });
