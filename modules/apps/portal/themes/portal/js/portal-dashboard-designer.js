@@ -301,6 +301,7 @@ $(function() {
             success : function(result) {
                 flow_data.column_headers = result.tableHeaders;
             },
+            async:   false,
             contentType : 'application/json',
             dataType : 'json'
         });
