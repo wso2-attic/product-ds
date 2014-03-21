@@ -445,10 +445,7 @@ $(function() {
 				gadgetLi = lastClickedGadgetButton.parents('li');
 				gadgetLi.data('gadgetInfo', tmpGadgetInfo);
 				insertGadget(gadgetLi, tmpGadgetInfo.attributes.overview_url_temp, modPrefs, flow_data.chartTitle);
-				//var placeholder = lastClickedGadgetButton.siblings('.designer-placeholder');
-				lastClickedGadgetButton.remove();
-				//fplaceholder.remove();
-				$('.gadget-add-btn-cont').remove();
+                lastClickedGadgetButton.closest('.gadget-add-btn-cont').remove();
 				deleteTempFiles();
 			}
 		}
