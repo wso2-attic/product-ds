@@ -268,6 +268,7 @@ $(function() {
 				case 4:
 					if (isGadgetChanged || isQueryRan) {
 						UESContainer.removeGadget('gadgetArea-preview');
+                        $('#gadgetArea-preview').html($("#gadgetPreviewPlaceholder").html());
 						getDataFormat();
 					}
 					break;
