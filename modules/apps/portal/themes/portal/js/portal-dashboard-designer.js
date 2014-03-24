@@ -291,6 +291,7 @@ $(function() {
 		if (cWindow.addListener) {
 			cWindow.addListener(function(gadgetInfo) {
 				tmpGadgetInfo = gadgetInfo;
+				console.log(tmpGadgetInfo);
 				isGadgetChanged = true;
 
 			});
@@ -314,13 +315,23 @@ $(function() {
 	var getDataFormat = function() {
 		isGadgetChanged = false;
 		isQueryRan = false;
-		caramel.ajax({
+		$.ajax({
 			type : 'POST',
-			url : tmpGadgetInfo.attributes.overview_dataformat,
+			url : '/publisher' + tmpGadgetInfo.attributes.overview_dataformat,
 			success : generateDataMapping,
 			contentType : 'application/json',
 			dataType : 'json'
 		});
+		//TODO: caramel.ajax prepends 'portal' as context
+		/*
+		caramel.ajax({
+			type : 'POST',
+			url : '/publisher' + tmpGadgetInfo.attributes.overview_dataformat,
+			success : generateDataMapping,
+			contentType : 'application/json',
+			dataType : 'json'
+		});
+		*/
 
 	}
 	var generateDataMapping = function(tableData) {

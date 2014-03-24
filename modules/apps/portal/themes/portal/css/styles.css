@@ -98,7 +98,7 @@ body {
 .btn {
     border-radius: 3px;
     background-image: none;
-    border-color: transparent;
+    border-color: 1px solid;
     box-shadow: none;
 }
 .btn-primary {
@@ -437,24 +437,36 @@ label.error {
 }
 #wizard-add-gadget-p-4 .preview-cont {
     position: relative;
+    height:436px;
 }
 #wizard-add-gadget-p-4 .gadget-preview-loader {
-    left: 0px;
+    left: 10px;
     position: absolute;
-    right: 0px;
-    top: 0px;
-    bottom: 0px;
+    right: 10px;
+    top: 10px;
+    bottom: 10px;
     background: none repeat scroll 0px 0px rgb(255, 255, 255);
 }
 #wizard-add-gadget-p-4 .gadget-preview-loader > div {
  font-size: 24px;
     left: 50%;
+    margin-top: -20px;
     margin-left: -66px;
     position: absolute;
     text-align: center;
     top: 50%;
 }
 
+#wizard-add-gadget .data-mapping-cont{
+   height: 379px;
+    overflow-y: auto;
+    padding-right: 23px;
+}
+#wizard-add-gadget .data-mapping-btns {
+    border: 1px solid #CCCCCC;
+    margin-bottom: 10px;
+    padding: 8px;
+}
 .wizard-icon.icon-rdbms {
     background: url('../img/wizard-btn-rdbms.png') no-repeat top center;
 }
@@ -639,6 +651,7 @@ label.error {
 }
 .wizard > .loading .spinner {
 }
+  
 .tabcontrol > .steps {
     display: block;
     position: relative;
