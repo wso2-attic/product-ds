@@ -128,6 +128,9 @@
                                 <featureArtifactDef>
                                     org.wso2.store.modules:ues.feature:${ues.feature.version}
                                 </featureArtifactDef>
+				<featureArtifactDef>
+				    org.wso2.store.modules:claims.feature:${claims.feature.version}
+                                </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.store:org.wso2.store.feature:${es.version}
                                 </featureArtifactDef>
@@ -231,6 +234,9 @@
                                 <feaureArtifactDef>
                                     org.wso2.ues:org.wso2.ues.feature:${project.version}
                                 </feaureArtifactDef>
+				<featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.claim.mgt.feature:${carbon.platform.version}
+                                </featureArtifactDef>
                             </featureArtifacts>
 
                         </configuration>
@@ -317,6 +323,10 @@
                                 <feature>
                                     <id>org.wso2.store.modules.ues.feature.group</id>
                                     <version>${ues.feature.version}</version>
+                                </feature>
+				<feature>
+                                    <id>org.wso2.store.modules.claims.feature.group</id>
+                                    <version>${claims.feature.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.registry.core.feature.group</id>
@@ -443,6 +453,10 @@
                                 <feature>
                                     <id>org.wso2.ues.feature.group</id>
                                     <version>${project.version}</version>
+                                </feature>
+				<feature>
+                                    <id>org.wso2.carbon.claim.mgt.feature.group</id>
+                                    <version>${carbon.platform.version}</version>
                                 </feature>
                             </features>
                         </configuration>
