@@ -72,7 +72,8 @@ var skipGadgets = function (name) {
         name === 'wso2-carbon-dev' ||
         name === 'intro-gadget-1' ||
         name === 'intro-gadget-2' ||
-        name === 'show-assets' ||
+        name === 'gadget-template-explorer' ||
+        name === 'gadget-explorer' ||
         name === 'co2-emission' ||
         name === 'electric-power' ||
         name === 'energy-use' ||

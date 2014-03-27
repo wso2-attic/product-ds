@@ -291,7 +291,6 @@ $(function() {
 		if (cWindow.addListener) {
 			cWindow.addListener(function(gadgetInfo) {
 				tmpGadgetInfo = gadgetInfo;
-				console.log(tmpGadgetInfo);
 				isGadgetChanged = true;
 
 			});
@@ -581,7 +580,7 @@ $(function() {
 	$STORE_MODAL.on('hidden', function() {
 	});
 
-	UESContainer.renderGadget('store-gadget-div', portalGadgets.store);
+	UESContainer.renderGadget('store-gadget-div', portalGadgets.gadgetTemplates);
 	UESContainer.renderGadget('store-gadget-div2', portalGadgets.store);
 
 	//id to be use in dynamically added gadgets.

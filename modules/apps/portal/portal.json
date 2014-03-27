@@ -22,7 +22,8 @@
         "appAcsHost" : "%https.host%"
     },
     "portalGadgets" : {
-        "store" : "%http.host%/publisher/config/defaults/gadgets/show-assets/show-assets.xml",
+        "gadgetTemplates" : "%http.host%/publisher/config/defaults/gadgets/gadget-template-explorer/gadget-template-explorer.xml",
+        "store" : "%http.host%/publisher/config/defaults/gadgets/gadget-explorer/gadget-explorer.xml",
         "intro0": "%http.host%/portal/gadgets/intro-gadget-1/intro-gadget-1.xml",
         "intro1": "%http.host%/portal/gadgets/intro-gadget-2/intro-gadget-2.xml"
     }
