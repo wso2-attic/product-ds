@@ -443,15 +443,18 @@ $(function() {
 			modPrefs.prefs = prefs;
 
 			var gadgetLi;
+			var tmpOverviewLoc = tmpGadgetInfo.attributes.overview_location;
+			var tmpGadget = tmpOverviewLoc.substring(tmpOverviewLoc.lastIndexOf('/')+1);
+			tmpGadget += '/'+ tmpGadget + ".xml";
 
 			//$('#modal-data-mapper').modal('hide');
 
 			if (mode == 'preview') {
 				gadgetLi = $('#gadget-preview');
 				gadgetLi.data('gadgetInfo', tmpGadgetInfo);
-				insertGadgetPreview(gadgetLi, data.gadgetLocation + tmpGadgetInfo.attributes.overview_url, modPrefs);
+				insertGadgetPreview(gadgetLi, data.gadgetLocation + tmpGadget, modPrefs);
 			} else {
-				tmpGadgetInfo.attributes.overview_url_temp = data.gadgetLocation + tmpGadgetInfo.attributes.overview_url
+				tmpGadgetInfo.attributes.overview_url_temp = data.gadgetLocation + tmpGadget;
 				gadgetLi = lastClickedGadgetButton.parents('li');
 				gadgetLi.data('gadgetInfo', tmpGadgetInfo);
 				insertGadget(gadgetLi, tmpGadgetInfo.attributes.overview_url_temp, modPrefs, flow_data.chartTitle);

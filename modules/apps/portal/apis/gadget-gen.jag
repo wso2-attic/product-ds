@@ -146,7 +146,7 @@
             site.copyFile(chartProcessorFile, data.appName, chartProccessorsLocation);
 
             var pathToOptions = gadgetLocation + '/chart-options.json';
-            var file = site.loadFile('portal', data.chartOptions);
+            var file = site.loadFile('publisher', data.chartOptions);
             site.createFile(data.appName, pathToOptions, file.getStream());
             file.close();
 
