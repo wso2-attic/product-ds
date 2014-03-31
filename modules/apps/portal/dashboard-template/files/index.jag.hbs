@@ -207,7 +207,7 @@ response.sendRedirect('/{{appName}}/login');
                     <ul>
                         <div id="grid-guides"></div>
 
-                        {{#each widgets}}
+                        {{#each widgets}}       
                             <li class="layout_block {{wclass}}" data-sizey="{{height}}" data-sizex="{{width}}"
                                 data-col="{{x}}" data-row="{{y}}"
                                 data-url="{{url}}" data-wid="{{wid}}" data-prefs="{{prefs}}" data-title="{{title}}">
@@ -231,122 +231,189 @@ response.sendRedirect('/{{appName}}/login');
                                     </div>
                                 {{/unless}}
                                 {{#unless url}}
-                                    <div class="designer-placeholder">
-
-                                    </div>
-
-                                    <button class="btn btn-add-gadget">Add Gadget</button>
+									<div class="gadget-add-btn-cont">
+										<button class="btn btn-add-gadget-new" data-toggle="tooltip" title="Create new Gadget">
+											<i class="icon icon-pencil"></i>
+										</button>
+										<button class="btn btn-add-gadget-existing" data-toggle="tooltip" title="Add existing Gadget">
+											<i class="icon icon-bar-chart"></i>
+										</button>
+									</div>
                                 {{/unless}}
                             </li>
                         {{/each}}
-
-
                     </ul>
                 </div>
 
             </div>
             <!-- /container -->
-
-
-            <!-- Modal -->
-            <!--<div id="modal-add-gadget" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="publishModalLabel" aria-hidden="true">-->
-            <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">-->
-            <!--<i class="icon-remove"></i>-->
-            <!--</button>-->
-            <!--<div id="store-gadget-div"></div>-->
-
-            <!--</div>-->
-
-
-            <!--------------------------------------- start gadget-gen-ui---------------------------------------------->
-
-            <div id="modal-add-gadget-wizard" class="modal hide fade" tabindex="-1" role="dialog"
-                 aria-labelledby="publishModalLabel"
-                 aria-hidden="true">
-
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        <i class="icon-remove"></i>
-                    </button>
-                    <h3>Add Gadget</h3>
-                </div>
-                <div class="modal-body">
-                    <form id="form-wizard">
-                        <div id="wizard-add-gadget">
-                            <h3>Select Data Source</h3>
-                            <section>
-
-                            </section>
-
-                            <h3>Configure Data Source</h3>
-                            <section>
-
-                            </section>
-
-                            <h3>Select Dataset</h3>
-                            <section>
-
-                            </section>
-
-                            <h3>Select a Gadget</h3>
-                            <section>
-                                <div id="store-gadget-div"></div>
-                            </section>
-
-                            <h3>Preview</h3>
-                            <section>
-                                <div class="row-fluid">
-                                    <div class="span6">
-                                        <div id="modal-data-mapping-extension-space"></div>
-                                        <div id="modal-data-mapping"></div>
-                                    </div>
-                                    <div class="span6 preview-cont">
-                                    	<div class="gadget-preview-loader" style="display: none">
-													<div>
-														<i class="icon icon-refresh icon-spin"></i>
-														<br>
-														<p>
-															<small>Loading preview</small>
-														</p>
-													</div>
-										</div>
-                                        <div id="gadget-preview">
-                                            <div id="gadget-preview-placeholder">
-                                                <p class="muted">
-                                                    Map data for the gadget and click on <strong>Preview</strong> to
-                                                    render the
-                                                    gadget preview
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </section>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button id="wizard-add-gadget-btn-prev" class="btn btn-primary btn-large disabled">
-                        Previous
-                    </button>
-                    <button id="wizard-add-gadget-btn-next" class="btn btn-primary btn-large">
-                        Next
-                    </button>
-                    <button id="wizard-add-gadget-btn-finish" class="btn btn-primary btn-large" style="display:none">
-                        Finish
-                    </button>
-                </div>
-            </div>
-
-            <!--------------------------------end of the gadget-gen-ui--------------------------------------------->
-
-
         </div>
 
     </div>
 
 </div>
+
+<!--------------------------------------- start gadget-gen-ui---------------------------------------------->
+
+<!-- Modal -->
+<div id="modal-add-gadget-wizard" class="modal modal-add-gadget hide fade" tabindex="-1" role="dialog"
+aria-labelledby="publishModalLabel"
+aria-hidden="true">
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+			<i class="icon-remove"></i>
+		</button>
+		<h3>Add Gadget</h3>
+	</div>
+	<div class="modal-body">
+		<form id="form-wizard">
+			<div id="wizard-add-gadget">
+				<h3>Select Data Source</h3>
+				<section>
+					
+				</section>
+
+				<h3>Configure Data Source</h3>
+				<section>
+
+				</section>
+
+				<h3>Select Dataset</h3>
+				<section>
+
+				</section>
+
+				<h3>Select a Gadget</h3>
+				<section>
+					<div id="store-gadget-div"></div>
+				</section>
+
+				<h3>Preview</h3>
+				<section>
+					<div class="row-fluid">
+						<div class="span6">
+							<div class="data-mapping-btns">
+								<div class="form-inline">
+
+									<button class="btn" id="mapping-add-series-btn">
+										<i class="icon icon-plus"></i> Add Series
+									</button>
+									<button class="btn" id="mapping-remove-series-btn">
+										<i class="icon icon-minus"></i> Remove Series
+									</button>
+									<button class="btn btn-primary pull-right" id="btn-preview-gadget">
+										Preview
+									</button>
+
+								</div>
+							</div>
+
+							<div class="data-mapping-cont">
+								<div id="modal-data-mapping-extension-space"></div>
+								<hr>
+								<div id="modal-data-mapping"></div>
+							</div>
+
+						</div>
+						<div class="span6 preview-cont">
+							<div class="gadget-preview-loader" style="display: none">
+								<div>
+									<i class="icon icon-refresh icon-spin"></i>
+									<br>
+
+									<p>
+										<small>Loading preview</small>
+									</p>
+								</div>
+							</div>
+							<div id="gadget-preview">
+								<div id="gadget-preview-placeholder">
+									<p class="muted">
+										Map data for the gadget and click on <strong>Preview</strong> to render the
+										gadget preview
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</section>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button id="wizard-add-gadget-btn-prev" class="btn btn-primary btn-large disabled">
+			Previous
+		</button>
+		<button id="wizard-add-gadget-btn-next" class="btn btn-primary btn-large">
+			Next
+		</button>
+		<button id="wizard-add-gadget-btn-finish" class="btn btn-primary btn-large" style="display:none">
+			Finish
+		</button>
+	</div>
+</div>
+<!--------------------------------end of the gadget-gen-ui--------------------------------------------->
+ 
+<!-- Modal -->
+<div id="modal-add-gadget-existing" class="modal modal-add-gadget hide fade" tabindex="-1" role="dialog"
+aria-labelledby="publishModalLabel"
+aria-hidden="true">
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+			<i class="icon-remove"></i>
+		</button>
+		<h3>Add existing Gadget</h3>
+	</div>
+	<div class="modal-body">
+
+		<div id="store-gadget-cont">
+
+			<div id="store-gadget-div2"></div>
+
+		</div>
+
+	</div>
+	<div class="modal-footer">
+
+		<button id="btn-add-gadget-existing" class="btn btn-primary btn-large">
+			Add Gadget
+		</button>
+	</div>
+</div>
+
+<script id="item-template" type="text/x-handlebars-template">
+<li class="layout_block">
+	<div class="grid_header">
+		<span class="grid_header_controls"> <a class="show-widget-pref" data-collapse="true"><i
+			class="icon-cog"></i></a> <a class="expand-widget"><i class="icon-resize-full"></i></a> <a
+			class="shrink-widget"><i class="icon-resize-small"></i></a> <a class="close-widget" href="#"><i
+			class="icon-remove"></i></a> </span>
+	</div>
+	<div class="gadget-pref-cont">
+
+	</div>
+	<!--
+	<div class="designer-placeholder">
+
+	</div>-->
+
+	<div class="add-gadget-item">
+
+	</div>
+	<div class="gadget-add-btn-cont">
+		<button class="btn btn-add-gadget-new" data-toggle="tooltip" title="Create new Gadget">
+			<i class="icon icon-pencil"></i>
+		</button>
+		<button class="btn btn-add-gadget-existing" data-toggle="tooltip" title="Add existing Gadget">
+			<i class="icon icon-bar-chart"></i>
+		</button>
+	</div>
+</li>
+</script>
+
 
 <script id="widget-template" type="text/x-handlebars-template">
     <li class="layout_block">
@@ -619,9 +686,16 @@ response.sendRedirect('/{{appName}}/login');
 <script src="js/jquery.validate.js"></script>
 <script src="js/jquery.steps.js"></script>
 <script src="js/portal-dashboard-designer.js"></script>
+<script src="js/portal-personalize.js"></script>
 <script src="js/caramel-client.js"></script>
 <script>
-    var store_url =  "{{showAssetGadget}}";
+	var portalGadgets = {};
+	portalGadgets.gadgetTemplates = "{{showGadgetTemplates}}";
+	portalGadgets.store = "{{showAssetGadget}}";
+	
+	$(function() {
+			drawGadgets();
+	});
 </script>
 
 </body>

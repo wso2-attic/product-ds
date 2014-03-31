@@ -67,6 +67,12 @@
 		<script src="{{url "/themes/portal/js/theme.js"}}"></script>
 		<script src="{{url "/themes/portal/js/shindig.js"}}"></script>
 		{{js .}}
+		<script>
+		$(function() {
+			
+			drawGadgets();
+		});
+		</script>
 		<script src="{{url "/themes/portal/js/caramel-client.js"}}"></script>
 			<!--[if IE]>
 		<script src="{{url "/themes/portal/js/ie.js"}}"></script>

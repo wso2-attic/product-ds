@@ -4,13 +4,15 @@ var layout, dummy_gadget_block = 50, block_params = {
 }, MARGINS_RATIO = 0.1, COLS = block_params.max_width;
 
 var onShowAssetLoad, tmpGadgetInfo, isQueryChanged = false, isQueryRan = false, isGadgetChanged = false;
-var drawGadgets;
 
 var flow_data = {};
+var metadata;
+var caramel = caramel || {};
 
 (function($) {
 
 	var extensions = {
+
 		resize_widget_dimensions : function(options) {
 			if (options.widget_margins) {
 				this.options.widget_margins = options.widget_margins;
@@ -43,8 +45,9 @@ $.validator.addMethod("alphanumeric", function(value, element) {
 	return this.optional(element) || /^[\w\-\s]+$/.test(value);
 }, "Must be alphanumeric.");
 
-$(function() {
+var newWid = 0;
 
+$(function() {
 	var $STORE_MODAL_TEMPLATE = $('#modal-add-gadget-wizard');
 	var $STORE_MODAL_GADGET = $('#modal-add-gadget-existing');
 	var $LAYOUTS_GRID = $('#layouts_grid');
@@ -52,37 +55,13 @@ $(function() {
 
 	var widgetId = 1;
 
-	layout = $('.layouts_grid ul').gridster({
-		widget_base_dimensions : newDimensions[0],
-		widget_margins : newDimensions[1],
+	var widgetTemplate = Handlebars.compile($('#widget-template').html());
+	var widgetTemplate2 = Handlebars.compile($('#widget-template2').html());
+	var widgetTemplateBlank = Handlebars.compile($('#widget-template-blank').html());
+	var widgetTemplateBlank2 = Handlebars.compile($('#widget-template-blank2').html());
 
-		serialize_params : function($w, wgd) {
-			var gadgetInfo = $($w.get(0)).data('gadgetInfo');
-			var wclass = ($(wgd.el[0]).attr('class').indexOf('static') != -1) ? 'static' : '';
-			var gadgetId = $w.find(".add-gadget-item > div").attr('id');
-			var gadgetRenderInfo = UESContainer.getGadgetInfo(gadgetId);
-			var prefs = gadgetRenderInfo && gadgetRenderInfo.opt.prefs || {};
-
-			return {
-				wid : widgetId++,
-				x : wgd.col,
-				y : wgd.row,
-				title : $w.find('input').val(),
-				width : wgd.size_x,
-				height : wgd.size_y,
-				prefs : JSON.stringify(prefs).replace(/"/g, "'"),
-				wclass : wclass,
-				url : gadgetInfo && gadgetInfo.attributes.overview_url_temp
-			};
-
-		},
-		max_cols : 6,
-		max_size_x : 6
-	}).data('gridster');
-
-	setTimeout(function() {
-		drawGrid(newDimensions[0][0]);
-	}, 2000);
+	drawGrid(newDimensions[0][0]);
+	setGridOffsetTop();
 
 	function calculateNewDimensions() {
 		var containerWidth = $('#layouts_grid').innerWidth();
@@ -96,12 +75,10 @@ $(function() {
 	function resize() {
 		var newDimensions = calculateNewDimensions();
 
-		//window.setTimeout(function() {
 		layout.resize_widget_dimensions({
 			widget_base_dimensions : newDimensions[0],
 			widget_margins : newDimensions[1]
 		});
-		//}, 2000);
 
 		drawGrid(newDimensions[0][0]);
 
@@ -119,18 +96,17 @@ $(function() {
 		var h = $LAYOUTS_GRID.innerWidth() / blockSize;
 		var v = $LAYOUTS_GRID.innerHeight() / blockSize;
 
-		$('#grid-guides').html('').hide();
+		$('#grid-guides').html('');
 
 		for (var i = 0; i < v; i++) {
 			for (var j = 0; j < h; j++) {
 
 				var plus = '<i class="designer-guides-plus" data-row="' + (i + 1) + '" data-col="' + (j + 1) + '"></i>';
-				$('#grid-guides').append(plus).fadeIn("slow");
+				$('#grid-guides').append(plus);
 			}
 		}
 	}
 
-	var itemTmp = Handlebars.compile($('#item-template').html());
 
 	$('#dummy-gadget').resizable({
 		grid : dummy_gadget_block,
@@ -146,48 +122,41 @@ $(function() {
 		}
 	});
 
-	var registerEventsToWidget = function(widget) {
-		var addGadgetBtn = $(widget).find('.btn-add-gadget-new, .btn-add-gadget-existing');
-		addGadgetBtn.click(onGadgetSelectButton);
-	};
+	$('.btn-add-gadget').live('click', onGadgetSelectButton);
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~start gadget-gen ui~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+	//Select Datasource window
 	function onGadgetSelectButton() {
 		lastClickedGadgetButton = $(this);
-		if (lastClickedGadgetButton.hasClass('btn-add-gadget-existing')) {
-			$('#modal-add-gadget-existing').modal('show');
-		} else if (lastClickedGadgetButton.hasClass('btn-add-gadget-new')) {
-			$STORE_MODAL_TEMPLATE.modal('show');
-		}
+		gadgetRendered = false;
 
+		if (!metadata) {
+			caramel.ajax({
+				type : 'POST',
+				url : "datasource-config.json",
+				success : genDataSourceDropdown,
+				contentType : 'application/json',
+				dataType : 'json'
+			});
+
+		} else {
+			genDataSourceDropdown(metadata);
+		}
 	}
 
+	var genDataSourceDropdown = function(datasourceData) {
+		metadata = datasourceData;
+		var windowData = {
+			dataSource : metadata.dataSources
+		}
 
-	$('body').on('click', '.btn-add-gadget-existing', function() {
-		$('#modal-add-gadget-existing').modal('show');
-	});
+		var source = $("#select-data-source").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+		var template = Handlebars.compile(source);
+		$('#wizard-add-gadget-p-0').html(template(windowData));
+		$('#modal-add-gadget-wizard').modal('show');
 
-	$STORE_MODAL_TEMPLATE.on('hidden', function() {
-		flow_data = {};
-		$("#wizard-add-gadget").steps('reset');
-		$('#wizard-add-gadget > .steps > ul > li.done').removeClass('done').addClass('disabled');
-		$('.wizard-dsType').removeClass('active');
-		$('#wizard-dsTypeSel').val('');
-
-		$('#gadgetArea-preview').html($("#gadgetPreviewPlaceholder").html());
-
-		var cWindow = $('#store-gadget-div').find('iframe').get(0).contentWindow;
-		cWindow.deselectGadget();
-
-		$('#wizard-add-gadget-btn-prev').addClass('disabled');
-
-	});
-
-	$STORE_MODAL_GADGET.on('hidden', function() {
-		var cWindow = $('#store-gadget-div2').find('iframe').get(0).contentWindow;
-		cWindow.deselectGadget();
-	});
+	};
 
 	$("#wizard-add-gadget").steps({
 		headerTag : "h3",
@@ -235,6 +204,7 @@ $(function() {
 
 			switch (newIndex) {
 				case 1:
+
 					if (!flow_data.conSettings) {
 						var nextWindowData = {
 							createConnection : metadata.dataSourcesDescriptions[flow_data.dataSource]
@@ -247,6 +217,7 @@ $(function() {
 					break;
 
 				case 2:
+
 					if (!flow_data.queryData) {
 						var window3Data = metadata.datasourceWindow_3[flow_data.dataSource];
 						if (window3Data) {
@@ -268,7 +239,7 @@ $(function() {
 							//$('#modal-sql-query-editor').modal('show');
 						} else {
 							// $('#modal-create-new-connection').modal('hide');
-							// $STORE_MODAL_TEMPLATE.modal('show');
+							// $STORE_MODAL.modal('show');
 							//alert("Select gadget");
 						}
 					}
@@ -297,21 +268,15 @@ $(function() {
 
 	//Next Click of 4th window (Gadget store window)
 	onShowAssetLoad = function() {
-		var cWindows = $('#store-gadget-div,#store-gadget-div2');
+		var cWindow = $('#store-gadget-div').find('iframe').get(0).contentWindow;
+		if (cWindow.addListener) {
+			cWindow.addListener(function(gadgetInfo) {
+				tmpGadgetInfo = gadgetInfo;
+				isGadgetChanged = true;
 
-		cWindows.each(function(i) {
-			var cw = $(this).find('iframe').get(0).contentWindow;
-			if (cw.addListener) {
-				cw.addListener(function(gadgetInfo) {
-					tmpGadgetInfo = gadgetInfo;
-					isGadgetChanged = true;
-
-				});
-			}
-		});
-
+			});
+		}
 	};
-
 	var getQueryData = function() {
 		caramel.ajax({
 			type : 'POST',
@@ -324,28 +289,19 @@ $(function() {
 			contentType : 'application/json',
 			dataType : 'json'
 		});
+		//isQueryChanged = false;
 		isQueryRan = true;
 	}
 	var getDataFormat = function() {
 		isGadgetChanged = false;
 		isQueryRan = false;
-		$.ajax({
+		caramel.ajax({
 			type : 'POST',
-			url : '/publisher' + tmpGadgetInfo.attributes.overview_dataformat,
+			url : '../portal/' + tmpGadgetInfo.attributes.overview_dataformat,
 			success : generateDataMapping,
 			contentType : 'application/json',
 			dataType : 'json'
 		});
-		//TODO: caramel.ajax prepends 'portal' as context
-		/*
-		 caramel.ajax({
-		 type : 'POST',
-		 url : '/publisher' + tmpGadgetInfo.attributes.overview_dataformat,
-		 success : generateDataMapping,
-		 contentType : 'application/json',
-		 dataType : 'json'
-		 });
-		 */
 
 	}
 	var generateDataMapping = function(tableData) {
@@ -365,7 +321,6 @@ $(function() {
 
 		$('#mapping-add-series-btn').bind('click', addSeriesBtnClick);
 		$('#mapping-remove-series-btn').bind('click', removeSeriesBtnClick);
-		//To add more series
 
 		$('#btn-preview-gadget').bind('click', function(e) {
 			e.preventDefault();
@@ -458,18 +413,15 @@ $(function() {
 			modPrefs.prefs = prefs;
 
 			var gadgetLi;
-			var tmpOverviewLoc = tmpGadgetInfo.attributes.overview_location;
-			var tmpGadget = tmpOverviewLoc.substring(tmpOverviewLoc.lastIndexOf('/') + 1);
-			tmpGadget += '/' + tmpGadget + ".xml";
 
 			//$('#modal-data-mapper').modal('hide');
 
 			if (mode == 'preview') {
 				gadgetLi = $('#gadget-preview');
 				gadgetLi.data('gadgetInfo', tmpGadgetInfo);
-				insertGadgetPreview(gadgetLi, data.gadgetLocation + tmpGadget, modPrefs);
+				insertGadgetPreview(gadgetLi, data.gadgetLocation + tmpGadgetInfo.attributes.overview_url, modPrefs);
 			} else {
-				tmpGadgetInfo.attributes.overview_url_temp = data.gadgetLocation + tmpGadget;
+				tmpGadgetInfo.attributes.overview_url_temp = data.gadgetLocation + tmpGadgetInfo.attributes.overview_url
 				gadgetLi = lastClickedGadgetButton.parents('li');
 				gadgetLi.data('gadgetInfo', tmpGadgetInfo);
 				insertGadget(gadgetLi, tmpGadgetInfo.attributes.overview_url_temp, modPrefs, flow_data.chartTitle);
@@ -485,7 +437,7 @@ $(function() {
 			url : 'apis/gadgetGen?action=deleteTemp',
 			data : JSON.stringify(flow_data.appName),
 			success : function() {
-				$STORE_MODAL_TEMPLATE.modal('hide');
+				$('#modal-add-gadget-wizard').modal('hide');
 				flow_data = {};
 			},
 			contentType : 'application/json',
@@ -501,18 +453,6 @@ $(function() {
 	});
 	$('#wizard-add-gadget-btn-finish').click(function() {
 		processFieldMapping('dashboard');
-	});
-
-	$('#btn-add-gadget-existing').click(function() {
-		var gadgetLi = lastClickedGadgetButton.parents('li');
-		var gadgetInfo = tmpGadgetInfo;
-		gadgetLi.data('gadgetInfo', gadgetInfo);
-		insertGadget(gadgetLi, gadgetInfo.attributes.overview_url);
-
-		var placeholder = lastClickedGadgetButton.parents('.gadget-add-btn-cont');
-		lastClickedGadgetButton.remove();
-		placeholder.remove();
-		$STORE_MODAL_GADGET.modal('hide');
 	});
 
 	$('#wizard-add-gadget-btn-prev, #wizard-add-gadget-btn-next').bind('click', function() {
@@ -559,7 +499,7 @@ $(function() {
 		flow_data.appName = $('#inp-dashboard').val();
 		flow_data.queryData = queryData;
 
-		//isSelectionChanged = true;
+		//isGadgetChanged = true;
 
 		caramel.ajax({
 			type : 'POST',
@@ -573,10 +513,30 @@ $(function() {
 		if (isQueryChanged) {
 			isQueryRan = true;
 		}
+
+	});
+
+	$('#modal-add-gadget-wizard').on('hidden', function() {
+		flow_data = {};
+		$("#wizard-add-gadget").steps('reset');
+		$('#wizard-add-gadget > .steps > ul > li.done').removeClass('done').addClass('disabled');
+		$('.wizard-dsType').removeClass('active');
+		$('#wizard-dsTypeSel').val('');
+
+		$('#gadgetArea-preview').html($("#gadgetPreviewPlaceholder").html());
+
+		var iframe1 = $('#store-gadget-div').find('iframe').get(0);
+
+		if (iframe1) {
+			var cWindow = iframe1.contentWindow;
+			cWindow.deselectGadget();
+		}
+
+		$('#wizard-add-gadget-btn-prev').addClass('disabled');
+
 	});
 
 	var renderDatasetTable = function(result) {
-
 		$('#wizard-add-gadget-p-2 .well').animate({
 			'margin-top' : 0
 		});
@@ -590,24 +550,165 @@ $(function() {
 
 	var eventRegistered = false;
 	// is an event is resisted to show-asset gadget to get the selected gadget.
+	function drawGadgets() {
 
-	drawGadgets = function() {
+		applyGridster();
 
-		var mode = $('#inp-view-mode').val(), layoutFormat, template, layoutType = $('#inp-layout').val();
-		layoutFormat = (mode == 'view' || mode == '') ? $('.layout_block:not(.static)') : getLayoutFormat(layoutType);
+		$.get('apis/ues/layout/', {}, function(result) {
+			if (result) {
 
-		for (var i = 0; i < layoutFormat.length; i++) {
-			template = itemTmp();
-			var itemLayout = layoutFormat[i];
-			var widget = layout.add_widget(template, itemLayout.width, itemLayout.height, itemLayout.x, itemLayout.y);
-			registerEventsToWidget(widget);
-		}
+				var userWidgets = result.widgets;
+				var defaultWidgets = layout.serialize();
+
+				$.each(userWidgets, function(i, w) {
+
+					if (w.wid > newWid) {
+
+						newWid = w.wid;
+					}
+					//find w in defaultWidgets, if found copy attributes to _widget
+					if (isWidgetFound(w, defaultWidgets)) {
+
+						//update coords in default grid
+						$('.layout_block[data-wid="' + w.wid + '"]').attr({
+							'data-col' : w.x,
+							'data-row' : w.y,
+							'data-url' : w.url,
+							'data-title' : w.title,
+							'data-prefs' : w.prefs
+						});
+
+					} else {
+						//add user widget to grid
+						layout.add_widget(widgetTemplate2({
+							wid : w.wid,
+							url : w.url,
+							prefs : w.prefs
+						}), w.width, w.height, w.x, w.y);
+					}
+				});
+
+				$.each(defaultWidgets, function(i, w) {
+					// skip static widgets
+					if (w.y == 1) {
+						return true;
+					}
+
+					if (w.wid > newWid) {
+						newWid = w.wid;
+					}
+
+					// remove widgets in default grid but not found in user widgets
+					if (!isWidgetFound(w, userWidgets)) {
+
+						var removeWidget = $('.layouts_grid').find('.layout_block[data-wid="' + w.wid + '"]');
+						layout.remove_widget($(removeWidget));
+					}
+				});
+
+				$('#dashboardName').find('span').text(result.title);
+
+			}
+
+			var widgets = $('.layouts_grid').find('.layout_block');
+
+			$.each(widgets, function(i, widget) {
+				var $w = $(widget);
+				var wid = $w.attr('data-wid');
+				if (wid > newWid) {
+					newWid = wid;
+				}
+
+				var url = $w.attr('data-url');
+				var title = $w.attr('data-title');
+				var prefs = JSON.parse($w.attr('data-prefs').replace(/'/g, '"'));
+				var gadgetArea = $w.find('.add-gadget-item');
+				if (url != '') {
+					$w.find('.designer-placeholder').remove();
+					$w.find('.btn-add-gadget').remove();
+					insertGadget($w, url, {
+						prefs : prefs
+					}, title);
+				}
+
+			});
+
+		}).error(function(error) {
+			console.log(error);
+		});
+
 		setGridOffsetTop();
+
 	}
 
-	var lastClickedGadgetButton = null;
+	function applyGridster() {
 
-	//id to be use in dynamically added gadgets.
+		var widgetId = 500;
+		layout = $('.layouts_grid ul').gridster({
+			widget_base_dimensions : newDimensions[0],
+			widget_margins : newDimensions[1],
+
+			serialize_params : function($w, wgd) {
+				var gadgetInfo = $($w.get(0)).data('gadgetInfo');
+				var wclass = ($(wgd.el[0]).attr('class').indexOf('static') != -1) ? 'static' : '';
+				var gadgetId = $w.find(".add-gadget-item > div").attr('id');
+				var gadgetRenderInfo = UESContainer.getGadgetInfo(gadgetId);
+				var prefs = gadgetRenderInfo && gadgetRenderInfo.opt.prefs || {};
+				var currentWidgetId = $(wgd.el[0]).attr('data-wid');
+				var url = $(wgd.el[0]).attr('data-url');
+				return {
+					wid : currentWidgetId || widgetId++,
+					x : wgd.col,
+					y : wgd.row,
+					title : $w.find('input').val(),
+					width : wgd.size_x,
+					height : wgd.size_y,
+					prefs : JSON.stringify(prefs).replace(/"/g, "'"),
+					wclass : wclass,
+					url : gadgetInfo && gadgetInfo.attributes.overview_url_temp || url
+				};
+
+			},
+			//min_rows : block_params.max_height,
+			max_cols : 6,
+			max_size_x : 6
+		}).data('gridster');
+	}
+
+	function isWidgetFound(w, defaultWidgets) {
+		var _widget = {};
+		$.each(defaultWidgets, function(i, _w) {
+			if (_w.wid == w.wid) {
+				//_widget = {};
+				_widget.x = _w.x;
+				_widget.y = _w.y;
+				return false;
+			}
+		});
+
+		if ( typeof _widget.x != 'undefined' || typeof _widget.y != 'undefined') {
+			return true;
+		}
+
+		return false;
+
+	}
+
+	// check if default grid widget and user saved widget
+	// have same positions. No change made if both are same
+	function isWidgetMatch(w1, w2) {
+
+		var match = ((w1.x == w2.x) && (w1.y == w2.y));
+
+		return match;
+	}
+
+	//
+	var lastClickedGadgetButton = null;
+	var gadgetRendered;
+
+	UESContainer.renderGadget('store-gadget-div', store_url);
+
 	var id = 1;
 
 	function insertGadget(parentEl, url, pref, title) {
@@ -616,11 +717,16 @@ $(function() {
 		var idStr = 'gadgetArea-d' + id;
 		gadgetDiv.html('<div id="' + idStr + '">');
 		UESContainer.renderGadget(idStr, url, pref || {}, function(gadgetInfo) {
-			if (gadgetInfo.meta.modulePrefs) {
-				parentEl.find('.grid_header').append('<input class="gadget-title-txt" value="' + (title || gadgetInfo.meta.modulePrefs.title) + '">');
-				parentEl.find('.show-widget-pref').show();
-			}
+			var visibleTitle = title || gadgetInfo.meta.modulePrefs.title;
+			parentEl.find('h3').text(visibleTitle);
+			parentEl.find('input').val(visibleTitle);
+
 		});
+		if (flow_data.mode == 'design') {
+			parentEl.find('#header_label').hide();
+			parentEl.find('#gadget_title_div').show();
+		}
+		// deleteTempFiles();
 	}
 
 	function insertGadgetPreview(parentEl, url, pref) {
@@ -639,14 +745,25 @@ $(function() {
 		});
 	}
 
-	function refreshGadget(iframe) {
-		var parentDiv = iframe.parents('div');
+	function refreshAllGadgets() {
+		var iframes = $('iframe').not('#__gadget_gadget-content-g1');
+		$.each(iframes, function(i, w) {
+			//			refreshGadget(w);
+		});
+	}
 
-		iframe.ready(function() {
-			iframe.height(parentDiv.parents('li').height() - 90);
+	function refreshGadget(iframe) {
+		console.log(">>>Gadget refreshed");
+		var parentLi = $(iframe).closest('li');
+
+		$(iframe).ready(function() {
+
+			$(iframe).height(parentLi.height() - 90);
 		});
 
-		iframe.get(0) && iframe.get(0).contentDocument.location.reload(true);
+		if ( typeof $(iframe).get(0) != 'undefined') {
+			$(iframe).get(0).contentDocument.location.reload(true);
+		}
 	}
 
 	function getLayoutFormat(layoutType) {
@@ -688,26 +805,6 @@ $(function() {
 					"height" : 6
 				}];
 				break;
-
-			case 'composite':
-
-				layoutFormat = [{
-					"x" : 1,
-					"y" : 2,
-					"width" : 2,
-					"height" : 4
-				}, {
-					"x" : 3,
-					"y" : 2,
-					"width" : 4,
-					"height" : 1
-				}, {
-					"x" : 3,
-					"y" : 3,
-					"width" : 4,
-					"height" : 3
-				}];
-				break;
 			default:
 			case 'grid':
 
@@ -743,33 +840,36 @@ $(function() {
 					"height" : 2
 				}];
 				break;
-
 		}
 		return layoutFormat;
 	}
 
+	drawGadgets();
+	changeMode('view');
+
+	$(window).bind('resize', resize);
 
 	$('#btn-add-dummy-gadget').click(function(e) {
 		e.preventDefault();
 		var $dummy = $('#dummy-size');
 		var w = Number($dummy.attr('data-w'));
 		var h = Number($dummy.attr('data-h'));
-		var widget = layout.add_widget(itemTmp(), w, h, 1, 2);
-		registerEventsToWidget(widget);
+		var widget = layout.add_widget(widgetTemplate(), w, h, 1, 2);
 		$('.dropdown.open .dropdown-toggle').dropdown('toggle');
+		//registerEventsToWidget(widget);
 	});
 
-	$('#btn-preview-dash').click(function() {
-		if ($(this).data('tooltip') == 'hide') {
-			var dashboard = $('#inp-dashboard').val();
-			var win = window.open('/' + dashboard, '_blank');
-			win.focus();
-		}
+	$("#btn-exit-editor").click(function() {
+		$('.sub-navbar-designer').slideUp("fast", function() {
+			changeMode('view');
+
+		});
 	});
 
 	$("#btn-exit-view").click(function() {
 		$('.sub-navbar-designer-view').slideUp("fast", function() {
 			changeMode('design');
+
 		});
 	});
 
@@ -780,6 +880,72 @@ $(function() {
 		$(widget).remove();
 		$('.gs_w').show();
 	});
+
+	function changeMode(mode) {
+		flow_data.mode = mode;
+		if (mode == 'view') {
+			var title = $('#inp-designer-title').val();
+			$('#dashboardName').find('span').text(title);
+			$('#dashboardName').fadeIn();
+			$('.sub-navbar-designer-view').fadeIn();
+			layout.disable();
+			$('#grid-guides').fadeOut("slow");
+			$('.close-widget').hide();
+			$('.show-widget-pref').hide();
+			$('.layout_block .btn-add-gadget').hide();
+			$('.layout_block').addClass('layout_block_view');
+			$('.gadget-controls li:last-child').remove();
+
+			$('.grid_header input').each(function() {
+				var $this = $(this);
+				$this.parent().parent().find('#header_label').show();
+				//append('<h3>' + $this.val() + '</h3>');
+				$this.parent().hide();
+			});
+		} else if (mode == 'design') {
+			var title = $('#dashboardName').find('span').text();
+			$('#inp-designer-title').val(title);
+			$('#dashboardName').hide();
+			$('.sub-navbar-designer').fadeIn();
+			layout.enable();
+			$('#grid-guides').fadeIn("slow");
+			$('.close-widget').show();
+			$('.show-widget-pref').each(function() {
+				var $this = $(this);
+				if ($this.parents('.grid_header').siblings('.designer-placeholder').length == 0) {
+					$this.show();
+				}
+			});
+			$('.layout_block .grid_header h3').each(function() {
+				var $this = $(this);
+				if ($this.parent().parents('.grid_header').siblings('.designer-placeholder').length == 0) {
+					$this.parent().parent().find('#gadget_title_div').show();
+					//append('<input class="gadget-title-txt" value="' + $this.text() + '">');
+					$this.parent().hide();
+				}
+			});
+			$('.layout_block .btn-add-gadget').show();
+			$('.layout_block').removeClass('layout_block_view');
+			$('.gadget-controls').append('<li><a href="#" class="close-widget"><i class="icon-remove"></i></a></li>');
+		}
+	}
+
+	function checkMode() {
+		var mode = $('#inp-view-mode').val();
+		changeMode(mode);
+	}
+
+	// Hides the 3 static gridster widgets placed at the top.
+	// placing static widgets was a fix for gridster responsive bug
+	// https://github.com/ducksboard/gridster.js/pull/77
+	function setGridOffsetTop() {
+		var sizey = parseInt($('.static').height());
+
+		$('.layouts_grid').animate({
+			'margin-top' : "-" + (sizey - 80) + "px"
+		});
+
+	}
 
 	var formArrayToPref = function(a) {
 		var o = {};
@@ -813,12 +979,14 @@ $(function() {
 			};
 
 			var savePref = function(e) {
+
 				e.preventDefault();
 				var newPref = formArrayToPref(prefCont.find('form').serializeArray());
 				UESContainer.redrawGadget(id, {
 					prefs : newPref
 				});
 				hidePref();
+
 			};
 
 			if ($this.attr('data-collapse') == 'false') {
@@ -872,89 +1040,42 @@ $(function() {
 		UESContainer.restoreGadget(widget.find(".add-gadget-item > div").attr('id'));
 	});
 
-	function changeMode(mode) {
-		if (mode == 'view') {
-			var title = $('#inp-designer-title').val();
-			$('#dashboardName').text(title).fadeIn();
-			$('.sub-navbar-designer-view').fadeIn();
-			layout.disable();
-			$('#grid-guides').fadeOut("slow");
-			$('.close-widget').hide();
-			$('.layout_block .gadget-add-btn-cont').hide();
-			$('.layout_block').addClass('layout_block_view');
-
-		} else if (mode == 'design') {
-			$('#dashboardName').hide();
-			$('.sub-navbar-designer').fadeIn();
-			layout.enable();
-			$('#grid-guides').fadeIn("slow");
-			$('.close-widget').show();
-			$('.layout_block .gadget-add-btn-cont').show();
-			$('.layout_block').removeClass('layout_block_view');
-		}
-	}
-
-	function checkMode() {
-		/*
-		 if (window.location.hash) {
-		 var hash = window.location.hash.substr(1);
-		 changeMode(hash);
-		 }
-		 */
-		var mode = $('#inp-view-mode').val();
-		changeMode(mode);
-	}
-
-	// Hides the 3 static gridster widgets placed at the top.
-	// placing static widgets was a fix for gridster responsive bug
-	// https://github.com/ducksboard/gridster.js/pull/77
-	function setGridOffsetTop() {
-		var sizey = parseInt($('.static').height());
-
-		$('.layouts_grid').animate({
-			'margin-top' : "-" + (sizey - 80) + "px"
-		});
-
-	}
-
-
 	$('#btn-save').click(function(e) {
-		var dashboard = $('#inp-dashboard').val();
-		var title = $('#inp-designer-title').val();
-		var data = {
-			title : title,
-			widgets : layout.serialize()
-		};
+		e.preventDefault();
 
 		var icon = $(this).find('i');
 		icon.removeClass().addClass('icon-spinner icon-spin');
 
-		$.post('apis/dashboard/' + dashboard, {
-			layout : JSON.stringify(data)
-		}).done(function(response) {
-			setTimeout(function() {
-				icon.removeClass().addClass('icon-save');
-				$("#btn-preview-dash").removeClass('disabled').tooltip('destroy').data('tooltip', 'hide');
-			}, 6000);
-		}).fail(function(xhr, textStatus, errorThrown) {
-			icon.removeClass().addClass('icon-save');
-			// Session unavailable
-			if (xhr.status == 401) {
-				showAlert('Session timed out. Please login again.', 'alert-error', '.alert-bar');
-			} else {
-				showAlert('Error occured while saving dashboard. Please retry or re-login.', 'alert-error', '.alert-bar');
+		var dashboard = $('#inp-dashboard').val();
+		var title = $('#inp-designer-title').val();
+		//var widgets = JSON.stringify(layout.serialize());
+		var widgets = layout.serialize();
+		widgets.splice(0, 4);
+		$('.layout_block .grid_header h3').each(function() {
+			var $this = $(this);
+			if ($this.parent().parents('.grid_header').siblings('.designer-placeholder').length == 0) {
+				var editedTitle = $this.parent().parent().find('input').val();
+				$this.text(editedTitle);
 			}
 		});
+
+		var _layout = {
+			title : title,
+			widgets : widgets
+		};
+
+		$.post('apis/ues/layout/' + dashboard, {
+			layout : JSON.stringify(_layout)
+		}, function(result) {
+			if (result) {
+				setTimeout(function() {
+					icon.removeClass().addClass('icon-save');
+				}, 1500);
+			}
+		}).error(function(error) {
+			console.log(error);
+		});
+
 	});
 
-	UESContainer.renderGadget('store-gadget-div', portalGadgets.gadgetTemplates);
-	UESContainer.renderGadget('store-gadget-div2', portalGadgets.store);
-	
-	$('button[data-toggle=tooltip]').tooltip();
-
-	$(window).bind('resize', resize);
-	$(window).bind('load', checkMode);
-	
-	//drawGadgets();
-
-});
+}); 
