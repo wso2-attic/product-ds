@@ -159,8 +159,6 @@ var create;
             copyDir(appName, subFile, '', layoutDef);
         }
         
-         new Log().debug(layoutDef);
-
         return true;
     }
 })();

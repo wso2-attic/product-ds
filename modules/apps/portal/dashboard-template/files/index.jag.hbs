@@ -681,22 +681,12 @@ aria-hidden="true">
 <script src="js/shindig.js"></script>
 <script>
 	var caramel = caramel || {}; caramel.context = "/{{appName}}"; caramel.url = function (path) { return this.context + (path.charAt(0) !== '/' ? '/' : '') + path; };
+	var portalGadgets = {};	portalGadgets.gadgetTemplates = "{{showGadgetTemplates}}";	portalGadgets.store = "{{showAssetGadget}}";
 </script>
 <script src="js/UESContainer.js"></script>
 <script src="js/jquery.validate.js"></script>
 <script src="js/jquery.steps.js"></script>
 <script src="js/portal-dashboard-designer.js"></script>
-<script src="js/portal-personalize.js"></script>
 <script src="js/caramel-client.js"></script>
-<script>
-	var portalGadgets = {};
-	portalGadgets.gadgetTemplates = "{{showGadgetTemplates}}";
-	portalGadgets.store = "{{showAssetGadget}}";
-	
-	$(function() {
-			drawGadgets();
-	});
-</script>
-
 </body>
 </html>
