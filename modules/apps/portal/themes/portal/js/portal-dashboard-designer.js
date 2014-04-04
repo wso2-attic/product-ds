@@ -9,7 +9,7 @@ var drawGadgets;
 
 var flow_data = {};
 var metadata;
-/* T */
+var newWid = 0;
 
 (function ($) {
 
@@ -46,8 +46,6 @@ $.validator.addMethod("alphanumeric", function (value, element) {
     return this.optional(element) || /^[\w\-\s]+$/.test(value);
 }, "Must be alphanumeric.");
 
-var newWid = 0;
-/* T */
 
 $(function () {
 
@@ -59,13 +57,7 @@ $(function () {
     var widgetId = 1;
 
     var widgetTemplate = Handlebars.compile($('#widget-template').html());
-    /* T */
     var widgetTemplate2 = Handlebars.compile($('#widget-template2').html());
-    /* T */
-    var widgetTemplateBlank = Handlebars.compile($('#widget-template-blank').html());
-    /* T */
-    var widgetTemplateBlank2 = Handlebars.compile($('#widget-template-blank2').html());
-    /* T */
 
     function applyGridster() {
         var widgetId = 500;
@@ -100,14 +92,11 @@ $(function () {
         }).data('gridster');
     }
 
-    //applyGridster();
-
     setTimeout(function () {
         drawGrid(newDimensions[0][0]);
     }, 2000);
 
     setGridOffsetTop();
-    /* T */
 
     function calculateNewDimensions() {
         var containerWidth = $('#layouts_grid').innerWidth();
@@ -124,19 +113,12 @@ $(function () {
     function resize() {
         var newDimensions = calculateNewDimensions();
 
-        //window.setTimeout(function() {
         layout.resize_widget_dimensions({
             widget_base_dimensions: newDimensions[0],
             widget_margins: newDimensions[1]
         });
-        //}, 2000);
 
         drawGrid(newDimensions[0][0]);
-
-        var iframes = $('iframes');
-        $.each(iframes, function (i, w) {
-            //refreshGadget(i);
-        });
 
         clearTimeout(timeOut);
         timeOut = setTimeout(setGridOffsetTop, 500);
@@ -148,14 +130,12 @@ $(function () {
         var v = $LAYOUTS_GRID.innerHeight() / blockSize;
 
         $('#grid-guides').html('').hide();
-        // $('#grid-guides').html(''); /* T */
 
         for (var i = 0; i < v; i++) {
             for (var j = 0; j < h; j++) {
 
                 var plus = '<i class="designer-guides-plus" data-row="' + (i + 1) + '" data-col="' + (j + 1) + '"></i>';
                 $('#grid-guides').append(plus).fadeIn("slow");
-                // $('#grid-guides').append(plus); /* T */
             }
         }
     }
@@ -176,8 +156,6 @@ $(function () {
         }
     });
 
-    /* T */
-    // $('.btn-add-gadget').live('click', onGadgetSelectButton);
     var registerEventsToWidget = function (widget) {
         var addGadgetBtn = $(widget).find('.btn-add-gadget-new, .btn-add-gadget-existing');
         addGadgetBtn.click(onGadgetSelectButton);
@@ -310,12 +288,8 @@ $(function () {
                                 $('#sql-editor-dataset').empty();
                             });
 
-                            //  $('#modal-create-new-connection').modal('hide');
-                            //$('#modal-sql-query-editor').modal('show');
                         } else {
-                            // $('#modal-create-new-connection').modal('hide');
-                            // $STORE_MODAL_TEMPLATE.modal('show');
-                            //alert("Select gadget");
+
                         }
                     }
 
@@ -564,18 +538,6 @@ $(function () {
     });
 
     $('#btn-add-gadget-existing').click(function () {
-        /*
-         var gadgetLi = lastClickedGadgetButton.parents('li');
-         var gadgetInfo = tmpGadgetInfo;
-         gadgetLi.data('gadgetInfo', gadgetInfo);
-         insertGadget(gadgetLi, gadgetInfo.attributes.overview_url);
-
-         var placeholder = lastClickedGadgetButton.parents('.gadget-add-btn-cont');
-         lastClickedGadgetButton.remove();
-         placeholder.remove();
-         $STORE_MODAL_GADGET.modal('hide');
-         */
-        //insertGadgetToTarget('dashboard');
         var gadgetLi = lastClickedGadgetButton.parents('li');
         gadgetLi.data('gadgetInfo', tmpGadgetInfo);
         insertGadget(gadgetLi, tmpGadgetInfo.attributes.overview_url);
@@ -632,8 +594,6 @@ $(function () {
         flow_data.appName = $('#inp-dashboard').val();
         flow_data.queryData = queryData;
 
-        //isSelectionChanged = true;
-
         caramel.ajax({
             type: 'POST',
             url: "apis/gadgetGen?action=queryDbAll",
@@ -668,8 +628,6 @@ $(function () {
         applyGridster();
 
         if (!isPortal) {
-
-            //applyGridster();
 
             $.get('apis/ues/layout/', {},function (result) {
                 if (result) {
@@ -772,7 +730,6 @@ $(function () {
         }
         setGridOffsetTop();
     }
-    /* T */
 
     function getDatasources() {
 
@@ -800,8 +757,7 @@ $(function () {
         var template = Handlebars.compile(source);
         $('#wizard-add-gadget-p-0').html(template(windowData));
     }
-    /* T */
-    // FROM personalization
+
     function isWidgetFound(w, defaultWidgets) {
         var _widget = {};
         $.each(defaultWidgets, function (i, _w) {
@@ -874,10 +830,6 @@ $(function () {
         parentEl.html('<div id="' + idStr + '">');
         UESContainer.renderGadget(idStr, url, pref || {}, function (gadgetInfo) {
             $('.gadget-preview-loader').fadeOut("fast");
-            if (gadgetInfo.meta.modulePrefs) {
-                //parentEl.find('.grid_header').append('<input class="gadget-title-txt" value="' + gadgetInfo.meta.modulePrefs.title + '">');
-                //parentEl.find('.show-widget-pref').show();
-            }
         });
     }
 
@@ -1024,7 +976,6 @@ $(function () {
         return layoutFormat;
     }
 
-    /* T */
     $("#btn-exit-editor").click(function () {
         $('.sub-navbar-designer').slideUp("fast", function () {
             changeMode('view');
@@ -1070,7 +1021,6 @@ $(function () {
         $('.gs_w').show();
     });
 
-    /* T */
     function changeMode(mode) {
         flow_data.mode = mode;
         if (mode == 'view') {
@@ -1094,7 +1044,7 @@ $(function () {
             });
         } else if (mode == 'design') {
             var title = $('#dashboardName').find('span').text();
-            $('#inp-designer-title').val(title);
+           // $('#inp-designer-title').val(title);
             $('#dashboardName').hide();
             $('.sub-navbar-designer').fadeIn();
             layout.enable();
@@ -1212,38 +1162,7 @@ $(function () {
         UESContainer.restoreGadget(widget.find(".add-gadget-item > div").attr('id'));
     });
 
-    /*
-     // from portal
-     function changeMode(mode) {
-     if (mode == 'view') {
-     var title = $('#inp-designer-title').val();
-     $('#dashboardName').text(title).fadeIn();
-     $('.sub-navbar-designer-view').fadeIn();
-     layout.disable();
-     $('#grid-guides').fadeOut("slow");
-     $('.close-widget').hide();
-     $('.layout_block .gadget-add-btn-cont').hide();
-     $('.layout_block').addClass('layout_block_view');
-
-     } else if (mode == 'design') {
-     $('#dashboardName').hide();
-     $('.sub-navbar-designer').fadeIn();
-     layout.enable();
-     $('#grid-guides').fadeIn("slow");
-     $('.close-widget').show();
-     $('.layout_block .gadget-add-btn-cont').show();
-     $('.layout_block').removeClass('layout_block_view');
-     }
-     }
-     */
     function checkMode() {
-        /*
-         if (window.location.hash) {
-         var hash = window.location.hash.substr(1);
-         changeMode(hash);
-         }
-         */
-
         if (isPortal) {
             var mode = $('#inp-view-mode').val();
             changeMode(mode);
@@ -1263,7 +1182,6 @@ $(function () {
         });
 
     }
-
 
     $('#btn-save').click(function (e) {
 
@@ -1336,7 +1254,6 @@ $(function () {
 
     UESContainer.renderGadget('store-gadget-div', portalGadgets.gadgetTemplates);
     UESContainer.renderGadget('store-gadget-div2', portalGadgets.store);
-    //UESContainer.renderGadget('store-gadget-div', portalGadgets.store);
 
     $('button[data-toggle=tooltip]').tooltip();
 
