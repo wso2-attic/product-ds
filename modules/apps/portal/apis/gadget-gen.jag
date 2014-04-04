@@ -12,8 +12,27 @@
             chartProcessors = '/modules/flot-charts/';
 
     response.addHeader('Content-Type', 'application/json');
+    if (action == 'getDataSourceNames') {
+        var dbHandler = null,
+                result = null,
+                message = "";
 
-    if (action == 'validateCon') {
+        var handler = require('/modules/datasource-handler.js');
+        var dbHandlerType = dbHandlers + handler.getDatasourceHandler(data.dataSource);
+        switch (data.dataSource) {
+            case 'RDBMS':
+            {
+                dbHandler = require(dbHandlerType);
+                result = dbHandler.getDataSources();
+                break;
+            }
+            default:
+                break;
+        }
+        print({'dataSourceNames':result})
+        return;
+    }
+    else if (action == 'validateCon') {
         var dbHandler = null,
                 result = null,
                 message = "";
@@ -112,13 +131,15 @@
 
             site.createDirStructure(data.appName, pathToGadgetTemplate);                              // create folder structure up to public
 
-            var gadgetTemplateDir = site.loadFile('portal', data.chartLocation);
+            var gadgetTemplateDir = site.loadFile('publisher', data.chartLocation);
             site.copyDir(gadgetTemplateDir, data.appName, pathToGadgetTemplate)       //copy gadget template to /gadget/my_gadget/public
 
-            site.removeDir(data.appName, pathToGadgetTemplate + data.chartLocation.split('/')[2] + '/datasource/')
-            site.removeDir(data.appName, pathToGadgetTemplate + data.chartLocation.split('/')[2] + '/config/')
-            site.removeDir(data.appName, pathToGadgetTemplate + data.chartLocation.split('/')[2] + '/banner.jpg')
-            site.removeDir(data.appName, pathToGadgetTemplate + data.chartLocation.split('/')[2] + '/thumbnail.jpg')
+            var gadgetName =  data.chartLocation.split('/')[4];
+
+            site.removeDir(data.appName, pathToGadgetTemplate + gadgetName + '/datasource/')
+            site.removeDir(data.appName, pathToGadgetTemplate + gadgetName + '/config/')
+            site.removeDir(data.appName, pathToGadgetTemplate + gadgetName + '/banner.jpg')
+            site.removeDir(data.appName, pathToGadgetTemplate + gadgetName + '/thumbnail.jpg')
 
             var processor = require('/modules/chart-processor.js');
             var chartProcessorType = chartProcessors + processor.getChartProcessor(chartType)
