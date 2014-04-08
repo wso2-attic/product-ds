@@ -29,7 +29,7 @@
             default:
                 break;
         }
-        print({'dataSourceNames':result})
+        print({'dataSourceNames': result})
         return;
     }
     else if (action == 'validateCon') {
@@ -54,7 +54,7 @@
             default:
                 break;
         }
-        print({'message':message})
+        print({'message': message})
         return;
     }
     else if (action == 'queryDbAll') {
@@ -134,7 +134,7 @@
             var gadgetTemplateDir = site.loadFile('publisher', data.chartLocation);
             site.copyDir(gadgetTemplateDir, data.appName, pathToGadgetTemplate)       //copy gadget template to /gadget/my_gadget/public
 
-            var gadgetName =  data.chartLocation.split('/')[4];
+            var gadgetName = data.chartLocation.split('/')[4];
 
             site.removeDir(data.appName, pathToGadgetTemplate + gadgetName + '/datasource/')
             site.removeDir(data.appName, pathToGadgetTemplate + gadgetName + '/config/')
@@ -171,6 +171,14 @@
             site.createFile(data.appName, pathToOptions, file.getStream());
             file.close();
 
+            var tempQuery = data.queryData;
+
+            for (var key in tempQuery) {
+                if (tempQuery[key].indexOf("order by") == -1) {
+                    tempQuery[key] = tempQuery[key] + " order by " + data.mappingData[0][data.dataColumns[0]];
+                }
+            }
+
             var base = 'http://' + localIP + ':' + httpPort + '/' + data.appName;
             var gadgetURL = base + gadgetLocation + gadgetTemplateLocation;
 
@@ -178,16 +186,17 @@
 
                     'function getChartData() {\n' +
                     '   var connectionData = JSON.parse(\'' + stringify(data.conSettings) + '\');\n' +
-                    '   var queryData = JSON.parse(\'' + stringify(data.queryData) + '\');\n' +
+                    '   var queryData = JSON.parse(\'' + stringify(tempQuery) + '\');\n' +
                     '   var dataColumns = JSON.parse(\'' + stringify(data.dataColumns) + '\');\n' +
                     '   var mapping = JSON.parse(\'' + stringify(data.mappingData) + '\');\n' +
+                    '   var timeSeries = JSON.parse(\'' + stringify(data.timeSeries) + '\');\n' +
                     '   var dataLabels = JSON.parse(\'' + stringify(data.dataLabels) + '\');\n' +
                     '   \n' +
                     '   var dbHandler = require(\'' + dbHanlderFileLocation + '\');\n' +
                     '   var dbResult = dbHandler.getData(connectionData,queryData);\n' +
                     '   \n' +
                     '   var dataProcessor = require(\'' + chartProccessorFileLocation + '\'); \n' +
-                    '   var processedData = dataProcessor.processData(dbResult,mapping,dataColumns,dataLabels); \n' +
+                    '   var processedData = dataProcessor.processData(dbResult,mapping,dataColumns,dataLabels,timeSeries); \n' +
                     '   \n' +
                     ' return processedData;\n' +
                     '}\n' +

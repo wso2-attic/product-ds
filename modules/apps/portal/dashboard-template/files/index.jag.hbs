@@ -311,6 +311,7 @@ aria-hidden="true">
 
 							<div class="data-mapping-cont">
 								<div id="modal-data-mapping-extension-space"></div>
+                                <div id="modal-time-series-extension-space"></div>
 								<hr>
 								<div id="modal-data-mapping"></div>
 							</div>
@@ -500,7 +501,7 @@ aria-hidden="true">
     </div>
 </script>
 
-<script id="create-new-connection" type="text/x-handlebars-template">
+<script id="create-new-connection-other" type="text/x-handlebars-template">
     <div class="row-fluid">
         <div class="span6 offset3 form-horizontal">
             [[#each createConnection]]
@@ -517,6 +518,34 @@ aria-hidden="true">
                     <button class="btn btn-validateCon">
 						Validate Connection
 					</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="create-new-connection-rdbms" type="text/x-handlebars-template">
+    <div class="row-fluid">
+        <div class="span6 offset3 form-horizontal">
+
+            <div class="control-group">
+                <label class="control-label">Connection</label>
+
+
+                <div class="controls">
+                    <select name="dataSourceNames" class="span12">
+                        [[#each dataSourceNames]]
+                        <option>[[this]]</option>
+                        [[/each]]
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="controls">
+                    <button class="btn btn-validateCon">
+                        Validate Connection
+                    </button>
                 </div>
             </div>
         </div>
@@ -645,20 +674,20 @@ aria-hidden="true">
                 </div>
             </div>
         </div>
-        <hr>
-        <div class="form-inline">
+    </div>
+</script>
 
-            <button class="btn" id="mapping-add-series-btn">
-                +
-            </button>
-            <button class="btn" id="mapping-remove-series-btn">
-                -
-            </button>
-            <button class="btn" id="btn-preview-gadget">
-                Preview
-            </button>
+<script id="time-series-extension" type="text/x-handlebars-template">
+    <div class="form-horizontal">
+        [[#if timeSeries]]
+        <div class="control-group">
+            <label class="control-label">Time Series Chart</label>
 
+            <div class="controls">
+                <input type="checkbox" id="time-series">
+            </div>
         </div>
+        [[/if]]
     </div>
 </script>
 

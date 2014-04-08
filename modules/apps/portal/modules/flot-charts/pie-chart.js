@@ -1,4 +1,4 @@
-function processData(dbResult, mapping, dataColumns) {
+function processData(dbResult, mapping, dataColumns,dataLabels,timeSeries) {
 
     var result = [];
     var output = {};

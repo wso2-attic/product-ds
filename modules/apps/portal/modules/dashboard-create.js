@@ -148,7 +148,7 @@ var create;
         layoutDef['appName'] = appName;
         layoutDef['httpsServerUrl'] = CONFIG.server.https;
         layoutDef['showAssetGadget'] = CONFIG.portalGadgets.store;
-        layoutDef['showGadgetTemplates'] = CONFIG.portalGadgets.store;
+        layoutDef['showGadgetTemplates'] = CONFIG.portalGadgets.gadgetTemplates;
         layoutDef['httpServerUrl'] = CONFIG.server.http;
 
         // copy files in dashboard-template/files

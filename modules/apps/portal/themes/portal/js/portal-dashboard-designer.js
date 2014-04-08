@@ -4,7 +4,8 @@ var layout, dummy_gadget_block = 50, block_params = {
     max_height: 6
 }, MARGINS_RATIO = 0.1, COLS = block_params.max_width, isPortal = (caramel.context == '/portal') ? true : false;
 
-var onShowAssetLoad, tmpGadgetInfo,isDsChanged = false, isQueryChanged = false, isQueryRan = false, isGadgetChanged = false;
+var onShowAssetLoad, tmpGadgetInfo, isDsChanged = false, isQueryChanged = false, isQueryRan = false, isGadgetChanged = false,
+    firstTime = true;
 var drawGadgets;
 
 var flow_data = {};
@@ -301,6 +302,7 @@ $(function () {
                         $('#gadgetArea-preview').html($("#gadgetPreviewPlaceholder").html());
                         getDataFormat();
                     }
+                    $('#time-series').attr('checked',false);
                     break;
 
             }
@@ -390,16 +392,27 @@ $(function () {
 
         var nextWindowData = {
             gadget_type: tmpGadgetInfo.attributes.overview_name,
-            dataLabels: tableData.dataLabels
+            dataLabels: tableData.dataLabels,
+        };
+
+        var nextWindowData_2 = {
+            timeSeries : tableData.timeSeriesAllowed
         };
 
         var source = $("#data-mapping-extension").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
         var template = Handlebars.compile(source);
         $('#modal-data-mapping-extension-space').html(template(nextWindowData));
 
+        var source_2 = $("#time-series-extension").html().replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
+        var template_2 = Handlebars.compile(source_2);
+        $('#modal-time-series-extension-space').html(template_2(nextWindowData_2));
+
+        if(firstTime){
         $('#mapping-add-series-btn').bind('click', addSeriesBtnClick);
         $('#mapping-remove-series-btn').bind('click', removeSeriesBtnClick);
         //To add more series
+            firstTime = false;
+        }
 
         $('#btn-preview-gadget').bind('click', function (e) {
             e.preventDefault();
@@ -460,6 +473,7 @@ $(function () {
         var dashboard = $('#inp-dashboard').val();
         flow_data.chartTitle = $('#chart-title-input').val();
         flow_data.refreshSequence = $('#refresh-sequence-input').val();
+        flow_data.timeSeries = $('#time-series').is(":checked");
 
         var labelData = {};
         $('#data-labels').find('.control-group').each(function () {

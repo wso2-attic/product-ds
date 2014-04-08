@@ -1,4 +1,6 @@
-function processData(dbResult, mapping, dataColumns,dataLabels) {
+function processData(dbResult, mapping, dataColumns,dataLabels,timeSeries) {
+
+    //var log = new Log();
 
     var result = [];
     var ticks = [];
@@ -10,7 +12,11 @@ function processData(dbResult, mapping, dataColumns,dataLabels) {
             if (!result[j]) {
                 result[j] = [];
             }
-            if (tickTmp[dbResult[i][mapping[j][dataColumns[0]]]]) {
+            if(timeSeries){
+                result[j].push([ct(dbResult[i][mapping[j][dataColumns[0]]]), dbResult[i][mapping[j][dataColumns[1]]]]);
+
+            }
+            else if (tickTmp[dbResult[i][mapping[j][dataColumns[0]]]]) {
                 var keyVal = tickTmp[dbResult[i][mapping[j][dataColumns[0]]]];
                 result[j].push([keyVal, dbResult[i][mapping[j][dataColumns[1]]]]);
 
@@ -32,9 +38,19 @@ function processData(dbResult, mapping, dataColumns,dataLabels) {
     }
 
     var chartOptions = require("chart-options.json");
-    chartOptions["xaxis"]["ticks"]= ticks;
+    if(timeSeries){
+        chartOptions["xaxis"]["timeformat"]= "%d/%m/%y";
+        chartOptions["xaxis"]["mode"]= "time";
+    } else{
+        chartOptions["xaxis"]["ticks"]= ticks;
+    }
+
     chartOptions.xaxis.axisLabel= dataLabels["X-Axis Label"]
     chartOptions.yaxis.axisLabel= dataLabels["Y-Axis Label"]
 
     return {0: output, 1: chartOptions};
+}
+
+function ct(time) {
+    return new Date(time * 1000).getTime();   //convert unix time to mili-seconds
 }

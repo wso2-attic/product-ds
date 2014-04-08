@@ -1,4 +1,4 @@
-function processData(dbResult, mapping, dataColumns, dataLabels) {
+function processData(dbResult, mapping, dataColumns,dataLabels,timeSeries) {
 
     var result = [];
     var ticks = [];
