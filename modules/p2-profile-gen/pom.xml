@@ -128,8 +128,11 @@
                                 <featureArtifactDef>
                                     org.wso2.store.modules:ues.feature:${ues.feature.version}
                                 </featureArtifactDef>
-				<featureArtifactDef>
-				    org.wso2.store.modules:claims.feature:${claims.feature.version}
+				                <featureArtifactDef>
+				                    org.wso2.store.modules:claims.feature:${claims.feature.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.claim.mgt.feature:${carbon.platform.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.store:org.wso2.store.feature:${es.version}
@@ -172,7 +175,10 @@
                                     org.wso2.carbon:org.wso2.carbon.identity.application.authentication.framework.server.feature:${patch.version.421}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.identity.authenticator.saml2.sso.feature:${patch.version.421}
+                                    org.wso2.carbon:org.wso2.carbon.identity.authenticator.saml2.sso.server.feature:${patch.version.421}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature:${patch.version.421}
                                 </featureArtifactDef>
                                 <feaureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.identity.sso.saml.feature:${patch.version.421}
@@ -234,8 +240,11 @@
                                 <feaureArtifactDef>
                                     org.wso2.ues:org.wso2.ues.feature:${project.version}
                                 </feaureArtifactDef>
-				<featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.claim.mgt.feature:${carbon.platform.version}
+                                <featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.identity.authenticator.saml2.sso.server.feature:${patch.version.421}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature:${patch.version.421}
                                 </featureArtifactDef>
                             </featureArtifacts>
 
@@ -324,7 +333,7 @@
                                     <id>org.wso2.store.modules.ues.feature.group</id>
                                     <version>${ues.feature.version}</version>
                                 </feature>
-				<feature>
+				                <feature>
                                     <id>org.wso2.store.modules.claims.feature.group</id>
                                     <version>${claims.feature.version}</version>
                                 </feature>
@@ -380,10 +389,6 @@
                                     <id>
                                         org.wso2.carbon.identity.application.authentication.framework.server.feature.group
                                     </id>
-                                    <version>${patch.version.421}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.identity.authenticator.saml2.sso.feature.group</id>
                                     <version>${patch.version.421}</version>
                                 </feature>
                                 <feature>
@@ -454,9 +459,17 @@
                                     <id>org.wso2.ues.feature.group</id>
                                     <version>${project.version}</version>
                                 </feature>
-				<feature>
+				                <feature>
                                     <id>org.wso2.carbon.claim.mgt.feature.group</id>
                                     <version>${carbon.platform.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.identity.authenticator.saml2.sso.server.feature.group</id>
+                                    <version>${patch.version.421}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature.group</id>
+                                    <version>${patch.version.421}</version>
                                 </feature>
                             </features>
                         </configuration>
