@@ -191,6 +191,13 @@
             </includes>
         </fileSet>
         <fileSet>
+            <directory>src/repository/conf/etc</directory>
+            <outputDirectory>wso2ues-${pom.version}/repository/conf/etc</outputDirectory>
+            <includes>
+                <include>**/**</include>
+            </includes>
+        </fileSet>
+        <fileSet>
             <directory>src/repository/resources</directory>
             <outputDirectory>wso2ues-${pom.version}/repository/resources</outputDirectory>
             <includes>
