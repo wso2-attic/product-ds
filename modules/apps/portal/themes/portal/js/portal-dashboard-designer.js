@@ -392,7 +392,7 @@ $(function () {
 
         var nextWindowData = {
             gadget_type: tmpGadgetInfo.attributes.overview_name,
-            dataLabels: tableData.dataLabels,
+            dataLabels: tableData.dataLabels
         };
 
         var nextWindowData_2 = {
@@ -1056,6 +1056,15 @@ $(function () {
                 //append('<h3>' + $this.val() + '</h3>');
                 $this.parent().hide();
             });
+            $('.btn-add-gadget-new').each(function(){
+                var addBtn = $(this);
+                addBtn.prop('disabled', true);
+
+            });
+            $('.btn-add-gadget-existing').each(function(){
+                var addBtn = $(this);
+                addBtn.prop('disabled', true);
+            });
         } else if (mode == 'design') {
             var title = $('#dashboardName').find('span').text();
            // $('#inp-designer-title').val(title);
@@ -1081,6 +1090,15 @@ $(function () {
             $('.layout_block .btn-add-gadget').show();
             $('.layout_block').removeClass('layout_block_view');
             $('.gadget-controls').append('<li><a href="#" class="close-widget"><i class="icon-remove"></i></a></li>');
+
+            $('.btn-add-gadget-new').each(function(){
+                var addBtn = $(this);
+                addBtn.prop('disabled', false);
+            });
+            $('.btn-add-gadget-existing').each(function(){
+                var addBtn = $(this);
+                addBtn.prop('disabled', false);
+            });
         }
     }
 
