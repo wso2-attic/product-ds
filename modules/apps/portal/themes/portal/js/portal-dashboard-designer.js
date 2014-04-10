@@ -50,6 +50,16 @@ $.validator.addMethod("alphanumeric", function (value, element) {
 
 $(function () {
 
+    //TODO: Remove this snippet when other datasource support added
+    var tempDisable = function(){
+        $('[data-dstype="REST API"]').parent().removeClass("span4").addClass("span5");
+        $('[data-dstype="REST API"]').parent().prop('disabled',true);
+        $('[data-dstype="Cassandra"]').parent().removeClass("span4").addClass("span5");
+        $('[data-dstype="Cassandra"]').parent().prop('disabled',true);
+    }
+
+    tempDisable();
+
     var $STORE_MODAL_TEMPLATE = $('#modal-add-gadget-wizard');
     var $STORE_MODAL_GADGET = $('#modal-add-gadget-existing');
     var $LAYOUTS_GRID = $('#layouts_grid');
@@ -567,10 +577,14 @@ $(function () {
     })
 
     $('body').on('click', '.wizard-dsType', function (e) {
-        e.preventDefault();
-        $('.wizard-dsType').removeClass('active');
-        $(this).toggleClass('active');
-        $('#wizard-dsTypeSel').val($(this).attr('data-dsType'));
+        //TODO : Change when other datasource type support added
+        if($(this).attr('data-dsType') == 'RDBMS'){
+            e.preventDefault();
+            $('.wizard-dsType').removeClass('active');
+            $(this).toggleClass('active');
+
+            $('#wizard-dsTypeSel').val($(this).attr('data-dsType'));
+        }
     });
 
     $('body').on('click', '.btn-validateCon', function (e) {

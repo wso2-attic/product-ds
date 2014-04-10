@@ -416,6 +416,32 @@ label.error {
     opacity: 1;
 }
 
+#wizard-add-gadget-p-0 .span5 {
+    text-align: center;
+    width: 210px;
+}
+#wizard-add-gadget-p-0 .span5 a {
+    display: block;
+    padding: 23px;
+    border: 3px solid transparent;
+    transition: all .3s ease;
+    color: #333333;
+    text-decoration: none;
+}
+
+#wizard-add-gadget-p-0 .row-fluid {
+    margin-top: 120px;
+
+}
+#wizard-add-gadget-p-0  .span5 a .wizard-icon {
+    display: block;
+    height: 105px;
+    margin: 0 auto;
+    width: 110px;
+    opacity: .6;
+    transition: all .3s ease;
+}
+
 #wizard-add-gadget-p-1 .row-fluid {
     margin-top: 120px;
 }
