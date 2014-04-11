@@ -6,6 +6,7 @@
     } else {
         var config = require('/config.json'),
         sso = require('sso'),
+	process = require("process"),
         sso_sessions = application.get('sso_sessions'),
         sessionId = session.getId(),
         encodedSAMLLogoutRequest = sso.client.getEncodedSAMLLogoutRequest(user, sso_sessions[session.getId()], '{{appName}}'),
