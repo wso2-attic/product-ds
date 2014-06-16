@@ -118,7 +118,8 @@ $(function () {
             widget_base_dimensions: newDimensions[0],
             widget_margins: newDimensions[1]
         });
-
+        // remove gridster generated CSS
+        $('head [generated-from="gridster"]:not(:last)').remove();
         drawGrid(newDimensions[0][0]);
 
         clearTimeout(timeOut);
