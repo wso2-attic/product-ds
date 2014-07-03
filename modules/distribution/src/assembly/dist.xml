@@ -16,10 +16,10 @@
  ~ under the License.
  -->
 <assembly>
+    <id>dist</id>
     <formats>
         <format>zip</format>
     </formats>
-
     <includeBaseDirectory>false</includeBaseDirectory>
     <fileSets>
         <!-- Copying p2 profile and osgi bundles-->
