@@ -16,12 +16,11 @@
  ~ under the License.
  -->
 <assembly>
-    <!--<id>bin</id>-->
+    <id>bin</id>
     <formats>
         <format>zip</format>
     </formats>
     <includeBaseDirectory>false</includeBaseDirectory>
-
     <fileSets>
         <fileSet>
             <directory>target/wso2carbon-core-${carbon.kernal.version}</directory>
@@ -38,7 +37,7 @@
                 <exclude>**/pom.xml</exclude>
                 <exclude>**/version.txt</exclude>
                 <exclude>**/carbon.xml</exclude>
-                <exclude>**/registry.xml</exclude>				
+                <exclude>**/registry.xml</exclude>
                 <exclude>**/axis2/axis2.xml</exclude>
                 <!--exclude>**/ciphertool.bat</exclude-->
                 <exclude>**/master-datasources.xml</exclude>
@@ -73,9 +72,7 @@
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/repository/conf/multitenancy
             </directory>
             <outputDirectory>wso2ues-${pom.version}/repository/conf/multitenancy</outputDirectory>
-            <fileMode>755</fileMode>
         </fileSet>
-
         <fileSet>
             <directory>../styles/service/src/main/resources/web/styles/css</directory>
             <outputDirectory>wso2ues-${pom.version}/resources/allthemes/Default/admin</outputDirectory>
@@ -91,15 +88,12 @@
                 <include>**/**.png</include>
             </includes>
         </fileSet>
-
-
         <!-- copy documentation -->
         <fileSet>
             <directory>target/site</directory>
             <outputDirectory>wso2ues-${pom.version}/docs</outputDirectory>
             <fileMode>755</fileMode>
         </fileSet>
-
         <!-- copy the landing page webapp -->
         <fileSet>
             <directory>lib/home</directory>
@@ -113,15 +107,19 @@
             </includes>
         </fileSet>
         <fileSet>
-            <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/repository/deployment/server/jaggeryapps</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/</outputDirectory>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/repository/deployment/server/jaggeryapps
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/
+            </outputDirectory>
             <includes>
                 <include>*/**</include>
             </includes>
         </fileSet>
         <fileSet>
             <directory>../apps</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/jaggeryapps/
+            </outputDirectory>
             <includes>
                 <include>*/**</include>
             </includes>
@@ -171,12 +169,12 @@
         </fileSet>
         <fileSet>
             <directory>src/repository/conf/security</directory>
-            <outputDirectory>wso2ues-${pom.version}/repository/conf/security/</outputDirectory>
+            <outputDirectory>${project.artifactId}-${pom.version}/repository/conf/security/</outputDirectory>
             <includes>
-                <include>**/application-authenticators.xml</include>
+                <include>*/**</include>
             </includes>
         </fileSet>
-		<fileSet>
+        <fileSet>
             <directory>src/repository/conf</directory>
             <outputDirectory>wso2ues-${pom.version}/repository/conf</outputDirectory>
             <includes>
@@ -197,11 +195,10 @@
                 <include>*/**</include>
             </includes>
         </fileSet>
-	    <!--data-bridge configuration-->
+        <!--data-bridge configuration-->
         <fileSet>
             <directory>src/repository/conf/data-bridge</directory>
             <outputDirectory>wso2ues-${pom.version}/repository/conf/data-bridge</outputDirectory>
-            <fileMode>755</fileMode>
         </fileSet>
         <fileSet>
             <directory>../p2-profile-gen/target/wso2carbon-core-${carbon.version}/lib/runtimes</directory>
@@ -217,17 +214,37 @@
                 <include>**/patch0001/*.*</include>
             </includes>
         </fileSet>
+        <fileSet>
+            <directory>src/repository/conf/identity</directory>
+            <outputDirectory>${project.artifactId}-${pom.version}/repository/conf/identity/</outputDirectory>
+            <includes>
+                <include>**/**</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>src/repository/conf/etc</directory>
+            <outputDirectory>${project.artifactId}-${pom.version}/repository/conf/etc/</outputDirectory>
+            <includes>
+                <include>**/**</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/resources/security/
+            </directory>
+            <outputDirectory>${project.artifactId}-${pom.version}/repository/resources/security/</outputDirectory>
+            <includes>
+                <include>**/sso_redirect.html</include>
+            </includes>
+        </fileSet>
     </fileSets>
-
     <dependencySets>
-
         <dependencySet>
             <outputDirectory>wso2ues-${pom.version}/lib/endorsed</outputDirectory>
             <includes>
                 <include>javax.el:el-api:jar</include>
             </includes>
         </dependencySet>
-
         <dependencySet>
             <outputDirectory>wso2ues-${pom.version}/repository/deployment/client/modules
             </outputDirectory>
@@ -237,7 +254,6 @@
             </includes>
         </dependencySet>
     </dependencySets>
-
     <files>
         <file>
             <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernal.version}/repository/conf/event-broker.xml
@@ -246,7 +262,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-
         <file>
             <source>INSTALL.txt</source>
             <outputDirectory>wso2ues-${pom.version}</outputDirectory>
@@ -292,7 +307,7 @@
             <source>src/repository/conf/registry.xml</source>
             <outputDirectory>wso2ues-${pom.version}/repository/conf/</outputDirectory>
             <filtered>true</filtered>
-        </file>		
+        </file>
         <file>
             <source>src/repository/conf/log4j.properties</source>
             <outputDirectory>wso2ues-${pom.version}/repository/conf/</outputDirectory>
@@ -342,33 +357,26 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>-->
-
         <!--file>
             <source>conf/claim-config.xml</source>
             <outputDirectory>wso2ues-${pom.version}/repository/conf/</outputDirectory>
             <fileMode>644</fileMode>
         </file-->
-
-
         <file>
             <source>src/repository/conf/identity.xml</source>
             <outputDirectory>wso2ues-${pom.version}/repository/conf</outputDirectory>
             <fileMode>644</fileMode>
         </file>
-
         <file>
             <source>src/repository/database/WSO2IDENTITY_DB.h2.db</source>
             <outputDirectory>wso2ues-${pom.version}/repository/database</outputDirectory>
             <fileMode>644</fileMode>
         </file>
-
         <!--        <file>
             <source>conf/wso2is-user-certs.jks</source>
             <outputDirectory>wso2ues-${pom.version}/repository/resources/security/</outputDirectory>
             <fileMode>644</fileMode>
         </file>-->
-
-
         <!--       <file>
             <source>conf/userRP.jks</source>
             <outputDirectory>wso2ues-${pom.version}/repository/resources/security/</outputDirectory>
