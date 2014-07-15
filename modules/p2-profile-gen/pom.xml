@@ -253,6 +253,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.identity.application.mgt.feature:${carbon.platform.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon:org.wso2.carbon.bam.toolbox.deployer.feature:${carbon.platform.version}
+                                </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
                     </execution>
@@ -502,6 +505,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.application.mgt.feature.group</id>
+                                    <version>${carbon.platform.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.bam.toolbox.deployer.feature.group</id>
                                     <version>${carbon.platform.version}</version>
                                 </feature>
                             </features>
