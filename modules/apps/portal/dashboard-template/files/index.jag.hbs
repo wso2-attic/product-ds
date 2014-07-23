@@ -1,7 +1,7 @@
 <%
 var user = require('store').server.current(session);
 if (!user) {
-response.sendRedirect('/{{appName}}/login');
+response.sendRedirect('{{tenantName}}/{{appName}}/login');
 }
 %>
 <!DOCTYPE html>
@@ -77,7 +77,7 @@ response.sendRedirect('/{{appName}}/login');
                             <li>
 
 
-                                <a href="/{{appName}}/logout.jag"><i class="icon-signout"></i> Sign out</a>
+                                <a href="{{tenantName}}/{{appName}}/logout.jag"><i class="icon-signout"></i> Sign out</a>
 
 
                             </li>
@@ -705,7 +705,7 @@ aria-hidden="true">
 <script src="js/handlebars.js"></script>
 <script src="js/shindig.js"></script>
 <script>
-	var caramel = caramel || {}; caramel.context = "/{{appName}}"; caramel.url = function (path) { return this.context + (path.charAt(0) !== '/' ? '/' : '') + path; };
+    var caramel = caramel || {}; caramel.context = "{{tenantName}}/{{appName}}"; caramel.url = function (path) { return this.context + (path.charAt(0) !== '/' ? '/' : '') + path; };
 	var portalGadgets = {};	portalGadgets.gadgetTemplates = "{{showGadgetTemplates}}";	portalGadgets.store = "{{showAssetGadget}}";
 </script>
 <script src="js/UESContainer.js"></script>

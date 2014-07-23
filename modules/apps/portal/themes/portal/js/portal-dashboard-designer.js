@@ -7,6 +7,7 @@ var layout, dummy_gadget_block = 50, block_params = {
 var onShowAssetLoad, tmpGadgetInfo, isDsChanged = false, isQueryChanged = false, isQueryRan = false, isGadgetChanged = false,
     firstTime = true;
 var drawGadgets;
+var tenantName;
 
 var flow_data = {};
 var metadata;
@@ -393,7 +394,7 @@ $(function () {
 
         var nextWindowData = {
             gadget_type: tmpGadgetInfo.attributes.overview_name,
-            dataLabels: tableData.dataLabels,
+            dataLabels: tableData.dataLabels
         };
 
         var nextWindowData_2 = {
@@ -1015,9 +1016,19 @@ $(function () {
     });
 
     $('#btn-preview-dash').click(function () {
+        caramel.ajax({
+            type: 'POST',
+            url: 'apis/dashboard?action=getTenantName',
+            success: function (result) {
+                tenantName= result.tenantName;
+            },
+            async: false,
+            contentType: 'application/json',
+            dataType: 'json'
+        });
         if ($(this).data('tooltip') == 'hide') {
             var dashboard = $('#inp-dashboard').val();
-            var win = window.open('/' + dashboard, '_blank');
+            var win = window.open(tenantName + '/' + dashboard, '_blank');
             win.focus();
         }
     });
