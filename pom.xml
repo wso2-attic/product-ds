@@ -415,11 +415,12 @@
         <h2.wso2.version>1.2.140.wso2v3</h2.wso2.version>
 
         <es.version>1.2.0-SNAPSHOT</es.version>
+        <carbon.social.version>1.1.0-SNAPSHOT</carbon.social.version>
         <carbon.kernal.version>4.3.0-SNAPSHOT</carbon.kernal.version>
         <carbon.platform.version>4.3.0-SNAPSHOT</carbon.platform.version>
 
         <!-- jaggery versions -->
-        <jaggery.feature.version>0.9.0.ALPHA5.wso2v1-SNAPSHOT</jaggery.feature.version>
+        <jaggery.feature.version>0.9.0-SNAPSHOT</jaggery.feature.version>
         <caramel.feature.version>1.0.1</caramel.feature.version>
         <handlebars.feature.version>1.0.0</handlebars.feature.version>
         <markdown.feature.version>1.0.0</markdown.feature.version>
