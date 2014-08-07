@@ -9,8 +9,8 @@
     relayState = '/{{appName}}',
     encodedSAMLAuthRequest = sso.client.getEncodedSAMLAuthRequest('{{appName}}'),
     log = new Log(),
-    postUrl = "https://" + process.getProperty('carbon.local.ip') + ":" + process.getProperty('https.port');
-
+    // postUrl = "https://" + process.getProperty('carbon.local.ip') + ":" + process.getProperty('https.port');
+     postUrl = dataConfi.server.https;
 
     if (!session.get("Loged")) {
     %>

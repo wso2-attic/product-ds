@@ -11,7 +11,8 @@ require('/modules/portal.js').exec(function (ctx) {
             relayState = (referer ? referer : '/portal'),
             encodedSAMLAuthRequest = sso.client.getEncodedSAMLAuthRequest(dataConfi.ssoConfiguration.issuer),
             log = new Log(),
-            postUrl = "https://" + process.getProperty('carbon.local.ip') + ":" + process.getProperty('https.port');
+            // postUrl = "https://" + process.getProperty('carbon.local.ip') + ":" + process.getProperty('https.port');
+            postUrl = dataConfi.server.https;
 
     if (!ctx.user) {
         %>
