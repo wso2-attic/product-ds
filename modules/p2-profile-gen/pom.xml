@@ -126,6 +126,9 @@
                                     org.wso2.store.modules:utils.feature:${es.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
+                                    org.wso2.store.modules:lifecycle.feature:${es.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
                                     org.wso2.store.modules:claims.feature:${es.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
@@ -319,6 +322,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.store.modules.utils.feature.group</id>
+                                    <version>${es.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.store.modules.lifecycle.feature.group</id>
                                     <version>${es.version}</version>
                                 </feature>
                                 <feature>

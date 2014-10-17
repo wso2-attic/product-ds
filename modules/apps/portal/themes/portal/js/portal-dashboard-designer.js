@@ -1012,7 +1012,8 @@ $(function () {
         }
 
         registerEventsToWidget(widget);
-        $('.dropdown.open .dropdown-toggle').dropdown('toggle');
+        //$('.dropdown.open .dropdown-toggle').dropdown('toggle');
+        $('.dropdown').removeClass('open');
     });
 
     $('#btn-preview-dash').click(function () {
