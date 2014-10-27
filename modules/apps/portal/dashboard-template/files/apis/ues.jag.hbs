@@ -16,6 +16,7 @@ require('/modules/app.js').exec(function (ctx) {
     var ues = require('/modules/ues.js');
 
     if (matcher.match('/{context}/apis/ues/layout/{appName}') ||
+        matcher.match('/t/{tenantname}/jaggeryapps/{context}/apis/ues/layout/') ||
         matcher.match('/{context}/apis/ues/layout/')) {
 
         var method = request.getMethod();

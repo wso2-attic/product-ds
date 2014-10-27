@@ -117,7 +117,16 @@
                                     org.wso2.store.modules:store.feature:${es.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
+                                    org.wso2.store.modules:rxt.feature:${es.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
                                     org.wso2.store.modules:ues.feature:${es.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.store.modules:utils.feature:${es.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.store.modules:lifecycle.feature:${es.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.store.modules:claims.feature:${es.version}
@@ -184,37 +193,10 @@
                                     org.wso2.carbon:org.wso2.carbon.governance.metadata.feature:${carbon.platform.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.cassandra.explorer.feature:${carbon.platform.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.cassandra.feature:${carbon.platform.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.cassandra-jdbc-1.2.5.server.feature:${carbon.platform.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.databridge.datapublisher.feature:${carbon.platform.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.databridge.datareceiver.feature:${carbon.platform.version}
-                                </featureArtifactDef>
-                                <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.databridge.commons.server.feature:${carbon.platform.version}
-                                </featureArtifactDef>
-                                <!--featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.databridge.cassandra.feature:${carbon.platform.version}
-                                </featureArtifactDef-->
-                                <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.module.mgt.server.feature:${carbon.platform.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.user.mgt.feature:${carbon.platform.version}
-                                </featureArtifactDef>
-                                <!--featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.databridge.streamdefn.cassandra.feature:${carbon.platform.version}
-                                </featureArtifactDef-->
-                                <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.databridge.streamdefn.registry.server.feature:${carbon.platform.version}
                                 </featureArtifactDef>
                                 <!-- Stratos features    -->
                                 <!--featureArtifactDef>
@@ -254,7 +236,7 @@
                                     org.wso2.carbon:org.wso2.carbon.identity.application.mgt.feature:${carbon.platform.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon:org.wso2.carbon.bam.toolbox.deployer.feature:${carbon.platform.version}
+                                    org.wso2.carbon:org.wso2.carbon.social.feature:${carbon.social.version}
                                 </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
@@ -332,6 +314,18 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.store.modules.store.feature.group</id>
+                                    <version>${es.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.store.modules.rxt.feature.group</id>
+                                    <version>${es.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.store.modules.utils.feature.group</id>
+                                    <version>${es.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.store.modules.lifecycle.feature.group</id>
                                     <version>${es.version}</version>
                                 </feature>
                                 <feature>
@@ -432,42 +426,6 @@
                                     <version>${stratos.patch.version.221}</version>
                                 </feature-->
                                 <feature>
-                                    <id>org.wso2.carbon.cassandra.explorer.feature.group</id>
-                                    <version>${carbon.platform.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.cassandra.feature.group</id>
-                                    <version>${carbon.platform.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.cassandra-jdbc-1.2.5.server.feature.group</id>
-                                    <version>${carbon.platform.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.databridge.datapublisher.feature.group</id>
-                                    <version>${carbon.platform.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.databridge.datareceiver.feature.group</id>
-                                    <version>${carbon.platform.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.databridge.commons.server.feature.group</id>
-                                    <version>${carbon.platform.version}</version>
-                                </feature>
-                                <!--feature>
-                                    <id>org.wso2.carbon.databridge.cassandra.feature.group</id>
-                                    <version>${carbon.platform.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.databridge.streamdefn.cassandra.feature.group</id>
-                                    <version>${carbon.platform.version}</version>
-                                </feature-->
-                                <feature>
-                                    <id>org.wso2.carbon.databridge.streamdefn.registry.server.feature.group</id>
-                                    <version>${carbon.platform.version}</version>
-                                </feature>
-                                <feature>
                                     <id>org.wso2.carbon.event.feature.group</id>
                                     <version>${carbon.platform.version}</version>
                                 </feature>
@@ -508,8 +466,8 @@
                                     <version>${carbon.platform.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.bam.toolbox.deployer.feature.group</id>
-                                    <version>${carbon.platform.version}</version>
+                                    <id>org.wso2.carbon.social.feature.group</id>
+                                    <version>${carbon.social.version}</version>
                                 </feature>
                             </features>
                         </configuration>

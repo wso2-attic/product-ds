@@ -9,15 +9,23 @@ require('/modules/portal.js').exec(function (ctx) {
         return;
     }
 
+    var tenantName = '';
+    if (ctx.user.tenantDomain != 'carbon.super') {
+        tenantName = '/t/' + ctx.user.tenantDomain + '/jaggeryapps';
+    }
+    if (request.getParameter('action') == 'getTenantName') {
+        print({'tenantName': tenantName})
+        return;
+    }
 
     var matcher = new URIMatcher(request.getRequestURI());
     var dashboard = require('/modules/dashboard-create.js');
 
     //TODO: make this POST
     if (request.getMethod() == 'POST' && matcher.match('/{context}/apis/dashboard/{appName}')) {
-        var appName = matcher.elements().appName;
+        var appName = matcher.elements().appName
         var layoutDef = parse(request.getParameter("layout"));
-        print(dashboard.create(appName, layoutDef));
+        print(dashboard.create(appName, layoutDef, tenantName));
     } else {
         response.sendError(404, 'API Endpoint Not Found');
     }

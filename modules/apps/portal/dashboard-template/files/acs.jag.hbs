@@ -49,7 +49,7 @@
 
                         if (user.loginWithSAML(sessionObj.loggedInUser)) {
                             log.info('user is set :::' + sessionObj.loggedInUser);
-                            response.sendRedirect('/{{appName}}');
+                            response.sendRedirect('{{tenantName}}/{{appName}}');
                         }
 
                     }
@@ -58,7 +58,7 @@
 
         } else {
             session.invalidate();
-            response.sendRedirect('/{{appName}}');
+            response.sendRedirect('{{tenantName}}/{{appName}}');
         }
     }
 

@@ -101,7 +101,7 @@ var create;
      * @param {string} appName
      * @param {*} layoutDef
      */
-    create = function (appName, layoutDef) {
+    create = function (appName, layoutDef,tenantName) {
         var TEMPL_FILES = new File(TEMPLATE_DIR + 'files');
         var CURRENT_THEME = (function () {
             return require('caramel').configs().themer();
@@ -138,7 +138,7 @@ var create;
 
         var appName64 = BASE64.encode(appName).replace(/=/g, '');
         DEPLOYER.sso({'issuer': appName,
-            'consumerUrl': PORTAL.ssoConfiguration.appAcsHost + '/' + appName + '/acs',
+            'consumerUrl': PORTAL.ssoConfiguration.appAcsHost + tenantName + '/' + appName + '/acs',
             'doSign': 'true',
             'singleLogout': 'true',
             'useFQUsername': 'true',
@@ -150,6 +150,7 @@ var create;
         layoutDef['showAssetGadget'] = CONFIG.portalGadgets.store;
         layoutDef['showGadgetTemplates'] = CONFIG.portalGadgets.gadgetTemplates;
         layoutDef['httpServerUrl'] = CONFIG.server.http;
+        layoutDef['tenantName'] = tenantName;
 
         // copy files in dashboard-template/files
         var files = TEMPL_FILES.listFiles();
