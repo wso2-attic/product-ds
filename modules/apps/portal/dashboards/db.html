@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>jQuery UI Selectable - Display as grid</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    <!--<link rel="stylesheet" href="css/theme.css">-->
+</head>
+<body>
+<div id="content">
+    <div class="container"></div>
+</div>
+<script src="js/jquery-1.10.2.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/handlebars-v1.3.0.js"></script>
+<script src="js/config.js"></script>
+<script src="js/store.js"></script>
+<script src="js/db.js"></script>
+<script id="layout-grid" type="text/x-handlebars-template">
+    <div class="row">
+        <div class="col-md-3 ues-widget-box">{{include left}}</div>
+        <div class="col-md-6 ues-widget-box">2</div>
+        <div class="col-md-3 ues-widget-box">3</div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 ues-widget-box">4</div>
+        <div class="col-md-6 ues-widget-box">5</div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 ues-widget-box">6</div>
+        <div class="col-md-4 ues-widget-box">7</div>
+        <div class="col-md-4 ues-widget-box">8</div>
+    </div>
+</script>
+<script id="widget-tab" type="text/x-handlebars-template">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        {{#.}}
+        <li{{#if active}} class="active"{{/if}}>
+        <a href="#{{id}}" role="tab" data-toggle="tab">{{name}}</a>
+        </li>
+        {{/.}}
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        {{#.}}
+        <div class="tab-pane{{#if active}} active{{/if}}" id="{{id}}">
+            {{#each data}}{{include .}}{{/each}}
+        </div>
+        {{/.}}
+    </div>
+</script>
+<script id="widget-list" type="text/x-handlebars-template">
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-success">Dapibus ac facilisis in</li>
+        <li class="list-group-item list-group-item-info">Cras sit amet nibh libero</li>
+        <li class="list-group-item list-group-item-warning">Porta ac consectetur ac</li>
+        <li class="list-group-item list-group-item-danger">Vestibulum at eros</li>
+    </ul>
+</script>
+<script id="thumbs-hbs" type="text/x-handlebars-template">
+    <div class="row thumbnails">
+        {{#each .}}
+        <div class="col-md-3 col-sm-4 col-xs-6 box">
+            <div class="thumbnail">
+                <img src="images/thumbnail.jpg"/>
+
+                <div class="caption">
+                    <h3>{{name}}</h3>
+                </div>
+                <div class="tools">
+                    <button type="button" class="btn btn-success drag-handle" data-id="{{id}}"><i
+                            class="fa fa-plus"></i></button>
+                    <button type="button" class="btn btn-info"><i class="fa fa-arrow-down"></i></button>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</script>
+</body>
+</html>

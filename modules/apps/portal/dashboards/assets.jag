@@ -1,0 +1,37 @@
+<%
+(function () {
+    var assets = [];
+    var size = 100;
+    var i;
+    for (i = 0; i < size; i++) {
+        assets.push({
+            id: i,
+            type: 'gadget',
+            name: 'Gadget-' + i,
+            attributes: {
+                url: 'http://localhost:9763/publisher/config/defaults/gadgets/pie-chart/pie-chart.xml'
+            }
+        });
+    }
+
+    var find = function (id) {
+        var i;
+        var length = assets.length;
+        for (i = 0; i < length; i++) {
+            if (assets[i].id == id) {
+                return assets[i];
+            }
+        }
+        return null;
+    };
+
+    var id = request.getParameter('id');
+    var start = request.getParameter('start') || 0;
+    var count = request.getParameter('count') || 20;
+    if (id) {
+        print(find(id));
+        return;
+    }
+    print(assets.slice(start, start + count));
+}());
+%>

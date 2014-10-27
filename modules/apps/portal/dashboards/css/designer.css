@@ -1,0 +1,30 @@
+
+#feedback {
+    font-size: 1.4em;
+}
+
+.grid .ui-selecting {
+    background: #FECA40;
+}
+
+.grid .ui-selected {
+    background: #F39814;
+    color: white;
+}
+
+.grid {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 984px;
+}
+
+.grid .box {
+    margin: 0;
+    padding: 0;
+    float: left;
+    width: 80px;
+    height: 80px;
+    font-size: 4em;
+    text-align: center;
+}
