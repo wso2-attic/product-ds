@@ -66,7 +66,7 @@
                                 <artifactItem>
                                     <groupId>org.wso2.carbon</groupId>
                                     <artifactId>wso2carbon-core</artifactId>
-                                    <version>${carbon.kernal.version}</version>
+                                    <version>${carbon.kernel.version}</version>
                                     <type>zip</type>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>target</outputDirectory>
@@ -125,7 +125,7 @@
                                         <include name="${project.artifactId}-${project.version}.zip"/>
                                     </fileset>
                                 </unzip>
-                                <copy todir="target/wso2carbon-core-${carbon.kernal.version}/repository/components"
+                                <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/components"
                                       overwrite="true">
                                     <fileset
                                             dir="${tempdir}/${project.artifactId}-${project.version}/repository/components">
@@ -150,7 +150,7 @@
                                       todir="target/shindig"/>
                                 <!--<zip destfile="target/ROOT.war"
                                      basedir="target/shindig"  />-->
-                                <concat destfile="target/wso2carbon-core-${carbon.kernal.version}/repository/log4j.properties">
+                                <concat destfile="target/wso2carbon-core-${carbon.kernel.version}/repository/log4j.properties">
                                     og4j.logger.net.sf.ehcache=ERROR
                                 </concat>
                                 <delete file="target/${project.artifactId}-${project.version}.zip"/>
@@ -213,7 +213,7 @@
                                 <delete dir="target/archive-tmp"/>
                                 <delete dir="target/dependency-maven-plugin-markers"/>
                                 <delete dir="target/maven-archiver"/>
-                                <delete dir="target/wso2carbon-core-${carbon.kernal.version}"/>
+                                <delete dir="target/wso2carbon-core-${carbon.kernel.version}"/>
                                 <delete file="target/${project.artifactId}-${project.version}.jar"/>
                                 <delete dir="target/sources"/>
                                 <delete dir="target/site"/>

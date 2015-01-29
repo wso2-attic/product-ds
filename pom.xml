@@ -1,6 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <parent>
+        <groupId>org.wso2</groupId>
+        <artifactId>wso2</artifactId>
+        <version>1</version>
+    </parent>
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wso2.ues</groupId>
     <artifactId>wso2ues-parent</artifactId>
@@ -208,7 +215,7 @@
             <dependency>
                 <groupId>org.wso2.carbon</groupId>
                 <artifactId>org.wso2.carbon.core</artifactId>
-                <version>${carbon.kernal.version}</version>
+                <version>${carbon.kernel.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.shindig</groupId>
@@ -380,11 +387,18 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <carbon.platform.version>4.3.0-SNAPSHOT</carbon.platform.version>
-        <carbon.kernel.version>4.3.0-SNAPSHOT</carbon.kernel.version>
+        <carbon.deployment.version>4.3.0-SNAPSHOT</carbon.deployment.version>
+        <carbon.multitenancy.version>4.3.0-SNAPSHOT</carbon.multitenancy.version>
+        <carbon.commons.version>4.3.0-SNAPSHOT</carbon.commons.version>
+        <carbon.registry.version>4.3.0-SNAPSHOT</carbon.registry.version>
+        <carbon.governance.version>4.3.0-SNAPSHOT</carbon.governance.version>
+        <carbon.identity.version>4.3.0-SNAPSHOT</carbon.identity.version>
+        <carbon.store.version>2.0.0-SNAPSHOT</carbon.store.version>
+        <carbon.social.version>1.2.0-SNAPSHOT</carbon.social.version>
+        <carbon.kernel.version>4.3.0</carbon.kernel.version>
 
-        <test.framwork.version>4.3.1-SNAPSHOT</test.framwork.version>
-        <platform.integration.utils.version>4.3.0-SNAPSHOT</platform.integration.utils.version>
+        <test.framwork.version>4.3.1</test.framwork.version>
+        <automation.utils.version>4.3.0</automation.utils.version>
 
         <maven.scrplugin.version>1.7.2</maven.scrplugin.version>
         <maven.wagon.ssh.version>2.1</maven.wagon.ssh.version>
@@ -414,11 +428,6 @@
         <el.api.version>2.2</el.api.version>
         <h2.wso2.version>1.2.140.wso2v3</h2.wso2.version>
 
-        <es.version>1.2.0-SNAPSHOT</es.version>
-        <carbon.social.version>1.1.0-SNAPSHOT</carbon.social.version>
-        <carbon.kernal.version>4.3.0-SNAPSHOT</carbon.kernal.version>
-        <carbon.platform.version>4.3.0-SNAPSHOT</carbon.platform.version>
-
         <!-- jaggery versions -->
         <jaggery.feature.version>0.9.0-SNAPSHOT</jaggery.feature.version>
         <caramel.feature.version>1.0.1</caramel.feature.version>
@@ -428,58 +437,6 @@
         <process.feature.version>1.0.0</process.feature.version>
         <uuid.feature.version>1.0.0</uuid.feature.version>
         <slf4j.wso2.version>1.5.10.wso2v1</slf4j.wso2.version>
-
-        <!-- patch versions -->
-        <!-- patch versions -->
-        <!--patch.version.421>4.2.1</patch.version.421>
-        <patch.version.422>4.2.2</patch.version.422>
-        <carbon.p2.plugin.version>1.5.3</carbon.p2.plugin.version>
-        <stratos.version>2.2.0</stratos.version>
-        <stratos.patch.version.221>2.2.1</stratos.patch.version.221-->
-        <!--     <carbon.p2.plugin.version>1.5.3</carbon.p2.plugin.version>
-
-             &lt;!&ndash; maven plugin versions &ndash;&gt;
-             <build-helper-maven-plugin.version>1.7</build-helper-maven-plugin.version>
-             <maven-compiler-plugin.version>2.3.1</maven-compiler-plugin.version>
-             <maven-resources-plugin.version>2.5</maven-resources-plugin.version>
-             <maven-clean-plugin.version>2.5</maven-clean-plugin.version>
-             <maven-surefire-plugin.version>2.12</maven-surefire-plugin.version>
-             <maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
-             <maven-jar-plugin.version>2.4</maven-jar-plugin.version>
-             <felix.bundle.version>2.3.5</felix.bundle.version>
-             <felix.scr.version>1.7.2</felix.scr.version>
-             <mvn.gpg>1.0-alpha-3</mvn.gpg>
-             <maven-site-plugin.version>3.0</maven-site-plugin.version>
-             <maven-src-plugin.version>1.7.2</maven-src-plugin.version>
-             <maven-bunlde-plugin.version>2.3.5</maven-bunlde-plugin.version>
-             <maven-source-plugin.version>2.1.2</maven-source-plugin.version>
-             <maven-assembly-plugin.version>2.2-beta-2</maven-assembly-plugin.version>
-             <maven-project-info-report-plugin.version>2.4</maven-project-info-report-plugin.version>
-             <maven-buildnumber-plugin.version>1.1</maven-buildnumber-plugin.version>
-             <maven-dependency-plugin.version>2.4</maven-dependency-plugin.version>
-             <caramel.feature.version>1.0.1</caramel.feature.version>
-             <handlebars.feature.version>1.0.0</handlebars.feature.version>
-             <markdown.feature.version>1.0.0</markdown.feature.version>
-             <process.feature.version>1.0.0</process.feature.version>
-             <carbon.feature.version>1.0.0</carbon.feature.version>
-             <event.feature.version>1.0.0</event.feature.version>
-             <uuid.feature.version>1.0.0</uuid.feature.version>
-             <login.feature.version>1.0.0</login.feature.version>
-             <permission.feature.version>1.0.0</permission.feature.version>
-             <registration.feature.version>1.0.0</registration.feature.version>
-             <sso.feature.version>1.0.0</sso.feature.version>
-             <store.feature.version>1.0.0</store.feature.version>
-             <ues.feature.version>1.0.0</ues.feature.version>
-             <claims.feature.version>1.0.0</claims.feature.version>
-             <wso2.slf4j.version>1.5.10.wso2v1</wso2.slf4j.version>
-             <sso.hostobjects.version>1.0.1</sso.hostobjects.version>
-             <wso2.slf4j.version>1.5.10.wso2v1</wso2.slf4j.version>
-             &lt;!&ndash;sso.hostobjects.version>4.2.0</sso.hostobjects.version&ndash;&gt;
-
-             <rhino.osgi.version>1.7.0.R4.wso2v1</rhino.osgi.version>
-             <commons-codec.osgi.version>1.4.0.wso2v1</commons-codec.osgi.version>
-             <opensaml2.wso2.version>2.4.1.wso2v1</opensaml2.wso2.version>
-             <commons-logging.version>1.1.1</commons-logging.version>-->
     </properties>
 
 </project>
