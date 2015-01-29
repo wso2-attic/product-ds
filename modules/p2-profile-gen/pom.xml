@@ -99,43 +99,43 @@
                                     org.jaggeryjs.modules:uuid.feature:${uuid.feature.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.store.modules:event.feature:${carbon.store.version}
+                                    org.wso2.carbon.store.modules:event.feature:${carbon.store.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.store.modules:login.feature:${carbon.store.version}
+                                    org.wso2.carbon.store.modules:login.feature:${carbon.store.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.store.modules:permission.feature:${carbon.store.version}
+                                    org.wso2.carbon.store.modules:permission.feature:${carbon.store.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.store.modules:registration.feature:${carbon.store.version}
+                                    org.wso2.carbon.store.modules:registration.feature:${carbon.store.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.store.modules:sso.feature:${carbon.store.version}
+                                    org.wso2.carbon.store.modules:sso.feature:${carbon.store.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.store.modules:store.feature:${carbon.store.version}
+                                    org.wso2.carbon.store.modules:store.feature:${carbon.store.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.store.modules:rxt.feature:${carbon.store.version}
+                                    org.wso2.carbon.store.modules:rxt.feature:${carbon.store.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.store.modules:ues.feature:${carbon.store.version}
+                                    org.wso2.carbon.store.modules:ues.feature:${carbon.store.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.store.modules:utils.feature:${carbon.store.version}
+                                    org.wso2.carbon.store.modules:utils.feature:${carbon.store.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.store.modules:lifecycle.feature:${carbon.store.version}
+                                    org.wso2.carbon.store.modules:lifecycle.feature:${carbon.store.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.store.modules:claims.feature:${carbon.store.version}
+                                    org.wso2.carbon.store.modules:claims.feature:${carbon.store.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.claim.mgt.feature:${carbon.identity.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.store:org.wso2.store.feature:${carbon.store.version}
+                                    org.wso2.carbon.store:org.wso2.carbon.store.feature:${carbon.store.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.registry.associations.dependencies.feature:${carbon.registry.version}
@@ -239,7 +239,7 @@
                                     org.wso2.carbon:org.wso2.carbon.social.feature:${carbon.social.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.store.modules:account-management.feature:${carbon.store.version}
+                                    org.wso2.carbon.store.modules:account-management.feature:${carbon.store.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon:org.wso2.carbon.identity.mgt.feature:${carbon.identity.version}
@@ -302,47 +302,47 @@
                                     <version>${uuid.feature.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.store.modules.event.feature.group</id>
+                                    <id>org.wso2.carbon.store.modules.event.feature.group</id>
                                     <version>${carbon.store.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.store.modules.login.feature.group</id>
+                                    <id>org.wso2.carbon.store.modules.login.feature.group</id>
                                     <version>${carbon.store.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.store.modules.permission.feature.group</id>
+                                    <id>org.wso2.carbon.store.modules.permission.feature.group</id>
                                     <version>${carbon.store.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.store.modules.registration.feature.group</id>
+                                    <id>org.wso2.carbon.store.modules.registration.feature.group</id>
                                     <version>${carbon.store.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.store.modules.sso.feature.group</id>
+                                    <id>org.wso2.carbon.store.modules.sso.feature.group</id>
                                     <version>${carbon.store.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.store.modules.store.feature.group</id>
+                                    <id>org.wso2.carbon.store.modules.store.feature.group</id>
                                     <version>${carbon.store.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.store.modules.rxt.feature.group</id>
+                                    <id>org.wso2.carbon.store.modules.rxt.feature.group</id>
                                     <version>${carbon.store.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.store.modules.utils.feature.group</id>
+                                    <id>org.wso2.carbon.store.modules.utils.feature.group</id>
                                     <version>${carbon.store.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.store.modules.lifecycle.feature.group</id>
+                                    <id>org.wso2.carbon.store.modules.lifecycle.feature.group</id>
                                     <version>${carbon.store.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.store.modules.ues.feature.group</id>
+                                    <id>org.wso2.carbon.store.modules.ues.feature.group</id>
                                     <version>${carbon.store.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.store.modules.claims.feature.group</id>
+                                    <id>org.wso2.carbon.store.modules.claims.feature.group</id>
                                     <version>${carbon.store.version}</version>
                                 </feature>
                                 <feature>
@@ -350,7 +350,7 @@
                                     <version>${carbon.registry.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.store.feature.group</id>
+                                    <id>org.wso2.carbon.store.feature.group</id>
                                     <version>${carbon.store.version}</version>
                                 </feature>
                                 <feature>
@@ -479,7 +479,7 @@
                                     <version>${carbon.social.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.store.modules.account-management.feature.group</id>
+                                    <id>org.wso2.carbon.store.modules.account-management.feature.group</id>
                                     <version>${carbon.store.version}</version>
                                 </feature>
                                 <feature>
