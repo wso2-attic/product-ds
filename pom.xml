@@ -386,7 +386,7 @@
     </issueManagement>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
+        <project.scm.id>github-scm</project.scm.id>
         <carbon.deployment.version>4.3.0-SNAPSHOT</carbon.deployment.version>
         <carbon.multitenancy.version>4.3.0-SNAPSHOT</carbon.multitenancy.version>
         <carbon.commons.version>4.3.0-SNAPSHOT</carbon.commons.version>
