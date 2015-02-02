@@ -239,27 +239,27 @@
                 <version>${h2.wso2.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.wso2.carbon</groupId>
+                <groupId>org.wso2.carbon.automationutils</groupId>
                 <artifactId>org.wso2.carbon.integration.common.extensions</artifactId>
-                <version>${carbon.platform.version}</version>
+                <version>${automation.utils.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>org.wso2.carbon</groupId>
+                <groupId>org.wso2.carbon.commons</groupId>
                 <artifactId>org.wso2.carbon.reporting.util</artifactId>
-                <version>${carbon.platform.version}</version>
+                <version>${carbon.commons.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>org.wso2.carbon</groupId>
+                <groupId>org.wso2.carbon.governance</groupId>
                 <artifactId>org.wso2.carbon.governance.list.stub</artifactId>
-                <version>${carbon.platform.version}</version>
+                <version>${carbon.governance.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>org.wso2.carbon</groupId>
+                <groupId>org.wso2.carbon.automationutils</groupId>
                 <artifactId>org.wso2.carbon.integration.common.tests</artifactId>
-                <version>${carbon.platform.version}</version>
+                <version>${automation.utils.version}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
