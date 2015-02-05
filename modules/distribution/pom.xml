@@ -3,7 +3,7 @@
     <parent>
         <groupId>org.wso2.ues</groupId>
         <artifactId>wso2ues-parent</artifactId>
-        <version>1.5.0-M1</version>
+        <version>1.5.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -140,7 +140,7 @@
                                     <fileset dir="target/shindig/WEB-INF/lib" includes="slf4j*" />
                                 </delete>
                                 <copy file="src/repository/resources/shindig/index.jsp" todir="target/shindig" />
-                                <!--<zip destfile="target/ROOT.war" basedir="target/shindig"   />-->
+                                <!--<zip destfile="target/ROOT.war" basedir="target/shindig" />-->
                                 <concat destfile="target/wso2carbon-core-${carbon.kernel.version}/repository/log4j.properties">
                                     og4j.logger.net.sf.ehcache=ERROR
                                 </concat>
