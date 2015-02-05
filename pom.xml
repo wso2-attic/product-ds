@@ -24,7 +24,6 @@
     </licenses>
     <modules>
         <module>modules/components/ues-admin</module>
-        <module>modules/components/sso-common</module>
         <module>modules/features/ues</module>
         <module>modules/p2-profile-gen</module>
         <module>modules/distribution</module>
@@ -174,19 +173,6 @@
                     <artifactId>maven-antrun-plugin</artifactId>
                     <version>${maven.antrunplugin.version}</version>
                 </plugin>
-                <plugin>
-                    <artifactId>maven-clean-plugin</artifactId>
-                    <version>${maven.cleanplugin.version}</version>
-                    <executions>
-                        <execution>
-                            <id>auto-clean</id>
-                            <phase>initialize</phase>
-                            <goals>
-                                <goal>clean</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -262,11 +248,17 @@
                 <version>${automation.utils.version}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>org.wso2.ues</groupId>
+                <artifactId>org.wso2.ues.admin.styles</artifactId>
+                <version>${product.ues.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <scm>
-        <connection>scm:git:https://github.com/wso2/ues.git</connection>
-        <developerConnection>scm:git:https://github.com/wso2/ues.git</developerConnection>
+        <connection>scm:git:https://github.com/wso2/product-ues.git</connection>
+        <developerConnection>scm:git:https://github.com/wso2/product-ues.git</developerConnection>
+        <tag>HEAD</tag>
     </scm>
     <repositories>
         <repository>
@@ -336,18 +328,6 @@
             </releases>
         </pluginRepository>
     </pluginRepositories>
-    <distributionManagement>
-        <repository>
-            <id>wso2.releases</id>
-            <name>WSO2 Internal Repository</name>
-            <url>http://maven.wso2.org/nexus/content/repositories/releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>wso2.snapshots</id>
-            <name>WSO2 Snapshot Repository</name>
-            <url>http://maven.wso2.org/nexus/content/repositories/snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
     <profiles>
         <profile>
             <id>sign</id>
@@ -387,15 +367,20 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.scm.id>github-scm</project.scm.id>
-        <carbon.deployment.version>4.3.0-SNAPSHOT</carbon.deployment.version>
-        <carbon.multitenancy.version>4.3.0-SNAPSHOT</carbon.multitenancy.version>
-        <carbon.commons.version>4.3.0-SNAPSHOT</carbon.commons.version>
-        <carbon.registry.version>4.3.0-SNAPSHOT</carbon.registry.version>
-        <carbon.governance.version>4.3.0-SNAPSHOT</carbon.governance.version>
-        <carbon.identity.version>4.3.0-SNAPSHOT</carbon.identity.version>
-        <carbon.store.version>2.0.0-SNAPSHOT</carbon.store.version>
-        <carbon.social.version>1.2.0-SNAPSHOT</carbon.social.version>
+
+        <!--repo versions-->
+        <carbon.commons.version>4.3.4</carbon.commons.version>
+        <carbon.registry.version>4.3.0</carbon.registry.version>
+        <carbon.governance.version>4.3.0</carbon.governance.version>
+        <carbon.deployment.version>4.3.1</carbon.deployment.version>
+        <carbon.identity.version>4.3.2</carbon.identity.version>
+        <carbon.multitenancy.version>4.3.3</carbon.multitenancy.version>
+
+        <carbon.store.version>2.0.0</carbon.store.version>
+        <carbon.social.version>1.2.0</carbon.social.version>
         <carbon.kernel.version>4.3.0</carbon.kernel.version>
+
+        <product.ues.version>1.5.0-SNAPSHOT</product.ues.version>
 
         <test.framwork.version>4.3.1</test.framwork.version>
         <automation.utils.version>4.3.0</automation.utils.version>
@@ -429,13 +414,14 @@
         <h2.wso2.version>1.2.140.wso2v3</h2.wso2.version>
 
         <!-- jaggery versions -->
-        <jaggery.feature.version>0.9.0-SNAPSHOT</jaggery.feature.version>
+        <jaggery.feature.version>0.9.0</jaggery.feature.version>
         <caramel.feature.version>1.0.1</caramel.feature.version>
         <handlebars.feature.version>1.0.0</handlebars.feature.version>
         <markdown.feature.version>1.0.0</markdown.feature.version>
-        <carbon.feature.version>1.0.0</carbon.feature.version>
-        <process.feature.version>1.0.0</process.feature.version>
-        <uuid.feature.version>1.0.0</uuid.feature.version>
+        <carbon.feature.version>1.2.0</carbon.feature.version>
+        <process.feature.version>1.2.0</process.feature.version>
+        <sso.feature.version>1.2.0</sso.feature.version>
+        <uuid.feature.version>1.2.0</uuid.feature.version>
         <slf4j.wso2.version>1.5.10.wso2v1</slf4j.wso2.version>
     </properties>
 

@@ -33,12 +33,6 @@
         <dependency>
             <groupId>org.wso2.ues</groupId>
             <artifactId>org.wso2.ues.admin.styles</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.wso2.ues</groupId>
-            <artifactId>org.wso2.ues.sso.common</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>slf4j.wso2</groupId>
@@ -68,7 +62,6 @@
                             </adviceFile>
                             <bundles>
                                 <bundleDef>slf4j.wso2:slf4j</bundleDef>
-                                <bundleDef>org.wso2.ues:org.wso2.ues.sso.common</bundleDef>
                                 <bundleDef>org.wso2.ues:org.wso2.ues.admin.styles</bundleDef>
                             </bundles>
                             <importBundles/>
