@@ -1,0 +1,15 @@
+{
+    "name": "usa-map",
+    "description": "Allows to view and select US states",
+    "notify": {
+        "select": {
+            "type": "address",
+            "description": "This notifies selected state"
+        },
+        "cancel": {
+            "type": "boolean",
+            "description": "This notifies cancellation of state selection"
+        }
+    },
+    "options": {}
+}

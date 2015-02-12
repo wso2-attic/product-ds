@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="USA Map" description="USA clickable map"/>
+    <Content type="html">
+        <![CDATA[
+<html>
+<head>
+<style>
+	.state{
+		fill: none;
+		stroke: #a9a9a9;
+		stroke-width: 1;
+	}
+	.state:hover{
+		fill-opacity:0.5;
+	}
+</style>
+</head>
+<body>
+<svg width="960" height="600" id="map"></svg>
+<script src="js/uStates.js"></script>
+<script src="js/d3.v3.min.js"></script>
+<script>
+
+	var click = function(state) {
+	    console.log({ country: 'US', state: state.id });
+	};
+
+	var data ={};
+	["HI", "AK", "FL", "SC", "GA", "AL", "NC", "TN", "RI", "CT", "MA",
+	"ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH",
+	"MI", "WY", "MT", "ID", "WA", "DC", "TX", "CA", "AZ", "NV", "UT",
+	"CO", "NM", "OR", "ND", "SD", "NE", "IA", "MS", "IN", "IL", "MN",
+	"WI", "MO", "AR", "OK", "KS", "LS", "VA"]
+		.forEach(function(d){
+			var low=Math.round(100*Math.random());
+			data[d]={color:d3.interpolate("#ffffcc", "#800026")(low/100)};
+		});
+
+	uStates.draw("#map", data, click);
+</script>
+
+</body>
+</html>
+    ]]>
+    </Content>
+</Module>

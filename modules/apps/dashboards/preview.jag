@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Selectable - Display as grid</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/jquery-ui.css">
+  <link rel="stylesheet" href="css/preview.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">Left</div>
+        <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-3 ues-widget"></div>
+                    <div class="col-md-6 ues-widget"></div>
+                    <div class="col-md-3 ues-widget"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 ues-widget"></div>
+                    <div class="col-md-6 ues-widget"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 ues-widget"></div>
+                    <div class="col-md-4 ues-widget"></div>
+                    <div class="col-md-4 ues-widget"></div>
+                </div>
+        </div>
+    </div>
+</div>
+  <script src="js/jquery-1.10.2.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <script src="js/preview.js"></script>
+</body>
+</html>
