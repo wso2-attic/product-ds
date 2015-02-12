@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-    <ModulePrefs title="USA Map" description="USA clickable map"/>
+    <ModulePrefs title="USA Map" height="280" description="USA clickable map">
+        <Require feature="dynamic-height"/>
+    </ModulePrefs>
     <Content type="html">
         <![CDATA[
 <html>
@@ -17,7 +19,7 @@
 </style>
 </head>
 <body>
-<svg width="960" height="600" id="map"></svg>
+<svg width="400" height="280" id="map" transform="scale(0.4)"></svg>
 <script src="js/uStates.js"></script>
 <script src="js/d3.v3.min.js"></script>
 <script>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-    <ModulePrefs title="USA Company Revenue" description="USA Company Revenue chart"/>
+    <ModulePrefs title="USA Company Revenue" height="280" description="USA Company Revenue chart"/>
     <Content type="html">
         <![CDATA[
 <html>

@@ -3,15 +3,17 @@
     var assets = [];
     var size = 100;
     var i;
+    var flag = false;
     for (i = 0; i < size; i++) {
         assets.push({
             id: i,
             type: 'gadget',
             name: 'Gadget-' + i,
             attributes: {
-                url: 'http://localhost:9763/publisher/config/defaults/gadgets/pie-chart/pie-chart.xml'
+                url: flag ? 'http://localhost:9763/dashboards/widgets/usa-map/usa.xml' : 'http://localhost:9763/dashboards/widgets/usa-business-revenue/revenue.xml'
             }
         });
+        flag = !flag;
     }
 
     var find = function (id) {
