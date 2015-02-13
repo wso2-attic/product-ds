@@ -9,7 +9,7 @@
             type: 'gadget',
             name: 'Gadget-' + i,
             attributes: {
-                url: 'http://localhost:9763/publisher/config/defaults/gadgets/pie-chart/pie-chart.xml'
+                url: 'https://localhost:9445/dashboards/test-resources/pie-chart/pie-chart.xml'
             }
         });
     }
