@@ -1,15 +1,19 @@
 <%
 (function () {
     var assets = [];
-    var size = 100;
+    var file = new File("/widgets");
+    var dirList = file.listFiles();
+    var size = dirList.length;
     var i;
     for (i = 0; i < size; i++) {
+        var widJson = require("/widgets/" + dirList[i].getName() + "/widget.json");
         assets.push({
             id: i,
             type: 'gadget',
-            name: 'Gadget-' + i,
+            name: widJson.name,
+            location: 'https://localhost:9445/dashboards/widgets/' + dirList[i].getName() + '/index.png',
             attributes: {
-                url: 'https://localhost:9445/dashboards/test-resources/pie-chart/pie-chart.xml'
+                url: 'https://localhost:9445/dashboards/widgets/' + dirList[i].getName() + '/index.xml'
             }
         });
     }
