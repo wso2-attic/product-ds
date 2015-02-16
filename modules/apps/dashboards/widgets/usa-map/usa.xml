@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-    <ModulePrefs title="USA Map" height="280" description="USA clickable map">
+    <ModulePrefs title="USA Map" description="USA clickable map">
         <Require feature="dynamic-height"/>
     </ModulePrefs>
     <Content type="html">
@@ -20,6 +20,7 @@
 </head>
 <body>
 <svg width="400" height="280" id="map" transform="scale(0.4)"></svg>
+<script src="../../js/jquery-1.10.2.js"></script>
 <script src="js/uStates.js"></script>
 <script src="js/d3.v3.min.js"></script>
 <script>
@@ -40,6 +41,9 @@
 		});
 
 	uStates.draw("#map", data, click);
+	gadgets.util.registerOnLoadHandler(function() {
+	    gadgets.window.adjustHeight();
+	});
 </script>
 
 </body>

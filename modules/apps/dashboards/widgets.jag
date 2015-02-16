@@ -1,37 +1,32 @@
 <%
 (function () {
+    var widgetsDir = '/widgets';
     var widgets = [];
-    var size = 100;
-    var i;
-    for (i = 0; i < size; i++) {
-        widgets.push({
-            id: i,
-            type: 'widget',
-            name: 'Widget-' + i,
-            attributes: {
-                url: 'http://localhost:9763/publisher/config/defaults/gadgets/pie-chart/pie-chart.xml'
-            }
-        });
-    }
 
-    var find = function (id) {
-        var i;
-        var length = widgets.length;
-        for (i = 0; i < length; i++) {
-            if (widgets[i].id == id) {
-                return widgets[i];
-            }
-        }
-        return null;
+    var configs = function (name) {
+        var file = new File(widgetsDir + '/' + name + '/widget.json');
+        file.open('r');
+        var config = JSON.parse(file.readAll());
+        file.close();
+        return config;
     };
 
-    var id = request.getParameter('id');
-    var start = request.getParameter('start') || 0;
-    var count = request.getParameter('count') || 20;
-    if (id) {
-        print(find(id));
+    var name = request.getParameter('name');
+    if (name) {
+        print(configs(name));
         return;
     }
-    print(widgets.slice(start, start + count));
+
+    var file = new File(widgetsDir);
+    var files = file.listFiles();
+    files.forEach(function (file) {
+        if (!file.isDirectory()) {
+            return;
+        }
+        var config = configs(file.getName());
+        widgets.push(config);
+    });
+    response.contentType = 'application/json';
+    print(widgets);
 }());
 %>

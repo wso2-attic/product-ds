@@ -61,8 +61,8 @@ $(function () {
             var droppable = $(this);
             ues.store.asset(id, function (err, data) {
                 var id = Math.random().toString(36).slice(2);
-                droppable.html('<div id=' + id + '></div>');
-                UESContainer.renderGadget(id, data.attributes.url);
+                droppable.html('<div id=' + id + ' class="widget"></div>');
+                CommonContainer.renderGadget($('#' + id), data.data.url);
             });
         }
     });
