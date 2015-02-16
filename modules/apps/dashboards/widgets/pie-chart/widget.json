@@ -1,0 +1,19 @@
+{
+    "name": "pie-chart",
+    "description": "Allows to view revenue by companies in US",
+    "listen": {
+        "address": {
+            "description": "Used to filter based on state"
+        }
+    },
+    "notify": {
+        "select": {
+            "type": "string",
+            "description": "This notifies selected company"
+        },
+        "cancel": {
+            "type": "boolean",
+            "description": "This notifies cancellation of company selection"
+        }
+    }
+}
