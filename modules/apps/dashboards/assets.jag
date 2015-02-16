@@ -5,6 +5,7 @@
     var dirList = file.listFiles();
     var size = dirList.length;
     var i;
+    var flag = false;
     for (i = 0; i < size; i++) {
         var widJson = require("/widgets/" + dirList[i].getName() + "/widget.json");
         assets.push({
@@ -16,6 +17,7 @@
                 url: 'https://localhost:9445/dashboards/widgets/' + dirList[i].getName() + '/index.xml'
             }
         });
+        flag = !flag;
     }
 
     var find = function (id) {

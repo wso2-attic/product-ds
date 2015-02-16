@@ -83,7 +83,6 @@
         </nav>
     </div>-->
     <div id="middle" class="tab-content">
-
         <div id="designer" class="container-fluid designer tab-pane active">
             <div class="row">
                 <div class="col-md-2 col-md-push-10">
@@ -94,12 +93,8 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputFile">File input</label>
-                            <input type="file" id="exampleInputFile">
-                            <p class="help-block">Example block-level help text here.</p>
+                            <input type="password" class="form-control" id="exampleInputPassword1"
+                                   placeholder="Password">
                         </div>
                         <div class="checkbox">
                             <label>
@@ -140,7 +135,7 @@
     </div>
     <div class="preview-toggle"></div>
 </div>
-<iframe id="sandbox" src="preview.jag"></iframe>
+<!--<iframe id="sandbox" src="preview.jag"></iframe>-->
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery-ui.js"></script>
@@ -148,7 +143,7 @@
 <script src="js/index.js"></script>
 <script src="js/store.js"></script>
 <script src="/portal/themes/portal/js/shindig.js"></script>
-<script src="/portal/themes/portal/js/UESContainer.js"></script>
+<script src="js/common-container.js"></script>
 <script id="designer-hbs" type="text/x-handlebars-template">
     <div class="row">
         <div class="col-md-3 ues-widget-box"></div>
@@ -177,7 +172,7 @@
                     <h3>{{name}}</h3>
                 </div>
                 <div class="tools">
-                    <button type="button" class="btn btn-success drag-handle" data-id="{{id}}"><i
+                    <button type="button" class="btn btn-success drag-handle" data-id="{{name}}"><i
                             class="fa fa-plus"></i></button>
                     <button type="button" class="btn btn-info"><i class="fa fa-arrow-down"></i></button>
                 </div>

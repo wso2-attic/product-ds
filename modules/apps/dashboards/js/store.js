@@ -5,7 +5,7 @@ var store = {};
     var store = (ues.store = {});
 
     store.asset = function (id, cb) {
-        $.get('assets.jag?id=' + id, function (data) {
+        $.get('assets.jag?name=' + id, function (data) {
             cb(false, data);
         }, 'json');
     };

@@ -1,8 +1,19 @@
 {
     "name": "usa-business-revenue",
+    "type": "gadget",
+    "options": {
+        "username": {
+            "type": "string",
+            "description": "Username to be used for service invocation"
+        }
+    },
+    "data": {
+        "url": "http://localhost:9763/dashboards/widgets/usa-business-revenue/revenue.xml"
+    },
     "description": "Allows to view revenue by companies in US",
     "listen": {
-        "address": {
+        "xxx": {
+            "type": "address",
             "description": "Used to filter based on state"
         }
     },

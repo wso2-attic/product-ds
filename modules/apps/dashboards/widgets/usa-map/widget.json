@@ -1,5 +1,15 @@
 {
     "name": "usa-map",
+    "type": "gadget",
+    "options": {
+        "username": {
+            "type": "string",
+            "description": "Username to be used for service invocation"
+        }
+    },
+    "data": {
+        "url": "http://localhost:9763/dashboards/widgets/usa-map/usa.xml"
+    },
     "description": "Allows to view and select US states",
     "notify": {
         "select": {
@@ -10,6 +20,5 @@
             "type": "boolean",
             "description": "This notifies cancellation of state selection"
         }
-    },
-    "options": {}
+    }
 }
