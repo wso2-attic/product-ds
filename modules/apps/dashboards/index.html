@@ -89,24 +89,23 @@
         <div id="designer" class="container-fluid designer tab-pane active">
             <div class="row">
                 <div class="col-md-2 col-md-push-10 properties">
-                        <form role="form">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1"
-                                       placeholder="Enter email">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1"
-                                       placeholder="Password">
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Check me out
-                                </label>
-                            </div>
-                            <button type="submit" class="btn btn-default">Submit</button>
-                        </form>
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1"
+                                   placeholder="Password">
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Check me out
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
                 </div>
                 <div class="col-md-10 col-md-pull-2">
                     <div class="container-fluid">
@@ -170,9 +169,7 @@
         {{#each .}}
         <div class="col-md-3 col-sm-4 col-xs-6 box">
             <div class="thumbnail">
-
-                <img src="{{location}}"/>
-
+                <img src="{{thmbnail}}"/>
                 <div class="caption">
                     <h3>{{name}}</h3>
                 </div>

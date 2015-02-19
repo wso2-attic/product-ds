@@ -1,6 +1,7 @@
 {
     "name": "usa-map",
     "type": "gadget",
+    "thmbnail": "https://localhost:9445/dashboards/widgets/usa-map/index.png",
     "options": {
         "username": {
             "type": "string",
@@ -8,7 +9,7 @@
         }
     },
     "data": {
-        "url": "http://localhost:9763/dashboards/widgets/usa-map/usa.xml"
+        "url": "https://localhost:9445/dashboards/widgets/usa-map/index.xml"
     },
     "description": "Allows to view and select US states",
     "notify": {

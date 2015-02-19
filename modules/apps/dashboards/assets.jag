@@ -1,5 +1,6 @@
 <%
 (function () {
+    /*
     var assets = [];
     var file = new File("/widgets");
     var dirList = file.listFiles();
@@ -39,5 +40,35 @@
         return;
     }
     print(assets.slice(start, start + count));
+     */
+
+    var widgetsDir = '/widgets';
+    var widgets = [];
+
+    var configs = function (name) {
+        var file = new File(widgetsDir + '/' + name + '/widget.json');
+        file.open('r');
+        var config = JSON.parse(file.readAll());
+        file.close();
+        return config;
+    };
+
+    var name = request.getParameter('name');
+    if (name) {
+        print(configs(name));
+        return;
+    }
+
+    var file = new File(widgetsDir);
+    var files = file.listFiles();
+    files.forEach(function (file) {
+        if (!file.isDirectory()) {
+            return;
+        }
+        var config = configs(file.getName());
+        widgets.push(config);
+    });
+    response.contentType = 'application/json';
+    print(widgets);
 }());
 %>
