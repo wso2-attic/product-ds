@@ -1,7 +1,7 @@
 {
     "name": "usa-map",
     "type": "gadget",
-    "thmbnail": "https://localhost:9445/dashboards/widgets/usa-map/index.png",
+    "thumbnail": "https://localhost:9445/dashboards/widgets/usa-map/index.png",
     "options": {
         "username": {
             "type": "string",

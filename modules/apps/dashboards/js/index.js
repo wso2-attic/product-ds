@@ -18,6 +18,7 @@ $(function () {
 
     var designer = Handlebars.compile($("#designer-hbs").html());
     var widgets = Handlebars.compile($("#thumbs-hbs").html());
+    var options = Handlebars.compile($("#options-hbs").html());
 
     ues.store.assets({
         start: 0,
@@ -27,12 +28,13 @@ $(function () {
             .find('.widgets .content').html(widgets(data)).end()
             .find('.thumbnails').on('click', '.add-button', function () {
                 console.log('adding');
-                $('#left').find('.nav-tabs a[href="#designer"]').tab('show');
+                //$('#left').find('.nav-tabs a[href="#designer"]').tab('show');
             });
     });
 
     $('#middle')
         .find('.designer .content').html(designer());
+
 
     $('.widgets').on('mouseenter', '.thumbnail .drag-handle', function () {
         $(this).draggable({
@@ -63,6 +65,9 @@ $(function () {
                 var id = Math.random().toString(36).slice(2);
                 droppable.html('<div id=' + id + ' class="widget"></div>');
                 CommonContainer.renderGadget($('#' + id), data.data.url);
+
+                $('#middle')
+                    .find('.designer .optionContent').html(options(data));
             });
         }
     });

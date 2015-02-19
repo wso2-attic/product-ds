@@ -87,7 +87,8 @@
     <div id="middle" class="tab-content">
         <div id="designer" class="container-fluid designer tab-pane active">
             <div class="row">
-                <div class="col-md-2 col-md-push-10">
+                <div class="col-md-2 col-md-push-10 optionContent">
+                    <!--
 
                     <form role="form">
                         <div class="form-group">
@@ -106,8 +107,7 @@
                         </div>
                         <button type="submit" class="btn btn-default">Submit</button>
                     </form>
-
-
+                    -->
                 </div>
 
                 <div class="col-md-10 col-md-pull-2">
@@ -165,7 +165,6 @@
         <div class="col-md-4 ues-widget-box"></div>
         <div class="col-md-4 ues-widget-box"></div>
     </div>
-
 </script>
 <script id="thumbs-hbs" type="text/x-handlebars-template">
     <div class="row thumbnails">
@@ -173,7 +172,7 @@
         <div class="col-md-3 col-sm-4 col-xs-6 box">
             <div class="thumbnail">
 
-            <img src="{{thmbnail}}"/>
+            <img src="{{thumbnail}}"/>
 
                 <div class="caption">
                     <h3>{{name}}</h3>
@@ -187,6 +186,31 @@
         </div>
         {{/each}}
     </div>
+</script>
+<script id="options-hbs" type="text/x-handlebars-template">
+    <div class="row">
+        <div class="col-md-12"><h3>Option panel of {{name}}</h3></div>
+    </div>
+
+    <form>
+        <fieldset>
+            <div class="form-group">
+                <label for="usernameTextInput">Username</label>
+                <input type="text" id="usernameTextInput" class="form-control" placeholder="Enter the username">
+            </div>
+
+            {{#each listen}}
+            <div class="form-group">
+                <label for="listeners">{{@key}}</label>
+                <select id="listeners" class="form-control">
+                    <option></option>
+                </select>
+            </div>
+            {{/each}}
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </fieldset>
+    </form>
 </script>
 </body>
 </html>
