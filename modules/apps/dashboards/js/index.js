@@ -62,7 +62,7 @@ $(function () {
             ues.store.asset(id, function (err, data) {
                 var id = Math.random().toString(36).slice(2);
                 droppable.html('<div id=' + id + ' class="widget"></div>');
-                CommonContainer.renderGadget($('#' + id), data.data.url);
+                ues.gadget($('#' + id), data.data.url);
             });
         }
     });
