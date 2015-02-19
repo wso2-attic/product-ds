@@ -23,13 +23,17 @@ var CommonContainer;
         params = params || {};
         params[osapi.container.RenderParam.WIDTH] = '100%';
         params[osapi.container.RenderParam.VIEW] = 'home';
-        container.each(function(index) {
+        container.each(function () {
             var container = $(this);
             params[osapi.container.RenderParam.HEIGHT] = container.height();
             var site = CommonContainer.newGadgetSite(container[0]);
             CommonContainer.navigateGadget(site, url, prefs, params, function (metadata) {
                 if (metadata.error) {
-                    return done(metadata.error);
+                    done ? done(metadata.error) : console.log(metadata.error);
+                    return;
+                }
+                if (done) {
+                    done();
                 }
             });
         });

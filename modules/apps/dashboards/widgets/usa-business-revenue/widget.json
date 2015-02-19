@@ -1,7 +1,7 @@
 {
     "name": "usa-business-revenue",
     "type": "gadget",
-    "thmbnail": "https://localhost:9445/dashboards/widgets/usa-business-revenue/index.png",
+    "thumbnail": "https://localhost:9443/dashboards/widgets/usa-business-revenue/index.png",
     "options": {
         "username": {
             "type": "string",
@@ -9,7 +9,7 @@
         }
     },
     "data": {
-        "url": "https://localhost:9445/dashboards/widgets/usa-business-revenue/index.xml"
+        "url": "https://localhost:9443/dashboards/widgets/usa-business-revenue/index.xml"
     },
     "description": "Allows to view revenue by companies in US",
     "listen": {
