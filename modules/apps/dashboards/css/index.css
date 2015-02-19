@@ -1,24 +1,29 @@
 
 body {
     padding-top: 50px;
-    font-family: proxima-nova, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Oxygen", Helvetica, Arial, sans-serif;
 }
 
 a, a:focus {
     outline: 0;
 }
 
-#middle .breadcrumb {
-    margin-bottom: 15px;
-    margin-top: 15px;
+.navbar-inverse {
+
 }
 
 /**
  * left navbar styles
  */
-
 #left .navbar {
     border-radius: 0;
+    border: none;
+}
+
+#left .navbar li a {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 23px;
 }
 
 #left .navbar-collapse {
@@ -38,6 +43,8 @@ a, a:focus {
     border-radius: 0;
     margin: 0;
     border: none;
+    color: #34495e;
+    background-color: #1abc9c;
 }
 
 #left .nav-tabs {
@@ -47,8 +54,27 @@ a, a:focus {
 #left .nav-tabs > li > a {
     border-radius: 0;
     margin: 0;
+    padding: 18px 0;
+    text-align: center;
+
 }
 
+#left .nav-tabs > li > a .glyphicon {
+    font-size: 40px;
+    line-height: normal;
+}
+
+/**
+ * tab panes
+ */
+#middle .tab-pane .toolbar h2 {
+    font-size: 32px;
+    margin-top: 20px;
+}
+
+/**
+ * sandbox styles
+ */
 #sandbox {
     width: 100%;
     height: 500px;
@@ -60,12 +86,17 @@ a, a:focus {
 @media (min-width: 768px) {
 
     #left {
-        width: 100px;
+        width: 84px;
         position: fixed;
     }
 
     #middle {
-        margin-left: 100px;
+        margin-left: 84px;
+    }
+
+    #designer .properties {
+        padding-left: 0;
+        margin-top: 10px;
     }
 }
 
@@ -73,6 +104,9 @@ a, a:focus {
     width: 254px;
 }
 
+/**
+ * thumbnail styles
+ */
 .thumbnail {
     padding-top: 10px;
     border-radius: 0;
@@ -83,13 +117,14 @@ a, a:focus {
     font-size: 18px;
 }
 
-.widgets {
+/**
+ * widget styles
+ */
+.widgets .toolbar {
+    margin-bottom: 10px;
     margin-top: 10px;
 }
 
-.widgets .toolbar {
-    margin-bottom: 10px;
-}
 
 .widget {
     height: 100%;
@@ -109,7 +144,7 @@ a, a:focus {
     height: 50px;
 }
 
-.left-bar .row {
+/*.left-bar .row {
     margin-bottom: 10px;
 }
 
@@ -118,11 +153,4 @@ a, a:focus {
     width: 50px;
     height: 15px;
     margin: 0 auto;
-}
-
-.properties {
-    position: absolute;
-    width: 100px;
-    height: 100%;
-    background: #ccc;
-}
+}*/
