@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>jQuery UI Selectable - Display as grid</title>
+    <title>WSO2 UES - Dashboard Designer</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/jquery-ui.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/flat-ui.min.css">
+    <link rel="stylesheet" href="css/nunito.css">
+    <link rel="stylesheet" href="css/oxygen.css">
     <link rel="stylesheet" href="css/index.css">
     <!--<link rel="stylesheet" href="css/theme.css">-->
 </head>
@@ -19,7 +22,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#" class="navbar-brand">Project name</a>
+            <a href="#" class="navbar-brand">Dashboards</a>
         </div>
         <div class="collapse navbar-collapse horizontal-bar">
             <ul class="nav navbar-nav">
@@ -49,10 +52,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse left-menu-bar">
                 <ul class="nav navbar-nav nav-tabs" role="tablist">
-                    <li class="active"><a href="#designer">Dashboard</a></li>
-                    <li><a href="#widgets">Store</a></li>
-                    <li><a href="#settings">Settings</a></li>
-                    <li><a href="#">Share</a></li>
+                    <li class="active"><a href="#designer"><span class="fui-windows glyphicon"></span></a></li>
+                    <li><a href="#widgets"><span class="fui-list-small-thumbnails glyphicon"></span></a></li>
+                    <li><a href="#settings"><span class="fui-gear glyphicon"></span></a></li>
+                    <li><a href="#"><span class="fui-exit glyphicon"></span></a></li>
                 </ul>
             </div>
         </nav>
@@ -85,29 +88,30 @@
     <div id="middle" class="tab-content">
         <div id="designer" class="container-fluid designer tab-pane active">
             <div class="row">
-                <div class="col-md-2 col-md-push-10">
-                    <form role="form">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1"
-                                   placeholder="Password">
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Check me out
-                            </label>
-                        </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
+                <div class="col-md-2 col-md-push-10 properties">
+                        <form role="form">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1"
+                                       placeholder="Enter email">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1"
+                                       placeholder="Password">
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"> Check me out
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </form>
                 </div>
                 <div class="col-md-10 col-md-pull-2">
                     <div class="container-fluid">
                         <div class="row toolbar">
-                            <div class="col-md-12"><h2>Designer Toolbar</h2></div>
+                            <h2>Designer Toolbar</h2>
                         </div>
                         <div class="row">
                             <div class="col-md-12 content"></div>
@@ -138,6 +142,7 @@
 <!--<iframe id="sandbox" src="preview.jag"></iframe>-->
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/flat-ui.min.js"></script>
 <script src="js/jquery-ui.js"></script>
 <script src="js/handlebars-v1.3.0.js"></script>
 <script src="js/index.js"></script>
@@ -166,7 +171,7 @@
         <div class="col-md-3 col-sm-4 col-xs-6 box">
             <div class="thumbnail">
 
-            <img src="{{location}}"/>
+                <img src="{{location}}"/>
 
                 <div class="caption">
                     <h3>{{name}}</h3>

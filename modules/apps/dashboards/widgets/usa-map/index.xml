@@ -2,7 +2,9 @@
 <Module>
     <ModulePrefs title="USA Map" description="USA clickable map">
         <Require feature="dynamic-height"/>
+        <Require feature="setprefs"/>
     </ModulePrefs>
+    <UserPref name="username" default_value="ruchira@wso2.com"/>
     <Content type="html">
         <![CDATA[
 <html>
@@ -27,6 +29,12 @@
 
 	var click = function(state) {
 	    console.log({ country: 'US', state: state.id });
+	    var prefs = new gadgets.Prefs();
+	    prefs.set('username1', 'ruchirawageesha@gmail.com');
+        var name = prefs.getString('username');
+        console.log(name);
+        var lang = prefs.getLang();
+        console.log(lang);
 	};
 
 	var data ={};
