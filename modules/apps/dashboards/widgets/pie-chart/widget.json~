@@ -1,6 +1,10 @@
 {
-    "name": "usa-business-revenue",
+    "name": "pie-chart",
     "description": "Allows to view revenue by companies in US",
+    "location": "https://localhost:9445/dashboards/widgets/pie-chart/index.png",
+    "data": {
+        "url": "https://localhost:9445/dashboards/widgets/pie-chart/index.xml"
+    },
     "listen": {
         "address": {
             "description": "Used to filter based on state"
