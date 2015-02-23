@@ -67,7 +67,7 @@ $(function () {
                       ues.store.gadget(id, function (err, data) {
                           var id = Math.random().toString(36).slice(2);
                           droppable.html('<div id=' + id + ' class="widget"></div>');
-                          CommonContainer.renderGadget($('#' + id), data.data.url);
+                          ues.gadget($('#' + id), data.data.url);
                           console.log('dropping');
                           $('#middle')
                               .find('.designer .optionContent').html(options(data));
@@ -109,8 +109,6 @@ $(function () {
         $(this).draggable('destroy');
     });
 
-<<<<<<< HEAD
-=======
     $('.ues-widget-box').droppable({
         //activeClass: 'ui-state-default',
         hoverClass: 'ui-state-hover',
@@ -127,8 +125,6 @@ $(function () {
         }
     });
 
-
->>>>>>> 5f20e7f120d14a3c5d447a31e99c44c208864c6c
     $('#sandbox').load(function () {
         $(this).contents()
             .find('body')
