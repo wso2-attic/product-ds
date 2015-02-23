@@ -1,7 +1,9 @@
 {
     "name": "usa-business-revenue",
     "type": "gadget",
-    "thumbnail": "https://localhost:9443/dashboards/widgets/usa-business-revenue/index.png",
+
+    "thumbnail": "https://localhost:9443/dashboards/assets/gadgets/usa-business-revenue/index.png",
+
     "options": {
         "username": {
             "type": "string",
@@ -9,15 +11,21 @@
         }
     },
     "data": {
-        "url": "https://localhost:9443/dashboards/widgets/usa-business-revenue/index.xml"
+        "url": "https://localhost:9443/dashboards/assets/widgets/usa-business-revenue/index.xml"
     },
     "description": "Allows to view revenue by companies in US",
+
     "listen": {
         "xxx": {
             "type": "address",
             "description": "Used to filter based on state"
-        }
+        },
+	"yyy": {
+            "type": "address",
+            "description": "Used to filter based on state"
+	}
     },
+
     "notify": {
         "select": {
             "type": "string",
