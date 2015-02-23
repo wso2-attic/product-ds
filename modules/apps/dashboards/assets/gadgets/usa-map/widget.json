@@ -1,11 +1,9 @@
 {
     "name": "usa-map",
     "type": "gadget",
-<<<<<<< HEAD
-    "thumbnail": "https://localhost:9445/dashboards/widgets/usa-map/index.png",
-=======
-    "thumbnail": "https://localhost:9443/dashboards/widgets/usa-map/index.png",
->>>>>>> a89c92d06229d0199d29a1bdeaeba5a431b722c7
+
+    "thumbnail": "https://localhost:9443/dashboards/assets/gadgets/usa-map/index.png",
+
     "options": {
         "username": {
             "type": "string",
@@ -13,7 +11,7 @@
         }
     },
     "data": {
-        "url": "https://localhost:9443/dashboards/widgets/usa-map/index.xml"
+        "url": "https://localhost:9443/dashboards/assets/gadgets/usa-map/index.xml"
     },
     "description": "Allows to view and select US states",
     "notify": {

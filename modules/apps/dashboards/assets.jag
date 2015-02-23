@@ -42,11 +42,19 @@
     print(assets.slice(start, start + count));
      */
 
-    var widgetsDir = '/widgets';
+    var widgetsDir = 'assets/gadgets';
     var widgets = [];
+    var widJson = 'widget.json';
+
+    var layoutsDir = 'assets/layouts';
+    var layouts = [];
+    var layJson = 'layout.json';
+
+    var dir;
+    var jsonType;
 
     var configs = function (name) {
-        var file = new File(widgetsDir + '/' + name + '/widget.json');
+        var file = new File(dir + '/' + name + '/' + jsonType);
         file.open('r');
         var config = JSON.parse(file.readAll());
         file.close();
@@ -54,21 +62,44 @@
     };
 
     var name = request.getParameter('name');
-    if (name) {
+    var type = request.getParameter('type');
+
+    if(type == 'gadget'){
+        dir = widgetsDir;
+        jsonType = widJson;
+    }
+
+    else if(type == 'layout'){
+        dir = layoutsDir;
+        jsonType = layJson;
+    }
+
+    if (name) {layouts
         print(configs(name));
         return;
     }
 
-    var file = new File(widgetsDir);
+    var file = new File(dir);
     var files = file.listFiles();
     files.forEach(function (file) {
         if (!file.isDirectory()) {
             return;
         }
         var config = configs(file.getName());
-        widgets.push(config);
+        if(type == 'gadget') {
+            widgets.push(config);
+        }
+        else if(type == 'layout'){
+            layouts.push(config);
+        }
     });
     response.contentType = 'application/json';
-    print(widgets);
+
+    if(type == 'gadget') {
+        print(widgets);
+    }
+    else if(type == 'layout'){
+        print(layouts);
+    }
 }());
 %>

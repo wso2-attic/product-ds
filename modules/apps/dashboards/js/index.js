@@ -1,4 +1,19 @@
 $(function () {
+
+/*
+    var page = {
+        content: {}
+    };
+
+    page.layout = 'layout1';
+
+    page.content[id] = [];
+    page.content[id].push({})
+*/
+
+
+
+
     /**
      * Tab initialization
      */
@@ -20,20 +35,61 @@ $(function () {
     var widgets = Handlebars.compile($("#thumbs-hbs").html());
     var options = Handlebars.compile($("#options-hbs").html());
 
-    ues.store.assets({
+    ues.store.gadgets({
         start: 0,
         count: 20
     }, function (err, data) {
         $('#middle')
             .find('.widgets .content').html(widgets(data)).end()
             .find('.thumbnails').on('click', '.add-button', function () {
-                console.log('adding');
+                //console.log('adding');
                 //$('#left').find('.nav-tabs a[href="#designer"]').tab('show');
             });
     });
 
+    ues.store.layouts({
+        start: 0,
+        count: 20
+    }, function (err, data) {
+
+          $.get(data[0].url , function(data) {
+              $('#middle')
+                .find('.designer .content').html(data);
+
+              $('.ues-widget-box').droppable({
+                  //activeClass: 'ui-state-default',
+                  hoverClass: 'ui-state-hover',
+                  //accept: ':not(.ui-sortable-helper)',
+                  drop: function (event, ui) {
+                      //$(this).find('.placeholder').remove();
+                      var id = ui.helper.data('id');
+                      var droppable = $(this);
+                      ues.store.gadget(id, function (err, data) {
+                          var id = Math.random().toString(36).slice(2);
+                          droppable.html('<div id=' + id + ' class="widget"></div>');
+                          CommonContainer.renderGadget($('#' + id), data.data.url);
+                          console.log('dropping');
+                          $('#middle')
+                              .find('.designer .optionContent').html(options(data));
+                      });
+                  }
+              });
+
+        }, 'text');
+
+    });
+
+
+
+
+/*
+    var gridHtml = '<div class="row"> <div class="col-md-3 ues-widget-box"></div> <div class="col-md-6 ues-widget-box"></div> <div class="col-md-3 ues-widget-box"></div> </div> <div class="row"> <div class="col-md-6 ues-widget-box"></div> <div class="col-md-6 ues-widget-box"></div> </div> <div class="row"> <div class="col-md-4 ues-widget-box"></div> <div class="col-md-4 ues-widget-box"></div> <div class="col-md-4 ues-widget-box"></div> </div>';
     $('#middle')
-        .find('.designer .content').html(designer());
+      //  .find('.designer .content').html(designer({gridContent:'<div class="row"> <div class="col-md-3 ues-widget-box"></div> <div class="col-md-6 ues-widget-box"></div> <div class="col-md-3 ues-widget-box"></div> </div> <div class="row"> <div class="col-md-6 ues-widget-box"></div> <div class="col-md-6 ues-widget-box"></div> </div> <div class="row"> <div class="col-md-4 ues-widget-box"></div> <div class="col-md-4 ues-widget-box"></div> <div class="col-md-4 ues-widget-box"></div> </div>'}));
+        .find('.designer .content').html(designer({gridContent: gridHtml}));
+*/
+
+
 
 
     $('.widgets').on('mouseenter', '.thumbnail .drag-handle', function () {
@@ -52,26 +108,6 @@ $(function () {
     }).on('mouseleave', '.thumbnail .drag-handle', function () {
         $(this).draggable('destroy');
     });
-
-    $('.ues-widget-box').droppable({
-        //activeClass: 'ui-state-default',
-        hoverClass: 'ui-state-hover',
-        //accept: ':not(.ui-sortable-helper)',
-        drop: function (event, ui) {
-            //$(this).find('.placeholder').remove();
-            var id = ui.helper.data('id');
-            var droppable = $(this);
-            ues.store.asset(id, function (err, data) {
-                var id = Math.random().toString(36).slice(2);
-                droppable.html('<div id=' + id + ' class="widget"></div>');
-                CommonContainer.renderGadget($('#' + id), data.data.url);
-
-                $('#middle')
-                    .find('.designer .optionContent').html(options(data));
-            });
-        }
-    });
-
 
     $('#sandbox').load(function () {
         $(this).contents()
