@@ -109,6 +109,26 @@ $(function () {
         $(this).draggable('destroy');
     });
 
+<<<<<<< HEAD
+=======
+    $('.ues-widget-box').droppable({
+        //activeClass: 'ui-state-default',
+        hoverClass: 'ui-state-hover',
+        //accept: ':not(.ui-sortable-helper)',
+        drop: function (event, ui) {
+            //$(this).find('.placeholder').remove();
+            var id = ui.helper.data('id');
+            var droppable = $(this);
+            ues.store.asset(id, function (err, data) {
+                var id = Math.random().toString(36).slice(2);
+                droppable.html('<div id=' + id + ' class="widget"></div>');
+                ues.gadget($('#' + id), data.data.url);
+            });
+        }
+    });
+
+
+>>>>>>> 5f20e7f120d14a3c5d447a31e99c44c208864c6c
     $('#sandbox').load(function () {
         $(this).contents()
             .find('body')
