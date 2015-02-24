@@ -1,5 +1,5 @@
 (function () {
-    ues.page($('#wrapper'), {
+    ues.page($("#wrapper"), {
         "title": "My Dashboard",
         "layout": {
             "name": "grid_1",
@@ -57,8 +57,14 @@
                             "type": "address",
                             "description": "Used to filter based on state",
                             "on": [{
-                                event: 'client-country',
-                                from: 'pujw6jwm3t'
+                                "event": "client-country",
+                                "from": "pujw6jwm3t"
+                            }, {
+                                "event": "user-country",
+                                "from": "pujw6jwm3t"
+                            }, {
+                                "event": "select",
+                                "from": "9zt9k74854"
                             }]
                         }
                     },
@@ -95,8 +101,8 @@
                             "type": "address",
                             "description": "Used to filter based on state",
                             "on": [{
-                                "event": "selected",
-                                "from": "rujw5jwm3i"
+                                "event": "select",
+                                "from": "9zt9k74854"
                             }]
                         }
                     },
@@ -110,6 +116,6 @@
             ]
         }
     }, function () {
-        console.log('page rendered');
+        console.log("page rendered");
     });
 }());

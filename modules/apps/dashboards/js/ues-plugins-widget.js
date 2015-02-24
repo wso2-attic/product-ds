@@ -1,7 +1,5 @@
 (function () {
-
-    var events = ues.events;
-
+    
     var plugin = (ues.plugins['widget'] = {});
 
     plugin.prepare = function (sandbox, hub) {
@@ -45,26 +43,16 @@
 
         Hub.prototype.on = function (event, done) {
             var hub = this;
-            var listeners = hub.options.listen;
-            var listener = listeners[event];
-            if (!listener) {
-                return console.warn('event %s has not defined under listener section, hence ignoring', event);
-            }
-            var notifiers = listener.on;
-            if (!notifiers) {
-                return;
-            }
-            notifiers.forEach(function (notifier) {
-                var channel = notifier.from + '.' + notifier.event;
-                hub.client.subscribe(channel, done);
-                console.log('subscribed for channel:%s by %s', channel, hub.options.id);
+            var channel = hub.options.id + '.' + event;
+            hub.client.subscribe(channel, function (topic, data, subscription) {
+                done(data);
             });
+            console.log('subscribed for channel:%s by %s', channel, hub.options.id);
         };
 
         Hub.prototype.emit = function (event, data) {
-            var channel = this.options.id + '.' + event;
-            console.log('publishing event:%s, data:%s by notifier:%s on channel:%s', event, data, this.options.id, channel);
-            this.client.publish(channel, data);
+            console.log('publishing event:%s, data:%s by notifier:%s', event, data, this.options.id);
+            this.client.publish(event, data);
         };
 
         client.connect(function (client, success, error) {

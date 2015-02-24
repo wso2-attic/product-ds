@@ -21,11 +21,11 @@
                     var id = 0;
                     setInterval(function() {
                         $('.log').append('<div>publishing message from g1, id : ' + (++id) + '</div>');
-                        gadgets.Hub.publish('country-code', {
+                        gadgets.Hub.publish('select', {
                             msg : 'A message from g1',
                             id: id
                         });
-                    }, 50000);
+                    }, 5000);
                 };
             </script>
         <head>
