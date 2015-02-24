@@ -38,7 +38,19 @@ var ues = ues || {};
     params[osapi.container.ContainerConfig.RENDER_DEBUG] = true;
     merge(params, 'container');
 
-    console.log(params);
+    /*    var sub1 = OpenAjax.hub.IframeContainer.prototype.subscribe;
+     OpenAjax.hub.IframeContainer.prototype.subscribe = function() {
+     var sid = sub1.apply(this, Array.prototype.slice.call(arguments));
+     console.log('----------ruchira---------------' + sid);
+     return sid;
+     };
+
+     var sub2 = OpenAjax.hub.InlineContainer.prototype.subscribe;
+     OpenAjax.hub.InlineContainer.prototype.subscribe = function() {
+     var sid = sub2.apply(this, Array.prototype.slice.call(arguments));
+     console.log('----------ruchira---------------' + sid);
+     return sid;
+     };*/
 
     //opensocial container for the DOM
     var container = new osapi.container.Container(params);
@@ -49,6 +61,7 @@ var ues = ues || {};
         options[osapi.container.RenderParam.WIDTH] = '100%';
         options[osapi.container.RenderParam.VIEW] = 'home';
         extend(options, params);
+        sandbox = (sandbox instanceof jQuery) ? sandbox : $(sandbox);
         sandbox.each(function () {
             var sandbox = $(this);
             options[osapi.container.RenderParam.HEIGHT] = sandbox.height();
@@ -68,21 +81,24 @@ var ues = ues || {};
     //Initializing OpenAjax ManagedHub
     var hub = new OpenAjax.hub.ManagedHub({
         onSubscribe: function (topic, container) {
-            console.log(container.getClientID() + ' subscribes to this topic \'' + topic + '\'');
-            return true;
+            var fn = configs(ues.configs, ['hub', 'subscribe']);
+            return fn ? fn(topic, container) : true;
         },
         onUnsubscribe: function (topic, container) {
-            console.log(container.getClientID() + ' unsubscribes from tthis topic \'' + topic + '\'');
-            return true;
+            var fn = configs(ues.configs, ['hub', 'unsubscribe']);
+            return fn ? fn(topic, container) : true;
         },
         onPublish: function (topic, data, from, to) {
-            console.log(from.getClientID() + ' publishes \'' + data + '\' to topic \'' + topic + '\' subscribed by ' + to.getClientID());
-            return true;
+            /*var clientId = to.getClientID();
+             var sub = subscriptions[clientId];
+             var container = ues.hub.getContainer(clientId);
+             container.sendToClient(topic, data, sub.conSubId);*/
+            var fn = configs(ues.configs, ['hub', 'publish']);
+            return fn ? fn(topic, data, from, to) : true;
         }
     });
 
-    var inlineContainer = new OpenAjax.hub.InlineContainer(hub, 'ues',
-        {
+    var inlineContainer = new OpenAjax.hub.InlineContainer(hub, 'ues', {
             Container: {
                 onSecurityAlert: function (source, alertType) {
                     //Handle client-side security alerts
@@ -111,9 +127,26 @@ var ues = ues || {};
     gadgets.pubsub2router.init({
         hub: hub
     });
+    /*
+     var Hub = function (client) {
+
+     };
+
+     Hub.prototype.on = function () {
+
+     };
+
+     Hub.prototype.once = function () {
+
+     };
+
+     Hub.prototype.off = function () {
+
+     };*/
 
     ues.hub = hub;
     ues.container = container;
     ues.client = client;
     ues.gadget = gadget;
+    ues.plugins = {};
 }());

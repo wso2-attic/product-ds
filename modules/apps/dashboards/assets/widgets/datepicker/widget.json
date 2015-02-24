@@ -1,0 +1,9 @@
+{
+    "name": "datepicker",
+    "notify": {
+        "select": {
+            "type": "date",
+            "description": "This notifies selected state"
+        }
+    }
+}

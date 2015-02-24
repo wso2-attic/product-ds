@@ -1,0 +1,75 @@
+{
+    "title": "My Dashboard",
+    "layout": {
+        "name": "grid_1",
+        "description": "This is a sample grid",
+        "thumbnail": "https://localhost:9443/dashboards/layouts/layout_1/index.jpg",
+        "url": "https://localhost:9443/dashboards/assets/layouts/layout_1/index.hbs"
+    },
+    "content": {
+        "a": [
+            {
+                "name": "usa-map",
+                "type": "gadget",
+                "thumbnail": "https://localhost:9443/dashboards/widgets/usa-map/index.png",
+                "options": {
+                    "username": {
+                        "type": "string",
+                        "description": "Username to be used for service invocation"
+                    }
+                },
+                "data": {
+                    "url": "https://localhost:9443/dashboards/assets/gadgets/usa-map/index.xml"
+                },
+                "description": "Allows to view and select US states",
+                "notify": {
+                    "select": {
+                        "type": "address",
+                        "description": "This notifies selected state"
+                    },
+                    "cancel": {
+                        "type": "boolean",
+                        "description": "This notifies cancellation of state selection"
+                    }
+                }
+            }
+        ],
+        "b": [
+            {
+                "name": "usa-business-revenue",
+                "type": "gadget",
+                "thumbnail": "https://localhost:9443/dashboards/assets/gadgets/usa-business-revenue/index.png",
+                "options": {
+                    "username": {
+                        "type": "string",
+                        "description": "Username to be used for service invocation"
+                    }
+                },
+                "data": {
+                    "url": "https://localhost:9443/dashboards/assets/gadgets/usa-business-revenue/index.xml"
+                },
+                "description": "Allows to view revenue by companies in US",
+                "listen": {
+                    "xxx": {
+                        "type": "address",
+                        "description": "Used to filter based on state"
+                    },
+                    "yyy": {
+                        "type": "address",
+                        "description": "Used to filter based on state"
+                    }
+                },
+                "notify": {
+                    "select": {
+                        "type": "string",
+                        "description": "This notifies selected company"
+                    },
+                    "cancel": {
+                        "type": "boolean",
+                        "description": "This notifies cancellation of company selection"
+                    }
+                }
+            }
+        ]
+    }
+}

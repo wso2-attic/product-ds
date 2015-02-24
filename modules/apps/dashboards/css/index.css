@@ -125,7 +125,6 @@ a, a:focus {
     margin-top: 10px;
 }
 
-
 .widget {
     height: 100%;
 }
@@ -136,7 +135,7 @@ a, a:focus {
 }
 
 .ues-widget {
-    height: 50px;
+    height: 300px;
 }
 
 .ues-widget.ui-draggable-dragging {
