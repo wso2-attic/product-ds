@@ -193,11 +193,13 @@
                 <input type="text" id="usernameTextInput" class="form-control" placeholder="Enter the username">
             </div>
 
-            {{#each listen}}
+            {{#each this}}
             <div class="form-group">
                 <label for="listeners">{{@key}}</label>
                 <select id="listeners" class="form-control">
-                    <option></option>
+                    {{#each on}}
+                    <option>{{name}} - ({{from}})</option>
+                    {{/each}}
                 </select>
             </div>
             {{/each}}

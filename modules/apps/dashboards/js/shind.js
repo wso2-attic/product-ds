@@ -4,8 +4,8 @@
         "layout": {
             "name": "grid_1",
             "description": "This is a sample grid",
-            "thumbnail": "https://localhost:9443/dashboards/layouts/layout_1/index.jpg",
-            "url": "https://localhost:9443/dashboards/assets/layouts/layout_1/index.hbs"
+            "thumbnail": "https://localhost:9443/dashboards/layouts/layout-1/index.jpg",
+            "url": "https://localhost:9443/dashboards/assets/layouts/layout-1/index.hbs"
         },
         "content": {
             "a": [

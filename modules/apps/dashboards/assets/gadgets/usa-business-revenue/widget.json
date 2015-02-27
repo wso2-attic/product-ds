@@ -16,13 +16,13 @@
     "description": "Allows to view revenue by companies in US",
 
     "listen": {
-        "xxx": {
+        "state-selected": {
             "type": "address",
             "description": "Used to filter based on state"
         },
 	"yyy": {
-            "type": "address",
-            "description": "Used to filter based on state"
+            "type": "date",
+            "description": "Used to filter based on date"
 	}
     },
 

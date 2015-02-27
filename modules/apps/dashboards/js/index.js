@@ -1,18 +1,11 @@
 $(function () {
 
-/*
+
     var page = {
         content: {}
     };
 
-    page.layout = 'layout1';
-
-    page.content[id] = [];
-    page.content[id].push({})
-*/
-
-
-
+    page.title = 'My Dashboard';
 
     /**
      * Tab initialization
@@ -52,6 +45,8 @@ $(function () {
         count: 20
     }, function (err, data) {
 
+        page.layout = data[0];
+
           $.get(data[0].url , function(data) {
               $('#middle')
                 .find('.designer .content').html(data);
@@ -61,16 +56,56 @@ $(function () {
                   hoverClass: 'ui-state-hover',
                   //accept: ':not(.ui-sortable-helper)',
                   drop: function (event, ui) {
+
                       //$(this).find('.placeholder').remove();
                       var id = ui.helper.data('id');
+
+                      var targetId = $(event.target).attr('id');
+                      if(!page.content[targetId]){
+                          page.content[targetId] = [];
+                      }
+
                       var droppable = $(this);
                       ues.store.gadget(id, function (err, data) {
                           var id = Math.random().toString(36).slice(2);
                           droppable.html('<div id=' + id + ' class="widget"></div>');
                           ues.gadget($('#' + id), data.data.url);
-                          console.log('dropping');
+
+                          data.id = id;
+                          page.content[targetId].push(data);
+
+                          //deep copy
+                          var listenerJson = jQuery.extend(true, {}, data.listen);
+
+                          for(var listeners in listenerJson) {
+                              listenerJson[listeners].on = [];
+                              // alert(data.listen[listeners].type);
+                              for (var containers in page.content) {
+                                  if (!page.content[containers][0]) {
+                                      continue;
+                                  }
+                                  //alert(page.content[containers][0].type);
+                                  for (var i = 0; i < page.content[containers].length; i++) {
+                                      for (var notifiers in page.content[containers][i].notify) {
+                                          //alert(page.content[containers][0].notify[notifiers].type); /*
+                                          if (listenerJson[listeners].type == page.content[containers][i].notify[notifiers].type) {
+                                              //alert("creating an array");
+                                              listenerJson[listeners].on.push({
+                                                  "event": notifiers,
+                                                  "from": page.content[containers][i].id,
+                                                  "name": page.content[containers][i].name
+                                              });
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+
+                          console.log(listenerJson);
+                          console.log(page);
+
                           $('#middle')
-                              .find('.designer .optionContent').html(options(data));
+                              .find('.designer .optionContent').html(options(listenerJson));
                       });
                   }
               });
@@ -109,21 +144,6 @@ $(function () {
         $(this).draggable('destroy');
     });
 
-    $('.ues-widget-box').droppable({
-        //activeClass: 'ui-state-default',
-        hoverClass: 'ui-state-hover',
-        //accept: ':not(.ui-sortable-helper)',
-        drop: function (event, ui) {
-            //$(this).find('.placeholder').remove();
-            var id = ui.helper.data('id');
-            var droppable = $(this);
-            ues.store.asset(id, function (err, data) {
-                var id = Math.random().toString(36).slice(2);
-                droppable.html('<div id=' + id + ' class="widget"></div>');
-                ues.gadget($('#' + id), data.data.url);
-            });
-        }
-    });
 
     $('#sandbox').load(function () {
         $(this).contents()

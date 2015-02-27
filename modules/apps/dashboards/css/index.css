@@ -130,12 +130,12 @@ a, a:focus {
 }
 
 .ues-widget-box {
-    height: 300px;
+    min-height: 300px;
     border: 1px solid #cccccc;
 }
 
 .ues-widget {
-    height: 300px;
+    min-height: 300px;
 }
 
 .ues-widget.ui-draggable-dragging {
