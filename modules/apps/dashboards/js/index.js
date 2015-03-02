@@ -27,6 +27,7 @@ $(function () {
     var designer = Handlebars.compile($("#designer-hbs").html());
     var widgets = Handlebars.compile($("#thumbs-hbs").html());
     var options = Handlebars.compile($("#options-hbs").html());
+    var layouts = Handlebars.compile($("#layouts-hbs").html());
 
     ues.store.gadgets({
         start: 0,
@@ -35,95 +36,114 @@ $(function () {
         $('#middle')
             .find('.widgets .content').html(widgets(data)).end()
             .find('.thumbnails').on('click', '.add-button', function () {
-                //console.log('adding');
-                //$('#left').find('.nav-tabs a[href="#designer"]').tab('show');
             });
     });
+
 
     ues.store.layouts({
         start: 0,
         count: 20
     }, function (err, data) {
 
-        page.layout = data[0];
+        $('#middle')
+            .find('.designer .content').html(layouts(data));
 
-          $.get(data[0].url , function(data) {
-              $('#middle')
-                .find('.designer .content').html(data);
+        //click layout select button
+        $(".btn-primary").click(function(){
 
-              $('.ues-widget-box').droppable({
-                  //activeClass: 'ui-state-default',
-                  hoverClass: 'ui-state-hover',
-                  //accept: ':not(.ui-sortable-helper)',
-                  drop: function (event, ui) {
+            var btnId = $(this).data('id');
+            var layoutJson;
 
-                      //$(this).find('.placeholder').remove();
-                      var id = ui.helper.data('id');
+            for(var i=0; i<data.length; i++){
+                if(data[i].name == btnId){
+                    layoutJson = data[i];
+                    break;
+                }
+            }
 
-                      var targetId = $(event.target).attr('id');
-                      if(!page.content[targetId]){
-                          page.content[targetId] = [];
-                      }
+            //add layout to page.json
+            page.layout = layoutJson;
 
-                      var droppable = $(this);
-                      ues.store.gadget(id, function (err, data) {
-                          var id = Math.random().toString(36).slice(2);
-                          droppable.html('<div id=' + id + ' class="widget"></div>');
-                          ues.gadget($('#' + id), data.data.url);
+            $.get(layoutJson.url , function(data) {
+                $('#middle')
+                    .find('.designer .content').html(data);
 
-                          data.id = id;
-                          page.content[targetId].push(data);
+                $('.ues-widget-box').droppable({
+                    //activeClass: 'ui-state-default',
+                    hoverClass: 'ui-state-hover',
+                    //accept: ':not(.ui-sortable-helper)',
+                    drop: function (event, ui) {
 
-                          //deep copy
-                          var listenerJson = jQuery.extend(true, {}, data.listen);
+                        //$(this).find('.placeholder').remove();
+                        var id = ui.helper.data('id');
+                        var widgetDivId;
 
-                          for(var listeners in listenerJson) {
-                              listenerJson[listeners].on = [];
-                              // alert(data.listen[listeners].type);
-                              for (var containers in page.content) {
-                                  if (!page.content[containers][0]) {
-                                      continue;
-                                  }
-                                  //alert(page.content[containers][0].type);
-                                  for (var i = 0; i < page.content[containers].length; i++) {
-                                      for (var notifiers in page.content[containers][i].notify) {
-                                          //alert(page.content[containers][0].notify[notifiers].type); /*
-                                          if (listenerJson[listeners].type == page.content[containers][i].notify[notifiers].type) {
-                                              //alert("creating an array");
-                                              listenerJson[listeners].on.push({
-                                                  "event": notifiers,
-                                                  "from": page.content[containers][i].id,
-                                                  "name": page.content[containers][i].name
-                                              });
-                                          }
-                                      }
-                                  }
-                              }
-                          }
+                        //get the container id
+                        var targetId = $(event.target).attr('id');
+                        if(!page.content[targetId]){
+                            page.content[targetId] = [];
+                        }
 
-                          console.log(listenerJson);
-                          console.log(page);
+                        var droppable = $(this);
+                        ues.store.gadget(id, function (err, data) {
+                            var id = Math.random().toString(36).slice(2);
+                            droppable.html('<div id=' + id + ' class="widget"></div>');
+                            ues.gadget($('#' + id), data.data.url);
 
-                          $('#middle')
-                              .find('.designer .optionContent').html(options(listenerJson));
-                      });
-                  }
-              });
+                            widgetDivId = id;
+                            data.id = id;
+                            page.content[targetId].push(data);
 
-        }, 'text');
+                            //deep copy
+                            var listenerJson = jQuery.extend(true, {}, data.listen);
 
+                            for(var listeners in listenerJson) {
+                                listenerJson[listeners].on = [];
+                                // alert(data.listen[listeners].type);
+                                for (var containers in page.content) {
+                                    if (!page.content[containers][0]) {
+                                        continue;
+                                    }
+                                    //alert(page.content[containers][0].type);
+                                    for (var i = 0; i < page.content[containers].length; i++) {
+                                        for (var notifiers in page.content[containers][i].notify) {
+                                            //alert(page.content[containers][0].notify[notifiers].type); /*
+                                            if (listenerJson[listeners].type == page.content[containers][i].notify[notifiers].type) {
+                                                //alert("creating an array");
+                                                listenerJson[listeners].on.push({
+                                                    "event": notifiers,
+                                                    "from": page.content[containers][i].id,
+                                                    "name": page.content[containers][i].name
+                                                });
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            //todo printing jsons only for testing
+                            console.log(listenerJson);
+                            console.log(page);
+
+                            $('#middle')
+                                .find('.designer .optionContent').html(options(listenerJson));
+
+                            //map to keep listener Jsons to generate option panel
+                            var map = {};
+                            map[widgetDivId] = listenerJson;
+
+                            $(".widget").click(function(){
+                                var divId = this.id;
+                                $('#middle')
+                                    .find('.designer .optionContent').html(options(map[divId]));
+                            });
+                        });
+                    }
+                });
+
+            }, 'text');
+        });
     });
-
-
-
-
-/*
-    var gridHtml = '<div class="row"> <div class="col-md-3 ues-widget-box"></div> <div class="col-md-6 ues-widget-box"></div> <div class="col-md-3 ues-widget-box"></div> </div> <div class="row"> <div class="col-md-6 ues-widget-box"></div> <div class="col-md-6 ues-widget-box"></div> </div> <div class="row"> <div class="col-md-4 ues-widget-box"></div> <div class="col-md-4 ues-widget-box"></div> <div class="col-md-4 ues-widget-box"></div> </div>';
-    $('#middle')
-      //  .find('.designer .content').html(designer({gridContent:'<div class="row"> <div class="col-md-3 ues-widget-box"></div> <div class="col-md-6 ues-widget-box"></div> <div class="col-md-3 ues-widget-box"></div> </div> <div class="row"> <div class="col-md-6 ues-widget-box"></div> <div class="col-md-6 ues-widget-box"></div> </div> <div class="row"> <div class="col-md-4 ues-widget-box"></div> <div class="col-md-4 ues-widget-box"></div> <div class="col-md-4 ues-widget-box"></div> </div>'}));
-        .find('.designer .content').html(designer({gridContent: gridHtml}));
-*/
-
 
 
 
