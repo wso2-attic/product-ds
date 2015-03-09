@@ -165,7 +165,7 @@
         <div class="col-md-3 col-sm-4 col-xs-6 box">
             <div class="thumbnail">
 
-            <img src="{{thumbnail}}"/>
+                <img src="{{thumbnail}}"/>
 
                 <div class="caption">
                     <h3>{{name}}</h3>
@@ -182,14 +182,14 @@
 </script>
 <script id="options-hbs" type="text/x-handlebars-template">
     <div class="row">
-        <div class="col-md-12"><h3>Option panel of {{name}}</h3></div>
+        <div class="col-md-12"><h3>Option panel</h3></div>
     </div>
 
     <form>
         <fieldset>
             <div class="form-group">
                 <label for="usernameTextInput">Username</label>
-                <input type="text"; id="usernameTextInput" class="form-control" placeholder="Enter the username">
+                <input type="text" id="usernameTextInput" class="form-control" placeholder="Enter the username">
             </div>
 
             {{#each this}}
@@ -208,7 +208,6 @@
     </form>
 </script>
 
-
 <script id="layouts-hbs" type="text/x-handlebars-template">
     <div class="row thumbnails">
         {{#each .}}
@@ -221,7 +220,7 @@
                     <h3>{{name}}</h3>
                 </div>
                 <div class="tools">
-                    <button type="button" class="btn btn-primary" data-id="{{name}}">Select</button>
+                    <button type="button" class="btn btn-primary-layout" data-id="{{name}}">Select</button>
                 </div>
             </div>
         </div>

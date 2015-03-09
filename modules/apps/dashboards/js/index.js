@@ -17,21 +17,23 @@ $(function () {
             var el = $(this);
             el.tab('show');
         });
-    //.find('.nav-tabs a:first')
-    //.tab('show');
 
     $('#right').find('.properties-handle').click(function () {
         $('#right').find('.navbar').toggle();
     });
+
 
     var designer = Handlebars.compile($("#designer-hbs").html());
     var widgets = Handlebars.compile($("#thumbs-hbs").html());
     var options = Handlebars.compile($("#options-hbs").html());
     var layouts = Handlebars.compile($("#layouts-hbs").html());
 
+    var startValue = 0;
+    var noOfValues = 20;
+
     ues.store.gadgets({
-        start: 0,
-        count: 20
+        start: startValue,
+        count: noOfValues
     }, function (err, data) {
         $('#middle')
             .find('.widgets .content').html(widgets(data)).end()
@@ -48,14 +50,17 @@ $(function () {
         $('#middle')
             .find('.designer .content').html(layouts(data));
 
-        //click layout select button
-        $(".btn-primary").click(function(){
+        //when layout select button is clicked
+        //todo jquery on instead of click
+        $('.btn-primary-layout').click(function () {
 
             var btnId = $(this).data('id');
             var layoutJson;
+            var length = data.length;
 
-            for(var i=0; i<data.length; i++){
-                if(data[i].name == btnId){
+            for (var i = 0; i < length; i++) {
+                var name = data[i].name;
+                if (name == btnId) {
                     layoutJson = data[i];
                     break;
                 }
@@ -64,7 +69,7 @@ $(function () {
             //add layout to page.json
             page.layout = layoutJson;
 
-            $.get(layoutJson.url , function(data) {
+            $.get(layoutJson.url, function (data) {
                 $('#middle')
                     .find('.designer .content').html(data);
 
@@ -76,13 +81,9 @@ $(function () {
 
                         //$(this).find('.placeholder').remove();
                         var id = ui.helper.data('id');
-                        var widgetDivId;
 
                         //get the container id
                         var targetId = $(event.target).attr('id');
-                        if(!page.content[targetId]){
-                            page.content[targetId] = [];
-                        }
 
                         var droppable = $(this);
                         ues.store.gadget(id, function (err, data) {
@@ -90,33 +91,23 @@ $(function () {
                             droppable.html('<div id=' + id + ' class="widget"></div>');
                             ues.gadget($('#' + id), data.data.url);
 
-                            widgetDivId = id;
                             data.id = id;
-                            page.content[targetId].push(data);
+                            var content = page.content[targetId] || (page.content[targetId] = []);
+                            content.push(data);
 
                             //deep copy
-                            var listenerJson = jQuery.extend(true, {}, data.listen);
+                            //jQuery = $
+                            var listenerJson = $.extend(true, {}, data.listen);
 
-                            for(var listeners in listenerJson) {
-                                listenerJson[listeners].on = [];
-                                // alert(data.listen[listeners].type);
-                                for (var containers in page.content) {
-                                    if (!page.content[containers][0]) {
-                                        continue;
-                                    }
-                                    //alert(page.content[containers][0].type);
-                                    for (var i = 0; i < page.content[containers].length; i++) {
-                                        for (var notifiers in page.content[containers][i].notify) {
-                                            //alert(page.content[containers][0].notify[notifiers].type); /*
-                                            if (listenerJson[listeners].type == page.content[containers][i].notify[notifiers].type) {
-                                                //alert("creating an array");
-                                                listenerJson[listeners].on.push({
-                                                    "event": notifiers,
-                                                    "from": page.content[containers][i].id,
-                                                    "name": page.content[containers][i].name
-                                                });
-                                            }
-                                        }
+                            for (var listeners in listenerJson) {
+                                if (listenerJson.hasOwnProperty(listeners)) {
+                                    listenerJson[listeners].on = [];
+
+                                    var type = listenerJson[listeners].type;
+                                    var notifyingGadgetArray = getNotifiers(type);
+
+                                    if (notifyingGadgetArray) {
+                                        updateListenerJson(listenerJson, notifyingGadgetArray, listeners);
                                     }
                                 }
                             }
@@ -125,17 +116,41 @@ $(function () {
                             console.log(listenerJson);
                             console.log(page);
 
-                            $('#middle')
-                                .find('.designer .optionContent').html(options(listenerJson));
+                            var optionContent = $('#middle').find('.designer .optionContent');
+                            optionContent.html(options(listenerJson));
 
-                            //map to keep listener Jsons to generate option panel
-                            var map = {};
-                            map[widgetDivId] = listenerJson;
-
-                            $(".widget").click(function(){
+                            $('.widget').click(function () {
                                 var divId = this.id;
-                                $('#middle')
-                                    .find('.designer .optionContent').html(options(map[divId]));
+                                var listenerJson;
+                                for (var containers in page.content) {
+                                    if (page.content.hasOwnProperty(containers)) {
+                                        if (!page.content[containers][0]) {
+                                            continue;
+                                        }
+                                        var length = page.content[containers].length;
+                                        for (var i = 0; i < length; i++) {
+                                            if (page.content[containers][i].id == divId) {
+                                                listenerJson = $.extend(true, {}, page.content[containers][i].listen);
+                                            }
+                                        }
+                                    }
+                                }
+
+                                if (listenerJson) {
+                                    for (var listeners in listenerJson) {
+                                        if (listenerJson.hasOwnProperty(listeners)) {
+                                            listenerJson[listeners].on = [];
+
+                                            var type = listenerJson[listeners].type;
+                                            var notifyingGadgetArray = getNotifiers(type);
+
+                                            if (notifyingGadgetArray) {
+                                                updateListenerJson(listenerJson, notifyingGadgetArray, listeners);
+                                            }
+                                        }
+                                    }
+                                }
+                                optionContent.html(options(listenerJson));
                             });
                         });
                     }
@@ -145,6 +160,55 @@ $(function () {
         });
     });
 
+
+    function updateListenerJson(listenerJson, notifyingGadgetArray, listeners) {
+        var length = notifyingGadgetArray.length;
+        for (var i = 0; i < length; i++) {
+            listenerJson[listeners].on.push({
+                "event": notifyingGadgetArray[i].notifier,
+                "from": notifyingGadgetArray[i].id,
+                "name": notifyingGadgetArray[i].name
+            });
+        }
+    }
+
+    function getNotifyingGadget(type, notifyingGadgetArray, containers, i, notifiers) {
+        if (page.content[containers][i].notify.hasOwnProperty(notifiers)) {
+            if (type == page.content[containers][i].notify[notifiers].type) {
+                var gadgetJson = $.extend(true, {}, page.content[containers][i]);
+                gadgetJson.notifier = notifiers;
+                notifyingGadgetArray.push(gadgetJson);
+            }
+        }
+    }
+
+    function findNotifiers(type, notifyingGadgetArray, containers, i) {
+        for (var notifiers in page.content[containers][i].notify) {
+            if (page.content[containers][i].notify.hasOwnProperty(notifiers)) {
+                getNotifyingGadget(type, notifyingGadgetArray, containers, i, notifiers);
+            }
+        }
+    }
+
+    function findInContainerArray(type, notifyingGadgetArray, containers) {
+        var length = page.content[containers].length;
+        for (var i = 0; i < length; i++) {
+            findNotifiers(type, notifyingGadgetArray, containers, i);
+        }
+    }
+
+    function getNotifiers(type) {
+        var notifyingGadgetArray = [];
+        for (var containers in page.content) {
+            if (page.content.hasOwnProperty(containers)) {
+                if (!page.content[containers][0]) {
+                    continue;
+                }
+                findInContainerArray(type, notifyingGadgetArray, containers);
+            }
+        }
+        return notifyingGadgetArray;
+    }
 
 
     $('.widgets').on('mouseenter', '.thumbnail .drag-handle', function () {
@@ -191,4 +255,5 @@ $(function () {
          .html('<div class="container"><div class="row"><div class="col-lg-3 ues-widget-box"></div><div class="col-lg-3 ues-widget-box"></div><div class="col-lg-3 ues-widget-box"></div><div class="col-lg-3 ues-widget-box"></div></div></div>');
          */
     });
+
 });
