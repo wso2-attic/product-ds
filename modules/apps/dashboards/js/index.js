@@ -94,10 +94,12 @@ $(function () {
                             data.id = id;
                             var content = page.content[targetId] || (page.content[targetId] = []);
                             content.push(data);
+                            var arrayLength = content.length;
 
                             //deep copy
                             //jQuery = $
                             var listenerJson = $.extend(true, {}, data.listen);
+                            var listenerJsonRef = page.content[targetId][arrayLength - 1].listen;
 
                             for (var listeners in listenerJson) {
                                 if (listenerJson.hasOwnProperty(listeners)) {
@@ -122,6 +124,7 @@ $(function () {
                             $('.widget').click(function () {
                                 var divId = this.id;
                                 var listenerJson;
+                                var listenerJsonRef;
                                 for (var containers in page.content) {
                                     if (page.content.hasOwnProperty(containers)) {
                                         if (!page.content[containers][0]) {
@@ -131,6 +134,7 @@ $(function () {
                                         for (var i = 0; i < length; i++) {
                                             if (page.content[containers][i].id == divId) {
                                                 listenerJson = $.extend(true, {}, page.content[containers][i].listen);
+                                                listenerJsonRef = page.content[containers][i].listen;
                                             }
                                         }
                                     }
@@ -151,6 +155,19 @@ $(function () {
                                     }
                                 }
                                 optionContent.html(options(listenerJson));
+
+                                $('.form-control').change(function () {
+                                    var selectedValue = this.options[this.selectedIndex].value;
+                                    var theListener = this.id;
+                                    updatePageJson(listenerJson, theListener, selectedValue, listenerJsonRef);
+                                });
+
+                            });
+
+                            $('.form-control').change(function () {
+                                var selectedValue = this.options[this.selectedIndex].value;
+                                var theListener = this.id;
+                                updatePageJson(listenerJson, theListener, selectedValue, listenerJsonRef);
                             });
                         });
                     }
@@ -160,14 +177,41 @@ $(function () {
         });
     });
 
+    function updatePageJson(listenerJson, theListener, selectedValue, listenerJsonRef) {
+        var length = listenerJson[theListener].on.length;
+        var event;
+        for (var i = 0; i < length; i++) {
+            if (listenerJson[theListener].on[i].from == selectedValue) {
+                event = listenerJson[theListener].on[i].event;
+                break;
+            }
+        }
+
+        var on = listenerJsonRef[theListener].on || (listenerJsonRef[theListener].on = []);
+        var onLength = on.length;
+
+        var found = false;
+        for (var i = 0; i < onLength; i++) {
+            if (on[i].from == selectedValue) {
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            on.push({
+                "event": event,
+                "from": selectedValue
+            });
+        }
+    }
 
     function updateListenerJson(listenerJson, notifyingGadgetArray, listeners) {
         var length = notifyingGadgetArray.length;
         for (var i = 0; i < length; i++) {
             listenerJson[listeners].on.push({
                 "event": notifyingGadgetArray[i].notifier,
-                "from": notifyingGadgetArray[i].id,
-                "name": notifyingGadgetArray[i].name
+                "from": notifyingGadgetArray[i].id
             });
         }
     }

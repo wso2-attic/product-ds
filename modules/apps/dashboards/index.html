@@ -117,7 +117,10 @@
                 <div class="col-md-10 col-md-pull-2">
                     <div class="container-fluid">
                         <div class="row toolbar">
-                            <h2>Designer Toolbar</h2>
+
+                            <button type="button" class="btn btn-primary-save">Save Dashboard</button>
+                            <button type="button" class="btn btn-primary-preview">Preview</button>
+
                         </div>
                         <div class="row">
                             <div class="col-md-12 content"></div>
@@ -194,16 +197,17 @@
 
             {{#each this}}
             <div class="form-group">
-                <label for="listeners">{{@key}}</label>
-                <select id="listeners" class="form-control">
+                <label for={{@key}}>{{@key}}</label>
+                <select id={{@key}} class="form-control">
+                    <option>Select a notifier</option>
                     {{#each on}}
-                    <option>{{name}} - ({{from}})</option>
+                    <option>{{from}}</option>
                     {{/each}}
                 </select>
             </div>
             {{/each}}
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <!-- <button type="submit" class="btn btn-primary-option">Submit</button> -->
         </fieldset>
     </form>
 </script>
