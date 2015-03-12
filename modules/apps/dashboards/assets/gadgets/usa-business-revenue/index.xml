@@ -6,6 +6,11 @@
 <html>
 <head>
 <style>
+    #chart {
+        width: 100%;
+        height: 100%;
+    }
+
     .bar {
       fill: steelblue;
     }
@@ -31,6 +36,7 @@
 </style>
 </head>
 <body>
+<svg id="chart" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid"></svg>
 <script src="js/d3.v3.min.js"></script>
 <script src="js/revenue.js"></script>
 </body>

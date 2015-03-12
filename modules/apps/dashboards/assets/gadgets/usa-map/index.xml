@@ -10,6 +10,10 @@
 <html>
 <head>
 <style>
+    #map {
+        height: 100%;
+        width: 100%;
+    }
 	.state{
 		fill: none;
 		stroke: #a9a9a9;
@@ -21,7 +25,7 @@
 </style>
 </head>
 <body>
-<svg width="400" height="280" id="map" transform="scale(0.4)"></svg>
+<svg id="map" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid"></svg>
 <script src="../../js/jquery-1.10.2.js"></script>
 <script src="js/uStates.js"></script>
 <script src="js/d3.v3.min.js"></script>

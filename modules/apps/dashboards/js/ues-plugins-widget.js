@@ -1,5 +1,5 @@
 (function () {
-    
+
     var plugin = (ues.plugins['widget'] = {});
 
     plugin.prepare = function (sandbox, hub) {
