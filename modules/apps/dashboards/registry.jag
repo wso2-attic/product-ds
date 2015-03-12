@@ -1,0 +1,25 @@
+<%
+
+var carbon = require('carbon');
+var url = 'https://10.100.4.145:9443/admin/services/';
+var server = new carbon.server.Server(url);
+
+// TODO replace the tenet id
+var options = {username: 'admin', domain: 'carbon.super', tenantId: -1234};
+var registry = new carbon.registry.Registry(server, options);
+
+
+//Add a resource to the registry
+var path = '/_system/wso2/dashboard';
+var page = request.getContent();
+
+var resource = {
+    content: page,
+    mediaType: 'application/json',
+    description: 'This is the dashboard json',
+    uuid: '0123',
+    properties: {prop1: 'val1', prop2: 'val2'}
+};
+registry.put(path, resource);
+
+%>

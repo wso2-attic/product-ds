@@ -173,6 +173,27 @@ $(function () {
                     }
                 });
 
+
+                $('.btn-primary-save').click(function () {
+
+                    $.ajax({
+                        url: 'registry.jag',
+                        type: "POST",
+                        data: JSON.stringify(page),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function () {
+                        },
+                        statusCode: {
+                            200: function () {
+                                alert("Saved Successfully!!!!");
+                            }
+                        }
+                    });
+
+                });
+
+
             }, 'text');
         });
     });

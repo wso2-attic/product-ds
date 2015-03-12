@@ -1,45 +1,45 @@
 <%
 (function () {
     /*
-    var assets = [];
-    var file = new File("/widgets");
-    var dirList = file.listFiles();
-    var size = dirList.length;
-    var i;
-    var flag = false;
-    for (i = 0; i < size; i++) {
-        var widJson = require("/widgets/" + dirList[i].getName() + "/widget.json");
-        assets.push({
-            id: i,
-            type: 'gadget',
-            name: widJson.name,
-            location: 'https://localhost:9445/dashboards/widgets/' + dirList[i].getName() + '/index.png',
-            attributes: {
-                url: 'https://localhost:9445/dashboards/widgets/' + dirList[i].getName() + '/index.xml'
-            }
-        });
-        flag = !flag;
-    }
+     var assets = [];
+     var file = new File("/widgets");
+     var dirList = file.listFiles();
+     var size = dirList.length;
+     var i;
+     var flag = false;
+     for (i = 0; i < size; i++) {
+     var widJson = require("/widgets/" + dirList[i].getName() + "/widget.json");
+     assets.push({
+     id: i,
+     type: 'gadget',
+     name: widJson.name,
+     location: 'https://localhost:9445/dashboards/widgets/' + dirList[i].getName() + '/index.png',
+     attributes: {
+     url: 'https://localhost:9445/dashboards/widgets/' + dirList[i].getName() + '/index.xml'
+     }
+     });
+     flag = !flag;
+     }
 
-    var find = function (id) {
-        var i;
-        var length = assets.length;
-        for (i = 0; i < length; i++) {
-            if (assets[i].id == id) {
-                return assets[i];
-            }
-        }
-        return null;
-    };
+     var find = function (id) {
+     var i;
+     var length = assets.length;
+     for (i = 0; i < length; i++) {
+     if (assets[i].id == id) {
+     return assets[i];
+     }
+     }
+     return null;
+     };
 
-    var id = request.getParameter('id');
-    var start = request.getParameter('start') || 0;
-    var count = request.getParameter('count') || 20;
-    if (id) {
-        print(find(id));
-        return;
-    }
-    print(assets.slice(start, start + count));
+     var id = request.getParameter('id');
+     var start = request.getParameter('start') || 0;
+     var count = request.getParameter('count') || 20;
+     if (id) {
+     print(find(id));
+     return;
+     }
+     print(assets.slice(start, start + count));
      */
 
     var widgetsDir = 'assets/gadgets';
@@ -64,12 +64,12 @@
     var name = request.getParameter('name');
     var type = request.getParameter('type');
 
-    if(type == 'gadget'){
+    if (type == 'gadget') {
         dir = widgetsDir;
         jsonType = widJson;
     }
 
-    else if(type == 'layout'){
+    else if (type == 'layout') {
         dir = layoutsDir;
         jsonType = layJson;
     }
@@ -86,19 +86,19 @@
             return;
         }
         var config = configs(file.getName());
-        if(type == 'gadget') {
+        if (type == 'gadget') {
             widgets.push(config);
         }
-        else if(type == 'layout'){
+        else if (type == 'layout') {
             layouts.push(config);
         }
     });
     response.contentType = 'application/json';
 
-    if(type == 'gadget') {
+    if (type == 'gadget') {
         print(widgets);
     }
-    else if(type == 'layout'){
+    else if (type == 'layout') {
         print(layouts);
     }
 }());
