@@ -13,7 +13,7 @@
     <!--<link rel="stylesheet" href="css/theme.css">-->
 </head>
 <body>
-<div role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+<div id="home-toolbar" role="navigation" class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
             <button data-target=".horizontal-bar" data-toggle="collapse" class="navbar-toggle" type="button">
@@ -114,14 +114,24 @@
 <<<<<<< HEAD
                     -->
                 </div>
-                <div class="col-md-10 col-md-pull-2">
+                <div id="preview-content" class="col-md-10 col-md-pull-2">
                     <div class="container-fluid">
+
                         <div class="row toolbar">
+                            <div class="col-md-12">
+                                <label id="dashboard-label"><h4>Dashboard</h4></label>
 
-                            <button type="button" class="btn btn-primary-save">Save Dashboard</button>
-                            <button type="button" class="btn btn-primary-preview">Preview</button>
+                                <div id="preview-mode-tools" class="btn-group">
+                                    <button type="button" class="btn btn-primary-exitPreview">Exit Preview</button>
+                                </div>
 
+                                <div id="designer-mode-tools" class="btn-group">
+                                    <button type="button" class="btn btn-primary-save">Save Dashboard</button>
+                                    <button type="button" class="btn btn-primary-preview">Preview</button>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="row">
                             <div class="col-md-12 content"></div>
                         </div>
