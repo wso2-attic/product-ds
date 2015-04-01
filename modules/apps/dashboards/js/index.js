@@ -7,6 +7,124 @@ $(function () {
 
     page.title = 'My Dashboard';
 
+
+    var savePageJson = function () {
+        $.ajax({
+            url: 'registry.jag',
+            type: 'POST',
+            data: JSON.stringify(page),
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function () {
+            },
+            statusCode: {
+                200: function () {
+                    alert('Saved Successfully!!!!');
+                }
+            }
+        });
+    };
+
+
+    var exitPreview = function () {
+
+        $('#preview-content').removeClass('dashboard-preview');
+
+        $('#home-toolbar').show();
+        $('#dashboard-label').hide();
+        $('#preview-mode-tools').hide();
+        $('#designer-mode-tools').show();
+    };
+
+    var showPreview = function () {
+
+        $('#preview-content').addClass('dashboard-preview');
+
+        $('#dashboard-label').show();
+        $('#preview-mode-tools').show();
+        $('#designer-mode-tools').hide();
+        $('#home-toolbar').hide();
+    };
+
+
+    var updatePageJson = function (listenerJson, theListener, selectedValue, listenerJsonRef) {
+        var length = listenerJson[theListener].on.length;
+        var event;
+        for (var i = 0; i < length; i++) {
+            if (listenerJson[theListener].on[i].from == selectedValue) {
+                event = listenerJson[theListener].on[i].event;
+                break;
+            }
+        }
+
+        var on = listenerJsonRef[theListener].on || (listenerJsonRef[theListener].on = []);
+        var onLength = on.length;
+
+        var found = false;
+        for (var j = 0; j < onLength; j++) {
+            if (on[j].from == selectedValue) {
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            on.push({
+                "event": event,
+                "from": selectedValue
+            });
+        }
+    };
+
+    var updateListenerJson = function (listenerJson, notifyingGadgetArray, listeners) {
+        var length = notifyingGadgetArray.length;
+        for (var i = 0; i < length; i++) {
+            listenerJson[listeners].on.push({
+                "event": notifyingGadgetArray[i].notifier,
+                "from": notifyingGadgetArray[i].id
+            });
+        }
+    };
+
+    var getNotifyingGadget = function (type, notifyingGadgetArray, containers, i, notifiers) {
+        if (page.content[containers][i].notify.hasOwnProperty(notifiers)) {
+            if (type == page.content[containers][i].notify[notifiers].type) {
+                var gadgetJson = $.extend(true, {}, page.content[containers][i]);
+                gadgetJson.notifier = notifiers;
+                notifyingGadgetArray.push(gadgetJson);
+            }
+        }
+    };
+
+    var findNotifiers = function (type, notifyingGadgetArray, containers, i) {
+        for (var notifiers in page.content[containers][i].notify) {
+            if (page.content[containers][i].notify.hasOwnProperty(notifiers)) {
+                getNotifyingGadget(type, notifyingGadgetArray, containers, i, notifiers);
+            }
+        }
+    };
+
+    var findInContainerArray = function (type, notifyingGadgetArray, containers) {
+        var length = page.content[containers].length;
+        for (var i = 0; i < length; i++) {
+            findNotifiers(type, notifyingGadgetArray, containers, i);
+        }
+    };
+
+    var getNotifiers = function (type) {
+        var notifyingGadgetArray = [];
+        for (var containers in page.content) {
+            if (page.content.hasOwnProperty(containers)) {
+                if (!page.content[containers][0]) {
+                    continue;
+                }
+                findInContainerArray(type, notifyingGadgetArray, containers);
+            }
+        }
+        return notifyingGadgetArray;
+    };
+
+
     /**
      * Tab initialization
      */
@@ -23,10 +141,10 @@ $(function () {
     });
 
 
-    var designer = Handlebars.compile($("#designer-hbs").html());
-    var widgets = Handlebars.compile($("#thumbs-hbs").html());
-    var options = Handlebars.compile($("#options-hbs").html());
-    var layouts = Handlebars.compile($("#layouts-hbs").html());
+    var designer = Handlebars.compile($('#designer-hbs').html());
+    var widgets = Handlebars.compile($('#thumbs-hbs').html());
+    var options = Handlebars.compile($('#options-hbs').html());
+    var layouts = Handlebars.compile($('#layouts-hbs').html());
 
     var startValue = 0;
     var noOfValues = 20;
@@ -63,8 +181,9 @@ $(function () {
 
             for (var i = 0; i < length; i++) {
                 var name = data[i].name;
+                var theLayout = data[i];
                 if (name == btnId) {
-                    layoutJson = data[i];
+                    layoutJson = theLayout;
                     break;
                 }
             }
@@ -129,6 +248,7 @@ $(function () {
                                 var listenerJson;
                                 var listenerJsonRef;
                                 for (var containers in page.content) {
+                                    var found = false;
                                     if (page.content.hasOwnProperty(containers)) {
                                         if (!page.content[containers][0]) {
                                             continue;
@@ -138,7 +258,12 @@ $(function () {
                                             if (page.content[containers][i].id == divId) {
                                                 listenerJson = $.extend(true, {}, page.content[containers][i].listen);
                                                 listenerJsonRef = page.content[containers][i].listen;
+                                                found = true;
+                                                break;
                                             }
+                                        }
+                                        if (found) {
+                                            break;
                                         }
                                     }
                                 }
@@ -161,6 +286,7 @@ $(function () {
 
                                 $('.form-control').change(function () {
                                     var selectedValue = this.options[this.selectedIndex].value;
+                                    //noinspection JSPotentiallyInvalidUsageOfThis
                                     var theListener = this.id;
                                     updatePageJson(listenerJson, theListener, selectedValue, listenerJsonRef);
                                 });
@@ -189,141 +315,15 @@ $(function () {
                         exitPreview();
                     });
 
+                    $('.btn-primary-saveAsJag').click(function () {
+                        alert('Saved');
+                    });
+
                 });
 
             }, 'text');
         });
     });
-
-    function savePageJson() {
-        $.ajax({
-            url: 'registry.jag',
-            type: "POST",
-            data: JSON.stringify(page),
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function () {
-            },
-            statusCode: {
-                200: function () {
-                    alert("Saved Successfully!!!!");
-                }
-            }
-        });
-    }
-
-    function exitPreview() {
-        $('#preview-content').css({
-            top: '',
-            left: '',
-            right: '',
-            position: '',
-            width: '',
-            height: '',
-            overflow: '',
-            background: ''
-        });
-
-        $('#home-toolbar').show();
-        $('#dashboard-label').hide();
-        $('#preview-mode-tools').hide();
-        $('#designer-mode-tools').show();
-    }
-
-    function showPreview() {
-        $('#preview-content').css({
-            top: '0',
-            left: '0',
-            position: 'fixed',
-            width: '100%',
-            height: '100%',
-            overflow: 'auto',
-            background: '#FFFFFF'
-        });
-
-        $('#dashboard-label').show();
-        $('#preview-mode-tools').show();
-        $('#designer-mode-tools').hide();
-        $('#home-toolbar').hide();
-    }
-
-
-    function updatePageJson(listenerJson, theListener, selectedValue, listenerJsonRef) {
-        var length = listenerJson[theListener].on.length;
-        var event;
-        for (var i = 0; i < length; i++) {
-            if (listenerJson[theListener].on[i].from == selectedValue) {
-                event = listenerJson[theListener].on[i].event;
-                break;
-            }
-        }
-
-        var on = listenerJsonRef[theListener].on || (listenerJsonRef[theListener].on = []);
-        var onLength = on.length;
-
-        var found = false;
-        for (var i = 0; i < onLength; i++) {
-            if (on[i].from == selectedValue) {
-                found = true;
-                break;
-            }
-        }
-
-        if (!found) {
-            on.push({
-                "event": event,
-                "from": selectedValue
-            });
-        }
-    }
-
-    function updateListenerJson(listenerJson, notifyingGadgetArray, listeners) {
-        var length = notifyingGadgetArray.length;
-        for (var i = 0; i < length; i++) {
-            listenerJson[listeners].on.push({
-                "event": notifyingGadgetArray[i].notifier,
-                "from": notifyingGadgetArray[i].id
-            });
-        }
-    }
-
-    function getNotifyingGadget(type, notifyingGadgetArray, containers, i, notifiers) {
-        if (page.content[containers][i].notify.hasOwnProperty(notifiers)) {
-            if (type == page.content[containers][i].notify[notifiers].type) {
-                var gadgetJson = $.extend(true, {}, page.content[containers][i]);
-                gadgetJson.notifier = notifiers;
-                notifyingGadgetArray.push(gadgetJson);
-            }
-        }
-    }
-
-    function findNotifiers(type, notifyingGadgetArray, containers, i) {
-        for (var notifiers in page.content[containers][i].notify) {
-            if (page.content[containers][i].notify.hasOwnProperty(notifiers)) {
-                getNotifyingGadget(type, notifyingGadgetArray, containers, i, notifiers);
-            }
-        }
-    }
-
-    function findInContainerArray(type, notifyingGadgetArray, containers) {
-        var length = page.content[containers].length;
-        for (var i = 0; i < length; i++) {
-            findNotifiers(type, notifyingGadgetArray, containers, i);
-        }
-    }
-
-    function getNotifiers(type) {
-        var notifyingGadgetArray = [];
-        for (var containers in page.content) {
-            if (page.content.hasOwnProperty(containers)) {
-                if (!page.content[containers][0]) {
-                    continue;
-                }
-                findInContainerArray(type, notifyingGadgetArray, containers);
-            }
-        }
-        return notifyingGadgetArray;
-    }
 
 
     $('.widgets').on('mouseenter', '.thumbnail .drag-handle', function () {
@@ -331,7 +331,7 @@ $(function () {
             cancel: false,
             appendTo: 'body',
             helper: 'clone',
-            start: function (event, ui) {
+            start: function () {
                 console.log('dragging');
                 $('#left').find('a[href="#designer"]').tab('show');
             },
