@@ -50,6 +50,9 @@ $(function () {
         $('#middle')
             .find('.designer .content').html(layouts(data));
 
+        $('#dashboard-label').hide();
+        $('#preview-mode-tools').hide();
+
         //when layout select button is clicked
         //todo jquery on instead of click
         $('.btn-primary-layout').click(function () {
@@ -173,9 +176,77 @@ $(function () {
                     }
                 });
 
+
+                $('.btn-primary-save').click(function () {
+                    savePageJson();
+                });
+
+
+                $('.btn-primary-preview').click(function () {
+                    showPreview();
+
+                    $('.btn-primary-exitPreview').click(function () {
+                        exitPreview();
+                    });
+
+                });
+
             }, 'text');
         });
     });
+
+    function savePageJson() {
+        $.ajax({
+            url: 'registry.jag',
+            type: "POST",
+            data: JSON.stringify(page),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+            },
+            statusCode: {
+                200: function () {
+                    alert("Saved Successfully!!!!");
+                }
+            }
+        });
+    }
+
+    function exitPreview() {
+        $('#preview-content').css({
+            top: '',
+            left: '',
+            right: '',
+            position: '',
+            width: '',
+            height: '',
+            overflow: '',
+            background: ''
+        });
+
+        $('#home-toolbar').show();
+        $('#dashboard-label').hide();
+        $('#preview-mode-tools').hide();
+        $('#designer-mode-tools').show();
+    }
+
+    function showPreview() {
+        $('#preview-content').css({
+            top: '0',
+            left: '0',
+            position: 'fixed',
+            width: '100%',
+            height: '100%',
+            overflow: 'auto',
+            background: '#FFFFFF'
+        });
+
+        $('#dashboard-label').show();
+        $('#preview-mode-tools').show();
+        $('#designer-mode-tools').hide();
+        $('#home-toolbar').hide();
+    }
+
 
     function updatePageJson(listenerJson, theListener, selectedValue, listenerJsonRef) {
         var length = listenerJson[theListener].on.length;
