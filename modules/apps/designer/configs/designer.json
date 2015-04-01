@@ -1,0 +1,6 @@
+{
+    "store": {
+        "type": "fs",
+        "url": "https://localhost:9443"
+    }
+}

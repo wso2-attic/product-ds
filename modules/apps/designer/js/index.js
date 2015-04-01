@@ -1,11 +1,137 @@
 $(function () {
-
+    //TODO: cleanup this
 
     var page = {
         content: {}
     };
 
     page.title = 'My Dashboard';
+
+    var designer = Handlebars.compile($("#designer-hbs").html());
+    var widgets = Handlebars.compile($("#thumbs-hbs").html());
+    var options = Handlebars.compile($("#options-hbs").html());
+    var layouts = Handlebars.compile($("#layouts-hbs").html());
+    var widget = Handlebars.compile($("#widget-hbs").html());
+
+    var updateLayout = function (data) {
+        $('#middle')
+            .find('.designer .content').html(data);
+
+        $('.ues-widget-box').droppable({
+            //activeClass: 'ui-state-default',
+            hoverClass: 'ui-state-hover',
+            //accept: ':not(.ui-sortable-helper)',
+            drop: function (event, ui) {
+
+                //$(this).find('.placeholder').remove();
+                var id = ui.helper.data('id');
+
+                //get the container id
+                var targetId = $(event.target).attr('id');
+
+                var droppable = $(this);
+                ues.store.gadget(id, function (err, data) {
+                    var id = Math.random().toString(36).slice(2);
+                    droppable.html(widget({
+                        id: id
+                    }));
+                    ues.gadget($('#' + id), data.data.url);
+
+                    data.id = id;
+                    var content = page.content[targetId] || (page.content[targetId] = []);
+                    content.push(data);
+                    var arrayLength = content.length;
+
+                    //deep copy
+                    //jQuery = $
+                    var listenerJson = $.extend(true, {}, data.listen);
+                    var listenerJsonRef = page.content[targetId][arrayLength - 1].listen;
+
+                    for (var listeners in listenerJson) {
+                        if (listenerJson.hasOwnProperty(listeners)) {
+                            listenerJson[listeners].on = [];
+
+                            var type = listenerJson[listeners].type;
+                            var notifyingGadgetArray = getNotifiers(type);
+
+                            if (notifyingGadgetArray) {
+                                updateListenerJson(listenerJson, notifyingGadgetArray, listeners);
+                            }
+                        }
+                    }
+
+                    //todo printing jsons only for testing
+                    console.log(listenerJson);
+                    console.log(page);
+
+                    var optionContent = $('#middle').find('.designer .optionContent');
+                    optionContent.html(options(listenerJson));
+
+                    $('.widget').click(function () {
+                        var divId = this.id;
+                        var listenerJson;
+                        var listenerJsonRef;
+                        for (var containers in page.content) {
+                            if (page.content.hasOwnProperty(containers)) {
+                                if (!page.content[containers][0]) {
+                                    continue;
+                                }
+                                var length = page.content[containers].length;
+                                for (var i = 0; i < length; i++) {
+                                    if (page.content[containers][i].id == divId) {
+                                        listenerJson = $.extend(true, {}, page.content[containers][i].listen);
+                                        listenerJsonRef = page.content[containers][i].listen;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (listenerJson) {
+                            for (var listeners in listenerJson) {
+                                if (listenerJson.hasOwnProperty(listeners)) {
+                                    listenerJson[listeners].on = [];
+
+                                    var type = listenerJson[listeners].type;
+                                    var notifyingGadgetArray = getNotifiers(type);
+
+                                    if (notifyingGadgetArray) {
+                                        updateListenerJson(listenerJson, notifyingGadgetArray, listeners);
+                                    }
+                                }
+                            }
+                        }
+                        optionContent.html(options(listenerJson));
+
+                        $('.form-control').change(function () {
+                            var selectedValue = this.options[this.selectedIndex].value;
+                            var theListener = this.id;
+                            updatePageJson(listenerJson, theListener, selectedValue, listenerJsonRef);
+                        });
+
+                    });
+
+                    $('.form-control').change(function () {
+                        var selectedValue = this.options[this.selectedIndex].value;
+                        var theListener = this.id;
+                        updatePageJson(listenerJson, theListener, selectedValue, listenerJsonRef);
+                    });
+                });
+            }
+        });
+
+        /*$('.btn-primary-save').click(function () {
+         savePageJson();
+         });
+
+
+         $('.btn-primary-preview').click(function () {
+         showPreview();
+
+         $('.btn-primary-exitPreview').click(function () {
+         exitPreview();
+         });
+         });*/
+    };
 
     /**
      * Tab initialization
@@ -21,12 +147,6 @@ $(function () {
     $('#right').find('.properties-handle').click(function () {
         $('#right').find('.navbar').toggle();
     });
-
-
-    var designer = Handlebars.compile($("#designer-hbs").html());
-    var widgets = Handlebars.compile($("#thumbs-hbs").html());
-    var options = Handlebars.compile($("#options-hbs").html());
-    var layouts = Handlebars.compile($("#layouts-hbs").html());
 
     var startValue = 0;
     var noOfValues = 20;
@@ -73,125 +193,8 @@ $(function () {
             page.layout = layoutJson;
 
             $.get(layoutJson.url, function (data) {
-                $('#middle')
-                    .find('.designer .content').html(data);
-
-                $('.ues-widget-box').droppable({
-                    //activeClass: 'ui-state-default',
-                    hoverClass: 'ui-state-hover',
-                    //accept: ':not(.ui-sortable-helper)',
-                    drop: function (event, ui) {
-
-                        //$(this).find('.placeholder').remove();
-                        var id = ui.helper.data('id');
-
-                        //get the container id
-                        var targetId = $(event.target).attr('id');
-
-                        var droppable = $(this);
-                        ues.store.gadget(id, function (err, data) {
-                            var id = Math.random().toString(36).slice(2);
-                            droppable.html('<div id=' + id + ' class="widget"></div>');
-                            ues.gadget($('#' + id), data.data.url);
-
-                            data.id = id;
-                            var content = page.content[targetId] || (page.content[targetId] = []);
-                            content.push(data);
-                            var arrayLength = content.length;
-
-                            //deep copy
-                            //jQuery = $
-                            var listenerJson = $.extend(true, {}, data.listen);
-                            var listenerJsonRef = page.content[targetId][arrayLength - 1].listen;
-
-                            for (var listeners in listenerJson) {
-                                if (listenerJson.hasOwnProperty(listeners)) {
-                                    listenerJson[listeners].on = [];
-
-                                    var type = listenerJson[listeners].type;
-                                    var notifyingGadgetArray = getNotifiers(type);
-
-                                    if (notifyingGadgetArray) {
-                                        updateListenerJson(listenerJson, notifyingGadgetArray, listeners);
-                                    }
-                                }
-                            }
-
-                            //todo printing jsons only for testing
-                            console.log(listenerJson);
-                            console.log(page);
-
-                            var optionContent = $('#middle').find('.designer .optionContent');
-                            optionContent.html(options(listenerJson));
-
-                            $('.widget').click(function () {
-                                var divId = this.id;
-                                var listenerJson;
-                                var listenerJsonRef;
-                                for (var containers in page.content) {
-                                    if (page.content.hasOwnProperty(containers)) {
-                                        if (!page.content[containers][0]) {
-                                            continue;
-                                        }
-                                        var length = page.content[containers].length;
-                                        for (var i = 0; i < length; i++) {
-                                            if (page.content[containers][i].id == divId) {
-                                                listenerJson = $.extend(true, {}, page.content[containers][i].listen);
-                                                listenerJsonRef = page.content[containers][i].listen;
-                                            }
-                                        }
-                                    }
-                                }
-
-                                if (listenerJson) {
-                                    for (var listeners in listenerJson) {
-                                        if (listenerJson.hasOwnProperty(listeners)) {
-                                            listenerJson[listeners].on = [];
-
-                                            var type = listenerJson[listeners].type;
-                                            var notifyingGadgetArray = getNotifiers(type);
-
-                                            if (notifyingGadgetArray) {
-                                                updateListenerJson(listenerJson, notifyingGadgetArray, listeners);
-                                            }
-                                        }
-                                    }
-                                }
-                                optionContent.html(options(listenerJson));
-
-                                $('.form-control').change(function () {
-                                    var selectedValue = this.options[this.selectedIndex].value;
-                                    var theListener = this.id;
-                                    updatePageJson(listenerJson, theListener, selectedValue, listenerJsonRef);
-                                });
-
-                            });
-
-                            $('.form-control').change(function () {
-                                var selectedValue = this.options[this.selectedIndex].value;
-                                var theListener = this.id;
-                                updatePageJson(listenerJson, theListener, selectedValue, listenerJsonRef);
-                            });
-                        });
-                    }
-                });
-
-
-                $('.btn-primary-save').click(function () {
-                    savePageJson();
-                });
-
-
-                $('.btn-primary-preview').click(function () {
-                    showPreview();
-
-                    $('.btn-primary-exitPreview').click(function () {
-                        exitPreview();
-                    });
-
-                });
-
-            }, 'text');
+                updateLayout(data);
+            }, 'html');
         });
     });
 
@@ -369,6 +372,13 @@ $(function () {
          .find('body')
          .html('<div class="container"><div class="row"><div class="col-lg-3 ues-widget-box"></div><div class="col-lg-3 ues-widget-box"></div><div class="col-lg-3 ues-widget-box"></div><div class="col-lg-3 ues-widget-box"></div></div></div>');
          */
+    });
+
+    $('.designer .content').on('mouseenter', '.widget .widget-toolbar', function () {
+        $('.tools', $(this)).show();
+    }).on('mouseleave', '.widget .widget-toolbar', function () {
+        //TODO: uncomment this
+        //$('.tools', $(this)).hide();
     });
 
 });

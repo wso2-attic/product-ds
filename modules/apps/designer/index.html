@@ -87,55 +87,17 @@
     </div>-->
     <div id="middle" class="tab-content">
         <div id="designer" class="container-fluid designer tab-pane active">
-            <div class="row">
-                <div class="col-md-2 col-md-push-10 optionContent">
-                    <!--
-
-=======
-                <div class="col-md-2 col-md-push-10 properties">
->>>>>>> a89c92d06229d0199d29a1bdeaeba5a431b722c7
-                    <form role="form">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1"
-                                   placeholder="Password">
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Check me out
-                            </label>
-                        </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
-<<<<<<< HEAD
-                    -->
-                </div>
-                <div id="preview-content" class="col-md-10 col-md-pull-2">
-                    <div class="container-fluid">
-
-                        <div class="row toolbar">
-                            <div class="col-md-12">
-                                <label id="dashboard-label"><h4>Dashboard</h4></label>
-
-                                <div id="preview-mode-tools" class="btn-group">
-                                    <button type="button" class="btn btn-primary-exitPreview">Exit Preview</button>
-                                </div>
-
-                                <div id="designer-mode-tools" class="btn-group">
-                                    <button type="button" class="btn btn-primary-save">Save Dashboard</button>
-                                    <button type="button" class="btn btn-primary-preview">Preview</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12 content"></div>
-                        </div>
+            <div class="row toolbar">
+                <div class="col-md-12">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default">Preview</button>
+                        <button type="button" class="btn btn-default">Save</button>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="container-fluid content"></div>
                 </div>
             </div>
         </div>
@@ -239,6 +201,19 @@
             </div>
         </div>
         {{/each}}
+    </div>
+</script>
+
+<script id="widget-hbs" type="text/x-handlebars-template">
+    <div class="widget" data-id="{{id}}">
+        <div class="widget-toolbar container-fluid">
+            <div class="row tools">
+                <div class="col-md-1 pull-right">
+                    <span class="fui-gear glyphicon"></span>
+                </div>
+            </div>
+        </div>
+        <div id="{{id}}" class="widget-content"></div>
     </div>
 </script>
 

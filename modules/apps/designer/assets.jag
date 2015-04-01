@@ -1,0 +1,12 @@
+<%
+(function () {
+    var config = require('/configs/designer.json');
+    var type = config.store.type;
+    var path = '/store/' + type + '.jag';
+    var file = new File(path);
+    if (!file.isExists()) {
+        throw new Error('specified store type is not supported : ' + type);
+    }
+    include(path);
+}());
+%>
