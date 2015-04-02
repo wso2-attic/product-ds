@@ -170,7 +170,7 @@ var dashboard = <%=dashboard%>;
                     <h3>{{name}}</h3>
                 </div>
                 <div class="tools">
-                    <button type="button" class="btn btn-success drag-handle" data-id="{{name}}"><i
+                    <button type="button" class="btn btn-success drag-handle" data-id="{{id}}"><i
                             class="fa fa-plus"></i></button>
                     <button type="button" class="btn btn-info"><i class="fa fa-arrow-down"></i></button>
                 </div>

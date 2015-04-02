@@ -27,7 +27,22 @@ $(function () {
     var widget = Handlebars.compile($("#widget-hbs").html());
 
     var layout = function (data) {
-        $('#middle').find('.designer').find('.content').html(data);
+        $('#middle').find('.designer').find('.content').html(data)
+            .find('.ues-widget-box').droppable({
+                //activeClass: 'ui-state-default',
+                hoverClass: 'ui-state-hover',
+                //accept: ':not(.ui-sortable-helper)',
+                drop: function (event, ui) {
+                    //$(this).find('.placeholder').remove();
+                    var id = ui.helper.data('id');
+                    var droppable = $(this);
+                    ues.store.gadget(id, function (err, data) {
+                        var id = randomId();
+                        droppable.html('<div id=' + id + ' class="widget"></div>');
+                        ues.gadget($('#' + id), data.data.url);
+                    });
+                }
+            });
     };
 
     /**
@@ -60,22 +75,6 @@ $(function () {
         });
     }).on('mouseleave', '.thumbnail .drag-handle', function () {
         $(this).draggable('destroy');
-    });
-
-    $('.ues-widget-box').droppable({
-        //activeClass: 'ui-state-default',
-        hoverClass: 'ui-state-hover',
-        //accept: ':not(.ui-sortable-helper)',
-        drop: function (event, ui) {
-            //$(this).find('.placeholder').remove();
-            var id = ui.helper.data('id');
-            var droppable = $(this);
-            ues.store.asset(id, function (err, data) {
-                var id = Math.random().toString(36).slice(2);
-                droppable.html('<div id=' + id + '></div>');
-                UESContainer.renderGadget(id, data.attributes.url);
-            });
-        }
     });
 
     ues.store.gadgets({
