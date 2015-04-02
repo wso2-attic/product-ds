@@ -1,8 +1,8 @@
 {
-    "name": "usa-map",
+    "id": "usa-map",
     "type": "gadget",
 
-    "thumbnail": "/designer/assets/gadgets/usa-map/index.png",
+    "thumbnail": "/designer/store/gadget/usa-map/index.png",
 
     "options": {
         "username": {
@@ -11,7 +11,7 @@
         }
     },
     "data": {
-        "url": "/designer/assets/gadgets/usa-map/index.xml"
+        "url": "/designer/store/gadget/usa-map/index.xml"
     },
     "description": "Allows to view and select US states",
     "notify": {

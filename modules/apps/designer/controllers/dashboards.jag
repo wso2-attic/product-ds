@@ -1,0 +1,12 @@
+<%
+var contentType = request.getContentType();
+//contentType = 'application/json';
+switch (contentType) {
+    case 'application/json':
+        include('dashboard-apis.jag');
+        break;
+    default:
+        include('dashboard-renderer.jag');
+        break;
+}
+%>

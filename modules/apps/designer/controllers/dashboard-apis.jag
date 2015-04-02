@@ -1,0 +1,71 @@
+<%
+var log = new Log();
+var usr = require('/modules/user.js');
+var user = usr.current();
+
+(function () {
+    if (!user) {
+        response.sendError(403, 'unauthorized');
+        print({
+            error: true
+        });
+        return;
+    }
+
+    var method = request.getMethod();
+    var dashboards = require('/modules/dashboards.js');
+
+    var matcher = new URIMatcher(request.getRequestURI());
+    //TODO: what happen when the context is changed or mapped via reverse proxy
+
+    response.contentType = 'application/json';
+
+    var id;
+    var dashboard;
+    if (matcher.match('/{context}/dashboards/{id}')) {
+        id = matcher.elements().id;
+        if (method === 'GET') {
+            dashboard = dashboards.findOne(id);
+            if (!dashboard) {
+                response.sendError(404, JSON.stringify({
+                    error: false
+                }));
+                return;
+            }
+            print(dashboard);
+            return;
+        }
+        if (method === 'PUT') {
+            //TODO
+        }
+        response.sendError(405, JSON.stringify({
+            error: false
+        }));
+    }
+
+    if (matcher.match('/{context}/dashboards')) {
+        if (method === 'GET') {
+            dashboard = dashboards.find();
+            if (!dashboard) {
+                response.sendError(404, JSON.stringify({
+                    error: false
+                }));
+                return;
+            }
+            print(dashboard);
+            return;
+        }
+        if (method === 'POST') {
+            dashboard = request.getContent();
+            dashboards.save(dashboard);
+            print({
+                error: false
+            });
+            return;
+        }
+        response.sendError(405, JSON.stringify({
+            error: false
+        }));
+    }
+}());
+%>

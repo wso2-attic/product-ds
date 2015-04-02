@@ -1,3 +1,25 @@
+<%
+var method = request.getMethod();
+var dashboards = require('/modules/dashboards.js');
+
+var randomId = function () {
+    return Math.random().toString(36).slice(2);
+};
+
+var id;
+var dashboard;
+var matcher = new URIMatcher(request.getRequestURI());
+//TODO: what happen when the context is changed or mapped via reverse proxy
+if (matcher.match('/{context}/dashboards/{id}')) {
+    id = matcher.elements().id;
+    dashboard = dashboards.findOne(id);
+} else {
+    dashboard = {
+        id: randomId(),
+        pages: {}
+    };
+}
+%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -91,7 +113,7 @@
                 <div class="col-md-12">
                     <div class="btn-group">
                         <button type="button" class="btn btn-default">Preview</button>
-                        <button type="button" class="btn btn-default">Save</button>
+                        <button type="button" class="btn btn-default save">Save</button>
                     </div>
                 </div>
             </div>
@@ -129,11 +151,13 @@
 <script src="js/index.js"></script>
 <script src="js/store.js"></script>
 <script src="/portal/themes/portal/js/shindig.js"></script>
+<script>
+var dashboard = <%=dashboard%>;
+</script>
 <script src="js/ues-prefs.js"></script>
 <script src="js/ues.js"></script>
 <script id="designer-hbs" type="text/x-handlebars-template">
 </script>
-
 <script id="thumbs-hbs" type="text/x-handlebars-template">
     <div class="row thumbnails">
         {{#each .}}
@@ -159,7 +183,6 @@
     <div class="row">
         <div class="col-md-12"><h3>Option panel</h3></div>
     </div>
-
     <form>
         <fieldset>
             <div class="form-group">
@@ -183,7 +206,6 @@
         </fieldset>
     </form>
 </script>
-
 <script id="layouts-hbs" type="text/x-handlebars-template">
     <div class="row thumbnails">
         {{#each .}}
@@ -196,14 +218,13 @@
                     <h3>{{name}}</h3>
                 </div>
                 <div class="tools">
-                    <button type="button" class="btn btn-primary-layout" data-id="{{name}}">Select</button>
+                    <button type="button" class="btn btn-primary add" data-url="{{url}}">Select</button>
                 </div>
             </div>
         </div>
         {{/each}}
     </div>
 </script>
-
 <script id="widget-hbs" type="text/x-handlebars-template">
     <div class="widget" data-id="{{id}}">
         <div class="widget-toolbar container-fluid">
@@ -216,7 +237,5 @@
         <div id="{{id}}" class="widget-content"></div>
     </div>
 </script>
-
-
 </body>
 </html>

@@ -1,9 +1,9 @@
 {
-    "name": "pie-chart",
+    "id": "pie-chart",
     "description": "Allows to view revenue by companies in US",
-    "thumbnail": "/designer/assets/gadgets/pie-chart/index.png",
+    "thumbnail": "/designer/store/gadget/pie-chart/index.png",
     "data": {
-        "url": "/designer/assets/gadgets/pie-chart/index.xml"
+        "url": "/designer/store/gadget/pie-chart/index.xml"
     },
     "listen": {
         "address": {
