@@ -1,9 +1,8 @@
 {
     "id": "usa-map",
+    "title": "USA Map",
     "type": "gadget",
-
     "thumbnail": "/designer/store/gadget/usa-map/index.png",
-
     "options": {
         "username": {
             "type": "string",

@@ -1,35 +1,36 @@
 {
-  "id": "usa-business-revenue",
-  "type": "gadget",
-  "thumbnail": "/designer/store/gadget/usa-business-revenue/index.png",
-  "options": {
-    "username": {
-      "type": "string",
-      "description": "Username to be used for service invocation"
-    }
-  },
-  "data": {
-    "url": "/designer/store/gadget/usa-business-revenue/index.xml"
-  },
-  "description": "Allows to view revenue by companies in US",
-  "listen": {
-    "state-selected": {
-      "type": "address",
-      "description": "Used to filter based on state"
+    "id": "usa-business-revenue",
+    "title": "USA Business Revenue",
+    "type": "gadget",
+    "thumbnail": "/designer/store/gadget/usa-business-revenue/index.png",
+    "options": {
+        "username": {
+            "type": "string",
+            "description": "Username to be used for service invocation"
+        }
     },
-    "yyy": {
-      "type": "date",
-      "description": "Used to filter based on date"
-    }
-  },
-  "notify": {
-    "select": {
-      "type": "string",
-      "description": "This notifies selected company"
+    "data": {
+        "url": "/designer/store/gadget/usa-business-revenue/index.xml"
     },
-    "cancel": {
-      "type": "boolean",
-      "description": "This notifies cancellation of company selection"
+    "description": "Allows to view revenue by companies in US",
+    "listen": {
+        "state-selected": {
+            "type": "address",
+            "description": "Used to filter based on state"
+        },
+        "yyy": {
+            "type": "date",
+            "description": "Used to filter based on date"
+        }
+    },
+    "notify": {
+        "select": {
+            "type": "string",
+            "description": "This notifies selected company"
+        },
+        "cancel": {
+            "type": "boolean",
+            "description": "This notifies cancellation of company selection"
+        }
     }
-  }
 }

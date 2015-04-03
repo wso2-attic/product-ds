@@ -20,14 +20,15 @@ $(function () {
         });
     };
 
-    var designer = Handlebars.compile($("#designer-hbs").html());
-    var widgets = Handlebars.compile($("#thumbs-hbs").html());
-    var options = Handlebars.compile($("#options-hbs").html());
-    var layouts = Handlebars.compile($("#layouts-hbs").html());
-    var widget = Handlebars.compile($("#widget-hbs").html());
+    var designerHbs = Handlebars.compile($("#designer-hbs").html());
+    var optionsHbs = Handlebars.compile($("#options-hbs").html());
+    var widgetsHbs = Handlebars.compile($("#widgets-hbs").html());
+    var widgetHbs = Handlebars.compile($("#widget-hbs").html());
+    var layoutsHbs = Handlebars.compile($("#layouts-hbs").html());
+    var layoutHbs = Handlebars.compile($("#layout-hbs").html());
 
     var layout = function (data) {
-        $('#middle').find('.designer').find('.content').html(data)
+        $('#middle').find('.designer').find('.content').html(layoutHbs(data))
             .find('.ues-widget-box').droppable({
                 //activeClass: 'ui-state-default',
                 hoverClass: 'ui-state-hover',
@@ -38,7 +39,9 @@ $(function () {
                     var droppable = $(this);
                     ues.store.gadget(id, function (err, data) {
                         var id = randomId();
-                        droppable.html('<div id=' + id + ' class="widget"></div>');
+                        droppable.html(widgetHbs({
+                            id: id
+                        }));
                         ues.gadget($('#' + id), data.data.url);
                     });
                 }
@@ -82,7 +85,7 @@ $(function () {
         count: 20
     }, function (err, data) {
         $('#middle')
-            .find('.widgets .content').html(widgets(data))
+            .find('.widgets .content').html(widgetsHbs(data))
             .on('click', '.thumbnails .add-button', function () {
 
             });
@@ -93,7 +96,7 @@ $(function () {
         count: 20
     }, function (err, data) {
         $('#middle')
-            .find('.designer .content').html(layouts(data))
+            .find('.designer .content').html(layoutsHbs(data))
             .on('click', '.thumbnails .add', function () {
                 var url = $(this).data('url');
                 $.get(url, function (data) {

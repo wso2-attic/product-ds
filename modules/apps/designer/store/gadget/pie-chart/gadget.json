@@ -1,5 +1,6 @@
 {
     "id": "pie-chart",
+    "title": "Pie Chart",
     "description": "Allows to view revenue by companies in US",
     "thumbnail": "/designer/store/gadget/pie-chart/index.png",
     "data": {
