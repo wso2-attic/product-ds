@@ -72,7 +72,7 @@ var ues = ues || {};
                     return;
                 }
                 if (done) {
-                    done();
+                    done(false, metadata);
                 }
             });
         });

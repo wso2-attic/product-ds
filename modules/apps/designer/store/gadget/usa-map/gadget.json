@@ -6,6 +6,7 @@
     "options": {
         "username": {
             "type": "string",
+            "title": "Username",
             "description": "Username to be used for service invocation"
         }
     },

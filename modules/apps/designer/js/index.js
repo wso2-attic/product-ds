@@ -7,6 +7,30 @@ $(function () {
         return Math.random().toString(36).slice(2);
     };
 
+    var cache = {
+        layout: [],
+        gadget: []
+    };
+
+    var current = 'landing';
+
+    var pager = function (name, page) {
+        return page ? (dashboard.pages[name] = page) : dashboard.pages[name];
+    };
+
+    var find = function (type, id) {
+        var i;
+        var item;
+        var items = cache[type];
+        var length = items.length;
+        for (i = 0; i < length; i++) {
+            item = items[i];
+            if (item.id === id) {
+                return item;
+            }
+        }
+    };
+
     var save = function () {
         $.ajax({
             url: dashboardUrl + '/' + page.id,
@@ -27,6 +51,33 @@ $(function () {
     var layoutsHbs = Handlebars.compile($("#layouts-hbs").html());
     var layoutHbs = Handlebars.compile($("#layout-hbs").html());
 
+    var userPrefs = function (widget, metadata) {
+        var pref;
+        var opts = {};
+        var prefs = metadata.userPrefs;
+        for (pref in prefs) {
+            if (prefs.hasOwnProperty(pref)) {
+                pref = prefs[pref];
+                opts[pref.name] = {
+                    type: pref.dataType,
+                    title: pref.displayName,
+                    value: pref.defaultValue,
+                    options: pref.orderedEnumValues,
+                    required: pref.required
+                };
+            }
+        }
+        widget.plugin = opts;
+    };
+
+    var options = function (id, widget) {
+        console.log(widget.options);
+        $('#middle').find('.designer .options').html(optionsHbs({
+            options: widget.options,
+            plugin: widget.plugin
+        }));
+    };
+
     var layout = function (data) {
         $('#middle').find('.designer').find('.content').html(layoutHbs(data))
             .find('.ues-widget-box').droppable({
@@ -36,13 +87,26 @@ $(function () {
                 drop: function (event, ui) {
                     //$(this).find('.placeholder').remove();
                     var id = ui.helper.data('id');
+                    var widget = find('gadget', id);
                     var droppable = $(this);
+                    var area = droppable.attr('id');
+                    var page = pager(current);
+                    var content = page.content;
+                    content = content[area] || (content[area] = []);
+                    content.push(widget);
                     ues.store.gadget(id, function (err, data) {
                         var id = randomId();
-                        droppable.html(widgetHbs({
+                        var el = $(widgetHbs({
                             id: id
                         }));
-                        ues.gadget($('#' + id), data.data.url);
+                        droppable.html(el);
+                        ues.gadget($('#' + id), data.data.url, null, null, function (err, metadata) {
+                            userPrefs(widget, metadata);
+                            el.on('click', '.widget-toolbar .options-handle', function () {
+                                options(id, widget);
+                            });
+                            options(id, widget);
+                        });
                     });
                 }
             });
@@ -84,6 +148,7 @@ $(function () {
         start: 0,
         count: 20
     }, function (err, data) {
+        cache.gadget = data;
         $('#middle')
             .find('.widgets .content').html(widgetsHbs(data))
             .on('click', '.thumbnails .add-button', function () {
@@ -95,11 +160,18 @@ $(function () {
         start: 0,
         count: 20
     }, function (err, data) {
+        cache.layout = data;
         $('#middle')
             .find('.designer .content').html(layoutsHbs(data))
             .on('click', '.thumbnails .add', function () {
-                var url = $(this).data('url');
-                $.get(url, function (data) {
+                var id = $(this).data('id');
+                var ly = find('layout', id);
+                pager(current, {
+                    title: 'My Dashboard',
+                    layout: ly,
+                    content: {}
+                });
+                $.get(ly.url, function (data) {
                     $('#middle').find('.designer .content').html(layout(data));
                 }, 'html');
             });

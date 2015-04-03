@@ -57,11 +57,8 @@
 
     if (matcher.match('/{context}/assets')) {
         id = matcher.elements().id;
-        log.info(id);
-        log.info(method);
         if (method === 'GET') {
             assets = store.find(assetType);
-            log.info(assets);
             assets.forEach(function (asset) {
                 azzet.update({
                     store: serverUrl

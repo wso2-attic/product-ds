@@ -157,45 +157,38 @@ var dashboard = <%=dashboard%>;
 <script id="designer-hbs" type="text/x-handlebars-template">
 </script>
 <script id="options-hbs" type="text/x-handlebars-template">
-    <div class="row">
-        <div class="col-md-12"><h3>Option panel</h3></div>
-    </div>
-    <form>
-        <fieldset>
+    <div class="sandbox">
+        <h4>Properties</h4>
+        <form>
+            {{#each options}}
             <div class="form-group">
-                <label for="usernameTextInput">Username</label>
-                <input type="text" id="usernameTextInput" class="form-control" placeholder="Enter the username">
-            </div>
-
-            {{#each this}}
-            <div class="form-group">
-                <label for={{@key}}>{{@key}}</label>
-                <select id={{@key}} class="form-control">
-                    <option>Select a notifier</option>
-                    {{#each on}}
-                    <option>{{from}}</option>
-                    {{/each}}
-                </select>
+                <label>{{title}}
+                    <input type="text" class="form-control" name="{{@key}}" placeholder="{{title}}" value="{{value}}">
+                </label>
             </div>
             {{/each}}
-
-            <!-- <button type="submit" class="btn btn-primary-option">Submit</button> -->
-        </fieldset>
-    </form>
+            {{#each plugin}}
+            {{!-- TODO handle all gadget prefs --}}
+            <div class="form-group">
+                <label>{{title}}
+                    <input type="text" class="form-control" name="{{@key}}" placeholder="{{title}}" value="{{value}}">
+                </label>
+            </div>
+            {{/each}}
+        </form>
+    </div>
 </script>
 <script id="layouts-hbs" type="text/x-handlebars-template">
     <div class="row thumbnails">
         {{#each .}}
         <div class="col-md-3 col-sm-4 col-xs-6 box">
             <div class="thumbnail">
-
                 <img src="{{thumbnail}}"/>
-
                 <div class="caption">
                     <h3>{{title}}</h3>
                 </div>
                 <div class="tools">
-                    <button type="button" class="btn btn-primary add" data-url="{{url}}">Select</button>
+                    <button type="button" class="btn btn-primary add" data-id="{{id}}">Select</button>
                 </div>
             </div>
         </div>
@@ -203,16 +196,19 @@ var dashboard = <%=dashboard%>;
     </div>
 </script>
 <script id="layout-hbs" type="text/x-handlebars-template">
-    <div class="container-fluid">{{{.}}}</div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="container-fluid">{{{.}}}</div>
+        </div>
+        <div class="col-md-2 options"></div>
+    </div>
 </script>
 <script id="widgets-hbs" type="text/x-handlebars-template">
     <div class="row thumbnails">
         {{#each .}}
         <div class="col-md-3 col-sm-4 col-xs-6 box">
             <div class="thumbnail">
-
                 <img src="{{thumbnail}}"/>
-
                 <div class="caption">
                     <h3>{{title}}</h3>
                 </div>
@@ -231,7 +227,7 @@ var dashboard = <%=dashboard%>;
         <div class="widget-toolbar container-fluid">
             <div class="row tools">
                 <div class="col-md-1 pull-right">
-                    <span class="fui-gear glyphicon"></span>
+                    <a href="#" class="options-handle"><span class="fui-gear glyphicon"></span></a>
                 </div>
             </div>
         </div>

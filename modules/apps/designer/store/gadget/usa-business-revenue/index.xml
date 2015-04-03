@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
     <ModulePrefs title="USA Company Revenue" height="280" description="USA Company Revenue chart"/>
+    <UserPref name="min"
+              display_name="Minimum"
+              default_value="100"/>
+    <UserPref name="max"
+              display_name="Maximum"
+              default_value="200"/>
     <Content type="html">
         <![CDATA[
 <html>
