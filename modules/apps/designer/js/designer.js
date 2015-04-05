@@ -71,7 +71,7 @@ $(function () {
 
     var updatePageOptions = function (id, opts) {
         var block = findPageWidget(id);
-        var options = block.widget.options;
+        var options = block.content.options;
         var o;
         var opt;
         for (opt in opts) {
@@ -124,7 +124,7 @@ $(function () {
         content = content[area] || (content[area] = []);
         content.push({
             id: instanceId,
-            widget: widget
+            content: widget
         });
         ues.store.gadget(id, function (err, data) {
             var el = $(widgetHbs({

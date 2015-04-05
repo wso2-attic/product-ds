@@ -11,9 +11,9 @@
     };
 
     var renderBlock = function (container, block) {
-        var plugin = ues.plugins[block.type];
+        var plugin = ues.plugins[block.content.type];
         if (!plugin) {
-            return console.warn('ues dashboard plugin for ' + block.type + ' cannot be found');
+            return console.warn('ues dashboard plugin for ' + block.content.type + ' cannot be found');
         }
         plugin.create(container, block, ues.hub);
     };
@@ -61,7 +61,7 @@
             if (content.hasOwnProperty(area)) {
                 blocks = content[area];
                 blocks.forEach(function (block) {
-                    var listeners = block.listen;
+                    var listeners = block.content.listen;
                     if (!listeners) {
                         return;
                     }

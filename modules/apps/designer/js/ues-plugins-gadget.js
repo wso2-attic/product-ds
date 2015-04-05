@@ -25,7 +25,7 @@
 
     plugin.create = function (sandbox, options, hub) {
         gadgets[options.id] = options;
-        ues.gadget(sandbox, options.data.url);
+        ues.gadget(sandbox, options.content.data.url);
     };
 
     plugin.update = function (sandbox, options, events, hub) {

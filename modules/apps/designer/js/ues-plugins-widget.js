@@ -7,7 +7,7 @@
     };
 
     plugin.create = function (sandbox, options, hub) {
-        var html = '<h2>' + options.name + '</h2>';
+        var html = '<h2>' + options.content.title + '</h2>';
         html += '<button class="send btn btn-primary" type="button">Send</button>';
         sandbox.html(html);
         var id = options.id;
