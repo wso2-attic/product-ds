@@ -1,6 +1,6 @@
 
 body {
-    padding-top: 53px;
+    padding-top: 50px;
     font-family: "Oxygen", Helvetica, Arial, sans-serif;
 }
 
@@ -40,11 +40,7 @@ a, a:focus {
 }
 
 #left .navbar-nav > li.active > a {
-    border-radius: 0;
-    margin: 0;
-    border: none;
-    color: #34495e;
-    background-color: #1abc9c;
+
 }
 
 #left .nav-tabs {
@@ -59,7 +55,7 @@ a, a:focus {
 
 }
 
-#left .nav-tabs > li > a .glyphicon {
+#left .nav-tabs > li > a .fa {
     font-size: 40px;
     line-height: normal;
 }
@@ -86,17 +82,22 @@ a, a:focus {
 @media (min-width: 768px) {
 
     #left {
-        width: 84px;
+        width: 74px;
         position: fixed;
+        height: 100%;
     }
 
     #middle {
-        margin-left: 84px;
+        margin-left: 74px;
     }
 
     #designer .properties {
         padding-left: 0;
         margin-top: 10px;
+    }
+
+    #left .left-menu-bar {
+        height: 100%;
     }
 }
 

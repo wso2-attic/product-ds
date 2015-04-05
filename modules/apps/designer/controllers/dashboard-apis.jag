@@ -57,7 +57,7 @@ var user = usr.current();
         }
         if (method === 'POST') {
             dashboard = request.getContent();
-            dashboards.save(dashboard);
+            dashboards.create(dashboard);
             print({
                 error: false
             });

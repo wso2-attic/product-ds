@@ -1,7 +1,7 @@
 $(function () {
     //TODO: cleanup this
 
-    var dashboardUrl = 'dashboards';
+    var dashboardUrl = window.location.pathname.match(/.*(\/dashboards\/).+/ig) ? '../dashboards' : 'dashboards';
 
     var randomId = function () {
         return Math.random().toString(36).slice(2);
@@ -18,7 +18,7 @@ $(function () {
         return page ? (dashboard.pages[name] = page) : dashboard.pages[name];
     };
 
-    var find = function (type, id) {
+    var findWidgetDef = function (type, id) {
         var i;
         var item;
         var items = cache[type];
@@ -31,17 +31,53 @@ $(function () {
         }
     };
 
+    var findBlock = function (id) {
+        var page = pager(current);
+        var content = page.content;
+        var i;
+        var length;
+        var area;
+        var widget;
+        var widgets;
+        for (area in content) {
+            if (content.hasOwnProperty(area)) {
+                widgets = content[area];
+                length = widgets.length;
+                for (i = 0; i < length; i++) {
+                    widget = widgets[i];
+                    if (widget.id === id) {
+                        return widget;
+                    }
+                }
+            }
+        }
+    };
+
     var save = function () {
         $.ajax({
-            url: dashboardUrl + '/' + page.id,
+            url: dashboardUrl,
             method: 'POST',
-            data: JSON.stringify(page),
+            data: JSON.stringify(dashboard),
             contentType: 'application/json'
         }).success(function (data) {
             console.log('dashboard saved successfully');
         }).error(function () {
             console.log('error saving dashboard');
         });
+    };
+
+    var update = function (id, opts) {
+        var block = findBlock(id);
+        var options = block.widget.options;
+        var o;
+        var opt;
+        for (opt in opts) {
+            if (opts.hasOwnProperty(opt)) {
+                o = options[opt];
+                o.value = opts[opt];
+            }
+        }
+        console.log(pager(current));
     };
 
     var designerHbs = Handlebars.compile($("#designer-hbs").html());
@@ -51,9 +87,10 @@ $(function () {
     var layoutsHbs = Handlebars.compile($("#layouts-hbs").html());
     var layoutHbs = Handlebars.compile($("#layout-hbs").html());
 
+    //TODO: handle plugin options in an extensible manner
     var userPrefs = function (widget, metadata) {
         var pref;
-        var opts = {};
+        var opts = widget.options || (widget.options = {});
         var prefs = metadata.userPrefs;
         for (pref in prefs) {
             if (prefs.hasOwnProperty(pref)) {
@@ -67,35 +104,54 @@ $(function () {
                 };
             }
         }
-        widget.plugin = opts;
     };
 
     var options = function (id, widget) {
         console.log(widget.options);
+        var opts = {};
         $('#middle').find('.designer .options').html(optionsHbs({
-            options: widget.options,
-            plugin: widget.plugin
-        }));
+            id: id,
+            options: widget.options
+        })).find('.sandbox').on('click', '.save', function () {
+            var thiz = $(this);
+            var id = thiz.data('id');
+            var sandbox = thiz.closest('.sandbox');
+            $('input', sandbox).each(function () {
+                var el = $(this);
+                opts[el.attr('name')] = el.val();
+            });
+            $('select', sandbox).each(function () {
+                var el = $(this);
+                opts[el.attr('name')] = el.val();
+            });
+            update(id, opts);
+        });
     };
 
     var layout = function (data) {
-        $('#middle').find('.designer').find('.content').html(layoutHbs(data))
+        $('#middle').find('.designer').html(layoutHbs(data))
+            .find('.toolbar .save').on('click', function () {
+                save();
+            }).end()
             .find('.ues-widget-box').droppable({
                 //activeClass: 'ui-state-default',
                 hoverClass: 'ui-state-hover',
                 //accept: ':not(.ui-sortable-helper)',
                 drop: function (event, ui) {
                     //$(this).find('.placeholder').remove();
-                    var id = ui.helper.data('id');
-                    var widget = find('gadget', id);
+                    var id = randomId();
+                    var wid = ui.helper.data('id');
+                    var widget = findWidgetDef('gadget', wid);
                     var droppable = $(this);
                     var area = droppable.attr('id');
                     var page = pager(current);
                     var content = page.content;
                     content = content[area] || (content[area] = []);
-                    content.push(widget);
-                    ues.store.gadget(id, function (err, data) {
-                        var id = randomId();
+                    content.push({
+                        id: id,
+                        widget: widget
+                    });
+                    ues.store.gadget(wid, function (err, data) {
                         var el = $(widgetHbs({
                             id: id
                         }));
@@ -110,6 +166,35 @@ $(function () {
                     });
                 }
             });
+    };
+
+    var layouter = function () {
+        var page = pager(current);
+        if (page && page.layout) {
+            layout(page.layout.content);
+            return;
+        }
+        ues.store.layouts({
+            start: 0,
+            count: 20
+        }, function (err, data) {
+            cache.layout = data;
+            $('#middle')
+                .find('.designer .content').html(layoutsHbs(data))
+                .on('click', '.thumbnails .add', function () {
+                    var id = $(this).data('id');
+                    var ly = findWidgetDef('layout', id);
+                    $.get(ly.url, function (data) {
+                        ly.content = data;
+                        pager(current, {
+                            title: 'My Dashboard',
+                            layout: ly,
+                            content: {}
+                        });
+                        layout(data);
+                    }, 'html');
+                });
+        });
     };
 
     /**
@@ -156,30 +241,11 @@ $(function () {
             });
     });
 
-    ues.store.layouts({
-        start: 0,
-        count: 20
-    }, function (err, data) {
-        cache.layout = data;
-        $('#middle')
-            .find('.designer .content').html(layoutsHbs(data))
-            .on('click', '.thumbnails .add', function () {
-                var id = $(this).data('id');
-                var ly = find('layout', id);
-                pager(current, {
-                    title: 'My Dashboard',
-                    layout: ly,
-                    content: {}
-                });
-                $.get(ly.url, function (data) {
-                    $('#middle').find('.designer .content').html(layout(data));
-                }, 'html');
-            });
-    });
+    layouter();
 
-    var source = function (html) {
-        return '<div class="container">' + html + '</div>';
-    };
+    /*var source = function (html) {
+     return '<div class="container">' + html + '</div>';
+     };*/
 
     /*$('.preview').click(function () {
      var html = $('.sandbox .container-fluid').html();

@@ -1,6 +1,8 @@
 <%
+var log = new Log();
 var method = request.getMethod();
 var dashboards = require('/modules/dashboards.js');
+var utils = require('/modules/utils.js');
 
 var randomId = function () {
     return Math.random().toString(36).slice(2);
@@ -19,19 +21,20 @@ if (matcher.match('/{context}/dashboards/{id}')) {
         pages: {}
     };
 }
+
+var prefix = utils.relativePrefix(request.getRequestURI());
 %>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <title>WSO2 UES - Dashboard Designer</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/jquery-ui.css">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/flat-ui.min.css">
-    <link rel="stylesheet" href="css/nunito.css">
-    <link rel="stylesheet" href="css/oxygen.css">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="<%=prefix%>css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%=prefix%>css/jquery-ui.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<%=prefix%>css/nunito.css">
+    <link rel="stylesheet" href="<%=prefix%>css/oxygen.css">
+    <link rel="stylesheet" href="<%=prefix%>css/index.css">
     <!--<link rel="stylesheet" href="css/theme.css">-->
 </head>
 <body>
@@ -58,7 +61,7 @@ if (matcher.match('/{context}/dashboards/{id}')) {
 </div>
 <div id="wrapper">
     <div id="left">
-        <nav class="navbar-default navbar" role="navigation">
+        <nav class="navbar-default navbar left-menu-bar" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -72,12 +75,12 @@ if (matcher.match('/{context}/dashboards/{id}')) {
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse left-menu-bar">
+            <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav nav-tabs" role="tablist">
-                    <li class="active"><a href="#designer"><span class="fui-windows glyphicon"></span></a></li>
-                    <li><a href="#widgets"><span class="fui-list-small-thumbnails glyphicon"></span></a></li>
-                    <li><a href="#settings"><span class="fui-gear glyphicon"></span></a></li>
-                    <li><a href="#"><span class="fui-exit glyphicon"></span></a></li>
+                    <li class="active"><a href="#designer"><i class="fa fa-columns"></i></a></li>
+                    <li><a href="#widgets"><i class="fa fa-pie-chart"></i></a></li>
+                    <li><a href="#settings"><i class="fa fa-cog"></i></a></li>
+                    <li><a href="#share"><i class="fa fa-share-alt"></i></a></li>
                 </ul>
             </div>
         </nav>
@@ -111,10 +114,8 @@ if (matcher.match('/{context}/dashboards/{id}')) {
         <div id="designer" class="container-fluid designer tab-pane active">
             <div class="row toolbar">
                 <div class="col-md-12">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default">Preview</button>
-                        <button type="button" class="btn btn-default save">Save</button>
-                    </div>
+                    <button type="button" class="btn btn-default preview">Preview</button>
+                    <button type="button" class="btn btn-default save">Save</button>
                 </div>
             </div>
             <div class="row">
@@ -141,22 +142,22 @@ if (matcher.match('/{context}/dashboards/{id}')) {
     <div class="preview-toggle"></div>
 </div>
 <!--<iframe id="sandbox" src="preview.jag"></iframe>-->
-<script src="js/jquery-1.10.2.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/flat-ui.min.js"></script>
-<script src="js/jquery-ui.js"></script>
-<script src="js/handlebars-v1.3.0.js"></script>
-<script src="js/index.js"></script>
-<script src="js/store.js"></script>
-<script src="/portal/themes/portal/js/shindig.js"></script>
+<script src="<%=prefix%>js/jquery-1.10.2.js"></script>
+<script src="<%=prefix%>js/bootstrap.min.js"></script>
+<script src="<%=prefix%>js/jquery-ui.js"></script>
+<script src="<%=prefix%>js/handlebars-v1.3.0.js"></script>
+<script src="<%=prefix%>js/designer.js"></script>
+<script src="<%=prefix%>js/store.js"></script>
+<!-- TODO fix shindig url -->
+<script src="/gadgets/js/container:open-views:opensearch:rpc:xmlutil:pubsub-2.js?c=1&debug=1&container=default"></script>
 <script>
 var dashboard = <%=dashboard%>;
 </script>
-<script src="js/ues-prefs.js"></script>
-<script src="js/ues.js"></script>
+<script src="<%=prefix%>js/ues-prefs.js"></script>
+<script src="<%=prefix%>js/ues.js"></script>
 <script id="designer-hbs" type="text/x-handlebars-template">
 </script>
-<script id="options-hbs" type="text/x-handlebars-template">
+<script id="widget-options-hbs" type="text/x-handlebars-template">
     <div class="sandbox">
         <h4>Properties</h4>
         <form>
@@ -167,18 +168,11 @@ var dashboard = <%=dashboard%>;
                 </label>
             </div>
             {{/each}}
-            {{#each plugin}}
-            {{!-- TODO handle all gadget prefs --}}
-            <div class="form-group">
-                <label>{{title}}
-                    <input type="text" class="form-control" name="{{@key}}" placeholder="{{title}}" value="{{value}}">
-                </label>
-            </div>
-            {{/each}}
+            <button type="button" class="btn btn-primary save" data-id="{{id}}">Save</button>
         </form>
     </div>
 </script>
-<script id="layouts-hbs" type="text/x-handlebars-template">
+<script id="layouts-list-hbs" type="text/x-handlebars-template">
     <div class="row thumbnails">
         {{#each .}}
         <div class="col-md-3 col-sm-4 col-xs-6 box">
@@ -196,14 +190,24 @@ var dashboard = <%=dashboard%>;
     </div>
 </script>
 <script id="layout-hbs" type="text/x-handlebars-template">
-    <div class="row">
-        <div class="col-md-10">
-            <div class="container-fluid">{{{.}}}</div>
+    <div class="row toolbar">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-default preview">Preview</button>
+            <button type="button" class="btn btn-default save">Save</button>
         </div>
-        <div class="col-md-2 options"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="container-fluid">{{{.}}}</div>
+                </div>
+                <div class="col-md-2 options"></div>
+            </div>
+        </div>
     </div>
 </script>
-<script id="widgets-hbs" type="text/x-handlebars-template">
+<script id="widgets-list-hbs" type="text/x-handlebars-template">
     <div class="row thumbnails">
         {{#each .}}
         <div class="col-md-3 col-sm-4 col-xs-6 box">
@@ -227,7 +231,7 @@ var dashboard = <%=dashboard%>;
         <div class="widget-toolbar container-fluid">
             <div class="row tools">
                 <div class="col-md-1 pull-right">
-                    <a href="#" class="options-handle"><span class="fui-gear glyphicon"></span></a>
+                    <a href="#" class="options-handle"><i class="fa fa-cog"></i></a>
                 </div>
             </div>
         </div>

@@ -16,7 +16,9 @@ var findOne = function (id) {
         username: user.username,
         tenantId: user.tenantId
     });
-    return registry.content(registryPath(id));
+    var content = registry.content(registryPath(id));
+    log.info(content);
+    return content;
 };
 
 var find = function () {
