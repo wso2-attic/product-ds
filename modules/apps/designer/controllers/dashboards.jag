@@ -1,6 +1,7 @@
 <%
 var dashboard;
 var prefix;
+var fresh = false;
 (function () {
     var contentType = request.getContentType();
     if (contentType) {
@@ -18,8 +19,8 @@ var prefix;
         return Math.random().toString(36).slice(2);
     };
 
-    var editor = false;
     var id;
+    var editor = false;
     var matcher = new URIMatcher(request.getRequestURI());
     //TODO: what happen when the context is changed or mapped via reverse proxy
     if (matcher.match('/{context}/dashboards/{id}')) {
@@ -35,6 +36,7 @@ var prefix;
             pages: {}
         };
         editor = true;
+        fresh = true;
     }
 
     prefix = utils.relativePrefix(request.getRequestURI());

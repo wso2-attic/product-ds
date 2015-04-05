@@ -38,16 +38,16 @@
 <script src="<%=prefix%>js/bootstrap.min.js"></script>
 <!-- TODO fix shindig url -->
 <script src="/gadgets/js/container:open-views:opensearch:rpc:xmlutil:pubsub-2.js?c=1&debug=1&container=default"></script>
-<script>
-var dashboard = <%=dashboard%>;
-</script>
 <script src="<%=prefix%>js/ues-prefs.js"></script>
 <script src="<%=prefix%>js/ues.js"></script>
 <script src="<%=prefix%>js/ues-plugins-gadget.js"></script>
 <script src="<%=prefix%>js/ues-plugins-widget.js"></script>
 <script src="<%=prefix%>js/ues-dashboards.js"></script>
 <script>
-ues.dashboard($('#wrapper'), dashboard, 'landing');
+ues.global.dashboard = <%=dashboard%>;
+</script>
+<script>
+ues.dashboard($('#wrapper'), ues.global.dashboard, 'landing');
 </script>
 </body>
 </html>
