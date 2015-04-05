@@ -83,7 +83,7 @@ $(function () {
         console.log(findPage(currentPage));
     };
 
-    var saveDashboard = function () {
+    var saveDashboard = function (dashboard) {
         $.ajax({
             url: dashboardUrl,
             method: 'POST',
@@ -115,30 +115,33 @@ $(function () {
         }
     };
 
-    var renderWidget = function (container, id) {
+    var renderWidget = function (page, container, id) {
         var instanceId = randomId();
         var widget = findStoreCache('gadget', id);
         var area = container.attr('id');
-        var page = findPage(currentPage);
         var content = page.content;
-        content = content[area] || (content[area] = []);
-        content.push({
+        var block = {
             id: instanceId,
             content: widget
-        });
-        ues.store.gadget(id, function (err, data) {
-            var el = $(widgetHbs({
-                id: instanceId
-            }));
-            container.html(el);
-            ues.gadget($('#' + instanceId), data.data.url, null, null, function (err, metadata) {
-                mergeUserPrefs(widget, metadata);
-                el.on('click', '.widget-toolbar .options-handle', function () {
-                    renderWidgetOptions(instanceId, widget);
-                });
-                renderWidgetOptions(instanceId, widget);
-            });
-        });
+        };
+        content = content[area] || (content[area] = []);
+        content.push(block);
+        //TODO: drag and drop doesn't work time to time
+        ues.widget(container, block);
+
+        /*ues.store.gadget(id, function (err, data) {
+         var el = $(widgetHbs({
+         id: instanceId
+         }));
+         container.html(el);
+         ues.gadget($('#' + instanceId), data.data.url, null, null, function (err, metadata) {
+         mergeUserPrefs(widget, metadata);
+         el.on('click', '.widget-toolbar .options-handle', function () {
+         renderWidgetOptions(instanceId, widget);
+         });
+         renderWidgetOptions(instanceId, widget);
+         });
+         });*/
     };
 
     var renderWidgetOptions = function (id, widget) {
@@ -179,21 +182,17 @@ $(function () {
             });
     };
 
-    var loadWidgets = function () {
+    var loadWidgets = function (start, count) {
         ues.store.gadgets({
-            start: 0,
-            count: 20
+            start: start,
+            count: count
         }, function (err, data) {
             storeCache.gadget = data;
-            $('#middle')
-                .find('.widgets .content').html(widgetsListHbs(data))
-                .on('click', '.thumbnails .add-button', function () {
-
-                });
+            $('#middle').find('.widgets .content').html(widgetsListHbs(data));
         });
     };
 
-    var initWidgetEvents = function () {
+    var initWidgets = function () {
         $('.widgets').on('mouseenter', '.thumbnail .drag-handle', function () {
             $(this).draggable({
                 cancel: false,
@@ -212,35 +211,6 @@ $(function () {
         });
     };
 
-    var initLayout = function () {
-        var page = findPage(currentPage);
-        if (page && page.layout) {
-            renderLayout(page.layout.content);
-            return;
-        }
-        ues.store.layouts({
-            start: 0,
-            count: 20
-        }, function (err, data) {
-            storeCache.layout = data;
-            $('#middle')
-                .find('.designer .content').html(layoutsListHbs(data))
-                .on('click', '.thumbnails .add', function () {
-                    var id = $(this).data('id');
-                    var ly = findStoreCache('layout', id);
-                    $.get(ly.url, function (data) {
-                        ly.content = data;
-                        createPage(currentPage, {
-                            title: 'My Dashboard',
-                            layout: ly,
-                            content: {}
-                        });
-                        renderLayout(data);
-                    }, 'html');
-                });
-        });
-    };
-
     var initTabs = function () {
         $('#left')
             .find('.nav-tabs a')
@@ -251,29 +221,80 @@ $(function () {
             });
     };
 
+    var listenLayout = function (dashboard, page) {
+        $('#middle').find('.designer')
+            .find('.toolbar .save').on('click', function () {
+                saveDashboard(dashboard);
+            }).end()
+            .find('.ues-widget-box').droppable({
+                //activeClass: 'ui-state-default',
+                hoverClass: 'ui-state-hover',
+                //accept: ':not(.ui-sortable-helper)',
+                drop: function (event, ui) {
+                    //$(this).find('.placeholder').remove();
+                    renderWidget(page, $(this), ui.helper.data('id'));
+                }
+            });
+    };
+
+    var layoutContainer = function () {
+        return $('#middle').find('.designer').html(layoutHbs()).find('.layout');
+    };
+
+    var addLayout = function (id, dashboard) {
+        var layout = findStoreCache('layout', id);
+        $.get(layout.url, function (data) {
+            var name = 'landing';
+            var title = 'My Dashboard';
+            layout.content = data;
+            var page = {
+                title: title,
+                layout: layout,
+                content: {}
+            };
+            dashboard.landing = name;
+            dashboard.pages[name] = page;
+            var container = layoutContainer();
+            ues.dashboard(container, dashboard, name);
+            listenLayout(dashboard, page);
+        }, 'html');
+    };
+
+    var initExisting = function (dashboard) {
+        var landing = dashboard.landing;
+        var page = dashboard.pages[landing];
+        if (!page) {
+            throw 'Specified page : ' + landing + ' cannot be found';
+        }
+        var container = layoutContainer();
+        ues.dashboard(container, dashboard, landing);
+        listenLayout(dashboard, page);
+    };
+
+    var initFresh = function (dashboard) {
+        ues.store.layouts({
+            start: 0,
+            count: 20
+        }, function (err, data) {
+            storeCache.layout = data;
+            $('#middle')
+                .find('.designer .content').html(layoutsListHbs(data))
+                .on('click', '.thumbnails .add', function () {
+                    addLayout($(this).data('id'), dashboard);
+                });
+        });
+    };
+
+    var initDashboard = function () {
+        var dashboard = ues.global.dashboard;
+        var fresh = ues.global.fresh;
+        fresh ? initFresh(dashboard) : initExisting(dashboard);
+    };
+
     initTabs();
-    initLayout();
-    initWidgetEvents();
-    loadWidgets();
-
-    /*var source = function (html) {
-     return '<div class="container">' + html + '</div>';
-     };*/
-
-    /*$('.preview').click(function () {
-     var html = $('.sandbox .container-fluid').html();
-     console.log(html);
-     $('#sandbox').contents()
-     .find('body')
-     .html(source(html));
-     */
-    /*$('.container').hide();
-     $('#sandbox').contents()
-     .find('body')
-     .html('<div class="container"><div class="row"><div class="col-lg-3 ues-widget-box"></div><div class="col-lg-3 ues-widget-box"></div><div class="col-lg-3 ues-widget-box"></div><div class="col-lg-3 ues-widget-box"></div></div></div>');
-     */
-    /*
-     });*/
+    initDashboard();
+    initWidgets();
+    loadWidgets(0, 20);
 
     //TODO: uncomment this
     /*$('.designer .content').on('mouseenter', '.widget .widget-toolbar', function () {

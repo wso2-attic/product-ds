@@ -153,7 +153,7 @@ ues.global.fresh = <%=fresh%>;
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-10">
-                    <div class="container-fluid">{{{.}}}</div>
+                    <div class="container-fluid layout"></div>
                 </div>
                 <div class="col-md-2 options"></div>
             </div>

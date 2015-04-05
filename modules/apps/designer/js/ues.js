@@ -149,4 +149,5 @@ var ues = ues || {};
     ues.client = client;
     ues.gadget = gadget;
     ues.plugins = {};
+    ues.global = {};
 }());

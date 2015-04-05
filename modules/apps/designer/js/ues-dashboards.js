@@ -10,12 +10,14 @@
         }, 'html');
     };
 
-    var renderBlock = function (container, block) {
+    var renderWidget = function (container, block) {
         var plugin = ues.plugins[block.content.type];
         if (!plugin) {
             return console.warn('ues dashboard plugin for ' + block.content.type + ' cannot be found');
         }
-        plugin.create(container, block, ues.hub);
+        var sandbox = $('<div id="' + block.id + '" class="ues-widget"></div>');
+        sandbox.appendTo(container);
+        plugin.create(sandbox, block, ues.hub);
     };
 
     var wirings;
@@ -73,37 +75,42 @@
         return wirez;
     };
 
-    var render = function (element, page, done) {
-        wirings = wires(page);
-        renderLayout(page.layout, function (err, layout) {
-            var container;
-            var area;
-            var content = page.content;
-            for (area in content) {
-                if (content.hasOwnProperty(area)) {
-                    container = $('#' + area, layout);
-                    content[area].forEach(function (options) {
-                        var sandbox = $('<div id="' + options.id + '" class="ues-widget"></div>');
-                        sandbox.appendTo(container);
-                        renderBlock(sandbox, options);
-                    });
-                }
-            }
-            element.html(layout);
-            if (!done) {
-                return;
-            }
-            done();
-        });
+    var setDocumentTitle = function (dashboard, page) {
+        document.title = document.title + ' | ' + (page.title || dashboard.title);
     };
 
-    ues.dashboard = function (element, dashboard, name, done) {
+    var renderPage = function (element, dashboard, page, done) {
+        setDocumentTitle(dashboard, page);
+        wirings = wires(page);
+        var container;
+        var area;
+        var layout = $(page.layout.content);
+        var content = page.content;
+        for (area in content) {
+            if (content.hasOwnProperty(area)) {
+                container = $('#' + area, layout);
+                content[area].forEach(function (options) {
+                    renderWidget(container, options);
+                });
+            }
+        }
+        element.html(layout);
+        if (!done) {
+            return;
+        }
+        done();
+    };
+
+    var renderDashboard = function (element, dashboard, name, done) {
         var page = dashboard.pages[name];
         if (!page) {
-            throw 'Request page : ' + name + ' cannot be found';
+            throw 'Requested page : ' + name + ' cannot be found';
         }
-        document.title = document.title + ' | ' + (page.title || dashboard.title);
-        render(element, page, done);
+        renderPage(element, dashboard, page, done);
     };
+
+    ues.widget = renderWidget;
+
+    ues.dashboard = renderDashboard;
 
 }());
