@@ -73,7 +73,7 @@
         return wirez;
     };
 
-    ues.page = function (element, page, done) {
+    var render = function (element, page, done) {
         wirings = wires(page);
         renderLayout(page.layout, function (err, layout) {
             var container;
@@ -93,4 +93,17 @@
             done();
         });
     };
+
+    ues.dashboard = function (element, dashboard, name, done) {
+        if (!done) {
+            done = name;
+            name = ues.dashboard.current;
+        }
+        var page = dashboard.pages[name];
+        if (!page) {
+            throw 'Request page : ' + name + ' cannot be found';
+        }
+        render(element, page, done);
+    };
+
 }());

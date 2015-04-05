@@ -1,5 +1,5 @@
 (function () {
-    ues.page($("#wrapper"), {
+    ues.dashboard($("#wrapper"), {
         "id": "123456",
         "pages": {
             "landing": {
@@ -125,7 +125,7 @@
                 }
             }
         }
-    }, function () {
+    }, 'landing', function () {
         console.log("page rendered");
     });
 }());
