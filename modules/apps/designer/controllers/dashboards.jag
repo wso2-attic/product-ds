@@ -1,4 +1,6 @@
 <%
+var dashboard;
+var prefix;
 (function () {
     var contentType = request.getContentType();
     if (contentType) {
@@ -8,6 +10,35 @@
             return;
         }
     }
-    include('dashboard-renderer.jag');
+
+    var dashboards = require('/modules/dashboards.js');
+    var utils = require('/modules/utils.js');
+
+    var randomId = function () {
+        return Math.random().toString(36).slice(2);
+    };
+
+    var editor = false;
+    var id;
+    var matcher = new URIMatcher(request.getRequestURI());
+    //TODO: what happen when the context is changed or mapped via reverse proxy
+    if (matcher.match('/{context}/dashboards/{id}')) {
+        id = matcher.elements().id;
+        dashboard = dashboards.findOne(id);
+    } else if (matcher.match('/{context}/dashboards/{id}/edit')) {
+        id = matcher.elements().id;
+        dashboard = dashboards.findOne(id);
+        editor = true;
+    } else {
+        dashboard = {
+            id: randomId(),
+            pages: {}
+        };
+        editor = true;
+    }
+
+    prefix = utils.relativePrefix(request.getRequestURI());
+
+    editor ? include('dashboard-designer.jag') : include('dashboard-renderer.jag');
 }());
 %>

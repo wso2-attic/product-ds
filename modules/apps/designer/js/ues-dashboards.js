@@ -90,19 +90,19 @@
                 }
             }
             element.html(layout);
+            if (!done) {
+                return;
+            }
             done();
         });
     };
 
     ues.dashboard = function (element, dashboard, name, done) {
-        if (!done) {
-            done = name;
-            name = ues.dashboard.current;
-        }
         var page = dashboard.pages[name];
         if (!page) {
             throw 'Request page : ' + name + ' cannot be found';
         }
+        document.title = document.title + ' | ' + (page.title || dashboard.title);
         render(element, page, done);
     };
 
