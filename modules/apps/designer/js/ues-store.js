@@ -3,7 +3,7 @@ var store = {};
 
 (function () {
 
-    var assetsUrl = window.location.pathname.match(/.*(\/dashboards\/).+/ig) ? '../assets' : 'assets';
+    var assetsUrl = ues.utils.relativePrefix() + 'assets';
 
     var store = (ues.store = {});
 

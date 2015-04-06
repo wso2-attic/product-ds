@@ -1,6 +1,8 @@
 (function () {
 
-    var idPrefix = (osapi.container.GadgetHolder.IFRAME_ID_PREFIX_ = 'gadget-');
+    osapi.container.GadgetHolder.IFRAME_ID_PREFIX_ = '';
+
+    var idPrefix = 'gadget-';
 
     var gadgets = {};
 
@@ -40,8 +42,10 @@
                     };
                 }
             }
-            gadgets[gadgetId(widget.id)] = widget;
-            ues.gadgets.render(sandbox, widget.content.data.url);
+            var id = gadgetId(widget.id);
+            var container = $('<div id="' + id + '"></div>').appendTo(sandbox);
+            gadgets[id] = widget;
+            ues.gadgets.render(container, widget.content.data.url);
             done(false, widget);
         });
     };

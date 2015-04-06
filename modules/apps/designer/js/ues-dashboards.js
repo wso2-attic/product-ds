@@ -90,7 +90,9 @@
             if (content.hasOwnProperty(area)) {
                 container = $('#' + area, layout);
                 content[area].forEach(function (options) {
-                    renderWidget(container, options);
+                    renderWidget(container, options, function () {
+
+                    });
                 });
             }
         }

@@ -1,7 +1,7 @@
 $(function () {
     //TODO: cleanup this
 
-    var dashboardUrl = window.location.pathname.match(/.*(\/dashboards\/).+/ig) ? '../dashboards' : 'dashboards';
+    var dashboardUrl = ues.utils.relativePrefix() + 'dashboards';
 
     var dashboard;
 

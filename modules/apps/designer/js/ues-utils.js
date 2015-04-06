@@ -1,6 +1,7 @@
 var ues = ues || {};
+
 (function () {
-    ues.relativePrefix = function () {
+    var relativePrefix = function () {
         var path = window.location.pathname;
         //.match(/.*(\/dashboards\/).+/ig) ? '../dashboards' : 'dashboards'
         var parts = path.split('/');
@@ -11,5 +12,9 @@ var ues = ues || {};
             prefix += '../';
         }
         return prefix;
+    };
+
+    ues.utils = {
+        relativePrefix: relativePrefix
     };
 }());
