@@ -13,7 +13,7 @@ require('/app.js');
 var portal = require('/portal.js').config();
 
 var populate = function () {
-    var i, name, length, gadgets, file, path, xml, location
+    var i, name, length, gadgets, file, path, xml, location,
         log = new Log('portal.deployer'),
         repo = new File(repoPath),
         deployer = require('/modules/deployer.js'),
