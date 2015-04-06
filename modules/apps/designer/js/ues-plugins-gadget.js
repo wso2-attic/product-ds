@@ -1,10 +1,14 @@
 (function () {
 
-    osapi.container.GadgetHolder.IFRAME_ID_PREFIX_ = '';
+    var idPrefix = (osapi.container.GadgetHolder.IFRAME_ID_PREFIX_ = 'gadget-');
 
     var gadgets = {};
 
     var subscribeForClient = ues.hub.subscribeForClient;
+
+    var gadgetId = function (id) {
+        return idPrefix + id;
+    };
 
     ues.hub.subscribeForClient = function (container, topic, conSubId) {
         var clientId = container.getClientID();
@@ -19,20 +23,34 @@
 
     var plugin = (ues.plugins['gadget'] = {});
 
-    plugin.prepare = function (sandbox, hub) {
+    plugin.create = function (sandbox, widget, hub, done) {
+        ues.gadgets.preload(widget.content.data.url, function (err, metadata) {
+            var pref;
+            var opts = widget.content.options || (widget.content.options = {});
+            var prefs = metadata.userPrefs;
+            for (pref in prefs) {
+                if (prefs.hasOwnProperty(pref)) {
+                    pref = prefs[pref];
+                    opts[pref.name] = {
+                        type: pref.dataType,
+                        title: pref.displayName,
+                        value: pref.defaultValue,
+                        options: pref.orderedEnumValues,
+                        required: pref.required
+                    };
+                }
+            }
+            gadgets[gadgetId(widget.id)] = widget;
+            ues.gadgets.render(sandbox, widget.content.data.url);
+            done(false, widget);
+        });
+    };
+
+    plugin.update = function (sandbox, widget, hub, done) {
 
     };
 
-    plugin.create = function (sandbox, options, hub) {
-        gadgets[options.id] = options;
-        ues.gadget(sandbox, options.content.data.url);
-    };
-
-    plugin.update = function (sandbox, options, events, hub) {
-
-    };
-
-    plugin.destroy = function (sandbox, hub) {
+    plugin.destroy = function (sandbox, options, hub, done) {
         $(sandbox).remove('iframe');
     };
 

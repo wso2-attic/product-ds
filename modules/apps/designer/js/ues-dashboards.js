@@ -10,14 +10,14 @@
         }, 'html');
     };
 
-    var renderWidget = function (container, block) {
+    var renderWidget = function (container, block, done) {
         var plugin = ues.plugins[block.content.type];
         if (!plugin) {
             return console.warn('ues dashboard plugin for ' + block.content.type + ' cannot be found');
         }
         var sandbox = $('<div id="' + block.id + '" class="ues-widget"></div>');
         sandbox.appendTo(container);
-        plugin.create(sandbox, block, ues.hub);
+        plugin.create(sandbox, block, ues.hub, done);
     };
 
     var wirings;
@@ -109,8 +109,12 @@
         renderPage(element, dashboard, page, done);
     };
 
-    ues.widget = renderWidget;
+    ues.widgets = {
+        render: renderWidget
+    };
 
-    ues.dashboard = renderDashboard;
+    ues.dashboards = {
+        render: renderDashboard
+    };
 
 }());

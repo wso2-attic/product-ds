@@ -156,7 +156,7 @@ $(function () {
                             id: id
                         }));
                         droppable.html(el);
-                        ues.gadget($('#' + id), data.data.url, null, null, function (err, metadata) {
+                        ues.gadgets.render($('#' + id), data.data.url, null, null, function (err, metadata) {
                             userPrefs(widget, metadata);
                             el.on('click', '.widget-toolbar .options-handle', function () {
                                 options(id, widget);

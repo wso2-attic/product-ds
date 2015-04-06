@@ -47,7 +47,7 @@
 ues.global.dashboard = <%=dashboard%>;
 </script>
 <script>
-ues.dashboard($('#wrapper'), ues.global.dashboard, 'landing');
+ues.dashboards.render($('#wrapper'), ues.global.dashboard, 'landing');
 </script>
 </body>
 </html>

@@ -3,12 +3,11 @@ $(function () {
 
     var dashboardUrl = window.location.pathname.match(/.*(\/dashboards\/).+/ig) ? '../dashboards' : 'dashboards';
 
-    var currentPage = 'landing';
+    var dashboard;
 
-    var storeCache = {
-        layout: [],
-        gadget: []
-    };
+    var page;
+
+    var storeCache = {};
 
     var layoutsListHbs = Handlebars.compile($("#layouts-list-hbs").html());
 
@@ -16,7 +15,7 @@ $(function () {
 
     var widgetsListHbs = Handlebars.compile($("#widgets-list-hbs").html());
 
-    var widgetHbs = Handlebars.compile($("#widget-hbs").html());
+    var widgetToolbarHbs = Handlebars.compile($("#widget-toolbar-hbs").html());
 
     var widgetOptionsHbs = Handlebars.compile($("#widget-options-hbs").html());
 
@@ -24,14 +23,6 @@ $(function () {
 
     var randomId = function () {
         return Math.random().toString(36).slice(2);
-    };
-
-    var findPage = function (name) {
-        return dashboard.pages[name];
-    };
-
-    var createPage = function (name, page) {
-        return dashboard.pages[name] = page;
     };
 
     var findStoreCache = function (type, id) {
@@ -47,14 +38,13 @@ $(function () {
         }
     };
 
-    var findPageWidget = function (id) {
-        var page = findPage(currentPage);
-        var content = page.content;
+    var findWidget = function (id) {
         var i;
         var length;
         var area;
         var widget;
         var widgets;
+        var content = page.content;
         for (area in content) {
             if (content.hasOwnProperty(area)) {
                 widgets = content[area];
@@ -69,18 +59,17 @@ $(function () {
         }
     };
 
-    var updatePageOptions = function (id, opts) {
-        var block = findPageWidget(id);
-        var options = block.content.options;
+    var updateWidgetOptions = function (id, opts) {
         var o;
         var opt;
+        var block = findWidget(id);
+        var options = block.content.options;
         for (opt in opts) {
             if (opts.hasOwnProperty(opt)) {
                 o = options[opt];
                 o.value = opts[opt];
             }
         }
-        console.log(findPage(currentPage));
     };
 
     var saveDashboard = function (dashboard) {
@@ -96,60 +85,42 @@ $(function () {
         });
     };
 
-    //TODO: handle plugin options in an extensible manner
-    var mergeUserPrefs = function (widget, metadata) {
-        var pref;
-        var opts = widget.options || (widget.options = {});
-        var prefs = metadata.userPrefs;
-        for (pref in prefs) {
-            if (prefs.hasOwnProperty(pref)) {
-                pref = prefs[pref];
-                opts[pref.name] = {
-                    type: pref.dataType,
-                    title: pref.displayName,
-                    value: pref.defaultValue,
-                    options: pref.orderedEnumValues,
-                    required: pref.required
-                };
-            }
-        }
+    var initWidgetProperties = function () {
+        $('#middle').find('.designer')
+            .on('click', '.ues-widget .widget-toolbar .options-handle', function () {
+                var id = $(this).closest('.ues-widget').attr('id');
+                renderWidgetOptions(id);
+            });
     };
 
-    var renderWidget = function (page, container, id) {
-        var instanceId = randomId();
-        var widget = findStoreCache('gadget', id);
+    var renderWidgetToolbar = function (id) {
+        $('#' + id).prepend($(widgetToolbarHbs()))
+    };
+
+    var renderWidget = function (container, wid) {
+        var id = randomId();
+        //TODO: remove hardcoded gadget
+        var asset = findStoreCache('gadget', wid);
         var area = container.attr('id');
         var content = page.content;
-        var block = {
-            id: instanceId,
-            content: widget
-        };
         content = content[area] || (content[area] = []);
-        content.push(block);
-        //TODO: drag and drop doesn't work time to time
-        ues.widget(container, block);
-
-        /*ues.store.gadget(id, function (err, data) {
-         var el = $(widgetHbs({
-         id: instanceId
-         }));
-         container.html(el);
-         ues.gadget($('#' + instanceId), data.data.url, null, null, function (err, metadata) {
-         mergeUserPrefs(widget, metadata);
-         el.on('click', '.widget-toolbar .options-handle', function () {
-         renderWidgetOptions(instanceId, widget);
-         });
-         renderWidgetOptions(instanceId, widget);
-         });
-         });*/
+        var widget = {
+            id: id,
+            content: asset
+        };
+        content.push(widget);
+        ues.widgets.render(container, widget, function (err, block) {
+            renderWidgetToolbar(id);
+            renderWidgetOptions(id);
+        });
     };
 
-    var renderWidgetOptions = function (id, widget) {
-        console.log(widget.options);
+    var renderWidgetOptions = function (id) {
         var opts = {};
+        var widget = findWidget(id);
         $('#middle').find('.designer .options').html(widgetOptionsHbs({
-            id: id,
-            options: widget.options
+            id: widget.id,
+            options: widget.content.options
         })).find('.sandbox').on('click', '.save', function () {
             var thiz = $(this);
             var id = thiz.data('id');
@@ -162,24 +133,8 @@ $(function () {
                 var el = $(this);
                 opts[el.attr('name')] = el.val();
             });
-            updatePageOptions(id, opts);
+            updateWidgetOptions(id, opts);
         });
-    };
-
-    var renderLayout = function (data) {
-        $('#middle').find('.designer').html(layoutHbs(data))
-            .find('.toolbar .save').on('click', function () {
-                saveDashboard();
-            }).end()
-            .find('.ues-widget-box').droppable({
-                //activeClass: 'ui-state-default',
-                hoverClass: 'ui-state-hover',
-                //accept: ':not(.ui-sortable-helper)',
-                drop: function (event, ui) {
-                    //$(this).find('.placeholder').remove();
-                    renderWidget($(this), ui.helper.data('id'));
-                }
-            });
     };
 
     var loadWidgets = function (start, count) {
@@ -221,7 +176,7 @@ $(function () {
             });
     };
 
-    var listenLayout = function (dashboard, page) {
+    var listenLayout = function () {
         $('#middle').find('.designer')
             .find('.toolbar .save').on('click', function () {
                 saveDashboard(dashboard);
@@ -232,7 +187,7 @@ $(function () {
                 //accept: ':not(.ui-sortable-helper)',
                 drop: function (event, ui) {
                     //$(this).find('.placeholder').remove();
-                    renderWidget(page, $(this), ui.helper.data('id'));
+                    renderWidget($(this), ui.helper.data('id'));
                 }
             });
     };
@@ -241,13 +196,13 @@ $(function () {
         return $('#middle').find('.designer').html(layoutHbs()).find('.layout');
     };
 
-    var addLayout = function (id, dashboard) {
+    var createPage = function (id) {
         var layout = findStoreCache('layout', id);
         $.get(layout.url, function (data) {
             var name = 'landing';
             var title = 'My Dashboard';
             layout.content = data;
-            var page = {
+            page = {
                 title: title,
                 layout: layout,
                 content: {}
@@ -255,23 +210,29 @@ $(function () {
             dashboard.landing = name;
             dashboard.pages[name] = page;
             var container = layoutContainer();
-            ues.dashboard(container, dashboard, name);
-            listenLayout(dashboard, page);
+            ues.dashboards.render(container, dashboard, name, function () {
+                listenLayout();
+            });
         }, 'html');
     };
 
-    var initExisting = function (dashboard) {
+    var initExisting = function () {
         var landing = dashboard.landing;
-        var page = dashboard.pages[landing];
+        page = dashboard.pages[landing];
         if (!page) {
             throw 'Specified page : ' + landing + ' cannot be found';
         }
         var container = layoutContainer();
-        ues.dashboard(container, dashboard, landing);
-        listenLayout(dashboard, page);
+        ues.dashboards.render(container, dashboard, landing, function () {
+            $('#middle').find('.designer .ues-widget').each(function () {
+                var id = $(this).attr('id');
+                renderWidgetToolbar(id);
+            });
+            listenLayout();
+        });
     };
 
-    var initFresh = function (dashboard) {
+    var initFresh = function () {
         ues.store.layouts({
             start: 0,
             count: 20
@@ -280,21 +241,29 @@ $(function () {
             $('#middle')
                 .find('.designer .content').html(layoutsListHbs(data))
                 .on('click', '.thumbnails .add', function () {
-                    addLayout($(this).data('id'), dashboard);
+                    createPage($(this).data('id'));
                 });
         });
     };
 
-    var initDashboard = function () {
-        var dashboard = ues.global.dashboard;
-        var fresh = ues.global.fresh;
-        fresh ? initFresh(dashboard) : initExisting(dashboard);
+    var initDashboard = function (db) {
+        if (db) {
+            dashboard = db;
+            initExisting();
+            return;
+        }
+        dashboard = {
+            id: randomId(),
+            pages: {}
+        };
+        initFresh();
     };
 
     initTabs();
-    initDashboard();
+    initWidgetProperties();
     initWidgets();
     loadWidgets(0, 20);
+    initDashboard(ues.global.dashboard);
 
     //TODO: uncomment this
     /*$('.designer .content').on('mouseenter', '.widget .widget-toolbar', function () {

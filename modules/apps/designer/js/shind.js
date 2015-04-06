@@ -1,5 +1,5 @@
 (function () {
-    ues.dashboard($("#wrapper"), {
+    ues.dashboards.render($("#wrapper"), {
         "id": "123456",
         "pages": {
             "landing": {

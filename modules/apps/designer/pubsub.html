@@ -22,8 +22,8 @@
 <h4>g2</h4>
 <div id="gadget-2"></div>
 <script>
-    ues.gadget('#gadget-1', 'http://localhost:9763/dashboards/tests/g1.xml');
-    ues.gadget('#gadget-2', 'http://localhost:9763/dashboards/tests/g2.xml');
+    ues.gadgets.render('#gadget-1', 'http://localhost:9763/dashboards/tests/g1.xml');
+    ues.gadgets.render('#gadget-2', 'http://localhost:9763/dashboards/tests/g2.xml');
 
     $(function () {
         $('.clear').click(function () {

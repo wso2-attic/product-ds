@@ -1,7 +1,6 @@
 <%
 var dashboard;
 var prefix;
-var fresh = false;
 (function () {
     var contentType = request.getContentType();
     if (contentType) {
@@ -15,10 +14,6 @@ var fresh = false;
     var dashboards = require('/modules/dashboards.js');
     var utils = require('/modules/utils.js');
 
-    var randomId = function () {
-        return Math.random().toString(36).slice(2);
-    };
-
     var id;
     var editor = false;
     var matcher = new URIMatcher(request.getRequestURI());
@@ -31,12 +26,7 @@ var fresh = false;
         dashboard = dashboards.findOne(id);
         editor = true;
     } else {
-        dashboard = {
-            id: randomId(),
-            pages: {}
-        };
         editor = true;
-        fresh = true;
     }
 
     prefix = utils.relativePrefix(request.getRequestURI());

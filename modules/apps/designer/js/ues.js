@@ -56,7 +56,7 @@ var ues = ues || {};
     var container = new osapi.container.Container(params);
 
     //Gadget renderer
-    var gadget = function (sandbox, url, prefs, params, done) {
+    var render = function (sandbox, url, prefs, params, done) {
         var options = {};
         options[osapi.container.RenderParam.WIDTH] = '100%';
         options[osapi.container.RenderParam.VIEW] = 'home';
@@ -75,6 +75,13 @@ var ues = ues || {};
                     done(false, metadata);
                 }
             });
+        });
+    };
+
+    var preload = function (url, done) {
+        container.preloadGadget(url, function (data) {
+            var metadata = data[url];
+            done(metadata.error, metadata);
         });
     };
 
@@ -147,7 +154,10 @@ var ues = ues || {};
     ues.hub = hub;
     ues.container = container;
     ues.client = client;
-    ues.gadget = gadget;
+    ues.gadgets = {
+        render: render,
+        preload: preload
+    };
     ues.plugins = {};
     ues.global = {};
 }());

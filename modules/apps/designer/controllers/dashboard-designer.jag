@@ -105,7 +105,6 @@
 <script src="<%=prefix%>js/ues-dashboards.js"></script>
 <script>
 ues.global.dashboard = <%=dashboard%>;
-ues.global.fresh = <%=fresh%>;
 </script>
 <script src="<%=prefix%>js/designer.js"></script>
 <script id="designer-hbs" type="text/x-handlebars-template">
@@ -179,16 +178,13 @@ ues.global.fresh = <%=fresh%>;
         {{/each}}
     </div>
 </script>
-<script id="widget-hbs" type="text/x-handlebars-template">
-    <div class="widget" data-id="{{id}}">
-        <div class="widget-toolbar container-fluid">
-            <div class="row tools">
-                <div class="col-md-1 pull-right">
-                    <a href="#" class="options-handle"><i class="fa fa-cog"></i></a>
-                </div>
+<script id="widget-toolbar-hbs" type="text/x-handlebars-template">
+    <div class="widget-toolbar container-fluid">
+        <div class="row tools">
+            <div class="col-md-1 pull-right">
+                <a href="#" class="options-handle"><i class="fa fa-cog"></i></a>
             </div>
         </div>
-        <div id="{{id}}" class="widget-content"></div>
     </div>
 </script>
 </body>

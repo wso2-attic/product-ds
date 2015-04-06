@@ -126,11 +126,6 @@ a, a:focus {
     margin-top: 10px;
 }
 
-.widget {
-    height: 100%;
-    position: relative;
-}
-
 .ues-widget-box {
     min-height: 300px;
     border: 1px solid #cccccc;
@@ -138,6 +133,7 @@ a, a:focus {
 
 .ues-widget {
     min-height: 300px;
+    position: relative;
 }
 
 .ues-widget.ui-draggable-dragging {

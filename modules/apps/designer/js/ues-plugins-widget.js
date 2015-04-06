@@ -2,15 +2,11 @@
 
     var plugin = (ues.plugins['widget'] = {});
 
-    plugin.prepare = function (sandbox, hub) {
-
-    };
-
-    plugin.create = function (sandbox, options, hub) {
-        var html = '<h2>' + options.content.title + '</h2>';
+    plugin.create = function (sandbox, widget, hub, done) {
+        var html = '<h2>' + widget.content.title + '</h2>';
         html += '<button class="send btn btn-primary" type="button">Send</button>';
         sandbox.html(html);
-        var id = options.id;
+        var id = widget.id;
         var container = new OpenAjax.hub.InlineContainer(ues.hub, id, {
                 Container: {
                     onSecurityAlert: function (source, alertType) {
@@ -56,7 +52,7 @@
         };
 
         client.connect(function (client, success, error) {
-            var hub = new Hub(client, options);
+            var hub = new Hub(client, widget);
             sandbox.on('click', '.send', function () {
                 hub.emit('user-country', 'LK');
                 hub.emit('client-country', 'US');
@@ -66,14 +62,14 @@
                 console.log(state);
             });
         });
+        done(false, widget);
+    };
+
+    plugin.update = function (sandbox, widget, hub, done) {
 
     };
 
-    plugin.update = function (sandbox, options, events, hub) {
-
-    };
-
-    plugin.destroy = function (sandbox, hub) {
+    plugin.destroy = function (sandbox, widget, hub, done) {
         $(sandbox).remove('iframe');
     };
 
