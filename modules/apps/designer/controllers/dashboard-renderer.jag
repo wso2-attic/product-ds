@@ -45,9 +45,8 @@
 <script src="<%=prefix%>js/ues-dashboards.js"></script>
 <script>
 ues.global.dashboard = <%=dashboard%>;
-</script>
-<script>
-ues.dashboards.render($('#wrapper'), ues.global.dashboard, 'landing');
+ues.global.page = '<%=page%>';
+ues.dashboards.render($('#wrapper'), ues.global.dashboard, ues.global.page);
 </script>
 </body>
 </html>

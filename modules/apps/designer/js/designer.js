@@ -216,11 +216,10 @@ $(function () {
         }, 'html');
     };
 
-    var initExisting = function () {
-        var landing = dashboard.landing;
+    var initExisting = function (landing) {
         page = dashboard.pages[landing];
         if (!page) {
-            throw 'Specified page : ' + landing + ' cannot be found';
+            throw 'specified page : ' + landing + ' cannot be found';
         }
         var container = layoutContainer();
         ues.dashboards.render(container, dashboard, landing, function () {
@@ -246,10 +245,10 @@ $(function () {
         });
     };
 
-    var initDashboard = function (db) {
+    var initDashboard = function (db, page) {
         if (db) {
             dashboard = db;
-            initExisting();
+            initExisting(page || db.landing);
             return;
         }
         dashboard = {
@@ -263,7 +262,7 @@ $(function () {
     initWidgetProperties();
     initWidgets();
     loadWidgets(0, 20);
-    initDashboard(ues.global.dashboard);
+    initDashboard(ues.global.dashboard, ues.global.page);
 
     //TODO: uncomment this
     /*$('.designer .content').on('mouseenter', '.widget .widget-toolbar', function () {

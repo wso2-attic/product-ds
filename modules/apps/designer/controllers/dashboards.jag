@@ -1,5 +1,6 @@
 <%
 var dashboard;
+var page;
 var prefix;
 (function () {
     var contentType = request.getContentType();
@@ -14,23 +15,20 @@ var prefix;
     var dashboards = require('/modules/dashboards.js');
     var utils = require('/modules/utils.js');
 
-    var id;
-    var editor = false;
+    var vars;
+    var editor = request.getParameter('editor');
     var matcher = new URIMatcher(request.getRequestURI());
     //TODO: what happen when the context is changed or mapped via reverse proxy
     if (matcher.match('/{context}/dashboards/{id}')) {
-        id = matcher.elements().id;
-        dashboard = dashboards.findOne(id);
-    } else if (matcher.match('/{context}/dashboards/{id}/edit')) {
-        id = matcher.elements().id;
-        dashboard = dashboards.findOne(id);
-        editor = true;
-    } else {
-        editor = true;
+        vars = matcher.elements();
+        dashboard = dashboards.findOne(vars.id);
+    } else if (matcher.match('/{context}/dashboards/{id}/{page}')) {
+        vars = matcher.elements();
+        dashboard = dashboards.findOne(vars.id);
+        page = vars.page
     }
 
     prefix = utils.relativePrefix(request.getRequestURI());
-
     editor ? include('dashboard-designer.jag') : include('dashboard-renderer.jag');
 }());
 %>

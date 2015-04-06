@@ -106,6 +106,7 @@
 <script src="<%=prefix%>js/ues-dashboards.js"></script>
 <script>
 ues.global.dashboard = <%=dashboard%>;
+ues.global.page = '<%=page%>';
 </script>
 <script src="<%=prefix%>js/designer.js"></script>
 <script id="designer-hbs" type="text/x-handlebars-template">
