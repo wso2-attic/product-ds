@@ -104,6 +104,7 @@
     };
 
     var renderDashboard = function (element, dashboard, name, done) {
+        name = name || dashboard.landing;
         var page = dashboard.pages[name];
         if (!page) {
             throw 'requested page : ' + name + ' cannot be found';

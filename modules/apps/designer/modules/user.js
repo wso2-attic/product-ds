@@ -15,6 +15,6 @@ var logout = function () {
     session.remove('user');
 };
 
-var authorized = function(perm, action) {
+var authorized = function (perm, action) {
     return true;
 };

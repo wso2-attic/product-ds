@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <title>WSO2 UES - Dashboard Designer</title>
-    <link rel="stylesheet" href="<%=prefix%>css/bootstrap.min.css">
-    <link rel="stylesheet" href="<%=prefix%>css/jquery-ui.css">
+    <link rel="stylesheet" href="<%=urlPrefix%>css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%=urlPrefix%>css/jquery-ui.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<%=prefix%>css/nunito.css">
-    <link rel="stylesheet" href="<%=prefix%>css/oxygen.css">
-    <link rel="stylesheet" href="<%=prefix%>css/index.css">
+    <link rel="stylesheet" href="<%=urlPrefix%>css/nunito.css">
+    <link rel="stylesheet" href="<%=urlPrefix%>css/oxygen.css">
+    <link rel="stylesheet" href="<%=urlPrefix%>css/index.css">
     <!--<link rel="stylesheet" href="css/theme.css">-->
 </head>
 <body>
@@ -91,24 +91,24 @@
     <div class="preview-toggle"></div>
 </div>
 <!--<iframe id="sandbox" src="preview.jag"></iframe>-->
-<script src="<%=prefix%>js/jquery-1.10.2.js"></script>
-<script src="<%=prefix%>js/bootstrap.min.js"></script>
-<script src="<%=prefix%>js/jquery-ui.js"></script>
-<script src="<%=prefix%>js/handlebars-v1.3.0.js"></script>
+<script src="<%=urlPrefix%>js/jquery-1.10.2.js"></script>
+<script src="<%=urlPrefix%>js/bootstrap.min.js"></script>
+<script src="<%=urlPrefix%>js/jquery-ui.js"></script>
+<script src="<%=urlPrefix%>js/handlebars-v1.3.0.js"></script>
 <!-- TODO fix shindig url -->
 <script src="/gadgets/js/container:open-views:opensearch:rpc:xmlutil:pubsub-2.js?c=1&debug=1&container=default"></script>
-<script src="<%=prefix%>js/ues-prefs.js"></script>
-<script src="<%=prefix%>js/ues.js"></script>
-<script src="<%=prefix%>js/ues-utils.js"></script>
-<script src="<%=prefix%>js/ues-store.js"></script>
-<script src="<%=prefix%>js/ues-plugins-gadget.js"></script>
-<script src="<%=prefix%>js/ues-plugins-widget.js"></script>
-<script src="<%=prefix%>js/ues-dashboards.js"></script>
+<script src="<%=urlPrefix%>js/ues-prefs.js"></script>
+<script src="<%=urlPrefix%>js/ues.js"></script>
+<script src="<%=urlPrefix%>js/ues-utils.js"></script>
+<script src="<%=urlPrefix%>js/ues-store.js"></script>
+<script src="<%=urlPrefix%>js/ues-plugins-gadget.js"></script>
+<script src="<%=urlPrefix%>js/ues-plugins-widget.js"></script>
+<script src="<%=urlPrefix%>js/ues-dashboards.js"></script>
 <script>
 ues.global.dashboard = <%=dashboard%>;
-ues.global.page = '<%=page%>';
+ues.global.page = <%=JSON.stringify(page)%>;
 </script>
-<script src="<%=prefix%>js/designer.js"></script>
+<script src="<%=urlPrefix%>js/designer.js"></script>
 <script id="designer-hbs" type="text/x-handlebars-template">
 </script>
 <script id="widget-options-hbs" type="text/x-handlebars-template">

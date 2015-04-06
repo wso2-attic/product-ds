@@ -1,7 +1,5 @@
 <%
 var log = new Log();
-var usr = require('/modules/user.js');
-var user = usr.current();
 
 (function () {
     if (!user) {
@@ -13,6 +11,7 @@ var user = usr.current();
     }
 
     var method = request.getMethod();
+    var utils = require('/modules/utils.js');
     var dashboards = require('/modules/dashboards.js');
 
     var matcher = new URIMatcher(request.getRequestURI());
@@ -21,11 +20,15 @@ var user = usr.current();
     response.contentType = 'application/json';
 
     var id;
+    var vars;
     var dashboard;
-    if (matcher.match('/{context}/dashboards/{id}')) {
-        id = matcher.elements().id;
+    if (matcher.match('/{context}/dashboards/{id}') ||
+            matcher.match('/{context}' + tenantPrefix + '/dashboards/{id}')) {
+        vars = matcher.elements();
         if (method === 'GET') {
-            dashboard = dashboards.findOne(id);
+            utils.sandbox(buildOptions(vars), function () {
+                dashboard = dashboards.findOne(vars.id);
+            });
             if (!dashboard) {
                 response.sendError(404, JSON.stringify({
                     error: false
@@ -43,9 +46,12 @@ var user = usr.current();
         }));
     }
 
-    if (matcher.match('/{context}/dashboards')) {
+    if (matcher.match('/{context}/dashboards') ||
+            matcher.match('/{context}' + tenantPrefix + '/dashboards')) {
         if (method === 'GET') {
-            dashboard = dashboards.find();
+            utils.sandbox(buildOptions(vars), function () {
+                dashboard = dashboards.find();
+            });
             if (!dashboard) {
                 response.sendError(404, JSON.stringify({
                     error: false
@@ -57,7 +63,9 @@ var user = usr.current();
         }
         if (method === 'POST') {
             dashboard = request.getContent();
-            dashboards.create(dashboard);
+            utils.sandbox(buildOptions(vars), function () {
+                dashboards.create(dashboard);
+            });
             print({
                 error: false
             });
