@@ -1,15 +1,19 @@
 (function () {
 
-    osapi.container.GadgetHolder.IFRAME_ID_PREFIX_ = '';
+    var gadgetPrefix = (osapi.container.GadgetHolder.IFRAME_ID_PREFIX_ = 'ues-');
 
-    var idPrefix = 'gadget-';
+    var containerPrefix = 'gadget-';
 
     var gadgets = {};
 
     var subscribeForClient = ues.hub.subscribeForClient;
 
+    var containerId = function (id) {
+        return containerPrefix + id;
+    };
+
     var gadgetId = function (id) {
-        return idPrefix + id;
+        return gadgetPrefix + id;
     };
 
     ues.hub.subscribeForClient = function (container, topic, conSubId) {
@@ -42,9 +46,10 @@
                     };
                 }
             }
-            var id = gadgetId(widget.id);
-            var container = $('<div id="' + id + '"></div>').appendTo(sandbox);
-            gadgets[id] = widget;
+            var cid = containerId(widget.id);
+            var gid = gadgetId(widget.id);
+            var container = $('<div id="' + cid + '" class="ues-gadget-box"></div>').appendTo(sandbox);
+            gadgets[gid] = widget;
             ues.gadgets.render(container, widget.content.data.url);
             done(false, widget);
         });
