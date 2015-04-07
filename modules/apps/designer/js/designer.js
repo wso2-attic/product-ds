@@ -72,6 +72,17 @@ $(function () {
         }
     };
 
+    var removeWidget = function (id) {
+        var container = $('#' + id);
+        var area = container.closest('.ues-widget-box').attr('id');
+        var widget = findWidget(id);
+        var content = page.content;
+        area = content[area];
+        var index = area.indexOf(widget);
+        area.splice(index, 1);
+        container.remove();
+    };
+
     var saveDashboard = function (dashboard) {
         $.ajax({
             url: dashboardUrl,
@@ -85,12 +96,16 @@ $(function () {
         });
     };
 
-    var initWidgetProperties = function () {
-        $('#middle').find('.designer')
-            .on('click', '.ues-widget .widget-toolbar .options-handle', function () {
-                var id = $(this).closest('.ues-widget').attr('id');
-                renderWidgetOptions(id);
-            });
+    var initWidgetToolbar = function () {
+        var designer = $('#middle').find('.designer');
+        designer.on('click', '.ues-widget .widget-toolbar .options-handle', function () {
+            var id = $(this).closest('.ues-widget').attr('id');
+            renderWidgetOptions(id);
+        });
+        designer.on('click', '.ues-widget .widget-toolbar .trash-handle', function () {
+            var id = $(this).closest('.ues-widget').attr('id');
+            removeWidget(id);
+        });
     };
 
     var renderWidgetToolbar = function (id) {
@@ -259,7 +274,7 @@ $(function () {
     };
 
     initTabs();
-    initWidgetProperties();
+    initWidgetToolbar();
     initWidgets();
     loadWidgets(0, 20);
     initDashboard(ues.global.dashboard, ues.global.page);

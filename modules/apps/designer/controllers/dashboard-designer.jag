@@ -181,12 +181,11 @@ ues.global.page = <%=JSON.stringify(page)%>;
     </div>
 </script>
 <script id="widget-toolbar-hbs" type="text/x-handlebars-template">
-    <div class="widget-toolbar container-fluid">
-        <div class="row tools">
-            <div class="col-md-1 pull-right">
-                <a href="#" class="options-handle"><i class="fa fa-cog"></i></a>
-            </div>
-        </div>
+    <div class="widget-toolbar">
+        <ul class="list-inline pull-right">
+            <li><a href="#" class="options-handle"><i class="fa fa-cog"></i></a></li>
+            <li><a href="#" class="trash-handle"><i class="fa fa-trash"></i></a></li>
+        </ul>
     </div>
 </script>
 </body>

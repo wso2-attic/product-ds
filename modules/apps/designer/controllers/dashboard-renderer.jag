@@ -12,7 +12,7 @@
 </head>
 <body>
 <div id="home-toolbar" role="navigation" class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
+    <div class="container">
         <div class="navbar-header">
             <button data-target=".horizontal-bar" data-toggle="collapse" class="navbar-toggle" type="button">
                 <span class="sr-only">Toggle navigation</span>
@@ -32,7 +32,7 @@
         <!--/.nav-collapse -->
     </div>
 </div>
-<div id="wrapper" class="container-fluid"></div>
+<div id="wrapper" class="container"></div>
 <!--<iframe id="sandbox" src="preview.jag"></iframe>-->
 <script src="<%=urlPrefix%>js/jquery-1.10.2.js"></script>
 <script src="<%=urlPrefix%>js/bootstrap.min.js"></script>

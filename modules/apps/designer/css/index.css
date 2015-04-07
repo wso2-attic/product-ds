@@ -145,7 +145,7 @@ a, a:focus {
     height: 50px;
     width: 100%;
     position: absolute;
-    padding: 0 10px;
+    padding-top: 5px;
 }
 
 .widget-toolbar .tools {
