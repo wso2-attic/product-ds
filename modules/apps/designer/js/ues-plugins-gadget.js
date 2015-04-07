@@ -29,10 +29,22 @@
 
     var plugin = (ues.plugins['gadget'] = {});
 
+    var createPanel = function () {
+        var html =
+            '<div class="panel panel-default">' +
+            '<div class="panel-heading">' +
+            '<h3 class="panel-title">Panel title</h3>' +
+            '</div>' +
+            '<div class="panel-body"></div>' +
+            '</div>';
+        return $(html);
+    };
+
     plugin.create = function (sandbox, widget, hub, done) {
-        ues.gadgets.preload(widget.content.data.url, function (err, metadata) {
+        var content = widget.content;
+        ues.gadgets.preload(content.data.url, function (err, metadata) {
             var pref;
-            var opts = widget.content.options || (widget.content.options = {});
+            var opts = content.options || (content.options = {});
             var prefs = metadata.userPrefs;
             for (pref in prefs) {
                 if (prefs.hasOwnProperty(pref)) {
@@ -48,9 +60,13 @@
             }
             var cid = containerId(widget.id);
             var gid = gadgetId(widget.id);
-            var container = $('<div id="' + cid + '" class="ues-widget-box-gadget"></div>').appendTo(sandbox);
+            var panel = createPanel();
+            var container = $('<div id="' + cid + '" class="ues-widget-box-gadget"></div>');
+            panel.find('.panel-title').html(content.title);
+            container.appendTo(panel.find('.panel-body'));
+            panel.appendTo(sandbox);
             gadgets[gid] = widget;
-            ues.gadgets.render(container, widget.content.data.url);
+            ues.gadgets.render(container, content.data.url);
             done(false, widget);
         });
     };
