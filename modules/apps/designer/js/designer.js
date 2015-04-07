@@ -83,6 +83,10 @@ $(function () {
         container.remove();
     };
 
+    var previewDashboard = function (page) {
+        window.open(dashboardUrl + '/' + dashboard.id + '/' + page.id, '_blank');
+    };
+
     var saveDashboard = function (dashboard) {
         $.ajax({
             url: dashboardUrl,
@@ -193,9 +197,14 @@ $(function () {
 
     var listenLayout = function () {
         $('#middle').find('.ues-designer')
-            .children('.ues-toolbar').find('.ues-save').on('click', function () {
+            .children('.ues-toolbar')
+            .find('.ues-save').on('click', function () {
                 saveDashboard(dashboard);
-            }).end().end()
+            }).end()
+            .find('.ues-preview').on('click', function () {
+                previewDashboard(page);
+            }).end()
+            .end()
             .find('.ues-widget-box').droppable({
                 //activeClass: 'ui-state-default',
                 hoverClass: 'ui-state-hover',
@@ -214,18 +223,19 @@ $(function () {
     var createPage = function (id) {
         var layout = findStoreCache('layout', id);
         $.get(layout.url, function (data) {
-            var name = 'landing';
+            var id = 'landing';
             var title = 'My Dashboard';
             layout.content = data;
             page = {
+                id: id,
                 title: title,
                 layout: layout,
                 content: {}
             };
-            dashboard.landing = name;
-            dashboard.pages[name] = page;
+            dashboard.landing = id;
+            dashboard.pages[id] = page;
             var container = layoutContainer();
-            ues.dashboards.render(container, dashboard, name, function () {
+            ues.dashboards.render(container, dashboard, id, function () {
                 listenLayout();
             });
         }, 'html');
@@ -278,12 +288,5 @@ $(function () {
     initWidgets();
     loadWidgets(0, 20);
     initDashboard(ues.global.dashboard, ues.global.page);
-
-    //TODO: uncomment this
-    /*$('.designer .content').on('mouseenter', '.widget .widget-toolbar', function () {
-     $('.tools', $(this)).show();
-     }).on('mouseleave', '.widget .widget-toolbar', function () {
-     $('.tools', $(this)).hide();
-     });*/
 
 });

@@ -132,5 +132,6 @@ a, a:focus {
     height: 50px;
     width: 100%;
     position: absolute;
-    padding-top: 5px;
+    padding-top: 8px;
+    padding-right: 8px;
 }
