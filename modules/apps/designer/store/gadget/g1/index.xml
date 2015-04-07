@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-    <ModulePrefs title="G1" height="350" description="g1">
+    <ModulePrefs title="G1" height="250" description="g1">
         <Require feature="pubsub-2"/>
         <Require feature="dynamic-height"/>
     </ModulePrefs>

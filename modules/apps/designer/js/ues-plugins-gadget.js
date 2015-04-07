@@ -48,7 +48,7 @@
             }
             var cid = containerId(widget.id);
             var gid = gadgetId(widget.id);
-            var container = $('<div id="' + cid + '" class="ues-gadget-box"></div>').appendTo(sandbox);
+            var container = $('<div id="' + cid + '" class="ues-widget-box-gadget"></div>').appendTo(sandbox);
             gadgets[gid] = widget;
             ues.gadgets.render(container, widget.content.data.url);
             done(false, widget);

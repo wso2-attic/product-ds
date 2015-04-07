@@ -11,7 +11,7 @@
     <!--<link rel="stylesheet" href="css/theme.css">-->
 </head>
 <body>
-<div id="home-toolbar" role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+<div id="navigation" role="navigation" class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button data-target=".horizontal-bar" data-toggle="collapse" class="navbar-toggle" type="button">

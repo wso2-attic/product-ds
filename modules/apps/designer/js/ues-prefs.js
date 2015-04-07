@@ -3,6 +3,7 @@ var ues = ues || {};
 (function () {
     //Initializing opensocial gadget specific environment
     var getPrefs = function (site, url, done) {
+        //TODO save userprefs in the registry
         console.log(Array.prototype.slice.call(arguments));
         done({
             username: 'ruchira.wageesha@gmail.com'

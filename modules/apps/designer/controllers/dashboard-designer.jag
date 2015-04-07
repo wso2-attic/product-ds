@@ -8,11 +8,11 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=urlPrefix%>css/nunito.css">
     <link rel="stylesheet" href="<%=urlPrefix%>css/oxygen.css">
-    <link rel="stylesheet" href="<%=urlPrefix%>css/index.css">
+    <link rel="stylesheet" href="<%=urlPrefix%>css/designer.css">
     <!--<link rel="stylesheet" href="css/theme.css">-->
 </head>
 <body>
-<div id="home-toolbar" role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+<div id="navigation" role="navigation" class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
             <button data-target=".horizontal-bar" data-toggle="collapse" class="navbar-toggle" type="button">
@@ -35,7 +35,7 @@
 </div>
 <div id="wrapper">
     <div id="left">
-        <nav class="navbar-default navbar left-menu-bar" role="navigation">
+        <nav class="navbar-default navbar ues-left-menu" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -60,19 +60,19 @@
         </nav>
     </div>
     <div id="middle" class="tab-content">
-        <div id="designer" class="container-fluid designer tab-pane active">
-            <div class="row toolbar">
+        <div id="designer" class="container-fluid ues-designer tab-pane active">
+            <div class="row ues-toolbar">
                 <div class="col-md-12">
-                    <button type="button" class="btn btn-default preview">Preview</button>
-                    <button type="button" class="btn btn-default save">Save</button>
+                    <button type="button" class="btn btn-default ues-preview">Preview</button>
+                    <button type="button" class="btn btn-default ues-save">Save</button>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12 content"></div>
+                <div class="col-md-12 ues-content"></div>
             </div>
         </div>
-        <div id="widgets" class="container-fluid widgets tab-pane">
-            <div class="row toolbar">
+        <div id="widgets" class="container-fluid ues-widgets tab-pane">
+            <div class="row ues-toolbar">
                 <div class="col-md-12">
                     <div class="btn-group">
                         <button type="button" class="btn btn-default">Gadgets</button>
@@ -83,10 +83,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12 content"></div>
+                <div class="col-md-12 ues-content"></div>
             </div>
         </div>
-        <div id="settings" class="container-fluid settings tab-pane"></div>
+        <div id="settings" class="container-fluid ues-settings tab-pane"></div>
     </div>
     <div class="preview-toggle"></div>
 </div>
@@ -112,7 +112,7 @@ ues.global.page = <%=JSON.stringify(page)%>;
 <script id="designer-hbs" type="text/x-handlebars-template">
 </script>
 <script id="widget-options-hbs" type="text/x-handlebars-template">
-    <div class="sandbox">
+    <div class="ues-sandbox">
         <h4>Properties</h4>
         <form>
             {{#each options}}
@@ -122,7 +122,7 @@ ues.global.page = <%=JSON.stringify(page)%>;
                 </label>
             </div>
             {{/each}}
-            <button type="button" class="btn btn-primary save" data-id="{{id}}">Save</button>
+            <button type="button" class="btn btn-primary ues-save" data-id="{{id}}">Save</button>
         </form>
     </div>
 </script>
@@ -135,8 +135,8 @@ ues.global.page = <%=JSON.stringify(page)%>;
                 <div class="caption">
                     <h3>{{title}}</h3>
                 </div>
-                <div class="tools">
-                    <button type="button" class="btn btn-primary add" data-id="{{id}}">Select</button>
+                <div class="ues-toolbar">
+                    <button type="button" class="btn btn-primary ues-add" data-id="{{id}}">Select</button>
                 </div>
             </div>
         </div>
@@ -144,19 +144,19 @@ ues.global.page = <%=JSON.stringify(page)%>;
     </div>
 </script>
 <script id="layout-hbs" type="text/x-handlebars-template">
-    <div class="row toolbar">
+    <div class="row ues-toolbar">
         <div class="col-md-12">
-            <button type="button" class="btn btn-default preview">Preview</button>
-            <button type="button" class="btn btn-default save">Save</button>
+            <button type="button" class="btn btn-default ues-preview">Preview</button>
+            <button type="button" class="btn btn-default ues-save">Save</button>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-10">
-                    <div class="container-fluid layout"></div>
+                    <div class="container-fluid ues-layout"></div>
                 </div>
-                <div class="col-md-2 options"></div>
+                <div class="col-md-2 ues-options"></div>
             </div>
         </div>
     </div>
@@ -170,8 +170,8 @@ ues.global.page = <%=JSON.stringify(page)%>;
                 <div class="caption">
                     <h3>{{title}}</h3>
                 </div>
-                <div class="tools">
-                    <button type="button" class="btn btn-success drag-handle" data-id="{{id}}"><i
+                <div class="ues-toolbar">
+                    <button type="button" class="btn btn-success ues-drag-handle" data-id="{{id}}"><i
                             class="fa fa-plus"></i></button>
                     <button type="button" class="btn btn-info"><i class="fa fa-arrow-down"></i></button>
                 </div>
@@ -181,10 +181,10 @@ ues.global.page = <%=JSON.stringify(page)%>;
     </div>
 </script>
 <script id="widget-toolbar-hbs" type="text/x-handlebars-template">
-    <div class="widget-toolbar">
+    <div class="ues-toolbar">
         <ul class="list-inline pull-right">
-            <li><a href="#" class="options-handle"><i class="fa fa-cog"></i></a></li>
-            <li><a href="#" class="trash-handle"><i class="fa fa-trash"></i></a></li>
+            <li><a href="#" class="ues-options-handle"><i class="fa fa-cog"></i></a></li>
+            <li><a href="#" class="ues-trash-handle"><i class="fa fa-trash"></i></a></li>
         </ul>
     </div>
 </script>

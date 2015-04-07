@@ -1,0 +1,9 @@
+{
+    "id": "g1",
+    "title": "G1",
+    "type": "gadget",
+    "thumbnail": "/designer/store/gadget/usa-business-revenue/index.png",
+    "data": {
+        "url": "/designer/store/gadget/g1/index.xml"
+    }
+}

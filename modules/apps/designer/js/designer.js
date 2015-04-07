@@ -97,12 +97,12 @@ $(function () {
     };
 
     var initWidgetToolbar = function () {
-        var designer = $('#middle').find('.designer');
-        designer.on('click', '.ues-widget .widget-toolbar .options-handle', function () {
+        var designer = $('#middle').find('.ues-designer');
+        designer.on('click', '.ues-widget .ues-toolbar .ues-options-handle', function () {
             var id = $(this).closest('.ues-widget').attr('id');
             renderWidgetOptions(id);
         });
-        designer.on('click', '.ues-widget .widget-toolbar .trash-handle', function () {
+        designer.on('click', '.ues-widget .ues-toolbar .ues-trash-handle', function () {
             var id = $(this).closest('.ues-widget').attr('id');
             removeWidget(id);
         });
@@ -133,13 +133,13 @@ $(function () {
     var renderWidgetOptions = function (id) {
         var opts = {};
         var widget = findWidget(id);
-        $('#middle').find('.designer .options').html(widgetOptionsHbs({
+        $('#middle').find('.ues-designer .ues-options').html(widgetOptionsHbs({
             id: widget.id,
             options: widget.content.options
-        })).find('.sandbox').on('click', '.save', function () {
+        })).find('.ues-sandbox').on('click', '.ues-save', function () {
             var thiz = $(this);
             var id = thiz.data('id');
-            var sandbox = thiz.closest('.sandbox');
+            var sandbox = thiz.closest('.ues-sandbox');
             $('input', sandbox).each(function () {
                 var el = $(this);
                 opts[el.attr('name')] = el.val();
@@ -158,12 +158,12 @@ $(function () {
             count: count
         }, function (err, data) {
             storeCache.gadget = data;
-            $('#middle').find('.widgets .content').html(widgetsListHbs(data));
+            $('#middle').find('.ues-widgets .ues-content').html(widgetsListHbs(data));
         });
     };
 
     var initWidgets = function () {
-        $('.widgets').on('mouseenter', '.thumbnail .drag-handle', function () {
+        $('.ues-widgets').on('mouseenter', '.thumbnail .ues-drag-handle', function () {
             $(this).draggable({
                 cancel: false,
                 appendTo: 'body',
@@ -176,7 +176,7 @@ $(function () {
                     //$('#left a[href="#widgets"]').tab('show');
                 }
             });
-        }).on('mouseleave', '.thumbnail .drag-handle', function () {
+        }).on('mouseleave', '.thumbnail .ues-drag-handle', function () {
             $(this).draggable('destroy');
         });
     };
@@ -192,10 +192,10 @@ $(function () {
     };
 
     var listenLayout = function () {
-        $('#middle').find('.designer')
-            .find('.toolbar .save').on('click', function () {
+        $('#middle').find('.ues-designer')
+            .children('.ues-toolbar').find('.ues-save').on('click', function () {
                 saveDashboard(dashboard);
-            }).end()
+            }).end().end()
             .find('.ues-widget-box').droppable({
                 //activeClass: 'ui-state-default',
                 hoverClass: 'ui-state-hover',
@@ -208,7 +208,7 @@ $(function () {
     };
 
     var layoutContainer = function () {
-        return $('#middle').find('.designer').html(layoutHbs()).find('.layout');
+        return $('#middle').find('.ues-designer').html(layoutHbs()).find('.ues-layout');
     };
 
     var createPage = function (id) {
@@ -238,7 +238,7 @@ $(function () {
         }
         var container = layoutContainer();
         ues.dashboards.render(container, dashboard, landing, function () {
-            $('#middle').find('.designer .ues-widget').each(function () {
+            $('#middle').find('.ues-designer .ues-widget').each(function () {
                 var id = $(this).attr('id');
                 renderWidgetToolbar(id);
             });
@@ -253,8 +253,8 @@ $(function () {
         }, function (err, data) {
             storeCache.layout = data;
             $('#middle')
-                .find('.designer .content').html(layoutsListHbs(data))
-                .on('click', '.thumbnails .add', function () {
+                .find('.ues-designer .ues-content').html(layoutsListHbs(data))
+                .on('click', '.thumbnails .ues-add', function () {
                     createPage($(this).data('id'));
                 });
         });
