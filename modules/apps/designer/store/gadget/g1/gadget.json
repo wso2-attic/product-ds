@@ -5,5 +5,15 @@
     "thumbnail": "/designer/store/gadget/usa-business-revenue/index.png",
     "data": {
         "url": "/designer/store/gadget/g1/index.xml"
+    },
+    "notify": {
+        "state-select": {
+            "type": "address",
+            "description": "This notifies selected state"
+        },
+        "state-cancel": {
+            "type": "boolean",
+            "description": "This notifies cancellation of state selection"
+        }
     }
 }

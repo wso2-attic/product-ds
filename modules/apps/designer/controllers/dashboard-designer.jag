@@ -113,16 +113,54 @@ ues.global.page = <%=JSON.stringify(page)%>;
 </script>
 <script id="widget-options-hbs" type="text/x-handlebars-template">
     <div class="ues-sandbox">
-        <h4>Properties</h4>
         <form>
-            {{#each options}}
-            <div class="form-group">
-                <label>{{title}}
-                    <input type="text" class="form-control" name="{{@key}}" placeholder="{{title}}" value="{{value}}">
-                </label>
-            </div>
-            {{/each}}
-            <button type="button" class="btn btn-primary ues-save" data-id="{{id}}">Save</button>
+            {{#has options}}
+                {{dump .}}
+                <h4>Properties</h4>
+                <div class="properties">
+                {{#each .}}
+                    <div class="form-group">
+                        <label>{{title}}
+                            <input type="text" class="form-control" name="{{@key}}" placeholder="{{title}}" value="{{value}}">
+                        </label>
+                    </div>
+                {{/each}}
+                </div>
+            {{/has}}
+            {{#has listeners}}
+                <h4>Events</h4>
+                <div class="panel-group notifiers" id="accordion-events" role="tablist" aria-multiselectable="true">
+                {{#each .}}
+                  <div class="panel panel-default listener" data-event="{{event}}">
+                    <div class="panel-heading" role="tab" id="heading-{{event}}" data-event="{{event}}">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse"
+                            data-parent="#accordion-events"
+                            href="#collapse-{{event}}" aria-expanded="true" aria-controls="collapse-{{event}}">{{event}}
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapse-{{event}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{event}}">
+                      <div class="panel-body">
+                      {{#each notifiers}}
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" class="notifier" data-from="{{from}}"
+                            data-event="{{event}}" value=""{{#if wired}} checked="checked"{{/if}}>{{event}} ({{from}})
+                            </label>
+                        </div>
+                      {{/each}}
+                      </div>
+                    </div>
+                  </div>
+                {{/each}}
+                </div>
+            {{/has}}
+            {{#has . options listeners}}
+                <button type="button" class="btn btn-primary ues-save" data-id="{{id}}">Save</button>
+            {{else}}
+                No options to configure.
+            {{/has}}
         </form>
     </div>
 </script>

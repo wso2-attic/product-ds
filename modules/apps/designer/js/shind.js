@@ -10,7 +10,7 @@
                     "description": "This is a sample grid",
                     "thumbnail": "https://localhost:9443/dashboards/layouts/layout-1/index.jpg",
                     "url": "https://localhost:9443/designer/store/layout/layout-1/index.hbs",
-                    "content": ""
+                    "content": "<div class=\"row\"><div id=\"a\" class=\"col-md-3 ues-widget-box\"></div><div id=\"b\" class=\"col-md-6 ues-widget-box\"></div><div id=\"c\" class=\"col-md-3 ues-widget-box\"></div></div><div class=\"row\"><div id=\"d\" class=\"col-md-6 ues-widget-box\"></div><div id=\"e\" class=\"col-md-6 ues-widget-box\"></div></div><div class=\"row\"><div id=\"f\" class=\"col-md-4 ues-widget-box\"></div><div id=\"g\" class=\"col-md-4 ues-widget-box\"></div><div id=\"h\" class=\"col-md-4 ues-widget-box\"></div></div>"
                 },
                 "content": {
                     "a": [{
@@ -27,7 +27,7 @@
                                 }
                             },
                             "data": {
-                                "url": "https://localhost:9443/dashboards/tests/g1.xml"
+                                "url": "https://localhost:9443/designer/store/gadget/g1/index.xml"
                             },
                             "description": "Allows to view and select US states",
                             "notify": {
@@ -56,7 +56,7 @@
                                 }
                             },
                             "data": {
-                                "url": "https://localhost:9443/dashboards/tests/g2.xml"
+                                "url": "https://localhost:9443/designer/store/gadget/g2/index.xml"
                             },
                             "description": "Allows to view revenue by companies in US",
                             "listen": {
@@ -101,7 +101,7 @@
                                 }
                             },
                             "data": {
-                                "url": "https://localhost:9443/dashboards/tests/g2.xml"
+                                "url": "https://localhost:9443/designer/store/gadget/g2/index.xml"
                             },
                             "description": "Allows to view revenue by companies in US",
                             "listen": {

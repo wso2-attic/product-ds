@@ -9,6 +9,41 @@ $(function () {
 
     var storeCache = {};
 
+    Handlebars.registerHelper('has', function () {
+        var has = function (o) {
+            if (!o) {
+                return false;
+            }
+            if (o instanceof Array && !o.length) {
+                return false;
+            }
+            var key;
+            for (key in o) {
+                if (o.hasOwnProperty(key)) {
+                    return true;
+                }
+            }
+            return false;
+        };
+        var args = Array.prototype.slice.call(arguments);
+        var options = args.pop();
+        var length = args.length;
+        if (!length) {
+            return new Handlebars.SafeString(options.inverse());
+        }
+        var i;
+        for (i = 0; i < length; i++) {
+            if (has(args[i])) {
+                return new Handlebars.SafeString(options.fn(args[0]));
+            }
+        }
+        return new Handlebars.SafeString(options.inverse());
+    });
+
+    Handlebars.registerHelper('dump', function (o) {
+        return JSON.stringify(o);
+    });
+
     var layoutsListHbs = Handlebars.compile($("#layouts-list-hbs").html());
 
     var layoutHbs = Handlebars.compile($("#layout-hbs").html());
@@ -59,15 +94,27 @@ $(function () {
         }
     };
 
-    var updateWidgetOptions = function (id, opts) {
+    var saveWidgetOptions = function (id, data) {
         var o;
         var opt;
         var block = findWidget(id);
-        var options = block.content.options;
+        var content = block.content;
+        var options = content.options;
+        var opts = data.options;
         for (opt in opts) {
             if (opts.hasOwnProperty(opt)) {
                 o = options[opt];
-                o.value = opts[opt];
+                o.value = data[opt];
+            }
+        }
+        var event;
+        var listener;
+        var notifiers = data.notifiers;
+        var listen = content.listen;
+        for (event in notifiers) {
+            if (notifiers.hasOwnProperty(event)) {
+                listener = listen[event];
+                listener.on = notifiers[event];
             }
         }
     };
@@ -134,26 +181,175 @@ $(function () {
         });
     };
 
-    var renderWidgetOptions = function (id) {
-        var opts = {};
-        var widget = findWidget(id);
-        $('#middle').find('.ues-designer .ues-options').html(widgetOptionsHbs({
+    var widgetNotifiers = function (notifiers, current, widget) {
+        if (current.id === widget.id) {
+            return;
+        }
+        var notify = widget.content.notify;
+        if (!notify) {
+            return;
+        }
+        var event;
+        var events;
+        var data;
+        for (event in notify) {
+            if (notify.hasOwnProperty(event)) {
+                data = notify[event];
+                events = notifiers[data.type] || (notifiers[data.type] = []);
+                events.push({
+                    from: widget.id,
+                    event: event,
+                    type: data.type,
+                    content: widget.content,
+                    description: data.description
+                });
+            }
+        }
+    };
+
+    var areaNotifiers = function (notifiers, widget, widgets) {
+        var i;
+        var length = widgets.length;
+        for (i = 0; i < length; i++) {
+            widgetNotifiers(notifiers, widget, widgets[i]);
+        }
+    };
+
+    var pageNotifiers = function (widget, page) {
+        var area;
+        var notifiers = {};
+        var content = page.content;
+        for (area in content) {
+            if (content.hasOwnProperty(area)) {
+                areaNotifiers(notifiers, widget, content[area]);
+            }
+        }
+        return notifiers;
+    };
+
+    var findNotifiers = function (widget, page) {
+        var event, listener, notifiers;
+        var listeners = [];
+        var content = widget.content;
+        var listen = content.listen;
+        if (!listen) {
+            return listeners;
+        }
+        notifiers = pageNotifiers(widget, page);
+        for (event in listen) {
+            if (listen.hasOwnProperty(event)) {
+                listener = listen[event];
+                listeners.push({
+                    event: event,
+                    title: listener.title,
+                    description: listener.description,
+                    notifiers: notifiers[listener.type]
+                });
+            }
+        }
+        console.log(listeners);
+        return listeners;
+    };
+
+    var wiredNotifier = function (from, event, notifiers) {
+        var i, notifier;
+        var length = notifiers.length;
+        for (i = 0; i < length; i++) {
+            notifier = notifiers[i];
+            if (notifier.from === from && notifier.event === event) {
+                return notifier;
+            }
+        }
+    };
+
+    var wireEvent = function (on, notifiers) {
+        var i, notifier;
+        var length = on.length;
+        for (i = 0; i < length; i++) {
+            notifier = on[i];
+            notifier = wiredNotifier(notifier.from, notifier.event, notifiers);
+            if (!notifier) {
+                continue;
+            }
+            notifier.wired = true;
+        }
+    };
+
+    var eventNotifiers = function (event, notifiers) {
+        var i, events;
+        var length = notifiers.length;
+        for (i = 0; i < length; i++) {
+            events = notifiers[i];
+            if (events.event === event) {
+                return events.notifiers;
+            }
+        }
+    };
+
+    var wireEvents = function (widget, notifiers) {
+        var listen = widget.content.listen;
+        if (!listen) {
+            return notifiers;
+        }
+        var event, on;
+        for (event in listen) {
+            if (listen.hasOwnProperty(event)) {
+                on = listen[event].on;
+                if (!on) {
+                    continue;
+                }
+                wireEvent(on, eventNotifiers(event, notifiers));
+            }
+        }
+        return notifiers;
+    };
+
+    var buildOptionsContext = function (widget, page) {
+        var notifiers = findNotifiers(widget, page);
+        return {
             id: widget.id,
-            options: widget.content.options
-        })).find('.ues-sandbox').on('click', '.ues-save', function () {
-            var thiz = $(this);
-            var id = thiz.data('id');
-            var sandbox = thiz.closest('.ues-sandbox');
-            $('input', sandbox).each(function () {
-                var el = $(this);
-                opts[el.attr('name')] = el.val();
+            options: widget.content.options,
+            listeners: wireEvents(widget, notifiers)
+        };
+    };
+
+    var renderWidgetOptions = function (id) {
+        var widget = findWidget(id);
+        var ctx = buildOptionsContext(widget, page);
+        $('#middle').find('.ues-designer .ues-options').html(widgetOptionsHbs(ctx))
+            .find('.ues-sandbox').on('click', '.ues-save', function () {
+                var thiz = $(this);
+                var id = thiz.data('id');
+                var notifiers = {};
+                var opts = {};
+                var sandbox = thiz.closest('.ues-sandbox');
+                $('.properties input', sandbox).each(function () {
+                    var el = $(this);
+                    opts[el.attr('name')] = el.val();
+                });
+                $('.properties select', sandbox).each(function () {
+                    var el = $(this);
+                    opts[el.attr('name')] = el.val();
+                });
+                $('.notifiers .notifier', sandbox).each(function () {
+                    var el = $(this);
+                    var from = el.data('from');
+                    var event = el.data('event');
+                    var listener = el.closest('.listener').data('event');
+                    var events = notifiers[listener] || (notifiers[listener] = []);
+                    if (!el.is(':checked')) {
+                        return;
+                    }
+                    events.push({
+                        from: from,
+                        event: event
+                    });
+                });
+                saveWidgetOptions(id, {
+                    options: opts,
+                    notifiers: notifiers
+                });
             });
-            $('select', sandbox).each(function () {
-                var el = $(this);
-                opts[el.attr('name')] = el.val();
-            });
-            updateWidgetOptions(id, opts);
-        });
     };
 
     var loadWidgets = function (start, count) {
