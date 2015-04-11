@@ -13,7 +13,7 @@
     };
 
     var gadgetId = function (id) {
-        return gadgetPrefix + id;
+        return gadgetPrefix + containerPrefix + id;
     };
 
     ues.hub.subscribeForClient = function (container, topic, conSubId) {
@@ -33,7 +33,7 @@
         var html =
             '<div class="panel panel-default">' +
             '<div class="panel-heading">' +
-            '<h3 class="panel-title">Panel title</h3>' +
+            '<h3 class="panel-title"></h3>' +
             '</div>' +
             '<div class="panel-body"></div>' +
             '</div>';

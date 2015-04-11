@@ -20,12 +20,16 @@
         plugin.create(sandbox, block, ues.hub, done);
     };
 
+    var widgetId = function (clientId) {
+        return clientId.split('-').pop();
+    };
+
     var wirings;
 
     var publishForClient = ues.hub.publishForClient;
     ues.hub.publishForClient = function (container, topic, data) {
         console.log('publishing data container:%s, topic:%s, data:%j', container.getClientID(), topic, data);
-        var clientId = container.getClientID();
+        var clientId = widgetId(container.getClientID());
         var channels = wirings[clientId + '.' + topic];
         if (!channels) {
             return;

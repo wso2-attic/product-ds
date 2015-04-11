@@ -7,11 +7,11 @@
         "url": "/designer/store/gadget/g1/index.xml"
     },
     "notify": {
-        "state-select": {
+        "select": {
             "type": "address",
             "description": "This notifies selected state"
         },
-        "state-cancel": {
+        "cancel": {
             "type": "boolean",
             "description": "This notifies cancellation of state selection"
         }

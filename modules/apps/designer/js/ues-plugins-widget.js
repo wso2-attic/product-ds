@@ -1,12 +1,18 @@
 (function () {
 
+    var containerPrefix = 'ues-widget-';
+
+    var containerId = function (id) {
+        return containerPrefix + id;
+    };
+
     var plugin = (ues.plugins['widget'] = {});
 
     plugin.create = function (sandbox, widget, hub, done) {
         var html = '<h2>' + widget.content.title + '</h2>';
         html += '<button class="ues-send btn btn-primary" type="button">Send</button>';
         sandbox.html(html);
-        var id = widget.id;
+        var id = containerId(widget.id);
         var container = new OpenAjax.hub.InlineContainer(ues.hub, id, {
                 Container: {
                     onSecurityAlert: function (source, alertType) {

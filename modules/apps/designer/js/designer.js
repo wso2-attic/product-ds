@@ -117,6 +117,7 @@ $(function () {
                 listener.on = notifiers[event];
             }
         }
+        saveDashboard(dashboard);
     };
 
     var removeWidget = function (id) {
