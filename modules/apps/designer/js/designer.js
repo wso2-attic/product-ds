@@ -433,6 +433,9 @@ $(function () {
     var listenLayout = function () {
         $('#middle').find('.ues-designer')
             .children('.ues-toolbar')
+            .find('.ues-page').on('click', function () {
+                newPage(pageOptions());
+            }).end()
             .find('.ues-save').on('click', function () {
                 saveDashboard(dashboard);
             }).end()
@@ -464,19 +467,18 @@ $(function () {
         return $('#middle').find('.ues-designer').html(layoutHbs()).find('.ues-layout');
     };
 
-    var createPage = function (id) {
-        var layout = findStoreCache('layout', id);
+    var createPage = function (options, lid) {
+        var layout = findStoreCache('layout', lid);
         $.get(layout.url, function (data) {
-            var id = 'landing';
-            var title = 'My Dashboard';
+            var id = options.id;
             layout.content = data;
             page = {
                 id: id,
-                title: title,
+                title: options.title,
                 layout: layout,
                 content: {}
             };
-            dashboard.landing = id;
+            dashboard.landing = dashboard.landing || id;
             dashboard.pages[id] = page;
             var container = layoutContainer();
             ues.dashboards.render(container, dashboard, id, function () {
@@ -500,6 +502,36 @@ $(function () {
         });
     };
 
+    var pageOptions = function (type) {
+        switch (type) {
+            case 'landing':
+                return {
+                    id: 'landing',
+                    title: 'My Dashboard'
+                };
+            case 'login':
+                return {
+                    id: 'login',
+                    title: 'Login'
+                };
+            default:
+                var pid;
+                var prefix = 'page';
+                var titlePrefix = 'Page ';
+                var i = 0;
+                var pages = dashboard.pages;
+                while (true) {
+                    pid = prefix + i;
+                    if (!pages[pid]) {
+                        return {
+                            id: pid,
+                            title: titlePrefix + i
+                        };
+                    }
+                }
+        }
+    };
+
     var initFresh = function () {
         ues.store.layouts({
             start: 0,
@@ -509,7 +541,21 @@ $(function () {
             $('#middle')
                 .find('.ues-designer .ues-content').html(layoutsListHbs(data))
                 .on('click', '.thumbnails .ues-add', function () {
-                    createPage($(this).data('id'));
+                    createPage(pageOptions('landing'), $(this).data('id'));
+                });
+        });
+    };
+
+    var newPage = function (page) {
+        ues.store.layouts({
+            start: 0,
+            count: 20
+        }, function (err, data) {
+            storeCache.layout = data;
+            $('#middle')
+                .find('.ues-designer .ues-content').html(layoutsListHbs(data))
+                .on('click', '.thumbnails .ues-add', function () {
+                    createPage(pageOptions(), $(this).data('id'));
                 });
         });
     };

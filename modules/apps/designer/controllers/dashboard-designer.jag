@@ -115,7 +115,6 @@ ues.global.page = <%=JSON.stringify(page)%>;
     <div class="ues-sandbox">
         <form>
             {{#has options}}
-                {{dump .}}
                 <h4>Properties</h4>
                 <div class="properties">
                 {{#each options}}
@@ -183,13 +182,16 @@ ues.global.page = <%=JSON.stringify(page)%>;
 </script>
 <script id="layout-hbs" type="text/x-handlebars-template">
     <div class="row ues-toolbar">
-        <div class="col-md-12">
-            <button type="button" class="btn btn-default ues-preview">Preview</button>
-            <button type="button" class="btn btn-default ues-save">Save</button>
+        <div class="col-md-10">
+            <button type="button" class="btn btn-default ues-page"><i class="fa fa-plus"></i> Page</button>
+            <button type="button" class="btn btn-default ues-preview"><i class="fa fa-eye"></i> Preview</button>
+            <button type="button" class="btn btn-default ues-save"><i class="fa fa-floppy-o"></i> Save</button>
+            <button type="button" class="btn btn-default ues-settings pull-right"><i class="fa fa-cog"></i> Settings</button>
         </div>
+        <div class="col-md-2"></div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 ues-content">
             <div class="row">
                 <div class="col-md-10">
                     <div class="container-fluid ues-layout"></div>
