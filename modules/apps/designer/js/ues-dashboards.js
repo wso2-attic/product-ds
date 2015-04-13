@@ -116,12 +116,17 @@
         renderPage(element, dashboard, page, done);
     };
 
+    var rewireDashboard = function (page) {
+        wirings = wires(page);
+    };
+
     ues.widgets = {
         render: renderWidget
     };
 
     ues.dashboards = {
-        render: renderDashboard
+        render: renderDashboard,
+        rewire: rewireDashboard
     };
 
 }());

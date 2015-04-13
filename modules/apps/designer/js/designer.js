@@ -29,15 +29,15 @@ $(function () {
         var options = args.pop();
         var length = args.length;
         if (!length) {
-            return new Handlebars.SafeString(options.inverse());
+            return new Handlebars.SafeString(options.inverse(this));
         }
         var i;
         for (i = 0; i < length; i++) {
             if (has(args[i])) {
-                return new Handlebars.SafeString(options.fn(args[0]));
+                return new Handlebars.SafeString(options.fn(this));
             }
         }
-        return new Handlebars.SafeString(options.inverse());
+        return new Handlebars.SafeString(options.inverse(this));
     });
 
     Handlebars.registerHelper('dump', function (o) {
@@ -117,6 +117,7 @@ $(function () {
                 listener.on = notifiers[event];
             }
         }
+        ues.dashboards.rewire(page);
         saveDashboard(dashboard);
     };
 
@@ -129,6 +130,13 @@ $(function () {
         var index = area.indexOf(widget);
         area.splice(index, 1);
         container.remove();
+        //TODO: remove properties panel, if it was active
+        var el = $('#middle').find('.ues-designer .ues-options');
+        var oid = el.find('.ues-save').data('id');
+        if (oid !== id) {
+            return;
+        }
+        el.empty();
     };
 
     var previewDashboard = function (page) {

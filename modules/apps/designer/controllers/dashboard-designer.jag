@@ -118,7 +118,7 @@ ues.global.page = <%=JSON.stringify(page)%>;
                 {{dump .}}
                 <h4>Properties</h4>
                 <div class="properties">
-                {{#each .}}
+                {{#each options}}
                     <div class="form-group">
                         <label>{{title}}
                             <input type="text" class="form-control" name="{{@key}}" placeholder="{{title}}" value="{{value}}">
@@ -130,7 +130,7 @@ ues.global.page = <%=JSON.stringify(page)%>;
             {{#has listeners}}
                 <h4>Events</h4>
                 <div class="panel-group notifiers" id="accordion-events" role="tablist" aria-multiselectable="true">
-                {{#each .}}
+                {{#each listeners}}
                   <div class="panel panel-default listener" data-event="{{event}}">
                     <div class="panel-heading" role="tab" id="heading-{{event}}" data-event="{{event}}">
                       <h4 class="panel-title">
@@ -156,7 +156,7 @@ ues.global.page = <%=JSON.stringify(page)%>;
                 {{/each}}
                 </div>
             {{/has}}
-            {{#has . options listeners}}
+            {{#has options listeners}}
                 <button type="button" class="btn btn-primary ues-save" data-id="{{id}}">Save</button>
             {{else}}
                 No options to configure.
