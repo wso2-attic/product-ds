@@ -121,22 +121,23 @@ $(function () {
         saveDashboard(dashboard);
     };
 
-    var removeWidget = function (id) {
-        var container = $('#' + id);
-        var area = container.closest('.ues-widget-box').attr('id');
-        var widget = findWidget(id);
-        var content = page.content;
-        area = content[area];
-        var index = area.indexOf(widget);
-        area.splice(index, 1);
-        container.remove();
-        //TODO: remove properties panel, if it was active
-        var el = $('#middle').find('.ues-designer .ues-options');
-        var oid = el.find('.ues-save').data('id');
-        if (oid !== id) {
-            return;
-        }
-        el.empty();
+    var removeWidget = function (widget) {
+        ues.widgets.destroy(widget, function (err) {
+            var container = $('#' + widget.id);
+            var area = container.closest('.ues-widget-box').attr('id');
+            var content = page.content;
+            area = content[area];
+            var index = area.indexOf(widget);
+            area.splice(index, 1);
+            container.remove();
+
+            var el = $('#middle').find('.ues-designer .ues-options');
+            var oid = el.find('.ues-save').data('id');
+            if (oid !== widget.id) {
+                return;
+            }
+            el.empty();
+        });
     };
 
     var previewDashboard = function (page) {
@@ -160,16 +161,31 @@ $(function () {
         var designer = $('#middle').find('.ues-designer');
         designer.on('click', '.ues-widget .ues-toolbar .ues-options-handle', function () {
             var id = $(this).closest('.ues-widget').attr('id');
-            renderWidgetOptions(id);
+            renderWidgetOptions(findWidget(id));
         });
         designer.on('click', '.ues-widget .ues-toolbar .ues-trash-handle', function () {
             var id = $(this).closest('.ues-widget').attr('id');
-            removeWidget(id);
+            removeWidget(findWidget(id));
+        });
+        designer.on('mouseenter', '.ues-widget .ues-toolbar .ues-move-handle', function () {
+            $(this).draggable({
+                cancel: false,
+                appendTo: 'body',
+                helper: 'clone',
+                start: function (event, ui) {
+                    console.log('dragging');
+                },
+                stop: function () {
+                    //$('#left a[href="#widgets"]').tab('show');
+                }
+            });
+        }).on('mouseleave', '.ues-widget .ues-toolbar .ues-move-handle', function () {
+            $(this).draggable('destroy');
         });
     };
 
-    var renderWidgetToolbar = function (id) {
-        $('#' + id).prepend($(widgetToolbarHbs()))
+    var renderWidgetToolbar = function (widget) {
+        $('#' + widget.id).prepend($(widgetToolbarHbs(widget)))
     };
 
     var renderWidget = function (container, wid) {
@@ -184,9 +200,24 @@ $(function () {
             content: asset
         };
         content.push(widget);
-        ues.widgets.render(container, widget, function (err, block) {
-            renderWidgetToolbar(id);
-            renderWidgetOptions(id);
+        ues.widgets.create(container, widget, function (err, block) {
+            var widget = findWidget(id);
+            renderWidgetToolbar(widget);
+            renderWidgetOptions(widget);
+        });
+    };
+
+    var moveWidget = function (container, id) {
+        var widget = findWidget(id);
+        var area = container.attr('id');
+        var content = page.content;
+        content = content[area] || (content[area] = []);
+        content.push(widget);
+        removeWidget(widget);
+        ues.widgets.create(container, widget, function (err, block) {
+            var widget = findWidget(id);
+            renderWidgetToolbar(widget);
+            renderWidgetOptions(widget);
         });
     };
 
@@ -322,8 +353,7 @@ $(function () {
         };
     };
 
-    var renderWidgetOptions = function (id) {
-        var widget = findWidget(id);
+    var renderWidgetOptions = function (widget) {
         var ctx = buildOptionsContext(widget, page);
         $('#middle').find('.ues-designer .ues-options').html(widgetOptionsHbs(ctx))
             .find('.ues-sandbox').on('click', '.ues-save', function () {
@@ -416,7 +446,16 @@ $(function () {
                 //accept: ':not(.ui-sortable-helper)',
                 drop: function (event, ui) {
                     //$(this).find('.placeholder').remove();
-                    renderWidget($(this), ui.helper.data('id'));
+                    var id = ui.helper.data('id');
+                    var action = ui.helper.data('action');
+                    var el = $(this);
+                    switch (action) {
+                        case 'move':
+                            moveWidget(el, id);
+                            break;
+                        default:
+                            renderWidget(el, id);
+                    }
                 }
             });
     };
@@ -455,7 +494,7 @@ $(function () {
         ues.dashboards.render(container, dashboard, landing, function () {
             $('#middle').find('.ues-designer .ues-widget').each(function () {
                 var id = $(this).attr('id');
-                renderWidgetToolbar(id);
+                renderWidgetToolbar(findWidget(id));
             });
             listenLayout();
         });

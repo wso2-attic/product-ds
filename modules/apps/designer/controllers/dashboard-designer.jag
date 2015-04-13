@@ -221,6 +221,7 @@ ues.global.page = <%=JSON.stringify(page)%>;
 <script id="widget-toolbar-hbs" type="text/x-handlebars-template">
     <div class="ues-toolbar">
         <ul class="list-inline pull-right">
+            <li><a href="#" class="ues-move-handle" data-id="{{id}}" data-action="move"><i class="fa fa-arrows"></i></a></li>
             <li><a href="#" class="ues-options-handle"><i class="fa fa-cog"></i></a></li>
             <li><a href="#" class="ues-trash-handle"><i class="fa fa-trash"></i></a></li>
         </ul>

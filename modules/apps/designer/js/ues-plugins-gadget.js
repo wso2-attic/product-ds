@@ -1,6 +1,6 @@
 (function () {
 
-    var gadgetPrefix = (osapi.container.GadgetHolder.IFRAME_ID_PREFIX_ = 'ues-');
+    var gadgetPrefix = (osapi.container.GadgetHolder.IFRAME_ID_PREFIX_ = 'sandbox-');
 
     var containerPrefix = 'gadget-';
 
@@ -18,11 +18,12 @@
 
     ues.hub.subscribeForClient = function (container, topic, conSubId) {
         var clientId = container.getClientID();
-        var options = gadgets[clientId];
-        if (!options) {
+        var data = gadgets[clientId];
+        if (!data) {
             return subscribeForClient.apply(ues.hub, [container, topic, conSubId]);
         }
-        var channel = options.id + '.' + topic;
+        var widget = data.widget;
+        var channel = widget.id + '.' + topic;
         console.log('subscribing container:%s topic:%s, channel:%s by %s', clientId, topic, channel);
         return subscribeForClient.apply(ues.hub, [container, channel, conSubId]);
     };
@@ -65,8 +66,11 @@
             panel.find('.panel-title').html(content.title);
             container.appendTo(panel.find('.panel-body'));
             panel.appendTo(sandbox);
-            gadgets[gid] = widget;
-            ues.gadgets.render(container, content.data.url);
+            var site = ues.gadgets.render(container, content.data.url);
+            gadgets[gid] = {
+                widget: widget,
+                site: site
+            };
             done(false, widget);
         });
     };
@@ -75,8 +79,12 @@
 
     };
 
-    plugin.destroy = function (sandbox, options, hub, done) {
-        $(sandbox).remove('iframe');
+    plugin.destroy = function (sandbox, widget, hub, done) {
+        var gid = gadgetId(widget.id);
+        var data = gadgets[gid];
+        var site = data.site;
+        ues.gadgets.remove(site.getId());
+        done(false);
     };
 
 }());

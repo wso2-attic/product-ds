@@ -1,6 +1,7 @@
 var ues = ues || {};
 
 (function () {
+    var registry = {};
     //search overridden configs through ues.configs object
     var configs = function (configs, args) {
         var find = function (o, args) {
@@ -62,20 +63,22 @@ var ues = ues || {};
         options[osapi.container.RenderParam.VIEW] = 'home';
         extend(options, params);
         sandbox = (sandbox instanceof jQuery) ? sandbox : $(sandbox);
-        sandbox.each(function () {
-            var sandbox = $(this);
-            options[osapi.container.RenderParam.HEIGHT] = sandbox.height();
-            var site = container.newGadgetSite(sandbox[0]);
-            container.navigateGadget(site, url, prefs, options, function (metadata) {
-                if (metadata.error) {
-                    done ? done(metadata.error) : console.log(metadata.error);
-                    return;
-                }
-                if (done) {
-                    done(false, metadata);
-                }
-            });
+        if (!sandbox.length) {
+            return;
+        }
+        options[osapi.container.RenderParam.HEIGHT] = sandbox.height();
+        var site = container.newGadgetSite(sandbox[0]);
+        container.navigateGadget(site, url, prefs, options, function (metadata) {
+            if (metadata.error) {
+                done ? done(metadata.error) : console.log(metadata.error);
+                return;
+            }
+            registry[site.getId()] = site;
+            if (done) {
+                done(false, metadata);
+            }
         });
+        return site;
     };
 
     var preload = function (url, done) {
@@ -83,6 +86,11 @@ var ues = ues || {};
             var metadata = data[url];
             done(metadata.error, metadata);
         });
+    };
+
+    var remove = function (id) {
+        container.closeGadget(registry[id]);
+        delete registry[id];
     };
 
     //Initializing OpenAjax ManagedHub
@@ -156,7 +164,8 @@ var ues = ues || {};
     ues.client = client;
     ues.gadgets = {
         render: render,
-        preload: preload
+        preload: preload,
+        remove: remove
     };
     ues.plugins = {};
     ues.global = {};

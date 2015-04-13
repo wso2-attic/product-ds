@@ -10,14 +10,26 @@
         }, 'html');
     };
 
-    var renderWidget = function (container, block, done) {
-        var plugin = ues.plugins[block.content.type];
+    var findPlugin = function (type) {
+        var plugin = ues.plugins[type];
         if (!plugin) {
-            return console.warn('ues dashboard plugin for ' + block.content.type + ' cannot be found');
+            throw 'ues dashboard plugin for ' + type + ' cannot be found';
         }
-        var sandbox = $('<div id="' + block.id + '" class="ues-widget"></div>');
+        return plugin;
+    };
+
+    var createWidget = function (container, widget, done) {
+        var type = widget.content.type;
+        var plugin = findPlugin(type);
+        var sandbox = $('<div id="' + widget.id + '" class="ues-widget"></div>');
         sandbox.appendTo(container);
-        plugin.create(sandbox, block, ues.hub, done);
+        plugin.create(sandbox, widget, ues.hub, done);
+    };
+
+    var destroyWidget = function (widget, done) {
+        var plugin = findPlugin(widget.content.type);
+        var container = $('#' + widget.id);
+        plugin.destroy(container, widget, ues.hub, done);
     };
 
     var widgetId = function (clientId) {
@@ -94,7 +106,7 @@
             if (content.hasOwnProperty(area)) {
                 container = $('#' + area, layout);
                 content[area].forEach(function (options) {
-                    renderWidget(container, options, function () {
+                    createWidget(container, options, function () {
 
                     });
                 });
@@ -121,7 +133,8 @@
     };
 
     ues.widgets = {
-        render: renderWidget
+        create: createWidget,
+        destroy: destroyWidget
     };
 
     ues.dashboards = {
