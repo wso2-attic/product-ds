@@ -119,9 +119,22 @@
         done();
     };
 
+    var findPage = function (dashboard, id) {
+        var i;
+        var page;
+        var pages = dashboard.pages;
+        var length = pages.length;
+        for (i = 0; i < length; i++) {
+            page = pages[i];
+            if (page.id === id) {
+                return page;
+            }
+        }
+    };
+
     var renderDashboard = function (element, dashboard, name, done) {
         name = name || dashboard.landing;
-        var page = dashboard.pages[name];
+        var page = findPage(dashboard, name);
         if (!page) {
             throw 'requested page : ' + name + ' cannot be found';
         }
@@ -139,7 +152,8 @@
 
     ues.dashboards = {
         render: renderDashboard,
-        rewire: rewireDashboard
+        rewire: rewireDashboard,
+        findPage: findPage
     };
 
 }());

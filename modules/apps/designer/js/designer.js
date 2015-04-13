@@ -52,9 +52,9 @@ $(function () {
 
     var widgetToolbarHbs = Handlebars.compile($("#widget-toolbar-hbs").html());
 
-    var widgetOptionsHbs = Handlebars.compile($("#widget-options-hbs").html());
+    var pageOptionsHbs = Handlebars.compile($("#page-options-hbs").html());
 
-    var designerHbs = Handlebars.compile($("#designer-hbs").html());
+    var widgetOptionsHbs = Handlebars.compile($("#widget-options-hbs").html());
 
     var randomId = function () {
         return Math.random().toString(36).slice(2);
@@ -138,6 +138,11 @@ $(function () {
             }
             el.empty();
         });
+    };
+
+    var removePage = function (page) {
+        //TODO
+        alert('TODO');
     };
 
     var previewDashboard = function (page) {
@@ -353,6 +358,23 @@ $(function () {
         };
     };
 
+    var renderPageOptions = function (page) {
+        $('#middle').find('.ues-designer .ues-options').html(pageOptionsHbs({
+            id: page.id,
+            title: page.title
+        })).find('.ues-sandbox').on('click', '.ues-save', function () {
+            var sandbox = $(this).closest('.ues-sandbox');
+            var id = $('.id', sandbox).val();
+            var landing = $('.landing', sandbox);
+            page.id = $('.id', sandbox).val();
+            page.title = $('.title', sandbox).val();
+            if (landing.is(':checked')) {
+                dashboard.landing = page.id;
+            }
+            saveDashboard(dashboard);
+        });
+    };
+
     var renderWidgetOptions = function (widget) {
         var ctx = buildOptionsContext(widget, page);
         $('#middle').find('.ues-designer .ues-options').html(widgetOptionsHbs(ctx))
@@ -442,6 +464,12 @@ $(function () {
             .find('.ues-preview').on('click', function () {
                 previewDashboard(page);
             }).end()
+            .find('.ues-settings').on('click', function () {
+                renderPageOptions(page);
+            }).end()
+            .find('.ues-remove').on('click', function () {
+                removePage(page);
+            }).end()
             .end()
             .find('.ues-widget-box').droppable({
                 //activeClass: 'ui-state-default',
@@ -479,7 +507,7 @@ $(function () {
                 content: {}
             };
             dashboard.landing = dashboard.landing || id;
-            dashboard.pages[id] = page;
+            dashboard.pages.push(page);
             var container = layoutContainer();
             ues.dashboards.render(container, dashboard, id, function () {
                 listenLayout();
@@ -488,7 +516,7 @@ $(function () {
     };
 
     var initExisting = function (landing) {
-        page = dashboard.pages[landing];
+        page = ues.dashboards.findPage(dashboard, landing);
         if (!page) {
             throw 'specified page : ' + landing + ' cannot be found';
         }
@@ -515,20 +543,23 @@ $(function () {
                     title: 'Login'
                 };
             default:
-                var pid;
+                var i;
+                var pid = 0;
                 var prefix = 'page';
                 var titlePrefix = 'Page ';
-                var i = 0;
+                var page = prefix + pid;
                 var pages = dashboard.pages;
-                while (true) {
-                    pid = prefix + i;
-                    if (!pages[pid]) {
-                        return {
-                            id: pid,
-                            title: titlePrefix + i
-                        };
+                var length = pages.length;
+                for (i = 0; i < length; i++) {
+                    if (pages[i].id === page) {
+                        pid++;
+                        page = prefix + pid;
                     }
                 }
+                return {
+                    id: page,
+                    title: titlePrefix + pid
+                };
         }
     };
 
@@ -568,7 +599,7 @@ $(function () {
         }
         dashboard = {
             id: randomId(),
-            pages: {}
+            pages: []
         };
         initFresh();
     };

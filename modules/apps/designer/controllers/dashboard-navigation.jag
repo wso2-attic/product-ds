@@ -13,15 +13,13 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="<%=dbRoot%><%=dashboard.landing%>">Home</a></li>
                 <%
-                var p;
                 var pages = dashboard.pages;
-                for(p in pages) {
-                    if(pages.hasOwnProperty(p) && dashboard.landing !== p) {
-                        p = pages[p];
+                pages.forEach(function(page) {
+                    if(dashboard.landing !== page.id) {
                 %>
-                <li><a href="<%=dbRoot%><%=p.id%>"><%=p.title%></a></li>
+                <li><a href="<%=dbRoot%><%=page.id%>"><%=page.title%></a></li>
                     <%  } %>
-                <% } %>
+                <% }); %>
             </ul>
         </div>
         <!--/.nav-collapse -->

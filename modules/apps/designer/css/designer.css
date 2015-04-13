@@ -135,3 +135,7 @@ a, a:focus {
     padding-top: 8px;
     padding-right: 8px;
 }
+
+#middle .ues-toolbar .pull-right {
+    margin-left: 5px;
+}

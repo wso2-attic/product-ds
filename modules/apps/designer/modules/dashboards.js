@@ -17,7 +17,6 @@ var findOne = function (id) {
         tenantId: user.tenantId
     });
     var content = registry.content(registryPath(id));
-    log.info(content);
     return JSON.parse(content);
 };
 
