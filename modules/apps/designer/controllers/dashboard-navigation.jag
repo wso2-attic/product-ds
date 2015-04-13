@@ -1,0 +1,29 @@
+<div id="navigation" role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button data-target=".horizontal-bar" data-toggle="collapse" class="navbar-toggle" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="<%=dbRoot%><%=dashboard.landing%>" class="navbar-brand">Dashboards</a>
+        </div>
+        <div class="collapse navbar-collapse horizontal-bar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="<%=dbRoot%><%=dashboard.landing%>">Home</a></li>
+                <%
+                var p;
+                var pages = dashboard.pages;
+                for(p in pages) {
+                    if(pages.hasOwnProperty(p) && dashboard.landing !== p) {
+                        p = pages[p];
+                %>
+                <li><a href="<%=dbRoot%><%=p.id%>"><%=p.title%></a></li>
+                    <%  } %>
+                <% } %>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>

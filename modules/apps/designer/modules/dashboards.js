@@ -18,7 +18,7 @@ var findOne = function (id) {
     });
     var content = registry.content(registryPath(id));
     log.info(content);
-    return content;
+    return JSON.parse(content);
 };
 
 var find = function () {
