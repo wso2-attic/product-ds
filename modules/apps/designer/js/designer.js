@@ -361,7 +361,7 @@ $(function () {
                     event: event,
                     title: listener.title,
                     description: listener.description,
-                    notifiers: notifiers[listener.type]
+                    notifiers: notifiers[listener.type] || []
                 });
             }
         }
