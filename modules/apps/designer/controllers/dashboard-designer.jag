@@ -115,13 +115,13 @@ ues.global.page = <%=JSON.stringify(page)%>;
         <form>
             <h4>Properties</h4>
             <div class="form-group">
-                <label>Id
-                    <input type="text" class="form-control id" name="id" placeholder="Id" value="{{id}}">
+                <label>Title
+                    <input type="text" class="form-control title" name="title" placeholder="Page Title" value="{{title}}">
                 </label>
             </div>
             <div class="form-group">
-                <label>Title
-                    <input type="text" class="form-control title" name="title" placeholder="Page Title" value="{{title}}">
+                <label>Id
+                    <input type="text" class="form-control id" name="id" placeholder="Id" value="{{id}}">
                 </label>
             </div>
             <div class="checkbox">

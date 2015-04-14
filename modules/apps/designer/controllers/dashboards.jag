@@ -57,6 +57,14 @@ var buildOptions;
     }
 
     urlPrefix = utils.relativePrefix(request.getRequestURI());
-    editor ? include('dashboard-designer.jag') : include('dashboard-renderer.jag');
+    if(editor) {
+        include('dashboard-designer.jag');
+        return;
+    }
+    if(dashboard) {
+        include('dashboard-renderer.jag');
+        return;
+    }
+    response.sendError(404, 'requested dashboard cannot be found');
 }());
 %>

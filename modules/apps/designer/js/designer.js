@@ -153,8 +153,8 @@ $(function () {
 
     var destroyWidget = function (widget, done) {
         ues.widgets.destroy(widget, function (err) {
-            if (!done) {
-                return;
+            if (err) {
+                return err;
             }
             done(err);
         });
@@ -532,7 +532,12 @@ $(function () {
         $('#middle').find('.ues-designer')
             .children('.ues-toolbar')
             .find('.ues-page').on('click', function () {
-                newPage(pageOptions());
+                destroyPage(page, function (err) {
+                    if (err) {
+                        return console.error(err);
+                    }
+                    initPage();
+                });
             }).end()
             .find('.ues-save').on('click', function () {
                 saveDashboard(dashboard);
@@ -559,7 +564,7 @@ $(function () {
                         return renderPage(landing);
                     }
                     dashboard.landing = null;
-                    initFresh();
+                    initPage('landing');
                 });
             }).end()
             .find('.ues-pages').on('click', 'a', function () {
@@ -674,7 +679,7 @@ $(function () {
         }
     };
 
-    var initFresh = function () {
+    var initPage = function (type) {
         ues.store.layouts({
             start: 0,
             count: 20
@@ -683,21 +688,7 @@ $(function () {
             $('#middle')
                 .find('.ues-designer .ues-content').html(layoutsListHbs(data))
                 .on('click', '.thumbnails .ues-add', function () {
-                    createPage(pageOptions('landing'), $(this).data('id'));
-                });
-        });
-    };
-
-    var newPage = function (page) {
-        ues.store.layouts({
-            start: 0,
-            count: 20
-        }, function (err, data) {
-            storeCache.layout = data;
-            $('#middle')
-                .find('.ues-designer .ues-content').html(layoutsListHbs(data))
-                .on('click', '.thumbnails .ues-add', function () {
-                    createPage(pageOptions(), $(this).data('id'));
+                    createPage(pageOptions(type), $(this).data('id'));
                 });
         });
     };
@@ -713,7 +704,7 @@ $(function () {
             title: 'Dashboard',
             pages: []
         };
-        initFresh();
+        initPage('landing');
     };
 
     initTabs();

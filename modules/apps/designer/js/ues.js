@@ -39,20 +39,6 @@ var ues = ues || {};
     params[osapi.container.ContainerConfig.RENDER_DEBUG] = true;
     merge(params, 'container');
 
-    /*    var sub1 = OpenAjax.hub.IframeContainer.prototype.subscribe;
-     OpenAjax.hub.IframeContainer.prototype.subscribe = function() {
-     var sid = sub1.apply(this, Array.prototype.slice.call(arguments));
-     console.log('----------ruchira---------------' + sid);
-     return sid;
-     };
-
-     var sub2 = OpenAjax.hub.InlineContainer.prototype.subscribe;
-     OpenAjax.hub.InlineContainer.prototype.subscribe = function() {
-     var sid = sub2.apply(this, Array.prototype.slice.call(arguments));
-     console.log('----------ruchira---------------' + sid);
-     return sid;
-     };*/
-
     //opensocial container for the DOM
     var container = new osapi.container.Container(params);
 
