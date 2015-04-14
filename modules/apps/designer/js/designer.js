@@ -144,7 +144,7 @@ $(function () {
             var el = $('#middle').find('.ues-designer .ues-options');
             var oid = el.find('.ues-save').data('id');
             if (oid !== widget.id) {
-                return;
+                return done();
             }
             el.empty();
             done();
@@ -271,7 +271,9 @@ $(function () {
         };
         content.push(widget);
         ues.widgets.create(container, widget, function (err, block) {
-            var widget = findWidget(id);
+            if (err) {
+                throw err;
+            }
             renderWidgetToolbar(widget);
             renderWidgetOptions(widget);
         });
@@ -288,7 +290,9 @@ $(function () {
                 throw err;
             }
             ues.widgets.create(container, widget, function (err, block) {
-                var widget = findWidget(id);
+                if (err) {
+                    throw err;
+                }
                 renderWidgetToolbar(widget);
                 renderWidgetOptions(widget);
             });
@@ -604,12 +608,12 @@ $(function () {
         $.get(layout.url, function (data) {
             var id = options.id;
             layout.content = data;
-            page = {
+            currentPage({
                 id: id,
                 title: options.title,
                 layout: layout,
                 content: {}
-            };
+            });
             dashboard.landing = dashboard.landing || id;
             dashboard.pages.push(page);
             var container = layoutContainer();
@@ -617,6 +621,10 @@ $(function () {
                 listenLayout();
             });
         }, 'html');
+    };
+
+    var currentPage = function (p) {
+        return page = (ues.global.page = p);
     };
 
     var switchPage = function (pid) {
@@ -632,7 +640,7 @@ $(function () {
     };
 
     var renderPage = function (pid) {
-        page = ues.dashboards.findPage(dashboard, pid);
+        currentPage(ues.dashboards.findPage(dashboard, pid));
         if (!page) {
             throw 'specified page : ' + pid + ' cannot be found';
         }
@@ -695,15 +703,15 @@ $(function () {
 
     var initDashboard = function (db, page) {
         if (db) {
-            dashboard = db;
+            dashboard = (ues.global.dashboard = db);
             renderPage(page || db.landing);
             return;
         }
-        dashboard = {
+        dashboard = (ues.global.dashboard = {
             id: randomId(),
             title: 'Dashboard',
             pages: []
-        };
+        });
         initPage('landing');
     };
 
