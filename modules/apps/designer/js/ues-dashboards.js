@@ -4,12 +4,6 @@
         throw 'ues.plugins cannot be found. Please include ues-plugins.js.';
     }
 
-    var renderLayout = function (layout, done) {
-        $.get(layout.url, function (data) {
-            done(false, $(data));
-        }, 'html');
-    };
-
     var findPlugin = function (type) {
         var plugin = ues.plugins[type];
         if (!plugin) {
@@ -92,7 +86,7 @@
     };
 
     var setDocumentTitle = function (dashboard, page) {
-        document.title = document.title + ' | ' + (page.title || dashboard.title);
+        document.title = dashboard.title + ' | ' + page.title;
     };
 
     var renderPage = function (element, dashboard, page, done) {
@@ -102,17 +96,19 @@
         var area;
         var layout = $(page.layout.content);
         var content = page.content;
+        element.html(layout);
         for (area in content) {
             if (content.hasOwnProperty(area)) {
                 container = $('#' + area, layout);
                 content[area].forEach(function (options) {
-                    createWidget(container, options, function () {
-
+                    createWidget(container, options, function (err) {
+                        if (err) {
+                            console.error(err);
+                        }
                     });
                 });
             }
         }
-        element.html(layout);
         if (!done) {
             return;
         }

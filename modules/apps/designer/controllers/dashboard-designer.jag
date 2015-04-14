@@ -91,6 +91,7 @@
     <div class="preview-toggle"></div>
 </div>
 <!--<iframe id="sandbox" src="preview.jag"></iframe>-->
+<script src="<%=urlPrefix%>js/async.js"></script>
 <script src="<%=urlPrefix%>js/jquery-1.10.2.js"></script>
 <script src="<%=urlPrefix%>js/bootstrap.min.js"></script>
 <script src="<%=urlPrefix%>js/jquery-ui.js"></script>
@@ -207,6 +208,18 @@ ues.global.page = <%=JSON.stringify(page)%>;
             <button type="button" class="btn btn-default ues-page"><i class="fa fa-plus"></i> Page</button>
             <button type="button" class="btn btn-default ues-preview"><i class="fa fa-eye"></i> Preview</button>
             <button type="button" class="btn btn-default ues-save"><i class="fa fa-floppy-o"></i> Save</button>
+            <div class="btn-group pull-right ues-pages">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                Pages <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                {{#each pages}}
+                <li{{#equals id ../current.id}} class="active"{{/equals}}>
+                    <a href="#" data-id="{{id}}">{{title}}</a>
+                </li>
+                {{/each}}
+              </ul>
+            </div>
             <button type="button" class="btn btn-default ues-remove pull-right"><i class="fa fa-trash"></i> Remove</button>
             <button type="button" class="btn btn-default ues-settings pull-right"><i class="fa fa-cog"></i> Settings</button>
         </div>

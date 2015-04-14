@@ -40,6 +40,13 @@ $(function () {
         return new Handlebars.SafeString(options.inverse(this));
     });
 
+    Handlebars.registerHelper('equals', function (left, right, options) {
+        if (left === right) {
+            return options.fn(this);
+        }
+        return options.inverse(this);
+    });
+
     Handlebars.registerHelper('dump', function (o) {
         return JSON.stringify(o);
     });
@@ -121,8 +128,11 @@ $(function () {
         saveDashboard(dashboard);
     };
 
-    var removeWidget = function (widget) {
-        ues.widgets.destroy(widget, function (err) {
+    var removeWidget = function (widget, done) {
+        destroyWidget(widget, function (err) {
+            if (err) {
+                return done(err);
+            }
             var container = $('#' + widget.id);
             var area = container.closest('.ues-widget-box').attr('id');
             var content = page.content;
@@ -137,12 +147,63 @@ $(function () {
                 return;
             }
             el.empty();
+            done();
         });
     };
 
-    var removePage = function (page) {
-        //TODO
-        alert('TODO');
+    var destroyWidget = function (widget, done) {
+        ues.widgets.destroy(widget, function (err) {
+            if (!done) {
+                return;
+            }
+            done(err);
+        });
+    };
+
+    var destroyArea = function (widgets, done) {
+        var i;
+        var length = widgets.length;
+        var tasks = [];
+        for (i = 0; i < length; i++) {
+            tasks.push((function (widget) {
+                return function (done) {
+                    destroyWidget(widget, function (err) {
+                        done(err);
+                    });
+                };
+            }(widgets[i])));
+        }
+        async.parallel(tasks, function (err, results) {
+            done(err);
+        });
+    };
+
+    var destroyPage = function (page, done) {
+        var area;
+        var content = page.content;
+        var tasks = [];
+        for (area in content) {
+            if (content.hasOwnProperty(area)) {
+                tasks.push((function (area) {
+                    return function (done) {
+                        destroyArea(area, function (err) {
+                            done(err);
+                        });
+                    };
+                }(content[area])));
+            }
+        }
+        async.parallel(tasks, function (err, results) {
+            $('#middle').find('.ues-designer .ues-layout').empty();
+            done(err);
+        });
+    };
+
+    var removePage = function (page, done) {
+        var pages = dashboard.pages;
+        var index = pages.indexOf(page);
+        pages.splice(index, 1);
+        destroyPage(page, done);
     };
 
     var previewDashboard = function (page) {
@@ -170,7 +231,11 @@ $(function () {
         });
         designer.on('click', '.ues-widget .ues-toolbar .ues-trash-handle', function () {
             var id = $(this).closest('.ues-widget').attr('id');
-            removeWidget(findWidget(id));
+            removeWidget(findWidget(id), function (err) {
+                if (err) {
+                    console.error(err);
+                }
+            });
         });
         designer.on('mouseenter', '.ues-widget .ues-toolbar .ues-move-handle', function () {
             $(this).draggable({
@@ -218,11 +283,15 @@ $(function () {
         var content = page.content;
         content = content[area] || (content[area] = []);
         content.push(widget);
-        removeWidget(widget);
-        ues.widgets.create(container, widget, function (err, block) {
-            var widget = findWidget(id);
-            renderWidgetToolbar(widget);
-            renderWidgetOptions(widget);
+        removeWidget(widget, function (err) {
+            if (err) {
+                throw err;
+            }
+            ues.widgets.create(container, widget, function (err, block) {
+                var widget = findWidget(id);
+                renderWidgetToolbar(widget);
+                renderWidgetOptions(widget);
+            });
         });
     };
 
@@ -365,12 +434,19 @@ $(function () {
         })).find('.ues-sandbox').on('click', '.ues-save', function () {
             var sandbox = $(this).closest('.ues-sandbox');
             var id = $('.id', sandbox).val();
+            var title = $('.title', sandbox).val();
             var landing = $('.landing', sandbox);
-            page.id = $('.id', sandbox).val();
-            page.title = $('.title', sandbox).val();
+            var link = $('#middle').find('.ues-designer').children('.ues-toolbar')
+                .find('.ues-pages a[data-id="' + page.id + '"]');
+
+            link.data('id', id);
+            link.text(title);
+            page.id = id;
+            page.title = title;
             if (landing.is(':checked')) {
-                dashboard.landing = page.id;
+                dashboard.landing = id;
             }
+
             saveDashboard(dashboard);
         });
     };
@@ -468,7 +544,27 @@ $(function () {
                 renderPageOptions(page);
             }).end()
             .find('.ues-remove').on('click', function () {
-                removePage(page);
+                removePage(page, function (err) {
+                    if (err) {
+                        return console.error(err);
+                    }
+                    var landing = dashboard.landing;
+                    if (landing !== page.id) {
+                        return renderPage(landing);
+                    }
+                    var pages = dashboard.pages;
+                    var p = pages[0];
+                    if (p) {
+                        landing = (dashboard.landing = p.id);
+                        return renderPage(landing);
+                    }
+                    dashboard.landing = null;
+                    initFresh();
+                });
+            }).end()
+            .find('.ues-pages').on('click', 'a', function () {
+                var next = $(this).data('id');
+                switchPage(next);
             }).end()
             .end()
             .find('.ues-widget-box').droppable({
@@ -492,7 +588,10 @@ $(function () {
     };
 
     var layoutContainer = function () {
-        return $('#middle').find('.ues-designer').html(layoutHbs()).find('.ues-layout');
+        return $('#middle').find('.ues-designer').html(layoutHbs({
+            pages: dashboard.pages,
+            current: page
+        })).find('.ues-layout');
     };
 
     var createPage = function (options, lid) {
@@ -515,13 +614,25 @@ $(function () {
         }, 'html');
     };
 
-    var initExisting = function (landing) {
-        page = ues.dashboards.findPage(dashboard, landing);
+    var switchPage = function (pid) {
         if (!page) {
-            throw 'specified page : ' + landing + ' cannot be found';
+            return renderPage(pid);
+        }
+        destroyPage(page, function (err) {
+            if (err) {
+                throw err;
+            }
+            renderPage(pid);
+        });
+    };
+
+    var renderPage = function (pid) {
+        page = ues.dashboards.findPage(dashboard, pid);
+        if (!page) {
+            throw 'specified page : ' + pid + ' cannot be found';
         }
         var container = layoutContainer();
-        ues.dashboards.render(container, dashboard, landing, function () {
+        ues.dashboards.render(container, dashboard, pid, function () {
             $('#middle').find('.ues-designer .ues-widget').each(function () {
                 var id = $(this).attr('id');
                 renderWidgetToolbar(findWidget(id));
@@ -594,11 +705,12 @@ $(function () {
     var initDashboard = function (db, page) {
         if (db) {
             dashboard = db;
-            initExisting(page || db.landing);
+            renderPage(page || db.landing);
             return;
         }
         dashboard = {
             id: randomId(),
+            title: 'Dashboard',
             pages: []
         };
         initFresh();
