@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-    <ModulePrefs title="USA Company Revenue" height="280" description="USA Company Revenue chart"/>
+    <ModulePrefs title="USA Company Revenue" height="200" description="USA Company Revenue chart">
+        <Require feature="pubsub-2">
+            <Param name="topics"/>
+        </Require>
+    </ModulePrefs>
     <UserPref name="min"
               display_name="Minimum"
               default_value="100"/>

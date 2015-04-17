@@ -255,7 +255,8 @@ $(function () {
     };
 
     var renderWidgetToolbar = function (widget) {
-        $('#' + widget.id).prepend($(widgetToolbarHbs(widget)))
+        var el = $('#' + widget.id).prepend($(widgetToolbarHbs(widget)));
+        $('[data-toggle="tooltip"]', el).tooltip();
     };
 
     var renderWidget = function (container, wid) {
@@ -457,7 +458,7 @@ $(function () {
 
     var renderWidgetOptions = function (widget) {
         var ctx = buildOptionsContext(widget, page);
-        $('#middle').find('.ues-designer .ues-options').html(widgetOptionsHbs(ctx))
+        var el = $('#middle').find('.ues-designer .ues-options').html(widgetOptionsHbs(ctx))
             .find('.ues-sandbox').on('click', '.ues-save', function () {
                 var thiz = $(this);
                 var id = thiz.data('id');
@@ -490,7 +491,8 @@ $(function () {
                     options: opts,
                     notifiers: notifiers
                 });
-            });
+            }).end();
+        $('[data-toggle="tooltip"]', el).tooltip();
     };
 
     var loadWidgets = function (start, count) {

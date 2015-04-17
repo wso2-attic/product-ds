@@ -3,6 +3,7 @@
     <ModulePrefs title="USA Map" description="USA clickable map">
         <Require feature="dynamic-height"/>
         <Require feature="setprefs"/>
+        <Require feature="pubsub-2"/>
     </ModulePrefs>
     <UserPref name="username" default_value="ruchira@wso2.com"/>
     <Content type="html">
@@ -32,13 +33,14 @@
 <script>
 
 	var click = function(state) {
-	    console.log({ country: 'US', state: state.id });
+	    var address = { country: 'US', state: state.id };
 	    var prefs = new gadgets.Prefs();
 	    prefs.set('username1', 'ruchirawageesha@gmail.com');
         var name = prefs.getString('username');
         console.log(name);
         var lang = prefs.getLang();
         console.log(lang);
+        gadgets.Hub.publish('select', address);
 	};
 
 	var data ={};
