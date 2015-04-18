@@ -136,12 +136,6 @@ a, a:focus {
     padding-right: 8px;
 }
 
-.ues-component .ues-toolbar li a {
-    width: 10px;
-    height: 10px;
-    background-color: darkgreen;
-}
-
 #middle .ues-toolbar .pull-right {
     margin-left: 4px;
 }
