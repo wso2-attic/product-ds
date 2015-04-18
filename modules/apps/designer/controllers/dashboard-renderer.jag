@@ -23,9 +23,9 @@
 <script src="/shindig/gadgets/js/container:open-views:opensearch:rpc:xmlutil:pubsub-2.js?c=1&debug=1&container=default"></script>
 <script src="<%=urlPrefix%>js/ues-prefs.js"></script>
 <script src="<%=urlPrefix%>js/ues.js"></script>
-<script src="<%=urlPrefix%>js/ues-plugins-gadget.js"></script>
-<script src="<%=urlPrefix%>js/ues-plugins-widget.js"></script>
 <script src="<%=urlPrefix%>js/ues-dashboards.js"></script>
+<script src="<%=urlPrefix%>extensions/components/gadget/index.js"></script>
+<script src="<%=urlPrefix%>extensions/components/widget/index.js"></script>
 <script>
 ues.global.dashboard = <%=dashboard%>;
 ues.global.page = <%=JSON.stringify(page)%>;

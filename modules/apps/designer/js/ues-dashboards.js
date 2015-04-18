@@ -1,32 +1,28 @@
 (function () {
 
-    if (!ues.plugins) {
-        throw 'ues.plugins cannot be found. Please include ues-plugins.js.';
-    }
-
     var findPlugin = function (type) {
-        var plugin = ues.plugins[type];
+        var plugin = ues.components[type];
         if (!plugin) {
             throw 'ues dashboard plugin for ' + type + ' cannot be found';
         }
         return plugin;
     };
 
-    var createWidget = function (container, widget, done) {
-        var type = widget.content.type;
+    var createComponent = function (container, component, done) {
+        var type = component.content.type;
         var plugin = findPlugin(type);
-        var sandbox = $('<div id="' + widget.id + '" class="ues-widget"></div>');
+        var sandbox = $('<div id="' + component.id + '" class="ues-component"></div>');
         sandbox.appendTo(container);
-        plugin.create(sandbox, widget, ues.hub, done);
+        plugin.create(sandbox, component, ues.hub, done);
     };
 
-    var destroyWidget = function (widget, done) {
-        var plugin = findPlugin(widget.content.type);
-        var container = $('#' + widget.id);
-        plugin.destroy(container, widget, ues.hub, done);
+    var destroyComponent = function (component, done) {
+        var plugin = findPlugin(component.content.type);
+        var container = $('#' + component.id);
+        plugin.destroy(container, component, ues.hub, done);
     };
 
-    var widgetId = function (clientId) {
+    var componentId = function (clientId) {
         return clientId.split('-').pop();
     };
 
@@ -35,7 +31,7 @@
     var publishForClient = ues.hub.publishForClient;
     ues.hub.publishForClient = function (container, topic, data) {
         console.log('publishing data container:%s, topic:%s, data:%j', container.getClientID(), topic, data);
-        var clientId = widgetId(container.getClientID());
+        var clientId = componentId(container.getClientID());
         var channels = wirings[clientId + '.' + topic];
         if (!channels) {
             return;
@@ -101,7 +97,7 @@
             if (content.hasOwnProperty(area)) {
                 container = $('#' + area, layout);
                 content[area].forEach(function (options) {
-                    createWidget(container, options, function (err) {
+                    createComponent(container, options, function (err) {
                         if (err) {
                             console.error(err);
                         }
@@ -141,9 +137,9 @@
         wirings = wires(page);
     };
 
-    ues.widgets = {
-        create: createWidget,
-        destroy: destroyWidget
+    ues.components = {
+        create: createComponent,
+        destroy: destroyComponent
     };
 
     ues.dashboards = {

@@ -52,7 +52,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav nav-tabs" role="tablist">
                     <li class="active"><a href="#designer"><i class="fa fa-columns"></i></a></li>
-                    <li><a href="#widgets"><i class="fa fa-pie-chart"></i></a></li>
+                    <li><a href="#components"><i class="fa fa-pie-chart"></i></a></li>
                     <li><a href="#settings"><i class="fa fa-cog"></i></a></li>
                     <li><a href="#share"><i class="fa fa-share-alt"></i></a></li>
                 </ul>
@@ -71,7 +71,7 @@
                 <div class="col-md-12 ues-content"></div>
             </div>
         </div>
-        <div id="widgets" class="container-fluid ues-widgets tab-pane">
+        <div id="components" class="container-fluid ues-components tab-pane">
             <div class="row ues-toolbar">
                 <div class="col-md-12">
                     <div class="btn-group">
@@ -88,9 +88,7 @@
         </div>
         <div id="settings" class="container-fluid ues-settings tab-pane"></div>
     </div>
-    <div class="preview-toggle"></div>
 </div>
-<!--<iframe id="sandbox" src="preview.jag"></iframe>-->
 <script src="<%=urlPrefix%>js/async.js"></script>
 <script src="<%=urlPrefix%>js/jquery-1.10.2.js"></script>
 <script src="<%=urlPrefix%>js/bootstrap.min.js"></script>
@@ -102,9 +100,9 @@
 <script src="<%=urlPrefix%>js/ues.js"></script>
 <script src="<%=urlPrefix%>js/ues-utils.js"></script>
 <script src="<%=urlPrefix%>js/ues-store.js"></script>
-<script src="<%=urlPrefix%>js/ues-plugins-gadget.js"></script>
-<script src="<%=urlPrefix%>js/ues-plugins-widget.js"></script>
 <script src="<%=urlPrefix%>js/ues-dashboards.js"></script>
+<script src="<%=urlPrefix%>extensions/components/gadget/index.js"></script>
+<script src="<%=urlPrefix%>extensions/components/widget/index.js"></script>
 <script>
 ues.global.dashboard = <%=dashboard%>;
 ues.global.page = <%=JSON.stringify(page)%>;
@@ -133,7 +131,7 @@ ues.global.page = <%=JSON.stringify(page)%>;
         </form>
     </div>
 </script>
-<script id="widget-options-hbs" type="text/x-handlebars-template">
+<script id="component-options-hbs" type="text/x-handlebars-template">
     <div class="ues-sandbox">
         <form>
             {{#has options}}
@@ -239,7 +237,7 @@ ues.global.page = <%=JSON.stringify(page)%>;
         </div>
     </div>
 </script>
-<script id="widgets-list-hbs" type="text/x-handlebars-template">
+<script id="components-list-hbs" type="text/x-handlebars-template">
     <div class="row thumbnails">
         {{#each .}}
         <div class="col-md-3 col-sm-4 col-xs-6 box">
@@ -258,7 +256,7 @@ ues.global.page = <%=JSON.stringify(page)%>;
         {{/each}}
     </div>
 </script>
-<script id="widget-toolbar-hbs" type="text/x-handlebars-template">
+<script id="component-toolbar-hbs" type="text/x-handlebars-template">
     <div class="ues-toolbar">
         <ul class="list-inline pull-right">
             <li><a href="#" data-toggle="tooltip" title="{{id}}"><i class="fa fa-info-circle"></i></a></li>
