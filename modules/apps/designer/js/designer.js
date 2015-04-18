@@ -9,6 +9,8 @@ $(function () {
 
     var storeCache = {};
 
+    var resolveURI = ues.dashboards.resolveURI;
+
     Handlebars.registerHelper('has', function () {
         var has = function (o) {
             if (!o) {
@@ -49,6 +51,10 @@ $(function () {
 
     Handlebars.registerHelper('dump', function (o) {
         return JSON.stringify(o);
+    });
+
+    Handlebars.registerHelper('resolveURI', function (path) {
+        return ues.dashboards.resolveURI(path);
     });
 
     var layoutsListHbs = Handlebars.compile($("#layouts-list-hbs").html());
@@ -259,10 +265,9 @@ $(function () {
         $('[data-toggle="tooltip"]', el).tooltip();
     };
 
-    var renderComponent = function (container, wid) {
+    var createComponent = function (container, asset) {
         var id = randomId();
         //TODO: remove hardcoded gadget
-        var asset = findStoreCache('gadget', wid);
         var area = container.attr('id');
         var content = page.content;
         content = content[area] || (content[area] = []);
@@ -592,7 +597,7 @@ $(function () {
                             moveComponent(el, id);
                             break;
                         default:
-                            renderComponent(el, id);
+                            createComponent(el, findStoreCache('gadget', id));
                     }
                 }
             });
@@ -607,7 +612,7 @@ $(function () {
 
     var createPage = function (options, lid) {
         var layout = findStoreCache('layout', lid);
-        $.get(layout.url, function (data) {
+        $.get(resolveURI(layout.url), function (data) {
             var id = options.id;
             layout.content = data;
             currentPage({

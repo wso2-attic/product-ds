@@ -1,10 +1,6 @@
-var update = function (ctx, asset) {
-    var url = asset.data.url;
-    if (!url.match('/(http://)|(https://)/i')) {
-        asset.data.url = ctx.store + url;
-    }
-    url = asset.thumbnail;
-    if (!url.match('/(http://)|(https://)/i')) {
-        asset.thumbnail = ctx.store + url;
-    }
-};
+(function () {
+    ues.plugins.assets['gadget'] = function (asset, options) {
+        asset.data.url = options.resolveURI(asset.data.url);
+        asset.data.thumbnail = options.resolveURI(asset.data.thumbnail);
+    };
+}());

@@ -1,7 +1,7 @@
 (function () {
 
     var findPlugin = function (type) {
-        var plugin = ues.components[type];
+        var plugin = ues.plugins.components[type];
         if (!plugin) {
             throw 'ues dashboard plugin for ' + type + ' cannot be found';
         }
@@ -137,6 +137,17 @@
         wirings = wires(page);
     };
 
+    var resolveURI = function (uri) {
+        var index = uri.indexOf('://');
+        var scheme = uri.substring(0, index);
+        var uriPlugin = ues.plugins.uris[scheme];
+        if (!uriPlugin) {
+            return uri;
+        }
+        var path = uri.substring(index + 3);
+        return uriPlugin(path);
+    };
+
     ues.components = {
         create: createComponent,
         destroy: destroyComponent
@@ -145,7 +156,16 @@
     ues.dashboards = {
         render: renderDashboard,
         rewire: rewireDashboard,
-        findPage: findPage
+        findPage: findPage,
+        resolveURI: resolveURI
+    };
+
+    ues.assets = {};
+
+    ues.plugins = {
+        assets: {},
+        components: {},
+        uris: {}
     };
 
 }());

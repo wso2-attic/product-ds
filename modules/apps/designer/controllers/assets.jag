@@ -5,7 +5,7 @@
     var config = require('/configs/designer.json');
 
     var storeType = config.store.type;
-    var storePath = '/extensions/store/' + storeType + '.js';
+    var storePath = '/extensions/stores/' + storeType + '/index.js';
     var store = require(storePath);
 
     var serverUrl = (function () {
@@ -22,7 +22,6 @@
 
     var id;
     var assetType = request.getParameter('type');
-    var azzet = require('/extensions/assets/' + assetType + '.js');
     var method = request.getMethod();
 
     response.contentType = 'application/json';
@@ -40,9 +39,6 @@
                 }));
                 return;
             }
-            azzet.update({
-                store: serverUrl
-            }, assets);
             print(assets);
             return;
         }
@@ -59,11 +55,6 @@
         id = matcher.elements().id;
         if (method === 'GET') {
             assets = store.find(assetType);
-            assets.forEach(function (asset) {
-                azzet.update({
-                    store: serverUrl
-                }, asset);
-            });
             print(assets);
             return;
         }

@@ -6,6 +6,24 @@
 
     var gadgets = {};
 
+    var server = ues.global.server;
+
+    var resolveURI = ues.dashboards.resolveURI;
+
+    var context = ues.global.context;
+
+    var resolveGadgetURL = function (uri) {
+        var index = uri.indexOf('local://');
+        if (index === -1) {
+            return resolveURI(uri);
+        }
+        uri = uri.substring(index + 8);
+        if (window.location.protocol === 'https:') {
+            return 'https://localhost:' + server.httpsPort + context + '/' + uri;
+        }
+        return 'http://localhost:' + server.httpPort + context + '/' + uri;
+    };
+
     var subscribeForClient = ues.hub.subscribeForClient;
 
     var containerId = function (id) {
@@ -28,7 +46,7 @@
         return subscribeForClient.apply(ues.hub, [container, channel, conSubId]);
     };
 
-    var plugin = (ues.components['gadget'] = {});
+    var component = (ues.plugins.components['gadget'] = {});
 
     var createPanel = function () {
         var html =
@@ -41,9 +59,10 @@
         return $(html);
     };
 
-    plugin.create = function (sandbox, component, hub, done) {
+    component.create = function (sandbox, component, hub, done) {
         var content = component.content;
-        ues.gadgets.preload(content.data.url, function (err, metadata) {
+        var url = resolveGadgetURL(content.data.url);
+        ues.gadgets.preload(url, function (err, metadata) {
             var pref;
             var opts = content.options || (content.options = {});
             var prefs = metadata.userPrefs;
@@ -66,7 +85,7 @@
             panel.find('.panel-title').html(content.title);
             container.appendTo(panel.find('.panel-body'));
             panel.appendTo(sandbox);
-            var site = ues.gadgets.render(container, content.data.url);
+            var site = ues.gadgets.render(container, url);
             gadgets[gid] = {
                 component: component,
                 site: site
@@ -75,11 +94,11 @@
         });
     };
 
-    plugin.update = function (sandbox, component, hub, done) {
+    component.update = function (sandbox, component, hub, done) {
 
     };
 
-    plugin.destroy = function (sandbox, component, hub, done) {
+    component.destroy = function (sandbox, component, hub, done) {
         var gid = gadgetId(component.id);
         var data = gadgets[gid];
         var site = data.site;

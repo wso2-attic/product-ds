@@ -98,15 +98,14 @@
 <script src="/shindig/gadgets/js/container:open-views:opensearch:rpc:xmlutil:pubsub-2.js?c=1&debug=1&container=default"></script>
 <script src="<%=urlPrefix%>js/ues-prefs.js"></script>
 <script src="<%=urlPrefix%>js/ues.js"></script>
+<% include('dashboard-scripts.jag'); %>
 <script src="<%=urlPrefix%>js/ues-utils.js"></script>
 <script src="<%=urlPrefix%>js/ues-store.js"></script>
 <script src="<%=urlPrefix%>js/ues-dashboards.js"></script>
 <script src="<%=urlPrefix%>extensions/components/gadget/index.js"></script>
 <script src="<%=urlPrefix%>extensions/components/widget/index.js"></script>
-<script>
-ues.global.dashboard = <%=dashboard%>;
-ues.global.page = <%=JSON.stringify(page)%>;
-</script>
+<script src="<%=urlPrefix%>extensions/uris/local/index.js"></script>
+<script src="<%=urlPrefix%>extensions/uris/store/index.js"></script>
 <script src="<%=urlPrefix%>js/designer.js"></script>
 <script id="page-options-hbs" type="text/x-handlebars-template">
     <div class="ues-sandbox">
@@ -191,7 +190,7 @@ ues.global.page = <%=JSON.stringify(page)%>;
         {{#each .}}
         <div class="col-md-3 col-sm-4 col-xs-6 box">
             <div class="thumbnail">
-                <img src="{{thumbnail}}"/>
+                <img src="{{resolveURI thumbnail}}"/>
                 <div class="caption">
                     <h3>{{title}}</h3>
                 </div>
@@ -242,7 +241,7 @@ ues.global.page = <%=JSON.stringify(page)%>;
         {{#each .}}
         <div class="col-md-3 col-sm-4 col-xs-6 box">
             <div class="thumbnail">
-                <img src="{{thumbnail}}"/>
+                <img src="{{resolveURI thumbnail}}"/>
                 <div class="caption">
                     <h3>{{title}}</h3>
                 </div>

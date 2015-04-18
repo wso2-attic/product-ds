@@ -1,14 +1,14 @@
 (function () {
 
-    var containerPrefix = 'ues-component-';
+    var containerPrefix = 'ues-widget-';
 
     var containerId = function (id) {
         return containerPrefix + id;
     };
 
-    var plugin = (ues.components['component'] = {});
+    var component = (ues.plugins.components['widget'] = {});
 
-    plugin.create = function (sandbox, component, hub, done) {
+    component.create = function (sandbox, component, hub, done) {
         var html = '<h2>' + component.content.title + '</h2>';
         html += '<button class="ues-send btn btn-primary" type="button">Send</button>';
         sandbox.html(html);
@@ -71,11 +71,11 @@
         done(false, component);
     };
 
-    plugin.update = function (sandbox, component, hub, done) {
+    component.update = function (sandbox, component, hub, done) {
 
     };
 
-    plugin.destroy = function (sandbox, component, hub, done) {
+    component.destroy = function (sandbox, component, hub, done) {
         $(sandbox).remove('iframe');
     };
 

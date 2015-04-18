@@ -23,12 +23,14 @@
 <script src="/shindig/gadgets/js/container:open-views:opensearch:rpc:xmlutil:pubsub-2.js?c=1&debug=1&container=default"></script>
 <script src="<%=urlPrefix%>js/ues-prefs.js"></script>
 <script src="<%=urlPrefix%>js/ues.js"></script>
+<% include('dashboard-scripts.jag'); %>
+<script src="<%=urlPrefix%>js/ues-utils.js"></script>
 <script src="<%=urlPrefix%>js/ues-dashboards.js"></script>
 <script src="<%=urlPrefix%>extensions/components/gadget/index.js"></script>
 <script src="<%=urlPrefix%>extensions/components/widget/index.js"></script>
+<script src="<%=urlPrefix%>extensions/uris/local/index.js"></script>
+<script src="<%=urlPrefix%>extensions/uris/store/index.js"></script>
 <script>
-ues.global.dashboard = <%=dashboard%>;
-ues.global.page = <%=JSON.stringify(page)%>;
 ues.dashboards.render($('#wrapper'), ues.global.dashboard, ues.global.page);
 </script>
 </body>
