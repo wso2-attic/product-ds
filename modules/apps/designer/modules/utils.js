@@ -14,5 +14,6 @@ var relativePrefix = function (path) {
 var sandbox = function (options, fn) {
     var carbon = require('carbon');
     options.tenantId = carbon.server.tenantId(options);
+    options.tenantId = options.tenantId || carbon.server.tenantId();
     carbon.server.sandbox(options, fn);
 };

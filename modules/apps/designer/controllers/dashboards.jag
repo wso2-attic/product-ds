@@ -10,8 +10,16 @@ var buildOptions;
     var configs = require('/configs/designer.json');
     tenantPrefix = configs.tenantPrefix + '/{domain}';
 
+    var utils = require('/modules/utils.js');
+    urlPrefix = utils.relativePrefix(request.getRequestURI());
+
     var usr = require('/modules/user.js');
     user = usr.current();
+
+    if(!user) {
+        response.sendRedirect(urlPrefix + 'landing');
+        return;
+    }
 
     buildOptions = function (vars) {
         if (user) {
@@ -33,7 +41,6 @@ var buildOptions;
     }
 
     var dashboards = require('/modules/dashboards.js');
-    var utils = require('/modules/utils.js');
 
     var vars;
     var editor = request.getParameter('editor');
@@ -56,7 +63,6 @@ var buildOptions;
         editor = true;
     }
 
-    urlPrefix = utils.relativePrefix(request.getRequestURI());
     if(editor) {
         include('dashboard-designer.jag');
         return;

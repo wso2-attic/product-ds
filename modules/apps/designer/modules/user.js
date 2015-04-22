@@ -1,13 +1,15 @@
 var current = function () {
-    login('admin');
     return session.get('user');
 };
 
 var login = function (username, password) {
-    session.put('user', {
-        username: username,
-        tenantId: -1234
-    });
+    var carbon = require('carbon');
+    var server = new carbon.server.Server();
+    if(!server.authenticate(username, password)) {
+        return false;
+    }
+    var user = carbon.server.tenantUser(username);
+    session.put('user', user);
     return true;
 };
 

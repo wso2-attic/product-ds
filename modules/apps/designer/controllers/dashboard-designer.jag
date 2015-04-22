@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title>WSO2 UES - Dashboard Designer</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<%=urlPrefix%>css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=urlPrefix%>css/jquery-ui.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -26,8 +28,21 @@
         <div class="collapse navbar-collapse horizontal-bar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <% if (user) { %>
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <%=user.username%> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="<%=urlPrefix%>logout">Logout</a></li>
+                    </ul>
+                </li>
+                </li>
+                <% } else { %>
+                <li><a href="<%=urlPrefix%>login<% if(dest) { %>?destination=<%=dest%><% } %>">Login</a></li>
+                <% } %>
             </ul>
         </div>
         <!--/.nav-collapse -->
