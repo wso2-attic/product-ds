@@ -150,7 +150,7 @@
 <script src="<%=urlPrefix%>js/designer.js"></script>
 <script src="<%=urlPrefix%>js/designer-settings.js"></script>
 <script id="shared-role-hbs" type="text/x-handlebars-template">
-    <button type="button" class="btn btn-default ues-shared-role" data-role="{{name}}">{{name}} <i class="fa fa-times remove-button"></i></button>
+    <button type="button" class="btn btn-default ues-shared-role" data-role="{{.}}">{{.}} <i class="fa fa-times remove-button"></i></button>
 </script>
 <script id="page-options-hbs" type="text/x-handlebars-template">
     <div class="ues-sandbox">

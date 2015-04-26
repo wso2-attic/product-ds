@@ -34,10 +34,11 @@ $(function () {
         displayKey: 'name',
         source: engine.ttAdapter()
     }).on('typeahead:selected', function (e, role, roles) {
+        var name = role.name;
         var permissions = dashboard.permissions;
-        permissions.viewers.push(role);
+        permissions.viewers.push(name);
         saveDashboard();
-        $('.ues-settings .ues-shared-view').append(sharedRoleHbs(role));
+        $('.ues-settings .ues-shared-view').append(sharedRoleHbs(name));
         $(this).val('');
     });
 
@@ -46,10 +47,11 @@ $(function () {
         displayKey: 'name',
         source: engine.ttAdapter()
     }).on('typeahead:selected', function (e, role, roles) {
+        var name = role.name;
         var permissions = dashboard.permissions;
-        permissions.editors.push(role);
+        permissions.editors.push(name);
         saveDashboard();
-        $('.ues-settings .ues-shared-edit').append(sharedRoleHbs(role));
+        $('.ues-settings .ues-shared-edit').append(sharedRoleHbs(name));
         $(this).val('');
     });
 });
