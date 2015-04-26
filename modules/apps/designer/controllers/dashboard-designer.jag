@@ -69,7 +69,6 @@
                     <li class="active"><a href="#designer"><i class="fa fa-columns"></i></a></li>
                     <li><a href="#components"><i class="fa fa-pie-chart"></i></a></li>
                     <li><a href="#settings"><i class="fa fa-cog"></i></a></li>
-                    <li><a href="#share"><i class="fa fa-share-alt"></i></a></li>
                 </ul>
             </div>
         </nav>
@@ -78,8 +77,8 @@
         <div id="designer" class="container-fluid ues-designer tab-pane active">
             <div class="row ues-toolbar">
                 <div class="col-md-12">
-                    <button type="button" class="btn btn-default ues-preview">Preview</button>
                     <button type="button" class="btn btn-default ues-save">Save</button>
+                    <button type="button" class="btn btn-default ues-preview">Preview</button>
                 </div>
             </div>
             <div class="row">
@@ -101,13 +100,40 @@
                 <div class="col-md-12 ues-content"></div>
             </div>
         </div>
-        <div id="settings" class="container-fluid ues-settings tab-pane"></div>
+        <div id="settings" class="container-fluid ues-settings tab-pane">
+            <div class="row ues-toolbar">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-default ues-save">Save</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <form class="form-horizontal">
+                      <div class="form-group">
+                        <label for="ues-share-view" class="col-sm-2 control-label">Viewers</label>
+                        <div class="col-sm-10">
+                          <input id="ues-share-view" type="text" class="form-control typeahead" placeholder="Roles">
+                          <div class="ues-shared-view"></div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="ues-share-edit" class="col-sm-2 control-label">Editors</label>
+                        <div class="col-sm-10">
+                          <input id="ues-share-edit" type="text" class="form-control typeahead" placeholder="Roles">
+                          <div class="ues-shared-edit"></div>
+                        </div>
+                      </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script src="<%=urlPrefix%>js/async.js"></script>
 <script src="<%=urlPrefix%>js/jquery-1.10.2.js"></script>
 <script src="<%=urlPrefix%>js/bootstrap.min.js"></script>
 <script src="<%=urlPrefix%>js/jquery-ui.js"></script>
+<script src="<%=urlPrefix%>js/typeahead.bundle.min.js"></script>
 <script src="<%=urlPrefix%>js/handlebars-v1.3.0.js"></script>
 <!-- TODO fix shindig url -->
 <script src="/shindig/gadgets/js/container:open-views:opensearch:rpc:xmlutil:pubsub-2.js?c=1&debug=1&container=default"></script>
@@ -122,6 +148,10 @@
 <script src="<%=urlPrefix%>extensions/uris/local/index.js"></script>
 <script src="<%=urlPrefix%>extensions/uris/store/index.js"></script>
 <script src="<%=urlPrefix%>js/designer.js"></script>
+<script src="<%=urlPrefix%>js/designer-settings.js"></script>
+<script id="shared-role-hbs" type="text/x-handlebars-template">
+    <button type="button" class="btn btn-default ues-shared-role" data-role="{{name}}">{{name}} <i class="fa fa-times remove-button"></i></button>
+</script>
 <script id="page-options-hbs" type="text/x-handlebars-template">
     <div class="ues-sandbox">
         <form>
@@ -141,13 +171,13 @@
                     <input type="checkbox" class="landing"{{#if landing}} checked="checked"{{/if}}> Use as Landing
                 </label>
             </div>
-            <button type="button" class="btn btn-primary ues-save" data-id="{{id}}">Save</button>
+            <button type="button" class="btn btn-default ues-save" data-id="{{id}}">Save</button>
         </form>
     </div>
 </script>
 <script id="component-options-hbs" type="text/x-handlebars-template">
-    <div class="ues-sandbox">
-        <form>
+    <div class="ues-sandbox" data-id="{{id}}">
+        <form class="component-options">
             {{#has options}}
                 <h4>Properties</h4>
                 <div class="properties">
@@ -193,7 +223,6 @@
                 </div>
             {{/has}}
             {{#has options listeners}}
-                <button type="button" class="btn btn-primary ues-save" data-id="{{id}}">Save</button>
             {{else}}
                 No options to configure.
             {{/has}}
@@ -203,14 +232,14 @@
 <script id="layouts-list-hbs" type="text/x-handlebars-template">
     <div class="row thumbnails">
         {{#each .}}
-        <div class="col-md-3 col-sm-4 col-xs-6 box">
+        <div class="col-md-3 col-sm-4 box">
             <div class="thumbnail">
                 <img src="{{resolveURI thumbnail}}"/>
                 <div class="caption">
                     <h3>{{title}}</h3>
                 </div>
                 <div class="ues-toolbar">
-                    <button type="button" class="btn btn-primary ues-add" data-id="{{id}}">Select</button>
+                    <button type="button" class="btn btn-default ues-add" data-id="{{id}}">Select</button>
                 </div>
             </div>
         </div>
@@ -220,9 +249,9 @@
 <script id="layout-hbs" type="text/x-handlebars-template">
     <div class="row ues-toolbar">
         <div class="col-md-10">
+            <button type="button" class="btn btn-default ues-save"><i class="fa fa-floppy-o"></i> Save</button>
             <button type="button" class="btn btn-default ues-page"><i class="fa fa-plus"></i> Page</button>
             <button type="button" class="btn btn-default ues-preview"><i class="fa fa-eye"></i> Preview</button>
-            <button type="button" class="btn btn-default ues-save"><i class="fa fa-floppy-o"></i> Save</button>
             <div class="btn-group pull-right ues-pages">
               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                 Pages <span class="caret"></span>
@@ -254,7 +283,7 @@
 <script id="components-list-hbs" type="text/x-handlebars-template">
     <div class="row thumbnails">
         {{#each .}}
-        <div class="col-md-3 col-sm-4 col-xs-6 box">
+        <div class="col-md-3 col-sm-4 box">
             <div class="thumbnail">
                 <img src="{{resolveURI thumbnail}}"/>
                 <div class="caption">
