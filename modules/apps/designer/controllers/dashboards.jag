@@ -11,13 +11,19 @@ var buildOptions;
     tenantPrefix = configs.tenantPrefix + '/{domain}';
 
     var utils = require('/modules/utils.js');
-    urlPrefix = utils.relativePrefix(request.getRequestURI());
+    var path = request.getRequestURI();
+    urlPrefix = utils.relativePrefix(path);
 
     var usr = require('/modules/user.js');
     user = usr.current();
 
-    if(!user) {
-        response.sendRedirect(urlPrefix + 'landing');
+    var dest;
+    var query;
+
+    if (!user) {
+        query = request.getQueryString();
+        dest = path + (query ? '?' + query : '');
+        response.sendRedirect(urlPrefix + 'login?destination=' + dest);
         return;
     }
 
@@ -63,11 +69,11 @@ var buildOptions;
         editor = true;
     }
 
-    if(editor) {
+    if (editor) {
         include('dashboard-designer.jag');
         return;
     }
-    if(dashboard) {
+    if (dashboard) {
         include('dashboard-renderer.jag');
         return;
     }
