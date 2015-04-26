@@ -131,7 +131,7 @@ $(function () {
             }
         }
         ues.dashboards.rewire(page);
-        saveDashboard(dashboard);
+        saveDashboard();
     };
 
     var removeComponent = function (component, done) {
@@ -216,7 +216,7 @@ $(function () {
         window.open(dashboardUrl + '/' + dashboard.id + '/' + page.id, '_blank');
     };
 
-    var saveDashboard = function (dashboard) {
+    var saveDashboard = function () {
         $.ajax({
             url: dashboardUrl,
             method: 'POST',
@@ -282,6 +282,7 @@ $(function () {
             }
             renderComponentToolbar(component);
             renderComponentOptions(component);
+            saveDashboard();
         });
     };
 
@@ -301,6 +302,7 @@ $(function () {
                 }
                 renderComponentToolbar(component);
                 renderComponentOptions(component);
+                saveDashboard();
             });
         });
     };
@@ -452,7 +454,7 @@ $(function () {
             dashboard.landing = id;
         }
 
-        saveDashboard(dashboard);
+        saveDashboard();
     };
 
     var renderPageOptions = function (page) {
@@ -540,7 +542,7 @@ $(function () {
             });
 
         $('#middle').on('click', '.ues-toolbar .ues-save', function () {
-            saveDashboard(dashboard);
+            saveDashboard();
         });
     };
 
@@ -625,6 +627,7 @@ $(function () {
             });
             dashboard.landing = dashboard.landing || id;
             dashboard.pages.push(page);
+            saveDashboard();
             var container = layoutContainer();
             ues.dashboards.render(container, dashboard, id, function () {
                 listenLayout();
@@ -733,5 +736,7 @@ $(function () {
     initComponents();
     loadComponents(0, 20);
     initDashboard(ues.global.dashboard, ues.global.page);
+
+    ues.dashboards.save = saveDashboard;
 
 });

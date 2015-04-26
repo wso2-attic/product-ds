@@ -2,6 +2,8 @@ $(function () {
 
     var dashboard = ues.global.dashboard;
 
+    var saveDashboard = ues.dashboards.save;
+
     var sharedRoleHbs = Handlebars.compile($("#shared-role-hbs").html());
 
     //TODO: fix the url
@@ -34,6 +36,7 @@ $(function () {
     }).on('typeahead:selected', function (e, role, roles) {
         var permissions = dashboard.permissions;
         permissions.viewers.push(role);
+        saveDashboard();
         $('.ues-settings .ues-shared-view').append(sharedRoleHbs(role));
         $(this).val('');
     });
@@ -45,6 +48,7 @@ $(function () {
     }).on('typeahead:selected', function (e, role, roles) {
         var permissions = dashboard.permissions;
         permissions.editors.push(role);
+        saveDashboard();
         $('.ues-settings .ues-shared-edit').append(sharedRoleHbs(role));
         $(this).val('');
     });

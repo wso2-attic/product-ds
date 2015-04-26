@@ -171,7 +171,6 @@
                     <input type="checkbox" class="landing"{{#if landing}} checked="checked"{{/if}}> Use as Landing
                 </label>
             </div>
-            <button type="button" class="btn btn-default ues-save" data-id="{{id}}">Save</button>
         </form>
     </div>
 </script>
