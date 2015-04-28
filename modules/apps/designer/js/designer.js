@@ -9,6 +9,8 @@ $(function () {
 
     var page;
 
+    var freshDashboard = true;
+
     var storeCache = {};
 
     var resolveURI = ues.dashboards.resolveURI;
@@ -219,9 +221,19 @@ $(function () {
     };
 
     var saveDashboard = function () {
+        var method;
+        var url;
+        if (freshDashboard) {
+            freshDashboard = false;
+            method = 'POST';
+            url = dashboardsApi;
+        } else {
+            method = 'PUT';
+            url = dashboardsApi + '/' + dashboard.id;
+        }
         $.ajax({
-            url: dashboardsApi,
-            method: 'POST',
+            url: url,
+            method: method,
             data: JSON.stringify(dashboard),
             contentType: 'application/json'
         }).success(function (data) {
@@ -717,6 +729,7 @@ $(function () {
 
     var initDashboard = function (db, page) {
         if (db) {
+            freshDashboard = false;
             dashboard = (ues.global.dashboard = db);
             renderPage(page || db.landing);
             return;

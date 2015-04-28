@@ -35,7 +35,26 @@ var create = function (dashboard) {
     var registry = new carbon.registry.Registry(server, {
         system: true
     });
-    registry.put(registryPath(dashboard.id), {
+    var path = registryPath(dashboard.id);
+    if (registry.exists(path)) {
+        throw 'a dashboard exists with the same id ' + dashboard.id;
+    }
+    registry.put(path, {
+        content: JSON.stringify(dashboard),
+        mediaType: 'application/json'
+    });
+};
+
+var update = function (dashboard) {
+    var server = new carbon.server.Server();
+    var registry = new carbon.registry.Registry(server, {
+        system: true
+    });
+    var path = registryPath(dashboard.id);
+    if (!registry.exists(path)) {
+        throw 'a dashboard cannot be found with the id ' + dashboard.id;
+    }
+    registry.put(path, {
         content: JSON.stringify(dashboard),
         mediaType: 'application/json'
     });
