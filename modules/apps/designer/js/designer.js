@@ -1,7 +1,9 @@
 $(function () {
     //TODO: cleanup this
 
-    var dashboardUrl = ues.utils.relativePrefix() + 'dashboards';
+    var dashboardsApi = ues.utils.relativePrefix() + 'apis/dashboards';
+
+    var dashboardsUrl = ues.utils.relativePrefix() + 'dashboards';
 
     var dashboard;
 
@@ -213,12 +215,12 @@ $(function () {
     };
 
     var previewDashboard = function (page) {
-        window.open(dashboardUrl + '/' + dashboard.id + '/' + page.id, '_blank');
+        window.open(dashboardsUrl + '/' + dashboard.id + '/' + page.id, '_blank');
     };
 
     var saveDashboard = function () {
         $.ajax({
-            url: dashboardUrl,
+            url: dashboardsApi,
             method: 'POST',
             data: JSON.stringify(dashboard),
             contentType: 'application/json'
@@ -724,7 +726,7 @@ $(function () {
             title: 'Dashboard',
             permissions: {
                 viewers: [],
-                editors: []
+                editors: ['Internal/everyone']
             },
             pages: []
         });

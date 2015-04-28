@@ -4,8 +4,7 @@ var logout;
 var authorized;
 var roles;
 
-(function() {
-
+(function () {
     var carbon = require('carbon');
     var server = new carbon.server.Server();
     var um = new carbon.user.UserManager(server);
@@ -19,6 +18,7 @@ var roles;
             return false;
         }
         var user = carbon.server.tenantUser(username);
+        user.roles = um.getRoleListOfUser(user.username);
         session.put('user', user);
         return true;
     };
