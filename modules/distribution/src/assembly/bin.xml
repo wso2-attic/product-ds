@@ -375,6 +375,14 @@
             <fileMode>644</fileMode>
         </file>
         <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/claim-config.xml
+            </source>
+            <outputDirectory>wso2ues-${pom.version}/repository/conf</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
             <source>src/repository/database/WSO2IDENTITY_DB.h2.db</source>
             <outputDirectory>wso2ues-${pom.version}/repository/database</outputDirectory>
             <fileMode>644</fileMode>
