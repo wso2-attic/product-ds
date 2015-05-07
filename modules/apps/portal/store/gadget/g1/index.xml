@@ -15,7 +15,7 @@
                     color: #fff;
                 }
             </style>
-            <script language="javascript" type="text/javascript" src="/portal/js/flot/jquery.js"></script>
+            <script language="javascript" type="text/javascript" src="/portal/js/jquery-1.10.2.js"></script>
             <script>
                 gadgets.HubSettings.onConnect = function() {
                     var id = 0;

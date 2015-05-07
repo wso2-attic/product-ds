@@ -1,5 +1,31 @@
 <%
-    var dbRoot = urlPrefix + 'dashboards/' + dashboard.id + '/';
+var dbRoot;
+(function() {
+    var utils = require('/modules/utils.js');
+    var dashboards = require('/modules/dashboards.js');
+    utils.sandbox(context, function () {
+        dashboard = dashboards.findOne(dashboardId);
+    });
+
+    if (!dashboard) {
+        response.sendError(404, 'requested dashboard cannot be found');
+        return;
+    }
+
+    var permissions = dashboard.permissions;
+    var carbon = require('carbon');
+    var anonRole = carbon.user.anonRole;
+
+    if (!user && permissions.viewers.indexOf(anonRole) === -1) {
+        sendLogin();
+        return;
+    }
+
+    if (!utils.allowed(user.roles, permissions.editors) && !utils.allowed(user.roles, permissions.viewers)) {
+        response.sendError(401, 'dashboard access not authorized');
+        return;
+    }
+    dbRoot = urlPrefix + 'dashboards/' + dashboard.id + '/';
 %>
 <!doctype html>
 <html lang="en">
@@ -37,3 +63,4 @@ ues.dashboards.render($('#wrapper'), ues.global.dashboard, ues.global.page);
 </script>
 </body>
 </html>
+<% } ()); %>

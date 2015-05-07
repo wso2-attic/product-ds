@@ -1,3 +1,47 @@
+<%
+(function() {
+    var utils = require('/modules/utils.js');
+    var configs = require('/configs/designer.json');
+    var fresh = false;
+
+    var dest = request.getRequestURI();
+    var query = request.getQueryString();
+    dest = encodeURIComponent(dest + (query ? '?' + query : ''));
+
+    if (!user) {
+        sendLogin();
+        return;
+    }
+
+    if (!utils.allowed(user.roles, configs.designers)) {
+        response.sendError(401, 'designer access not authorized');
+        return;
+    }
+
+    var dashboards = require('/modules/dashboards.js');
+    utils.sandbox(context, function () {
+        dashboard = dashboards.findOne(dashboardId);
+    });
+
+    if(!dashboard) {
+        dashboard = {
+            id: dashboardId,
+            title: 'Dashboard',
+            permissions: {
+                viewers: [],
+                editors: ['Internal/everyone']
+            },
+            pages: []
+        };
+        fresh = true;
+    }
+
+    var permissions = dashboard.permissions;
+    if (!utils.allowed(user.roles, permissions.editors)) {
+        response.sendError(401, 'dashboard editing not authorized');
+        return;
+    }
+%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -36,12 +80,12 @@
                         <%=user.username%> <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="<%=urlPrefix%>logout">Logout</a></li>
+                        <li><a href="<%=urlPrefix%>logout?destination=<%=dest%>">Logout</a></li>
                     </ul>
                 </li>
                 </li>
                 <% } else { %>
-                <li><a href="<%=urlPrefix%>login<% if(dest) { %>?destination=<%=dest%><% } %>">Login</a></li>
+                <li><a href="<%=urlPrefix%>login?destination=<%=dest%>">Login</a></li>
                 <% } %>
             </ul>
         </div>
@@ -140,6 +184,9 @@
 <script src="<%=urlPrefix%>js/ues-prefs.js"></script>
 <script src="<%=urlPrefix%>js/ues.js"></script>
 <% include('dashboard-scripts.jag'); %>
+<script>
+ues.global.fresh = <%=fresh%>;
+</script>
 <script src="<%=urlPrefix%>js/ues-utils.js"></script>
 <script src="<%=urlPrefix%>js/ues-store.js"></script>
 <script src="<%=urlPrefix%>js/ues-dashboards.js"></script>
@@ -310,3 +357,4 @@
 </script>
 </body>
 </html>
+<% } ()); %>

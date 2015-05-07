@@ -6,7 +6,7 @@
 %>
 <script>
 ues.global.dashboard = <%=dashboard%>;
-ues.global.page = <%=JSON.stringify(page)%>;
+ues.global.page = <%=JSON.stringify(pageId)%>;
 ues.global.context = <%=JSON.stringify(request.getContextPath())%>;
 ues.global.server = {
     httpPort: <%=JSON.stringify(httpPort)%>,

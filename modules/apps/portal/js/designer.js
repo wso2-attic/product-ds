@@ -727,30 +727,17 @@ $(function () {
         });
     };
 
-    var initDashboard = function (db, page) {
-        if (db) {
-            freshDashboard = false;
-            dashboard = (ues.global.dashboard = db);
-            renderPage(page || db.landing);
-            return;
-        }
-        dashboard = (ues.global.dashboard = {
-            id: randomId(),
-            title: 'Dashboard',
-            permissions: {
-                viewers: [],
-                editors: ['Internal/everyone']
-            },
-            pages: []
-        });
-        initPage('landing');
+    var initDashboard = function (db, page, fresh) {
+        freshDashboard = fresh;
+        dashboard = (ues.global.dashboard = db);
+        fresh ? initPage('landing') : renderPage(page || db.landing);
     };
 
     initUI();
     initComponentToolbar();
     initComponents();
     loadComponents(0, 20);
-    initDashboard(ues.global.dashboard, ues.global.page);
+    initDashboard(ues.global.dashboard, ues.global.page, ues.global.fresh);
 
     ues.dashboards.save = saveDashboard;
 

@@ -42,5 +42,11 @@
             <SignResponse>true</SignResponse>
             <CustomLoginPage>/portal/controllers/login.jag</CustomLoginPage>
         </ServiceProvider>
+        <ServiceProvider>
+            <Issuer>app1</Issuer>
+            <AssertionConsumerService>https://localhost:9443/app1/acs.jag</AssertionConsumerService>
+            <SignResponse>true</SignResponse>
+            <CustomLoginPage>/app1/login.jag</CustomLoginPage>
+        </ServiceProvider>
     </ServiceProviders>
 </SSOIdentityProviderConfig>
