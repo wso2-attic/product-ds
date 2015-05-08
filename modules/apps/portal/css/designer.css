@@ -1,17 +1,3 @@
-
-body {
-    padding-top: 50px;
-    font-family: "Oxygen", Helvetica, Arial, sans-serif;
-}
-
-a, a:focus {
-    outline: 0;
-}
-
-.navbar-inverse {
-
-}
-
 /**
  * left navbar styles
  */

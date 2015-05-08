@@ -70,7 +70,7 @@ var editor;
             matcher.match('/{context}/dashboards') || matcher.match('/{context}' + tenantPrefix + '/dashboards')) {
         vars = matcher.elements();
         context = buildOptions(vars);
-        include('dashboard-list.jag');
+        include('dashboard-portal.jag');
         return;
     }
 

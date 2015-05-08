@@ -5,6 +5,7 @@ var authorized;
 var roles;
 
 (function () {
+    var log = new Log();
     var carbon = require('carbon');
     var server = new carbon.server.Server();
     var um = new carbon.user.UserManager(server);

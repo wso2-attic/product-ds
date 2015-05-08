@@ -1,9 +1,10 @@
 var ues = ues || {};
-var store = {};
 
 (function () {
 
     var assetsUrl = ues.utils.relativePrefix() + 'assets';
+
+    var dashboardsUrl = ues.utils.relativePrefix() + 'apis/dashboards';
 
     var store = (ues.store = {});
 
@@ -27,6 +28,18 @@ var store = {};
 
     store.layouts = function (paging, cb) {
         $.get(assetsUrl + '?start=' + paging.start + '&count=' + paging.count + '&type=layout', function (data) {
+            cb(false, data);
+        }, 'json');
+    };
+
+    store.dashboard = function (id, cb) {
+        $.get(assetsUrl + '/' + id + '?type=dashboard', function (data) {
+            cb(false, data);
+        }, 'json');
+    };
+
+    store.dashboards = function (paging, cb) {
+        $.get(assetsUrl + '?start=' + paging.start + '&count=' + paging.count + '&type=dashboard', function (data) {
             cb(false, data);
         }, 'json');
     };

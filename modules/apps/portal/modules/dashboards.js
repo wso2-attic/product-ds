@@ -60,10 +60,15 @@ var update = function (dashboard) {
     });
 };
 
-var allowed = function (dashboard, options) {
+var allowed = function (dashboard, permission) {
     var usr = require('/modules/user.js');
     var utils = require('/modules/utils.js');
     var user = usr.current();
     var permissions = dashboard.permissions;
-    return utils.allowed(user.roles, options.edit ? permissions.editors : permissions.viewers);
+    if (permission.edit) {
+        return utils.allowed(user.roles, permissions.editors);
+    }
+    if (permission.view) {
+        return utils.allowed(user.roles, permissions.viewers);
+    }
 };

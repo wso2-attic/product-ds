@@ -18,22 +18,14 @@ var tenantPrefix;
     var usr = require('/modules/user.js');
     user = usr.current();
 
-    var buildOptions = function (vars) {
-        if (user) {
-            user.secured = true;
-            return user;
-        }
-        return {
-            domain: vars.domain
-        };
-    };
-
     response.contentType = 'application/json';
 
     var vars;
     var permissions;
     var viewers;
     var editors;
+    var allDashboards;
+    var userDashboards;
     var carbon = require('carbon');
     var anonRole = carbon.user.anonRole;
     var editor = request.getParameter('editor');
@@ -43,7 +35,7 @@ var tenantPrefix;
     if (matcher.match('/{context}/apis/dashboards/{id}') ||
             matcher.match('/{context}' + tenantPrefix + '/apis/dashboards/{id}')) {
         vars = matcher.elements();
-        utils.sandbox(buildOptions(vars), function () {
+        utils.sandbox(utils.context(user, vars.domain), function () {
             dashboard = dashboards.findOne(vars.id);
         });
         if (!dashboard) {
@@ -84,7 +76,7 @@ var tenantPrefix;
             }
             dashboard = request.getContent();
             vars = matcher.elements();
-            utils.sandbox(buildOptions(vars), function () {
+            utils.sandbox(utils.context(user, vars.domain), function () {
                 dashboards.update(dashboard);
             });
             print({
@@ -98,6 +90,33 @@ var tenantPrefix;
         return;
     } else if (matcher.match('/{context}/apis/dashboards') ||
             matcher.match('/{context}' + tenantPrefix + '/apis/dashboards')) {
+        if (method === 'GET') {
+            utils.sandbox(utils.context(user, vars.domain), function () {
+                allDashboards = dashboards.find();
+            });
+            userDashboards = [];
+            allDashboards.forEach(function (dashboard) {
+                if (utils.allowed(dashboard, {edit: true})) {
+                    userDashboards.push({
+                        id: dashboard.id,
+                        title: dashboard.title,
+                        description: dashboard.description,
+                        editable: true
+                    });
+                    return;
+                }
+                if (utils.allowed(dashboard, {view: true})) {
+                    userDashboards.push({
+                        id: dashboard.id,
+                        title: dashboard.title,
+                        description: dashboard.description,
+                        editable: false
+                    });
+                }
+            });
+            print(userDashboards);
+            return;
+        }
         if (method === 'POST') {
             if (!user || !utils.allowed(user.roles, configs.designers)) {
                 response.sendError(401, JSON.stringify({
@@ -107,7 +126,7 @@ var tenantPrefix;
             }
             dashboard = request.getContent();
             vars = matcher.elements();
-            utils.sandbox(buildOptions(vars), function () {
+            utils.sandbox(utils.context(user, vars.domain), function () {
                 dashboards.create(dashboard);
             });
             print({

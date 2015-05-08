@@ -38,3 +38,13 @@ var allowed = function (roles, allowed) {
     }
     return false;
 };
+
+var context = function (user, domain) {
+    if (user) {
+        user.secured = true;
+        return user;
+    }
+    return {
+        domain: domain
+    };
+};

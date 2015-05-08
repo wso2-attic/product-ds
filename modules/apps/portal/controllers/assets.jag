@@ -1,24 +1,22 @@
 <%
 (function () {
     var log = new Log();
+
+    var usr = require('/modules/user.js');
+    var user = usr.current();
+
+    if (!user) {
+        response.sendError(401, 'unauthorized to access assets');
+        return;
+    }
+
     var carbon = require('carbon');
     var config = require('/configs/designer.json');
+    var utils = require('/modules/utils.js');
 
     var storeType = config.store.type;
     var storePath = '/extensions/stores/' + storeType + '/index.js';
     var store = require(storePath);
-
-    var serverUrl = (function () {
-        var url = config.store.url;
-        if (url) {
-            return url;
-        }
-        //TODO: get host name from carbon.xml
-        var ip = carbon.server.ip;
-        var port = carbon.server.httpsPort;
-        url = 'https://' + ip + ':' + port;
-        return url;
-    }());
 
     var id;
     var assetType = request.getParameter('type');
@@ -32,7 +30,9 @@
     if (matcher.match('/{context}/assets/{id}')) {
         id = matcher.elements().id;
         if (method === 'GET') {
-            assets = store.findOne(assetType, id);
+            utils.sandbox(utils.context(user), function () {
+                assets = store.findOne(assetType, id);
+            });
             if (!assets) {
                 response.sendError(404, JSON.stringify({
                     error: true
@@ -54,7 +54,9 @@
     if (matcher.match('/{context}/assets')) {
         id = matcher.elements().id;
         if (method === 'GET') {
-            assets = store.find(assetType);
+            utils.sandbox(utils.context(user), function () {
+                assets = store.find(assetType);
+            });
             print(assets);
             return;
         }

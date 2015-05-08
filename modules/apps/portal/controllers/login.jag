@@ -44,12 +44,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#" class="navbar-brand">Dashboards</a>
+            <a href="<%=urlPrefix%>" class="navbar-brand">Dashboards</a>
         </div>
         <div class="collapse navbar-collapse horizontal-bar">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="#">Home</a>
+                    <a href="<%=urlPrefix%>">Home</a>
                 </li>
             </ul>
         </div>
