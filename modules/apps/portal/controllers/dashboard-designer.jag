@@ -14,15 +14,24 @@
         return;
     }
 
-    var dashboards = require('/modules/dashboards.js');
-    utils.sandbox(context, function () {
-        dashboard = dashboards.findOne(dashboardId);
-    });
+    var method = request.getMethod();
 
-    if(!dashboard) {
+    var dashboards;
+    var permissions;
+    if (method === 'GET') {
+        dashboards = require('/modules/dashboards.js');
+        utils.sandbox(context, function () {
+            dashboard = dashboards.findOne(dashboardId);
+        });
+        permissions = dashboard.permissions;
+        if (!utils.allowed(user.roles, permissions.editors)) {
+            response.sendError(401, 'dashboard editing not authorized');
+            return;
+        }
+    } else if (method === 'POST') {
         dashboard = {
             id: dashboardId,
-            title: 'Dashboard',
+            title: request.getParameter('title'),
             permissions: {
                 viewers: [],
                 editors: ['Internal/everyone']
@@ -30,11 +39,8 @@
             pages: []
         };
         fresh = true;
-    }
-
-    var permissions = dashboard.permissions;
-    if (!utils.allowed(user.roles, permissions.editors)) {
-        response.sendError(401, 'dashboard editing not authorized');
+    } else {
+        response.sendError(400, 'bad dashboard request');
         return;
     }
 %>
