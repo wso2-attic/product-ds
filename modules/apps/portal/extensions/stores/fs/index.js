@@ -60,7 +60,10 @@ var findOne, find, create, update, remove;
         var um = new carbon.user.UserManager(server);
         var userRoles = um.getRoleListOfUser(user.username);
 
-        var dashboards = registry.content(registryPath());
+        var dashboards = registry.content(registryPath(), {
+            start: 0,
+            count: 20
+        });
         var allDashboards = [];
         dashboards.forEach(function (dashboard) {
             allDashboards.push(JSON.parse(registry.content(dashboard)));

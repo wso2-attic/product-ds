@@ -32,6 +32,7 @@
         dashboard = {
             id: dashboardId,
             title: request.getParameter('title'),
+            description: request.getParameter('description'),
             permissions: {
                 viewers: [],
                 editors: ['Internal/everyone']
