@@ -64,6 +64,9 @@ var findOne, find, create, update, remove;
             start: 0,
             count: 20
         });
+        if (!dashboards) {
+            return [];
+        }
         var allDashboards = [];
         dashboards.forEach(function (dashboard) {
             allDashboards.push(JSON.parse(registry.content(dashboard)));
