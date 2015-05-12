@@ -90,12 +90,6 @@
     </div>
     <div id="middle" class="tab-content">
         <div id="designer" class="container-fluid ues-designer tab-pane active">
-            <div class="row ues-toolbar">
-                <div class="col-md-12">
-                    <button type="button" class="btn btn-default ues-save">Save</button>
-                    <button type="button" class="btn btn-default ues-preview">Preview</button>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-md-12 ues-content"></div>
             </div>
@@ -117,9 +111,7 @@
         </div>
         <div id="settings" class="container-fluid ues-settings tab-pane">
             <div class="row ues-toolbar">
-                <div class="col-md-12">
-                    <button type="button" class="btn btn-default ues-save">Save</button>
-                </div>
+                <div class="col-md-12"></div>
             </div>
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
@@ -266,7 +258,6 @@ ues.global.fresh = <%=fresh%>;
 <script id="layout-hbs" type="text/x-handlebars-template">
     <div class="row ues-toolbar">
         <div class="col-md-10">
-            <button type="button" class="btn btn-default ues-save"><i class="fa fa-floppy-o"></i> Save</button>
             <button type="button" class="btn btn-default ues-page"><i class="fa fa-plus"></i> Page</button>
             <button type="button" class="btn btn-default ues-preview"><i class="fa fa-eye"></i> Preview</button>
             <div class="btn-group pull-right ues-pages">

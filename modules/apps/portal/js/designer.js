@@ -554,10 +554,6 @@ $(function () {
                 var el = $(this);
                 el.tab('show');
             });
-
-        $('#middle').on('click', '.ues-toolbar .ues-save', function () {
-            saveDashboard();
-        });
     };
 
     var listenLayout = function () {
