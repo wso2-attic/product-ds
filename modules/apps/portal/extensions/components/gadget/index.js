@@ -68,11 +68,7 @@
         var content = component.content;
         var url = resolveGadgetURL(content.data.url);
         var settings = content.settings || {};
-        var styles = content.styles || {
-                borders: true,
-                title: content.title,
-                titlePosition: 'center'
-            };
+        var styles = content.styles || {};
         ues.gadgets.preload(url, function (err, metadata) {
             var pref;
             var opts = content.options || (content.options = {});

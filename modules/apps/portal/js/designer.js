@@ -291,12 +291,23 @@ $(function () {
         $('[data-toggle="tooltip"]', el).tooltip();
     };
 
+    var updateStyles = function (asset) {
+        var styles = asset.styles || (asset.styles = {
+                title: true,
+                borders: true
+            });
+        if (styles.title && typeof styles.title === 'boolean') {
+            styles.title = asset.title;
+        }
+    };
+
     var createComponent = function (container, asset) {
         var id = randomId();
         //TODO: remove hardcoded gadget
         var area = container.attr('id');
         var content = page.content;
         content = content[area] || (content[area] = []);
+        updateStyles(asset);
         var component = {
             id: id,
             content: asset
