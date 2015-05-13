@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="Date Picker" height="250" description="g1">
+        <Require feature="pubsub-2"/>
+        <Require feature="dynamic-height"/>
+    </ModulePrefs>
+    <Content type="html">
+        <![CDATA[
+        <head>
+            <meta charset="utf-8">
+            <title>jQuery UI Datepicker - Default functionality</title>
+            <link rel="stylesheet" href="css/jquery-ui.css" type="text/css"/>
+            <script src="/portal/js/jquery-1.10.2.js"></script>
+            <script src="js/jquery-ui.js"></script>
+            <script>
+                $(function() {
+                    $( "#datepicker" ).datepicker();
+                });
+            </script>
+        </head>
+        <body>
+            <p>Date: <input type="text" id="datepicker"></p>
+        </body>
+        ]]>
+    </Content>
+</Module>

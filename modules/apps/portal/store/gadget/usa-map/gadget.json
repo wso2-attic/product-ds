@@ -10,6 +10,13 @@
             "description": "Username to be used for service invocation"
         }
     },
+    "settings": {
+        "personalize": true
+    },
+    "styles": {
+        "borders": true,
+        "title": true
+    },
     "data": {
         "url": "local://store/gadget/usa-map/index.xml"
     },

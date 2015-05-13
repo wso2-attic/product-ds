@@ -124,6 +124,10 @@
     padding-right: 8px;
 }
 
+.ues-component-properties label {
+    display: block;
+}
+
 #middle .ues-toolbar .pull-right {
     margin-left: 4px;
 }

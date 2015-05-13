@@ -58,6 +58,7 @@
     <link rel="stylesheet" href="<%=urlPrefix%>css/nunito.css">
     <link rel="stylesheet" href="<%=urlPrefix%>css/oxygen.css">
     <link rel="stylesheet" href="<%=urlPrefix%>css/navigation.css">
+    <link rel="stylesheet" href="<%=urlPrefix%>css/common.css">
     <link rel="stylesheet" href="<%=urlPrefix%>css/designer.css">
     <!--<link rel="stylesheet" href="css/theme.css">-->
 </head>
@@ -98,10 +99,8 @@
             <div class="row ues-toolbar">
                 <div class="col-md-12">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-default">Gadgets</button>
-                        <button type="button" class="btn btn-default">UIs</button>
-                        <button type="button" class="btn btn-default">Pages</button>
-                        <button type="button" class="btn btn-default">Templates</button>
+                        <button type="button" class="btn btn-default ues-gadgets active">Gadgets</button>
+                        <button type="button" class="btn btn-default ues-widgets">Widgets</button>
                     </div>
                 </div>
             </div>
@@ -184,56 +183,93 @@ ues.global.fresh = <%=fresh%>;
         </form>
     </div>
 </script>
-<script id="component-options-hbs" type="text/x-handlebars-template">
+<script id="component-properties-hbs" type="text/x-handlebars-template">
     <div class="ues-sandbox" data-id="{{id}}">
-        <form class="component-options">
+        <form class="ues-component-properties">
             {{#has options}}
-                <h4>Properties</h4>
-                <div class="properties">
-                {{#each options}}
-                    <div class="form-group">
-                        <label>{{title}}
-                            <input type="text" class="form-control" name="{{@key}}" placeholder="{{title}}" value="{{value}}">
-                        </label>
-                    </div>
-                {{/each}}
-                </div>
-            {{/has}}
-            {{#has listeners}}
-                <h4>Events</h4>
-                <div class="panel-group notifiers" id="accordion-events" role="tablist" aria-multiselectable="true">
-                {{#each listeners}}
-                  <div class="panel panel-default listener" data-event="{{event}}">
-                    <div class="panel-heading" role="tab" id="heading-{{event}}" data-event="{{event}}">
-                      <h4 class="panel-title">
-                        <a data-toggle="collapse"
-                            data-parent="#accordion-events"
-                            href="#collapse-{{event}}" aria-expanded="true" aria-controls="collapse-{{event}}">{{event}}
-                        </a>
-                      </h4>
-                    </div>
-                    <div id="collapse-{{event}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{event}}">
-                      <div class="panel-body">
-                      {{#each notifiers}}
-                        <div class="checkbox">
-                          <label>
-                            <input type="checkbox" class="notifier" data-from="{{from}}"
-                            data-event="{{event}}" value=""{{#if wired}} checked="checked"{{/if}}>{{event}} ({{content.title}}
-                            <a href="#" data-toggle="tooltip" title="{{from}}">
-                                <i class="fa fa-info-circle"></i>
-                            </a>)
+                <div class="ues-options ues-properties">
+                    <h4>Options</h4>
+                    {{#each options}}
+                        <div class="form-group">
+                            <label>{{title}}
+                                <input type="text" class="form-control" name="{{@key}}" placeholder="{{title}}" value="{{value}}">
                             </label>
                         </div>
-                      {{/each}}
-                      </div>
+                    {{/each}}
+                </div>
+                <hr/>
+            {{/has}}
+            {{#has settings}}
+                <div class="ues-settings ues-properties">
+                    <h4>Settings</h4>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="personalize"{{#if settings.personalize}} checked="checked"{{/if}}> Personalizable
+                        </label>
                     </div>
-                  </div>
-                {{/each}}
+                </div>
+                <hr/>
+            {{/has}}
+            {{#has styles}}
+                <div class="ues-styles ues-properties">
+                    <h4>Styles</h4>
+                    <div class="form-group">
+                        <label>Title
+                            <input type="text" class="form-control" name="title" placeholder="{{../title}}" value="{{../title}}">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>Title Position
+                            <select class="form-control ues-title-position">
+                                <option value="left"{{#equals "left" styles.titlePosition}} selected="selected"{{/equals}}>Left</option>
+                                <option value="center"{{#equals "center" styles.titlePosition}} selected="selected"{{/equals}}>Center</option>
+                                <option value="right"{{#equals "right" styles.titlePosition}} selected="selected"{{/equals}}>Right</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="borders"{{#if styles.borders}} checked="checked"{{/if}}> Borders
+                        </label>
+                    </div>
+                </div>
+                <hr/>
+            {{/has}}
+            {{#has listeners}}
+                <div class="panel-group ues-notifiers ues-properties" id="accordion-events" role="tablist" aria-multiselectable="true">
+                    <h4>Events</h4>
+                    {{#each listeners}}
+                      <div class="panel panel-default listener" data-event="{{event}}">
+                        <div class="panel-heading" role="tab" id="heading-{{event}}" data-event="{{event}}">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse"
+                                data-parent="#accordion-events"
+                                href="#collapse-{{event}}" aria-expanded="true" aria-controls="collapse-{{event}}">{{event}}
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapse-{{event}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{event}}">
+                          <div class="panel-body">
+                          {{#each notifiers}}
+                            <div class="checkbox">
+                              <label>
+                                <input type="checkbox" class="notifier" data-from="{{from}}"
+                                data-event="{{event}}" value=""{{#if wired}} checked="checked"{{/if}}>{{event}} ({{content.title}}
+                                <a href="#" data-toggle="tooltip" title="{{from}}">
+                                    <i class="fa fa-info-circle"></i>
+                                </a>)
+                                </label>
+                            </div>
+                          {{/each}}
+                          </div>
+                        </div>
+                      </div>
+                    {{/each}}
                 </div>
             {{/has}}
-            {{#has options listeners}}
+            {{#has options listeners settings styles}}
             {{else}}
-                No options to configure.
+                No properties to configure.
             {{/has}}
         </form>
     </div>
@@ -283,7 +319,7 @@ ues.global.fresh = <%=fresh%>;
                 <div class="col-md-10">
                     <div class="container-fluid ues-layout"></div>
                 </div>
-                <div class="col-md-2 ues-options"></div>
+                <div class="col-md-2 ues-properties"></div>
             </div>
         </div>
     </div>
@@ -312,7 +348,7 @@ ues.global.fresh = <%=fresh%>;
         <ul class="list-inline pull-right">
             <li><a href="#" data-toggle="tooltip" title="{{id}}"><i class="fa fa-info-circle"></i></a></li>
             <li><a href="#" class="ues-move-handle" data-id="{{id}}" data-action="move"><i class="fa fa-arrows"></i></a></li>
-            <li><a href="#" class="ues-options-handle"><i class="fa fa-cog"></i></a></li>
+            <li><a href="#" class="ues-properties-handle"><i class="fa fa-cog"></i></a></li>
             <li><a href="#" class="ues-trash-handle"><i class="fa fa-trash"></i></a></li>
         </ul>
     </div>

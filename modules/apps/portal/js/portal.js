@@ -5,7 +5,7 @@ $(function () {
     var dashboardsListHbs = Handlebars.compile($("#dashboards-list-hbs").html());
 
     var initDashboardList = function () {
-        ues.store.dashboards({
+        ues.store.assets('dashboard', {
             start: 0,
             count: 20
         }, function (err, data) {
