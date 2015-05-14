@@ -122,8 +122,8 @@ $(function () {
         var opts = data.options;
         for (opt in opts) {
             if (opts.hasOwnProperty(opt)) {
-                o = options[opt];
-                o.value = data[opt];
+                o = options[opt] || (options[opt] = {});
+                o.value = opts[opt];
             }
         }
 
@@ -512,6 +512,10 @@ $(function () {
             var el = $(this);
             options[el.attr('name')] = el.val();
         });
+        $('.ues-options textarea', sandbox).each(function () {
+            var el = $(this);
+            options[el.attr('name')] = el.val();
+        });
     };
 
     var saveSettings = function (sandbox, settings) {
@@ -586,7 +590,7 @@ $(function () {
     var renderComponentProperties = function (component) {
         var ctx = buildPropertiesContext(component, page);
         var el = $('#middle').find('.ues-designer .ues-properties').html(componentPropertiesHbs(ctx))
-            .find('.ues-sandbox').on('change', 'input, select', function () {
+            .find('.ues-sandbox').on('change', 'input, select, textarea', function () {
                 updateComponentProperties($(this).closest('.ues-sandbox'));
             });
         $('[data-toggle="tooltip"]', el).tooltip();

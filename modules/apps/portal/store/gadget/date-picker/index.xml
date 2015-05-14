@@ -9,17 +9,32 @@
         <head>
             <meta charset="utf-8">
             <title>jQuery UI Datepicker - Default functionality</title>
-            <link rel="stylesheet" href="css/jquery-ui.css" type="text/css"/>
+            <link rel="stylesheet" href="/portal/css/bootstrap.min.css" type="text/css"/>
+            <link rel="stylesheet" href="css/bootstrap-datepicker.min.css" type="text/css"/>
+            <style>
+                .datepicker-inline {
+                    margin:0 auto;
+                }
+            </style>
             <script src="/portal/js/jquery-1.10.2.js"></script>
-            <script src="js/jquery-ui.js"></script>
+            <script src="/portal/js/bootstrap.min.js"></script>
+            <script src="js/bootstrap-datepicker.min.js"></script>
             <script>
                 $(function() {
-                    $( "#datepicker" ).datepicker();
+                    $("#datepicker").datepicker({
+                        orientation: 'top'
+                    });
                 });
             </script>
         </head>
         <body>
-            <p>Date: <input type="text" id="datepicker"></p>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="datepicker"></div>
+                    </div>
+                </div>
+            </div>
         </body>
         ]]>
     </Content>

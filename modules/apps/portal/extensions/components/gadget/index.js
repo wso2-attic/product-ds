@@ -69,20 +69,26 @@
         var url = resolveGadgetURL(content.data.url);
         var settings = content.settings || {};
         var styles = content.styles || {};
+        var options = content.options || (content.options = {});
         ues.gadgets.preload(url, function (err, metadata) {
             var pref;
-            var opts = content.options || (content.options = {});
+            var name;
+            var option;
+            var params = {};
             var prefs = metadata.userPrefs;
             for (pref in prefs) {
                 if (prefs.hasOwnProperty(pref)) {
                     pref = prefs[pref];
-                    opts[pref.name] = {
-                        type: pref.dataType,
-                        title: pref.displayName,
-                        value: pref.defaultValue,
-                        options: pref.orderedEnumValues,
-                        required: pref.required
+                    name = pref.name;
+                    option = options[name] || {};
+                    options[name] = {
+                        type: option.type || pref.dataType,
+                        title: option.title || pref.displayName,
+                        value: option.value || pref.defaultValue,
+                        options: option.options || pref.orderedEnumValues,
+                        required: option.required || pref.required
                     };
+                    params[name] = option.value;
                 }
             }
             var cid = containerId(component.id);
@@ -91,7 +97,7 @@
             var container = $('<div id="' + cid + '" class="ues-component-box-gadget"></div>');
             container.appendTo(panel.find('.panel-body'));
             panel.appendTo(sandbox);
-            var site = ues.gadgets.render(container, url);
+            var site = ues.gadgets.render(container, url, params);
             gadgets[gid] = {
                 component: component,
                 site: site
