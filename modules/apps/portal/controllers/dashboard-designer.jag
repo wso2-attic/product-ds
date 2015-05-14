@@ -219,7 +219,7 @@ ues.global.fresh = <%=fresh%>;
                     <h4>Styles</h4>
                     <div class="form-group">
                         <label>Title
-                            <input type="text" class="form-control" name="title" placeholder="Title" value="{{#if styles.title}}{{../title}}{{/if}}">
+                            <input type="text" class="form-control" name="title" placeholder="Title" value="{{#if styles.title}}{{styles.title}}{{/if}}">
                         </label>
                     </div>
                     <div class="form-group">
