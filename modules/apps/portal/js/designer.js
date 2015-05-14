@@ -146,6 +146,7 @@ $(function () {
         }
 
         ues.dashboards.rewire(page);
+        updateComponent(id);
         saveDashboard();
     };
 
@@ -341,6 +342,14 @@ $(function () {
                 renderComponentProperties(component);
                 saveDashboard();
             });
+        });
+    };
+
+    var updateComponent = function (id) {
+        ues.components.update(findComponent(id), function (err) {
+            if (err) {
+                throw err;
+            }
         });
     };
 
