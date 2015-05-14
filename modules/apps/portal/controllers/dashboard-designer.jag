@@ -231,6 +231,11 @@ ues.global.fresh = <%=fresh%>;
                             </select>
                         </label>
                     </div>
+                    <div class="form-group">
+                        <label>Height
+                            <input type="text" class="form-control" name="height" placeholder="Height" value="{{#if styles.height}}{{styles.height}}{{/if}}">
+                        </label>
+                    </div>
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" name="borders"{{#if styles.borders}} checked="checked"{{/if}}> Borders

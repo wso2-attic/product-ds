@@ -1,5 +1,7 @@
 (function () {
 
+    var DEFAULT_PADDING = 35;
+
     var gadgetPrefix = (osapi.container.GadgetHolder.IFRAME_ID_PREFIX_ = 'sandbox-');
 
     var containerPrefix = 'gadget-';
@@ -53,7 +55,11 @@
         if (!styles.borders) {
             html += ' ues-borderless';
         }
-        html += '">';
+        html += '"';
+        if (styles.height) {
+            html += ' style="height:' + styles.height + 'px"';
+        }
+        html += '>';
         if (styles.title) {
             html += '<div class="panel-heading">';
             html += '<h3 class="panel-title ues-title-' + (styles.titlePosition) + '">' + styles.title + '</h3>';
@@ -97,7 +103,11 @@
             var container = $('<div id="' + cid + '"></div>');
             container.appendTo(panel.find('.panel-body'));
             panel.appendTo(sandbox);
-            var site = ues.gadgets.render(container, url, params);
+            var renderParams = {};
+            if (styles.height) {
+                renderParams[osapi.container.RenderParam.HEIGHT] = parseInt(styles.height, 10) - DEFAULT_PADDING;
+            }
+            var site = ues.gadgets.render(container, url, params, renderParams);
             gadgets[gid] = {
                 component: comp,
                 site: site

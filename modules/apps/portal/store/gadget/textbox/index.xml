@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-    <ModulePrefs title="Text Box" height="250" description="Text Box Gadget">
+    <ModulePrefs title="Text Box" description="Text Box Gadget">
         <Require feature="dynamic-height"/>
     </ModulePrefs>
     <UserPref name="content"
