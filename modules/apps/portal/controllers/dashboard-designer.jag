@@ -305,6 +305,7 @@ ues.global.fresh = <%=fresh%>;
         <div class="col-md-10">
             <button type="button" class="btn btn-default ues-page"><i class="fa fa-plus"></i> Page</button>
             <button type="button" class="btn btn-default ues-preview"><i class="fa fa-eye"></i> Preview</button>
+            <button type="button" class="btn btn-default ues-export"><i class="fa fa-cloud-download"></i> Export</button>
             <div class="btn-group pull-right ues-pages">
               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                 Pages <span class="caret"></span>

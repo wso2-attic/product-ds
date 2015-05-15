@@ -232,6 +232,10 @@ $(function () {
         window.open(dashboardsUrl + '/' + dashboard.id + '/' + page.id, '_blank');
     };
 
+    var exportDashboard = function (page) {
+        window.open(dashboardsApi + '/' + dashboard.id, '_blank');
+    };
+
     var saveDashboard = function () {
         var method;
         var url;
@@ -675,6 +679,9 @@ $(function () {
             }).end()
             .find('.ues-preview').on('click', function () {
                 previewDashboard(page);
+            }).end()
+            .find('.ues-export').on('click', function () {
+                exportDashboard(page);
             }).end()
             .find('.ues-settings').on('click', function () {
                 renderPageOptions(page);
