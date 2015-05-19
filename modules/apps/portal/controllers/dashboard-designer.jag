@@ -285,6 +285,7 @@ ues.global.fresh = <%=fresh%>;
 </script>
 <script id="layouts-list-hbs" type="text/x-handlebars-template">
     <div class="row thumbnails">
+        {{#if length}}
         {{#each .}}
         <div class="col-md-3 col-sm-4 box">
             <div class="thumbnail">
@@ -298,6 +299,13 @@ ues.global.fresh = <%=fresh%>;
             </div>
         </div>
         {{/each}}
+        {{else}}
+        <div class="col-md-12">
+            <div class="caption">
+                <h4>No layouts found.</h4>
+            </div>
+        </div>
+        {{/if}}
     </div>
 </script>
 <script id="layout-hbs" type="text/x-handlebars-template">
@@ -336,6 +344,7 @@ ues.global.fresh = <%=fresh%>;
 </script>
 <script id="components-list-hbs" type="text/x-handlebars-template">
     <div class="row thumbnails">
+        {{#if length}}
         {{#each .}}
         <div class="col-md-3 col-sm-4 box">
             <div class="thumbnail">
@@ -351,6 +360,13 @@ ues.global.fresh = <%=fresh%>;
             </div>
         </div>
         {{/each}}
+        {{else}}
+        <div class="col-md-12">
+            <div class="caption">
+                <h4>No gadgets or widgets found.</h4>
+            </div>
+        </div>
+        {{/if}}
     </div>
 </script>
 <script id="component-toolbar-hbs" type="text/x-handlebars-template">

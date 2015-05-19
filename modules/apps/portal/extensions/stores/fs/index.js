@@ -4,8 +4,11 @@ var findOne, find, create, update, remove;
 
     var dir = '/store/';
 
-    var assetsDir = function (type) {
-        return dir + type + '/';
+    var assetsDir = function (ctx, type) {
+        var carbon = require('carbon');
+        var config = require('/configs/designer.json');
+        var domain = config.shareStore ? carbon.server.superTenant.domain : ctx.domain;
+        return dir + domain + '/' + type + '/';
     };
 
     var allowed = function (roles, allowed) {
@@ -46,9 +49,8 @@ var findOne, find, create, update, remove;
         };
     };
 
-    var findDashboards = function (type, query, start, count) {
-        var user = currentContext();
-        if (!user.username) {
+    var findDashboards = function (ctx, type, query, start, count) {
+        if (!ctx.username) {
             return [];
         }
 
@@ -58,7 +60,7 @@ var findOne, find, create, update, remove;
             system: true
         });
         var um = new carbon.user.UserManager(server);
-        var userRoles = um.getRoleListOfUser(user.username);
+        var userRoles = um.getRoleListOfUser(ctx.username);
 
         var dashboards = registry.content(registryPath(), {
             start: 0,
@@ -97,7 +99,8 @@ var findOne, find, create, update, remove;
     };
 
     findOne = function (type, id) {
-        var parent = assetsDir(type);
+        var ctx = currentContext();
+        var parent = assetsDir(ctx, type);
         var file = new File(parent + id);
         if (!file.isExists()) {
             return null;
@@ -113,10 +116,11 @@ var findOne, find, create, update, remove;
     };
 
     find = function (type, query, start, count) {
+        var ctx = currentContext();
         if (type === 'dashboard') {
-            return findDashboards(type, query, start, count);
+            return findDashboards(ctx, type, query, start, count);
         }
-        var parent = new File(assetsDir(type));
+        var parent = new File(assetsDir(ctx, type));
         var assetz = parent.listFiles();
         var assets = [];
         assetz.forEach(function (asset) {
@@ -131,15 +135,16 @@ var findOne, find, create, update, remove;
         return assets;
     };
 
-    create = function (type, asset) {
-        var parent = new File(assetsDir(type));
-        var file = new File(asset.id, parent);
-        file.mkdir();
-        file = new File(type + '.json', file);
-        file.open('w');
-        file.write(JSON.stringify(asset));
-        file.close();
-    };
+    /*create = function (type, asset) {
+     var user = currentContext();
+     var parent = new File(assetsDir(user, type));
+     var file = new File(asset.id, parent);
+     file.mkdir();
+     file = new File(type + '.json', file);
+     file.open('w');
+     file.write(JSON.stringify(asset));
+     file.close();
+     };*/
 
     update = function (asset) {
 
