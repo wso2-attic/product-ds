@@ -1,9 +1,9 @@
 $(function () {
     //TODO: cleanup this
 
-    var dashboardsApi = ues.utils.relativePrefix() + 'apis/dashboards';
+    var dashboardsApi = ues.utils.tenantPrefix() + 'apis/dashboards';
 
-    var dashboardsUrl = ues.utils.relativePrefix() + 'dashboards';
+    var dashboardsUrl = ues.utils.tenantPrefix() + 'dashboards';
 
     var dashboard;
 

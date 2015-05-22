@@ -1,10 +1,19 @@
 <%
 (function() {
-if (!user) {
-    sendLogin();
-    return;
-}
-%>
+    if (!user) {
+        sendLogin();
+        return;
+    }
+
+    var utils = require('/modules/utils.js');
+    var configs = require('/configs/designer.json');
+
+    if (!utils.allowed(user.roles, configs.designers)) {
+        response.sendError(401, 'designer access not authorized');
+        return;
+    }
+
+    %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,7 +34,7 @@ if (!user) {
 <div id="wrapper" class="container-fluid">
     <div class="row thumbnails ues-dashboard">
         <div class="col-md-8 col-md-offset-2">
-            <form action="<%=urlPrefix%>dashboards" method="post" id="dashboard-form">
+            <form action="<%=tenantPrefix%>dashboards" method="post" id="dashboard-form">
                 <h2>Create a Dashboard</h2>
                 <div class="form-group">
                     <label for="dashboard-title">Title</label>

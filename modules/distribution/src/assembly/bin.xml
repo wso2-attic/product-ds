@@ -43,7 +43,6 @@
                 <exclude>**/master-datasources.xml</exclude>
                 <exclude>**/org.wso2.carbon.identity.relyingparty.ui-3.1.0.SNAPSHOT.jar</exclude>
                 <exclude>**/org.wso2.carbon.identity.user.registration.ui-3.1.0.SNAPSHOT.jar</exclude>
-                <exclude>**/log4j.properties</exclude>
             </excludes>
         </fileSet>
         <fileSet>
@@ -144,10 +143,21 @@
             </includes>
         </fileSet>
         <fileSet>
-            <directory>target/shindig</directory>
-            <outputDirectory>wso2ues-${pom.version}/repository/deployment/server/webapps/shindig</outputDirectory>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/deployment/server/webapps
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/deployment/server/webapps</outputDirectory>
             <includes>
-                <include>**/**</include>
+                <include>shindig.war</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/resources/security
+            </directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/repository/resources/security</outputDirectory>
+            <includes>
+                <include>wso2carbon.pem</include>
             </includes>
         </fileSet>
         <fileSet>
@@ -309,11 +319,6 @@
         </file>
         <file>
             <source>src/repository/conf/registry.xml</source>
-            <outputDirectory>wso2ues-${pom.version}/repository/conf/</outputDirectory>
-            <filtered>true</filtered>
-        </file>
-        <file>
-            <source>src/repository/conf/log4j.properties</source>
             <outputDirectory>wso2ues-${pom.version}/repository/conf/</outputDirectory>
             <filtered>true</filtered>
         </file>

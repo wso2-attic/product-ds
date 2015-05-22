@@ -1,20 +1,31 @@
 <%
 (function() {
     var usr;
+    var user;
     var username;
     var password;
     var message;
+    var carbon;
+    var tenantPrefix;
+    var log = new Log();
     var utils = require('/modules/utils.js');
     var urlPrefix = utils.relativePrefix(request.getRequestURI());
     var method = request.getMethod();
     var dest = request.getParameter('destination');
-    if(method === 'POST') {
+    if (method === 'POST') {
+        carbon = require('carbon');
         username = request.getParameter('username');
-        password = request.getParameter('password');
-        usr = require('/modules/user.js');
-        if(usr.login(username, password)) {
-            response.sendRedirect(dest || urlPrefix);
-            return;
+        user = carbon.server.tenantUser(username);
+        if (user.tenantId !== -1) {
+            usr = require('/modules/user.js');
+            password = request.getParameter('password');
+            if (usr.login(username, password)) {
+                log.info(urlPrefix);
+                tenantPrefix = utils.tenantedPrefix(urlPrefix, user.domain);
+                log.info(tenantPrefix);
+                response.sendRedirect(dest || tenantPrefix);
+                return;
+            }
         }
         message = 'The username or password you entered is incorrect.';
     }

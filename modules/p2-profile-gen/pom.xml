@@ -207,6 +207,9 @@
                                 <feaureArtifactDef>
                                     org.wso2.ues:org.wso2.ues.feature:${product.ues.version}
                                 </feaureArtifactDef>
+                                <feaureArtifactDef>
+                                    org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.shindig.feature:${carbon.dashboards.version}
+                                </feaureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.multitenancy:org.wso2.carbon.tenant.common.feature:${carbon.multitenancy.version}
                                 </featureArtifactDef>
@@ -363,6 +366,10 @@
                                 <feature>
                                     <id>org.wso2.ues.feature.group</id>
                                     <version>${product.ues.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.dashboards.shindig.feature.group</id>
+                                    <version>${carbon.dashboards.version}</version>
                                 </feature>
 
                                 <!-- governance feature -->

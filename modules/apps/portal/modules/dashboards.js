@@ -1,6 +1,7 @@
 var log = new Log();
 
 var carbon = require('carbon');
+var utils = require('/modules/utils.js');
 
 //TODO: what happen when the context is changed or mapped via reverse proxy
 var registryPath = function (id) {
@@ -9,18 +10,22 @@ var registryPath = function (id) {
 };
 
 var findOne = function (id) {
+    var context = utils.currentContext();
     var server = new carbon.server.Server();
     var registry = new carbon.registry.Registry(server, {
-        system: true
+        system: true//Boolean(context.username)
     });
     var content = registry.content(registryPath(id));
     return JSON.parse(content);
 };
 
 var find = function () {
+    var context = utils.currentContext();
+    log.info("-------------");
+    log.info(context);
     var server = new carbon.server.Server();
     var registry = new carbon.registry.Registry(server, {
-        system: true
+        system: true//Boolean(context.username)
     });
     var dashboards = registry.content(registryPath());
     var dashboardz = [];
@@ -31,9 +36,10 @@ var find = function () {
 };
 
 var create = function (dashboard) {
+    var context = utils.currentContext();
     var server = new carbon.server.Server();
     var registry = new carbon.registry.Registry(server, {
-        system: true
+        system: true//Boolean(context.username)
     });
     var path = registryPath(dashboard.id);
     if (registry.exists(path)) {
@@ -46,9 +52,10 @@ var create = function (dashboard) {
 };
 
 var update = function (dashboard) {
+    var context = utils.currentContext();
     var server = new carbon.server.Server();
     var registry = new carbon.registry.Registry(server, {
-        system: true
+        system: true//Boolean(context.username)
     });
     var path = registryPath(dashboard.id);
     if (!registry.exists(path)) {
@@ -61,9 +68,10 @@ var update = function (dashboard) {
 };
 
 var remove = function (id) {
+    var context = utils.currentContext();
     var server = new carbon.server.Server();
     var registry = new carbon.registry.Registry(server, {
-        system: true
+        system: true//Boolean(context.username)
     });
     var path = registryPath(id);
     if (registry.exists(path)) {
@@ -73,7 +81,6 @@ var remove = function (id) {
 
 var allowed = function (dashboard, permission) {
     var usr = require('/modules/user.js');
-    var utils = require('/modules/utils.js');
     var user = usr.current();
     var permissions = dashboard.permissions;
     if (permission.edit) {

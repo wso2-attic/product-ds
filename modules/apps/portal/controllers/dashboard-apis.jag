@@ -3,13 +3,13 @@ var user;
 var dashboard;
 var page;
 var urlPrefix;
-var tenantPrefix;
+var tenantPattern;
 
 (function () {
     var log = new Log();
 
     var configs = require('/configs/designer.json');
-    tenantPrefix = configs.tenantPrefix + '/{domain}';
+    tenantPattern = configs.tenantPrefix + '/{domain}';
 
     var utils = require('/modules/utils.js');
     var path = request.getRequestURI();
@@ -33,7 +33,7 @@ var tenantPrefix;
     var dashboards = require('/modules/dashboards.js');
     var matcher = new URIMatcher(request.getRequestURI());
     if (matcher.match('/{context}/apis/dashboards/{id}') ||
-            matcher.match('/{context}' + tenantPrefix + '/apis/dashboards/{id}')) {
+            matcher.match('/{context}' + tenantPattern + '/apis/dashboards/{id}')) {
         vars = matcher.elements();
         utils.sandbox(utils.context(user, vars.domain), function () {
             dashboard = dashboards.findOne(vars.id);
@@ -102,7 +102,7 @@ var tenantPrefix;
         }));
         return;
     } else if (matcher.match('/{context}/apis/dashboards') ||
-            matcher.match('/{context}' + tenantPrefix + '/apis/dashboards')) {
+            matcher.match('/{context}' + tenantPattern + '/apis/dashboards')) {
         if (method === 'GET') {
             utils.sandbox(utils.context(user, vars.domain), function () {
                 allDashboards = dashboards.find();

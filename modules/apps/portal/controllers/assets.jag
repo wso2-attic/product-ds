@@ -10,9 +10,16 @@
         return;
     }
 
+    var utils = require('/modules/utils.js');
+    var domain = request.getParameter('domain');
+
+    if (!utils.tenantExists(domain)) {
+        response.sendError(404, 'requested tenant cannot be found');
+        return;
+    }
+
     var carbon = require('carbon');
     var config = require('/configs/designer.json');
-    var utils = require('/modules/utils.js');
 
     var storeType = config.store.type;
     var storePath = '/extensions/stores/' + storeType + '/index.js';
@@ -30,7 +37,7 @@
     if (matcher.match('/{context}/assets/{id}')) {
         id = matcher.elements().id;
         if (method === 'GET') {
-            utils.sandbox(utils.context(user), function () {
+            utils.sandbox(utils.context(user, domain), function () {
                 assets = store.findOne(assetType, id);
             });
             if (!assets) {
@@ -54,7 +61,7 @@
     if (matcher.match('/{context}/assets')) {
         id = matcher.elements().id;
         if (method === 'GET') {
-            utils.sandbox(utils.context(user), function () {
+            utils.sandbox(utils.context(user, domain), function () {
                 assets = store.find(assetType);
             });
             print(assets);

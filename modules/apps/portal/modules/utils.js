@@ -11,10 +11,36 @@ var relativePrefix = function (path) {
     return prefix;
 };
 
-var sandbox = function (options, fn) {
+var tenantedPrefix = function (prefix, domain) {
+    if (!domain) {
+        return prefix;
+    }
+    var configs = require('/configs/designer.json');
     var carbon = require('carbon');
+    if (domain === carbon.server.superTenant.domain) {
+        return prefix;
+    }
+    return prefix + configs.tenantPrefix.replace(/^\//, '') + '/' + domain + '/';
+};
+
+var sandbox = function (context, fn) {
+    var carbon = require('carbon');
+    var options = {};
+
+    if (context.anonDomain) {
+        options.domain = context.anonDomain;
+        if (context.anonDomain === context.domain) {
+            options.username = context.username;
+        }
+    } else {
+        if (context.domain) {
+            options.username = context.username;
+            options.domain = context.domain;
+        } else {
+            options.domain = carbon.server.tenantDomain();
+        }
+    }
     options.tenantId = carbon.server.tenantId(options);
-    options.tenantId = options.tenantId || carbon.server.tenantId();
     carbon.server.sandbox(options, fn);
 };
 
@@ -40,11 +66,32 @@ var allowed = function (roles, allowed) {
 };
 
 var context = function (user, domain) {
+    var ctx = {
+        anonDomain: domain
+    };
     if (user) {
-        user.secured = true;
-        return user;
+        ctx.username = user.username;
+        ctx.domain = String(user.domain);
     }
-    return {
+    return ctx;
+};
+
+var tenantExists = function (domain) {
+    var carbon = require('carbon');
+    var tenantId = carbon.server.tenantId({
         domain: domain
+    });
+    log.info(tenantId);
+    return tenantId !== -1;
+};
+
+var currentContext = function () {
+    var PrivilegedCarbonContext = Packages.org.wso2.carbon.context.PrivilegedCarbonContext;
+    var context = PrivilegedCarbonContext.getThreadLocalCarbonContext();
+    var username = context.getUsername();
+    return {
+        username: username,
+        domain: context.getTenantDomain(),
+        tenantId: context.getTenantId()
     };
 };

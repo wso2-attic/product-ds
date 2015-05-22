@@ -4,6 +4,7 @@ var dashboard;
 var page;
 var urlPrefix;
 var tenantPrefix;
+var tenantPattern;
 
 var sendLogin;
 var dashboardId;
@@ -12,29 +13,27 @@ var context;
 var editor;
 
 (function () {
-    var action;
     var log = new Log();
-    var method = request.getMethod();
+
     var configs = require('/configs/designer.json');
+    var matcher = new URIMatcher(request.getRequestURI());
+
+    tenantPattern = configs.tenantPrefix + '/{domain}';
+
+    if (matcher.match('/{context}' + tenantPattern + '/apis/{+any}')) {
+        include('/controllers/dashboard-apis.jag');
+        return;
+    }
+
+    var action;
+    var method = request.getMethod();
     var utils = require('/modules/utils.js');
     var usr = require('/modules/user.js');
-
-    tenantPrefix = configs.tenantPrefix + '/{domain}';
 
     var path = request.getRequestURI();
     urlPrefix = utils.relativePrefix(path);
 
     user = usr.current();
-
-    var buildOptions = function (vars) {
-        if (user) {
-            user.secured = true;
-            return user;
-        }
-        return {
-            domain: vars.domain
-        };
-    };
 
     sendLogin = function () {
         var query = request.getQueryString();
@@ -44,14 +43,14 @@ var editor;
 
     var vars;
     var dashboards = require('/modules/dashboards.js');
-    var matcher = new URIMatcher(request.getRequestURI());
     editor = request.getParameter('editor');
 
     if (matcher.match('/{context}/dashboards/{id}') ||
-            matcher.match('/{context}' + tenantPrefix + '/dashboards/{id}')) {
+            matcher.match('/{context}' + tenantPattern + '/dashboards/{id}')) {
         vars = matcher.elements();
         dashboardId = vars.id;
-        context = buildOptions(vars);
+        context = utils.context(user, vars.domain);
+        tenantPrefix = utils.tenantedPrefix(urlPrefix, vars.domain);
         if (method === 'POST') {
             dashboardId = request.getParameter('id');
             include('dashboard-designer.jag');
@@ -62,39 +61,42 @@ var editor;
     }
 
     if (matcher.match('/{context}/dashboards/{id}/{page}') ||
-            matcher.match('/{context}' + tenantPrefix + '/dashboards/{id}/{page}')) {
+            matcher.match('/{context}' + tenantPattern + '/dashboards/{id}/{page}')) {
         vars = matcher.elements();
         dashboardId = vars.id;
         pageId = vars.page;
-        context = buildOptions(vars);
+        context = utils.context(user, vars.domain);
+        tenantPrefix = utils.tenantedPrefix(urlPrefix, vars.domain);
         include('dashboard-renderer.jag');
         return;
     }
 
-    if (matcher.match('/{context}/') || matcher.match('/{context}' + tenantPrefix + '/') ||
-            matcher.match('/{context}') || matcher.match('/{context}' + tenantPrefix)) {
+    if (matcher.match('/{context}/') || matcher.match('/{context}' + tenantPattern + '/') ||
+            matcher.match('/{context}') || matcher.match('/{context}' + tenantPattern)) {
         vars = matcher.elements();
-        context = buildOptions(vars);
+        context = utils.context(user, vars.domain);
+        tenantPrefix = utils.tenantedPrefix(urlPrefix, vars.domain);
         include('dashboard-portal.jag');
         return;
     }
 
-    if (matcher.match('/{context}/dashboards/') || matcher.match('/{context}' + tenantPrefix + '/dashboards/') ||
-            matcher.match('/{context}/dashboards') || matcher.match('/{context}' + tenantPrefix + '/dashboards')) {
+    if (matcher.match('/{context}/dashboards/') || matcher.match('/{context}' + tenantPattern + '/dashboards/') ||
+            matcher.match('/{context}/dashboards') || matcher.match('/{context}' + tenantPattern + '/dashboards')) {
         vars = matcher.elements();
-        context = buildOptions(vars);
+        context = utils.context(user, vars.domain);
+        tenantPrefix = utils.tenantedPrefix(urlPrefix, vars.domain);
         action = request.getParameter('action');
         if (action === 'create') {
             include('dashboard-create.jag');
             return;
         }
         /*
-        if (action === 'download') {
-            dashboardId = request.getParameter('dashboard');
-            include('dashboard-download.jag');
-            return;
-        }
-        */
+         if (action === 'download') {
+         dashboardId = request.getParameter('dashboard');
+         include('dashboard-download.jag');
+         return;
+         }
+         */
         include('dashboard-portal.jag');
         return;
     }

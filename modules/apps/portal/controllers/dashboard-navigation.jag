@@ -11,15 +11,15 @@ var dest = encodeURIComponent(request.getRequestURI() + (query ? '?' + query : '
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="<%=urlPrefix%>dashboards" class="navbar-brand">Dashboards</a>
+            <a href="<%=tenantPrefix%>dashboards" class="navbar-brand">Dashboards</a>
         </div>
         <div class="collapse navbar-collapse horizontal-bar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="<%=urlPrefix%>">Home</a></li>
+                <li class="active"><a href="<%=tenantPrefix%>">Home</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <% if (user) { %>
-                <li><a href="<%=urlPrefix%>dashboards?action=create"><i class="fa fa-plus"></i> Dashboard</a></li>
+                <li><a href="<%=tenantPrefix%>dashboards?action=create"><i class="fa fa-plus"></i> Dashboard</a></li>
                 <li>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         <%=user.username%> <span class="caret"></span>

@@ -1,6 +1,9 @@
 (function () {
+    var prefix = ues.utils.relativePrefix();
+
+    var domain = ues.global.domain;
+
     ues.plugins.uris['store'] = function (uri) {
-        //TODO dynamically calculate the uri
-        return 'https://localhost:9443/' + uri;
+        return prefix + 'store/' + domain + '/' + uri;
     };
 }());

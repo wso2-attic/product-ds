@@ -4,6 +4,8 @@ var findOne, find, create, update, remove;
 
     var dir = '/store/';
 
+    var utils = require('/modules/utils.js');
+
     var assetsDir = function (ctx, type) {
         var carbon = require('carbon');
         var config = require('/configs/designer.json');
@@ -35,18 +37,6 @@ var findOne, find, create, update, remove;
     var registryPath = function (id) {
         var path = '/_system/config/ues/dashboards';
         return id ? path + '/' + id : path;
-    };
-
-    var currentContext = function () {
-        var PrivilegedCarbonContext = Packages.org.wso2.carbon.context.PrivilegedCarbonContext;
-        var context = PrivilegedCarbonContext.getThreadLocalCarbonContext();
-        var username = context.getUsername();
-
-        return {
-            username: username,
-            domain: context.getTenantDomain(),
-            tenantId: context.getTenantId()
-        };
     };
 
     var findDashboards = function (ctx, type, query, start, count) {
@@ -99,7 +89,7 @@ var findOne, find, create, update, remove;
     };
 
     findOne = function (type, id) {
-        var ctx = currentContext();
+        var ctx = utils.currentContext();
         var parent = assetsDir(ctx, type);
         var file = new File(parent + id);
         if (!file.isExists()) {
@@ -116,7 +106,7 @@ var findOne, find, create, update, remove;
     };
 
     find = function (type, query, start, count) {
-        var ctx = currentContext();
+        var ctx = utils.currentContext();
         if (type === 'dashboard') {
             return findDashboards(ctx, type, query, start, count);
         }

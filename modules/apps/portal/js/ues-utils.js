@@ -14,7 +14,17 @@ var ues = ues || {};
         return prefix;
     };
 
+    var tenantPrefix = function () {
+        var prefix = relativePrefix();
+        var domain = ues.global.anonDomain;
+        if (!domain) {
+            return prefix;
+        }
+        return prefix + ues.global.tenantPrefix.replace(/^\//, '') + '/' + domain + '/';
+    };
+
     ues.utils = {
-        relativePrefix: relativePrefix
+        relativePrefix: relativePrefix,
+        tenantPrefix: tenantPrefix
     };
 }());

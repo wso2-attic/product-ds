@@ -9,6 +9,11 @@
         return;
     }
 
+    if (!utils.tenantExists(context.domain || context.anonDomain)) {
+        response.sendError(404, 'requested tenant cannot be found');
+        return;
+    }
+
     if (!utils.allowed(user.roles, configs.designers)) {
         response.sendError(401, 'designer access not authorized');
         return;

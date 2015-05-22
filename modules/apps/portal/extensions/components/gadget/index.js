@@ -15,11 +15,11 @@
     var context = ues.global.context;
 
     var resolveGadgetURL = function (uri) {
-        var index = uri.indexOf('local://');
-        if (index === -1) {
-            return resolveURI(uri);
+        uri = resolveURI(uri);
+        if (uri.match(/^https?:\/\//i)) {
+            return uri;
         }
-        uri = uri.substring(index + 8);
+        uri = uri.replace(/^(..\/)*/i, '');
         if (window.location.protocol === 'https:') {
             return 'https://localhost:' + server.httpsPort + context + '/' + uri;
         }
