@@ -7,12 +7,12 @@
 %>
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Dashboards</title>
-        <link rel="stylesheet" href="<%=urlPrefix%>css/bootstrap.min.css">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboards</title>
+    <link rel="stylesheet" href="<%=urlPrefix%>css/bootstrap.min.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=urlPrefix%>css/ladda-themeless.min.css">
     <link rel="stylesheet" href="<%=urlPrefix%>css/nunito.css">
@@ -29,7 +29,8 @@
 <script src="<%=urlPrefix%>js/handlebars-v1.3.0.js"></script>
 <script src="<%=urlPrefix%>js/spin.min.js"></script>
 <script src="<%=urlPrefix%>js/ladda.min.js"></script>
-<script src="<%=urlPrefix%>js/ues-utils.js"></script>
+<script src="<%=urlPrefix%>js/ues.js"></script>
+<% include('dashboard-scripts.jag'); %>
 <script src="<%=urlPrefix%>js/ues-store.js"></script>
 <script src="<%=urlPrefix%>js/portal.js"></script>
 <script id="dashboards-list-hbs" type="text/x-handlebars-template">

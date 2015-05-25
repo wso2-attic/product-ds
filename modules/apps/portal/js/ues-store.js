@@ -1,21 +1,19 @@
-var ues = ues || {};
-
 (function () {
 
-    var assetsUrl = ues.utils.relativePrefix() + 'assets';
+    var domain = ues.global.anonDomain || ues.global.domain;
 
-    var dashboardsUrl = ues.utils.relativePrefix() + 'apis/dashboards';
+    var assetsUrl = ues.utils.relativePrefix() + 'assets';
 
     var store = (ues.store = {});
 
     store.asset = function (type, id, cb) {
-        $.get(assetsUrl + '/' + id + '?type=' + type, function (data) {
+        $.get(assetsUrl + '/' + id + '?domain=' + domain + '&type=' + type, function (data) {
             cb(false, data);
         }, 'json');
     };
 
     store.assets = function (type, paging, cb) {
-        $.get(assetsUrl + '?start=' + paging.start + '&count=' + paging.count + '&type=' + type, function (data) {
+        $.get(assetsUrl + '?domain=' + domain + '&start=' + paging.start + '&count=' + paging.count + '&type=' + type, function (data) {
             cb(false, data);
         }, 'json');
     };

@@ -148,13 +148,13 @@
 <script src="<%=urlPrefix%>js/handlebars-v1.3.0.js"></script>
 <!-- TODO fix shindig url -->
 <script src="/shindig/gadgets/js/container:open-views:opensearch:rpc:xmlutil:pubsub-2.js?c=1&debug=1&container=default"></script>
-<script src="<%=urlPrefix%>js/ues-prefs.js"></script>
 <script src="<%=urlPrefix%>js/ues.js"></script>
+<script src="<%=urlPrefix%>js/ues-prefs.js"></script>
 <% include('dashboard-scripts.jag'); %>
 <script>
 ues.global.fresh = <%=fresh%>;
 </script>
-<script src="<%=urlPrefix%>js/ues-utils.js"></script>
+<script src="<%=urlPrefix%>js/ues-gadgets.js"></script>
 <script src="<%=urlPrefix%>js/ues-store.js"></script>
 <script src="<%=urlPrefix%>js/ues-dashboards.js"></script>
 <script src="<%=urlPrefix%>extensions/components/gadget/index.js"></script>

@@ -1,5 +1,3 @@
-var ues = ues || {};
-
 (function () {
     //Initializing opensocial gadget specific environment
     var getPrefs = function (site, url, done) {

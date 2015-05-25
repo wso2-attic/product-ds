@@ -1,6 +1,6 @@
 $(function () {
 
-    var dashboardsApi = ues.utils.relativePrefix() + 'apis/dashboards';
+    var dashboardsApi = ues.utils.tenantPrefix() + 'apis/dashboards';
 
     var dashboardsListHbs = Handlebars.compile($("#dashboards-list-hbs").html());
 
