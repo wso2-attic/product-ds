@@ -1,22 +1,10 @@
 <%
-var user;
-var dashboard;
-var page;
-var urlPrefix;
-var tenantPattern;
-
 (function () {
     var log = new Log();
 
     var configs = require('/configs/designer.json');
-    tenantPattern = configs.tenantPrefix + '/{domain}';
-
     var utils = require('/modules/utils.js');
-    var path = request.getRequestURI();
-    urlPrefix = utils.relativePrefix(path);
-
-    var usr = require('/modules/user.js');
-    user = usr.current();
+    var dashboards = require('/modules/dashboards.js');
 
     response.contentType = 'application/json';
 
@@ -28,14 +16,12 @@ var tenantPattern;
     var userDashboards;
     var carbon = require('carbon');
     var anonRole = carbon.user.anonRole;
-    var editor = request.getParameter('editor');
     var method = request.getMethod();
-    var dashboards = require('/modules/dashboards.js');
+
     var matcher = new URIMatcher(request.getRequestURI());
-    if (matcher.match('/{context}/apis/dashboards/{id}') ||
-            matcher.match('/{context}' + tenantPattern + '/apis/dashboards/{id}')) {
+    if (matcher.match('/dashboards/{id}')) {
         vars = matcher.elements();
-        utils.sandbox(utils.context(user, vars.domain), function () {
+        utils.sandbox(context, function () {
             dashboard = dashboards.findOne(vars.id);
         });
         if (!dashboard) {
@@ -75,8 +61,7 @@ var tenantPattern;
                 return;
             }
             dashboard = request.getContent();
-            vars = matcher.elements();
-            utils.sandbox(utils.context(user, vars.domain), function () {
+            utils.sandbox(context, function () {
                 dashboards.update(dashboard);
             });
             print({
@@ -91,7 +76,9 @@ var tenantPattern;
                 }));
                 return;
             }
-            dashboards.remove(dashboard.id);
+            utils.sandbox(context, function () {
+                dashboards.remove(dashboard.id);
+            });
             print({
                 error: false
             });
@@ -101,10 +88,11 @@ var tenantPattern;
             error: true
         }));
         return;
-    } else if (matcher.match('/{context}/apis/dashboards') ||
-            matcher.match('/{context}' + tenantPattern + '/apis/dashboards')) {
+    }
+
+    if (matcher.match('/dashboards')) {
         if (method === 'GET') {
-            utils.sandbox(utils.context(user, vars.domain), function () {
+            utils.sandbox(context, function () {
                 allDashboards = dashboards.find();
             });
             userDashboards = [];
@@ -138,8 +126,7 @@ var tenantPattern;
                 return;
             }
             dashboard = request.getContent();
-            vars = matcher.elements();
-            utils.sandbox(utils.context(user, vars.domain), function () {
+            utils.sandbox(context, function () {
                 dashboards.create(dashboard);
             });
             print({
@@ -152,6 +139,7 @@ var tenantPattern;
         }));
         return;
     }
+
     response.sendError(404, JSON.stringify({
         error: true
     }));

@@ -1,7 +1,5 @@
 <%
 (function () {
-    var usr = require('/modules/user.js');
-    var user = usr.current();
     if (!user) {
         response.sendError(401, 'unauthorized to access roles');
         return;
@@ -14,7 +12,8 @@
         response.sendError(401, 'roles access not authorized');
         return;
     }
-    
+
+    var usr = require('/modules/user.js');
     response.contentType = 'application/json';
     print(usr.roles());
 }());

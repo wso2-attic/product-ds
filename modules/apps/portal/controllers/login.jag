@@ -9,7 +9,6 @@
     var tenantPrefix;
     var log = new Log();
     var utils = require('/modules/utils.js');
-    var urlPrefix = utils.relativePrefix(request.getRequestURI());
     var method = request.getMethod();
     var dest = request.getParameter('destination');
     if (method === 'POST') {
@@ -20,9 +19,7 @@
             usr = require('/modules/user.js');
             password = request.getParameter('password');
             if (usr.login(username, password)) {
-                log.info(urlPrefix);
-                tenantPrefix = utils.tenantedPrefix(urlPrefix, user.domain);
-                log.info(tenantPrefix);
+                tenantedUrlPrefix = utils.tenantedPrefix(urlPrefix, user.domain);
                 response.sendRedirect(dest || tenantPrefix);
                 return;
             }
@@ -70,7 +67,7 @@
 <div id="wrapper" class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <form class="ues-signin-form" action="<%=urlPrefix%>login" method="post">
+            <form class="ues-signin-form" action="<%=tenantedUrlPrefix%>login" method="post">
                 <h2 class="ues-signin-heading">Login</h2>
                 <div class="form-group">
                     <label for="ues-username" class="sr-only">Username</label>

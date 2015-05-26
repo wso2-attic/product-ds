@@ -71,7 +71,7 @@ var context = function (user, domain) {
     };
     if (user) {
         ctx.username = user.username;
-        ctx.domain = String(user.domain);
+        ctx.domain = user.domain;
     }
     return ctx;
 };
@@ -81,7 +81,6 @@ var tenantExists = function (domain) {
     var tenantId = carbon.server.tenantId({
         domain: domain
     });
-    log.info(tenantId);
     return tenantId !== -1;
 };
 
@@ -94,4 +93,16 @@ var currentContext = function () {
         domain: context.getTenantDomain(),
         tenantId: context.getTenantId()
     };
+};
+
+var findJag = function (path) {
+    var file = new File(path);
+    if (file.isExists()) {
+        return path;
+    }
+    path = path.replace(/\/[^\/]*$/ig, '');
+    if(!path) {
+        return null;
+    }
+    return findJag(path + '.jag');
 };

@@ -2,20 +2,6 @@
 var dbRoot;
 (function () {
     var utils = require('/modules/utils.js');
-    var dashboards = require('/modules/dashboards.js');
-
-    if (!utils.tenantExists(context.domain || context.anonDomain)) {
-        response.sendError(404, 'requested tenant cannot be found');
-        return;
-    }
-    utils.sandbox(context, function () {
-        dashboard = dashboards.findOne(dashboardId);
-    });
-
-    if (!dashboard) {
-        response.sendError(404, 'requested dashboard cannot be found');
-        return;
-    }
 
     var permissions = dashboard.permissions;
     var carbon = require('carbon');
@@ -30,10 +16,11 @@ var dbRoot;
         response.sendError(401, 'dashboard access not authorized');
         return;
     }
+
     dbRoot = urlPrefix + 'dashboards/' + dashboard.id + '/';
 
     var query = request.getQueryString();
-    var dest = encodeURIComponent(request.getRequestURI() + (query ? '?' + query : ''));
+    var dest = encodeURIComponent(originalURI + (query ? '?' + query : ''));
 %>
 <!doctype html>
 <html lang="en">
@@ -64,7 +51,7 @@ var dbRoot;
         </div>
         <div class="collapse navbar-collapse horizontal-bar">
             <ul class="nav navbar-nav">
-                <li<% if(dashboard.landing === page) { %> class="active"<% } %>>
+                <li<% if(dashboard.landing === pageId) { %> class="active"<% } %>>
                     <a href="<%=dbRoot%><%=dashboard.landing%>">Home</a>
                 </li>
                 <%
@@ -72,7 +59,7 @@ var dbRoot;
                 pages.forEach(function (p) {
                     if (dashboard.landing !== p.id) {
                 %>
-                        <li<%if (p.id === page) { %> class="active"<% } %>>
+                        <li<%if (p.id === pageId) { %> class="active"<% } %>>
                             <a href="<%=dbRoot%><%=p.id%>"><%=p.title%></a>
                         </li>
                     <% } %>
@@ -104,6 +91,7 @@ var dbRoot;
 <script src="/shindig/gadgets/js/container:open-views:opensearch:rpc:xmlutil:pubsub-2.js?c=1&debug=1&container=default"></script>
 <script src="<%=urlPrefix%>js/ues.js"></script>
 <script src="<%=urlPrefix%>js/ues-prefs.js"></script>
+<% include('common-scripts.jag'); %>
 <% include('dashboard-scripts.jag'); %>
 <script src="<%=urlPrefix%>js/ues-gadgets.js"></script>
 <script src="<%=urlPrefix%>js/ues-dashboards.js"></script>

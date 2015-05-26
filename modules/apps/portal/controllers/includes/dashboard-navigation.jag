@@ -1,6 +1,6 @@
 <%
 var query = request.getQueryString();
-var dest = encodeURIComponent(request.getRequestURI() + (query ? '?' + query : ''));
+var dest = encodeURIComponent(originalURI + (query ? '?' + query : ''));
 %>
 <div id="navigation" role="navigation" class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
@@ -11,15 +11,15 @@ var dest = encodeURIComponent(request.getRequestURI() + (query ? '?' + query : '
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="<%=tenantPrefix%>dashboards" class="navbar-brand">Dashboards</a>
+            <a href="<%=tenantedUrlPrefix%>" class="navbar-brand">Dashboards</a>
         </div>
         <div class="collapse navbar-collapse horizontal-bar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="<%=tenantPrefix%>">Home</a></li>
+                <li class="active"><a href="<%=tenantedUrlPrefix%>">Home</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <% if (user) { %>
-                <li><a href="<%=tenantPrefix%>dashboards?action=create"><i class="fa fa-plus"></i> Dashboard</a></li>
+                <li><a href="<%=tenantedUrlPrefix%>dashboards?action=create"><i class="fa fa-plus"></i> Dashboard</a></li>
                 <li>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         <%=user.username%> <span class="caret"></span>

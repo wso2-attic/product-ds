@@ -1,0 +1,5 @@
+<script>
+ues.global.fresh = <%=fresh%>;
+ues.global.dashboard = <%=dashboard%>;
+ues.global.page = <%=JSON.stringify(pageId)%>;
+</script>

@@ -2,23 +2,11 @@
 (function () {
     var log = new Log();
 
-    var usr = require('/modules/user.js');
-    var user = usr.current();
-
     if (!user) {
         response.sendError(401, 'unauthorized to access assets');
         return;
     }
 
-    var utils = require('/modules/utils.js');
-    var domain = request.getParameter('domain');
-
-    if (!utils.tenantExists(domain)) {
-        response.sendError(404, 'requested tenant cannot be found');
-        return;
-    }
-
-    var carbon = require('carbon');
     var config = require('/configs/designer.json');
 
     var storeType = config.store.type;
@@ -32,12 +20,13 @@
     response.contentType = 'application/json';
 
     var assets;
+
+    var utils = require('/modules/utils.js');
     var matcher = new URIMatcher(request.getRequestURI());
-    //TODO: what happen when the context is changed or mapped via reverse proxy
-    if (matcher.match('/{context}/assets/{id}')) {
+    if (matcher.match('/assets/{id}')) {
         id = matcher.elements().id;
         if (method === 'GET') {
-            utils.sandbox(utils.context(user, domain), function () {
+            utils.sandbox(utils.context(user, urlDomain || userDomain), function () {
                 assets = store.findOne(assetType, id);
             });
             if (!assets) {
@@ -58,10 +47,10 @@
         return;
     }
 
-    if (matcher.match('/{context}/assets')) {
+    if (matcher.match('/assets')) {
         id = matcher.elements().id;
         if (method === 'GET') {
-            utils.sandbox(utils.context(user, domain), function () {
+            utils.sandbox(utils.context(user, urlDomain || userDomain), function () {
                 assets = store.find(assetType);
             });
             print(assets);

@@ -30,11 +30,11 @@
     <!--<link rel="stylesheet" href="css/theme.css">-->
 </head>
 <body>
-<% include('dashboard-navigation.jag'); %>
+<% include('includes/dashboard-navigation.jag'); %>
 <div id="wrapper" class="container-fluid">
     <div class="row thumbnails ues-dashboard">
         <div class="col-md-8 col-md-offset-2">
-            <form action="<%=tenantPrefix%>dashboards" method="post" id="dashboard-form">
+            <form action="<%=tenantedUrlPrefix%>dashboards" method="post" id="dashboard-form">
                 <h2>Create a Dashboard</h2>
                 <div class="form-group">
                     <label for="dashboard-title">Title</label>

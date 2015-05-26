@@ -8,7 +8,12 @@ var roles;
     var log = new Log();
 
     current = function () {
-        return session.get('user');
+        var user = session.get('user');
+        if(!user) {
+            return null;
+        }
+        user.domain = String(user.domain);
+        return user;
     };
 
     login = function (username, password) {
