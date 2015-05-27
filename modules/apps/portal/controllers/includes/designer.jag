@@ -16,7 +16,7 @@
     <!--<link rel="stylesheet" href="css/theme.css">-->
 </head>
 <body>
-<% include('dashboard-navigation.jag'); %>
+<% include('designer-navigation.jag'); %>
 <div id="wrapper">
     <div id="left">
         <nav class="navbar-default navbar ues-left-menu" role="navigation">

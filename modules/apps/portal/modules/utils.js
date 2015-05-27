@@ -16,10 +16,6 @@ var tenantedPrefix = function (prefix, domain) {
         return prefix;
     }
     var configs = require('/configs/designer.json');
-    var carbon = require('carbon');
-    if (domain === carbon.server.superTenant.domain) {
-        return prefix;
-    }
     return prefix + configs.tenantPrefix.replace(/^\//, '') + '/' + domain + '/';
 };
 

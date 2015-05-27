@@ -30,7 +30,7 @@
     <!--<link rel="stylesheet" href="css/theme.css">-->
 </head>
 <body>
-<% include('includes/dashboard-navigation.jag'); %>
+<% include('includes/designer-navigation.jag'); %>
 <div id="wrapper" class="container-fluid">
     <div class="row thumbnails ues-dashboard">
         <div class="col-md-8 col-md-offset-2">

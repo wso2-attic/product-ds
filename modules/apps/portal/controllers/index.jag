@@ -4,15 +4,15 @@
         sendLogin();
         return;
     }
-    %>
-    <!doctype html>
-    <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Dashboards</title>
-        <link rel="stylesheet" href="<%=urlPrefix%>css/bootstrap.min.css">
+%>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboards</title>
+    <link rel="stylesheet" href="<%=urlPrefix%>css/bootstrap.min.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<%=urlPrefix%>css/ladda-themeless.min.css">
     <link rel="stylesheet" href="<%=urlPrefix%>css/nunito.css">
@@ -22,7 +22,7 @@
     <!--<link rel="stylesheet" href="css/theme.css">-->
 </head>
 <body>
-<% include('includes/dashboard-navigation.jag'); %>
+<% include('includes/designer-navigation.jag'); %>
 <div id="wrapper" class="container-fluid"></div>
 <script src="<%=urlPrefix%>js/jquery-1.10.2.js"></script>
 <script src="<%=urlPrefix%>js/bootstrap.min.js"></script>
@@ -50,7 +50,6 @@
                         </a>
                     </div>
                 </div>
-
             </div>
         </div>
         {{/each}}

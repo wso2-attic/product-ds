@@ -34,11 +34,11 @@ var originalURI;
         urlDomain = vars.domain;
         relativeURI = '/' + vars.any;
     } else if (matcher.match('/{context}') || matcher.match('/{context}/')) {
-        urlDomain = request.getParameter('domain') || String(carbon.server.superTenant.domain);
+        urlDomain = request.getParameter('domain');
         relativeURI = originalURI.match(/.*\/$/ig) ? '/' : '';
     } else if (matcher.match('/{context}/{+any}')) {
         vars = matcher.elements();
-        urlDomain = request.getParameter('domain') || String(carbon.server.superTenant.domain);
+        urlDomain = request.getParameter('domain');
         relativeURI = '/' + vars.any;
     } else {
         response.sendError(404, 'requested resource cannot be found');
