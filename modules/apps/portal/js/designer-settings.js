@@ -54,13 +54,13 @@ $(function () {
     };
 
     var initTypeahead = function () {
-        var engine = new Bloodhound({
+        var viewerRoles = new Bloodhound({
             name: 'roles',
             limit: 10,
             prefetch: {
-                url: rolesApi + '?q=%QUERY',
+                url: rolesApi,
                 filter: function (roles) {
-                    console.log(roles);
+                    roles.push(ues.global.anonRole);
                     return $.map(roles, function (role) {
                         return {name: role};
                     });
@@ -68,28 +68,48 @@ $(function () {
                 ttl: 60
             },
             datumTokenizer: function (d) {
-                return d.name.split(/[\s\/]+/) || [];
+                return d.name.split(/[\s\/.]+/) || [];
             },
             queryTokenizer: Bloodhound.tokenizers.whitespace
         });
 
-        engine.initialize();
+        viewerRoles.initialize();
 
         //TODO: handle autocompletion and check clearing
         $('#ues-share-view').typeahead(null, {
             name: 'roles',
             displayKey: 'name',
-            source: engine.ttAdapter()
+            source: viewerRoles.ttAdapter()
         }).on('typeahead:selected', function (e, role, roles) {
             viewer($(this), role.name);
         }).on('typeahead:autocomplete', function (e, role) {
             viewer($(this), role.name);
         });
 
+        var editorRoles = new Bloodhound({
+            name: 'roles',
+            limit: 10,
+            prefetch: {
+                url: rolesApi,
+                filter: function (roles) {
+                    return $.map(roles, function (role) {
+                        return {name: role};
+                    });
+                },
+                ttl: 60
+            },
+            datumTokenizer: function (d) {
+                return d.name.split(/[\s\/.]+/) || [];
+            },
+            queryTokenizer: Bloodhound.tokenizers.whitespace
+        });
+
+        editorRoles.initialize();
+
         $('#ues-share-edit').typeahead(null, {
             name: 'roles',
             displayKey: 'name',
-            source: engine.ttAdapter()
+            source: editorRoles.ttAdapter()
         }).on('typeahead:selected', function (e, role, roles) {
             editor($(this), role.name);
         }).on('typeahead:autocomplete', function (e, role) {

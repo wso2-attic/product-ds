@@ -9,7 +9,7 @@ var roles;
 
     current = function () {
         var user = session.get('user');
-        if(!user) {
+        if (!user) {
             return null;
         }
         user.domain = String(user.domain);
