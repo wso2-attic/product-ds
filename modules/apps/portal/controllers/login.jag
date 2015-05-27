@@ -6,7 +6,6 @@
     var password;
     var message;
     var carbon;
-    var tenantPrefix;
     var log = new Log();
     var utils = require('/modules/utils.js');
     var method = request.getMethod();
@@ -19,8 +18,15 @@
             usr = require('/modules/user.js');
             password = request.getParameter('password');
             if (usr.login(username, password)) {
-                tenantedUrlPrefix = utils.tenantedPrefix(urlPrefix, user.domain);
-                response.sendRedirect(dest || tenantPrefix);
+                if (dest) {
+                    response.sendRedirect(dest);
+                    return;
+                }
+                if (superDomain == user.domain) {
+                    response.sendRedirect(urlPrefix);
+                    return;
+                }
+                response.sendRedirect(utils.tenantedPrefix(urlPrefix, user.domain));
                 return;
             }
         }

@@ -5,8 +5,9 @@
         return;
     }
 
+    var utils = require('/modules/utils.js');
     if (userDomain !== (urlDomain || superDomain)) {
-        response.sendError(401, 'portal access not authorized of this tenant');
+        response.sendRedirect(utils.tenantedPrefix(urlPrefix, userDomain));
         return;
     }
 %>
