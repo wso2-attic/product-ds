@@ -5,20 +5,6 @@ var dashboard;
 var fresh;
 
 (function () {
-
-    if (!user) {
-        sendLogin();
-        return;
-    }
-
-    var utils = require('/modules/utils.js');
-    var configs = require('/configs/designer.json');
-
-    if (!utils.allowed(user.roles, configs.designers)) {
-        response.sendError(401, 'designer access not authorized');
-        return;
-    }
-
     var vars;
     var dashboardId;
     var pageId;
@@ -36,9 +22,9 @@ var fresh;
     }
 
     var dashboards;
-    var permissions;
     var editor;
     var method = request.getMethod();
+    var utils = require('/modules/utils.js');
 
     if (method === 'GET') {
         dashboards = require('/modules/dashboards.js');
@@ -51,11 +37,6 @@ var fresh;
             return;
         }
 
-        permissions = dashboard.permissions;
-        if (!utils.allowed(user.roles, permissions.editors)) {
-            response.sendError(401, 'dashboard editing not authorized');
-            return;
-        }
         editor = request.getParameter('editor');
         editor ? include('includes/designer.jag') : include('includes/renderer.jag');
         return;

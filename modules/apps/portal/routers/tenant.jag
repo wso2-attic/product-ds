@@ -2,6 +2,7 @@
 var user;
 var context;
 var tenantPrefix;
+var superDomain;
 var urlDomain;
 var userDomain;
 var originalURI;
@@ -16,6 +17,7 @@ var originalURI;
     var usr = require('/modules/user.js');
     var utils = require('/modules/utils.js');
 
+    superDomain = String(carbon.server.superTenant.domain);
     user = usr.current();
     tenantPrefix = configs.tenantPrefix;
     userDomain = user ? user.domain : null;

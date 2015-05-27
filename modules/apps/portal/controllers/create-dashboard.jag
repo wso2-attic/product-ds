@@ -5,6 +5,11 @@
         return;
     }
 
+    if(userDomain !== (urlDomain || superDomain)) {
+        response.sendError(401, 'designer access not authorized of this tenant');
+        return;
+    }
+
     var utils = require('/modules/utils.js');
     var configs = require('/configs/designer.json');
 
