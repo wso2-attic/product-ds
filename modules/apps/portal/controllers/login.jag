@@ -83,11 +83,11 @@
                     <label for="ues-password" class="sr-only">Password</label>
                     <input type="password" name="password" class="form-control ues-password" placeholder="Password" required>
                 </div>
-                <div class="checkbox">
+                <!--div class="checkbox">
                     <label>
                     <input type="checkbox" value="remember-me" class="ues-remember"> Remember me
                     </label>
-                </div>
+                </div-->
                 <% if (dest) { %>
                 <input type="hidden" name="destination" value="<%=dest%>">
                 <% } %>

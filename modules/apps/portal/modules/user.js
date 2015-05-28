@@ -23,13 +23,28 @@ var roles;
             return false;
         }
         var user = carbon.server.tenantUser(username);
+        var utils = require('/modules/utils.js');
         var um = new carbon.user.UserManager(server);
         user.roles = um.getRoleListOfUser(user.username);
+        try {
+            utils.handlers('login', user);
+        } catch (e) {
+            log.error(e);
+            return false;
+        }
         session.put('user', user);
         return true;
     };
 
     logout = function () {
+        var utils = require('/modules/utils.js');
+        var user = current();
+        try {
+            utils.handlers('logout', user);
+        } catch (e) {
+            log.error(e);
+            return;
+        }
         session.remove('user');
     };
 
