@@ -9,9 +9,12 @@
     response.contentType = 'application/json';
 
     var vars;
+    var start;
+    var count;
     var permissions;
     var viewers;
     var editors;
+    var roles;
     var allDashboards;
     var userDashboards;
     var carbon = require('carbon');
@@ -91,28 +94,31 @@
     }
 
     if (matcher.match('/dashboards')) {
+        if (!user) {
+            response.sendError(401, JSON.stringify({
+                error: 'unauthorized to access the dashboard'
+            }));
+            return;
+        }
         if (method === 'GET') {
+            start = request.getParameter('start');
+            count = request.getParameter('count');
             utils.sandbox(context, function () {
-                allDashboards = dashboards.find();
+                allDashboards = dashboards.find({
+                    start: start,
+                    count: count
+                });
             });
+            roles = user.roles;
             userDashboards = [];
             allDashboards.forEach(function (dashboard) {
-                if (utils.allowed(dashboard, {edit: true})) {
-                    userDashboards.push({
-                        id: dashboard.id,
-                        title: dashboard.title,
-                        description: dashboard.description,
-                        editable: true
-                    });
+                var permissions = dashboard.permissions;
+                if (utils.allowed(roles, permissions.editors)) {
+                    userDashboards.push(dashboard);
                     return;
                 }
-                if (utils.allowed(dashboard, {view: true})) {
-                    userDashboards.push({
-                        id: dashboard.id,
-                        title: dashboard.title,
-                        description: dashboard.description,
-                        editable: false
-                    });
+                if (utils.allowed(roles, permissions.viewers)) {
+                    userDashboards.push(dashboard);
                 }
             });
             print(userDashboards);

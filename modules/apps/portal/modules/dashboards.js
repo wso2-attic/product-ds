@@ -18,12 +18,12 @@ var findOne = function (id) {
     return JSON.parse(content);
 };
 
-var find = function () {
+var find = function (paging) {
     var server = new carbon.server.Server();
     var registry = new carbon.registry.Registry(server, {
         system: true
     });
-    var dashboards = registry.content(registryPath());
+    var dashboards = registry.content(registryPath(), paging);
     var dashboardz = [];
     dashboards.forEach(function (dashboard) {
         dashboardz.push(JSON.parse(registry.content(dashboard)));
