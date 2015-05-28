@@ -2,7 +2,7 @@
 
     var domain = ues.global.urlDomain || ues.global.userDomain;
 
-    var assetsUrl = ues.utils.relativePrefix() + 'assets';
+    var assetsUrl = ues.utils.relativePrefix() + 'apis/assets';
 
     var store = (ues.store = {});
 

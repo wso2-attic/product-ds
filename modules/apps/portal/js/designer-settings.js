@@ -75,7 +75,7 @@ $(function () {
 
         viewerRoles.initialize();
 
-        //TODO: handle autocompletion and check clearing
+        //TODO: improve typeahead to use single prefetch for both editors and viewers
         $('#ues-share-view').typeahead(null, {
             name: 'roles',
             displayKey: 'name',
