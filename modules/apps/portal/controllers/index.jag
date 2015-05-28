@@ -49,11 +49,15 @@
                     <h3>{{title}}</h3>
                     <p class="ues-description">{{description}}</p>
                     <div class="ues-actions">
+                        {{#if editable}}
                         <a class="btn btn-default ues-edit" href="<%=tenantedUrlPrefix%>dashboards/{{id}}?editor=true">Edit</a>
+                        {{/if}}
                         <a class="btn btn-default ues-view" href="<%=tenantedUrlPrefix%>dashboards/{{id}}" target="_blank">View</a>
+                         {{#if editable}}
                         <a class="btn btn-danger ues-delete ladda-button" data-style="expand-right" data-size="l" href="#">
                             <span class="ladda-label">Delete</span>
                         </a>
+                        {{/if}}
                     </div>
                 </div>
             </div>

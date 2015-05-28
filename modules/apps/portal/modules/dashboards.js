@@ -10,22 +10,18 @@ var registryPath = function (id) {
 };
 
 var findOne = function (id) {
-    var context = utils.currentContext();
     var server = new carbon.server.Server();
     var registry = new carbon.registry.Registry(server, {
-        system: true//Boolean(context.username)
+        system: true
     });
     var content = registry.content(registryPath(id));
     return JSON.parse(content);
 };
 
 var find = function () {
-    var context = utils.currentContext();
-    log.info("-------------");
-    log.info(context);
     var server = new carbon.server.Server();
     var registry = new carbon.registry.Registry(server, {
-        system: true//Boolean(context.username)
+        system: true
     });
     var dashboards = registry.content(registryPath());
     var dashboardz = [];
@@ -36,10 +32,9 @@ var find = function () {
 };
 
 var create = function (dashboard) {
-    var context = utils.currentContext();
     var server = new carbon.server.Server();
     var registry = new carbon.registry.Registry(server, {
-        system: true//Boolean(context.username)
+        system: true
     });
     var path = registryPath(dashboard.id);
     if (registry.exists(path)) {
@@ -52,10 +47,9 @@ var create = function (dashboard) {
 };
 
 var update = function (dashboard) {
-    var context = utils.currentContext();
     var server = new carbon.server.Server();
     var registry = new carbon.registry.Registry(server, {
-        system: true//Boolean(context.username)
+        system: true
     });
     var path = registryPath(dashboard.id);
     if (!registry.exists(path)) {
@@ -68,10 +62,9 @@ var update = function (dashboard) {
 };
 
 var remove = function (id) {
-    var context = utils.currentContext();
     var server = new carbon.server.Server();
     var registry = new carbon.registry.Registry(server, {
-        system: true//Boolean(context.username)
+        system: true
     });
     var path = registryPath(id);
     if (registry.exists(path)) {
