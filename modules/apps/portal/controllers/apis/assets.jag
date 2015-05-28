@@ -26,7 +26,7 @@
     if (matcher.match('/assets/{id}')) {
         id = matcher.elements().id;
         if (method === 'GET') {
-            utils.sandbox(utils.context(user, urlDomain || userDomain), function () {
+            utils.sandbox(utils.context(user, urlDomain), function () {
                 assets = store.findOne(assetType, id);
             });
             if (!assets) {
@@ -50,7 +50,7 @@
     if (matcher.match('/assets')) {
         id = matcher.elements().id;
         if (method === 'GET') {
-            utils.sandbox(utils.context(user, urlDomain || userDomain), function () {
+            utils.sandbox(utils.context(user, urlDomain), function () {
                 assets = store.find(assetType);
             });
             print(assets);
