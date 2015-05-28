@@ -4,7 +4,7 @@
     "type": "gadget",
     "thumbnail": "store://gadget/usa-business-revenue/index.png",
     "data": {
-        "url": "store://gadget/date-picker/index.xml"
+        "url": "store://widget/date-picker/index.xml"
     },
     "styles": {
         "borders": false,

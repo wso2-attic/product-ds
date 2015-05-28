@@ -651,9 +651,15 @@ $(function () {
     var initComponentsStore = function () {
         var toolbar = $('#middle').find('.ues-components .ues-toolbar');
         $('.ues-gadgets', toolbar).on('click', function () {
+            var el = $(this);
+            el.siblings().removeClass('active');
+            el.addClass('active');
             loadAssets('gadget', 0, 20);
         });
         $('.ues-widgets', toolbar).on('click', function () {
+            var el = $(this);
+            el.siblings().removeClass('active');
+            el.addClass('active');
             loadAssets('widget', 0, 20);
         });
         loadAssets('gadget', 0, 20);

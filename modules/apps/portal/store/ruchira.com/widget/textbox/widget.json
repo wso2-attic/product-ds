@@ -4,7 +4,7 @@
     "type": "gadget",
     "thumbnail": "store://gadget/usa-business-revenue/index.png",
     "data": {
-        "url": "store://gadget/textbox/index.xml"
+        "url": "store://widget/textbox/index.xml"
     },
     "options": {
         "content": {
