@@ -52,6 +52,7 @@ var originalURI;
         return;
     }
 
+    //TODO: fix should go here
     context = utils.context(user, urlDomain);
 
     var isAPI = relativeURI.match(/^\/apis\/.*/ig);

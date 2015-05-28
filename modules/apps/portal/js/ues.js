@@ -18,7 +18,7 @@ ues.global = {};
 
     var tenantPrefix = function () {
         var prefix = relativePrefix();
-        var domain = ues.global.anonDomain;
+        var domain = ues.global.urlDomain;
         if (!domain) {
             return prefix;
         }

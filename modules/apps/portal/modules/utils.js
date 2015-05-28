@@ -23,20 +23,19 @@ var sandbox = function (context, fn) {
     var carbon = require('carbon');
     var options = {};
 
-    if (context.anonDomain) {
-        options.domain = context.anonDomain;
-        if (context.anonDomain === context.domain) {
-            options.username = context.username;
-        }
+    if (context.urlDomain) {
+        options.domain = context.urlDomain;
     } else {
-        if (context.domain) {
-            options.username = context.username;
-            options.domain = context.domain;
-        } else {
-            options.domain = carbon.server.tenantDomain();
-        }
+        options.domain = String(carbon.server.superTenant.domain);
     }
-    options.tenantId = carbon.server.tenantId(options);
+
+    if (options.domain === context.userDomain) {
+        options.username = context.username;
+    }
+
+    options.tenantId = carbon.server.tenantId({
+        domain: options.domain
+    });
     carbon.server.sandbox(options, fn);
 };
 
@@ -63,11 +62,11 @@ var allowed = function (roles, allowed) {
 
 var context = function (user, domain) {
     var ctx = {
-        anonDomain: domain
+        urlDomain: domain
     };
     if (user) {
         ctx.username = user.username;
-        ctx.domain = user.domain;
+        ctx.userDomain = user.domain;
     }
     return ctx;
 };
@@ -97,7 +96,7 @@ var findJag = function (path) {
         return path;
     }
     path = path.replace(/\/[^\/]*$/ig, '');
-    if(!path) {
+    if (!path) {
         return null;
     }
     return findJag(path + '.jag');
