@@ -126,6 +126,7 @@
                 <exclude>**/climate/**</exclude>
                 <exclude>**/ceo-dash/**</exclude>
                 <exclude>**/markmail/**</exclude>
+                <exclude>**/portal-old/**</exclude>
             </excludes>
         </fileSet>
         <fileSet>
@@ -262,20 +263,6 @@
         </dependencySet>
     </dependencySets>
     <files>
-        <file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/event-broker.xml
-            </source>
-            <outputDirectory>wso2ues-${pom.version}/repository/conf/</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
-            <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/social.xml
-            </source>
-            <outputDirectory>wso2ues-${pom.version}/repository/conf/</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
         <file>
             <source>INSTALL.txt</source>
             <outputDirectory>wso2ues-${pom.version}</outputDirectory>
