@@ -19,24 +19,6 @@
     <TenantRegistrationPage>https://stratos-local.wso2.com/carbon/tenant-register/select_domain.jsp</TenantRegistrationPage>
     <ServiceProviders>
         <ServiceProvider>
-            <Issuer>store</Issuer>
-            <AssertionConsumerService>https://localhost:9443/store/acs</AssertionConsumerService>
-            <SignResponse>true</SignResponse>
-            <CustomLoginPage>/store/login.jag</CustomLoginPage>
-        </ServiceProvider>
-        <ServiceProvider>
-            <Issuer>social</Issuer>
-            <AssertionConsumerService>https://localhost:9443/social/acs</AssertionConsumerService>
-            <SignResponse>true</SignResponse>
-            <CustomLoginPage>/social/login</CustomLoginPage>
-        </ServiceProvider>
-        <ServiceProvider>
-            <Issuer>publisher</Issuer>
-            <AssertionConsumerService>https://localhost:9443/publisher/acs</AssertionConsumerService>
-            <SignResponse>true</SignResponse>
-            <CustomLoginPage>/publisher/controllers/login.jag</CustomLoginPage>
-        </ServiceProvider>
-        <ServiceProvider>
             <Issuer>portal</Issuer>
             <AssertionConsumerService>https://localhost:9443/portal/acs</AssertionConsumerService>
             <SignResponse>true</SignResponse>
