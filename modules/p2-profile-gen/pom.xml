@@ -191,6 +191,12 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.commons:org.wso2.carbon.tenant.mgt.common.feature:${carbon.commons.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.store:event.feature:${carbon.store.version}
+                                </featureArtifactDef>
+                                <feaureArtifactDef>
+                                    org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.sso.feature:${carbon.dashboards.version}
+                                </feaureArtifactDef>
                             </featureArtifacts>
                         </configuration>
                     </execution>
@@ -353,6 +359,14 @@
                                 <feature>
                                     <id>org.wso2.carbon.identity.relying.party.server.feature.group</id>
                                     <version>${carbon.identity.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.store.modules.event.feature.group</id>
+                                    <version>${carbon.store.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.dashboards.sso.feature.group</id>
+                                    <version>${carbon.dashboards.version}</version>
                                 </feature>
                             </features>
                         </configuration>
