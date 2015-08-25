@@ -194,6 +194,15 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.store:event.feature:${carbon.store.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.store:account-management.feature:${carbon.store.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.store:utils.feature:${carbon.store.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.store:store.feature:${carbon.store.version}
+                                </featureArtifactDef>
                                 <feaureArtifactDef>
                                     org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.sso.feature:${carbon.dashboards.version}
                                 </feaureArtifactDef>
@@ -362,6 +371,18 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.store.modules.event.feature.group</id>
+                                    <version>${carbon.store.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.store.modules.account-management.feature.group</id>
+                                    <version>${carbon.store.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.store.modules.store.feature.group</id>
+                                    <version>${carbon.store.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.store.modules.utils.feature.group</id>
                                     <version>${carbon.store.version}</version>
                                 </feature>
                                 <feature>
