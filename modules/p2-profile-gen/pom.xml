@@ -110,7 +110,7 @@
                                     org.wso2.carbon.deployment:org.wso2.carbon.module.mgt.server.feature:${carbon.deployment.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
-                                    org.wso2.carbon.commons:org.wso2.carbon.user.mgt.feature:${carbon.commons.version}
+                                    org.wso2.carbon.identity:org.wso2.carbon.user.mgt.feature:${carbon.identity.version}
                                 </featureArtifactDef>
                                 <!-- Stratos features    -->
                                 <!--featureArtifactDef>
@@ -197,6 +197,13 @@
                                 <feaureArtifactDef>
                                     org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.sso.feature:${carbon.dashboards.version}
                                 </feaureArtifactDef>
+                                <feaureArtifactDef>
+                                    org.wso2.carbon.identity:org.wso2.carbon.identity.core.ui.feature:${carbon.identity.version}
+                                </feaureArtifactDef>
+                                <!--- Notification Support: Mail -->
+                                <featureArtifactDef>
+                                    org.apache.axis2.transport:org.apache.axis2.transport.mail.feature:${axis2-transports.wso2.version}
+                                </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
                     </execution>
@@ -367,6 +374,23 @@
                                 <feature>
                                     <id>org.wso2.carbon.dashboards.sso.feature.group</id>
                                     <version>${carbon.dashboards.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.identity.core.feature.group</id>
+                                    <version>${carbon.identity.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.identity.core.ui.feature.group</id>
+                                    <version>${carbon.identity.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.user.mgt.feature.group</id>
+                                    <version>${carbon.identity.version}</version>
+                                </feature>
+                                <!-- Notification Support: Mail -->
+                                <feature>
+                                    <id>org.apache.axis2.transport.mail.feature.group</id>
+                                    <version>${axis2-transports.wso2.version}</version>
                                 </feature>
                             </features>
                         </configuration>
