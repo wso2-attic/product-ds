@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
         <groupId>org.wso2</groupId>
@@ -371,7 +370,7 @@
         <carbon.multitenancy.version>4.4.1</carbon.multitenancy.version>
         <carbon.store.version>2.3.1</carbon.store.version>
 
-        <carbon.dashboards.version>1.0.4-SNAPSHOT</carbon.dashboards.version>
+        <carbon.dashboards.version>1.0.3</carbon.dashboards.version>
         <product.ues.version>2.0.0-SNAPSHOT</product.ues.version>
 
         <test.framwork.version>4.3.1</test.framwork.version>
