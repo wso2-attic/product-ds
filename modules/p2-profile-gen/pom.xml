@@ -200,7 +200,7 @@
                                 <feaureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.core.ui.feature:${carbon.identity.version}
                                 </feaureArtifactDef>
-                                <!--- Notification Support: Mail -->
+                                <!-- Notification Support: Mail -->
                                 <featureArtifactDef>
                                     org.apache.axis2.transport:org.apache.axis2.transport.mail.feature:${axis2-transports.wso2.version}
                                 </featureArtifactDef>
