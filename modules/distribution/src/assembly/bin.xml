@@ -245,6 +245,15 @@
                 <include>**/sso_redirect.html</include>
             </includes>
         </fileSet>
+        <fileSet>
+            <directory>src/repository/conf/security</directory>
+            <outputDirectory>${project.artifactId}-${product.ues.version}/repository/conf/identity/</outputDirectory>
+            <includes>
+                <include>**/application-authenticators.xml</include>
+                <!-- Replacement for application-authenticators.xml -->
+                <include>**/application-authentication.xml</include>
+            </includes>
+        </fileSet>
     </fileSets>
     <dependencySets>
         <dependencySet>
