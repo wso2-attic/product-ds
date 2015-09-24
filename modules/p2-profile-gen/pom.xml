@@ -202,9 +202,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.store:store.feature:${carbon.store.version}
                                 </featureArtifactDef>
-                                <feaureArtifactDef>
+                                <!-- <feaureArtifactDef>
                                     org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.sso.feature:${carbon.dashboards.version}
-                                </feaureArtifactDef>
+                                </feaureArtifactDef> -->
                                 <feaureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.core.ui.feature:${carbon.identity.version}
                                 </feaureArtifactDef>
@@ -391,10 +391,10 @@
                                     <id>org.wso2.store.modules.utils.feature.group</id>
                                     <version>${carbon.store.version}</version>
                                 </feature>
-                                <feature>
+                                <!-- <feature>
                                     <id>org.wso2.carbon.dashboards.sso.feature.group</id>
                                     <version>${carbon.dashboards.version}</version>
-                                </feature>
+                                </feature> -->
                                 <feature>
                                     <id>org.wso2.carbon.identity.core.feature.group</id>
                                     <version>${carbon.identity.version}</version>
