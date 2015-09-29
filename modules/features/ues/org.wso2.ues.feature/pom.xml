@@ -33,8 +33,16 @@
             <artifactId>org.wso2.ues.admin.styles</artifactId>
         </dependency>
         <dependency>
-            <groupId>slf4j.wso2</groupId>
-            <artifactId>slf4j</artifactId>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.ehcache.wso2</groupId>
+            <artifactId>ehcache</artifactId>
         </dependency>
     </dependencies>
     <build>
@@ -60,6 +68,9 @@
                             </adviceFile>
                             <bundles>
                                 <bundleDef>org.wso2.ues:org.wso2.ues.admin.styles</bundleDef>
+                                <bundleDef>org.slf4j:slf4j-log4j12</bundleDef>
+                                <bundleDef>org.slf4j:slf4j-api</bundleDef>
+                                <bundleDef>net.sf.ehcache.wso2:ehcache</bundleDef>
                             </bundles>
                             <importBundles />
                             <importFeatures />
