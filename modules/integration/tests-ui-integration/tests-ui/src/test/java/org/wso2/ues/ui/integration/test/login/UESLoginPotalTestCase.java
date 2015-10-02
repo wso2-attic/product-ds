@@ -29,7 +29,7 @@ import org.wso2.ues.ui.integration.util.UESWebDriver;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class LoginNew extends BaseUITestCase{
+public class UESLoginPotalTestCase extends BaseUITestCase{
     private static final int MAX_WAIT_TIME = 30;
 
     @BeforeClass

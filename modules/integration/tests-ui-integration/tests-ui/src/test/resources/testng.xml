@@ -31,14 +31,14 @@
     </listeners>
 
 
-    <test name="ES-UI-tests" parallel="false" verbose="2" preserve-order="true">
+    <test name="UES-UI-tests" parallel="false" verbose="2" preserve-order="true">
         <!--<packages>-->
             <!--<package name="org.wso2.ues.ui.integration.test.login.*"/>-->
         <!--</packages>>-->
         <classes>
-            <!--<class name="org.wso2.ues.ui.integration.test.login.UESLoginTestCase"/>-->
-            <class name="org.wso2.ues.ui.integration.test.login.LoginNew"/>
-            <class name="org.wso2.ues.ui.integration.test.common.AddUserToUES"/>
+            <class name="org.wso2.ues.ui.integration.test.login.LoginAdminTestCase"/>
+            <class name="org.wso2.ues.ui.integration.test.login.LoginPotalTestCase"/>
+            <class name="org.wso2.ues.ui.integration.test.common.AddUserTestCase"/>
         </classes>
 
     </test>

@@ -19,6 +19,5 @@ package ues.integration.tests.common.domain;
 */
 
 public class UESIntegrationTestConstants {
-    public final static String ES_PRODUCT_NAME = "ES";
-    public final static String BAM_PRODUCT_NAME = "BAM";
+    public final static String UES_PRODUCT_NAME = "UES";
 }

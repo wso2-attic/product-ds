@@ -18,83 +18,89 @@ package ues.integration.tests.common.domain;
 *under the License.
 */
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.testng.Assert;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.engine.context.beans.Tenant;
 import org.wso2.carbon.automation.engine.context.beans.User;
 import org.wso2.carbon.automation.test.utils.common.TestConfigurationProvider;
-import org.wso2.carbon.integration.common.utils.LoginLogoutClient;
 
 import javax.xml.xpath.XPathExpressionException;
 
 public abstract class UESIntegrationTest {
+    private static final Log LOG = LogFactory.getLog(UESIntegrationTest.class);
+    protected final TestUserMode userMode;
+    private User userInfo = null;
+    private AutomationContext uesContext = null;
+    private Tenant tenantInfo = null;
 
-    protected AutomationContext esContext = null;
-    protected Tenant tenantInfo;
-    protected User userInfo;
-    protected String sessionCookie;
-    protected TestUserMode userMode;
 
-    protected void init() throws Exception {
-        userMode =  TestUserMode.SUPER_TENANT_ADMIN;
-        init(userMode);
+    public UESIntegrationTest(TestUserMode userMode) {
+        this.userMode = userMode;
     }
 
-    protected void init(TestUserMode userType) throws Exception {
-
-        esContext = new AutomationContext(UESIntegrationTestConstants.ES_PRODUCT_NAME, userType);
-        LoginLogoutClient loginLogoutClient = new LoginLogoutClient(esContext);
-        sessionCookie = loginLogoutClient.login();
-        //return the current tenant as the userType(TestUserMode)
-        tenantInfo = esContext.getContextTenant();
-        //return the user information initialized with the system
-        userInfo = tenantInfo.getContextUser();
-
-    }
-    protected void init(String tenantKey, String userKey) throws Exception {
-
-        esContext = new AutomationContext(UESIntegrationTestConstants.ES_PRODUCT_NAME, "es002",
-                tenantKey, userKey);
-        LoginLogoutClient loginLogoutClient = new LoginLogoutClient(esContext);
-        sessionCookie = loginLogoutClient.login();
-        //return the current tenant as the userType(TestUserMode)
-        tenantInfo = esContext.getContextTenant();
-        //return the user information initialized with the system
-        userInfo = tenantInfo.getContextUser();
-
+    public UESIntegrationTest() {
+        this(TestUserMode.SUPER_TENANT_ADMIN);
     }
 
-    protected void cleanup() {
-        userInfo = null;
-        esContext = null;
+    public AutomationContext getUesContext() throws XPathExpressionException {
+        if (uesContext == null) {
+            uesContext = new AutomationContext(UESIntegrationTestConstants.UES_PRODUCT_NAME, this.userMode);
+        }
+        return uesContext;
+    }
+
+    public int getMaxWaitTime() throws XPathExpressionException {
+        return Integer.parseInt(getUesContext().getConfigurationValue("//maximumWaitingTime"));
+    }
+
+    public Tenant getTenantInfo() throws XPathExpressionException {
+        if (tenantInfo == null) {
+            tenantInfo = getUesContext().getContextTenant();
+        }
+        return tenantInfo;
+    }
+
+    public User getUserInfo() throws XPathExpressionException {
+        if (userInfo == null) {
+            userInfo = getTenantInfo().getContextUser();
+        }
+        return userInfo;
+    }
+
+    public String getCurrentUsername() throws XPathExpressionException {
+        return getUserInfo().getUserName();
+    }
+
+    public String getCurrentPassword() throws XPathExpressionException {
+        return getUserInfo().getPassword();
     }
 
     protected String getServiceUrlHttp(String serviceName) throws XPathExpressionException {
-        String serviceUrl = esContext.getContextUrls().getServiceUrl() + "/" + serviceName;
+        String serviceUrl = uesContext.getContextUrls().getServiceUrl() + "/" + serviceName;
         validateServiceUrl(serviceUrl, tenantInfo);
         return serviceUrl;
     }
 
     protected String getServiceUrlHttps(String serviceName) throws XPathExpressionException {
-        String serviceUrl = esContext.getContextUrls().getSecureServiceUrl() + "/" + serviceName;
+        String serviceUrl = uesContext.getContextUrls().getSecureServiceUrl() + "/" + serviceName;
         validateServiceUrl(serviceUrl, tenantInfo);
         return serviceUrl;
     }
 
     protected String getResourceLocation() throws XPathExpressionException {
-        return TestConfigurationProvider.getResourceLocation(UESIntegrationTestConstants.ES_PRODUCT_NAME);
+        return TestConfigurationProvider.getResourceLocation(UESIntegrationTestConstants.UES_PRODUCT_NAME);
     }
 
 
-
     protected boolean isTenant() throws Exception {
-        if(userMode == null){
+        if (userMode == null) {
             throw new Exception("UserMode Not Initialized. Can not identify user type");
         }
         return (userMode == TestUserMode.TENANT_ADMIN || userMode == TestUserMode.TENANT_USER);
     }
-
 
 
     private void validateServiceUrl(String serviceUrl, Tenant tenant) {

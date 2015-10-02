@@ -26,6 +26,10 @@
         -->
         <deploymentDelay>60000</deploymentDelay>
         <!--
+         Change this to edit wait time for findElement
+        -->
+        <maximumWaitingTime>30</maximumWaitingTime>
+        <!--
          Change this to standalone|platform|all to execute test on specific environment
         -->
         <executionEnvironment>standalone</executionEnvironment>
@@ -40,6 +44,7 @@
         <!--
          Browser type with used by framework to execute UI test, supported types - chrome|firefox|opera|ie|htmlUnit
         -->
+
     </configurations>
     <tools>
         <selenium>
@@ -55,6 +60,7 @@
             </browser>
         </selenium>
     </tools>
+
     <!--
     Database configuration to be used for data service testing. DB configuration in dbs files will be replaced with
                below configuration at test run time
@@ -132,27 +138,6 @@
                         <userName>testuser21</userName>
                         <password>testuser21</password>
                     </user>
-                    <user key="reviewer1">
-                        <userName>reviewer1</userName>
-                        <password>reviewer1pass</password>
-                        <roles>
-                            <role>Internal/reviewer</role>
-                        </roles>
-                    </user>
-                    <user key="storeUser1">
-                        <userName>storeUser1</userName>
-                        <password>storeUser1pass</password>
-                        <roles>
-                            <role>Internal/store</role>
-                        </roles>
-                    </user>
-                    <user key="publisherUser1">
-                        <userName>publisherUser1</userName>
-                        <password>publisherUser1</password>
-                        <roles>
-                            <role>Internal/publisher</role>
-                        </roles>
-                    </user>
                 </users>
             </tenant>
         </superTenant>
@@ -203,7 +188,7 @@
         <!--
         cluster instance details to be used to platform test execution
         -->
-        <productGroup name="ES" clusteringEnabled="false" default="true">
+        <productGroup name="UES" clusteringEnabled="false" default="true">
 
             <instance name="lbw001" type="lb_worker_manager" nonBlockingTransportEnabled="true">
                 <hosts>
@@ -218,7 +203,7 @@
 
                 </properties>
             </instance>
-            <instance name="es001" type="manager" nonBlockingTransportEnabled="false">
+            <instance name="ues001" type="manager" nonBlockingTransportEnabled="false">
                 <hosts>
                     <host type="default">localhost</host>
                 </hosts>
@@ -230,7 +215,7 @@
                 </properties>
             </instance>
 
-            <instance name="es002" type="standalone" nonBlockingTransportEnabled="false">
+            <instance name="ues002" type="standalone" nonBlockingTransportEnabled="false">
                 <hosts>
                     <host type="default">localhost</host>
                 </hosts>
@@ -241,7 +226,7 @@
                 <properties>
                 </properties>
             </instance>
-            <instance name="es003" type="worker" nonBlockingTransportEnabled="false">
+            <instance name="ues003" type="worker" nonBlockingTransportEnabled="false">
                 <hosts>
                     <host type="default">localhost</host>
                 </hosts>
@@ -270,9 +255,9 @@
                     <!--&lt;!&ndash;<parameter name="-DportOffset" value="0" />&ndash;&gt;-->
                     <!--&lt;!&ndash;<parameter name="cmdArg" value="debug 5005" />&ndash;&gt;-->
                 <!--</class>-->
-                <!--<class>-->
-                    <!--<name>org.wso2.carbon.integration.common.extensions.usermgt.UserPopulateExtension</name>-->
-                <!--</class>-->
+                <class>
+                    <name>org.wso2.carbon.integration.common.extensions.usermgt.UserPopulateExtension</name>
+                </class>
             </extentionClasses>
         </platformExecutionManager>
 
@@ -300,4 +285,5 @@
         </PlatformReportManager>
 
     </listenerExtensions>
+
 </automation>

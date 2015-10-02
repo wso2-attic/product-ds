@@ -16,54 +16,43 @@ package org.wso2.ues.ui.integration.util;
 *specific language governing permissions and limitations
 *under the License.
 */
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.wso2.carbon.automation.engine.configurations.UrlGenerationUtil;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.engine.context.beans.Tenant;
+import org.wso2.carbon.automation.extensions.selenium.BrowserManager;
 import org.wso2.ues.integration.common.clients.ResourceAdminServiceClient;
-import ues.integration.tests.common.domain.UESIntegrationUITest;
+import ues.integration.tests.common.domain.UESIntegrationTest;
 
-public abstract class BaseUITestCase extends UESIntegrationUITest {
+import javax.xml.xpath.XPathExpressionException;
+import java.net.MalformedURLException;
 
+public abstract class BaseUITestCase extends UESIntegrationTest {
+
+    protected static final String PRODUCT_GROUP_NAME = "UES";
+    protected static final String DASHBOARD_REGISTRY_BASE_PATH = "/_system/config/ues/dashboards/";
     private static final Log LOG = LogFactory.getLog(BaseUITestCase.class);
-    protected UESWebDriver driver;
-    protected String baseUrl;
-    protected String backendURL;
-    protected WebDriverWait wait;
-    protected boolean acceptNextAlert = true;
-
-    protected static final String PRODUCT_GROUP_NAME = "ES";
-    protected static final String PUBLISHER_APP = "publisher";
-    protected static final String STORE_APP = "store";
-    protected static final String STORE_URL = "/store";
-    protected static final String PUBLISHER_URL = "/publisher";
-    protected static final String MANAGEMENT_CONSOLE_URL = "/carbon/";
-    protected static final String PUBLISHER_LOGOUT_URL = "/publisher/logout";
-    protected static final String STORE_LOGOUT_URL = "/store/logout";
-    protected static final String PUBLISHER_GADGET_LIST_PAGE = "/publisher/assets/gadget/list";
-    protected static final String PUBLISHER_GADGET_CREATE_PAGE = "/publisher/assets/gadget/create";
-    protected static final String STORE_GADGET_LIST_PAGE = "/store/assets/gadget/list";
-    protected static final String STORE_TOP_ASSETS_PAGE = "/store/pages/top-assets";
-    protected static final String GADGET_REGISTRY_BASE_PATH = "/_system/governance/gadgets/";
-    protected static final String SITE_REGISTRY_BASE_PATH = "/_system/governance/sites/";
-    protected static final String NONE_EXIST_TENANT_DOMAIN = "foo.com";
-    protected static final String ERROR_404 = "Error 404";
-
-    protected static final int MAX_DRIVER_WAIT_TIME_SEC = 30;
-
-    protected String currentUserName;
-    protected String currentUserPwd;
-    protected String adminUserName;
-    protected String adminUserPwd;
-    protected String providerName;
     protected Tenant tenantDetails;
-
     protected String resourcePath;
-    protected String smtpPropertyLocation;
     protected ResourceAdminServiceClient resourceAdminServiceClient;
+    private UESWebDriver driver = null;
+    private String baseUrl = null;
+    private WebDriverWait wait = null;
+
+
+    public BaseUITestCase() {
+        super();
+    }
+
+    public BaseUITestCase(TestUserMode userMode) {
+        super(userMode);
+
+    }
 
     /**
      * This method check whether the given element is present in the current driver instance
@@ -120,9 +109,55 @@ public abstract class BaseUITestCase extends UESIntegrationUITest {
         }
         return alertText;
     }
+    /**
+     * This method returns the we driver instance
+     *
+     * @return UESWEbDriver - the driver instance of UESWebDriver
+     */
+    public UESWebDriver getDriver() throws MalformedURLException, XPathExpressionException {
+        if (driver == null) {
+            driver = new UESWebDriver(BrowserManager.getWebDriver(), getMaxWaitTime());
+        }
+        return driver;
+    }
+    /**
+     * This method returns the baseUrl
+     *
+     * @return baseUrl - the baseUrl of webApp
+     */
+    public String getBaseUrl() throws MalformedURLException, XPathExpressionException {
+        if (baseUrl == null) {
+            baseUrl = UrlGenerationUtil.getWebAppURL(getUesContext().getContextTenant(), getUesContext().getInstance());
+        }
+        return baseUrl;
+    }
+    /**
+     * This method returns the we driver wait instance
+     *
+     * @return UESWEbDriverWait - the webDriverWait instance of UESWebDriverWait
+     */
+    public WebDriverWait getWebDriverWait() throws MalformedURLException, XPathExpressionException {
+        if (wait == null) {
+            wait = new WebDriverWait(getDriver(), getMaxWaitTime());
+        }
+        return wait;
+    }
 
     protected void buildTenantDetails(TestUserMode userMode) throws Exception {
         AutomationContext automationContext = new AutomationContext(PRODUCT_GROUP_NAME, userMode);
         tenantDetails = automationContext.getContextTenant();
+    }
+
+    protected String getLoginURL() throws XPathExpressionException {
+        return UrlGenerationUtil.getLoginURL(getUesContext().getInstance());
+    }
+
+    protected String getWebAppURL() throws XPathExpressionException {
+        return UrlGenerationUtil.getWebAppURL(getUesContext().getContextTenant(), getUesContext().getInstance());
+    }
+
+    protected String getStorePublisherUrl() throws XPathExpressionException {
+        return UrlGenerationUtil.getWebAppURL(getUesContext().getContextTenant(), getUesContext().getInstance()).split("\\/t\\/")
+                [0];
     }
 }

@@ -12,15 +12,14 @@ import java.util.Set;
 
 
 public class UESWebDriver implements WebDriver {
-    private WebDriver driver = null;
-    private static final int MAX_WAIT_TIME = 30;
     private static final long POLL_SLEEP_INTERVAL = 2000;
+    private static int maxWaitTime;
+    private WebDriver driver = null;
 
-    /**
-     * Throwing an exception in the constructor since BrowserManager.getWebDriver() throws exception
-     */
-    public UESWebDriver(WebDriver webDriver){
-        this.driver = webDriver ;
+
+    public UESWebDriver(WebDriver webDriver, int maxWaitTime) {
+        this.driver = webDriver;
+        UESWebDriver.maxWaitTime = maxWaitTime;
     }
 
     /**
@@ -75,7 +74,7 @@ public class UESWebDriver implements WebDriver {
      */
     @Override
     public WebElement findElement(By by) {
-        waitTillElementPresent(by, MAX_WAIT_TIME);
+        waitTillElementPresent(by, maxWaitTime);
         return driver.findElement(by);
     }
 
