@@ -22,13 +22,12 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
-import org.wso2.ues.ui.integration.util.BaseUITestCase;
-import org.wso2.ues.ui.integration.util.UESUtil;
+import org.wso2.ues.ui.integration.util.UESUIIntegrationTest;
 
-public class LoginPotalTestCase extends BaseUITestCase {
+public class LoginPortalTest extends UESUIIntegrationTest {
 
     @Factory(dataProvider = "userMode")
-    public LoginPotalTestCase(TestUserMode userMode) throws Exception {
+    public LoginPortalTest(TestUserMode userMode) throws Exception {
         super(userMode);
     }
 
@@ -39,15 +38,15 @@ public class LoginPotalTestCase extends BaseUITestCase {
 
     @Test(groups = "wso2.ues.login", description = "login to UES Portal")
     public void testLoginToPortal() throws Exception {
-        UESUtil.login(getDriver(), getBaseUrl(), getCurrentUsername(), getCurrentPassword());
+        UESUIIntegrationTest.login(getDriver(), getBaseUrl(), getCurrentUsername(), getCurrentPassword());
     }
 
     @Test(groups = "wso2.ues.logout", description = "logout from UES Portal", dependsOnMethods = "testLoginToPortal")
     public void testLogoutPortal() throws Exception {
-        UESUtil.logout(getDriver(), getBaseUrl(), getCurrentUsername());
+        UESUIIntegrationTest.logout(getDriver(), getBaseUrl(), getCurrentUsername());
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
         getDriver().quit();
     }

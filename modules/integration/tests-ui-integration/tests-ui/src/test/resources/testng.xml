@@ -33,12 +33,13 @@
 
     <test name="UES-UI-tests" parallel="false" verbose="2" preserve-order="true">
         <!--<packages>-->
-            <!--<package name="org.wso2.ues.ui.integration.test.login.*"/>-->
+        <!--<package name="org.wso2.ues.ui.integration.test.login.*"/>-->
         <!--</packages>>-->
         <classes>
-            <class name="org.wso2.ues.ui.integration.test.login.LoginAdminTestCase"/>
-            <class name="org.wso2.ues.ui.integration.test.login.LoginPotalTestCase"/>
-            <class name="org.wso2.ues.ui.integration.test.common.AddUserTestCase"/>
+            <class name="org.wso2.ues.ui.integration.test.login.LoginAdminTest"/>
+            <class name="org.wso2.ues.ui.integration.test.login.LoginPortalTest"/>
+            <class name="org.wso2.ues.ui.integration.test.common.AddUserTest"/>
+            <class name="org.wso2.ues.ui.integration.test.dashboard.AddDeleteDashboardTest"/>
         </classes>
 
     </test>
