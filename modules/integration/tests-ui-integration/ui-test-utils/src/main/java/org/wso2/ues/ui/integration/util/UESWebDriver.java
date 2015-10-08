@@ -10,33 +10,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 import java.util.Set;
 
-
 public class UESWebDriver implements WebDriver {
-    private static final long POLL_SLEEP_INTERVAL = 2000;
     private static int maxWaitTime;
     private WebDriver driver = null;
-
 
     public UESWebDriver(WebDriver webDriver, int maxWaitTime) {
         this.driver = webDriver;
         UESWebDriver.maxWaitTime = maxWaitTime;
-    }
-
-    /**
-     * This method will keep refreshing/reloading the current url for a given number of poll-count
-     * until a given element is available
-     *
-     * @param by        Element that is expected to be present
-     * @param pollCount Number of time page need to be reloaded into webDriver
-     */
-    public void findElementPoll(By by, int pollCount) throws InterruptedException {
-        int count = 0;
-        while (!isElementPresent(by) && count < pollCount) {
-            Thread.sleep(POLL_SLEEP_INTERVAL);
-            String url = driver.getCurrentUrl();
-            driver.get(url);
-            count++;
-        }
     }
 
     /**
@@ -45,7 +25,7 @@ public class UESWebDriver implements WebDriver {
      * @param by Element to be present in the page
      * @return true if element is present false otherwise
      */
-    private boolean isElementPresent(By by) {
+    public boolean isElementPresent(By by) {
         try {
             driver.findElement(by);
             return true;

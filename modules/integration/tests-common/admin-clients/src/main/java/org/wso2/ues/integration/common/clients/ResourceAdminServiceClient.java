@@ -16,6 +16,7 @@ package org.wso2.ues.integration.common.clients;
 *specific language governing permissions and limitations
 *under the License.
 */
+
 import org.apache.axis2.AxisFault;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -29,18 +30,15 @@ import org.wso2.carbon.registry.resource.stub.common.xsd.ResourceData;
 import javax.activation.DataHandler;
 import java.rmi.RemoteException;
 
-
 public class ResourceAdminServiceClient {
     private static final Log log = LogFactory.getLog(ResourceAdminServiceClient.class);
-
-    private final String serviceName = "ResourceAdminService";
-    private ResourceAdminServiceStub resourceAdminServiceStub;
-
     private static final String MEDIA_TYPE_WSDL = "application/wsdl+xml";
     private static final String MEDIA_TYPE_WADL = "application/wadl+xml";
     private static final String MEDIA_TYPE_SCHEMA = "application/x-xsd+xml";
     private static final String MEDIA_TYPE_POLICY = "application/policy+xml";
     private static final String MEDIA_TYPE_GOVERNANCE_ARCHIVE = "application/vnd.wso2.governance-archive";
+    private final String serviceName = "ResourceAdminService";
+    private ResourceAdminServiceStub resourceAdminServiceStub;
 
     public ResourceAdminServiceClient(String serviceUrl, String sessionCookie) throws AxisFault {
         String endPoint = serviceUrl + serviceName;
@@ -58,7 +56,6 @@ public class ResourceAdminServiceClient {
     public boolean addResource(String destinationPath, String mediaType,
                                String description, DataHandler dh)
             throws ResourceAdminServiceExceptionException, RemoteException {
-
         if (log.isDebugEnabled()) {
             log.debug("Destination Path :" + destinationPath);
             log.debug("Media Type :" + mediaType);
@@ -77,19 +74,16 @@ public class ResourceAdminServiceClient {
             throws RemoteException, ResourceAdminServiceExceptionException {
         CollectionContentBean collectionContentBean;
         collectionContentBean = resourceAdminServiceStub.getCollectionContent(destinationPath);
-
         return collectionContentBean;
     }
 
     public boolean deleteResource(String destinationPath)
             throws ResourceAdminServiceExceptionException, RemoteException {
-
         return resourceAdminServiceStub.delete(destinationPath);
     }
 
     public void addWSDL(String description, DataHandler dh)
             throws ResourceAdminServiceExceptionException, RemoteException {
-
         String fileName;
         fileName = dh.getName().substring(dh.getName().lastIndexOf('/') + 1);
         log.debug(fileName);
@@ -98,7 +92,6 @@ public class ResourceAdminServiceClient {
 
     public void addWADL(String description, DataHandler dh)
             throws ResourceAdminServiceExceptionException, RemoteException {
-
         String fileName;
         fileName = dh.getName().substring(dh.getName().lastIndexOf('/') + 1);
         log.debug(fileName);
@@ -108,7 +101,6 @@ public class ResourceAdminServiceClient {
     public void addWSDL(String resourceName, String description,
                         String fetchURL)
             throws ResourceAdminServiceExceptionException, RemoteException {
-
         resourceAdminServiceStub.importResource("/", resourceName, MEDIA_TYPE_WSDL,
                 description, fetchURL, null, null);
     }
@@ -116,7 +108,6 @@ public class ResourceAdminServiceClient {
     public void addWADL(String resourceName, String description,
                         String fetchURL)
             throws ResourceAdminServiceExceptionException, RemoteException {
-
         resourceAdminServiceStub.importResource("/", resourceName, MEDIA_TYPE_WADL,
                 description, fetchURL, null, null);
     }
@@ -132,7 +123,6 @@ public class ResourceAdminServiceClient {
     public void addSchema(String resourceName, String description,
                           String fetchURL) throws ResourceAdminServiceExceptionException,
             RemoteException {
-
         resourceAdminServiceStub.importResource("/", resourceName, MEDIA_TYPE_SCHEMA,
                 description, fetchURL, null, null);
 
@@ -149,7 +139,6 @@ public class ResourceAdminServiceClient {
     public void addPolicy(String resourceName, String description,
                           String fetchURL)
             throws ResourceAdminServiceExceptionException, RemoteException {
-
         resourceAdminServiceStub.importResource("/", resourceName, MEDIA_TYPE_POLICY,
                 description, fetchURL, null, null);
     }
@@ -168,18 +157,15 @@ public class ResourceAdminServiceClient {
         return resourceAdminServiceStub.addCollection(parentPath, collectionName, mediaType, description);
     }
 
-
     public void addSymbolicLink(String parentPath, String name,
                                 String targetPath)
             throws ResourceAdminServiceExceptionException, RemoteException {
-
         resourceAdminServiceStub.addSymbolicLink(parentPath, name, targetPath);
     }
 
     public void addTextResource(String parentPath, String fileName,
                                 String mediaType, String description, String content)
             throws RemoteException, ResourceAdminServiceExceptionException {
-
         resourceAdminServiceStub.addTextResource(parentPath, fileName, mediaType,
                 description, content);
     }
@@ -188,7 +174,6 @@ public class ResourceAdminServiceClient {
                                       String roleToAuthorize,
                                       String actionToAuthorize, String permissionType)
             throws RemoteException, ResourceAdminServiceResourceServiceExceptionException {
-
         resourceAdminServiceStub.addRolePermission(pathToAuthorize, roleToAuthorize,
                 actionToAuthorize, permissionType);
 
@@ -196,20 +181,17 @@ public class ResourceAdminServiceClient {
 
     public String getProperty(String resourcePath, String key)
             throws RemoteException, ResourceAdminServiceExceptionException {
-
         return resourceAdminServiceStub.getProperty(resourcePath, key);
 
     }
 
     public MetadataBean getMetadata(String resourcePath)
             throws RemoteException, ResourceAdminServiceExceptionException {
-
         return resourceAdminServiceStub.getMetadata(resourcePath);
     }
 
     public ContentBean getResourceContent(String resourcePath)
             throws RemoteException, ResourceAdminServiceExceptionException {
-
         return resourceAdminServiceStub.getContentBean(resourcePath);
 
     }
@@ -217,9 +199,7 @@ public class ResourceAdminServiceClient {
     public ResourceData[] getResourceData(String resourcePath)
             throws RemoteException, ResourceAdminServiceExceptionException {
         String[] resourceArray = {resourcePath};
-
         return resourceAdminServiceStub.getResourceData(resourceArray);
-
 
     }
 
@@ -233,7 +213,6 @@ public class ResourceAdminServiceClient {
     }
 
     public String getMimeTypeFromHuman(String mediaType) throws Exception {
-
         try {
             return resourceAdminServiceStub.getMimeTypeFromHuman(mediaType);
         } catch (Exception e) {
@@ -260,7 +239,6 @@ public class ResourceAdminServiceClient {
         resourceAdminServiceStub.moveResource(parentPath, oldResourcePath, destinationPath, targetName);
     }
 
-
     public VersionPath[] getVersionPaths(String path)
             throws RemoteException, ResourceAdminServiceExceptionException {
         VersionPath[] versionPaths = null;
@@ -271,7 +249,6 @@ public class ResourceAdminServiceClient {
 
     public VersionsBean getVersionsBean(String path)
             throws RemoteException, ResourceAdminServiceExceptionException {
-
         return resourceAdminServiceStub.getVersionsBean(path);
     }
 
@@ -280,17 +257,14 @@ public class ResourceAdminServiceClient {
         resourceAdminServiceStub.createVersion(resourcePath);
     }
 
-
     public void deleteVersionHistory(String path, String snapshotID)
             throws RemoteException, ResourceAdminServiceExceptionException {
         resourceAdminServiceStub.deleteVersionHistory(path, snapshotID);
     }
 
-
     public boolean restoreVersion(String path)
             throws RemoteException, ResourceAdminServiceExceptionException {
         boolean status = false;
-
         status = resourceAdminServiceStub.restoreVersion(path);
         return status;
     }
@@ -305,7 +279,6 @@ public class ResourceAdminServiceClient {
     public PermissionBean getPermission(String path) throws Exception {
         return resourceAdminServiceStub.getPermissions(path);
     }
-
 
     public void renameResource(String parentPath, String oldResourcePath, String newResourceName)
             throws RemoteException, ResourceAdminServiceExceptionException {
@@ -327,23 +300,21 @@ public class ResourceAdminServiceClient {
         return resourceAdminServiceStub.listExtensions();
     }
 
-
     public void setDescription(String path, String description)
             throws RemoteException, ResourceAdminServiceExceptionException {
         resourceAdminServiceStub.setDescription(path, description);
     }
-
 
     public ContentDownloadBean getContentDownloadBean(String path)
             throws RemoteException, ResourceAdminServiceExceptionException {
         return resourceAdminServiceStub.getContentDownloadBean(path);
     }
 
-
     public boolean importResource(String parentPath, String resourceName, String mediaType,
                                   String description, String fetchURL, String symLink)
             throws RemoteException, ResourceAdminServiceExceptionException {
-        return resourceAdminServiceStub.importResource(parentPath, resourceName, mediaType, description, fetchURL, symLink, null);
+        return resourceAdminServiceStub.importResource(parentPath, resourceName, mediaType, description, fetchURL,
+                symLink, null);
     }
 
     public ResourceTreeEntryBean getResourceTreeEntryBean(String resourcePath)

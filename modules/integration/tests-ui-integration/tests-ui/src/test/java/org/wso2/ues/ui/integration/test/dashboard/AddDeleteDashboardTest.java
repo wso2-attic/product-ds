@@ -17,26 +17,25 @@ package org.wso2.ues.ui.integration.test.dashboard;
 *under the License.
 */
 
-import org.apache.axis2.AxisFault;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
-import org.wso2.carbon.registry.resource.stub.ResourceAdminServiceExceptionException;
+import org.wso2.carbon.registry.resource.stub.beans.xsd.CollectionContentBean;
 import org.wso2.ues.integration.common.clients.ResourceAdminServiceClient;
-import org.wso2.ues.ui.integration.util.BaseUITestCase;
-import org.wso2.ues.ui.integration.util.UESUtil;
+import org.wso2.ues.ui.integration.util.UESUIIntegrationTest;
 
 import javax.xml.xpath.XPathExpressionException;
-import java.net.MalformedURLException;
-import java.rmi.RemoteException;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 
-public class AddDeleteDashboardTestCase extends BaseUITestCase {
+public class AddDeleteDashboardTest extends UESUIIntegrationTest {
 
+    private static final Log LOG = LogFactory.getLog(AddDeleteDashboardTest.class);
     private static final String DASHBOARD_TITLE1 = "sampledashboard1";
     private static final String DASHBOARD_TITLE2 = "sampledashboard2";
     private static final String DASHBOARD_DESCRIPTION = "This is sample descrition for dashboard";
@@ -45,26 +44,28 @@ public class AddDeleteDashboardTestCase extends BaseUITestCase {
     private WebElement webElement = null;
 
     @Factory(dataProvider = "userMode")
-    public AddDeleteDashboardTestCase(TestUserMode userMode, String dashboardTitle) {
+    public AddDeleteDashboardTest(TestUserMode userMode, String dashboardTitle) {
         super(userMode);
         this.dashboardTitle = dashboardTitle;
     }
 
     @DataProvider(name = "userMode")
     private static Object[][] userModeProvider() {
-        return new Object[][]{{TestUserMode.SUPER_TENANT_ADMIN, DASHBOARD_TITLE1}, {TestUserMode.SUPER_TENANT_USER, DASHBOARD_TITLE2}};
+        return new Object[][]{{TestUserMode.SUPER_TENANT_ADMIN, DASHBOARD_TITLE1},
+                {TestUserMode.SUPER_TENANT_USER, DASHBOARD_TITLE2}};
     }
 
     @BeforeClass(alwaysRun = true)
-    public void setUp() throws XPathExpressionException, AxisFault, MalformedURLException, InterruptedException {
-        String backendURL = getUesContext().getContextUrls().getBackEndUrl();
-        resourceAdminServiceClient = new ResourceAdminServiceClient(backendURL, getCurrentUsername(), getCurrentPassword());
+    public void setUp() throws Exception {
+        String backendURL = getBackEndUrl();
+        resourceAdminServiceClient = new ResourceAdminServiceClient(backendURL, getCurrentUsername(),
+                getCurrentPassword());
         resourcePath = DASHBOARD_REGISTRY_BASE_PATH + dashboardTitle.toLowerCase();
-        UESUtil.login(getDriver(), getBaseUrl(), getCurrentUsername(), getCurrentPassword());
+        UESUIIntegrationTest.login(getDriver(), getBaseUrl(), getCurrentUsername(), getCurrentPassword());
     }
 
-    @Test(groups = "wso2.ues.dashboard", description = "Adding new dashboard")
-    public void testAddDashboardNew() throws MalformedURLException, XPathExpressionException {
+    @Test(groups = "wso2.ues.dashboard", description = "Adding new dashboard for dashboard server")
+    public void testAddDashboardNew() throws Exception {
         getDriver().findElement(By.cssSelector("[href='create-dashboard']")).click();
         getDriver().findElement(By.id("ues-dashboard-title")).clear();
         getDriver().findElement(By.id("ues-dashboard-title")).sendKeys(dashboardTitle);
@@ -76,24 +77,41 @@ public class AddDeleteDashboardTestCase extends BaseUITestCase {
         getDriver().findElement(By.cssSelector("i.fw.fw-dashboard")).click();
         getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.id(dashboardTitle)));
         webElement = getDriver().findElement(By.id(dashboardTitle));
-
         assertEquals(dashboardTitle, webElement.findElement(By.cssSelector("h2")).getText());
         assertEquals(DASHBOARD_DESCRIPTION, webElement.findElement(By.cssSelector("p")).getText());
     }
 
-    @Test(groups = "wso2.ues.dashboard", description = "Deleting added dashboard", dependsOnMethods = "testAddDashboardNew")
-    public void testDeleteDashboardNew() throws MalformedURLException, XPathExpressionException {
+    @Test(groups = "wso2.ues.dashboard", description = "Deleting the existing dashboard from dashboard server",
+            dependsOnMethods = "testAddDashboardNew")
+    public void testDeleteDashboardNew() throws Exception {
+        Boolean isResourceExist = false;
         webElement = getDriver().findElement(By.id(dashboardTitle));
         webElement.findElement(By.cssSelector("i.fw-delete")).click();
         getDriver().findElement(By.cssSelector("span.ladda-label")).click();
-        assertFalse(BaseUITestCase.isElementPresent(getDriver(), By.id(dashboardTitle)), "successfully deleted dashboard" + dashboardTitle);
+        assertFalse(getDriver().isElementPresent(By.id(dashboardTitle)), "Error occurred while deleting dashboard" +
+                dashboardTitle);
+        CollectionContentBean collectionContentBean;
+        new CollectionContentBean();
+        collectionContentBean = resourceAdminServiceClient.getCollectionContent(DASHBOARD_REGISTRY_BASE_PATH);
+        if (collectionContentBean.getChildCount() > 0) {
+            String[] childPath = collectionContentBean.getChildPaths();
+            for (int i = 0; i <= childPath.length - 1; i++) {
+                if (childPath[i].equalsIgnoreCase(resourcePath)) {
+                    isResourceExist = true;
+                }
+            }
+        }
+        assertFalse(isResourceExist, "Registry resource could not be deleted due to some errors");
+
     }
 
-    @AfterClass
-    public void tearDown() throws MalformedURLException, XPathExpressionException, RemoteException, ResourceAdminServiceExceptionException {
-        resourceAdminServiceClient.deleteResource(resourcePath);
-        UESUtil.logout(getDriver(), getBaseUrl(), getCurrentUsername());
-        getDriver().quit();
+    @AfterClass(alwaysRun = true)
+    public void tearDown() throws Exception {
+        try {
+            UESUIIntegrationTest.logout(getDriver(), getBaseUrl(), getCurrentUsername());
+        } finally {
+            getDriver().quit();
+        }
     }
 
 }

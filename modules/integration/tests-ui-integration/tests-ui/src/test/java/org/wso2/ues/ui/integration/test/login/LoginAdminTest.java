@@ -19,20 +19,19 @@ package org.wso2.ues.ui.integration.test.login;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
-import org.wso2.ues.ui.integration.util.BaseUITestCase;
-import org.wso2.ues.ui.integration.util.UESUtil;
+import org.wso2.ues.ui.integration.util.UESUIIntegrationTest;
 
-public class LoginAdminTestCase extends BaseUITestCase {
+public class LoginAdminTest extends UESUIIntegrationTest {
 
-
-    @Test(groups = "wso2.ues.login", description = "verify login to carbon console")
+    @Test(groups = "wso2.ues.login", description = "verify login to admin console")
     public void testLoginAdminTestcaseUES() throws Exception {
-        UESUtil.loginToAdminConsole(getDriver(), getBaseUrl(), getCurrentUsername(), getCurrentPassword());
+        UESUIIntegrationTest.loginToAdminConsole(getDriver(), getBaseUrl(), getCurrentUsername(), getCurrentPassword());
     }
 
-    @Test(groups = "wso2.ues.login", description = "verify logout from  carbon console", dependsOnMethods = "testLoginAdminTestcaseUES")
+    @Test(groups = "wso2.ues.login", description = "verify logout from admin console", dependsOnMethods =
+            "testLoginAdminTestcaseUES")
     public void testLogoutAdminTestcaseUES() throws Exception {
-        UESUtil.logoutFromAdminConsole(getDriver(), getBaseUrl());
+        UESUIIntegrationTest.logoutFromAdminConsole(getDriver(), getBaseUrl());
     }
 
     @AfterClass(alwaysRun = true)
