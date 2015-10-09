@@ -16,14 +16,14 @@ body {
 .line {
     fill: none;
     stroke: steelblue;
-    stroke-width: 1px;
+    stroke-width: 1.5px;
 }
 
 #back{
     float: left;
     background: linear-gradient(#9fbfe7, #6e84a0) repeat scroll 0 0 #87a2c4;
     border: #000000;
-    font-size: 12pt;
+    font-size: 12px;
     color: antiquewhite;
 }
 
@@ -33,6 +33,6 @@ body {
 
 #path-container text{
     margin: 20px;
-    font-size: 12pt;
+    font-size: 12px;
     font-family: monospace;
 }
