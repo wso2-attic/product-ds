@@ -1,0 +1,22 @@
+{
+  "id": "linechart",
+  "title": "USA Population History",
+  "type": "gadget",
+  "thumbnail": "store://gadget/usa-population-history/images/index.png",
+  "options": {},
+  "data": {
+    "url": "store://gadget/usa-population-history/index.xml"
+  },
+  "notify": {
+    "history":{
+      "type": "address",
+      "description": "This notifies the selected year"
+    }
+  },
+  "listen": {
+    "state": {
+      "type": "address",
+      "description": "Used to filter based on state"
+    }
+  }
+}

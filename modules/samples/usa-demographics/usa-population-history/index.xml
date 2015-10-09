@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="USA Population History"
+                 height="350"
+                 description="Subscribe to the population history channel"
+                 tags="drilldown">
+        <Require feature="dynamic-height"/>
+        <Require feature="pubsub-2"/>
+    </ModulePrefs>
+    <Content type="html">
+        <![CDATA[
+
+             <!-- Load the style sheet-->
+             <link href="content/index.css" type="text/css" rel="stylesheet">
+
+             <!-- Load the common javascript libraries -->
+             <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+             <script type="text/javascript" src="js/d3.min.js"></script>
+
+             <!-- Load the custom javascript -->
+             <script type="text/javascript" src="js/custom/data.js"></script>
+             <script type="text/javascript" src="js/custom/line-chart-gadget.js"></script>
+
+             <!-- Container for the line chart -->
+            <div id="linechart"></div>
+
+            <!-- Initialize the page script -->
+            <script type="text/javascript">
+                // Create the object for current page state.
+                var properties = {
+                    width: window.document.body.scrollWidth,
+                    height: window.document.body.scrollHeight - 20
+                };
+
+                // Initialize the page script.
+                initLineChart(properties);
+            </script>
+        ]]>
+    </Content>
+</Module>

@@ -254,6 +254,13 @@
                 <include>**/application-authentication.xml</include>
             </includes>
         </fileSet>
+        <fileSet>
+            <directory>../samples</directory>
+            <outputDirectory>${project.artifactId}-${product.ues.version}/samples/</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
     </fileSets>
     <dependencySets>
         <dependencySet>

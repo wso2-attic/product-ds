@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="Population by Ethnicity"
+                 height="350"
+                 description="Subscribe to the population by Ethnicity Channel"
+                 tags="drilldown">
+        <Require feature="dynamic-height"/>
+        <Require feature="pubsub-2"/>
+    </ModulePrefs>
+    <Content type="html">
+        <![CDATA[
+
+            <!-- Load the style sheet-->
+            <link rel="stylesheet" type="text/css" href="content/index.css">
+
+            <!-- Load the common libraries-->
+            <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+            <script type="text/javascript" src="js/d3.min.js"></script>
+
+            <!-- Load the gadget java script-->
+            <script type="text/javascript" src="js/custom/data.js"></script>
+            <script type="text/javascript" src="js/custom/donut-chart-gadget.js"></script>
+
+            <div id="gadget_drill">
+                <input id="back" type="button" value="<"/>
+                <div id="path-container"><text id="path">All</text></div>
+                <div id="donut">
+                </div>
+                 <ul id="donutDetails"></ul>
+            </div>
+
+            <script type="text/javascript">
+                var properties = {
+                    pie: $("#pie"),
+                    btnBack: $("#back"),
+                    txtPath: $("#path"),
+                    donutDetails: $("#donutDetails"),
+                    width: window.document.body.scrollWidth,
+                    height: window.document.body.scrollHeight - 120
+                };
+
+                // Initialize the page script for the donut chart.
+                initDonutChart(properties);
+            </script>
+        ]]>
+    </Content>
+</Module>
