@@ -1,0 +1,30 @@
+#donutDetails{
+    list-style: none;
+}
+
+#donutDetails li{
+    font-size: 11pt;
+}
+
+svg{
+    position: relative;
+    float: left;
+}
+
+#back{
+    float: left;
+    background: linear-gradient(#9fbfe7, #6e84a0) repeat scroll 0 0 #87a2c4;
+    border: #000000;
+    font-size: 12pt;
+    color: antiquewhite;
+}
+
+#path-container{
+    margin-bottom: 20px;
+}
+
+#path-container text{
+    margin: 20px;
+    font-size: 12pt;
+    font-family: monospace;
+}
