@@ -1,5 +1,3 @@
-package ues.integration.tests.common.domain;
-
 /*
 *Copyright (c) 2015​, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
@@ -17,6 +15,8 @@ package ues.integration.tests.common.domain;
 *specific language governing permissions and limitations
 *under the License.
 */
+
+package ues.integration.tests.common.domain;
 
 public class UESIntegrationTestConstants {
     public final static String UES_PRODUCT_NAME = "UES";

@@ -1,5 +1,3 @@
-package ues.integration.tests.common.domain;
-
 /*
 *Copyright (c) 2015​, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
@@ -17,6 +15,7 @@ package ues.integration.tests.common.domain;
 *specific language governing permissions and limitations
 *under the License.
 */
+package ues.integration.tests.common.domain;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -115,7 +114,7 @@ public abstract class UESIntegrationTest {
     }
 
     protected String getBackEndUrl() throws Exception {
-        return  getUesContext().getContextUrls().getBackEndUrl();
+        return getUesContext().getContextUrls().getBackEndUrl();
     }
 
     /**
