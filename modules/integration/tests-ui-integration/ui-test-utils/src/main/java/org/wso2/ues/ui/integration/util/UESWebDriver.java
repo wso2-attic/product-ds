@@ -1,22 +1,30 @@
 package org.wso2.ues.ui.integration.util;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.interactions.HasInputDevices;
+import org.openqa.selenium.interactions.Keyboard;
+import org.openqa.selenium.interactions.Mouse;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 import java.util.Set;
 
-public class UESWebDriver implements WebDriver {
+public class UESWebDriver implements WebDriver, JavascriptExecutor,HasInputDevices {
     private static int maxWaitTime;
     private WebDriver driver = null;
+    private FirefoxProfile firefoxProfile = null;
 
     public UESWebDriver(WebDriver webDriver, int maxWaitTime) {
         this.driver = webDriver;
         UESWebDriver.maxWaitTime = maxWaitTime;
+    }
+
+    public UESWebDriver(WebDriver webDriver, int maxWaitTime,FirefoxProfile profile) {
+        this.driver = webDriver;
+        UESWebDriver.maxWaitTime = maxWaitTime;
+        firefoxProfile = profile;
     }
 
     /**
@@ -119,5 +127,32 @@ public class UESWebDriver implements WebDriver {
         return driver.manage();
     }
 
+    @Override
+    public Object executeScript(String s, Object... objects) {
+        if(driver instanceof JavascriptExecutor)
+            return ((JavascriptExecutor)driver).executeScript(s, objects);
+        return null;
+    }
+
+    @Override
+    public Object executeAsyncScript(String s, Object... objects) {
+        if(driver instanceof JavascriptExecutor)
+            return ((JavascriptExecutor)driver).executeAsyncScript(s, objects);
+        return null;
+    }
+
+    @Override
+    public Keyboard getKeyboard() {
+        if(driver instanceof HasInputDevices)
+            return ((HasInputDevices)driver).getKeyboard();
+        return null;
+    }
+
+    @Override
+    public Mouse getMouse() {
+        if(driver instanceof HasInputDevices)
+            return ((HasInputDevices)driver).getMouse();
+        return null;
+    }
 }
 

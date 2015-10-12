@@ -20,6 +20,7 @@ package org.wso2.ues.ui.integration.util;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.wso2.carbon.automation.engine.configurations.UrlGenerationUtil;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
@@ -125,6 +126,18 @@ public abstract class UESUIIntegrationTest extends UESIntegrationTest {
     public UESWebDriver getDriver() throws MalformedURLException, XPathExpressionException {
         if (driver == null) {
             driver = new UESWebDriver(BrowserManager.getWebDriver(), getMaxWaitTime());
+        }
+        return driver;
+    }
+
+    /**
+     * This method returns the web driver instance
+     *
+     * @return UESWEbDriver - the driver instance of UESWebDriver
+     */
+    public UESWebDriver getDriver(FirefoxProfile profile) throws MalformedURLException, XPathExpressionException {
+        if (driver == null) {
+            driver = new UESWebDriver(BrowserManager.getWebDriver(), getMaxWaitTime(),profile);
         }
         return driver;
     }
