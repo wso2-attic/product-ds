@@ -1,17 +1,17 @@
-#donutDetails{
+#donutDetails {
     list-style: none;
 }
 
-#donutDetails li{
+#donutDetails li {
     font-size: 11px;
 }
 
-svg{
+svg {
     position: relative;
     float: left;
 }
 
-#back{
+#back {
     float: left;
     background: linear-gradient(#9fbfe7, #6e84a0) repeat scroll 0 0 #87a2c4;
     border: #000000;
@@ -19,12 +19,25 @@ svg{
     color: antiquewhite;
 }
 
-#path-container{
+#path-container {
     margin-bottom: 20px;
 }
 
-#path-container text{
+#path-container text {
     margin: 20px;
     font-size: 12px;
     font-family: monospace;
+}
+
+#donutDetails div {
+    width: 10px;
+    height: 10px;
+    display: block;
+    position: relative;
+    float: left;
+}
+
+#donutDetails span {
+    position: relative;
+    margin-left: 10px;
 }
