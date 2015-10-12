@@ -96,6 +96,11 @@ var initBarChart;
         var getAgeDetailsByState = function (stateId) {
             var age_data = [];
 
+            /*
+             * @type element - element is a object which contain the population
+             * information of USA. These object collection can be viewed in file
+             * data.js under the USA_DEMOGRAPHICS_SAMPLE_DATA.
+             * */
             $.each(USA_DEMOGRAPHICS_SAMPLE_DATA, function (index, element) {
                 if (element.id == stateId) {
                     $.extend(true, age_data, element.populationAgeGender);

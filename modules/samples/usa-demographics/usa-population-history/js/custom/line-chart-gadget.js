@@ -49,6 +49,11 @@ var initLineChart = null;
         var getPopulationHistoryByState = function (stateId) {
             var populationHistory = [];
 
+            /*
+             * @type element - element is a object which contain the population
+             * information of USA. These object collection can be viewed in file
+             * data.js under the USA_DEMOGRAPHICS_SAMPLE_DATA.
+             * */
             $.each(USA_DEMOGRAPHICS_SAMPLE_DATA, function (index, element) {
                 if (element.id == stateId) {
                     $.extend(true, populationHistory, element.populationHistory);
