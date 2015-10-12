@@ -25,7 +25,8 @@ var initMap;
     var state = null;
 
     /*
-     *Configure the page functionality.
+     * Configure the page functionality.
+     * @private
      */
     var configure = function () {
         var width = state.width,
@@ -48,7 +49,8 @@ var initMap;
             STATE_CHANNEL = "state";
 
         /*
-         *Get the state details by id.
+         * Get the state details by id.
+         * @private
          */
         var getStateDetailsById = function (stateId) {
             var details = {};
@@ -69,11 +71,18 @@ var initMap;
         };
 
         /*
-         *Get the population by Ethnicity in selected state.
+         * Get the population by Ethnicity in selected state.
+         * @private
          */
         var getPopulationByEthnicityID = function (ethnicities, ethnicityId) {
             var currentPopulation = 0;
 
+            /*
+             * @type element - element is a object which contain the ethnicity
+             * information of USA. These object collection can be viewed in file
+             * data.js under the USA_DEMOGRAPHICS_SAMPLE_DATA in category array
+              * in each object.
+             * */
             $.each(ethnicities, function (index, element) {
                 if (element.id == ethnicityId) {
                     currentPopulation = element.currentPopulation;
@@ -91,11 +100,18 @@ var initMap;
         };
 
         /*
-         *Get the population by the Gender.
+         * Get the population by the Gender.
+         * @private
          */
         var getPopulationByGender = function (genders, genderId, age) {
             var currentPopulation = 0;
 
+            /*
+             * @type element - element is a object which contain the gender
+             * information of USA. These object collection can be viewed in file
+             * data.js under the USA_DEMOGRAPHICS_SAMPLE_DATA in populationAgeGender
+             * array.
+             * */
             $.each(genders, function (index, element) {
                 if (element.id == age && element.name == genderId) {
                     currentPopulation = element.currentPopulation;
@@ -113,11 +129,18 @@ var initMap;
         };
 
         /*
-         *Get the population by Age given in selected state.
+         * Get the population by Age given in selected state.
+         * @private
          */
         var getPopulationByAge = function (ageGenderDetails, ageId) {
             var currentPopulation = 0;
 
+            /*
+             * @type element - element is a object which contain the age
+             * information of USA. These object collection can be viewed in file
+             * data.js under the USA_DEMOGRAPHICS_SAMPLE_DATA in populationAgeGender
+             * array.
+             * */
             $.each(ageGenderDetails, function (index, element) {
                 if (element.name == ageId) {
                     currentPopulation = element.currentPopulation;
@@ -129,11 +152,18 @@ var initMap;
         };
 
         /*
-         *Get the population by year
+         * Get the population by year.
+         * @private
          */
         var getPopulationByYear = function (historyDetails, year) {
             var currentPopulation = 0;
 
+            /*
+             * @type element - element is a object which contain the population history
+             * information of USA. These object collection can be viewed in file
+             * data.js under the USA_DEMOGRAPHICS_SAMPLE_DATA in populationHistory
+             * array.
+             * */
             $.each(historyDetails, function (index, element) {
                 if (element.year == year) {
                     currentPopulation = element.currentPopulation;
@@ -145,7 +175,8 @@ var initMap;
         };
 
         /*
-         *Get the current population by state id.
+         * Get the current population by state id.
+         * @private
          */
         var getCurrentPopulationById = function (stateId) {
             var currentPopulation,
@@ -157,7 +188,8 @@ var initMap;
         };
 
         /*
-         *Initialize the User Interface functionality and styles.
+         * Initialize the User Interface functionality and styles.
+         * @private
          */
         var initUI = function () {
             methodsForDensityColors[ETHNICITY_CHANNEL] = getColorForEthnicityDensity;
@@ -204,6 +236,7 @@ var initMap;
 
         /*
          * Callback of channel subscriber.
+         * @private
          */
         var callbackForChannel = function (channel, message) {
             if (message) {
@@ -217,6 +250,7 @@ var initMap;
 
         /*
          * Get color according to population distribution density as to ethnicity.
+         * @private
          */
         var getColorForEthnicityDensity = function (stateId, ethnicityId) {
             var stateDetails, currentPopulation;
@@ -228,6 +262,7 @@ var initMap;
 
         /*
          * Get color according to population distribution density as to age.
+         * @private
          */
         var getColorForAgeDensity = function (stateId, ageId) {
             var stateDetails, currentPopulation;
@@ -239,6 +274,7 @@ var initMap;
 
         /*
          * Get color according to population distribution density as to gender.
+         * @private
          */
         var getColorForGenderDensity = function (stateId, genderId) {
             var stateDetails, currentPopulation;
@@ -249,7 +285,8 @@ var initMap;
         };
 
         /*
-         * Get the color according to population distribution density as to year
+         * Get the color according to population distribution density as to year.
+         * @private
          */
         var getColorForHistoryDensity = function (stateId, year) {
             var stateDetails, currentPopulation;
@@ -261,6 +298,7 @@ var initMap;
 
         /*
          * Get color according to the population density of given state.
+         * @private
          */
         var getColorForPopulationDensity = function (stateId) {
             var currentPopulation;
@@ -270,7 +308,8 @@ var initMap;
         };
 
         /*
-         *Create SVG element.
+         * Create SVG element.
+         * @private
          */
         var createSVG = function () {
             return d3.select("#container").append("svg")
@@ -279,7 +318,8 @@ var initMap;
         };
 
         /*
-         *Create a Projection.
+         * Create a Projection.
+         * @private
          */
         var createProjection = function () {
             return d3.geo.albersUsa()
@@ -288,7 +328,8 @@ var initMap;
         };
 
         /*
-         *Adjust the map container height and width.
+         * Adjust the map container height and width.
+         * @private
          */
         var adjustMapContainer = function () {
             d3.select("#container")
@@ -297,7 +338,8 @@ var initMap;
         };
 
         /*
-         *Create a GeoPath.
+         * Create a GeoPath.
+         * @private
          */
         var createGeoPath = function () {
             return d3.geo.path()
@@ -305,7 +347,8 @@ var initMap;
         };
 
         /*
-         *Change the color of each state as to the population.
+         * Change the color of each state as to the population.
+         * @private
          */
         var changeColorByDensity = function (channel, id) {
             d3.select("#states")
@@ -320,7 +363,8 @@ var initMap;
         };
 
         /*
-         *Change color according to the population density.
+         * Change color according to the population density.
+         * @private
          */
         var getColorByPopulation = function (population) {
             if (population <= 10000) {
@@ -339,26 +383,29 @@ var initMap;
         };
 
         /*
-         *Select the density colors by type.
+         * Select the density colors by type.
+         * @private
          */
         var selectColorByDataType = function (channel) {
             densityColors = colorsForEachDensities[channel];
         };
 
         /*
-         *Append the color key scale below the map.
+         * Append the color key scale below the map.
+         * @private
          */
         var appendKeyScale = function () {
             $("#map-keys").empty();
             $.each(densityColors, function (i, d) {
-                $("#map-keys").append('<li><span style="width:10;height:10;background-color:' + d + ';float: left;margin-left:5px"></span><span style="position: relative;margin-left: 5px;">' + DENSITY_SCALE[i] + '</span></li>');
+                $("#map-keys").append('<li><div style="background-color:' + d + ';"></div><span>' + DENSITY_SCALE[i] + '</span></li>');
             });
         };
 
         /*
-         *Clicked event on a state of usa.
+         * Clicked event on a state of usa.
+         * @private
          */
-        var onStateClick = function (d,svg) {
+        var onStateClick = function (d, svg) {
             var x, y, scale;
 
             selectColorByDataType(STATE_CHANNEL);
@@ -406,7 +453,8 @@ var initMap;
         };
 
         /*
-         *Zoom out the map.
+         * Zoom out the map.
+         * @private
          */
         var zoomOutMap = function () {
             centered = null;
@@ -419,11 +467,11 @@ var initMap;
         /*
          *On mouse is over an state of usa.
          */
-        var onMouseOver = function (d, element,svg) {
+        var onMouseOver = function (d, element, svg) {
             $(element).attr("fill", "aqua");
             var position = d3.mouse(element);
             d3.select(svg[0][0].parentNode.parentNode).select(".datamaps-hoverover").style('top', ((position[1] + 30)) + "px").style("opacity", 0)
-                .html("<div style='font-family:monospace;font-size:14;background: #eee;border: 1px solid #ccc;padding: 2px;border-radius: 8px;'>" + d.properties.name + "</div>")
+                .html("<div>" + d.properties.name + "</div>")
                 .style('left', (position[0]) + "px");
             d3.select(svg[0][0].parentNode.parentNode).select('.datamaps-hoverover').transition().duration(500).style("opacity", .9).style('display', 'block');
         };
@@ -431,17 +479,19 @@ var initMap;
         /*
          *On mouse is out from a state of usa.
          */
-        var onMouseOut = function (d, element,svg) {
+        var onMouseOut = function (d, element, svg) {
             $(element).attr("fill", previousColors[d.id]);
             d3.select(svg[0][0].parentNode.parentNode).select('.datamaps-hoverover').transition().duration(200).style("opacity", 0).style('display', 'none');
         };
 
         /*
-         *Create Labels to add to the map.
+         * Create Labels to add to the map.
+         * @private
          */
         var addLabels = function (svg) {
-            var labelStartCoodinates = projection([-67.707617, 42.722131]);
-            var xOffset = 7.5, yOffset = 5;
+            var startPoint = projection([-67.707617, 42.722131]),
+                xOffset = 7.5,
+                yOffset = 5;
 
             svg.select("#states").selectAll("path").attr("data-foo", function (d) {
                 var center = path.centroid(d);
@@ -449,17 +499,16 @@ var initMap;
                 if (d.id === "NY") xOffset = -1;
                 if (d.id === "MI") yOffset = 18;
                 if (d.id === "LA") xOffset = 13;
-                var x, y;
+                var x, y,
+                    stateToBeAligned = ["VT", "NH", "MA", "RI", "CT", "NJ", "DE", "MD", "DC"].indexOf(d.id);
 
                 x = center[0] - xOffset;
                 y = center[1];
 
-                var smallStateIndex = ["VT", "NH", "MA", "RI", "CT", "NJ", "DE", "MD", "DC"].indexOf(d.id);
-
-                if (smallStateIndex > -1) {
-                    var yStart = labelStartCoodinates[1];
-                    x = labelStartCoodinates[0];
-                    y = yStart + (smallStateIndex * (2 + 12));
+                if (stateToBeAligned > -1) {
+                    var yStart = startPoint[1];
+                    x = startPoint[0];
+                    y = yStart + (stateToBeAligned * (2 + 12));
                     stateGroup.append("line")
                         .attr("x1", x - 3)
                         .attr("y1", y - 5)
@@ -479,7 +528,8 @@ var initMap;
         };
 
         /*
-         *Create the map.
+         * Create the map.
+         * @private
          */
         var createMap = function (svg) {
             var us = USA_GEO_DATA;
@@ -489,7 +539,7 @@ var initMap;
                 .attr("width", width)
                 .attr("height", height)
                 .on("click", function (d) {
-                    onStateClick(d,svg);
+                    onStateClick(d, svg);
                 });
 
             stateGroup = svg.append("g");
@@ -509,13 +559,13 @@ var initMap;
                     return getColorByPopulation(currentPopulation);
                 })
                 .on("click", function (d) {
-                    onStateClick(d,svg);
+                    onStateClick(d, svg);
                 })
                 .on("mouseover", function (d) {
-                    onMouseOver(d, this,svg);
+                    onMouseOver(d, this, svg);
                 })
                 .on("mouseout", function (d) {
-                    onMouseOut(d, this,svg);
+                    onMouseOut(d, this, svg);
                 });
 
             stateGroup.append("path")
@@ -529,7 +579,8 @@ var initMap;
         };
 
         /*
-         *Publish State data.
+         * Publish State data.
+         * @private
          */
         var publishStateData = function (stateId) {
             var dataBundle = {
@@ -543,14 +594,15 @@ var initMap;
     };
 
     /*
-     *Dispose the page state.
+     * Dispose the page state.
+     * @private
      */
     var dispose = function () {
         state = null;
     };
 
     /*
-     *Initialize the page functionality.
+     * Initialize the page functionality.
      */
     initMap = function (properties) {
         dispose();

@@ -23,11 +23,11 @@
              <script type="text/javascript" src="js/custom/map-gadget.js"></script>
 
              <!-- Container to contain the map visualization elements-->
-             <div id="container" style="position: relative;"></div>
+             <div id="container"></div>
              <ul id="map-keys"></ul>
 
              <!-- Hover label for the map to show the name of the state-->
-             <div class="datamaps-hoverover" style="z-index: 10001; position: absolute; display: none;"></div>
+             <div class="datamaps-hoverover"></div>
 
              <!-- Initialize the javascript for the page -->
              <script type="text/javascript">
