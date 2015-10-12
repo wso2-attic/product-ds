@@ -177,12 +177,12 @@ var initDonutChart;
             gadgets.HubSettings.onConnect = function () {
                 // Subscribe to the age channel.
                 gadgets.Hub.subscribe(AGE_CHANNEL, function (topic, message) {
-                        callbackForChannel(AGE_CHANNEL, message);
+                    callbackForChannel(AGE_CHANNEL, message);
                 });
 
                 // Subscribe to the state channel.
                 gadgets.Hub.subscribe(STATE_CHANNEL, function (topic, message) {
-                        callbackForChannel(STATE_CHANNEL, message);
+                    callbackForChannel(STATE_CHANNEL, message);
                 });
             };
         };
@@ -544,7 +544,34 @@ var initDonutChart;
                 if (d.data.name != "Male" && d.data.name != "Female") {
                     publishEthnicityData(d.data.id);
                 }
-            });
+            })
+                .on("mouseover", function () {
+                    d3.select(this)
+                        .transition()
+                        .duration(250)
+                        .attr("d", d3.svg.arc()
+                            .startAngle(function (d) {
+                                return d.startAngle;
+                            })
+                            .endAngle(function (d) {
+                                return d.endAngle;
+                            })
+                            .innerRadius(innerRadios + 2).outerRadius(radios + 2));
+
+                })
+                .on("mouseout", function () {
+                    d3.select(this)
+                        .transition()
+                        .duration(250)
+                        .attr("d", d3.svg.arc()
+                            .startAngle(function (d) {
+                                return d.startAngle;
+                            })
+                            .endAngle(function (d) {
+                                return d.endAngle;
+                            })
+                            .innerRadius(innerRadios).outerRadius(radios));
+                });
         };
 
         initUI();
