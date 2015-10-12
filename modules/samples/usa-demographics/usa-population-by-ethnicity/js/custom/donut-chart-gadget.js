@@ -425,7 +425,7 @@ var initDonutChart;
         var updateChartDetails = function (data) {
             $("#donutDetails").empty();
             data.forEach(function (element, index) {
-                var html = "<li>" + "<div style='width:10;height:10;display:block;background-color:" + color(index) + ";position: relative;float: left;'></div><span style='position: relative;margin-left: 10;'>" + element.name + " - " + element.currentPopulation + "</span></li>";
+                var html = "<li>" + "<div style='background-color:" + color(index) + ";'></div><span>" + element.name + " - " + element.currentPopulation + "</span></li>";
                 $("#donutDetails").append(html);
             });
         };
