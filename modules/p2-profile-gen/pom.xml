@@ -91,6 +91,9 @@
                                     org.jaggeryjs.modules:process.feature:${process.feature.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
+                                    org.jaggeryjs.modules:i18n.feature:${i18n.feature.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
                                     org.jaggeryjs.modules:uuid.feature:${uuid.feature.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
@@ -267,6 +270,10 @@
                                 <feature>
                                     <id>org.jaggeryjs.modules.process.feature.group</id>
                                     <version>${process.feature.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.jaggeryjs.modules.i18n.feature.group</id>
+                                    <version>${i18n.feature.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.jaggeryjs.modules.uuid.feature.group</id>

@@ -422,6 +422,7 @@
         <sso.feature.version>1.4.3</sso.feature.version>
         <slf4j.version>1.6.6</slf4j.version>
         <ehcache.wso2.version>1.5.0.wso2v3</ehcache.wso2.version>
+        <i18n.feature.version>1.4.3</i18n.feature.version>
     </properties>
 
 </project>
