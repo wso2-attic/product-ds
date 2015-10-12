@@ -136,7 +136,7 @@ var initBarChart;
             gadgets.HubSettings.onConnect = function () {
                 // Subscribe to the state channel.
                 gadgets.Hub.subscribe(STATE_CHANNEL, function (topic, message) {
-                        callbackForChannels(message);
+                    callbackForChannels(message);
                 });
             };
         };
@@ -146,7 +146,7 @@ var initBarChart;
          * @private
          * */
         var callbackForChannels = function (message) {
-            if(message) {
+            if (message) {
                 subscribeData = message;
                 initLinkedList();
                 $("#back").hide();
@@ -391,7 +391,31 @@ var initBarChart;
                     // Publish Age details.
                     publishAgeDetails(d.name, d.id);
                 }
-            });
+            })
+                .on("mouseover", function () {
+                    d3.select(this)
+                        .transition()
+                        .duration(250)
+                        .attr("width", (xScale.rangeBand() + 3))
+                        .attr("height", function (d) {
+                            return height - yScale(d.currentPopulation);
+                        })
+                        .attr("y", function (d) {
+                            return yScale(d.currentPopulation);
+                        });
+                })
+                .on("mouseout", function () {
+                    d3.select(this)
+                        .transition()
+                        .duration(250)
+                        .attr("width", xScale.rangeBand())
+                        .attr("height", function (d) {
+                            return height - yScale(d.currentPopulation);
+                        })
+                        .attr("y", function (d) {
+                            return yScale(d.currentPopulation);
+                        });
+                });
         };
 
         initUI();
