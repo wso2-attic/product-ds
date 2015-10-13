@@ -4025,7 +4025,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1074000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 474000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 600000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -4033,7 +4049,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 2211000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 111000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 1100000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -4041,7 +4073,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 2457000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 1357000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 1100000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -4049,7 +4097,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 2290000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 129000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 100000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -4057,7 +4121,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 2431000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 1131000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 1300000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -4065,7 +4145,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 2741000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 1141000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 1600000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -4073,7 +4169,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 2338000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 1038000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 1300000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -4081,7 +4193,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1728000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 1200000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 528000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -4089,7 +4217,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1098000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 598000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 500000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -4097,7 +4241,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 434000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 224000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 210000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -4251,7 +4411,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 687000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 360000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 320000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -4259,7 +4435,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1385000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 700000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 685000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -4267,7 +4459,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1390000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 790000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 600000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -4275,7 +4483,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1336000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 536000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 800000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -4283,7 +4507,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1398000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 738000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 660000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -4291,7 +4531,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1391000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 621000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 770000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -4299,7 +4555,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1070000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 540000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 530000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -4307,7 +4579,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 606000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 303000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 303000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -4315,7 +4603,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 312000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 200000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 112000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -4323,7 +4627,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 114000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 56000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 58000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -4477,7 +4797,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 87000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 45000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 42000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -4485,7 +4821,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 165000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 78000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 87000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -4493,7 +4845,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 182000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 76000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 106000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -4501,7 +4869,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 185000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 98000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 87000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -4509,7 +4893,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 176000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 87000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 89000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -4517,7 +4917,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 194000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 92000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 102000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -4525,7 +4941,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 176000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 89000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 87000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -4533,7 +4965,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 101000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 54000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 47000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -4541,7 +4989,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 64000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 33000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 31000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -4549,7 +5013,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 30000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<85",
+                currentPopulation: 16000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<85",
+                currentPopulation: 14000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -4703,7 +5183,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 122000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 56000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 66000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -4711,7 +5207,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 238000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 118000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 120000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -4719,7 +5231,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 224000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 112000,
+                percentage: 50,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 112000,
+                percentage: 50,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -4727,7 +5255,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 209000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 120000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 89000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -4735,7 +5279,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 192000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 97000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 95000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -4743,7 +5303,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 209000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 117000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 92000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -4751,7 +5327,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 180000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 90000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 90000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -4759,7 +5351,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 110000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 57000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 53000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -4767,7 +5375,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 60000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 30000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 30000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -4775,7 +5399,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 25000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 10000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 15000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -4929,7 +5569,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 836000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 456000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 380000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -4937,7 +5593,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1739000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 810000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 929000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -4945,7 +5617,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1801000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 893000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 908000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -4953,7 +5641,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1776000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 867000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 909000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -4961,7 +5665,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1726000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 856000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 870000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -4969,7 +5689,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1871000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 923000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 948000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -4977,7 +5713,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1473000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 689000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 784000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -4985,7 +5737,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 850000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 431000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 419000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -4993,7 +5761,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 525000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 312000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 213000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -5001,7 +5785,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 235000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 123000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 112000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -5155,7 +5955,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 434000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 223000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 211000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -5163,7 +5979,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 897000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 451000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 446000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -5171,7 +6003,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 928000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 489000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 439000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -5179,7 +6027,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 827000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 398000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 429000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -5187,7 +6051,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 841000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 452000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 389000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -5195,7 +6075,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 947000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 547000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 400000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -5203,7 +6099,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 769000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 356000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 413000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -5211,7 +6123,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 452000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 234000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 218000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -5219,7 +6147,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 274000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 123000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 151000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -5227,7 +6171,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 115000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 53000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 62000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -5381,7 +6341,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 202000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 123000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 79000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -5389,7 +6365,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 402000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 200000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 202000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -5397,7 +6389,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 430000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 215000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 215000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -5405,7 +6413,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 383000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 185000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 198000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -5413,7 +6437,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 365000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 189000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 176000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -5421,7 +6461,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 440000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 223000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 217000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -5429,7 +6485,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 373000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 223000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 150000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -5437,7 +6509,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 225000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 113000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 112000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -5445,7 +6533,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 154000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 89000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 65000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -5453,7 +6557,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 75000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 37000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 38000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -5607,7 +6727,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 205000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 98000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 107000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -5615,7 +6751,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 401000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 200000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 201000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -5623,7 +6775,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 408000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 204000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 204000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -5631,7 +6799,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 378000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 198000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 18000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -5639,7 +6823,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 347000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 147000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 200000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -5647,7 +6847,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 406000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 201000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 205000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -5655,7 +6871,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 331000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 198000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 133000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -5663,7 +6895,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 190000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 98000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 92000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -5671,7 +6919,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 126000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 78000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 48000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -5679,7 +6943,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 59000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 29000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 30000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -5833,7 +7113,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 282000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 198000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 84000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -5841,7 +7137,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 567000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 298000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 269000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -5849,7 +7161,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 587000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 278000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 309000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -5857,7 +7185,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 566000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 298000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 268000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -5865,7 +7209,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 577000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 287000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 290000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -5873,7 +7233,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 643000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 321000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 322000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -5881,7 +7257,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 539000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 298000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 241000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -5889,7 +7281,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 325000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 178000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 147000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -5897,7 +7305,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 184000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 91000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 93000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -5905,7 +7329,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 69000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 32000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 37000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -6059,7 +7499,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 314000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 187000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 127000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -6067,7 +7523,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 613000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 301000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 312000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -6075,7 +7547,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 665000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 321000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 344000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -6083,7 +7571,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 628000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 314000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 314000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -6091,7 +7595,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 565000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 298000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 267000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -6099,7 +7619,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 654000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 325000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 329000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -6107,7 +7643,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 536000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 266000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 270000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -6115,7 +7667,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 312000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 165000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 147000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -6123,7 +7691,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 180000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 90000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 90000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -6131,7 +7715,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 66000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 33000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 33000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -6284,7 +7884,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 70000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 32000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 38000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -6292,7 +7908,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 153000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 78000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 75000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -6300,7 +7932,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 168000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 82000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 86000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -6308,7 +7956,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 145000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 69000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 76000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -6316,7 +7980,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 171000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 89000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 82000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -6324,7 +8004,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 219000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 109000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 110000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -6332,7 +8028,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 192000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 96000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 96000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -6340,7 +8052,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 113000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 52000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 61000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -6348,7 +8076,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 69000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 32000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 37000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -6356,7 +8100,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 29000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 16000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 13000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -6510,7 +8270,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 364000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 198000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 166000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -6518,7 +8294,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 746000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 321000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 425000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -6526,7 +8318,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 800000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 398000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 402000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -6534,7 +8342,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 762000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 321000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 441000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -6542,7 +8366,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 796000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 324000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 472000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -6550,7 +8390,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 902000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 445000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 457000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -6558,7 +8414,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 696000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 321000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 375000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -6566,7 +8438,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 386000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 187000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 199000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -6574,7 +8462,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 223000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 123000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 100000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -6582,7 +8486,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 98000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 45000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 48000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -6736,7 +8656,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 367000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 156000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 211000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -6744,7 +8680,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 791000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 326000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 465000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -6752,7 +8704,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 938000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 467000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 471000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -6760,7 +8728,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 845000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 412000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 433000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -6768,7 +8752,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 887000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 443000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 444000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -6776,7 +8776,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1012000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 513000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 499000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -6784,7 +8800,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 803000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 398000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 405000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -6792,7 +8824,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 456000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 236000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 220000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -6800,7 +8848,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 301000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 178000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 123000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -6808,7 +8872,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 145000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 72000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 73000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -6962,7 +9042,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 596000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 296000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 300000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -6970,7 +9066,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1313000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 675000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 638000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -6978,7 +9090,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1409000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 689000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 720000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -6986,7 +9114,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1164000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 597000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 567000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -6994,7 +9138,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1278000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 621000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 657000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -7002,7 +9162,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1510000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 760000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 750000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -7010,7 +9186,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1252000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 621000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 631000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -7018,7 +9210,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 725000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 345000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 380000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -7026,7 +9234,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 445000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 223000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 222000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -7034,7 +9258,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 192000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 96000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 96000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -7188,7 +9428,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 356000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 198000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 158000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -7196,7 +9452,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 708000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 382000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 326000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -7204,7 +9476,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 723000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 321000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 402000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -7212,7 +9500,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 716000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 367000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 349000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -7220,7 +9524,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 681000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 321000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 360000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -7228,7 +9548,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 808000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 404000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 404000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -7236,7 +9572,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 629000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 327000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 302000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -7244,7 +9596,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 354000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 178000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 176000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -7252,7 +9620,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 222000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 111000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 111000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -7260,7 +9644,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 107000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 49000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 58000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -7414,7 +9814,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 211000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 134000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 77000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -7422,7 +9838,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 414000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 209000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 205000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -7430,7 +9862,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 436000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 212000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 224000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -7438,7 +9886,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 387000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 198000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 189000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -7446,7 +9910,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 375000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 198000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 177000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -7454,7 +9934,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 417000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 231000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 186000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -7462,7 +9958,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 347000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 167000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 180000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -7470,7 +9982,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 214000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 112000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 102000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -7478,7 +10006,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 122000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 55000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 67000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -7486,7 +10030,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 44000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 22000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 22000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -7640,7 +10200,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 390000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 198000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 192000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -7648,7 +10224,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 787000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 321000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 466000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -7656,7 +10248,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 837000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 423000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 414000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -7664,7 +10272,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 775000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 350000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 425000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -7672,7 +10296,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 749000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 398000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 351000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -7680,7 +10320,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 889000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 454000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 435000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -7688,7 +10344,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 723000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 423000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 300000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -7696,7 +10368,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 450000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 234000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 216000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -7704,7 +10392,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 274000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 143000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 131000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -7712,7 +10416,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 114000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 76000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 38000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -7866,7 +10586,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 62000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 34000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 28000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -7874,7 +10610,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 122000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 54000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 68000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -7882,7 +10634,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 134000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 65000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 69000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -7890,7 +10658,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 123000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 67000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 56000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -7898,7 +10682,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 113000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 55000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 58000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -7906,7 +10706,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 150000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 75000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 75000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -7914,7 +10730,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 139000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 66000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 73000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -7922,7 +10754,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 81000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 39000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 42000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -7930,7 +10778,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 46000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 23000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 23000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -7938,7 +10802,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 20000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 10000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 10000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -8092,7 +10972,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 132000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 76000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 56000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -8100,7 +10996,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 252000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 134000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 118000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -8108,7 +11020,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 258000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 123000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 135000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -8116,7 +11044,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 245000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 132000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 113000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -8124,7 +11068,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 221000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 121000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 100000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -8132,7 +11092,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 259000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 134000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 125000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -8140,7 +11116,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 213000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 108000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 105000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -8148,7 +11140,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 123000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 76000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 47000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -8156,7 +11164,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 84000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 42000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 42000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -8164,7 +11188,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 39000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 16000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 23000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -8318,7 +11358,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 187000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 97000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 90000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -8326,7 +11382,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 366000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 154000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 212000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -8334,7 +11406,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 360000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 17000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 19000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -8342,7 +11430,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 387000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 145000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 242000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -8350,7 +11454,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 383000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 143000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 240000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -8358,7 +11478,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 377000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 189000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 188000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -8366,7 +11502,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 315000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 198000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 117000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -8374,7 +11526,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 198000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 87000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 111000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -8382,7 +11550,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 96000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 45000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 51000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -8390,7 +11574,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 30000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 15000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 15000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -8544,7 +11744,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 70000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 37000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 33000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -8552,7 +11768,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 162000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 81000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 81000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -8560,7 +11792,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 178000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 82000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 96000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -8568,7 +11816,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 144000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 74000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 70000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -8576,7 +11840,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 179000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 78000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 101000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -8584,7 +11864,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 226000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 132000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 94000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -8592,7 +11888,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 178000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 84000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 94000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -8600,7 +11912,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 97000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 43000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 54000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -8608,7 +11936,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 57000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 25000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 32000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -8616,7 +11960,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 25000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 15000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 10000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -8770,7 +12130,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 541000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 250000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 291000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -8778,7 +12154,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1152000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 534000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 618000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -8786,7 +12178,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1139000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 598000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 541000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -8794,7 +12202,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1110000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 555000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 555000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -8802,7 +12226,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1238000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 638000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 600000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -8810,7 +12250,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1379000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 679000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 700000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -8818,7 +12274,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1046000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 540000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 506000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -8826,7 +12298,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 611000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 305000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 306000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -8834,7 +12322,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 395000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 200000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 195000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -8842,7 +12346,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 180000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 90000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 90000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -8996,7 +12516,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 145000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 78000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 67000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -9004,7 +12540,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 285000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 185000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 100000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -9012,7 +12564,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 292000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 123000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 169000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -9020,7 +12588,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 267000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 123000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 144000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -9028,7 +12612,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 249000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 132000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 117000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -9036,7 +12636,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 292000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 156000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 136000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -9044,7 +12660,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 257000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 134000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 123000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -9052,7 +12684,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 154000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 76000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 78000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -9060,7 +12708,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 86000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 45000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 41000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -9068,7 +12732,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 32000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 16000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 16000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -9222,7 +12902,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1156000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 598000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 558000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -9230,7 +12926,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 2375000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 1123000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 1252000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -9238,7 +12950,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 2777000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 1323000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 1454000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -9246,7 +12974,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 2659000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 1298000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 1361000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -9254,7 +12998,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 2610000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 1198000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 1412000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -9262,7 +13022,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 2879000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 1323000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 1556000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -9270,7 +13046,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 2304000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 1120000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 1184000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -9278,7 +13070,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1361000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 674000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 687000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -9286,7 +13094,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 866000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 433000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 433000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -9294,7 +13118,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 391000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 187000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 204000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -9448,7 +13288,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 632000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 321000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 311000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -9456,7 +13312,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1267000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 624000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 643000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -9464,7 +13336,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1321000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 621000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 700000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -9472,7 +13360,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1247000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 678000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 569000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -9480,7 +13384,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1327000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 698000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 629000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -9488,7 +13408,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1369000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 657000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 712000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -9496,7 +13432,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1139000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 587000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 552000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -9504,7 +13456,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 698000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 324000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 374000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -9512,7 +13480,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 389000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 187000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 202000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -9520,7 +13504,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 147000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 73000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 74000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -9674,7 +13674,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 45000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 23000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 22000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -9682,7 +13698,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 80000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 39000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 41000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -9690,7 +13722,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 106000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 54000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 52000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -9698,7 +13746,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 90000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 45000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 45000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -9706,7 +13770,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 75000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 38000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 37000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -9714,7 +13794,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 97000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 45000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 52000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -9722,7 +13818,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 82000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 41000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 41000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -9730,7 +13842,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 47000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 23000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 24000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -9738,7 +13866,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 34000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 22000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 12000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -9746,7 +13890,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 17000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category:  [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 9000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 8000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -9900,7 +14060,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 721000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 342000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 379000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -9908,7 +14084,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1523000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 672000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 851000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -9916,7 +14108,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1587000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 698000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 889000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -9924,7 +14132,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1410000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 780000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 630000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -9932,7 +14156,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1480000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 689000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 791000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -9940,7 +14180,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1742000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 821000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 921000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -9948,7 +14204,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1452000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 765000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 687000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -9956,7 +14228,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 850000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 425000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 425000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -9964,7 +14252,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 541000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 321000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 220000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -9972,7 +14276,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 230000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 108000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 122000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -10126,7 +14446,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 264000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 135000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 129000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -10134,7 +14470,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 513000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 245000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 268000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -10142,7 +14494,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 534000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 245000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 289000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -10150,7 +14518,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 507000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 250000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 257000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -10158,7 +14542,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 461000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 231000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 230000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -10166,7 +14566,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 526000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 237000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 289000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -10174,7 +14590,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 440000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 220000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 220000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -10182,7 +14614,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 280000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 120000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 160000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -10190,7 +14638,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 164000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 87000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 77000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -10198,7 +14662,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 62000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 32000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 30000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -10352,7 +14832,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 238000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 116000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 122000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -10360,7 +14856,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 480000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 230000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 250000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -10368,7 +14880,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 508000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 250000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 258000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -10376,7 +14904,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 524000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 234000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 290000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -10384,7 +14928,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 500000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 250000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 250000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -10392,7 +14952,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 539000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 276000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 263000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -10400,7 +14976,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 510000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 260000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 250000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -10408,7 +15000,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 290000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 129000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 161000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -10416,7 +15024,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 166000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 98000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 68000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -10424,7 +15048,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 78000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 39000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 39000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -10578,7 +15218,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 730000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 298000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 432000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -10586,7 +15242,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1545000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 798000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 747000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -10594,7 +15266,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1779000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 897000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 882000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -10602,7 +15290,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1511000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 723000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 788000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -10610,7 +15314,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1616000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 876000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 740000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -10618,7 +15338,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1940000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 976000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 964000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -10626,7 +15362,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1622000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 820000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 802000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -10634,7 +15386,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 980000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 438000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 542000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -10642,7 +15410,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 674000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 321000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 353000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -10650,7 +15434,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 306000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 176000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 130000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -10804,7 +15604,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 57000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 34000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 23000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -10812,7 +15628,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 124000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 78000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 46000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -10820,7 +15652,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 162000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 87000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 75000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -10828,7 +15676,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 127000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 56000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 71000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -10836,7 +15700,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 137000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 77000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 60000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -10844,7 +15724,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 162000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 67000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 95000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -10852,7 +15748,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 131000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 62000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 69000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -10860,7 +15772,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 74000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 34000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 40000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -10868,7 +15796,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 51000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 25000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 26000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -10876,7 +15820,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 27000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 14000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 13000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -11030,7 +15990,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 302000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 167000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 135000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -11038,7 +16014,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 593000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 278000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 315000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -11046,7 +16038,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 661000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 321000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 340000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -11054,7 +16062,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 592000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 298000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 294000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -11062,7 +16086,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 601000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 301000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 300000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -11070,7 +16110,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 659000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 259000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 400000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -11078,7 +16134,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 584000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 278000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 306000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -11086,7 +16158,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 369000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 167000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 202000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -11094,7 +16182,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 192000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 89000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 103000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -11102,7 +16206,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 71000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 34000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 37000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -11256,7 +16376,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 60000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 30000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 30000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -11264,7 +16400,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 109000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 56000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 53000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -11272,7 +16424,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 115000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 59000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 56000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -11280,7 +16448,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 105000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 55000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 50000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -11288,7 +16472,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 93000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 45000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 48000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -11296,7 +16496,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 117000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 56000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 61000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -11304,7 +16520,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 98000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 46000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 52000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -11312,7 +16544,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 58000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 29000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 29000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -11320,7 +16568,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 40000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 20000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 20000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -11328,7 +16592,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 19000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 12000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 7000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -11482,7 +16762,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 408000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 234000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 174000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -11490,7 +16786,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 831000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 342000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 489000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -11498,7 +16810,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 863000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 432000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 431000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -11506,7 +16834,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 824000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 432000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 392000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -11514,7 +16858,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 854000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 467000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 387000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -11522,7 +16882,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 926000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 435000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 491000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -11530,7 +16906,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 786000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 342000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 444000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -11538,7 +16930,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 487000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 267000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 220000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -11546,7 +16954,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 266000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 133000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 133000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -11554,7 +16978,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 100000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "84<",
+                currentPopulation: 50000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "84<",
+                currentPopulation: 50000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -11708,7 +17148,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1928000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 987000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 941000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -11716,7 +17172,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 3810000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 1500000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 2310000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -11724,7 +17196,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 3700000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 1800000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 1900000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -11732,7 +17220,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 3613000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 1892000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 1721000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -11740,7 +17244,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 3458000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 1723000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 1735000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -11748,7 +17268,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 3435000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 1786000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 1649000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -11756,7 +17292,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 2598000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 1598000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 1000000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -11764,7 +17316,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1472000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 789000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 683000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -11772,7 +17340,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 824000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 432000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 392000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -11780,7 +17364,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 305000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 150000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 155000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -11934,7 +17534,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 264000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 164000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 100000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -11942,7 +17558,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 478000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 268000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 210000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -11950,7 +17582,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 448000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 243000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 205000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -11958,7 +17606,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 446000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 234000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 212000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -11966,7 +17630,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 332000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 150000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 182000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -11974,7 +17654,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 307000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 150000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 157000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -11982,7 +17678,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 240000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 140000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 100000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -11990,7 +17702,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 138000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 93000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 45000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -11998,7 +17726,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 80000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 40000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 40000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -12006,7 +17750,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 31000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 15000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 16000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -12160,7 +17920,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 32000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 15000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 17000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -12168,7 +17944,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 72000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 33000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 39000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -12176,7 +17968,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 90000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 45000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 45000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -12184,7 +17992,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 70000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 35000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 35000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -12192,7 +18016,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 78000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 34000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 44000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -12200,7 +18040,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 103000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 54000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 49000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -12208,7 +18064,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 90000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 45000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 45000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -12216,7 +18088,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 50000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 23000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 27000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -12224,7 +18112,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 29000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 12000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 17000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -12232,7 +18136,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 13000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 6000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 7000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -12386,7 +18306,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 510000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 255000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 255000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -12394,7 +18330,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1023000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 543000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 480000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -12402,7 +18354,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1123000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 543000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 580000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -12410,7 +18378,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1090000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 50000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 59000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -12418,7 +18402,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1109000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 540000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 569000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -12426,7 +18426,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 1214000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 584000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 630000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -12434,7 +18450,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 955000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 456000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 499000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -12442,7 +18474,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 550000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 250000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 300000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -12450,7 +18498,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 305000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 205000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 100000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -12458,7 +18522,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 122000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 56000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 66000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -12612,7 +18692,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 440000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 220000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 220000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -12620,7 +18716,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 868000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 456000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 412000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -12628,7 +18740,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 924000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 434000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 490000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -12636,7 +18764,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 934000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 456000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 478000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -12644,7 +18788,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 908000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 408000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 500000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -12652,7 +18812,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 988000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 588000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 400000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -12660,7 +18836,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 835000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 453000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 382000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -12668,7 +18860,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 457000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 257000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 200000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -12676,7 +18884,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 253000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 153000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 100000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -12684,7 +18908,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 117000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 57000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 60000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -12838,7 +19078,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 104000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 54000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 50000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -12846,7 +19102,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 215000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 115000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 100000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -12854,7 +19126,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 237000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 137000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 100000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -12862,7 +19150,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 221000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 121000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 100000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -12870,7 +19174,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 237000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 100000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 137000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -12878,7 +19198,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 276000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 106000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 170000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -12886,7 +19222,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 265000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 165000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 100000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -12894,7 +19246,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 164000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 64000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 100000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -12902,7 +19270,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 98000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 48000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 50000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -12910,7 +19294,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 36000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 16000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 20000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -13064,7 +19464,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 358000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 258000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 100000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -13072,7 +19488,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 745000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 345000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 400000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -13080,7 +19512,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 786000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 386000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 400000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -13088,7 +19536,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 722000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 422000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 300000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -13096,7 +19560,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 726000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 426000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 300000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -13104,7 +19584,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 874000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 474000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 400000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -13112,7 +19608,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 700000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 400000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 300000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -13120,7 +19632,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 400000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 200000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 200000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -13128,7 +19656,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 258000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 158000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 100000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -13136,7 +19680,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 119000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 59000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 60000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }, {
@@ -13290,7 +19850,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 40000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "<5",
+                currentPopulation: 20000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "<5",
+                currentPopulation: 20000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "5-14",
@@ -13298,7 +19874,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 73000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "5-14",
+                currentPopulation: 40000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "5-14",
+                currentPopulation: 33000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "15-24",
@@ -13306,7 +19898,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 78000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "15-24",
+                currentPopulation: 48000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "15-24",
+                currentPopulation: 30000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "25-34",
@@ -13314,7 +19922,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 78000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "25-34",
+                currentPopulation: 48000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "25-34",
+                currentPopulation: 30000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "35-44",
@@ -13322,7 +19946,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 67000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "35-44",
+                currentPopulation: 20000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "35-44",
+                currentPopulation: 47000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "45-54",
@@ -13330,7 +19970,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 84000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "45-54",
+                currentPopulation: 44000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "45-54",
+                currentPopulation: 40000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "55-64",
@@ -13338,7 +19994,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 74000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "55-64",
+                currentPopulation: 44000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "55-64",
+                currentPopulation: 30000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "65-74",
@@ -13346,7 +20018,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 40000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "65-74",
+                currentPopulation: 20000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "65-74",
+                currentPopulation: 20000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "75-84",
@@ -13354,7 +20042,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 22000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "75-84",
+                currentPopulation: 11000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "75-84",
+                currentPopulation: 11000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }, {
             name: "85<",
@@ -13362,7 +20066,23 @@ var USA_DEMOGRAPHICS_SAMPLE_DATA = [
             currentPopulation: 9000,
             percentage: 0,
             year: 2010,
-            category: [],
+            category: [{
+                name: "Male",
+                id: "85<",
+                currentPopulation: 3000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }, {
+                name: "Female",
+                id: "85<",
+                currentPopulation: 6000,
+                percentage: 0,
+                year: 2010,
+                category: [],
+                populationHistory: []
+            }],
             populationHistory: []
         }]
     }
