@@ -40,7 +40,7 @@
             <class name="org.wso2.ues.ui.integration.test.login.LoginPortalTest"/>
             <class name="org.wso2.ues.ui.integration.test.common.AddUserTest"/>
             <class name="org.wso2.ues.ui.integration.test.dashboard.AddDeleteDashboardTest"/>
-            <!--<class name="org.wso2.ues.ui.integration.test.dashboard.AddgadgetToDashboardTest"/>-->
+            <class name="org.wso2.ues.ui.integration.test.dashboard.BannerTest"/>
         </classes>
 
     </test>

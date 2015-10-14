@@ -37,7 +37,7 @@ public class AddDeleteDashboardTest extends UESUIIntegrationTest {
     private static final Log LOG = LogFactory.getLog(AddDeleteDashboardTest.class);
     private static final String DASHBOARD_TITLE1 = "sampledashboard1";
     private static final String DASHBOARD_TITLE2 = "sampledashboard2";
-    private static final String DASHBOARD_DESCRIPTION = "This is sample descrition for dashboard";
+    private static final String DASHBOARD_DESCRIPTION = "This is sample description for dashboard";
     private ResourceAdminServiceClient resourceAdminServiceClient;
     private String dashboardTitle;
     private WebElement webElement = null;
