@@ -20,13 +20,11 @@ package ues.integration.tests.common.domain;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.testng.Assert;
 import org.wso2.carbon.automation.engine.configurations.UrlGenerationUtil;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.engine.context.beans.Tenant;
 import org.wso2.carbon.automation.engine.context.beans.User;
-import org.wso2.carbon.automation.test.utils.common.TestConfigurationProvider;
 
 import javax.xml.xpath.XPathExpressionException;
 
@@ -46,6 +44,11 @@ public abstract class UESIntegrationTest {
         this(TestUserMode.SUPER_TENANT_ADMIN);
     }
 
+    /**
+     * This method returns the automation Context
+     *
+     * @throws javax.xml.xpath.XPathExpressionException
+     */
     private AutomationContext getUesContext() throws XPathExpressionException {
         if (uesContext == null) {
             uesContext = new AutomationContext(UESIntegrationTestConstants.UES_PRODUCT_NAME, this.userMode);
@@ -53,10 +56,20 @@ public abstract class UESIntegrationTest {
         return uesContext;
     }
 
+    /**
+     * This method returns the maximum waiting time from automation context
+     *
+     * @throws javax.xml.xpath.XPathExpressionException
+     */
     public int getMaxWaitTime() throws XPathExpressionException {
         return Integer.parseInt(getUesContext().getConfigurationValue("//maximumWaitingTime"));
     }
 
+    /**
+     * This method returns the current tenant Information
+     *
+     * @throws javax.xml.xpath.XPathExpressionException
+     */
     public Tenant getCurrentTenantInfo() throws XPathExpressionException {
         if (tenantInfo == null) {
             tenantInfo = getUesContext().getContextTenant();
@@ -64,6 +77,11 @@ public abstract class UESIntegrationTest {
         return tenantInfo;
     }
 
+    /**
+     * This method returns the current user information
+     *
+     * @throws javax.xml.xpath.XPathExpressionException
+     */
     public User getCurrentUserInfo() throws XPathExpressionException {
         if (userInfo == null) {
             userInfo = getCurrentTenantInfo().getContextUser();
@@ -71,51 +89,31 @@ public abstract class UESIntegrationTest {
         return userInfo;
     }
 
+    /**
+     * This method returns the current username of user from userInfo
+     *
+     * @throws javax.xml.xpath.XPathExpressionException
+     */
     public String getCurrentUsername() throws XPathExpressionException {
         return getCurrentUserInfo().getUserName();
     }
 
+    /**
+     * This method returns the current password of user from userInfo
+     *
+     * @throws javax.xml.xpath.XPathExpressionException
+     */
     public String getCurrentPassword() throws XPathExpressionException {
         return getCurrentUserInfo().getPassword();
     }
 
-    protected String getServiceUrlHttp(String serviceName) throws XPathExpressionException {
-        String serviceUrl = uesContext.getContextUrls().getServiceUrl() + "/" + serviceName;
-        validateServiceUrl(serviceUrl, tenantInfo);
-        return serviceUrl;
-    }
-
-    protected String getServiceUrlHttps(String serviceName) throws XPathExpressionException {
-        String serviceUrl = uesContext.getContextUrls().getSecureServiceUrl() + "/" + serviceName;
-        validateServiceUrl(serviceUrl, tenantInfo);
-        return serviceUrl;
-    }
-
-    protected String getResourceLocation() throws XPathExpressionException {
-        return TestConfigurationProvider.getResourceLocation(UESIntegrationTestConstants.UES_PRODUCT_NAME);
-    }
-
-    protected boolean isTenant() throws Exception {
-        if (userMode == null) {
-            throw new Exception("UserMode Not Initialized. Can not identify user type");
-        }
-        return (userMode == TestUserMode.TENANT_ADMIN || userMode == TestUserMode.TENANT_USER);
-    }
-
-    private void validateServiceUrl(String serviceUrl, Tenant tenant) {
-        //if user mode is null can not validate the service url
-        if (userMode != null) {
-            if ((userMode == TestUserMode.TENANT_ADMIN || userMode == TestUserMode.TENANT_USER)) {
-                Assert.assertTrue(serviceUrl.contains("/t/" + tenant.getDomain() + "/"), "invalid service url for " +
-                        "tenant. " + serviceUrl);
-            } else {
-                Assert.assertFalse(serviceUrl.contains("/t/"), "Invalid service url for user. " + serviceUrl);
-            }
-        }
-    }
-
+    /**
+     * This method returns the backendUrl
+     *
+     * @return backendUrl - the backendUrl
+     */
     protected String getBackEndUrl() throws Exception {
-        return  getUesContext().getContextUrls().getBackEndUrl();
+        return getUesContext().getContextUrls().getBackEndUrl();
     }
 
     /**
