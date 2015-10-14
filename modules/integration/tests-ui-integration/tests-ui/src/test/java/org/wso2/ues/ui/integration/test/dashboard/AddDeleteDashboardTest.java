@@ -1,4 +1,3 @@
-package org.wso2.ues.ui.integration.test.dashboard;
 /*
 *Copyright (c) 2015​, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
@@ -17,6 +16,8 @@ package org.wso2.ues.ui.integration.test.dashboard;
 *under the License.
 */
 
+package org.wso2.ues.ui.integration.test.dashboard;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
@@ -27,8 +28,6 @@ import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.registry.resource.stub.beans.xsd.CollectionContentBean;
 import org.wso2.ues.integration.common.clients.ResourceAdminServiceClient;
 import org.wso2.ues.ui.integration.util.UESUIIntegrationTest;
-
-import javax.xml.xpath.XPathExpressionException;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;

@@ -1,4 +1,3 @@
-package org.wso2.ues.integration.common.clients;
 /*
 *Copyright (c) 2015​, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
@@ -16,6 +15,7 @@ package org.wso2.ues.integration.common.clients;
 *specific language governing permissions and limitations
 *under the License.
 */
+package org.wso2.ues.integration.common.clients;
 
 import org.apache.axis2.AxisFault;
 import org.apache.commons.logging.Log;

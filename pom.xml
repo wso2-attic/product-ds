@@ -548,7 +548,7 @@
         <carbon.automation.version>4.3.1</carbon.automation.version>
         <carbon.automationutils.version>4.3.0</carbon.automationutils.version>
 
-        <carbon.dashboards.version>1.0.4</carbon.dashboards.version>
+        <carbon.dashboards.version>1.0.6-SNAPSHOT</carbon.dashboards.version>
         <product.ues.version>2.0.0-SNAPSHOT</product.ues.version>
 
         <test.framework.version>4.4.2</test.framework.version>

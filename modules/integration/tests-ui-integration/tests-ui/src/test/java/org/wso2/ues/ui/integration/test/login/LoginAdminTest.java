@@ -1,4 +1,3 @@
-package org.wso2.ues.ui.integration.test.login;
 /*
 *Copyright (c) 2015​, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
@@ -16,6 +15,8 @@ package org.wso2.ues.ui.integration.test.login;
 *specific language governing permissions and limitations
 *under the License.
 */
+
+package org.wso2.ues.ui.integration.test.login;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
