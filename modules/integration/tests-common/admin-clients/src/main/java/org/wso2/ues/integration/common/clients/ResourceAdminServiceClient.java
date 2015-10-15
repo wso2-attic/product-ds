@@ -28,6 +28,7 @@ import org.wso2.carbon.registry.resource.stub.beans.xsd.*;
 import org.wso2.carbon.registry.resource.stub.common.xsd.ResourceData;
 
 import javax.activation.DataHandler;
+import javax.xml.transform.Source;
 import java.rmi.RemoteException;
 
 public class ResourceAdminServiceClient {
@@ -321,6 +322,5 @@ public class ResourceAdminServiceClient {
             throws RemoteException, ResourceAdminServiceExceptionException {
         return resourceAdminServiceStub.getResourceTreeEntry(resourcePath);
     }
-
 }
 

@@ -32,7 +32,6 @@ import java.util.Set;
 public class UESWebDriver implements WebDriver, JavascriptExecutor, HasInputDevices {
     private static int maxWaitTime;
     private WebDriver driver = null;
-    private FirefoxProfile firefoxProfile = null;
 
     public UESWebDriver(WebDriver webDriver, int maxWaitTime) {
         this.driver = webDriver;
@@ -42,7 +41,6 @@ public class UESWebDriver implements WebDriver, JavascriptExecutor, HasInputDevi
     public UESWebDriver(WebDriver webDriver, int maxWaitTime, FirefoxProfile profile) {
         this.driver = webDriver;
         UESWebDriver.maxWaitTime = maxWaitTime;
-        firefoxProfile = profile;
     }
 
     /**
