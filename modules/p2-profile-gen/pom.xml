@@ -100,6 +100,9 @@
                                     org.jaggeryjs.modules:sso.feature:${sso.feature.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
+                                    org.jaggeryjs.modules:oauth.feature:${oauth.feature.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
                                     org.wso2.carbon.registry:org.wso2.carbon.registry.core.feature:${carbon.registry.version}
                                 </featureArtifactDef>
                                 <featureArtifactDef>
@@ -282,6 +285,10 @@
                                 <feature>
                                     <id>org.jaggeryjs.modules.sso.feature.group</id>
                                     <version>${sso.feature.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.jaggeryjs.modules.oauth.feature.group</id>
+                                    <version>${oauth.feature.version}</version>
                                 </feature>
 
                                 <!-- ues feature -->
