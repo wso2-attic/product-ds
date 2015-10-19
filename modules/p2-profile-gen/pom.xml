@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>wso2ues-profile-gen</artifactId>
     <packaging>pom</packaging>
-    <name>UES - Profile Generation</name>
+    <name>DS - Profile Generation</name>
     <build>
         <plugins>
             <plugin>

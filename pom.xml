@@ -11,9 +11,9 @@
     <artifactId>wso2ues-parent</artifactId>
     <packaging>pom</packaging>
     <version>2.0.0-SNAPSHOT</version>
-    <name>WSO2 User Engagement Server</name>
+    <name>WSO2 Dashboard Server</name>
     <url>http://wso2.com/products/user-engagement-server</url>
-    <description>WSO2 User Engagement Server</description>
+    <description>WSO2 Dashboard Server</description>
     <licenses>
         <license>
             <name>Apache License Version 2.0</name>
