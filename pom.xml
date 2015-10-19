@@ -8,7 +8,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wso2.ues</groupId>
-    <artifactId>wso2ues-parent</artifactId>
+    <artifactId>wso2ds-parent</artifactId>
     <packaging>pom</packaging>
     <version>2.0.0-SNAPSHOT</version>
     <name>WSO2 Dashboard Server</name>
