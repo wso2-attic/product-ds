@@ -9,8 +9,8 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>wso2ues</artifactId>
     <packaging>jar</packaging>
-    <name>WSO2 User Engagement Server - Distribution</name>
-    <description>User Engagement Server Distribution</description>
+    <name>WSO2 Dashboard Server - Distribution</name>
+    <description>Dashboard Server Distribution</description>
     <dependencies>
         <dependency>
             <groupId>javax.el</groupId>
