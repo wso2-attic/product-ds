@@ -16,11 +16,11 @@
 *under the License.
 */
 
-package org.wso2.ues.ui.integration.test.login;
+package org.wso2.ds.ui.integration.test.login;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
-import org.wso2.ues.ui.integration.util.UESUIIntegrationTest;
+import org.wso2.ds.ui.integration.util.UESUIIntegrationTest;
 
 public class LoginAdminTest extends UESUIIntegrationTest {
 

@@ -20,8 +20,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
-        <groupId>org.wso2.ues</groupId>
-        <artifactId>wso2ds-integration</artifactId>
+        <groupId>org.wso2.ds</groupId>
+        <artifactId>tests-ui-integration</artifactId>
         <version>2.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
@@ -163,7 +163,7 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>org.wso2.ues</groupId>
+                                    <groupId>org.wso2.ds</groupId>
                                     <artifactId>wso2ds</artifactId>
                                     <version>2.0.0-SNAPSHOT</version>
                                     <type>zip</type>
@@ -269,8 +269,8 @@
             <artifactId>org.wso2.carbon.integration.common.tests</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.wso2.ues</groupId>
-            <artifactId>org.wso2.ues.integration.common.clients</artifactId>
+            <groupId>org.wso2.ds</groupId>
+            <artifactId>org.wso2.ds.integration.common.clients</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>org.wso2.carbon</groupId>
@@ -279,8 +279,8 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.wso2.ues</groupId>
-            <artifactId>org.wso2.ues.integration.common.utils</artifactId>
+            <groupId>org.wso2.ds</groupId>
+            <artifactId>org.wso2.ds.integration.common.utils</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>org.wso2.carbon</groupId>
@@ -289,7 +289,7 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.wso2.ues</groupId>
+            <groupId>org.wso2.ds</groupId>
             <artifactId>ui-test-utils</artifactId>
         </dependency>
         <dependency>

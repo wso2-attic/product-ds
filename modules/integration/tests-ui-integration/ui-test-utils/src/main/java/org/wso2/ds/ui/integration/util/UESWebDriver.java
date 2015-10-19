@@ -16,7 +16,7 @@
 *under the License.
 */
 
-package org.wso2.ues.ui.integration.util;
+package org.wso2.ds.ui.integration.util;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxProfile;

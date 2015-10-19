@@ -15,14 +15,14 @@
 *specific language governing permissions and limitations
 *under the License.
 */
-package org.wso2.ues.ui.integration.test.login;
+package org.wso2.ds.ui.integration.test.login;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
-import org.wso2.ues.ui.integration.util.UESUIIntegrationTest;
+import org.wso2.ds.ui.integration.util.UESUIIntegrationTest;
 
 public class LoginPortalTest extends UESUIIntegrationTest {
 

@@ -16,7 +16,7 @@
 *under the License.
 */
 
-package org.wso2.ues.ui.integration.test.dashboard;
+package org.wso2.ds.ui.integration.test.dashboard;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -26,8 +26,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.registry.resource.stub.beans.xsd.CollectionContentBean;
-import org.wso2.ues.integration.common.clients.ResourceAdminServiceClient;
-import org.wso2.ues.ui.integration.util.UESUIIntegrationTest;
+import org.wso2.ds.integration.common.clients.ResourceAdminServiceClient;
+import org.wso2.ds.ui.integration.util.UESUIIntegrationTest;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
