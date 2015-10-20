@@ -22,9 +22,9 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
-import org.wso2.ds.ui.integration.util.UESUIIntegrationTest;
+import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 
-public class LoginPortalTest extends UESUIIntegrationTest {
+public class LoginPortalTest extends DSUIIntegrationTest {
 
     @Factory(dataProvider = "userMode")
     public LoginPortalTest(TestUserMode userMode) throws Exception {
@@ -36,14 +36,14 @@ public class LoginPortalTest extends UESUIIntegrationTest {
         return new Object[][]{{TestUserMode.SUPER_TENANT_ADMIN}, {TestUserMode.SUPER_TENANT_USER}};
     }
 
-    @Test(groups = "wso2.ues.login", description = "login to UES Portal")
+    @Test(groups = "wso2.ds.login", description = "login to DS Portal")
     public void testLoginToPortal() throws Exception {
-        UESUIIntegrationTest.login(getDriver(), getBaseUrl(), getCurrentUsername(), getCurrentPassword());
+        DSUIIntegrationTest.login(getDriver(), getBaseUrl(), getCurrentUsername(), getCurrentPassword());
     }
 
-    @Test(groups = "wso2.ues.logout", description = "logout from UES Portal", dependsOnMethods = "testLoginToPortal")
+    @Test(groups = "wso2.ds.logout", description = "logout from DS Portal", dependsOnMethods = "testLoginToPortal")
     public void testLogoutPortal() throws Exception {
-        UESUIIntegrationTest.logout(getDriver(), getBaseUrl(), getCurrentUsername());
+        DSUIIntegrationTest.logout(getDriver(), getBaseUrl(), getCurrentUsername());
     }
 
     @AfterClass(alwaysRun = true)

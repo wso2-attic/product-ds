@@ -31,7 +31,7 @@
     </listeners>
 
 
-    <test name="UES-UI-tests" parallel="false" verbose="2" preserve-order="true">
+    <test name="DS-UI-tests" parallel="false" verbose="2" preserve-order="true">
         <!--<packages>-->
         <!--<package name="org.wso2.ds.ui.integration.test.login.*"/>-->
         <!--</packages>>-->
@@ -39,8 +39,7 @@
             <!--class name="org.wso2.ds.ui.integration.test.login.LoginAdminTest"/-->
             <!--class name="org.wso2.ds.ui.integration.test.login.LoginPortalTest"/-->
             <!--class name="org.wso2.ds.ui.integration.test.common.AddUserTest"/-->
-            <!--class name="org.wso2.ds.ui.integration.test.dashboard.AddDeleteDashboardTest"/-->
-            <class name="org.wso2.ds.ui.integration.test.dashboard.AddgadgetToDashboardtest"/>
+            <class name="org.wso2.ds.ui.integration.test.dashboard.AddDeleteDashboardTest"/>
         </classes>
 
     </test>

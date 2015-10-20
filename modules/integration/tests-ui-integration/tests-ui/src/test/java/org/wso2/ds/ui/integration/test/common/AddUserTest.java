@@ -23,11 +23,11 @@ package org.wso2.ds.ui.integration.test.common;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
-import org.wso2.ds.ui.integration.util.UESUIIntegrationTest;
+import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 
 import static org.testng.Assert.assertEquals;
 
-public class AddUserTest extends UESUIIntegrationTest {
+public class AddUserTest extends DSUIIntegrationTest {
     private static final String USER_NAME = "sampleuser1";
     private static final String PASSWORD = "sampleuser1";
     private static final String RETYPE_PASSWORD = "sampleuser1";
@@ -36,10 +36,10 @@ public class AddUserTest extends UESUIIntegrationTest {
         super();
     }
 
-    @Test(groups = "wso2.ues.common", description = "Adding user to Dashboard server and trying to login with newly " +
+    @Test(groups = "wso2.ds.common", description = "Adding user to Dashboard server and trying to login with newly " +
             "created user to portal")
-    public void testAddUserToUES() throws Exception {
-        UESUIIntegrationTest.loginToAdminConsole(getDriver(), getBaseUrl(), getCurrentUsername(), getCurrentPassword());
+    public void testAddUserToDS() throws Exception {
+        DSUIIntegrationTest.loginToAdminConsole(getDriver(), getBaseUrl(), getCurrentUsername(), getCurrentPassword());
         getDriver().findElement(By.cssSelector("a[href=\"../userstore/add-user-role" +
                 ".jsp?region=region1&item=user_mgt_menu_add\"]")).click();
         getDriver().findElement(By.cssSelector("a[href=\"../user/add-step1.jsp\"]")).click();
@@ -54,7 +54,7 @@ public class AddUserTest extends UESUIIntegrationTest {
         getDriver().findElement(By.cssSelector("td.buttonRow > input.button")).click();
         getDriver().findElement(By.cssSelector("button[type=\"button\"]")).click();
         getDriver().findElement(By.cssSelector(".right > a")).click();
-        UESUIIntegrationTest.login(getDriver(), getBaseUrl(), USER_NAME, PASSWORD);
+        DSUIIntegrationTest.login(getDriver(), getBaseUrl(), USER_NAME, PASSWORD);
         assertEquals(USER_NAME, getDriver().findElement(By.cssSelector(".dropdown-toggle")).getText(), "Expected " +
                 "Username is not matched");
 
@@ -63,7 +63,7 @@ public class AddUserTest extends UESUIIntegrationTest {
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
         try {
-            UESUIIntegrationTest.logout(getDriver(), getBaseUrl(), USER_NAME);
+            DSUIIntegrationTest.logout(getDriver(), getBaseUrl(), USER_NAME);
         } finally {
             getDriver().quit();
         }

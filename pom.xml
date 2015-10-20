@@ -25,6 +25,7 @@
         <module>modules/features/ues</module>
         <module>modules/p2-profile-gen</module>
         <module>modules/distribution</module>
+        <module>modules/integration</module>
     </modules>
     <build>
         <extensions>
@@ -268,7 +269,7 @@
             <dependency>
                 <groupId>org.wso2.ds</groupId>
                 <artifactId>org.wso2.ds.admin.styles</artifactId>
-                <version>${product.ues.version}</version>
+                <version>${product.ds.version}</version>
             </dependency>
             <!--Test framework dependencies -->
             <dependency>
@@ -393,7 +394,7 @@
             <dependency>
                 <groupId>org.wso2.ds</groupId>
                 <artifactId>org.wso2.ds.integration.common.clients</artifactId>
-                <version>${product.ues.version}</version>
+                <version>${product.ds.version}</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
@@ -404,13 +405,13 @@
             <dependency>
                 <groupId>org.wso2.ds</groupId>
                 <artifactId>ui-test-utils</artifactId>
-                <version>${product.ues.version}</version>
+                <version>${product.ds.version}</version>
                 <!--<scope>test</scope>-->
             </dependency>
             <dependency>
                 <groupId>org.wso2.ds</groupId>
                 <artifactId>org.wso2.ds.integration.common.utils</artifactId>
-                <version>${product.ues.version}</version>
+                <version>${product.ds.version}</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
@@ -549,7 +550,7 @@
         <carbon.automationutils.version>4.3.0</carbon.automationutils.version>
 
         <carbon.dashboards.version>1.0.7-SNAPSHOT</carbon.dashboards.version>
-        <product.ues.version>2.0.0-SNAPSHOT</product.ues.version>
+        <product.ds.version>2.0.0-SNAPSHOT</product.ds.version>
 
         <test.framework.version>4.4.2</test.framework.version>
         <automation.utils.version>4.4.2</automation.utils.version>

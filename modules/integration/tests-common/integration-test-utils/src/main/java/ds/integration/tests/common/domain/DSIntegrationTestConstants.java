@@ -18,6 +18,6 @@
 
 package ds.integration.tests.common.domain;
 
-public class UESIntegrationTestConstants {
-    public final static String UES_PRODUCT_NAME = "UES";
+public class DSIntegrationTestConstants {
+    public final static String DS_PRODUCT_NAME = "DS";
 }

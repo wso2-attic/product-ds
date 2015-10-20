@@ -72,7 +72,7 @@
                         <property>
                             <name>server.list</name>
                             <value>
-                                UES
+                                DS
                             </value>
                         </property>
                         <property>
@@ -132,7 +132,7 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/src/test/resources/artifacts/UES/jar
+                            <outputDirectory>${basedir}/src/test/resources/artifacts/DS/jar
                             </outputDirectory>
                             <includeTypes>jar</includeTypes>
                             <includeArtifactIds>mysql-connector-java

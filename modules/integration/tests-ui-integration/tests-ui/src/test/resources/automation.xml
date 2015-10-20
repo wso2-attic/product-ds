@@ -189,7 +189,7 @@
         <!--
         cluster instance details to be used to platform test execution
         -->
-        <productGroup name="UES" clusteringEnabled="false" default="true">
+        <productGroup name="DS" clusteringEnabled="false" default="true">
 
             <instance name="lbw001" type="lb_worker_manager" nonBlockingTransportEnabled="true">
                 <hosts>
@@ -204,7 +204,7 @@
 
                 </properties>
             </instance>
-            <instance name="ues001" type="manager" nonBlockingTransportEnabled="false">
+            <instance name="ds001" type="manager" nonBlockingTransportEnabled="false">
                 <hosts>
                     <host type="default">localhost</host>
                 </hosts>
@@ -216,7 +216,7 @@
                 </properties>
             </instance>
 
-            <instance name="ues002" type="standalone" nonBlockingTransportEnabled="false">
+            <instance name="ds002" type="standalone" nonBlockingTransportEnabled="false">
                 <hosts>
                     <host type="default">localhost</host>
                 </hosts>
@@ -227,7 +227,7 @@
                 <properties>
                 </properties>
             </instance>
-            <instance name="ues003" type="worker" nonBlockingTransportEnabled="false">
+            <instance name="ds003" type="worker" nonBlockingTransportEnabled="false">
                 <hosts>
                     <host type="default">localhost</host>
                 </hosts>

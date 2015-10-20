@@ -20,19 +20,19 @@ package org.wso2.ds.ui.integration.test.login;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
-import org.wso2.ds.ui.integration.util.UESUIIntegrationTest;
+import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 
-public class LoginAdminTest extends UESUIIntegrationTest {
+public class LoginAdminTest extends DSUIIntegrationTest {
 
-    @Test(groups = "wso2.ues.login", description = "verify login to admin console")
-    public void testLoginAdminTestcaseUES() throws Exception {
-        UESUIIntegrationTest.loginToAdminConsole(getDriver(), getBaseUrl(), getCurrentUsername(), getCurrentPassword());
+    @Test(groups = "wso2.ds.login", description = "verify login to admin console")
+    public void testLoginAdminTestcaseDS() throws Exception {
+        DSUIIntegrationTest.loginToAdminConsole(getDriver(), getBaseUrl(), getCurrentUsername(), getCurrentPassword());
     }
 
-    @Test(groups = "wso2.ues.login", description = "verify logout from admin console", dependsOnMethods =
-            "testLoginAdminTestcaseUES")
-    public void testLogoutAdminTestcaseUES() throws Exception {
-        UESUIIntegrationTest.logoutFromAdminConsole(getDriver(), getBaseUrl());
+    @Test(groups = "wso2.ds.login", description = "verify logout from admin console", dependsOnMethods =
+            "testLoginAdminTestcaseDS")
+    public void testLogoutAdminTestcaseDS() throws Exception {
+        DSUIIntegrationTest.logoutFromAdminConsole(getDriver(), getBaseUrl());
     }
 
     @AfterClass(alwaysRun = true)
