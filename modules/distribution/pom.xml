@@ -106,14 +106,14 @@
                                 <mkdir dir="${tempdir}" />
                                 <unzip dest="${tempdir}">
                                     <fileset dir="target">
-                                        <include name="${project.artifactId}-${product.ues.version}.zip" />
+                                        <include name="${project.artifactId}-${product.ds.version}.zip" />
                                     </fileset>
                                 </unzip>
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/components" overwrite="true">
-                                    <fileset dir="${tempdir}/${project.artifactId}-${product.ues.version}/repository/components">
+                                    <fileset dir="${tempdir}/${project.artifactId}-${product.ds.version}/repository/components">
                                     </fileset>
                                 </copy>
-                                <delete file="target/${project.artifactId}-${product.ues.version}.zip" />
+                                <delete file="target/${project.artifactId}-${product.ds.version}.zip" />
                                 <delete dir="${tempdir}" />
                             </tasks>
                         </configuration>
@@ -156,7 +156,7 @@
                                 <delete dir="target/dependency-maven-plugin-markers" />
                                 <delete dir="target/maven-archiver" />
                                 <delete dir="target/wso2carbon-core-${carbon.kernel.version}" />
-                                <delete file="target/${project.artifactId}-${product.ues.version}.jar" />
+                                <delete file="target/${project.artifactId}-${product.ds.version}.jar" />
                                 <delete dir="target/sources" />
                                 <delete dir="target/site" />
                                 <delete dir="target/antrun" />

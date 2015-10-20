@@ -74,7 +74,7 @@
                             <publishArtifactRepository>true</publishArtifactRepository>
                             <featureArtifacts>
                                 <feaureArtifactDef>
-                                    org.wso2.ds:org.wso2.ds.feature:${product.ues.version}
+                                    org.wso2.ds:org.wso2.ds.feature:${product.ds.version}
                                 </feaureArtifactDef>
                                 <featureArtifactDef>org.jaggeryjs:org.jaggeryjs.feature:${jaggery.feature.version}
                                 </featureArtifactDef>
@@ -247,7 +247,7 @@
                             <features>
                                 <feature>
                                     <id>org.wso2.ds.feature.group</id>
-                                    <version>${product.ues.version}</version>
+                                    <version>${product.ds.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.jaggeryjs.feature.group</id>

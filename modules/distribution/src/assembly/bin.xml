@@ -247,7 +247,7 @@
         </fileSet>
         <fileSet>
             <directory>src/repository/conf/security</directory>
-            <outputDirectory>${project.artifactId}-${product.ues.version}/repository/conf/identity/</outputDirectory>
+            <outputDirectory>${project.artifactId}-${product.ds.version}/repository/conf/identity/</outputDirectory>
             <includes>
                 <include>**/application-authenticators.xml</include>
                 <!-- Replacement for application-authenticators.xml -->
