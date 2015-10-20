@@ -16,7 +16,7 @@
 *under the License.
 */
 
-package ues.integration.tests.common.domain;
+package ds.integration.tests.common.domain;
 
 public class UESIntegrationTestConstants {
     public final static String UES_PRODUCT_NAME = "UES";

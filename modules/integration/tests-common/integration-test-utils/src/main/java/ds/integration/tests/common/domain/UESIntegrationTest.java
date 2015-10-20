@@ -15,7 +15,7 @@
 *specific language governing permissions and limitations
 *under the License.
 */
-package ues.integration.tests.common.domain;
+package ds.integration.tests.common.domain;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

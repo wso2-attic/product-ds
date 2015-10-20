@@ -25,7 +25,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.extensions.selenium.BrowserManager;
-import ues.integration.tests.common.domain.UESIntegrationTest;
+import ds.integration.tests.common.domain.UESIntegrationTest;
 
 import javax.xml.xpath.XPathExpressionException;
 import java.net.MalformedURLException;
