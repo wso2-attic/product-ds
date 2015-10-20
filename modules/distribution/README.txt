@@ -1,9 +1,9 @@
-WSO2 User Engagement Server ${product.version}
+WSO2 Dashboard Server ${product.version}
 ----------------------
 
 ${buildNumber}
 
-Welcome to the WSO2 User Engagement Server ${product.version} release
+Welcome to the WSO2 Dashboard Server ${product.version} release
 
 Key Features
 ------------
@@ -41,10 +41,10 @@ Known Issues
 https://wso2.org/jira/issues/?filter=11174
 
 
-WSO2 User Engagement Server Binary Distribution Directory Structure
+WSO2 Dashboard Server Binary Distribution Directory Structure
 -----------------------------------------------------
 
-	UES_HOME
+	DS_HOME
         .
         ├── bin   //executables
         ├── dbscripts        //DBScripts
@@ -165,7 +165,7 @@ Training
 --------
 
 WSO2 Inc. offers a variety of professional Training Programs, including
-training on general Web services as well as WSO2 User Engagement Server, Apache Axis2,
+training on general Web services as well as WSO2 Dashboard Server, Apache Axis2,
 Data Services and a number of other products.
 
 For additional support information please refer to

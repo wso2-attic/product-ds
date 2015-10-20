@@ -20,8 +20,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
-        <groupId>org.wso2.ues</groupId>
-        <artifactId>wso2ues-integration</artifactId>
+        <groupId>org.wso2.ds</groupId>
+        <artifactId>tests-ui-integration</artifactId>
         <version>2.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
@@ -56,7 +56,7 @@
                         <property>
                             <name>carbon.zip</name>
                             <value>
-                                ${basedir}/../../../distribution/target/wso2ues-2.0.0-SNAPSHOT.zip
+                                ${basedir}/../../../distribution/target/wso2ds-2.0.0-SNAPSHOT.zip
                             </value>
                         </property>
                         <property>
@@ -72,7 +72,7 @@
                         <property>
                             <name>server.list</name>
                             <value>
-                                UES
+                                DS
                             </value>
                         </property>
                         <property>
@@ -132,7 +132,7 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/src/test/resources/artifacts/UES/jar
+                            <outputDirectory>${basedir}/src/test/resources/artifacts/DS/jar
                             </outputDirectory>
                             <includeTypes>jar</includeTypes>
                             <includeArtifactIds>mysql-connector-java
@@ -163,8 +163,8 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>org.wso2.ues</groupId>
-                                    <artifactId>wso2ues</artifactId>
+                                    <groupId>org.wso2.ds</groupId>
+                                    <artifactId>wso2ds</artifactId>
                                     <version>2.0.0-SNAPSHOT</version>
                                     <type>zip</type>
                                     <overWrite>true</overWrite>
@@ -203,7 +203,7 @@
                             <resources>
                                 <resource>
                                     <directory>
-                                        ${basedir}/target/tobeCopied/wso2ues-2.0.0-SNAPSHOT/repository/resources/security/
+                                        ${basedir}/target/tobeCopied/wso2ds-2.0.0-SNAPSHOT/repository/resources/security/
                                     </directory>
                                     <includes>
                                         <include>**/*.jks</include>
@@ -224,7 +224,7 @@
                             <resources>
                                 <resource>
                                     <directory>
-                                        ${basedir}/target/tobeCopied/wso2ues-2.0.0-SNAPSHOT/repository/deployment/client/modules
+                                        ${basedir}/target/tobeCopied/wso2ds-2.0.0-SNAPSHOT/repository/deployment/client/modules
                                     </directory>
                                     <includes>
                                         <include>**/*.mar</include>
@@ -269,8 +269,8 @@
             <artifactId>org.wso2.carbon.integration.common.tests</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.wso2.ues</groupId>
-            <artifactId>org.wso2.ues.integration.common.clients</artifactId>
+            <groupId>org.wso2.ds</groupId>
+            <artifactId>org.wso2.ds.integration.common.clients</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>org.wso2.carbon</groupId>
@@ -279,8 +279,8 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.wso2.ues</groupId>
-            <artifactId>org.wso2.ues.integration.common.utils</artifactId>
+            <groupId>org.wso2.ds</groupId>
+            <artifactId>org.wso2.ds.integration.common.utils</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>org.wso2.carbon</groupId>
@@ -289,7 +289,7 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.wso2.ues</groupId>
+            <groupId>org.wso2.ds</groupId>
             <artifactId>ui-test-utils</artifactId>
         </dependency>
         <dependency>

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>org.wso2.ues</groupId>
-        <artifactId>wso2ues-parent</artifactId>
+        <groupId>org.wso2.ds</groupId>
+        <artifactId>wso2ds-parent</artifactId>
         <version>2.0.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>wso2ues</artifactId>
+    <artifactId>wso2ds</artifactId>
     <packaging>jar</packaging>
-    <name>WSO2 User Engagement Server - Distribution</name>
-    <description>User Engagement Server Distribution</description>
+    <name>WSO2 Dashboard Server - Distribution</name>
+    <description>Dashboard Server Distribution</description>
     <dependencies>
         <dependency>
             <groupId>javax.el</groupId>
@@ -106,14 +106,14 @@
                                 <mkdir dir="${tempdir}" />
                                 <unzip dest="${tempdir}">
                                     <fileset dir="target">
-                                        <include name="${project.artifactId}-${product.ues.version}.zip" />
+                                        <include name="${project.artifactId}-${product.ds.version}.zip" />
                                     </fileset>
                                 </unzip>
                                 <copy todir="target/wso2carbon-core-${carbon.kernel.version}/repository/components" overwrite="true">
-                                    <fileset dir="${tempdir}/${project.artifactId}-${product.ues.version}/repository/components">
+                                    <fileset dir="${tempdir}/${project.artifactId}-${product.ds.version}/repository/components">
                                     </fileset>
                                 </copy>
-                                <delete file="target/${project.artifactId}-${product.ues.version}.zip" />
+                                <delete file="target/${project.artifactId}-${product.ds.version}.zip" />
                                 <delete dir="${tempdir}" />
                             </tasks>
                         </configuration>
@@ -156,7 +156,7 @@
                                 <delete dir="target/dependency-maven-plugin-markers" />
                                 <delete dir="target/maven-archiver" />
                                 <delete dir="target/wso2carbon-core-${carbon.kernel.version}" />
-                                <delete file="target/${project.artifactId}-${product.ues.version}.jar" />
+                                <delete file="target/${project.artifactId}-${product.ds.version}.jar" />
                                 <delete dir="target/sources" />
                                 <delete dir="target/site" />
                                 <delete dir="target/antrun" />

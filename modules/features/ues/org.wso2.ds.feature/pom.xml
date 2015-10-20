@@ -17,20 +17,20 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
-        <groupId>org.wso2.ues</groupId>
-        <artifactId>wso2ues-features</artifactId>
+        <groupId>org.wso2.ds</groupId>
+        <artifactId>wso2ds-features</artifactId>
         <version>2.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>org.wso2.ues.feature</artifactId>
+    <artifactId>org.wso2.ds.feature</artifactId>
     <packaging>pom</packaging>
-    <name>WSO2 Carbon - UES feature</name>
+    <name>WSO2 Carbon - DS feature</name>
     <url>http://wso2.org</url>
     <dependencies>
         <dependency>
-            <groupId>org.wso2.ues</groupId>
-            <artifactId>org.wso2.ues.admin.styles</artifactId>
+            <groupId>org.wso2.ds</groupId>
+            <artifactId>org.wso2.ds.admin.styles</artifactId>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -58,7 +58,7 @@
                             <goal>p2-feature-gen</goal>
                         </goals>
                         <configuration>
-                            <id>org.wso2.ues</id>
+                            <id>org.wso2.ds</id>
                             <propertiesFile>../../../../etc/feature.properties</propertiesFile>
                             <adviceFile>
                                 <properties>
@@ -67,7 +67,7 @@
                                 </properties>
                             </adviceFile>
                             <bundles>
-                                <bundleDef>org.wso2.ues:org.wso2.ues.admin.styles</bundleDef>
+                                <bundleDef>org.wso2.ds:org.wso2.ds.admin.styles</bundleDef>
                                 <bundleDef>org.slf4j:slf4j-log4j12</bundleDef>
                                 <bundleDef>org.slf4j:slf4j-api</bundleDef>
                                 <bundleDef>net.sf.ehcache.wso2:ehcache</bundleDef>

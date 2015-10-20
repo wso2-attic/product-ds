@@ -15,7 +15,7 @@
 *specific language governing permissions and limitations
 *under the License.
 */
-package ues.integration.tests.common.domain;
+package ds.integration.tests.common.domain;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -29,36 +29,36 @@ import org.wso2.carbon.automation.test.utils.common.TestConfigurationProvider;
 
 import javax.xml.xpath.XPathExpressionException;
 
-public abstract class UESIntegrationTest {
-    private static final Log LOG = LogFactory.getLog(UESIntegrationTest.class);
+public abstract class DSIntegrationTest {
+    private static final Log LOG = LogFactory.getLog(DSIntegrationTest.class);
     protected final TestUserMode userMode;
     private User userInfo = null;
-    private AutomationContext uesContext = null;
+    private AutomationContext dsContext = null;
     private Tenant tenantInfo = null;
     private String baseUrl = null;
 
-    public UESIntegrationTest(TestUserMode userMode) {
+    public DSIntegrationTest(TestUserMode userMode) {
         this.userMode = userMode;
     }
 
-    public UESIntegrationTest() {
+    public DSIntegrationTest() {
         this(TestUserMode.SUPER_TENANT_ADMIN);
     }
 
-    private AutomationContext getUesContext() throws XPathExpressionException {
-        if (uesContext == null) {
-            uesContext = new AutomationContext(UESIntegrationTestConstants.UES_PRODUCT_NAME, this.userMode);
+    private AutomationContext getDsContext() throws XPathExpressionException {
+        if (dsContext == null) {
+            dsContext = new AutomationContext(DSIntegrationTestConstants.DS_PRODUCT_NAME, this.userMode);
         }
-        return uesContext;
+        return dsContext;
     }
 
     public int getMaxWaitTime() throws XPathExpressionException {
-        return Integer.parseInt(getUesContext().getConfigurationValue("//maximumWaitingTime"));
+        return Integer.parseInt(getDsContext().getConfigurationValue("//maximumWaitingTime"));
     }
 
     public Tenant getCurrentTenantInfo() throws XPathExpressionException {
         if (tenantInfo == null) {
-            tenantInfo = getUesContext().getContextTenant();
+            tenantInfo = getDsContext().getContextTenant();
         }
         return tenantInfo;
     }
@@ -79,19 +79,19 @@ public abstract class UESIntegrationTest {
     }
 
     protected String getServiceUrlHttp(String serviceName) throws XPathExpressionException {
-        String serviceUrl = uesContext.getContextUrls().getServiceUrl() + "/" + serviceName;
+        String serviceUrl = getDsContext().getContextUrls().getServiceUrl() + "/" + serviceName;
         validateServiceUrl(serviceUrl, tenantInfo);
         return serviceUrl;
     }
 
     protected String getServiceUrlHttps(String serviceName) throws XPathExpressionException {
-        String serviceUrl = uesContext.getContextUrls().getSecureServiceUrl() + "/" + serviceName;
+        String serviceUrl = getDsContext().getContextUrls().getSecureServiceUrl() + "/" + serviceName;
         validateServiceUrl(serviceUrl, tenantInfo);
         return serviceUrl;
     }
 
     protected String getResourceLocation() throws XPathExpressionException {
-        return TestConfigurationProvider.getResourceLocation(UESIntegrationTestConstants.UES_PRODUCT_NAME);
+        return TestConfigurationProvider.getResourceLocation(DSIntegrationTestConstants.DS_PRODUCT_NAME);
     }
 
     protected boolean isTenant() throws Exception {
@@ -114,7 +114,7 @@ public abstract class UESIntegrationTest {
     }
 
     protected String getBackEndUrl() throws Exception {
-        return getUesContext().getContextUrls().getBackEndUrl();
+        return getDsContext().getContextUrls().getBackEndUrl();
     }
 
     /**
@@ -124,7 +124,7 @@ public abstract class UESIntegrationTest {
      */
     public String getBaseUrl() throws Exception {
         if (baseUrl == null) {
-            baseUrl = UrlGenerationUtil.getWebAppURL(getUesContext().getContextTenant(), getUesContext().getInstance());
+            baseUrl = UrlGenerationUtil.getWebAppURL(getDsContext().getContextTenant(), getDsContext().getInstance());
         }
         return baseUrl;
     }

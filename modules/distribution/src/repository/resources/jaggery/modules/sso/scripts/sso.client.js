@@ -8,7 +8,7 @@ var client = {};
 
 (function (client) {
 
-    var Util = Packages.org.wso2.ues.sso.common.util.Util,
+    var Util = Packages.org.wso2.ds.sso.common.util.Util,
         carbon = require('carbon'),
         log = new Log();
 
@@ -54,7 +54,7 @@ var client = {};
     client.getEncodedSAMLAuthRequest = function (issuerId) {
         return Util.encode(
             Util.marshall(
-                new Packages.org.wso2.ues.sso.common.builders.AuthReqBuilder().buildAuthenticationRequest(issuerId)
+                new Packages.org.wso2.ds.sso.common.builders.AuthReqBuilder().buildAuthenticationRequest(issuerId)
             ));
     };
 
@@ -64,8 +64,8 @@ var client = {};
     client.getEncodedSAMLLogoutRequest = function (user, sessionIndex, issuerId) {
         return Util.encode(
             Util.marshall(
-                new Packages.org.wso2.ues.sso.common.builders.LogoutRequestBuilder().buildLogoutRequest(user, sessionIndex,
-                    Packages.org.wso2.ues.sso.common.constants.SSOConstants.LOGOUT_USER,
+                new Packages.org.wso2.ds.sso.common.builders.LogoutRequestBuilder().buildLogoutRequest(user, sessionIndex,
+                    Packages.org.wso2.ds.sso.common.constants.SSOConstants.LOGOUT_USER,
                     issuerId)));
     };
 

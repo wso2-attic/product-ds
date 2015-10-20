@@ -15,7 +15,7 @@
 *specific language governing permissions and limitations
 *under the License.
 */
-package org.wso2.ues.integration.common.clients;
+package org.wso2.ds.integration.common.clients;
 
 import org.apache.axis2.AxisFault;
 import org.apache.commons.logging.Log;
