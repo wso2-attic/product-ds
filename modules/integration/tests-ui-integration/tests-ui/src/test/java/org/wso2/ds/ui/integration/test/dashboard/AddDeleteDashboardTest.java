@@ -16,7 +16,7 @@
 *under the License.
 */
 
-package org.wso2.ues.ui.integration.test.dashboard;
+package org.wso2.ds.ui.integration.test.dashboard;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -26,13 +26,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.registry.resource.stub.beans.xsd.CollectionContentBean;
-import org.wso2.ues.integration.common.clients.ResourceAdminServiceClient;
-import org.wso2.ues.ui.integration.util.UESUIIntegrationTest;
+import org.wso2.ds.integration.common.clients.ResourceAdminServiceClient;
+import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 
-public class AddDeleteDashboardTest extends UESUIIntegrationTest {
+public class AddDeleteDashboardTest extends DSUIIntegrationTest {
 
     private static final Log LOG = LogFactory.getLog(AddDeleteDashboardTest.class);
     private static final String DASHBOARD_TITLE1 = "sampledashboard1";
@@ -60,10 +60,10 @@ public class AddDeleteDashboardTest extends UESUIIntegrationTest {
         resourceAdminServiceClient = new ResourceAdminServiceClient(backendURL, getCurrentUsername(),
                 getCurrentPassword());
         resourcePath = DASHBOARD_REGISTRY_BASE_PATH + dashboardTitle.toLowerCase();
-        UESUIIntegrationTest.login(getDriver(), getBaseUrl(), getCurrentUsername(), getCurrentPassword());
+        DSUIIntegrationTest.login(getDriver(), getBaseUrl(), getCurrentUsername(), getCurrentPassword());
     }
 
-    @Test(groups = "wso2.ues.dashboard", description = "Adding new dashboard for dashboard server")
+    @Test(groups = "wso2.ds.dashboard", description = "Adding new dashboard for dashboard server")
     public void testAddDashboardNew() throws Exception {
         getDriver().findElement(By.cssSelector("[href='create-dashboard']")).click();
         getDriver().findElement(By.id("ues-dashboard-title")).clear();
@@ -80,7 +80,7 @@ public class AddDeleteDashboardTest extends UESUIIntegrationTest {
         assertEquals(DASHBOARD_DESCRIPTION, webElement.findElement(By.cssSelector("p")).getText());
     }
 
-    @Test(groups = "wso2.ues.dashboard", description = "Deleting the existing dashboard from dashboard server",
+    @Test(groups = "wso2.ds.dashboard", description = "Deleting the existing dashboard from dashboard server",
             dependsOnMethods = "testAddDashboardNew")
     public void testDeleteDashboardNew() throws Exception {
         Boolean isResourceExist = false;
@@ -107,7 +107,7 @@ public class AddDeleteDashboardTest extends UESUIIntegrationTest {
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
         try {
-            UESUIIntegrationTest.logout(getDriver(), getBaseUrl(), getCurrentUsername());
+            DSUIIntegrationTest.logout(getDriver(), getBaseUrl(), getCurrentUsername());
         } finally {
             getDriver().quit();
         }

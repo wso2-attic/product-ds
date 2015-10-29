@@ -7,13 +7,13 @@
         <version>1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.wso2.ues</groupId>
-    <artifactId>wso2ues-parent</artifactId>
+    <groupId>org.wso2.ds</groupId>
+    <artifactId>wso2ds-parent</artifactId>
     <packaging>pom</packaging>
     <version>2.0.0-SNAPSHOT</version>
-    <name>WSO2 User Engagement Server</name>
+    <name>WSO2 Dashboard Server</name>
     <url>http://wso2.com/products/user-engagement-server</url>
-    <description>WSO2 User Engagement Server</description>
+    <description>WSO2 Dashboard Server</description>
     <licenses>
         <license>
             <name>Apache License Version 2.0</name>
@@ -25,6 +25,7 @@
         <module>modules/features/ues</module>
         <module>modules/p2-profile-gen</module>
         <module>modules/distribution</module>
+        <module>modules/integration</module>
     </modules>
     <build>
         <extensions>
@@ -266,9 +267,9 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>org.wso2.ues</groupId>
-                <artifactId>org.wso2.ues.admin.styles</artifactId>
-                <version>${product.ues.version}</version>
+                <groupId>org.wso2.ds</groupId>
+                <artifactId>org.wso2.ds.admin.styles</artifactId>
+                <version>${product.ds.version}</version>
             </dependency>
             <!--Test framework dependencies -->
             <dependency>
@@ -391,9 +392,9 @@
                 <version>${commons-io.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.wso2.ues</groupId>
-                <artifactId>org.wso2.ues.integration.common.clients</artifactId>
-                <version>${product.ues.version}</version>
+                <groupId>org.wso2.ds</groupId>
+                <artifactId>org.wso2.ds.integration.common.clients</artifactId>
+                <version>${product.ds.version}</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
@@ -402,15 +403,15 @@
                 <version>${carbon.registry.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.wso2.ues</groupId>
+                <groupId>org.wso2.ds</groupId>
                 <artifactId>ui-test-utils</artifactId>
-                <version>${product.ues.version}</version>
+                <version>${product.ds.version}</version>
                 <!--<scope>test</scope>-->
             </dependency>
             <dependency>
-                <groupId>org.wso2.ues</groupId>
-                <artifactId>org.wso2.ues.integration.common.utils</artifactId>
-                <version>${product.ues.version}</version>
+                <groupId>org.wso2.ds</groupId>
+                <artifactId>org.wso2.ds.integration.common.utils</artifactId>
+                <version>${product.ds.version}</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
@@ -548,8 +549,8 @@
         <carbon.automation.version>4.3.1</carbon.automation.version>
         <carbon.automationutils.version>4.3.0</carbon.automationutils.version>
 
-        <carbon.dashboards.version>1.0.7-SNAPSHOT</carbon.dashboards.version>
-        <product.ues.version>2.0.0-SNAPSHOT</product.ues.version>
+        <carbon.dashboards.version>1.0.8-SNAPSHOT</carbon.dashboards.version>
+        <product.ds.version>2.0.0-SNAPSHOT</product.ds.version>
 
         <test.framework.version>4.4.2</test.framework.version>
         <automation.utils.version>4.4.2</automation.utils.version>

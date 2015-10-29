@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>org.wso2.ues</groupId>
-        <artifactId>wso2ues-parent</artifactId>
+        <groupId>org.wso2.ds</groupId>
+        <artifactId>wso2ds-parent</artifactId>
         <version>2.0.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>wso2ues-profile-gen</artifactId>
+    <artifactId>wso2ds-profile-gen</artifactId>
     <packaging>pom</packaging>
-    <name>UES - Profile Generation</name>
+    <name>DS - Profile Generation</name>
     <build>
         <plugins>
             <plugin>
@@ -74,7 +74,7 @@
                             <publishArtifactRepository>true</publishArtifactRepository>
                             <featureArtifacts>
                                 <feaureArtifactDef>
-                                    org.wso2.ues:org.wso2.ues.feature:${product.ues.version}
+                                    org.wso2.ds:org.wso2.ds.feature:${product.ds.version}
                                 </feaureArtifactDef>
                                 <featureArtifactDef>org.jaggeryjs:org.jaggeryjs.feature:${jaggery.feature.version}
                                 </featureArtifactDef>
@@ -246,8 +246,8 @@
                             <deleteOldProfileFiles>true</deleteOldProfileFiles>
                             <features>
                                 <feature>
-                                    <id>org.wso2.ues.feature.group</id>
-                                    <version>${product.ues.version}</version>
+                                    <id>org.wso2.ds.feature.group</id>
+                                    <version>${product.ds.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.jaggeryjs.feature.group</id>

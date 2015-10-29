@@ -343,8 +343,8 @@ org.wso2.ciphertool-1.0.0-wso2v2.jar                                            
 org.wso2.securevault_1.0.0.wso2v2.jar                                           bundle         apache2   768
 org.wso2.stratos.identity.saml2.sso.mgt.ui_2.2.0.jar                            bundle         apache2   2516
 org.wso2.stratos.identity.saml2.sso.mgt_2.2.0.jar                               bundle         apache2   2523
-org.wso2.ues.admin.styles_1.5.0.jar                                             bundle         apache2   3261
-org.wso2.ues.sso.common_1.5.0.jar                                               bundle         apache2   3260
+org.wso2.ds.admin.styles_1.5.0.jar                                             bundle         apache2   3261
+org.wso2.ds.sso.common_1.5.0.jar                                               bundle         apache2   3260
 pdepublishing-ant.jar                                                           jar            epl1      524
 pdepublishing.jar                                                               jar            epl1      525
 poi-ooxml_3.9.0.wso2v1.jar                                                      bundle         apache2   1947
