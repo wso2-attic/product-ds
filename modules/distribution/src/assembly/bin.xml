@@ -256,7 +256,7 @@
         </fileSet>
         <fileSet>
             <directory>../samples</directory>
-            <outputDirectory>${project.artifactId}-${product.ues.version}/samples/</outputDirectory>
+            <outputDirectory>${project.artifactId}-${product.ds.version}/samples/</outputDirectory>
             <includes>
                 <include>*/**</include>
             </includes>

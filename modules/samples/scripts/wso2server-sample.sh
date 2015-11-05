@@ -36,9 +36,10 @@ path=$(dirname "$script")
 pathEdited=$(dirname "$path")
 
 # Defining Sample data and directories' paths
-dropLocation="$pathEdited/repository/deployment/server/jaggeryapps/portal/store/carbon.super/gadget"
+gadgetDropLocation="$pathEdited/repository/deployment/server/jaggeryapps/portal/store/carbon.super/gadget"
 sampleConfig="$pathEdited/repository/deployment/server/jaggeryapps/portal/configs/sample.json"
 jaggeryConfig="$pathEdited/repository/deployment/server/jaggeryapps/portal/jaggery.conf"
+scriptDropLocation="$pathEdited/repository/deployment/server/jaggeryapps/portal/js"
 
 # Process the user input
 sample=""
@@ -54,14 +55,14 @@ do
         noDigits="$(echo $c | sed 's/[[:digit:]]//g')"
         if [ -z $noDigits ]; then
             sample=""
-            sampleFolder="$pathEdited/samples/s$c/*"
+            sampleFolder="$pathEdited/samples/s$c"
         else
            echo "*** Sample number to be started is not specified *** Please specify a sample number to be started with the -sn option"
            echo "Example, to run sample 0: wso2server-samples.sh -sn 0"
            exit
         fi
     else
-        sampleFolder="$pathEdited/samples/s$c/*"
+        sampleFolder="$pathEdited/samples/s$c"
     fi
 done
 
@@ -72,10 +73,8 @@ if [ -z $validate ]; then
 fi
 
 echo "*** Coping the sample files ***"
-cp -r $sampleFolder $dropLocation
-
-echo "*** Adding init script into jaggery configuration file ***"
-sed -i '$s/}/,\n"initScripts":["js\/sample.js"]\n}/gw output' $jaggeryConfig
+cp -r $sampleFolder/gadgets/* $gadgetDropLocation
+cp -r $sampleFolder/scripts/* $scriptDropLocation
 
 echo "*** Editing the sample.json file ***"
 sed -i 's/false/true/gw output' $sampleConfig
