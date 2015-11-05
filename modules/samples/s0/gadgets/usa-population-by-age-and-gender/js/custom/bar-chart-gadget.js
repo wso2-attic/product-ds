@@ -335,13 +335,13 @@ var initBarChart;
                 if (parent) {
                     path = path.replace("-> " + parent, "");
                 } else {
-                    path = getStateNameByStateId(stateId)//stateId;
+                    path = getStateNameByStateId(stateId);
                 }
             } else {
                 if (parent) {
                     path = path + "-> " + parent;
                 } else {
-                    path = getStateNameByStateId(stateId)//stateId;
+                    path = getStateNameByStateId(stateId);
                 }
                 var newNode = {
                     state: stateId,
