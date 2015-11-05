@@ -496,7 +496,7 @@ var initDonutChart;
 
             arcGroup.selectAll("circle").remove();
             totalValue.text(function () {
-                return totalPopulation.toFixed(1);
+                return totalPopulation;
             });
 
             arcGroup.selectAll("path").remove();
@@ -512,24 +512,6 @@ var initDonutChart;
                 .transition()
                 .duration(tweenDuration)
                 .attrTween("d", pieTween);
-
-            var texts = arcGroup.selectAll("text").data(filteredPieData);
-            texts.enter().append("svg:text")
-                .attr("transform", function (d) {
-                    return "translate(" + arc.centroid(d) + ")";
-                })
-                .attr("dy", ".35em")
-                .style("text-anchor", "middle")
-                .style("font-family", "monospace")
-                .style("font-size", "12")
-                .text(function (d) {
-                    return d.data.percentage + "%";
-                });
-
-            // Animate the text transition.
-            texts.transition().duration(tweenDuration).text(function (d) {
-                return d.data.percentage + "%";
-            });
 
             // Bind the on click event for each part of the donut
             paths.on("click", function (d) {

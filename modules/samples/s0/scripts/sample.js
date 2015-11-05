@@ -18,11 +18,11 @@ var log = new Log();
 try {
     var dashboard = require("/modules/dashboards.js");
     var config = require("/configs/sample.json");
-}catch(Exception){
+} catch (Exception) {
     log.error("Required File (/modules/dashboards.js or /configs/sample.json) is missing");
 }
 
-if(config.isSampleOn) {
+if (config.isSampleOn) {
     var DASHBOARD = {
         "id": "demographics-of-usa",
         "title": "Demographics of USA",
@@ -43,7 +43,7 @@ if(config.isSampleOn) {
             "content": {
                 "default": {
                     "d": [{
-                        "id": "9v35hu5u2e9daemi",
+                        "id": "dzdig2mle9rizfr",
                         "content": {
                             "id": "usa-states",
                             "title": "Population Density Of USA",
@@ -51,27 +51,27 @@ if(config.isSampleOn) {
                             "thumbnail": "store://gadget/usa-population-density/images/index.png",
                             "options": {},
                             "data": {"url": "store://gadget/usa-population-density/index.xml"},
-                            "notify": {"state": {"type": "address", "description": "This notifies the selected state"}},
+                            "notify": {"state": {"type": "state", "description": "This notifies the selected state"}},
                             "listen": {
                                 "age": {
-                                    "type": "address",
+                                    "type": "number",
                                     "description": "Listen to the age channel",
-                                    "on": [{"from": "7khbx7d06yrs5rk9", "event": "age"}]
+                                    "on": [{"from": "bim7z762yg1zto6r", "event": "age"}]
                                 },
                                 "ethnicity": {
-                                    "type": "address",
+                                    "type": "ethnicity",
                                     "description": "Listen to the ethnicity channel",
-                                    "on": [{"from": "9ek38q6mg9cnmi", "event": "ethnicity"}]
+                                    "on": [{"from": "btg82n4yrki96bt9", "event": "ethnicity"}]
                                 },
                                 "gender": {
-                                    "type": "address",
+                                    "type": "gender",
                                     "description": "Listen to the gender channel",
-                                    "on": [{"from": "7khbx7d06yrs5rk9", "event": "gender"}]
+                                    "on": [{"from": "bim7z762yg1zto6r", "event": "gender"}]
                                 },
                                 "history": {
-                                    "type": "address",
+                                    "type": "year",
                                     "description": "Listen to the history channel",
-                                    "on": [{"from": "a6btuca9q2u4bo6r", "event": "history"}]
+                                    "on": [{"from": "prs8krsgrlxiggb9", "event": "history"}]
                                 }
                             },
                             "styles": {
@@ -84,108 +84,108 @@ if(config.isSampleOn) {
                             "settings": {}
                         }
                     }],
-                    "f": [{
-                        "id": "7khbx7d06yrs5rk9",
-                        "content": {
-                            "id": "barchart",
-                            "title": "USA Population by Age and Gender",
-                            "type": "gadget",
-                            "thumbnail": "store://gadget/usa-population-by-age-and-gender/images/index.png",
-                            "options": {},
-                            "data": {"url": "store://gadget/usa-population-by-age-and-gender/index.xml"},
-                            "notify": {
-                                "age": {"type": "address", "description": "This notifies the selected Age"},
-                                "gender": {"type": "address", "description": "This notifies the selected Gender"}
-                            },
-                            "listen": {
-                                "state": {
-                                    "type": "address",
-                                    "description": "Used to listen to state channel",
-                                    "on": [{"from": "9v35hu5u2e9daemi", "event": "state"}]
-                                }
-                            },
-                            "styles": {
-                                "height": "",
-                                "borders": true,
-                                "titlePosition": "left",
-                                "title": "USA Population by Age and Gender"
-                            },
-                            "locale_titles": {"en-US": "USA Population by Age and Gender"},
-                            "settings": {}
-                        }
-                    }],
                     "g": [{
-                        "id": "9ek38q6mg9cnmi",
+                        "id": "btg82n4yrki96bt9",
                         "content": {
                             "id": "donutchart",
-                            "title": "USA Population by Ethnicity",
+                            "title": "Population by Ethnicity",
                             "type": "gadget",
                             "thumbnail": "store://gadget/usa-population-by-ethnicity/images/index.png",
                             "options": {},
                             "data": {"url": "store://gadget/usa-population-by-ethnicity/index.xml"},
                             "notify": {
                                 "ethnicity": {
-                                    "type": "address",
+                                    "type": "ethnicity",
                                     "description": "This notifies the selected state"
                                 }
                             },
                             "listen": {
                                 "age": {
-                                    "type": "address",
+                                    "type": "number",
                                     "description": "Used to filter based on state",
-                                    "on": [{"from": "7khbx7d06yrs5rk9", "event": "age"}]
+                                    "on": [{"from": "bim7z762yg1zto6r", "event": "age"}]
                                 },
                                 "state": {
-                                    "type": "address",
+                                    "type": "state",
                                     "description": "Used to filter based on state",
-                                    "on": [{"from": "9v35hu5u2e9daemi", "event": "state"}]
+                                    "on": [{"from": "dzdig2mle9rizfr", "event": "state"}]
                                 }
                             },
                             "styles": {
                                 "height": "",
                                 "borders": true,
                                 "titlePosition": "left",
-                                "title": "USA Population by Ethnicity"
+                                "title": "Population by Ethnicity"
                             },
-                            "locale_titles": {"en-US": "USA Population by Ethnicity"},
+                            "locale_titles": {"en-US": "Population by Ethnicity"},
+                            "settings": {}
+                        }
+                    }],
+                    "f": [{
+                        "id": "bim7z762yg1zto6r",
+                        "content": {
+                            "id": "barchart",
+                            "title": "Population by Age and Gender",
+                            "type": "gadget",
+                            "thumbnail": "store://gadget/usa-population-by-age-and-gender/images/index.png",
+                            "options": {},
+                            "data": {"url": "store://gadget/usa-population-by-age-and-gender/index.xml"},
+                            "notify": {
+                                "age": {"type": "number", "description": "This notifies the selected Age"},
+                                "gender": {"type": "gender", "description": "This notifies the selected Gender"}
+                            },
+                            "listen": {
+                                "state": {
+                                    "type": "state",
+                                    "description": "Used to listen to state channel",
+                                    "on": [{"from": "dzdig2mle9rizfr", "event": "state"}]
+                                }
+                            },
+                            "styles": {
+                                "height": "",
+                                "borders": true,
+                                "titlePosition": "left",
+                                "title": "Population by Age and Gender"
+                            },
+                            "locale_titles": {"en-US": "Population by Age and Gender"},
                             "settings": {}
                         }
                     }],
                     "h": [{
-                        "id": "a6btuca9q2u4bo6r",
+                        "id": "prs8krsgrlxiggb9",
                         "content": {
                             "id": "linechart",
-                            "title": "USA Population History",
+                            "title": "Population History",
                             "type": "gadget",
                             "thumbnail": "store://gadget/usa-population-history/images/index.png",
                             "options": {},
                             "data": {"url": "store://gadget/usa-population-history/index.xml"},
-                            "notify": {
-                                "history": {
-                                    "type": "address",
-                                    "description": "This notifies the selected year"
-                                }
-                            },
+                            "notify": {"history": {"type": "year", "description": "This notifies the selected year"}},
                             "listen": {
                                 "state": {
-                                    "type": "address",
+                                    "type": "state",
                                     "description": "Used to filter based on state",
-                                    "on": [{"from": "9v35hu5u2e9daemi", "event": "state"}]
+                                    "on": [{"from": "dzdig2mle9rizfr", "event": "state"}]
                                 }
                             },
                             "styles": {
                                 "height": "",
                                 "borders": true,
                                 "titlePosition": "left",
-                                "title": "USA Population History"
+                                "title": "Population History"
                             },
-                            "locale_titles": {"en-US": "USA Population History"},
+                            "locale_titles": {"en-US": "Population History"},
                             "settings": {}
                         }
                     }]
                 }, "anon": {}
             }
         }],
+        "identityServerUrl": "",
+        "accessTokenUrl": "",
+        "apiKey": "",
+        "apiSecret": "",
+        "banner": {"globalBannerExists": null, "customBannerExists": null},
         "landing": "landing",
         "isanon": false,
         "isUserCustom": false

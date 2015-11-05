@@ -1,6 +1,6 @@
 {
   "id": "barchart",
-  "title": "USA Population by Age and Gender",
+  "title": "Population by Age and Gender",
   "type": "gadget",
   "thumbnail": "store://gadget/usa-population-by-age-and-gender/images/index.png",
   "options": {},
@@ -9,17 +9,17 @@
   },
   "notify": {
     "age": {
-      "type": "address",
+      "type": "number",
       "description": "This notifies the selected Age"
     },
     "gender": {
-      "type": "address",
+      "type": "gender",
       "description": "This notifies the selected Gender"
     }
   },
   "listen": {
     "state":{
-      "type": "address",
+      "type": "state",
       "description": "Used to listen to state channel"
     }
   }

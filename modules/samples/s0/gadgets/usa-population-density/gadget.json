@@ -9,25 +9,25 @@
   },
   "notify": {
     "state":{
-      "type": "address",
+      "type": "state",
       "description": "This notifies the selected state"
     }
   },
   "listen": {
     "age": {
-      "type": "address",
+      "type": "number",
       "description": "Listen to the age channel"
     },
     "ethnicity":{
-      "type": "address",
+      "type": "ethnicity",
       "description": "Listen to the ethnicity channel"
     },
     "gender":{
-      "type": "address",
+      "type": "gender",
       "description": "Listen to the gender channel"
     },
     "history":{
-      "type": "address",
+      "type": "year",
       "description": "Listen to the history channel"
     }
   }

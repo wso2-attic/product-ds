@@ -260,9 +260,6 @@
             <includes>
                 <include>*/**</include>
             </includes>
-            <excludes>
-                <exclude>**/scripts/**</exclude>
-            </excludes>
         </fileSet>
     </fileSets>
     <dependencySets>
@@ -370,7 +367,7 @@
             <source>../samples/scripts/wso2server-sample.sh</source>
             <outputDirectory>wso2ds-${pom.version}/bin/</outputDirectory>
             <filtered>true</filtered>
-            <fileMode>644</fileMode>
+            <fileMode>755</fileMode>
         </file>
         <file>
             <source>../samples/scripts/sample.json</source>

@@ -245,6 +245,12 @@ var initLineChart = null;
             xGroup = createXAxisGroup(svg);
             yGroup = createYAxisGroup(svg);
 
+            d3.select(".x.axis").append("text")
+                .attr("x",width)
+                .attr("y",-2)
+                .style("text-anchor", "end")
+                .text("Year");
+
             var path = svg.append("path")
                 .datum(dataToProcess)
                 .attr("class", "line")

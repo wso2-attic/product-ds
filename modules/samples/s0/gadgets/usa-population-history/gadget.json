@@ -1,6 +1,6 @@
 {
   "id": "linechart",
-  "title": "USA Population History",
+  "title": "Population History",
   "type": "gadget",
   "thumbnail": "store://gadget/usa-population-history/images/index.png",
   "options": {},
@@ -9,13 +9,13 @@
   },
   "notify": {
     "history":{
-      "type": "address",
+      "type": "year",
       "description": "This notifies the selected year"
     }
   },
   "listen": {
     "state": {
-      "type": "address",
+      "type": "state",
       "description": "Used to filter based on state"
     }
   }

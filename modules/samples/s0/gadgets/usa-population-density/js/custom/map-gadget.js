@@ -323,7 +323,7 @@ var initMap;
          */
         var createProjection = function () {
             return d3.geo.albersUsa()
-                .scale(width)
+                .scale(width-150)
                 .translate([width / 2, height / 2]);
         };
 
@@ -468,7 +468,7 @@ var initMap;
          *On mouse is over an state of usa.
          */
         var onMouseOver = function (d, element, svg) {
-            $(element).attr("fill", "aqua");
+            $(element).attr("fill", "#FC8D59");
             var position = d3.mouse(element);
             d3.select(svg[0][0].parentNode.parentNode).select(".datamaps-hoverover").style('top', ((position[1] + 30)) + "px").style("opacity", 0)
                 .html("<div>" + d.properties.name + "</div>")
@@ -522,7 +522,7 @@ var initMap;
                     .attr("x", x)
                     .attr("y", y)
                     .style("font-family", "monospace")
-                    .style("font-size", "" + width / 60)
+                    .style("font-size", "" + width / 100)
                     .text(d.id);
             });
         };

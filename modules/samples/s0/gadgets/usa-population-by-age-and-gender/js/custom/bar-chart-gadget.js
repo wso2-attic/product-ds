@@ -112,6 +112,24 @@ var initBarChart;
         };
 
         /*
+         * Get the name of state by state id.
+         * @private
+         * */
+        var getStateNameByStateId = function(stateId){
+            var name = "";
+
+            $.each(USA_DEMOGRAPHICS_SAMPLE_DATA,function(index,element){
+               if(element.id == stateId){
+                   var history = element.populationHistory[0];
+                   name = history.name;
+                   return false;
+               }
+            });
+
+            return name;
+        };
+
+        /*
          * Initialize the user interface functionality.
          * @private
          * */
@@ -317,13 +335,13 @@ var initBarChart;
                 if (parent) {
                     path = path.replace("-> " + parent, "");
                 } else {
-                    path = stateId;
+                    path = getStateNameByStateId(stateId)//stateId;
                 }
             } else {
                 if (parent) {
                     path = path + "-> " + parent;
                 } else {
-                    path = stateId;
+                    path = getStateNameByStateId(stateId)//stateId;
                 }
                 var newNode = {
                     state: stateId,
@@ -334,6 +352,8 @@ var initBarChart;
             }
 
             state.txtPath.text(path);
+
+            svg.select(".axis-label").remove();
 
             xScale = createXScale(dataToProcess);
             yScale = createYScale(dataToProcess);
@@ -351,6 +371,14 @@ var initBarChart;
                 .attr("dy", "-.2em")
                 .style("font-size", "10")
                 .attr("transform", "rotate(-40)");
+
+            svg.select(".x.axis")
+                .append("text")
+                .attr("class","axis-label")
+                .attr("x",width+10)
+                .attr("y",15)
+                .style("text-anchor", "end")
+                .text("age");
 
             svg.select(".y.axis")
                 .transition()

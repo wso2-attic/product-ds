@@ -20360,10 +20360,10 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
 
 DENSITY_COLORS = {
     ethnicityDensityColors: ["#CCDFEC", "#AAD1EC", "#76BBEA", "#5EB3EC", "#39A2E8", "#088FE8"],
-    ageDensityColors: ["#CBECD5", "#A9EABD", "#93EFAF", "#6FEC95", "#52E880", "#02BB3B"],
+    ageDensityColors: ["#B39A75", "#B1905F", "#AF884E", "#AF7F39", "#AF7827", "#985E07"],
     genderDensityColors: ["#EFE5B9", "#F1E19F", "#EFD980", "#F7D85D", "#F1C517", "#CAA204"],
     historyDensityColors: ["#B190AF", "#B180AF", "#B164AD", "#AF4CAA", "#AF2CA9", "#880D82"],
-    stateDensityColors: ["#f4e8bd", "#e2c4a6", "#d0a18f", "#b76e6d", "#9d3b4c", "#92243d"]
+    stateDensityColors: ["#ABDDA4", "#95DA8B", "#7DD670", "#66D456", "#4BCC38", "#27A015"]
 },
 
-DENSITY_SCALE = ["0-10000", "10000-100000", "100000-1000000", "1000000-10000000", "10000000-100000000", "100000000-1000000000"];
+DENSITY_SCALE = ["0-10k", "10k-100k", "100k-1000k", "1000k-10000k", "10000k-100000k", "100000k-1000000k"];

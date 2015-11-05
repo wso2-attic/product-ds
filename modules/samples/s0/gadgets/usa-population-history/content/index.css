@@ -10,14 +10,14 @@ body {
 }
 
 .x.axis path {
-    display: none;
+
 }
 
 .line
 {
     fill: none;
-    stroke: steelblue;
-    stroke-width: 1.5px;
+    stroke: #D8A31D;
+    stroke-width: 3px;
 }
 
 div.tooltip {

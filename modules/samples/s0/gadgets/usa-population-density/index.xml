@@ -24,6 +24,7 @@
 
              <!-- Container to contain the map visualization elements-->
              <div id="container"></div>
+             <label for="map-keys" style="font-size: 11px;">Density of People</label>
              <ul id="map-keys"></ul>
 
              <!-- Hover label for the map to show the name of the state-->
