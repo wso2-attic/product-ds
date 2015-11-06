@@ -191,10 +191,10 @@ if (config.isSampleOn) {
         "isUserCustom": false
     };
 
-    log.info("*** Deleting existing dashboard ***");
+    log.info("Deleting existing sample dashboard");
     dashboard.remove("demographics-of-usa");
 
-    log.info("*** Creating sample dashboard ***");
+    log.info("Creating sample dashboard");
     dashboard.create(DASHBOARD);
 
     // Reset the sample.json file to previous.

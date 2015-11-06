@@ -72,13 +72,13 @@ if [ -z $validate ]; then
   exit
 fi
 
-echo "*** Coping the sample files ***"
+# Coping the sample files
 cp -r $sampleFolder/gadgets/* $gadgetDropLocation
 cp -r $sampleFolder/scripts/* $scriptDropLocation
 
-echo "*** Editing the sample.json file ***"
+# Editing the sample.json file
 sed -i 's/false/true/gw output' $sampleConfig
 
-echo "*** Running the dashboard server with sample dashboard ***"
+echo "Starting the dashboard server with sample dashboard"
 sh $path/wso2server.sh
 
