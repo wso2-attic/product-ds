@@ -22,7 +22,6 @@ import ds.integration.tests.common.domain.DSIntegrationTest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.extensions.selenium.BrowserManager;
@@ -119,15 +118,80 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     }
 
     /**
-     * This method returns the web driver instance
+     * Add dashboard to DashboardServer
      *
-     * @return DSWEbDriver - the driver instance of DSWebDriver
+     * @param driver         WebDriver instance
+     * @param dashBoardTitle the title of a dashboard
+     * @param description    the description about dashboard
      */
-    public DSWebDriver getDriver() throws MalformedURLException, XPathExpressionException {
-        if (driver == null) {
-            driver = new DSWebDriver(BrowserManager.getWebDriver(), getMaxWaitTime());
+    public static void addDashBoard(DSWebDriver driver, String dashBoardTitle, String description) {
+        driver.findElement(By.cssSelector("[href='create-dashboard']")).click();
+        driver.findElement(By.id("ues-dashboard-title")).clear();
+        driver.findElement(By.id("ues-dashboard-title")).sendKeys(dashBoardTitle);
+        driver.findElement(By.id("ues-dashboard-description")).clear();
+        driver.findElement(By.id("ues-dashboard-description")).sendKeys(description);
+        driver.findElement(By.id("ues-dashboard-create")).click();
+        driver.findElement(By.id("single-column")).click();
+        driver.findElement(By.cssSelector("a.navbar-brand.ues-tiles-menu-toggle")).click();
+        driver.findElement(By.cssSelector("i.fw.fw-dashboard")).click();
+
+    }
+
+    /**
+     * Add dashboard to DashboardServer
+     *
+     * @param driver         DSwebdriver instance
+     * @param username       username of user
+     * @param password       password of user
+     * @param retypePassword retype password of user
+     */
+    public static void AddUser(DSWebDriver driver, String username, String password, String retypePassword) {
+        driver.findElement(By.cssSelector("a[href=\"../userstore/add-user-role" +
+                ".jsp?region=region1&item=user_mgt_menu_add\"]")).click();
+        driver.findElement(By.cssSelector("a[href=\"../user/add-step1.jsp\"]")).click();
+        driver.findElement(By.name("username")).clear();
+        driver.findElement(By.name("username")).sendKeys(username);
+        driver.findElement(By.name("password")).clear();
+        driver.findElement(By.name("password")).sendKeys(password);
+        driver.findElement(By.name("retype")).clear();
+        driver.findElement(By.name("retype")).sendKeys(retypePassword);
+        //get a way to next button
+        driver.findElement(By.cssSelector("input.button")).click();
+        driver.findElement(By.cssSelector("td.buttonRow > input.button")).click();
+        driver.findElement(By.cssSelector("button[type=\"button\"]")).click();
+    }
+
+    /**
+     * Add dashboard to DashboardServer
+     *
+     * @param driver   DSwebdriver instance
+     * @param roleName name of role
+     */
+    public static void addRole(DSWebDriver driver, String roleName) {
+        driver.findElement(By.cssSelector("a[href=\"../userstore/add-user-role" +
+                ".jsp?region=region1&item=user_mgt_menu_add\"]")).click();
+        driver.findElement(By.cssSelector("a[href=\"../role/add-step1.jsp\"]")).click();
+        driver.findElement(By.name("roleName")).clear();
+        driver.findElement(By.name("roleName")).sendKeys(roleName);
+        driver.findElement(By.cssSelector("input.button")).click();
+        driver.findElement(By.cssSelector("td.buttonRow > input.button")).click();
+    }
+
+    /**
+     * Assign roles for users
+     *
+     * @param driver    DSwebdriver instance
+     * @param roleName name of the role
+     * @param userNames array fo userNames
+     */
+    public static void assignRoleToUser(DSWebDriver driver,String roleName, String[] userNames) {
+        driver.findElement(By.cssSelector("a[href=\"edit-users.jsp?roleName="+roleName+"&org.wso2.carbon.role" +
+                ".read.only=false\"]")).click();
+        for (String userName : userNames) {
+            driver.findElement(By.cssSelector("input[value='" + userName + "']")).click();
         }
-        return driver;
+        driver.findElement(By.cssSelector("input.button[value='Finish']")).click();
+        driver.findElement(By.cssSelector("div.ui-dialog-buttonpane button")).click();
     }
 
     /**
@@ -135,9 +199,9 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      *
      * @return DSWEbDriver - the driver instance of DSWebDriver
      */
-    public DSWebDriver getDriver(FirefoxProfile profile) throws MalformedURLException, XPathExpressionException {
+    public DSWebDriver getDriver() throws MalformedURLException, XPathExpressionException {
         if (driver == null) {
-            driver = new DSWebDriver(BrowserManager.getWebDriver(), getMaxWaitTime(), profile);
+            driver = new DSWebDriver(BrowserManager.getWebDriver(), getMaxWaitTime());
         }
         return driver;
     }
@@ -153,5 +217,4 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         }
         return wait;
     }
-
 }
