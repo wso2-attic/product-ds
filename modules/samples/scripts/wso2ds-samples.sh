@@ -58,7 +58,7 @@ do
             sampleFolder="$pathEdited/samples/s$c"
         else
            echo "*** Sample number to be started is not specified *** Please specify a sample number to be started with the -sn option"
-           echo "Example, to run sample 0: wso2server-samples.sh -sn 0"
+           echo "Example, to run sample 0: wso2ds-samples.sh -sn 0"
            exit
         fi
     else
@@ -68,7 +68,7 @@ done
 
 if [ -z $validate ]; then
   echo "*** Sample number to be started is not specified *** Please specify a sample number to be started with the -sn option"
-  echo "Example, to run sample 0: wso2server-samples.sh -sn 0"
+  echo "Example, to run sample 0: wso2ds-samples.sh -sn 0"
   exit
 fi
 
