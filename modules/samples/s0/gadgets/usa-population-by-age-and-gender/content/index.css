@@ -1,0 +1,39 @@
+body {
+    font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.x.axis path {
+
+}
+
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+}
+
+#back{
+    float: left;
+    background: linear-gradient(#9fbfe7, #6e84a0) repeat scroll 0 0 #87a2c4;
+    border: #000000;
+    font-size: 12px;
+    color: antiquewhite;
+}
+
+#path-container{
+    margin-bottom: 20px;
+}
+
+#path-container text{
+    margin: 20px;
+    font-size: 12px;
+    font-family: monospace;
+    color: #960b4f
+}

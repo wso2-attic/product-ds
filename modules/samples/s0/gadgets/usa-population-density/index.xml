@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="Demography of USA"
+                 height="500"
+                 description="USA Map with demographics details."
+                 tags="drill_down">
+        <Require feature="dynamic-height"/>
+        <Require feature="pubsub-2"/>
+    </ModulePrefs>
+    <Content type="html">
+        <![CDATA[
+
+             <!-- Load the Style sheet -->
+             <link rel="stylesheet" type="text/css" href="content/index.css">
+
+             <!-- Calling the Common libraries -->
+             <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+             <script type="text/javascript" src="js/d3.min.js"></script>
+             <script type="text/javascript" src="js/topojson.js"></script>
+
+             <!-- Calling the Custom javascript file -->
+             <script type="text/javascript" src="js/custom/data.js"></script>
+             <script type="text/javascript" src="js/custom/map-gadget.js"></script>
+
+             <!-- Container to contain the map visualization elements-->
+             <div id="container"></div>
+             <label for="map-keys" style="font-size: 11px;">Density of People</label>
+             <ul id="map-keys"></ul>
+
+             <!-- Hover label for the map to show the name of the state-->
+             <div class="datamaps-hoverover"></div>
+
+             <!-- Initialize the javascript for the page -->
+             <script type="text/javascript">
+                // Page state properties to pass in to the script.
+	            var properties = {
+	                mapContainer_id: "container",
+	                map_keys: $("#map-keys"),
+	                hoverOver_class: "datamaps-hoverover",
+	                width: window.document.body.scrollWidth,
+                    height: window.document.body.scrollHeight - 60
+	            };
+
+                // Initialize the script for the page.
+	            initMap(properties);
+            </script>
+        ]]>
+    </Content>
+</Module>
