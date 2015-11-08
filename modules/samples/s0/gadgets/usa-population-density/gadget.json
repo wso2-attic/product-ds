@@ -1,0 +1,34 @@
+{
+  "id": "usa-states",
+  "title": "Population Density Of USA",
+  "type": "gadget",
+  "thumbnail": "store://gadget/usa-population-density/images/index.png",
+  "options": {},
+  "data": {
+    "url": "store://gadget/usa-population-density/index.xml"
+  },
+  "notify": {
+    "state":{
+      "type": "state",
+      "description": "This notifies the selected state"
+    }
+  },
+  "listen": {
+    "age": {
+      "type": "number",
+      "description": "Listen to the age channel"
+    },
+    "ethnicity":{
+      "type": "ethnicity",
+      "description": "Listen to the ethnicity channel"
+    },
+    "gender":{
+      "type": "gender",
+      "description": "Listen to the gender channel"
+    },
+    "history":{
+      "type": "year",
+      "description": "Listen to the history channel"
+    }
+  }
+}

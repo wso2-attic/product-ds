@@ -76,8 +76,8 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
         getDriver().findElement(By.cssSelector("i.fw.fw-dashboard")).click();
         getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.id(dashboardTitle)));
         webElement = getDriver().findElement(By.id(dashboardTitle));
-        assertEquals(dashboardTitle, webElement.findElement(By.cssSelector("h2")).getText());
-        assertEquals(DASHBOARD_DESCRIPTION, webElement.findElement(By.cssSelector("p")).getText());
+        assertEquals(dashboardTitle, webElement.findElement(By.id("ues-dashboard-title")).getText());
+        assertEquals(DASHBOARD_DESCRIPTION, webElement.findElement(By.id("ues-dashboard-description")).getText());
     }
 
     @Test(groups = "wso2.ds.dashboard", description = "Deleting the existing dashboard from dashboard server",
