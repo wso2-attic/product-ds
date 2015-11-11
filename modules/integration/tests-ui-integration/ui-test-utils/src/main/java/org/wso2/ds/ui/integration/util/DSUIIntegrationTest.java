@@ -181,12 +181,9 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * Assign roles for users
      *
      * @param driver    DSwebdriver instance
-     * @param roleName name of the role
      * @param userNames array fo userNames
      */
-    public static void assignRoleToUser(DSWebDriver driver,String roleName, String[] userNames) {
-        driver.findElement(By.cssSelector("a[href=\"edit-users.jsp?roleName="+roleName+"&org.wso2.carbon.role" +
-                ".read.only=false\"]")).click();
+    public static void assignRoleToUser(DSWebDriver driver, String[] userNames) {
         for (String userName : userNames) {
             driver.findElement(By.cssSelector("input[value='" + userName + "']")).click();
         }
