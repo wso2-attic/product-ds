@@ -27,16 +27,15 @@ rem   JAVA_HOME       Must point at your Java Development Kit installation.
 rem
 rem   JAVA_OPTS       (Optional) Java runtime options used when the commands
 rem                   is executed.
+rem
+rem NOTE: Borrowed generously from apache Tomcat startup script
 rem ---------------------------------------------------------------------------
-
-rem ----- if JAVA_HOME is not set we're not happy ------------------------------
 
 SET script=%~dp0
 
 rem Defining Sample data and directories' paths
 set gadgetDropLocation=%script%..\repository\deployment\server\jaggeryapps\portal\store\carbon.super\gadget
-set sampleConfig=%script%..\repository\deployment\server\jaggeryapps\portal\configs\sample.json
-set scriptDropLocation=%script%..\repository\deployment\server\jaggeryapps\portal\js
+set dashboardDropLocation=%script%..\repository\deployment\server\jaggeryapps\portal\extensions\dashboards
 
 set cn=%1
 set UserInputValue=%2
@@ -61,10 +60,8 @@ goto exitWithoutClosing
 :validArgument
 set sampleFolder=%script%..\samples\s%UserInputValue%
 
-xcopy %sampleFolder%\gadgets\* %gadgetDropLocation% /e /i /h /Y
-xcopy %sampleFolder%\scripts\* %scriptDropLocation% /Y
-
-@echo {"isSampleOn": true}> %sampleConfig%
+xcopy "%sampleFolder%\gadgets\*" "%gadgetDropLocation%" /e /i /h /Y
+xcopy "%sampleFolder%\scripts\*" "%dashboardDropLocation%" /Y
 
 echo "Starting the dashboard server with sample dashboard"
 wso2server.bat
