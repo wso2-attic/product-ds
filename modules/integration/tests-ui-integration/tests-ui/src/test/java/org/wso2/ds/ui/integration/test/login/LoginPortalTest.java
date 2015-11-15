@@ -38,12 +38,12 @@ public class LoginPortalTest extends DSUIIntegrationTest {
 
     @Test(groups = "wso2.ds.login", description = "login to DS Portal")
     public void testLoginToPortal() throws Exception {
-        DSUIIntegrationTest.login(getDriver(), getBaseUrl(), getCurrentUsername(), getCurrentPassword());
+        login(getCurrentUsername(), getCurrentPassword());
     }
 
     @Test(groups = "wso2.ds.logout", description = "logout from DS Portal", dependsOnMethods = "testLoginToPortal")
     public void testLogoutPortal() throws Exception {
-        DSUIIntegrationTest.logout(getDriver(), getBaseUrl(), getCurrentUsername());
+        logout();
     }
 
     @AfterClass(alwaysRun = true)

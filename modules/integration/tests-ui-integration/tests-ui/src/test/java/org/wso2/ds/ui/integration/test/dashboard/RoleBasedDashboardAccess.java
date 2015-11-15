@@ -50,14 +50,13 @@ public class RoleBasedDashboardAccess extends DSUIIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
-        DSUIIntegrationTest.login(getDriver(), getBaseUrl(), getCurrentUsername(), getCurrentPassword());
-        DSUIIntegrationTest.addDashBoard(getDriver(), DASHBOARD_TITLE, DASHBOARD_DESCRIPTION);
+        login(getCurrentUsername(), getCurrentPassword());
+        addDashBoard(DASHBOARD_TITLE, DASHBOARD_DESCRIPTION);
     }
 
     @Test(groups = "wso2.ds.dashboard", description = "Adding a dashboard and access it with role base " +
             "name for dashboard server")
     public void testRoleBasedDashboardAccessNew() throws Exception {
-        //TODO can split into two test cases
         DSWebDriver driver = getDriver();
         WebElement createdDashBoard = driver.findElement(By.id(dashboardTitle.toLowerCase()));
         assertTrue(driver.isElementPresent(By.cssSelector(".ues-view")), "view element is present in the " +
@@ -69,11 +68,11 @@ public class RoleBasedDashboardAccess extends DSUIIntegrationTest {
 
         createdDashBoard.findElement(By.cssSelector(".ues-settings")).click();
         driver.findElement(By.cssSelector(".ues-shared-edit > .ues-shared-role > .remove-button")).click();
-        DSUIIntegrationTest.logout(driver, getBaseUrl(), getCurrentUsername());
-        DSUIIntegrationTest.loginToAdminConsole(driver, getBaseUrl(), getCurrentUsername(), getCurrentPassword());
-        DSUIIntegrationTest.AddUser(driver,USER_NAME,PASSWORD,RETYPE_PASSWORD);
+        logout();
+        loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
+        addUser(USER_NAME,PASSWORD,RETYPE_PASSWORD);
         // login with new user
-        DSUIIntegrationTest.login(driver, getBaseUrl(), USER_NAME, PASSWORD);
+        login(USER_NAME, PASSWORD);
         WebElement webElement = getDriver().findElement(By.id(dashboardTitle.toLowerCase()));
         assertEquals(DASHBOARD_TITLE, webElement.findElement(By.id("ues-dashboard-title")).getText());
         assertEquals(DASHBOARD_DESCRIPTION, webElement.findElement(By.id("ues-dashboard-description")).getText());
@@ -87,10 +86,6 @@ public class RoleBasedDashboardAccess extends DSUIIntegrationTest {
     }
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
-        try {
-            DSUIIntegrationTest.logout(getDriver(), getBaseUrl(), getCurrentUsername());
-        } finally {
-            getDriver().quit();
-        }
+        dsUITestTearDown();
     }
 }

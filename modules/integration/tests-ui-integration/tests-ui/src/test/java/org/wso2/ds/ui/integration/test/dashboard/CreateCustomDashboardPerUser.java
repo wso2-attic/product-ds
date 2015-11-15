@@ -20,11 +20,11 @@
 
 package org.wso2.ds.ui.integration.test.dashboard;
 
+import ds.integration.tests.common.domain.DSIntegrationTestConstants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
-import org.wso2.carbon.registry.resource.stub.beans.xsd.CollectionContentBean;
 import org.wso2.ds.integration.common.clients.ResourceAdminServiceClient;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 import org.wso2.ds.ui.integration.util.DSWebDriver;
@@ -50,8 +50,6 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
 
     private static final String DASHBOARD_PAGENAME = "PersonalizeDashBoardTitle";
 
-    private ResourceAdminServiceClient resourceAdminServiceClient;
-
     private String dashboardTitle;
 
     @Factory(dataProvider = "userMode")
@@ -68,44 +66,45 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
         String backendURL = getBackEndUrl();
-        resourceAdminServiceClient = new ResourceAdminServiceClient(backendURL, getCurrentUsername(),
+        ResourceAdminServiceClient resourceAdminServiceClient = new ResourceAdminServiceClient(backendURL,
+                getCurrentUsername(),
                 getCurrentPassword());
-        resourcePath = DASHBOARD_REGISTRY_BASE_PATH + dashboardTitle.toLowerCase();
-        DSUIIntegrationTest.loginToAdminConsole(getDriver(), getBaseUrl(), getCurrentUsername(), getCurrentPassword());
+        resourcePath = DSIntegrationTestConstants.DASHBOARD_REGISTRY_BASE_PATH + dashboardTitle.toLowerCase();
+        loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
 
     }
 
-    @Test(groups = "wso2.ds.dashboard", description = "Per user dashboard settings")
+    @Test(groups = "wso2.ds.dashboard", description = "Adding user to admin console and assign editor or viewer roles" +
+            " to newly added users")
     public void testAddUserAssignRoles() throws Exception {
-        DSWebDriver driver = getDriver();
-        DSUIIntegrationTest.AddUser(driver, USER_NAME_EDITOR, PASSWORD_EDITOR, RETYPE_PASSWORD_EDITOR);
-        DSUIIntegrationTest.addRole(driver, EDITOR_ROLE);
-        DSUIIntegrationTest.assignRoleToUser(driver, new String[]{USER_NAME_EDITOR});
-        DSUIIntegrationTest.AddUser(driver, USER_NAME_VIEWER, PASSWORD_VIEWER, RETYPE_PASSWORD_VIEWER);
-        DSUIIntegrationTest.addRole(driver, VIEWER_ROLE);
-        DSUIIntegrationTest.assignRoleToUser(driver, new String[]{USER_NAME_VIEWER});
-        DSUIIntegrationTest.logoutFromAdminConsole(driver, getBaseUrl());
+        addUser(USER_NAME_EDITOR, PASSWORD_EDITOR, RETYPE_PASSWORD_EDITOR);
+        addRole(EDITOR_ROLE);
+        assignRoleToUser(new String[]{USER_NAME_EDITOR});
+        addUser(USER_NAME_VIEWER, PASSWORD_VIEWER, RETYPE_PASSWORD_VIEWER);
+        addRole(VIEWER_ROLE);
+        assignRoleToUser(new String[]{USER_NAME_VIEWER});
+        logoutFromAdminConsole();
 
     }
 
-    @Test(groups = "wso2.ds.dashboard", description = "Per user dashboard settings", dependsOnMethods =
+    @Test(groups = "wso2.ds.dashboard", description = "assigning dashboard view and edit permission", dependsOnMethods =
             "testAddUserAssignRoles")
     public void testAddDashboardAndAssignRolesBysetting() throws Exception {
         DSWebDriver driver = getDriver();
-        DSUIIntegrationTest.login(driver, getBaseUrl(), USER_NAME_EDITOR, PASSWORD_EDITOR);
-        DSUIIntegrationTest.addDashBoard(driver, dashboardTitle, DASHBOARD_DESCRIPTION);
+        login(USER_NAME_EDITOR, PASSWORD_EDITOR);
+        addDashBoard(dashboardTitle, DASHBOARD_DESCRIPTION);
         WebElement webElement = driver.findElement(By.id(dashboardTitle));
         webElement.findElement(By.cssSelector(".ues-edit")).click();
-        driver.findElement(By.cssSelector("a[href=\"../dashboard-settings/" + dashboardTitle + "\"]")).click();
+        driver.findElement(By.id("settings-link")).click();
         WebElement element = driver.findElement(By.id("ues-share-view"));
         element.sendKeys(VIEWER_ROLE);
-        driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         element.click();
         WebElement selectedElement = driver.findElement(By.cssSelector("div.tt-menu > div > div:first-child"));
         selectedElement.click();
         WebElement element2 = driver.findElement(By.id("ues-share-edit"));
         element2.sendKeys(EDITOR_ROLE);
-        driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         element2.click();
         WebElement selectedElement2 = driver.findElement(By.cssSelector("div.tt-menu > div > div:first-child"));
         selectedElement2.click();
@@ -114,11 +113,11 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
 
     }
 
-    @Test(groups = "wso2.ds.dashboard", description = "Per user dashboard settings", dependsOnMethods =
+    @Test(groups = "wso2.ds.dashboard", description = "test for editor role", dependsOnMethods =
             "testAddDashboardAndAssignRolesBysetting")
     public void testForEditorRole() throws Exception {
         DSWebDriver driver = getDriver();
-        driver.findElement(By.cssSelector("a[href=\".././\"]")).click();
+        driver.findElement(By.id("ues-back")).click();
         WebElement dashboard = getDriver().findElement(By.id(dashboardTitle.toLowerCase()));
         assertEquals(DASHBOARD_TITLE, dashboard.findElement(By.id("ues-dashboard-title")).getText());
         assertEquals(DASHBOARD_DESCRIPTION, dashboard.findElement(By.id("ues-dashboard-description")).getText());
@@ -130,31 +129,29 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
                 "the current UI");
         driver.findElement(By.cssSelector(".ues-view")).click();
         // switch the driver to the new window and click on the edit/personalize link
-        String theParent = driver.getWindowHandle();
-        for (Object o : driver.getWindowHandles()) {
-            String theChild = o.toString();
-            if (!theChild.contains(theParent)) {
-                driver.switchTo().window(theChild);
+        String parentWindow = driver.getWindowHandle();
+        for (String childWindows : driver.getWindowHandles()) {
+            if (!childWindows.contains(parentWindow)) {
+                driver.switchTo().window(childWindows);
                 //it will go to view page as editor
                 assertEquals(USER_NAME_EDITOR, getDriver().findElement(By.cssSelector(".dropdown-toggle")).getText(),
-                        "Expected " +
-                                "Username is not matched");
+                        "Expected Username is not matched");
                 assertEquals("Edit", driver.findElement(By.cssSelector("a[href=\"../dashboards/" + dashboardTitle +
                         "/?editor=true\"]")).getText(), "expected Edit Button but cannot find edit Button");
                 break;
             }
         }
         driver.close();
-        driver.switchTo().window(theParent);
-        DSUIIntegrationTest.logout(driver, getBaseUrl(), USER_NAME_EDITOR);
+        driver.switchTo().window(parentWindow);
+        logout();
 
     }
 
-    @Test(groups = "wso2.ds.dashboard", description = "Per user dashboard settings", dependsOnMethods =
+    @Test(groups = "wso2.ds.dashboard", description = "test for viewer role", dependsOnMethods =
             "testAddDashboardAndAssignRolesBysetting")
     public void testForViewer() throws Exception {
         DSWebDriver driver = getDriver();
-        DSUIIntegrationTest.login(driver, getBaseUrl(), USER_NAME_VIEWER, PASSWORD_VIEWER);
+        login(USER_NAME_VIEWER, PASSWORD_VIEWER);
         WebElement dashboardViewer = driver.findElement(By.id(dashboardTitle.toLowerCase()));
         assertEquals(DASHBOARD_TITLE, dashboardViewer.findElement(By.id("ues-dashboard-title")).getText());
         assertEquals(DASHBOARD_DESCRIPTION, dashboardViewer.findElement(By.id("ues-dashboard-description")).getText());
@@ -168,64 +165,53 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
                 "the current UI");
         driver.findElement(By.cssSelector(".ues-view")).click();
         // switch the driver to the new window and click on the edit/personalize link
-        String theParentViewer = driver.getWindowHandle();
-        for (Object o : driver.getWindowHandles()) {
-            String theChild = o.toString();
-            if (!theChild.contains(theParentViewer)) {
-                driver.switchTo().window(theChild);
+        String parentViewer = driver.getWindowHandle();
+        for (String childWindow : driver.getWindowHandles()) {
+            if (!childWindow.contains(parentViewer)) {
+                driver.switchTo().window(childWindow);
                 //it will go to view page as viewer
                 assertEquals(USER_NAME_VIEWER, driver.findElement(By.cssSelector(".dropdown-toggle")).getText(),
-                        "Expected " +
-                                "Username is not matched");
+                        "Expected Username is not matched");
                 assertEquals("Personalize", getDriver().findElement(By.cssSelector("a[href=\"../dashboards/" +
                         dashboardTitle +
                         "/?custom=true\"]")).getText(), "expected Personalize Button but cannot find Personalize " +
                         "Button");
-                driver.findElement(By.cssSelector("a[href=\"../dashboards/" +
-                        dashboardTitle +
-                        "/?custom=true\"]")).click();
-                String personalizeParentWindow = driver.getWindowHandle();
-                for (Object page : driver.getWindowHandles()) {
-                    String childPage = page.toString();
-                    if (!childPage.contains(personalizeParentWindow)) {
-                        driver.switchTo().window(childPage);
-                        driver.findElement(By.cssSelector(".ues-page-properties-toggle i")).click();
-                        driver.findElement(By.cssSelector(".title")).clear();
-                        driver.findElement(By.cssSelector(".title")).sendKeys(DASHBOARD_PAGENAME);
-                        driver.findElement(By.cssSelector("h4.ues-page-title")).click();
-                        assertEquals(DASHBOARD_PAGENAME, driver.findElement(By.cssSelector("h4.ues-page-title"))
-                                        .getText(),
-                                "error occured while edit the new page name");
-                        break;
-                    }
-                    driver.close();
-                    driver.switchTo().window(personalizeParentWindow);
-
-                }
                 break;
             }
+
         }
-        driver.close();
-        driver.switchTo().window(theParentViewer);
     }
 
     @Test(groups = "wso2.ds.dashboard", description = "Per user dashboard settings", dependsOnMethods =
             "testForViewer")
-    public void checkRegistrySourceForCustomizeDashboard() throws Exception {
-        Boolean isResourceExist = false;
-        CollectionContentBean collectionContentBean;
-        new CollectionContentBean();
-        collectionContentBean = resourceAdminServiceClient.getCollectionContent("/_system/config/ues/");
-        if (collectionContentBean.getChildCount() > 0) {
-            String[] childPath = collectionContentBean.getChildPaths();
-            for (int i = 0; i <= childPath.length - 1; i++) {
-                if (childPath[i].equalsIgnoreCase("/_system/config/ues/" + USER_NAME_VIEWER + "/dashboards" +
-                        dashboardTitle.toLowerCase())) {
-                    isResourceExist = true;
-                    break;
-                }
+    public void testCustomizeButtonDashboard() throws Exception {
+        DSWebDriver driver = getDriver();
+        driver.findElement(By.cssSelector("a[href=\"../dashboards/" +
+                dashboardTitle + "/?custom=true\"]")).click();
+        String parentWindow = driver.getWindowHandle();
+        for (String childWindow : driver.getWindowHandles()) {
+            if (childWindow.contains(parentWindow)) {
+                driver.switchTo().window(childWindow);
+                driver.findElement(By.id("edit-page-properties")).click();
+                driver.findElement(By.cssSelector(".title")).clear();
+                driver.findElement(By.cssSelector(".title")).sendKeys(DASHBOARD_PAGENAME);
+                driver.findElement(By.cssSelector("h4.ues-page-title")).click();
+                assertEquals(DASHBOARD_PAGENAME, driver.findElement(By.cssSelector("h4.ues-page-title"))
+                        .getText(), "error occurred while edit the new page name");
+                break;
+
             }
         }
+        driver.switchTo().window(parentWindow);
+
+    }
+
+    @Test(groups = "wso2.ds.dashboard", description = "Per user dashboard settings", dependsOnMethods =
+            "testCustomizeButtonDashboard")
+    public void checkRegistrySourceForCustomizeDashboard() throws Exception {
+        Boolean isResourceExist;
+        isResourceExist = isResourceExist(DSIntegrationTestConstants.DASHBOARD_REGISTRY_PATH_CUSTOM_DASHBOARD_PERUSER
+                + "/" + USER_NAME_VIEWER + "/dashboards/" + dashboardTitle.toLowerCase());
         assertTrue(isResourceExist, "Registry resource could not be created for personalize dashboard per user due to" +
                 " some errors");
 
@@ -233,13 +219,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
 
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
-        DSWebDriver driver = getDriver();
-        try {
-            DSUIIntegrationTest.logout(driver, getBaseUrl(), USER_NAME_VIEWER);
-        } finally {
-            //driver.quit();
-
-        }
+        dsUITestTearDown();
 
     }
 

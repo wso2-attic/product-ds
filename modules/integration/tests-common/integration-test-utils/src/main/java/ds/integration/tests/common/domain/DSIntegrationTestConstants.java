@@ -18,9 +18,9 @@
 
 package ds.integration.tests.common.domain;
 
-import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
-
 public class DSIntegrationTestConstants {
     public final static String DS_PRODUCT_NAME = "DS";
-    public final static String DS_TEST_RESOURCE_LOCATION = FrameworkPathUtil.getReportLocation()+"/../src/test/resources";
+    public final static String DASHBOARD_REGISTRY_BASE_PATH = "/_system/config/ues/dashboards/";
+    public final static String DASHBOARD_REGISTRY_PATH_CUSTOM_DASHBOARD_PERUSER = "/_system/config/ues/";
 }
+
