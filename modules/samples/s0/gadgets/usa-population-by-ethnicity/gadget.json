@@ -1,0 +1,26 @@
+{
+  "id": "donutchart",
+  "title": "Population by Ethnicity",
+  "type": "gadget",
+  "thumbnail": "store://gadget/usa-population-by-ethnicity/images/index.png",
+  "options": {},
+  "data": {
+    "url": "store://gadget/usa-population-by-ethnicity/index.xml"
+  },
+  "notify": {
+    "ethnicity": {
+      "type": "ethnicity",
+      "description": "This notifies the selected state"
+    }
+  },
+  "listen": {
+    "age": {
+      "type": "number",
+      "description": "Used to filter based on state"
+    },
+    "state": {
+      "type": "state",
+      "description": "Used to filter based on state"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="Population By Age"
+                 height="350"
+                 description="Drill Down Enabled barchart for showing population my age and gender"
+                 tags="drill-down">
+        <Require feature="dynamic-height"/>
+        <Require feature="pubsub-2"/>
+    </ModulePrefs>
+    <Content type="html">
+        <![CDATA[
+
+            <!-- Load the stylesheet-->
+            <link rel="stylesheet" type="text/css" href="content/index.css">
+
+            <!-- Loading common javascript libraries -->
+            <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+            <script type="text/javascript" src="js/d3.min.js"></script>
+
+            <!-- Loading custom javascript files -->
+            <script type="text/javascript" src="js/custom/data.js"></script>
+            <script type="text/javascript" src="js/custom/bar-chart-gadget.js"></script>
+
+            <input id="back" type="button" value="<"/>
+            <div id="path-container"><text id="path">US</text></div>
+
+            <!-- Run the page script-->
+            <script type="text/javascript">
+                // Create a page state object.
+                var properties = {
+                    txtPath: $("#path"),
+                    btnBack: $("#back"),
+                    width: window.document.body.scrollWidth,
+                    height: window.document.body.scrollHeight - 40
+                };
+
+                // Initialize the page script.
+                initBarChart(properties);
+	        </script>
+        ]]>
+    </Content>
+</Module>

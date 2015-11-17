@@ -254,6 +254,13 @@
                 <include>**/application-authentication.xml</include>
             </includes>
         </fileSet>
+        <fileSet>
+            <directory>../samples</directory>
+            <outputDirectory>${project.artifactId}-${product.ds.version}/samples/</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
     </fileSets>
     <dependencySets>
         <dependencySet>
@@ -353,6 +360,18 @@
         <file>
             <source>target/wso2carbon-core-${carbon.kernel.version}/repository/conf/README</source>
             <outputDirectory>wso2ds-${pom.version}/repository/conf/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>../samples/scripts/wso2ds-samples.sh</source>
+            <outputDirectory>wso2ds-${pom.version}/bin/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>../samples/scripts/sample.json</source>
+            <outputDirectory>wso2ds-${pom.version}/repository/deployment/server/jaggeryapps/portal/configs/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
