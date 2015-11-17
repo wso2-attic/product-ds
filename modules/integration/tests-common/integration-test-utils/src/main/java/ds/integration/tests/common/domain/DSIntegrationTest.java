@@ -45,6 +45,11 @@ public abstract class DSIntegrationTest {
         this(TestUserMode.SUPER_TENANT_ADMIN);
     }
 
+    /**
+     * This method returns the automation Context
+     *
+     * @throws javax.xml.xpath.XPathExpressionException
+     */
     private AutomationContext getDsContext() throws XPathExpressionException {
         if (dsContext == null) {
             dsContext = new AutomationContext(DSIntegrationTestConstants.DS_PRODUCT_NAME, this.userMode);
@@ -52,10 +57,20 @@ public abstract class DSIntegrationTest {
         return dsContext;
     }
 
+    /**
+     * This method returns the maximum waiting time from automation context
+     *
+     * @throws javax.xml.xpath.XPathExpressionException
+     */
     public int getMaxWaitTime() throws XPathExpressionException {
         return Integer.parseInt(getDsContext().getConfigurationValue("//maximumWaitingTime"));
     }
 
+    /**
+     * This method returns the current tenant Information
+     *
+     * @throws javax.xml.xpath.XPathExpressionException
+     */
     public Tenant getCurrentTenantInfo() throws XPathExpressionException {
         if (tenantInfo == null) {
             tenantInfo = getDsContext().getContextTenant();
@@ -63,6 +78,11 @@ public abstract class DSIntegrationTest {
         return tenantInfo;
     }
 
+    /**
+     * This method returns the current user information
+     *
+     * @throws javax.xml.xpath.XPathExpressionException
+     */
     public User getCurrentUserInfo() throws XPathExpressionException {
         if (userInfo == null) {
             userInfo = getCurrentTenantInfo().getContextUser();
@@ -70,10 +90,20 @@ public abstract class DSIntegrationTest {
         return userInfo;
     }
 
+    /**
+     * This method returns the current username of user from userInfo
+     *
+     * @throws javax.xml.xpath.XPathExpressionException
+     */
     public String getCurrentUsername() throws XPathExpressionException {
         return getCurrentUserInfo().getUserName();
     }
 
+    /**
+     * This method returns the current password of user from userInfo
+     *
+     * @throws javax.xml.xpath.XPathExpressionException
+     */
     public String getCurrentPassword() throws XPathExpressionException {
         return getCurrentUserInfo().getPassword();
     }
@@ -113,6 +143,11 @@ public abstract class DSIntegrationTest {
         }
     }
 
+    /**
+     * This method returns the backendUrl
+     *
+     * @return backendUrl - the backendUrl
+     */
     protected String getBackEndUrl() throws Exception {
         return getDsContext().getContextUrls().getBackEndUrl();
     }
