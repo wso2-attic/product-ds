@@ -29,7 +29,6 @@ import org.wso2.carbon.automation.engine.context.beans.User;
 import org.wso2.carbon.integration.common.admin.client.UserManagementClient;
 import org.wso2.ds.integration.common.clients.ResourceAdminServiceClient;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
-import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 import org.wso2.ds.ui.integration.util.DSWebDriver;
 import ds.integration.tests.common.domain.DSIntegrationTestConstants;
 
