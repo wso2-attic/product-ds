@@ -26,13 +26,13 @@ public class LoginAdminTest extends DSUIIntegrationTest {
 
     @Test(groups = "wso2.ds.login", description = "verify login to admin console")
     public void testLoginAdminTestcaseDS() throws Exception {
-        DSUIIntegrationTest.loginToAdminConsole(getDriver(), getBaseUrl(), getCurrentUsername(), getCurrentPassword());
+        loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
     }
 
     @Test(groups = "wso2.ds.login", description = "verify logout from admin console", dependsOnMethods =
             "testLoginAdminTestcaseDS")
     public void testLogoutAdminTestcaseDS() throws Exception {
-        DSUIIntegrationTest.logoutFromAdminConsole(getDriver(), getBaseUrl());
+        logoutFromAdminConsole();
     }
 
     @AfterClass(alwaysRun = true)

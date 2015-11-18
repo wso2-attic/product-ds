@@ -19,7 +19,6 @@
 package org.wso2.ds.ui.integration.util;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.interactions.HasInputDevices;
 import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.interactions.Mouse;
@@ -32,17 +31,10 @@ import java.util.Set;
 public class DSWebDriver implements WebDriver, JavascriptExecutor, HasInputDevices {
     private static int maxWaitTime;
     private WebDriver driver = null;
-    private FirefoxProfile firefoxProfile = null;
 
     public DSWebDriver(WebDriver webDriver, int maxWaitTime) {
         this.driver = webDriver;
         DSWebDriver.maxWaitTime = maxWaitTime;
-    }
-
-    public DSWebDriver(WebDriver webDriver, int maxWaitTime, FirefoxProfile profile) {
-        this.driver = webDriver;
-        DSWebDriver.maxWaitTime = maxWaitTime;
-        firefoxProfile = profile;
     }
 
     /**
