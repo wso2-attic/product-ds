@@ -16,6 +16,7 @@
 
 package org.wso2.ds.ui.integration.test.dashboard;
 
+import ds.integration.tests.common.domain.DSIntegrationTestConstants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
@@ -30,7 +31,6 @@ import org.wso2.carbon.integration.common.admin.client.UserManagementClient;
 import org.wso2.ds.integration.common.clients.ResourceAdminServiceClient;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 import org.wso2.ds.ui.integration.util.DSWebDriver;
-import ds.integration.tests.common.domain.DSIntegrationTestConstants;
 
 import javax.xml.xpath.XPathExpressionException;
 import java.io.File;
@@ -38,7 +38,8 @@ import java.net.MalformedURLException;
 import java.nio.file.Paths;
 import java.util.Iterator;
 
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 /**
  * Created by lasanthas on 10/8/15.
@@ -100,11 +101,11 @@ public class BannerTest extends DSUIIntegrationTest {
     public void setUp() throws Exception {
 
         // login as admin and create the dashboard
-        login(getDriver(), getBaseUrl(), getCurrentUsername(), getCurrentPassword());
+        login(getCurrentUsername(), getCurrentPassword());
 
         initDashboard();
 
-        logout(getDriver(), getBaseUrl(), getCurrentUsername());
+        logout();
     }
 
     /**
@@ -115,13 +116,13 @@ public class BannerTest extends DSUIIntegrationTest {
     @Test(groups = "wso2.ues.dashboard", description = "Cancel adding banner by editor")
     public void cancelAddingBannerByEditor() throws Exception {
 
-        login(getDriver(), getBaseUrl(), editor.getUserName(), editor.getPassword());
+        login(editor.getUserName(), editor.getPassword());
 
         goToDesigner();
 
         clickEditBannerButton(0);
         clickCancelBannerButton();
-        assertEquals(isResourceExist(DASHBOARD_ID + "/banner"), false,
+        assertFalse(isResourceExist(ROOT_RESOURCE_PATH + DASHBOARD_ID + "/banner"),
                 "Resource should not be uploaded to the registry");
     }
 
@@ -136,10 +137,9 @@ public class BannerTest extends DSUIIntegrationTest {
 
         clickEditBannerButton(0);
         clickSaveBannerButton();
-        assertEquals(isResourceExist(DASHBOARD_ID + "/banner"), true,
-                "Unable to find the resource");
+        assertTrue(isResourceExist(ROOT_RESOURCE_PATH + DASHBOARD_ID + "/banner"), "Unable to find the resource");
 
-        logout(getDriver(), getBaseUrl(), editor.getUserName());
+        logout();
     }
 
     /**
@@ -151,13 +151,13 @@ public class BannerTest extends DSUIIntegrationTest {
             dependsOnMethods = "addBannerByEditor")
     public void cancelAddingBannerByViewer() throws Exception {
 
-        login(getDriver(), getBaseUrl(), viewer.getUserName(), viewer.getPassword());
+        login(viewer.getUserName(), viewer.getPassword());
 
         customizeDashboard();
 
         clickEditBannerButton(1);
         clickCancelBannerButton();
-        assertEquals(isResourceExist(DASHBOARD_ID + "/" + viewer.getUserName() + "/banner"), false,
+        assertFalse(isResourceExist(ROOT_RESOURCE_PATH + DASHBOARD_ID + "/" + viewer.getUserName() + "/banner"),
                 "Resource should not be uploaded to the registry");
     }
 
@@ -173,7 +173,7 @@ public class BannerTest extends DSUIIntegrationTest {
         clickEditBannerButton(1);
         clickSaveBannerButton();
 
-        assertEquals(isResourceExist(DASHBOARD_ID + "/" + viewer.getUserName() + "/banner"), true,
+        assertTrue(isResourceExist(ROOT_RESOURCE_PATH + DASHBOARD_ID + "/" + viewer.getUserName() + "/banner"),
                 "Unable to find the resource");
     }
 
@@ -187,10 +187,10 @@ public class BannerTest extends DSUIIntegrationTest {
     public void resetBannerByViewer() throws Exception {
 
         clickRemoveBannerButton();
-        assertEquals(isResourceExist(DASHBOARD_ID + "/" + viewer.getUserName() + "/banner"), false,
+        assertFalse(isResourceExist(DASHBOARD_ID + "/" + viewer.getUserName() + "/banner"),
                 "Unable to remove the resource");
 
-        logout(getDriver(), getBaseUrl(), viewer.getUserName());
+        logout();
     }
 
     /**
@@ -202,15 +202,15 @@ public class BannerTest extends DSUIIntegrationTest {
             dependsOnMethods = "resetBannerByViewer")
     public void removeBannerByEditor() throws Exception {
 
-        login(getDriver(), getBaseUrl(), editor.getUserName(), editor.getPassword());
+        login(editor.getUserName(), editor.getPassword());
 
         goToDesigner();
 
         clickRemoveBannerButton();
-        assertEquals(isResourceExist(DASHBOARD_ID + "/banner"), false,
+        assertFalse(isResourceExist(ROOT_RESOURCE_PATH + DASHBOARD_ID + "/banner"),
                 "Unable to remove the resource");
 
-        logout(getDriver(), getBaseUrl(), editor.getUserName());
+        logout();
     }
 
     /**
@@ -221,26 +221,6 @@ public class BannerTest extends DSUIIntegrationTest {
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
         getDriver().quit();
-    }
-
-    /**
-     * Check whether an specific resource under the '/_system/config/ues/customizations/' exists
-     *
-     * @param resourcePath relative path from the '/_system/config/ues/customizations/' node
-     * @return boolean
-     */
-    private boolean isResourceExist(String resourcePath) {
-
-        boolean resourceExists;
-
-        try {
-            resourceAdminServiceClient.getResourceContent(ROOT_RESOURCE_PATH + resourcePath);
-            resourceExists = true;
-        } catch (Exception ex) {
-            resourceExists = false;
-        }
-
-        return resourceExists;
     }
 
     /**
