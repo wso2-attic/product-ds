@@ -16,9 +16,9 @@
   ~  under the License.
   -->
 
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="ESTestSuite" parallel="false">
+<suite name="DSTestSuite" parallel="false">
     <parameter name="useDefaultListeners" value="false"/>
 
     <listeners>
@@ -41,13 +41,11 @@
             <!--class name="org.wso2.ds.ui.integration.test.common.AddUserTest"/-->
             <class name="org.wso2.ds.ui.integration.test.dashboard.AddDeleteDashboardTest"/>
             <!--<class name="org.wso2.ds.ui.integration.test.dashboard.BannerTest"/>-->
-            <!--class name="org.wso2.ds.ui.integration.test.dashboard.AddgadgetToDashboardTest"/-->
+            <class name="org.wso2.ds.ui.integration.test.dashboard.AddGadgetToDashboardTest"/>
             <!--class name="org.wso2.ds.ui.integration.test.dashboard.AddPageToDashboard"/-->
             <!--class name="org.wso2.ds.ui.integration.test.dashboard.RoleBasedDashboardAccess"/-->
             <!--<class name="org.wso2.ds.ui.integration.test.dashboard.CreateCustomDashboardPerUser"/>-->
         </classes>
 
     </test>
-
-
 </suite>

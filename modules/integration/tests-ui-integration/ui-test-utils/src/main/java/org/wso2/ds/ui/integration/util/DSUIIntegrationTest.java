@@ -229,8 +229,8 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @param resourcePath - the path of resource
      * @return isResourceExist - true/false
      */
-    public Boolean isResourceExist(String resourcePath) {
-        Boolean isResourceExist;
+    public boolean isResourceExist(String resourcePath) {
+        boolean isResourceExist;
         try {
             String backendURL = getBackEndUrl();
             ResourceAdminServiceClient resourceAdminServiceClient = new ResourceAdminServiceClient(backendURL,
