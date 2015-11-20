@@ -235,7 +235,7 @@ public class BannerTest extends DSUIIntegrationTest {
         driver.findElement(By.id("ues-dashboard-title")).clear();
         driver.findElement(By.id("ues-dashboard-title")).sendKeys(DASHBOARD_TITLE);
         driver.findElement(By.id("ues-dashboard-create")).click();
-        driver.findElement(By.cssSelector("button[data-id='layout-banner']")).click();
+        driver.findElement(By.cssSelector("button[data-id='banner']")).click();
 
         // change permissions
         driver.findElement(By.id("settings-link")).click();
