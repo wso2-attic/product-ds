@@ -65,6 +65,7 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
 
     @Test(groups = "wso2.ds.dashboard", description = "Adding new dashboard for dashboard server")
     public void testAddDashboardNew() throws Exception {
+        getDriver().get(getBaseUrl()+"/portal/dashboards");
         getDriver().findElement(By.cssSelector("[href='create-dashboard']")).click();
         getDriver().findElement(By.id("ues-dashboard-title")).clear();
         getDriver().findElement(By.id("ues-dashboard-title")).sendKeys(dashboardTitle);
@@ -112,5 +113,4 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
             getDriver().quit();
         }
     }
-
 }

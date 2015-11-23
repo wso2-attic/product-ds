@@ -370,10 +370,10 @@
             <fileMode>755</fileMode>
         </file>
         <file>
-            <source>../samples/scripts/sample.json</source>
-            <outputDirectory>wso2ds-${pom.version}/repository/deployment/server/jaggeryapps/portal/configs/</outputDirectory>
+            <source>../samples/scripts/wso2ds-samples.bat</source>
+            <outputDirectory>wso2ds-${pom.version}/bin/</outputDirectory>
             <filtered>true</filtered>
-            <fileMode>644</fileMode>
+            <fileMode>755</fileMode>
         </file>
         <!--<file>
             <source>target/wso2carbon-core-${carbon.kernel.version}/bin/wso2server.bat</source>
