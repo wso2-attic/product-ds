@@ -50,8 +50,10 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
 
     @DataProvider(name = "userMode")
     private static Object[][] userModeProvider() {
-        return new Object[][]{{TestUserMode.SUPER_TENANT_ADMIN, DASHBOARD_TITLE1},
-                {TestUserMode.SUPER_TENANT_USER, DASHBOARD_TITLE2}};
+        return new Object[][]{
+                {TestUserMode.SUPER_TENANT_ADMIN, DASHBOARD_TITLE1},
+                {TestUserMode.SUPER_TENANT_USER, DASHBOARD_TITLE2}
+        };
     }
 
     @BeforeClass(alwaysRun = true)
@@ -63,6 +65,7 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
     @Test(groups = "wso2.ds.dashboard", description = "Adding new dashboard for dashboard server")
     public void testAddDashboardNew() throws Exception {
         DSWebDriver driver = getDriver();
+
         driver.findElement(By.cssSelector("[href='create-dashboard']")).click();
         driver.findElement(By.id("ues-dashboard-title")).clear();
         driver.findElement(By.id("ues-dashboard-title")).sendKeys(dashboardTitle);
@@ -74,7 +77,9 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("i.fw.fw-dashboard")).click();
         getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.id(dashboardTitle)));
         webElement = driver.findElement(By.id(dashboardTitle));
+
         assertEquals(dashboardTitle, webElement.findElement(By.id("ues-dashboard-title")).getText());
+
         assertEquals(DASHBOARD_DESCRIPTION, webElement.findElement(By.id("ues-dashboard-description")).getText());
     }
 
@@ -82,15 +87,17 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
             dependsOnMethods = "testAddDashboardNew")
     public void testDeleteDashboardNew() throws Exception {
         DSWebDriver driver = getDriver();
+
         Boolean isResourceExist;
         webElement = driver.findElement(By.id(dashboardTitle));
         webElement.findElement(By.cssSelector("i.fw-delete")).click();
         driver.findElement(By.cssSelector("span.ladda-label")).click();
+
         assertFalse(driver.isElementPresent(By.id(dashboardTitle)), "Error occurred while deleting dashboard" +
                 dashboardTitle);
+
         isResourceExist = isResourceExist(resourcePath);
         assertFalse(isResourceExist, "Registry resource could not be deleted due to some errors");
-
     }
 
     @AfterClass(alwaysRun = true)

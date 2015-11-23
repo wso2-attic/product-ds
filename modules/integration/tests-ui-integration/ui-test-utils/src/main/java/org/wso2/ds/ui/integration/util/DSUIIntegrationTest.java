@@ -29,6 +29,7 @@ import org.wso2.ds.integration.common.clients.ResourceAdminServiceClient;
 
 import javax.xml.xpath.XPathExpressionException;
 import java.net.MalformedURLException;
+import java.util.Stack;
 
 public abstract class DSUIIntegrationTest extends DSIntegrationTest {
 
@@ -36,9 +37,11 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     private static final String DS_SUFFIX = "/portal/login-controller?destination=%2Fportal%2F";
     private static final String DS_HOME_SUFFIX = "/portal/";
     private static final String ADMIN_CONSOLE_SUFFIX = "/carbon/admin/index.jsp";
+
     protected String resourcePath;
     private DSWebDriver driver = null;
     private WebDriverWait wait = null;
+    private Stack<String> windowHandles = new Stack<String>();
 
     public DSUIIntegrationTest() {
         super();
@@ -47,6 +50,81 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     public DSUIIntegrationTest(TestUserMode userMode) {
         super(userMode);
 
+    }
+
+    /**
+     * Get JS script to simulate adding gadgets to the page
+     *
+     * @param mappings array of gadget mappings in { gadget id, target id} format
+     * @return JS script
+     */
+    public String generateAddGadgetScript(String[][] mappings) {
+
+        String script =
+                "$('.ues-thumbnail').draggable({" +
+                        "    cancel: false," +
+                        "    appendTo: 'body'," +
+                        "    helper: 'clone'," +
+                        "    start: function (event, ui) {" +
+                        "        ui.helper.addClass('ues-store-thumbnail');" +
+                        "    }," +
+                        "    stop: function (event, ui) {" +
+                        "        ui.helper.removeClass('ues-store-thumbnail');" +
+                        "    }" +
+                        "});" +
+                        "function performDrag(id, targetId) {" +
+                        "    var gadget = $('[data-id=' + id + ']');" +
+                        "    var target = $('#' + targetId);" +
+                        "    " +
+                        "    var gadgetOffset = gadget.offset();" +
+                        "    var targetOffset = target.offset();" +
+                        "    " +
+                        "    var dx = targetOffset.left - gadgetOffset.left;" +
+                        "    var dy = targetOffset.top - gadgetOffset.top;" +
+                        "    " +
+                        "    gadget.simulate('drag', { dx: dx, dy: dy});" +
+                        "}";
+
+        for (String[] mapping : mappings) {
+            script += "performDrag('" + mapping[0] + "', '" + mapping[1] + "');";
+        }
+
+        return script;
+    }
+
+    /**
+     * Switch to a child window while remembering the parent window
+     *
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    public void pushWindow() throws MalformedURLException, XPathExpressionException {
+
+        driver = getDriver();
+
+        String currentWindowHandle = driver.getWindowHandle();
+
+        for (String windowHandle : driver.getWindowHandles()) {
+            if (!windowHandle.equals(currentWindowHandle)) {
+                driver.switchTo().window(windowHandle);
+                break;
+            }
+        }
+
+        windowHandles.push(currentWindowHandle);
+    }
+
+    /**
+     * Switch to the parent window (while is remembered previously) from a child window
+     *
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    public void popWindow() throws MalformedURLException, XPathExpressionException {
+
+        if (windowHandles.size() > 0) {
+            getDriver().switchTo().window(windowHandles.pop());
+        }
     }
 
     /**

@@ -40,6 +40,7 @@ public class AddUserTest extends DSUIIntegrationTest {
             "created user to portal")
     public void testAddUserToDS() throws Exception {
         loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
+
         getDriver().findElement(By.cssSelector("a[href=\"../userstore/add-user-role" +
                 ".jsp?region=region1&item=user_mgt_menu_add\"]")).click();
         getDriver().findElement(By.cssSelector("a[href=\"../user/add-step1.jsp\"]")).click();
@@ -53,7 +54,9 @@ public class AddUserTest extends DSUIIntegrationTest {
         getDriver().findElement(By.cssSelector("td.buttonRow > input.button")).click();
         getDriver().findElement(By.cssSelector("button[type=\"button\"]")).click();
         getDriver().findElement(By.cssSelector(".right > a")).click();
+
         login(USER_NAME, PASSWORD);
+
         assertEquals(USER_NAME, getDriver().findElement(By.cssSelector(".dropdown-toggle")).getText(), "Expected " +
                 "Username is not matched");
 

@@ -36,7 +36,6 @@ import javax.xml.xpath.XPathExpressionException;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.nio.file.Paths;
-import java.util.Iterator;
 
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -283,19 +282,9 @@ public class BannerTest extends DSUIIntegrationTest {
                 ".ues-view")).click();
 
         // switch the driver to the new window and click on the edit/personalize link
-        String theParent = driver.getWindowHandle();
-        Iterator windowIterator = driver.getWindowHandles().iterator();
+        pushWindow();
 
-        while (windowIterator.hasNext()) {
-
-            String theChild = windowIterator.next().toString();
-
-            if (!theChild.contains(theParent)) {
-                driver.switchTo().window(theChild);
-                driver.findElement(By.cssSelector(".ues-copy")).click();
-                break;
-            }
-        }
+        driver.findElement(By.cssSelector(".ues-copy")).click();
     }
 
     /**

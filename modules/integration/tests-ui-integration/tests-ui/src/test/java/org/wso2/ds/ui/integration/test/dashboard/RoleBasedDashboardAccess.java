@@ -58,32 +58,40 @@ public class RoleBasedDashboardAccess extends DSUIIntegrationTest {
             "name for dashboard server")
     public void testRoleBasedDashboardAccessNew() throws Exception {
         DSWebDriver driver = getDriver();
-        WebElement createdDashBoard = driver.findElement(By.id(dashboardTitle.toLowerCase()));
-        assertTrue(driver.isElementPresent(By.cssSelector(".ues-view")), "view element is present in the " +
-                "current UI");
-        assertTrue(driver.isElementPresent(By.cssSelector(".ues-edit")), "edit element is present in the " +
-                "current UI");
-        assertTrue(driver.isElementPresent(By.cssSelector(".ues-settings")), "settings element is present in the " +
-                "current UI");
 
-        createdDashBoard.findElement(By.cssSelector(".ues-settings")).click();
+        String dashboardId = dashboardTitle.toLowerCase();
+
+        assertTrue(driver.isElementPresent(By.cssSelector("#" + dashboardId + " .ues-view")),
+                "view element is present in the current UI");
+        assertTrue(driver.isElementPresent(By.cssSelector("#" + dashboardId + " .ues-edit")),
+                "edit element is present in the current UI");
+        assertTrue(driver.isElementPresent(By.cssSelector("#" + dashboardId + " .ues-settings")),
+                "settings element is present in the current UI");
+
+        driver.findElement(By.cssSelector("#" + dashboardId + " .ues-settings")).click();
         driver.findElement(By.cssSelector(".ues-shared-edit > .ues-shared-role > .remove-button")).click();
+
         logout();
+
         loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
-        addUser(USER_NAME,PASSWORD,RETYPE_PASSWORD);
+        addUser(USER_NAME, PASSWORD, RETYPE_PASSWORD);
+
         // login with new user
         login(USER_NAME, PASSWORD);
-        WebElement webElement = getDriver().findElement(By.id(dashboardTitle.toLowerCase()));
-        assertEquals(DASHBOARD_TITLE, webElement.findElement(By.id("ues-dashboard-title")).getText());
-        assertEquals(DASHBOARD_DESCRIPTION, webElement.findElement(By.id("ues-dashboard-description")).getText());
-        assertTrue(driver.isElementPresent(By.cssSelector(".ues-view")), "view element is present in the " +
-                "current UI");
-        assertFalse(driver.isElementPresent(By.cssSelector(".ues-edit")), "edit element is present in the " +
-                "current UI");
-        assertFalse(driver.isElementPresent(By.cssSelector(".ues-settings")), "settings element is present in the " +
-                "current UI");
 
+        WebElement dashboard = driver.findElement(By.id(dashboardId));
+
+        assertEquals(DASHBOARD_TITLE, dashboard.findElement(By.id("ues-dashboard-title")).getText());
+        assertEquals(DASHBOARD_DESCRIPTION, dashboard.findElement(By.id("ues-dashboard-description")).getText());
+
+        assertTrue(driver.isElementPresent(By.cssSelector("#" + dashboardId + " .ues-view")),
+                "view element is present in the current UI");
+        assertFalse(driver.isElementPresent(By.cssSelector("#" + dashboardId + " .ues-edit")),
+                "edit element is present in the current UI");
+        assertFalse(driver.isElementPresent(By.cssSelector("#" + dashboardId + " .ues-settings")),
+                "settings element is present in the current UI");
     }
+
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
         dsUITestTearDown();
