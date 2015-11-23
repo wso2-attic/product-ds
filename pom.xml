@@ -172,6 +172,16 @@
                     <artifactId>maven-antrun-plugin</artifactId>
                     <version>${maven.antrunplugin.version}</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>findbugs-maven-plugin</artifactId>
+                    <version>${maven.findbugsplugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${maven.checkstyleplugin.version}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -571,6 +581,9 @@
         <maven.cleanplugin.version>2.5</maven.cleanplugin.version>
         <maven.gpgplugin.version>1.0-alpha-3</maven.gpgplugin.version>
         <maven.carbon.p2plugin.version>1.5.3</maven.carbon.p2plugin.version>
+        <maven.findbugsplugin.version>3.0.2</maven.findbugsplugin.version>
+        <maven.checkstyleplugin.version>2.16</maven.checkstyleplugin.version>
+
 
         <rhino.osgi.version>1.7.0.R4.wso2v1</rhino.osgi.version>
         <commons-logging.version>1.1.1</commons-logging.version>

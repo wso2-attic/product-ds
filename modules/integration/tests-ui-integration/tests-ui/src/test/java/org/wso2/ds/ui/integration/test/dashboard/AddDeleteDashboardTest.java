@@ -29,6 +29,8 @@ import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 import org.wso2.ds.ui.integration.util.DSWebDriver;
 
+import java.util.Locale;
+
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 
@@ -46,6 +48,8 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
     public AddDeleteDashboardTest(TestUserMode userMode, String dashboardTitle) {
         super(userMode);
         this.dashboardTitle = dashboardTitle;
+        Locale.setDefault(new Locale("en")); //setting English as locale
+
     }
 
     @DataProvider(name = "userMode")
