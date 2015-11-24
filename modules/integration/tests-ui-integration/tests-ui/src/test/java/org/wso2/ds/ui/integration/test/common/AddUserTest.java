@@ -39,7 +39,8 @@ public class AddUserTest extends DSUIIntegrationTest {
     @Test(groups = "wso2.ds.common", description = "Adding user to Dashboard server and trying to login with newly " +
             "created user to portal")
     public void testAddUserToDS() throws Exception {
-        DSUIIntegrationTest.loginToAdminConsole(getDriver(), getBaseUrl(), getCurrentUsername(), getCurrentPassword());
+        loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
+
         getDriver().findElement(By.cssSelector("a[href=\"../userstore/add-user-role" +
                 ".jsp?region=region1&item=user_mgt_menu_add\"]")).click();
         getDriver().findElement(By.cssSelector("a[href=\"../user/add-step1.jsp\"]")).click();
@@ -49,12 +50,13 @@ public class AddUserTest extends DSUIIntegrationTest {
         getDriver().findElement(By.name("password")).sendKeys(PASSWORD);
         getDriver().findElement(By.name("retype")).clear();
         getDriver().findElement(By.name("retype")).sendKeys(RETYPE_PASSWORD);
-        //get a way to next button
         getDriver().findElement(By.cssSelector("input.button")).click();
         getDriver().findElement(By.cssSelector("td.buttonRow > input.button")).click();
         getDriver().findElement(By.cssSelector("button[type=\"button\"]")).click();
         getDriver().findElement(By.cssSelector(".right > a")).click();
-        DSUIIntegrationTest.login(getDriver(), getBaseUrl(), USER_NAME, PASSWORD);
+
+        login(USER_NAME, PASSWORD);
+
         assertEquals(USER_NAME, getDriver().findElement(By.cssSelector(".dropdown-toggle")).getText(), "Expected " +
                 "Username is not matched");
 
@@ -62,11 +64,7 @@ public class AddUserTest extends DSUIIntegrationTest {
 
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
-        try {
-            DSUIIntegrationTest.logout(getDriver(), getBaseUrl(), USER_NAME);
-        } finally {
-            getDriver().quit();
-        }
+        dsUITestTearDown();
     }
 
 }
