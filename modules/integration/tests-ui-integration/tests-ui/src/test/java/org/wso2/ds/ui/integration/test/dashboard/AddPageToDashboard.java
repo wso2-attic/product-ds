@@ -72,7 +72,7 @@ public class AddPageToDashboard extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("[name=id]")).sendKeys(DASHBOARD_URL);
         driver.findElement(By.cssSelector("h4.ues-page-title")).click();
 
-        assertEquals(DASHBOARD_PAGENAME, driver.findElement(By.cssSelector("h4.ues-page-title")).getText(),
+        assertEquals(driver.findElement(By.cssSelector("h4.ues-page-title")).getText(), DASHBOARD_PAGENAME,
                 "error occurred while edit the new page name");
 
         //checks the name of added newest page under pages drop list
