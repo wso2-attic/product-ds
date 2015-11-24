@@ -23,11 +23,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.*;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
-import org.wso2.ds.integration.common.clients.ResourceAdminServiceClient;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 
 import static org.testng.Assert.assertEquals;
@@ -40,9 +37,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
     private static final Log LOG = LogFactory.getLog(DashboardAnonViewTest.class);
     private static final String DASHBOARD_TITLE = "anondashboard";
     private static final String DASHBOARD_DESCRIPTION = "This is sample descrition for dashboard";
-    private ResourceAdminServiceClient resourceAdminServiceClient;
     private String dashboardTitle;
-    private WebElement webElement = null;
 
     @Factory(dataProvider = "userMode")
     public DashboardAnonViewTest(TestUserMode userMode, String dashboardTitle) {
@@ -57,9 +52,6 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
-        String backendURL = getBackEndUrl();
-        resourceAdminServiceClient = new ResourceAdminServiceClient(backendURL, getCurrentUsername(),
-                getCurrentPassword());
         resourcePath = DSIntegrationTestConstants.DASHBOARD_REGISTRY_BASE_PATH + dashboardTitle.toLowerCase();
         login(getCurrentUsername(), getCurrentPassword());
     }
@@ -71,6 +63,9 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
     public void testAnonDashboard() throws Exception {
         String defaultViewGadgetExpected = "USA Map";
         String anonViewGadgetExpected = "G1";
+
+        getDriver().get(getBaseUrl() + "/portal/dashboards");
+        getDriver().findElement(By.cssSelector("[href='create-dashboard']")).click();
 
         getDriver().findElement(By.id("ues-dashboard-title")).clear();
         getDriver().findElement(By.id("ues-dashboard-title")).sendKeys(dashboardTitle);
@@ -309,5 +304,14 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         assertEquals(defaultViewGadgetExpected, defaultGadgetActual);
         assertTrue(isToggleButtonHidden, "Anonymous toggle button is not hidden");
         assertTrue(noIFramesAvailable, "There are gadgets available for anonymous view when no anonymous view available");
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void tearDown() throws Exception {
+        try {
+            logout();
+        } finally {
+            getDriver().quit();
+        }
     }
 }

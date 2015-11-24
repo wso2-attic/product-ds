@@ -44,7 +44,8 @@
             <class name="org.wso2.ds.ui.integration.test.dashboard.AddPageToDashboard"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.RoleBasedDashboardAccess"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.CreateCustomDashboardPerUser"/>
-
+            <class name="org.wso2.ds.ui.integration.test.dashboard.DashboardAnonViewTest"/>
+            <class name="org.wso2.ds.ui.integration.test.dashboard.BannerTest"/>
         </classes>
 
     </test>
