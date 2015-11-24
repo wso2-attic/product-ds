@@ -78,6 +78,7 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
         driver.findElement(By.id("single-column")).click();
         driver.findElement(By.cssSelector("a.navbar-brand.ues-tiles-menu-toggle")).click();
         driver.findElement(By.cssSelector("i.fw.fw-dashboard")).click();
+
         getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.id(dashboardTitle)));
         webElement = driver.findElement(By.id(dashboardTitle));
 
@@ -109,3 +110,4 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
     }
 
 }
+

@@ -15,7 +15,7 @@
 #  limitations under the License.
 
 # ----------------------------------------------------------------------------
-# Script for running the WSO2 DS Server samples
+# Script for running the WSO2 DS samples
 #
 # Environment Variable Perquisites
 #
@@ -37,9 +37,7 @@ pathEdited=$(dirname "$path")
 
 # Defining Sample data and directories' paths
 gadgetDropLocation="$pathEdited/repository/deployment/server/jaggeryapps/portal/store/carbon.super/gadget"
-sampleConfig="$pathEdited/repository/deployment/server/jaggeryapps/portal/configs/sample.json"
-jaggeryConfig="$pathEdited/repository/deployment/server/jaggeryapps/portal/jaggery.conf"
-scriptDropLocation="$pathEdited/repository/deployment/server/jaggeryapps/portal/js"
+dashboardDropLocation="$pathEdited/repository/deployment/server/jaggeryapps/portal/extensions/dashboards"
 
 # Process the user input
 sample=""
@@ -73,12 +71,9 @@ if [ -z $validate ]; then
 fi
 
 # Coping the sample files
-cp -r $sampleFolder/gadgets/* $gadgetDropLocation
-cp -r $sampleFolder/scripts/* $scriptDropLocation
-
-# Editing the sample.json file
-sed -i 's/false/true/gw output' $sampleConfig
+cp -r "$sampleFolder/gadgets"/* "$gadgetDropLocation"
+cp -r "$sampleFolder/scripts"/* "$dashboardDropLocation"
 
 echo "Starting the dashboard server with sample dashboard"
-sh $path/wso2server.sh
+sh "$path/wso2server.sh"
 
