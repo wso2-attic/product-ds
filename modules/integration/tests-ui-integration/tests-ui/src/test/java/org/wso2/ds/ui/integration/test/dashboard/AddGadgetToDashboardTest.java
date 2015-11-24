@@ -62,39 +62,16 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         }
     }
 
-    @Test(groups = "wso2.ds.dashboard", description = "Adding blocks to an existing dashboard")
-    public void testAddBlocks() throws MalformedURLException, XPathExpressionException {
-        DSWebDriver driver = getDriver();
-        driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
-        driver.findElement(By.cssSelector("#ues-add-block-menu-item > a")).click();
-        driver.findElement(By.id("ues-add-block-btn")).click();
-        driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
-        pushWindow();
-        assertTrue(isBlockPresent("a"), "The block 'a' does not exist");
-        driver.close();
-        popWindow();
-    }
 
-    @Test(groups = "wso2.ds.dashboard", description = "Removing blocks from an existing dashboard",
-            dependsOnMethods = "testAddBlocks")
-    public void testRemoveBlock() throws MalformedURLException, XPathExpressionException, InterruptedException {
-        DSWebDriver driver = getDriver();
-        driver.findElement(By.cssSelector("#a.ues-component-box .ues-component-box-remove-handle")).click();
-        // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
-        Thread.sleep(1000);
-        driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
-        pushWindow();
-        assertFalse(isBlockPresent("a"), "The block 'a' exists after deletion");
-        driver.close();
-        popWindow();
-    }
-
-    @Test(groups = "wso2.ds.dashboard", description = "Adding gadgets to an existing dashboard from dashboard server",
-            dependsOnMethods = "testRemoveBlock")
+    @Test(groups = "wso2.ds.dashboard", description = "Adding gadgets to an existing dashboard from dashboard server")
     public void testAddGadgetToDashboard() throws Exception {
         DSWebDriver driver = getDriver();
         String[][] gadgetMappings = {{"g1", "b"}, {"usa-map", "c"}};
         String script = generateAddGadgetScript(gadgetMappings);
+
+        driver.get(getBaseUrl() + "/portal/dashboards");
+        driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
+
         driver.findElement(By.cssSelector("i.fw.fw-pie-chart")).click();
         driver.executeScript(script);
         // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
@@ -142,41 +119,5 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         driver.close();
         driver.switchTo().window(parentWindow);
 
-    }
-
-    @Test(groups = "wso2.ds.dashboard", description = "Test fluid layout",
-            dependsOnMethods = "testAddGadgetToDashboard")
-    public void testFluidLayout() throws MalformedURLException, XPathExpressionException {
-        DSWebDriver driver = getDriver();
-        driver.findElement(By.cssSelector("a.ues-page-properties-toggle")).click();
-        driver.findElement(By.cssSelector("#ues-properties input[name=fluidLayout]")).click();
-        driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
-        pushWindow();
-        boolean isFluidLayout = false;
-        List<WebElement> elements = getDriver().findElements(By.cssSelector("#wrapper > .container-fluid"));
-        if (elements.size() > 0) {
-            isFluidLayout = true;
-        }
-        assertTrue(isFluidLayout, "The layout is not fluid");
-        driver.close();
-        popWindow();
-    }
-
-    /**
-     * Check whether a block exists
-     *
-     * @param id ID of the block
-     * @return
-     * @throws MalformedURLException
-     * @throws XPathExpressionException
-     */
-    private boolean isBlockPresent(String id) throws MalformedURLException, XPathExpressionException {
-        DSWebDriver driver = getDriver();
-        // reduce the timeout to 2 seconds
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        List<WebElement> elements = driver.findElements(By.cssSelector("div#" + id + ".ues-component-box"));
-        // restore the original timeout value
-        driver.manage().timeouts().implicitlyWait(getMaxWaitTime(), TimeUnit.SECONDS);
-        return (elements.size() > 0);
     }
 }

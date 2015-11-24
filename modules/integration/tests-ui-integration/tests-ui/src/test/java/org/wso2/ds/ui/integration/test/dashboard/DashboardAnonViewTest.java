@@ -18,6 +18,7 @@
 
 package org.wso2.ds.ui.integration.test.dashboard;
 
+import ds.integration.tests.common.domain.DSIntegrationTestConstants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
@@ -59,8 +60,8 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         String backendURL = getBackEndUrl();
         resourceAdminServiceClient = new ResourceAdminServiceClient(backendURL, getCurrentUsername(),
                 getCurrentPassword());
-        resourcePath = DASHBOARD_REGISTRY_BASE_PATH + dashboardTitle.toLowerCase();
-        DSUIIntegrationTest.login(getDriver(), getBaseUrl(), getCurrentUsername(), getCurrentPassword());
+        resourcePath = DSIntegrationTestConstants.DASHBOARD_REGISTRY_BASE_PATH + dashboardTitle.toLowerCase();
+        login(getCurrentUsername(), getCurrentPassword());
     }
 
     /**

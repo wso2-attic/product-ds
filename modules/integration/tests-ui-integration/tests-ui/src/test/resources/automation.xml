@@ -139,14 +139,6 @@
                         <userName>testuser21</userName>
                         <password>testuser21</password>
                     </user>
-                    <user key="editor">
-                        <userName>editor_user</userName>
-                        <password>editor_user</password>
-                    </user>
-                    <user key="viewer">
-                        <userName>viewer_user</userName>
-                        <password>viewer_user</password>
-                    </user>
                 </users>
             </tenant>
         </superTenant>
