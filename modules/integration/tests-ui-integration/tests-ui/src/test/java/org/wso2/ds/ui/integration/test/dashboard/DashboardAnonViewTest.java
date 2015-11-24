@@ -74,10 +74,10 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         getDriver().findElement(By.id("ues-dashboard-title")).clear();
         getDriver().findElement(By.id("ues-dashboard-title")).sendKeys(dashboardTitle);
         getDriver().findElement(By.id("ues-dashboard-create")).click();
-        getDriver().findElement(By.cssSelector("#layout-1")).click();
+        getDriver().findElement(By.cssSelector("#default-grid")).click();
         getDriver().findElement(By.cssSelector(".ues-page-properties-toggle")).click();
-        getDriver().findElement(By.className("landing")).click();
-        getDriver().findElement(By.className("anon")).click();
+        getDriver().findElement(By.cssSelector("input[name='landing']")).click();
+        getDriver().findElement(By.cssSelector("input[name='anon']")).click();
         getDriver().findElement(By.className("toggle-group")).click();
         getDriver().findElement(By.cssSelector("a[data-type='gadget']")).click();
 
@@ -166,9 +166,9 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         String defaultGadgetExpected = "G2";
 
         getDriver().findElement(By.className("ues-page-add")).click();
-        getDriver().findElement(By.cssSelector("#layout-1")).click();
+        getDriver().findElement(By.cssSelector("#default-grid")).click();
         getDriver().findElement(By.cssSelector(".ues-page-properties-toggle")).click();
-        getDriver().findElement(By.className("anon")).click();
+        getDriver().findElement(By.cssSelector("input[name='anon']")).click();
         getDriver().findElement(By.className("toggle-group")).click();
 
         ((JavascriptExecutor) getDriver()).executeScript(" var draggableElement = $(\"div[data-id='g2']\")" +
@@ -274,7 +274,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
     public void testAnonDashboardPageRemove() throws Exception {
         String defaultGadgetExpected = "G2";
 
-        getDriver().findElement(By.className("anon")).click();
+        getDriver().findElement(By.cssSelector("input[name='anon']")).click();
         boolean isToggleButtonHidden = getDriver().findElements(By.cssSelector(".toggle-design-view.hide")).size() > 0;
         String defaultGadgetActual = getDriver().findElement(By.cssSelector("iframe")).getAttribute("title");
         getDriver().get(getBaseUrl() + "/portal/dashboards/" + dashboardTitle + "/landing?isAnonView=true");
@@ -296,7 +296,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
 
         getDriver().get(getBaseUrl() + "/portal/dashboards/" + dashboardTitle + "?editor=true");
         getDriver().findElement(By.cssSelector(".ues-page-properties-toggle")).click();
-        getDriver().findElement(By.className("anon")).click();
+        getDriver().findElement(By.cssSelector("input[name='anon']")).click();
 
         boolean isToggleButtonHidden = getDriver().findElements(By.cssSelector(".toggle-design-view.hide")).size() > 0;
         String defaultGadgetActual = getDriver().findElement(By.cssSelector("iframe")).getAttribute("title");
