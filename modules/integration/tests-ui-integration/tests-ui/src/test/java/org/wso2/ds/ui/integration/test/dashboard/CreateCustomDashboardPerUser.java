@@ -115,7 +115,8 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
         String dashboardId = dashboardTitle.toLowerCase();
 
-        driver.findElement(By.id("ues-go-back")).click();
+        driver.findElement(By.id("ues-back")).click();
+
 
         WebElement dashboard = getDriver().findElement(By.id(dashboardId));
         assertEquals(DASHBOARD_TITLE, dashboard.findElement(By.id("ues-dashboard-title")).getText());
@@ -150,6 +151,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         String dashboardId = dashboardTitle.toLowerCase();
 
         login(USERNAME_VIEWER, PASSWORD_VIEWER);
+        driver.get(getBaseUrl()+"/portal/dashboards");
 
         WebElement dashboard = driver.findElement(By.id(dashboardId));
 

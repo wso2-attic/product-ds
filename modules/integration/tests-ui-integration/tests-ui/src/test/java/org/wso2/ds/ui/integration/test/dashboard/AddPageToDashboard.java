@@ -131,6 +131,7 @@ public class AddPageToDashboard extends DSUIIntegrationTest {
         }
 
         assertEquals(count, 0, "some errors occurred when deleting the newly added page to dashboard App");
+
     }
 
     @AfterClass(alwaysRun = true)

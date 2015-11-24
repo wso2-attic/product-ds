@@ -35,7 +35,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
 
     private static final Log LOG = LogFactory.getLog(DSUIIntegrationTest.class);
     private static final String DS_SUFFIX = "/portal/login-controller?destination=%2Fportal%2F";
-    private static final String DS_HOME_SUFFIX = "/portal/";
+    private static final String DS_HOME_SUFFIX = "/portal/dashboards";
     private static final String ADMIN_CONSOLE_SUFFIX = "/carbon/admin/index.jsp";
 
     protected String resourcePath;
@@ -197,6 +197,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      */
     public void addDashBoard(String dashBoardTitle, String description) throws Exception {
         driver = getDriver();
+        driver.get(getBaseUrl()+"/portal/dashboards");
         driver.findElement(By.cssSelector("[href='create-dashboard']")).click();
         driver.findElement(By.id("ues-dashboard-title")).clear();
         driver.findElement(By.id("ues-dashboard-title")).sendKeys(dashBoardTitle);

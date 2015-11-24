@@ -78,7 +78,7 @@ public class RoleBasedDashboardAccess extends DSUIIntegrationTest {
 
         // login with new user
         login(USER_NAME, PASSWORD);
-
+        driver.get(getBaseUrl()+"/portal/dashboards");
         WebElement dashboard = driver.findElement(By.id(dashboardId));
 
         assertEquals(DASHBOARD_TITLE, dashboard.findElement(By.id("ues-dashboard-title")).getText());

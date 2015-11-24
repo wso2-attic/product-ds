@@ -48,8 +48,6 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
     public AddDeleteDashboardTest(TestUserMode userMode, String dashboardTitle) {
         super(userMode);
         this.dashboardTitle = dashboardTitle;
-        Locale.setDefault(new Locale("en")); //setting English as locale
-
     }
 
     @DataProvider(name = "userMode")
@@ -70,6 +68,7 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
     public void testAddDashboardNew() throws Exception {
         DSWebDriver driver = getDriver();
 
+        driver.get(getBaseUrl()+"/portal/dashboards");
         driver.findElement(By.cssSelector("[href='create-dashboard']")).click();
         driver.findElement(By.id("ues-dashboard-title")).clear();
         driver.findElement(By.id("ues-dashboard-title")).sendKeys(dashboardTitle);

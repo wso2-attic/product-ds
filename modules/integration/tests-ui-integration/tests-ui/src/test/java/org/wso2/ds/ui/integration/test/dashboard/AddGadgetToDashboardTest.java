@@ -36,12 +36,10 @@ import static org.testng.Assert.*;
  */
 public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
     private static final String DASHBOARD_TITLE = "sampledashboard1";
-    private String dashboardTitle;
 
     @Factory(dataProvider = "userMode")
     public AddGadgetToDashboardTest(TestUserMode userMode, String dashboardTitle) {
         super(userMode);
-        this.dashboardTitle = dashboardTitle;
     }
 
     @DataProvider(name = "userMode")

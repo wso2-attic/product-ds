@@ -225,11 +225,12 @@ public class BannerTest extends DSUIIntegrationTest {
     /**
      * initialize the dashboard
      */
-    private void initDashboard() throws MalformedURLException, XPathExpressionException {
+    private void initDashboard() throws Exception {
 
         DSWebDriver driver = getDriver();
 
         // create dashboard
+        driver.get(getBaseUrl()+"/portal/dashboards");
         driver.findElement(By.cssSelector("a[href='create-dashboard']")).click();
         driver.findElement(By.id("ues-dashboard-title")).clear();
         driver.findElement(By.id("ues-dashboard-title")).sendKeys(DASHBOARD_TITLE);
@@ -262,8 +263,9 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    private void goToDesigner() throws MalformedURLException, XPathExpressionException {
+    private void goToDesigner() throws Exception {
 
+        getDriver().get(getBaseUrl()+"/portal/dashboards");
         getDriver().findElement(By.cssSelector(".ues-dashboard[data-id='" + DASHBOARD_ID + "'] a" +
                 ".ues-edit")).click();
     }
@@ -274,10 +276,11 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    private void customizeDashboard() throws MalformedURLException, XPathExpressionException {
+    private void customizeDashboard() throws Exception {
 
         DSWebDriver driver = getDriver();
 
+        getDriver().get(getBaseUrl()+"/portal/dashboards");
         driver.findElement(By.cssSelector(".ues-dashboard[data-id='" + DASHBOARD_ID + "'] a" +
                 ".ues-view")).click();
 
