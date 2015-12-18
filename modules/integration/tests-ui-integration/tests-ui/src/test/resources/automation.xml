@@ -151,7 +151,7 @@
             </tenant>
         </superTenant>
         <tenants>
-            <tenant domain="wso2.com" key="wso2">
+            <tenant domain="abc.com" key="abc">
                 <admin>
                     <user key="admin">
                         <userName>admin</userName>
@@ -167,9 +167,17 @@
                         <userName>testuser21</userName>
                         <password>testuser21</password>
                     </user>
+                    <user key="editor">
+                        <userName>editor_user</userName>
+                        <password>editor_user</password>
+                    </user>
+                    <user key="viewer">
+                        <userName>viewer_user</userName>
+                        <password>viewer_user</password>
+                    </user>
                 </users>
             </tenant>
-            <tenant domain="abc.com" key="abc">
+            <tenant domain="wso2.com" key="wso2">
                 <admin>
                     <user key="admin">
                         <userName>admin</userName>
