@@ -86,7 +86,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
     public void testRemoveBlock() throws MalformedURLException, XPathExpressionException, InterruptedException {
 
         DSWebDriver driver = getDriver();
-        driver.findElement(By.cssSelector("#a.ues-component-box .ues-component-box-remove-handle")).click();
+        driver.findElement(By.cssSelector("#a.ues-component-box .ues-trash-handle")).click();
 
         // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
         Thread.sleep(500);
@@ -152,6 +152,12 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
 
         assertEquals("USA MAP (This is default view)", txt.toString());
 
+        String showToolbarScript =
+                "for(i = 0; i < document.getElementsByClassName('ues-component-toolbar').length; i++) {" +
+                "    document.getElementsByClassName('ues-component-toolbar')[i].style.display = 'inline';" +
+                "}";
+
+        driver.executeScript(showToolbarScript);
         driver.findElement(By.cssSelector("#c i.fw.fw-laptop")).click();
 
         // This sleep is used to wait until the content of the iframe appears
