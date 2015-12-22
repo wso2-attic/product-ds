@@ -64,11 +64,9 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
 
     @Test(groups = "wso2.ds.dashboard", description = "Adding blocks to an existing dashboard")
     public void testAddBlocks() throws Exception {
-
         DSWebDriver driver = getDriver();
 
         redirectToLocation("portal", "dashboards");
-
         driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
         driver.findElement(By.cssSelector("#ues-add-block-menu-item > a")).click();
         driver.findElement(By.id("ues-add-block-btn")).click();
@@ -84,7 +82,6 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
     @Test(groups = "wso2.ds.dashboard", description = "Removing blocks from an existing dashboard",
             dependsOnMethods = "testAddBlocks")
     public void testRemoveBlock() throws Exception {
-
         DSWebDriver driver = getDriver();
         driver.findElement(By.cssSelector("#a.ues-component-box .ues-trash-handle")).click();
 
@@ -101,7 +98,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
 
 
     @Test(groups = "wso2.ds.dashboard", description = "Adding gadgets to an existing dashboard from dashboard server",
-        dependsOnMethods = "testRemoveBlock")
+            dependsOnMethods = "testRemoveBlock")
     public void testAddGadgetToDashboard() throws Exception {
         DSWebDriver driver = getDriver();
         String[][] gadgetMappings = {{"publisher", "b"}, {"usa-map", "c"}};
@@ -137,7 +134,6 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
 
         driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
-
         pushWindow();
 
         // This sleep is used to wait until the content of the iframe appears
@@ -146,15 +142,15 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         Object txt = driver.executeScript(
                 "var iframe = $(\"iframe[title='USA Map']\")[0];" +
                         "var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);" +
-                "return innerDoc.getElementById('defaultViewLabel').textContent;"
+                        "return innerDoc.getElementById('defaultViewLabel').textContent;"
         );
 
         assertEquals("USA MAP (This is default view)", txt.toString());
 
         String showToolbarScript =
                 "for(i = 0; i < document.getElementsByClassName('ues-component-toolbar').length; i++) {" +
-                "    document.getElementsByClassName('ues-component-toolbar')[i].style.display = 'inline';" +
-                "}";
+                        "    document.getElementsByClassName('ues-component-toolbar')[i].style.display = 'inline';" +
+                        "}";
 
         driver.executeScript(showToolbarScript);
         driver.findElement(By.cssSelector("#c i.fw.fw-laptop")).click();
@@ -166,7 +162,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         Object txtMax = driver.executeScript(
                 "var iframe = $(\"iFrame[title='USA Map']\")[0];" +
                         "var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);" +
-                "return innerDoc.getElementById('fullViewLabel').textContent;"
+                        "return innerDoc.getElementById('fullViewLabel').textContent;"
         );
 
         assertEquals("USA MAP(this is full screen view)", txtMax.toString());
@@ -178,7 +174,6 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
     @Test(groups = "wso2.ds.dashboard", description = "Test fluid layout",
             dependsOnMethods = "testMaximizeGadgetInView")
     public void testFluidLayout() throws MalformedURLException, XPathExpressionException {
-
         boolean isFluidLayout = false;
         DSWebDriver driver = getDriver();
 
@@ -188,7 +183,6 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
 
         driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
         pushWindow();
-
 
         List<WebElement> elements = getDriver().findElements(By.cssSelector("#wrapper > .container-fluid"));
         if (elements.size() > 0) {
@@ -209,7 +203,6 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      */
     private boolean isBlockPresent(String id) throws Exception {
-
         DSWebDriver driver = getDriver();
 
         // reduce the timeout to 2 seconds
