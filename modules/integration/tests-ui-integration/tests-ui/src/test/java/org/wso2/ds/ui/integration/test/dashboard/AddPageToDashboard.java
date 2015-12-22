@@ -116,6 +116,7 @@ public class AddPageToDashboard extends DSUIIntegrationTest {
         WebElement newPageElement = driver.findElement(By.
                 cssSelector("a[data-id='" + DASHBOARD_URL.toLowerCase() + "']"));
         newPageElement.findElement(By.cssSelector(".ues-trash")).click();
+        driver.findElement(By.id("button-0")).click();
 
         int count = 0;
         List<WebElement> pages = pageList.findElements(By.cssSelector("a.accordion-toggle"));
