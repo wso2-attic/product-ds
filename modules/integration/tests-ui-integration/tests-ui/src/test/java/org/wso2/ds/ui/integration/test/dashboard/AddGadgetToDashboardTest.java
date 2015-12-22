@@ -26,7 +26,6 @@ import org.wso2.ds.ui.integration.util.DSWebDriver;
 import javax.xml.xpath.XPathExpressionException;
 import java.net.MalformedURLException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.*;
 
@@ -83,7 +82,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
 
     @Test(groups = "wso2.ds.dashboard", description = "Removing blocks from an existing dashboard",
             dependsOnMethods = "testAddBlocks")
-    public void testRemoveBlock() throws MalformedURLException, XPathExpressionException, InterruptedException {
+    public void testRemoveBlock() throws Exception {
 
         DSWebDriver driver = getDriver();
         driver.findElement(By.cssSelector("#a.ues-component-box .ues-trash-handle")).click();
@@ -208,17 +207,17 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    private boolean isBlockPresent(String id) throws MalformedURLException, XPathExpressionException {
+    private boolean isBlockPresent(String id) throws Exception {
 
         DSWebDriver driver = getDriver();
 
         // reduce the timeout to 2 seconds
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        modifyTimeOut(2);
 
         List<WebElement> elements = driver.findElements(By.cssSelector("div#" + id + ".ues-component-box"));
 
         // restore the original timeout value
-        driver.manage().timeouts().implicitlyWait(getMaxWaitTime(), TimeUnit.SECONDS);
+        resetTimeOut();
 
         return (elements.size() > 0);
     }

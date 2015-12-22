@@ -250,18 +250,19 @@ public class BannerTest extends DSUIIntegrationTest {
         driver.findElement(By.id("ues-dashboard-title")).clear();
         driver.findElement(By.id("ues-dashboard-title")).sendKeys(dashboardTitle);
         driver.findElement(By.id("ues-dashboard-create")).click();
-        driver.findElement(By.cssSelector("button[data-id='banner']")).click();
+        selectLayout("banner");
 
         // Change permissions
         driver.findElement(By.id("settings-link")).click();
+        driver.executeScript("scroll(0, 200);");
 
         driver.findElement(By.id("ues-share-view")).clear();
-        driver.findElement(By.id("ues-share-view")).sendKeys("viewer");
-        driver.findElement(By.cssSelector("div.tt-suggestion.tt-selectable")).click();
+        driver.findElement(By.id("ues-share-view")).sendKeys("view");
+        driver.findElement(By.id("ues-share-view")).sendKeys(Keys.TAB);
 
         driver.findElement(By.id("ues-share-edit")).clear();
-        driver.findElement(By.id("ues-share-edit")).sendKeys("editor");
-        driver.findElement(By.cssSelector("div.tt-suggestion.tt-selectable")).click();
+        driver.findElement(By.id("ues-share-edit")).sendKeys("edit");
+        driver.findElement(By.id("ues-share-edit")).sendKeys(Keys.TAB);
 
         // Remove other permissions
         driver.findElement(By.cssSelector(".ues-shared-view " +
@@ -269,7 +270,7 @@ public class BannerTest extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector(".ues-shared-edit " +
                 ".ues-shared-role[data-role=\"Internal/everyone\"] span.remove-button")).click();
 
-        driver.findElement(By.id("ues-designer-link")).click();
+        driver.findElement(By.id("ues-back")).click();
     }
 
     /**
