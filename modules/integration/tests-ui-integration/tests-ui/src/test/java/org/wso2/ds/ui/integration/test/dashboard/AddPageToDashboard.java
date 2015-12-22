@@ -31,6 +31,7 @@ import org.wso2.ds.ui.integration.util.DSWebDriver;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class AddPageToDashboard extends DSUIIntegrationTest {
@@ -62,24 +63,22 @@ public class AddPageToDashboard extends DSUIIntegrationTest {
         WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
         webElement.findElement(By.cssSelector(".ues-edit")).click();
 
-        //Add a Page
-        driver.findElement(By.cssSelector(".ues-page-add")).click();
-        driver.findElement(By.id("default-grid")).click();
-        driver.findElement(By.cssSelector(".fw-register2")).click();
+        addPageToDashboard();
         driver.findElement(By.cssSelector("[name=title]")).clear();
         driver.findElement(By.cssSelector("[name=title]")).sendKeys(DASHBOARD_PAGENAME);
+        driver.executeScript("$('[name=title]').change();");
         driver.findElement(By.cssSelector("[name=id]")).clear();
         driver.findElement(By.cssSelector("[name=id]")).sendKeys(DASHBOARD_URL);
-        driver.findElement(By.cssSelector("h4.ues-page-title")).click();
+        driver.executeScript("$('[name=id]').change();");
 
-        assertEquals(driver.findElement(By.cssSelector("h4.ues-page-title")).getText(), DASHBOARD_PAGENAME,
+        assertEquals(driver.findElement(By.cssSelector("h4.ues-page-title")).
+                        findElement(By.cssSelector("span.page-title")).getText(), DASHBOARD_PAGENAME,
                 "error occurred while edit the new page name");
 
         //checks the name of added newest page under pages drop list
         int count = 0;
-        driver.findElement(By.cssSelector("a.ues-page-switcher.dropdown-toggle")).click();
-        WebElement pageList = driver.findElement(By.cssSelector(".ues-pages-list"));
-        List<WebElement> pages = pageList.findElements(By.tagName("li"));
+        WebElement pageList = driver.findElement(By.cssSelector("#ues-page-properties"));
+        List<WebElement> pages = pageList.findElements(By.cssSelector("a.accordion-toggle"));
         for (WebElement we : pages) {
             if (we.getText().equalsIgnoreCase(DASHBOARD_PAGENAME)) {
                 count++;
@@ -93,18 +92,18 @@ public class AddPageToDashboard extends DSUIIntegrationTest {
             "testAddEditPageDashboardNew")
     public void testLandingCheckBox() throws Exception {
         DSWebDriver driver = getDriver();
+
+        switchPage(DASHBOARD_URL.toLowerCase());
         driver.findElement(By.cssSelector("[name=landing]")).click();
         driver.findElement(By.cssSelector("i.fw.fw-view")).click();
-
         pushWindow();
 
         String fullUrl = driver.getCurrentUrl();
         Boolean status = fullUrl.toLowerCase().contains(DASHBOARD_URL.toLowerCase());
 
-        assertTrue(status, "landing with a newly added page is not configured properly");
+        assertFalse(status, "landing with a newly added page is not configured properly");
 
         driver.close();
-
         popWindow();
     }
 
@@ -113,17 +112,13 @@ public class AddPageToDashboard extends DSUIIntegrationTest {
     public void testDeletePageDashboardNew() throws Exception {
         DSWebDriver driver = getDriver();
 
-        WebElement pageList = driver.findElement(By.cssSelector(".ues-pages-list"));
-        driver.findElement(By.cssSelector("a.ues-page-switcher.dropdown-toggle")).click();
-        pageList.findElement(By.cssSelector("li a[data-id='landing']")).click();
-        driver.findElement(By.cssSelector("a.ues-page-switcher.dropdown-toggle")).click();
-        WebElement newPageElement = driver.findElement(By.cssSelector(".ues-pages-list li " +
-                "a[data-id='" + DASHBOARD_URL + "']"));
+        WebElement pageList = driver.findElement(By.cssSelector("#ues-page-properties"));
+        WebElement newPageElement = driver.findElement(By.
+                cssSelector("a[data-id='" + DASHBOARD_URL.toLowerCase() + "']"));
         newPageElement.findElement(By.cssSelector(".ues-trash")).click();
 
         int count = 0;
-        driver.findElement(By.cssSelector("a.ues-page-switcher.dropdown-toggle")).click();
-        List<WebElement> pages = pageList.findElements(By.tagName("li"));
+        List<WebElement> pages = pageList.findElements(By.cssSelector("a.accordion-toggle"));
         for (WebElement we : pages) {
             if (we.getText().equalsIgnoreCase(DASHBOARD_PAGENAME)) {
                 count++;
@@ -131,7 +126,6 @@ public class AddPageToDashboard extends DSUIIntegrationTest {
         }
 
         assertEquals(count, 0, "some errors occurred when deleting the newly added page to dashboard App");
-
     }
 
     @AfterClass(alwaysRun = true)

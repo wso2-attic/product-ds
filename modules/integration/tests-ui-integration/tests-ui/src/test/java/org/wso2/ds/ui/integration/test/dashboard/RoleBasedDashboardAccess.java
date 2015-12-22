@@ -27,10 +27,13 @@ import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 import org.wso2.ds.ui.integration.util.DSWebDriver;
 
+import java.sql.Time;
+import java.util.concurrent.TimeUnit;
+
 import static org.testng.Assert.*;
 
 public class RoleBasedDashboardAccess extends DSUIIntegrationTest {
-    private static final String DASHBOARD_TITLE = "sampleDashBoard";
+    private static final String DASHBOARD_TITLE = "sampleRoleBasedDashboard";
     private static final String DASHBOARD_DESCRIPTION = "This is description about " + DASHBOARD_TITLE;
     private static final String USER_NAME = "sampleUser";
     private static final String PASSWORD = "qwerty";
@@ -58,7 +61,6 @@ public class RoleBasedDashboardAccess extends DSUIIntegrationTest {
             "name for dashboard server")
     public void testRoleBasedDashboardAccessNew() throws Exception {
         DSWebDriver driver = getDriver();
-
         String dashboardId = dashboardTitle.toLowerCase();
 
         assertTrue(driver.isElementPresent(By.cssSelector("#" + dashboardId + " .ues-view")),
@@ -69,8 +71,8 @@ public class RoleBasedDashboardAccess extends DSUIIntegrationTest {
                 "settings element is present in the current UI");
 
         driver.findElement(By.cssSelector("#" + dashboardId + " .ues-settings")).click();
-        driver.findElement(By.cssSelector(".ues-shared-edit > .ues-shared-role > .remove-button")).click();
-
+        driver.findElement(By.cssSelector(".ues-shared-edit")).findElement(By.cssSelector(".remove-button")).click();
+        driver.findElement(By.id("button-0")).click();
         logout();
 
         loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
@@ -78,11 +80,13 @@ public class RoleBasedDashboardAccess extends DSUIIntegrationTest {
 
         // login with new user
         login(USER_NAME, PASSWORD);
-        driver.get(getBaseUrl()+"/portal/dashboards");
+        redirectToLocation("portal", "dashboards");
         WebElement dashboard = driver.findElement(By.id(dashboardId));
 
         assertEquals(DASHBOARD_TITLE, dashboard.findElement(By.id("ues-dashboard-title")).getText());
         assertEquals(DASHBOARD_DESCRIPTION, dashboard.findElement(By.id("ues-dashboard-description")).getText());
+
+        modifyTimeOut(2);
 
         assertTrue(driver.isElementPresent(By.cssSelector("#" + dashboardId + " .ues-view")),
                 "view element is present in the current UI");
@@ -90,6 +94,8 @@ public class RoleBasedDashboardAccess extends DSUIIntegrationTest {
                 "edit element is present in the current UI");
         assertFalse(driver.isElementPresent(By.cssSelector("#" + dashboardId + " .ues-settings")),
                 "settings element is present in the current UI");
+
+        resetTimeOut();
     }
 
     @AfterClass(alwaysRun = true)
