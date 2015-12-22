@@ -22,13 +22,12 @@ package org.wso2.ds.ui.integration.test.dashboard;
 
 import ds.integration.tests.common.domain.DSIntegrationTestConstants;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 import org.wso2.ds.ui.integration.util.DSWebDriver;
-
-import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.*;
 
@@ -93,18 +92,16 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
         webElement.findElement(By.cssSelector(".ues-edit")).click();
         driver.findElement(By.id("settings-link")).click();
+        driver.executeScript("scroll(0, 200);");
+
         WebElement element = driver.findElement(By.id("ues-share-view"));
-        element.sendKeys(VIEWER_ROLE);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        element.click();
-        WebElement selectedElement = driver.findElement(By.cssSelector("div.tt-menu > div > div:first-child"));
-        selectedElement.click();
+        element.sendKeys("dashboardViewer");
+        element.sendKeys(Keys.TAB);
+
         WebElement element2 = driver.findElement(By.id("ues-share-edit"));
-        element2.sendKeys(EDITOR_ROLE);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        element2.click();
-        WebElement selectedElement2 = driver.findElement(By.cssSelector("div.tt-menu > div > div:first-child"));
-        selectedElement2.click();
+        element2.sendKeys("dashboardEditor");
+        element2.sendKeys(Keys.TAB);
+
         driver.findElement(By.cssSelector(".ues-shared-view > .ues-shared-role > .remove-button")).click();
         driver.findElement(By.cssSelector(".ues-shared-edit > .ues-shared-role > .remove-button")).click();
     }
@@ -182,8 +179,9 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
 
         driver.findElement(By.cssSelector("a.ues-copy")).click();
+        driver.findElement(By.cssSelector("a.ues-pages-toggle")).click();
+        driver.findElement(By.cssSelector("#ues-dashboard-pages .ues-page-item.active .accordion-toggle")).click();
 
-        driver.findElement(By.cssSelector(".ues-page-properties-toggle")).click();
         driver.findElement(By.cssSelector("[name=title]")).clear();
         driver.findElement(By.cssSelector("[name=title]")).sendKeys(DASHBOARD_PAGE_NAME);
         driver.findElement(By.cssSelector("h4.ues-page-title")).click();
