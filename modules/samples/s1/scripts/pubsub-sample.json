@@ -1,0 +1,135 @@
+{
+  "id": "publisher-subscriber-sample",
+  "title": "Publisher Subscriber Sample",
+  "description": "Sample to describe how to use the pub sub communication between gadgets.",
+  "permissions": {
+    "viewers": [
+      "Internal/everyone"
+    ],
+    "editors": [
+      "Internal/everyone"
+    ]
+  },
+  "pages": [
+    {
+      "id": "landing",
+      "title": "Welcome",
+      "layout": {
+        "content": {
+          "loggedIn": {
+            "blocks": [
+              {
+                "id": "a",
+                "col": 1,
+                "row": 1,
+                "size_x": 4,
+                "size_y": 3,
+                "banner": false
+              },
+              {
+                "id": "c",
+                "col": 9,
+                "row": 1,
+                "size_x": 4,
+                "size_y": 3,
+                "banner": false
+              }
+            ]
+          }
+        },
+        "fluidLayout": false
+      },
+      "isanon": false,
+      "content": {
+        "default": {
+          "c": [
+            {
+              "id": "lg90lxwz1j4te29",
+              "content": {
+                "id": "subscriber",
+                "title": "Subscriber",
+                "type": "gadget",
+                "category": "Subscribers",
+                "thumbnail": "store://gadget/usa-business-revenue/index.png",
+                "data": {
+                  "url": "store://gadget/subscriber/index.xml"
+                },
+                "listen": {
+                  "state-selected": {
+                    "type": "address",
+                    "description": "Used to filter based on state",
+                    "on": [
+                      {
+                        "from": "cix7amwr3yqlg14i",
+                        "event": "select"
+                      }
+                    ]
+                  },
+                  "auto-update": {
+                    "type": "boolean",
+                    "description": "Used to filter based on state",
+                    "on": []
+                  }
+                },
+                "styles": {
+                  "height": "",
+                  "borders": true,
+                  "titlePosition": "left",
+                  "title": "Subscriber"
+                },
+                "options": {},
+                "locale_titles": {
+                  "en-US": "Subscriber"
+                },
+                "settings": {}
+              }
+            }
+          ],
+          "a": [
+            {
+              "id": "cix7amwr3yqlg14i",
+              "content": {
+                "id": "publisher",
+                "title": "Publisher",
+                "type": "gadget",
+                "thumbnail": "store://gadget/usa-business-revenue/index.png",
+                "category": "Publishers",
+                "data": {
+                  "url": "store://gadget/publisher/index.xml"
+                },
+                "notify": {
+                  "select": {
+                    "type": "address",
+                    "description": "This notifies selected state"
+                  },
+                  "cancel": {
+                    "type": "boolean",
+                    "description": "This notifies cancellation of state selection"
+                  }
+                },
+                "styles": {
+                  "title": "Publisher",
+                  "borders": true
+                },
+                "options": {},
+                "locale_titles": {}
+              }
+            }
+          ]
+        },
+        "anon": {}
+      }
+    }
+  ],
+  "identityServerUrl": "",
+  "accessTokenUrl": "",
+  "apiKey": "",
+  "apiSecret": "",
+  "banner": {
+    "globalBannerExists": null,
+    "customBannerExists": null
+  },
+  "landing": "landing",
+  "isanon": false,
+  "isUserCustom": false
+}

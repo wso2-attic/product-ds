@@ -258,7 +258,7 @@
             <directory>../samples</directory>
             <outputDirectory>${project.artifactId}-${product.ds.version}/samples/</outputDirectory>
             <includes>
-                <include>*/**</include>
+                <include>**/s0/**</include>
             </includes>
         </fileSet>
     </fileSets>
