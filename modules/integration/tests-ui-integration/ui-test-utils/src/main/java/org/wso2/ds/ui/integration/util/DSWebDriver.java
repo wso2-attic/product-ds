@@ -35,7 +35,7 @@ public class DSWebDriver implements WebDriver, JavascriptExecutor, HasInputDevic
     public DSWebDriver(WebDriver webDriver, int maxWaitTime) {
         this.driver = webDriver;
         DSWebDriver.maxWaitTime = maxWaitTime;
-        this.driver.manage().window().maximize();
+        this.driver.manage().window().setSize(new Dimension(1920, 1080));
     }
 
     /**

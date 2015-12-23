@@ -22,6 +22,7 @@ import ds.integration.tests.common.domain.DSIntegrationTest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.extensions.selenium.BrowserManager;
@@ -112,6 +113,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         for (String windowHandle : driver.getWindowHandles()) {
             if (!windowHandle.equals(currentWindowHandle)) {
                 driver.switchTo().window(windowHandle);
+                driver.manage().window().setSize(new Dimension(1920, 1080));
                 break;
             }
         }
