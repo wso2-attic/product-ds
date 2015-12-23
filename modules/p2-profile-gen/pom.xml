@@ -236,6 +236,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.user.registration.ui.feature:${carbon.identity.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.deployment:org.wso2.carbon.as.runtimes.cxf.feature:${carbon.deployment.version}
+                                </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
                     </execution>
@@ -467,6 +470,10 @@
                                 <feature>
                                     <id>org.wso2.carbon.identity.user.registration.ui.feature.group</id>
                                     <version>${carbon.identity.version}</version>
+                                </feature>
+                                <feature>
+                                     <id>org.wso2.carbon.as.runtimes.cxf.feature.group</id>
+                                     <version>${carbon.deployment.version}</version>
                                 </feature>
                             </features>
                         </configuration>

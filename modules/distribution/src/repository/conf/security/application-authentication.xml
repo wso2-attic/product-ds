@@ -32,7 +32,7 @@
         AuthenticationEndpointURL is location of the web app containing
         the authentication related pages
     -->
-    <AuthenticationEndpointURL>/sso/login</AuthenticationEndpointURL>
+    <AuthenticationEndpointURL>/authenticationendpoint/login.do</AuthenticationEndpointURL>
 
     <!--
         Extensions allow extending the default behaviour of the authentication
