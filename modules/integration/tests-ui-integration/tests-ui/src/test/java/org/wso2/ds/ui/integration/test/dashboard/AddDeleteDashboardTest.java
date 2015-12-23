@@ -30,6 +30,7 @@ import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 import org.wso2.ds.ui.integration.util.DSWebDriver;
 
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
@@ -68,22 +69,20 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
     public void testAddDashboardNew() throws Exception {
         DSWebDriver driver = getDriver();
 
-        driver.get(getBaseUrl()+"/portal/dashboards");
+        redirectToLocation("portal", "dashboards");
         driver.findElement(By.cssSelector("[href='create-dashboard']")).click();
         driver.findElement(By.id("ues-dashboard-title")).clear();
         driver.findElement(By.id("ues-dashboard-title")).sendKeys(dashboardTitle);
         driver.findElement(By.id("ues-dashboard-description")).clear();
         driver.findElement(By.id("ues-dashboard-description")).sendKeys(DASHBOARD_DESCRIPTION);
         driver.findElement(By.id("ues-dashboard-create")).click();
-        driver.findElement(By.id("single-column")).click();
-        driver.findElement(By.cssSelector("a.navbar-brand.ues-tiles-menu-toggle")).click();
-        driver.findElement(By.cssSelector("i.fw.fw-dashboard")).click();
+        driver.findElement(By.cssSelector("a[data-id='single-column']")).click();
+        redirectToLocation("portal", "dashboards");
 
         getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.id(dashboardTitle)));
         webElement = driver.findElement(By.id(dashboardTitle));
 
         assertEquals(dashboardTitle, webElement.findElement(By.id("ues-dashboard-title")).getText());
-
         assertEquals(DASHBOARD_DESCRIPTION, webElement.findElement(By.id("ues-dashboard-description")).getText());
     }
 
@@ -97,8 +96,10 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
         webElement.findElement(By.cssSelector("i.fw-delete")).click();
         driver.findElement(By.cssSelector("span.ladda-label")).click();
 
+        modifyTimeOut(2);
         assertFalse(driver.isElementPresent(By.id(dashboardTitle)), "Error occurred while deleting dashboard" +
                 dashboardTitle);
+        resetTimeOut();
 
         isResourceExist = isResourceExist(resourcePath);
         assertFalse(isResourceExist, "Registry resource could not be deleted due to some errors");
@@ -108,6 +109,5 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
     public void tearDown() throws Exception {
         dsUITestTearDown();
     }
-
 }
 

@@ -21,9 +21,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.engine.context.beans.User;
@@ -40,50 +38,70 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 /**
- * Created by lasanthas on 10/8/15.
+ * Tests the dashboard banner uploading functionality for super tenant and tenant user scenarios.
  */
 public class BannerTest extends DSUIIntegrationTest {
 
     private static final Log LOG = LogFactory.getLog(BannerTest.class);
 
-    private static final String DASHBOARD_TITLE = "Banner Dashboard";
-    private static final String DASHBOARD_ID = "banner-dashboard";
     private static final String ROOT_RESOURCE_PATH = "/_system/config/ues/customizations/";
     private static final String[] IMAGES = {"orange.png", "silver.png"};
 
-    private static final String EDITOR_ROLE = "editor";
-    private static final String VIEWER_ROLE = "viewer";
+    private static final String SUPER_TENANT_EDITOR_ROLE = "editor";
+    private static final String SUPER_TENANT_VIEWER_ROLE = "viewer";
+    private static final String TENANT_EDITOR_ROLE = "t_editor";
+    private static final String TENANT_VIEWER_ROLE = "t_viewer";
     private static final String ADMIN_ROLE = "admin";
 
+    private String dashboardId, dashboardTitle;
     private User editor, viewer;
 
     /**
      * Initialize the class
      */
-    public BannerTest() throws Exception {
+    @Factory(dataProvider = "userMode")
+    public BannerTest(TestUserMode userMode, String dashboardId, String dashboardTitle) throws Exception {
         super(TestUserMode.SUPER_TENANT_ADMIN);
 
-        AutomationContext automationContext = new AutomationContext(DSIntegrationTestConstants
-                .DS_PRODUCT_NAME, this.userMode);
+        this.dashboardId = dashboardId;
+        this.dashboardTitle = dashboardTitle;
+
+        boolean isTenant = userMode.equals(TestUserMode.TENANT_ADMIN);
+
+        // Read the editor and viewer users from the automation.xml file.
+        AutomationContext automationContext = new AutomationContext(DSIntegrationTestConstants.DS_PRODUCT_NAME,
+                this.userMode);
 
         editor = automationContext.getContextTenant().getTenantUser("editor");
         viewer = automationContext.getContextTenant().getTenantUser("viewer");
 
-        UserManagementClient userManagementClient = new UserManagementClient(getBackEndUrl(),
-                getCurrentUsername(), getCurrentPassword());
+        // Manage user roles
+        UserManagementClient userManagementClient = new UserManagementClient(getBackEndUrl(), getCurrentUsername(),
+                getCurrentPassword());
 
-        // Create user roles
-        String[] editorsRoles = new String[]{editor.getUserName()};
-        String[] viewersRoles = new String[]{viewer.getUserName()};
+        // Create editor and viewer user roles (separate user roles are created for super tenant and tenant users)
+        userManagementClient.addRole(
+                isTenant ? TENANT_EDITOR_ROLE : SUPER_TENANT_EDITOR_ROLE, new String[]{editor.getUserName()}, null);
+        userManagementClient.addRole(
+                isTenant ? TENANT_VIEWER_ROLE : SUPER_TENANT_VIEWER_ROLE, new String[]{viewer.getUserName()}, null);
 
-        userManagementClient.addRole(EDITOR_ROLE, editorsRoles, null);
-        userManagementClient.addRole(VIEWER_ROLE, viewersRoles, null);
-
-        // Remove unnecessary roles from users
+        // Remove the admin role from the editors and viewers
         String[] rolesToRemove = new String[]{ADMIN_ROLE};
-
         userManagementClient.addRemoveRolesOfUser(editor.getUserName(), null, rolesToRemove);
         userManagementClient.addRemoveRolesOfUser(viewer.getUserName(), null, rolesToRemove);
+    }
+
+    /**
+     * Provides user modes
+     *
+     * @return
+     */
+    @DataProvider(name = "userMode")
+    private static Object[][] userModeProvider() {
+        return new Object[][]{
+                {TestUserMode.SUPER_TENANT_ADMIN, "banner-dashboard", "Banner Dashboard"},
+                {TestUserMode.TENANT_ADMIN, "tenanted-banner-dashboard", "Tenanted Banner Dashboard"},
+        };
     }
 
     /**
@@ -94,7 +112,7 @@ public class BannerTest extends DSUIIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
 
-        // login as admin and create the dashboard
+        // Login to the portal and create the dashboard as the admin user
         login(getCurrentUsername(), getCurrentPassword());
 
         initDashboard();
@@ -116,7 +134,7 @@ public class BannerTest extends DSUIIntegrationTest {
 
         clickEditBannerButton(0);
         clickCancelBannerButton();
-        assertFalse(isResourceExist(ROOT_RESOURCE_PATH + DASHBOARD_ID + "/banner"),
+        assertFalse(isResourceExist(ROOT_RESOURCE_PATH + dashboardId + "/banner"),
                 "Resource should not be uploaded to the registry");
     }
 
@@ -131,7 +149,7 @@ public class BannerTest extends DSUIIntegrationTest {
 
         clickEditBannerButton(0);
         clickSaveBannerButton();
-        assertTrue(isResourceExist(ROOT_RESOURCE_PATH + DASHBOARD_ID + "/banner"), "Unable to find the resource");
+        assertTrue(isResourceExist(ROOT_RESOURCE_PATH + dashboardId + "/banner"), "Unable to find the resource");
 
         logout();
     }
@@ -151,7 +169,7 @@ public class BannerTest extends DSUIIntegrationTest {
 
         clickEditBannerButton(1);
         clickCancelBannerButton();
-        assertFalse(isResourceExist(ROOT_RESOURCE_PATH + DASHBOARD_ID + "/" + viewer.getUserName() + "/banner"),
+        assertFalse(isResourceExist(ROOT_RESOURCE_PATH + dashboardId + "/" + viewer.getUserName() + "/banner"),
                 "Resource should not be uploaded to the registry");
     }
 
@@ -167,7 +185,7 @@ public class BannerTest extends DSUIIntegrationTest {
         clickEditBannerButton(1);
         clickSaveBannerButton();
 
-        assertTrue(isResourceExist(ROOT_RESOURCE_PATH + DASHBOARD_ID + "/" + viewer.getUserName() + "/banner"),
+        assertTrue(isResourceExist(ROOT_RESOURCE_PATH + dashboardId + "/" + viewer.getUserName() + "/banner"),
                 "Unable to find the resource");
     }
 
@@ -181,7 +199,7 @@ public class BannerTest extends DSUIIntegrationTest {
     public void resetBannerByViewer() throws Exception {
 
         clickRemoveBannerButton();
-        assertFalse(isResourceExist(DASHBOARD_ID + "/" + viewer.getUserName() + "/banner"),
+        assertFalse(isResourceExist(dashboardId + "/" + viewer.getUserName() + "/banner"),
                 "Unable to remove the resource");
 
         logout();
@@ -201,8 +219,7 @@ public class BannerTest extends DSUIIntegrationTest {
         goToDesigner();
 
         clickRemoveBannerButton();
-        assertFalse(isResourceExist(ROOT_RESOURCE_PATH + DASHBOARD_ID + "/banner"),
-                "Unable to remove the resource");
+        assertFalse(isResourceExist(ROOT_RESOURCE_PATH + dashboardId + "/banner"), "Unable to remove the resource");
 
         logout();
     }
@@ -218,7 +235,9 @@ public class BannerTest extends DSUIIntegrationTest {
     }
 
     /**
-     * initialize the dashboard
+     * Create the dashboard, select the layout template and change editor and viewer permissions
+     *
+     * @throws Exception
      */
     private void initDashboard() throws Exception {
 
@@ -226,31 +245,32 @@ public class BannerTest extends DSUIIntegrationTest {
 
         driver.get(getBaseUrl() + "/portal/dashboards");
 
-        // create dashboard
+        // Create dashboard
         driver.findElement(By.cssSelector("a[href='create-dashboard']")).click();
         driver.findElement(By.id("ues-dashboard-title")).clear();
-        driver.findElement(By.id("ues-dashboard-title")).sendKeys(DASHBOARD_TITLE);
+        driver.findElement(By.id("ues-dashboard-title")).sendKeys(dashboardTitle);
         driver.findElement(By.id("ues-dashboard-create")).click();
-        driver.findElement(By.cssSelector("button[data-id='banner']")).click();
+        selectLayout("banner");
 
-        // change permissions
+        // Change permissions
         driver.findElement(By.id("settings-link")).click();
+        driver.executeScript("scroll(0, 200);");
 
         driver.findElement(By.id("ues-share-view")).clear();
-        driver.findElement(By.id("ues-share-view")).sendKeys("viewer");
-        driver.findElement(By.cssSelector("div.tt-suggestion.tt-selectable")).click();
+        driver.findElement(By.id("ues-share-view")).sendKeys("view");
+        driver.findElement(By.id("ues-share-view")).sendKeys(Keys.TAB);
 
         driver.findElement(By.id("ues-share-edit")).clear();
-        driver.findElement(By.id("ues-share-edit")).sendKeys("editor");
-        driver.findElement(By.cssSelector("div.tt-suggestion.tt-selectable")).click();
+        driver.findElement(By.id("ues-share-edit")).sendKeys("edit");
+        driver.findElement(By.id("ues-share-edit")).sendKeys(Keys.TAB);
 
-        // remove permissions from others
+        // Remove other permissions
         driver.findElement(By.cssSelector(".ues-shared-view " +
                 ".ues-shared-role[data-role=\"Internal/everyone\"] span.remove-button")).click();
         driver.findElement(By.cssSelector(".ues-shared-edit " +
                 ".ues-shared-role[data-role=\"Internal/everyone\"] span.remove-button")).click();
 
-        driver.findElement(By.id("ues-designer-link")).click();
+        driver.findElement(By.id("ues-back")).click();
     }
 
     /**
@@ -262,8 +282,8 @@ public class BannerTest extends DSUIIntegrationTest {
     private void goToDesigner() throws Exception {
 
         getDriver().get(getBaseUrl() + "/portal/dashboards");
-        getDriver().findElement(By.cssSelector(".ues-dashboard[data-id='" + DASHBOARD_ID + "'] a" +
-                ".ues-edit")).click();
+        getDriver().findElement(By.cssSelector(".ues-dashboard[data-id='" + dashboardId + "'] a" + ".ues-edit"))
+                .click();
     }
 
     /**
@@ -277,11 +297,9 @@ public class BannerTest extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
 
         driver.get(getBaseUrl() + "/portal/dashboards");
+        driver.findElement(By.cssSelector(".ues-dashboard[data-id='" + dashboardId + "'] a" + ".ues-view")).click();
 
-        driver.findElement(By.cssSelector(".ues-dashboard[data-id='" + DASHBOARD_ID + "'] a" +
-                ".ues-view")).click();
-
-        // switch the driver to the new window and click on the edit/personalize link
+        // Switch the driver to the new window and click on the edit/personalize link
         pushWindow();
 
         driver.findElement(By.cssSelector(".ues-copy")).click();
@@ -294,21 +312,18 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    private void clickEditBannerButton(int imageIndex) throws MalformedURLException,
-            XPathExpressionException {
+    private void clickEditBannerButton(int imageIndex) throws MalformedURLException, XPathExpressionException {
 
         DSWebDriver driver = getDriver();
 
-        // temporary display the html form which is used to upload the image
-        driver.executeScript("document.getElementById('ues-dashboard-upload-banner-form')" +
-                ".className='';");
+        // Temporary display the HTML form which is used to upload the image
+        driver.executeScript("document.getElementById('ues-dashboard-upload-banner-form').className='';");
 
-        // get the sample_images directory
+        // Get the sample_images directory
         ClassLoader classLoader = BannerTest.class.getClassLoader();
         File classPathRoot = new File(classLoader.getResource("").getPath());
 
-        String filePath = Paths.get(classPathRoot.getAbsolutePath(), "sample_images",
-                IMAGES[imageIndex]).toString();
+        String filePath = Paths.get(classPathRoot.getAbsolutePath(), "sample_images", IMAGES[imageIndex]).toString();
 
         if (LOG.isDebugEnabled()) {
             File file = new File(filePath);

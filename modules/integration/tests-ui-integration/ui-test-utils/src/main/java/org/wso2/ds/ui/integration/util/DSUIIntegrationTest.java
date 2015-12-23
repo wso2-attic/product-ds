@@ -30,6 +30,7 @@ import org.wso2.ds.integration.common.clients.ResourceAdminServiceClient;
 import javax.xml.xpath.XPathExpressionException;
 import java.net.MalformedURLException;
 import java.util.Stack;
+import java.util.concurrent.TimeUnit;
 
 public abstract class DSUIIntegrationTest extends DSIntegrationTest {
 
@@ -43,13 +44,20 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     private WebDriverWait wait = null;
     private Stack<String> windowHandles = new Stack<String>();
 
+    /**
+     * Constructor for the DSUIIntegrationTest
+     */
     public DSUIIntegrationTest() {
         super();
     }
 
+    /**
+     * Constructor for the DSUIIntegrationTest
+     *
+     * @param userMode user mode to initiate the class
+     */
     public DSUIIntegrationTest(TestUserMode userMode) {
         super(userMode);
-
     }
 
     /**
@@ -59,7 +67,6 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @return JS script
      */
     public String generateAddGadgetScript(String[][] mappings) {
-
         String script =
                 "$('.ues-thumbnail').draggable({" +
                         "    cancel: false," +
@@ -99,9 +106,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @throws XPathExpressionException
      */
     public void pushWindow() throws MalformedURLException, XPathExpressionException {
-
         driver = getDriver();
-
         String currentWindowHandle = driver.getWindowHandle();
 
         for (String windowHandle : driver.getWindowHandles()) {
@@ -121,7 +126,6 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @throws XPathExpressionException
      */
     public void popWindow() throws MalformedURLException, XPathExpressionException {
-
         if (windowHandles.size() > 0) {
             getDriver().switchTo().window(windowHandles.pop());
         }
@@ -134,11 +138,11 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @param pwd      password
      * @throws javax.xml.xpath.XPathExpressionException,InterruptedException
      */
-    public void login(String userName, String pwd)
-            throws Exception {
+    public void login(String userName, String pwd) throws Exception {
         String fullUrl = "";
         fullUrl = getBaseUrl() + DS_SUFFIX;
         driver = getDriver();
+
         driver.get(fullUrl);
         driver.findElement(By.name("username")).clear();
         driver.findElement(By.name("username")).sendKeys(userName);
@@ -152,11 +156,11 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      *
      * @throws javax.xml.xpath.XPathExpressionException
      */
-    public void logout() throws
-            Exception {
+    public void logout() throws Exception {
         String fullUrl = "";
         fullUrl = getBaseUrl() + DS_HOME_SUFFIX;
         driver = getDriver();
+
         driver.get(fullUrl);
         driver.findElement(By.cssSelector(".dropdown-toggle")).click();
         driver.findElement(By.cssSelector(".dropdown-menu > li > a")).click();
@@ -169,9 +173,9 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @param pwd      password
      * @throws javax.xml.xpath.XPathExpressionException
      */
-    public void loginToAdminConsole(String userName, String pwd) throws
-            Exception {
+    public void loginToAdminConsole(String userName, String pwd) throws Exception {
         driver = getDriver();
+
         driver.get(getBaseUrl() + ADMIN_CONSOLE_SUFFIX);
         driver.findElement(By.id("txtUserName")).clear();
         driver.findElement(By.id("txtUserName")).sendKeys(userName);
@@ -185,6 +189,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      */
     public void logoutFromAdminConsole() throws Exception {
         driver = getDriver();
+
         driver.get(getBaseUrl() + ADMIN_CONSOLE_SUFFIX);
         driver.findElement(By.cssSelector(".right > a")).click();
     }
@@ -197,17 +202,80 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      */
     public void addDashBoard(String dashBoardTitle, String description) throws Exception {
         driver = getDriver();
-        driver.get(getBaseUrl()+"/portal/dashboards");
+
+        redirectToLocation("portal", "dashboards");
         driver.findElement(By.cssSelector("[href='create-dashboard']")).click();
         driver.findElement(By.id("ues-dashboard-title")).clear();
         driver.findElement(By.id("ues-dashboard-title")).sendKeys(dashBoardTitle);
         driver.findElement(By.id("ues-dashboard-description")).clear();
         driver.findElement(By.id("ues-dashboard-description")).sendKeys(description);
         driver.findElement(By.id("ues-dashboard-create")).click();
-        driver.findElement(By.id("single-column")).click();
-        driver.findElement(By.cssSelector("a.navbar-brand.ues-tiles-menu-toggle")).click();
-        driver.findElement(By.cssSelector("i.fw.fw-dashboard")).click();
+        selectLayout("single-column");
+        redirectToLocation("portal", "dashboards");
+    }
 
+    /**
+     * Select the given layout
+     *
+     * @param layout name of the layout to be selected
+     */
+    public void selectLayout(String layout) throws Exception {
+        driver = getDriver();
+
+        driver.findElement(By.cssSelector("a[data-id='" + layout + "']")).click();
+    }
+
+    /**
+     * Redirect user to given location
+     *
+     * @param domain   name of the domain where user wants to direct in to
+     * @param location name of the location to be directed to
+     */
+    public void redirectToLocation(String domain, String location) throws Exception {
+        driver = getDriver();
+        String url = getBaseUrl() + "/" + domain;
+
+        if (location != null && !location.isEmpty()) {
+            url += "/" + location;
+        }
+        driver.get(url);
+    }
+
+    /**
+     * Modify the timeout as to the given value
+     *
+     * @param seconds Time to replace the default timeout of selenium
+     */
+    public void modifyTimeOut(int seconds) throws Exception {
+        getDriver().manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
+    }
+
+    /**
+     * Reset the timeout of selenium back to default
+     */
+    public void resetTimeOut() throws Exception {
+        getDriver().manage().timeouts().implicitlyWait(getMaxWaitTime(), TimeUnit.SECONDS);
+    }
+
+    /**
+     * Add a page to the dashboard
+     */
+    public void addPageToDashboard() throws Exception {
+        driver = getDriver();
+        driver.findElement(By.cssSelector("a.ues-pages-toggle")).click();
+        driver.findElement(By.cssSelector(".ues-page-add")).click();
+        selectLayout("single-column");
+        driver.findElement(By.cssSelector(".ues-page-item.active")).findElement(By.cssSelector("a.accordion-toggle")).click();
+    }
+
+    /**
+     * Switch to the given page
+     *
+     * @param pageID ID of the page to be switched to
+     */
+    public void switchPage(String pageID) throws Exception {
+        driver = getDriver();
+        driver.findElement(By.cssSelector("a[data-id='" + pageID + "']")).click();
     }
 
     /**
@@ -219,6 +287,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      */
     public void addUser(String username, String password, String retypePassword) throws Exception {
         driver = getDriver();
+
         driver.findElement(By.cssSelector("a[href=\"../userstore/add-user-role" +
                 ".jsp?region=region1&item=user_mgt_menu_add\"]")).click();
         driver.findElement(By.cssSelector("a[href=\"../user/add-step1.jsp\"]")).click();
@@ -257,6 +326,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      */
     public void assignRoleToUser(String[] userNames) throws Exception {
         driver = getDriver();
+
         for (String userName : userNames) {
             driver.findElement(By.cssSelector("input[value='" + userName + "']")).click();
         }

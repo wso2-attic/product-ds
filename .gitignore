@@ -2,6 +2,11 @@
 *.iml
 .idea
 *.~
+target/
+
+# these files gets created when running tests #
+modules/integration/tests-ui-integration/tests-ui/src/test/resources/keystores/
+modules/integration/tests-ui-integration/tests-ui/src/test/resources/client/
 
 # Package Files #
 *.jar

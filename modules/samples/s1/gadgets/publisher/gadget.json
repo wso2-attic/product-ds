@@ -1,0 +1,20 @@
+{
+    "id": "publisher",
+    "title": "Publisher",
+    "type": "gadget",
+    "thumbnail": "store://gadget/usa-business-revenue/index.png",
+    "category": "Publishers",
+    "data": {
+        "url": "store://gadget/publisher/index.xml"
+    },
+    "notify": {
+        "select": {
+            "type": "address",
+            "description": "This notifies selected state"
+        },
+        "cancel": {
+            "type": "boolean",
+            "description": "This notifies cancellation of state selection"
+        }
+    }
+}
