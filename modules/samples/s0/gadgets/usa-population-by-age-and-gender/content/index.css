@@ -21,9 +21,9 @@ body {
 
 #back{
     float: left;
-    background: linear-gradient(#9fbfe7, #6e84a0) repeat scroll 0 0 #87a2c4;
+    background: linear-gradient(#356BAF, #6e84a0) repeat scroll 0 0 #87a2c4;
     border: #000000;
-    font-size: 12px;
+    font-size: 10px;
     color: antiquewhite;
 }
 
@@ -33,7 +33,7 @@ body {
 
 #path-container text{
     margin: 20px;
-    font-size: 12px;
+    font-size: 10px;
     font-family: monospace;
-    color: #960b4f
+    color: #5F5963;
 }
