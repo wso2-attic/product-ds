@@ -22,15 +22,15 @@
                 "id": "a",
                 "col": 1,
                 "row": 1,
-                "size_x": 4,
+                "size_x": 6,
                 "size_y": 3,
                 "banner": false
               },
               {
                 "id": "c",
-                "col": 9,
+                "col": 7,
                 "row": 1,
-                "size_x": 4,
+                "size_x": 6,
                 "size_y": 3,
                 "banner": false
               }
@@ -42,52 +42,9 @@
       "isanon": false,
       "content": {
         "default": {
-          "c": [
-            {
-              "id": "lg90lxwz1j4te29",
-              "content": {
-                "id": "subscriber",
-                "title": "Subscriber",
-                "type": "gadget",
-                "category": "Subscribers",
-                "thumbnail": "store://gadget/usa-business-revenue/index.png",
-                "data": {
-                  "url": "store://gadget/subscriber/index.xml"
-                },
-                "listen": {
-                  "state-selected": {
-                    "type": "address",
-                    "description": "Used to filter based on state",
-                    "on": [
-                      {
-                        "from": "cix7amwr3yqlg14i",
-                        "event": "select"
-                      }
-                    ]
-                  },
-                  "auto-update": {
-                    "type": "boolean",
-                    "description": "Used to filter based on state",
-                    "on": []
-                  }
-                },
-                "styles": {
-                  "height": "",
-                  "borders": true,
-                  "titlePosition": "left",
-                  "title": "Subscriber"
-                },
-                "options": {},
-                "locale_titles": {
-                  "en-US": "Subscriber"
-                },
-                "settings": {}
-              }
-            }
-          ],
           "a": [
             {
-              "id": "cix7amwr3yqlg14i",
+              "id": "miguift0pco9a4i",
               "content": {
                 "id": "publisher",
                 "title": "Publisher",
@@ -98,13 +55,9 @@
                   "url": "store://gadget/publisher/index.xml"
                 },
                 "notify": {
-                  "select": {
-                    "type": "address",
-                    "description": "This notifies selected state"
-                  },
-                  "cancel": {
-                    "type": "boolean",
-                    "description": "This notifies cancellation of state selection"
+                  "publisher": {
+                    "type": "message",
+                    "description": "This notifies message generated in publisher"
                   }
                 },
                 "styles": {
@@ -113,6 +66,43 @@
                 },
                 "options": {},
                 "locale_titles": {}
+              }
+            }
+          ],
+          "c": [
+            {
+              "id": "n7g2sdi7yq1if6r",
+              "content": {
+                "id": "subscriber",
+                "title": "Subscriber",
+                "type": "gadget",
+                "category": "Subscribers",
+                "thumbnail": "store://gadget/usa-business-revenue/index.png",
+                "data": {
+                  "url": "store://gadget/subscriber/index.xml"
+                },
+                "listen": {
+                  "subscriber": {
+                    "type": "message",
+                    "description": "Used to listen to Any message of type address",
+                    "on": [
+                      {
+                        "from": "miguift0pco9a4i",
+                        "event": "publisher"
+                      }
+                    ]
+                  }
+                },
+                "styles": {
+                  "borders": true,
+                  "titlePosition": "left",
+                  "title": "Subscriber"
+                },
+                "options": {},
+                "locale_titles": {
+                  "en-US": "Subscriber"
+                },
+                "settings": {}
               }
             }
           ]
