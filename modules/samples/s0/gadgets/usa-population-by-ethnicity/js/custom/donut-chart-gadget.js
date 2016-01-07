@@ -173,6 +173,13 @@ var initDonutChart;
             totalValue = createTotalTrafficValueLabel(centerGroup);
             totalUnits = createUnitsLabel(centerGroup);
 
+            var dataBundle = {
+                data: "US",
+                state: "US"
+            };
+
+            callbackForChannel(STATE_CHANNEL, dataBundle);
+
             // Initialize the subscriber to listen to the subscribed chanel.
             gadgets.HubSettings.onConnect = function () {
                 // Subscribe to the age channel.
@@ -263,7 +270,12 @@ var initDonutChart;
          * Create a color scale.
          * */
         var createColorScale = function () {
-            return d3.scale.category20();
+
+            var getColor = function(d){
+                return COLORS[d.name];
+            };
+
+            return getColor;
         };
 
         /*
@@ -425,7 +437,7 @@ var initDonutChart;
         var updateChartDetails = function (data) {
             $("#donutDetails").empty();
             data.forEach(function (element, index) {
-                var html = "<li>" + "<div style='background-color:" + color(index) + ";'></div><span>" + element.name + " - " + element.currentPopulation + "</span></li>";
+                var html = "<li>" + "<div style='background-color:" + color(element) + ";'></div><span>" + element.name + " - " + element.currentPopulation + "</span></li>";
                 $("#donutDetails").append(html);
             });
         };
@@ -446,6 +458,7 @@ var initDonutChart;
          * */
         var update = function (dataToProcess, parentName, prevParent, isBack) {
 
+            $("#well").show();
             totalPopulation = 0;
 
             /* If back operation
@@ -507,7 +520,8 @@ var initDonutChart;
                 .attr("stroke", "white")
                 .attr("stroke-width", 0.5)
                 .attr("fill", function (d, i) {
-                    return color(i);
+                    console.log(d);
+                    return color(d);
                 })
                 .transition()
                 .duration(tweenDuration)

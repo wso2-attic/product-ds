@@ -292,7 +292,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 223553000,
             percentage: 72.4,
@@ -300,7 +300,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 38929000,
             percentage: 12.6,
@@ -678,7 +678,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 3275000,
             percentage: 68.5,
@@ -686,7 +686,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 1251000,
             percentage: 26.2,
@@ -1064,7 +1064,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 474000,
             percentage: 66.7,
@@ -1072,7 +1072,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 23000,
             percentage: 3.3,
@@ -1449,7 +1449,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 4667000,
             percentage: 73.0,
@@ -1457,7 +1457,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 259000,
             percentage: 4.1,
@@ -1835,7 +1835,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 2245000,
             percentage: 77,
@@ -1843,7 +1843,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 450000,
             percentage: 15.4,
@@ -2221,7 +2221,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 21454000,
             percentage: 57.6,
@@ -2229,7 +2229,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 2299000,
             percentage: 6.2,
@@ -2607,7 +2607,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 4089000,
             percentage: 81.3,
@@ -2615,7 +2615,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 202000,
             percentage: 4,
@@ -2993,7 +2993,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 2772000,
             percentage: 77.6,
@@ -3001,7 +3001,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 362000,
             percentage: 10.1,
@@ -3379,7 +3379,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 619000,
             percentage: 68.9,
@@ -3387,7 +3387,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 192000,
             percentage: 21.4,
@@ -3765,7 +3765,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 231000,
             percentage: 38.5,
@@ -3773,7 +3773,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 305000,
             percentage: 50.7,
@@ -4151,7 +4151,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 14109000,
             percentage: 75,
@@ -4159,7 +4159,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 3000000,
             percentage: 16,
@@ -4537,7 +4537,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 5787000,
             percentage: 59.7,
@@ -4545,7 +4545,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 2950000,
             percentage: 30.5,
@@ -4923,7 +4923,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 337000,
             percentage: 24.7,
@@ -4931,7 +4931,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 21000,
             percentage: 1.6,
@@ -5309,7 +5309,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 1396000,
             percentage: 89.1,
@@ -5317,7 +5317,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 10000,
             percentage: 0.6,
@@ -5695,7 +5695,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 9178000,
             percentage: 71.5,
@@ -5703,7 +5703,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 1866000,
             percentage: 14.5,
@@ -6081,7 +6081,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 5468000,
             percentage: 84.3,
@@ -6089,7 +6089,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 591000,
             percentage: 9.1,
@@ -6467,7 +6467,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 2782000,
             percentage: 91.3,
@@ -6475,7 +6475,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 89000,
             percentage: 2.9,
@@ -6853,7 +6853,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 2391000,
             percentage: 83.8,
@@ -6861,7 +6861,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 168000,
             percentage: 5.9,
@@ -7239,7 +7239,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 3810000,
             percentage: 87.8,
@@ -7247,7 +7247,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 338000,
             percentage: 7.8,
@@ -7625,7 +7625,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 2836000,
             percentage: 62.6,
@@ -7633,7 +7633,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 1452000,
             percentage: 32,
@@ -8011,7 +8011,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 1265000,
             percentage: 95.2,
@@ -8019,7 +8019,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 16000,
             percentage: 1.2,
@@ -8396,7 +8396,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 3359000,
             percentage: 58.2,
@@ -8404,7 +8404,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 1700000,
             percentage: 29.4,
@@ -8782,7 +8782,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 5265000,
             percentage: 80.4,
@@ -8790,7 +8790,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 434000,
             percentage: 6.6,
@@ -9168,7 +9168,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 7803000,
             percentage: 78.9,
@@ -9176,7 +9176,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 1400000,
             percentage: 14.2,
@@ -9554,7 +9554,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 4524000,
             percentage: 85.3,
@@ -9562,7 +9562,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 274000,
             percentage: 5.2,
@@ -9940,7 +9940,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 1755000,
             percentage: 59.1,
@@ -9948,7 +9948,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 1098000,
             percentage: 37,
@@ -10326,7 +10326,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 4959000,
             percentage: 82.8,
@@ -10334,7 +10334,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 693000,
             percentage: 11.6,
@@ -10712,7 +10712,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 885000,
             percentage: 89.4,
@@ -10720,7 +10720,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 4000,
             percentage: 0.4,
@@ -11098,7 +11098,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 1573000,
             percentage: 86.1,
@@ -11106,7 +11106,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 83000,
             percentage: 4.5,
@@ -11484,7 +11484,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 1787000,
             percentage: 66.2,
@@ -11492,7 +11492,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 219000,
             percentage: 8.1,
@@ -11870,7 +11870,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 1236000,
             percentage: 93.9,
@@ -11878,7 +11878,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 15000,
             percentage: 1.1,
@@ -12256,7 +12256,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 6029000,
             percentage: 68.6,
@@ -12264,7 +12264,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 1205000,
             percentage: 13.7,
@@ -12642,7 +12642,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 1408000,
             percentage: 68.4,
@@ -12650,7 +12650,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 43000,
             percentage: 2.1,
@@ -13028,7 +13028,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 12741000,
             percentage: 65.7,
@@ -13036,7 +13036,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 3074000,
             percentage: 15.9,
@@ -13414,7 +13414,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 6529000,
             percentage: 68.5,
@@ -13422,7 +13422,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 2049000,
             percentage: 21.5,
@@ -13800,7 +13800,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 605000,
             percentage: 90,
@@ -13808,7 +13808,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 8000,
             percentage: 1.2,
@@ -14186,7 +14186,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 9539000,
             percentage: 82.7,
@@ -14194,7 +14194,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 1408000,
             percentage: 12.2,
@@ -14572,7 +14572,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 2707000,
             percentage: 72.2,
@@ -14580,7 +14580,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 278000,
             percentage: 7.4,
@@ -14958,7 +14958,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 3205000,
             percentage: 83.6,
@@ -14966,7 +14966,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 69000,
             percentage: 1.8,
@@ -15344,7 +15344,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 10406000,
             percentage: 81.9,
@@ -15352,7 +15352,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 1378000,
             percentage: 10.8,
@@ -15730,7 +15730,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 857000,
             percentage: 81.4,
@@ -15738,7 +15738,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 60000,
             percentage: 5.7,
@@ -16116,7 +16116,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 3060000,
             percentage: 66.2,
@@ -16124,7 +16124,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 1291000,
             percentage: 27.9,
@@ -16502,7 +16502,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 699000,
             percentage: 85.9,
@@ -16510,7 +16510,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 10000,
             percentage: 1.3,
@@ -16888,7 +16888,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 4922000,
             percentage: 77.6,
@@ -16896,7 +16896,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 1057000,
             percentage: 16.7,
@@ -17274,7 +17274,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 17702000,
             percentage: 70.4,
@@ -17282,7 +17282,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 2980000,
             percentage: 11.8,
@@ -17660,7 +17660,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 2380000,
             percentage: 86.1,
@@ -17668,7 +17668,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 29000,
             percentage: 1.1,
@@ -18046,7 +18046,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 596000,
             percentage: 95.3,
@@ -18054,7 +18054,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 6000,
             percentage: 1,
@@ -18432,7 +18432,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 5487000,
             percentage: 68.6,
@@ -18440,7 +18440,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 1551000,
             percentage: 19.4,
@@ -18818,7 +18818,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 5196000,
             percentage: 77.3,
@@ -18826,7 +18826,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 240000,
             percentage: 3.6,
@@ -19204,7 +19204,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 1740000,
             percentage: 93.9,
@@ -19212,7 +19212,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 63000,
             percentage: 3.4,
@@ -19590,7 +19590,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 4902000,
             percentage: 86.2,
@@ -19598,7 +19598,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 359000,
             percentage: 6.3,
@@ -19976,7 +19976,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
         percentage: 0,
         year: 2010,
         category: [{
-            name: "White People",
+            name: "American",
             id: "white",
             currentPopulation: 511000,
             percentage: 90.7,
@@ -19984,7 +19984,7 @@ USA_DEMOGRAPHICS_SAMPLE_DATA = [
             category: [],
             populationHistory: []
         }, {
-            name: "Black People",
+            name: "African American",
             id: "black",
             currentPopulation: 5000,
             percentage: 0.8,

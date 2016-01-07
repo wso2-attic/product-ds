@@ -193,7 +193,10 @@ var initBarChart;
          * @private
          * */
         var createColor = function () {
-            return d3.scale.category20();
+            var getColor = function(){
+                return "rgb(31, 119, 180)";
+            };
+            return getColor;
         };
 
         /*
@@ -390,9 +393,19 @@ var initBarChart;
             rectangles = barGroup.selectAll(".bar").data(dataToProcess);
             rectangles.enter().append("rect")
                 .attr("class", "bar")
-                .attr("width", xScale.rangeBand())
+                .attr("width", function(){
+                    if(dataToProcess.length == 2){
+                        return xScale.rangeBand()/4;
+                    }else {
+                        return xScale.rangeBand();
+                    }
+                })
                 .attr("x", function (d) {
-                    return xScale(d.name);
+                    if(dataToProcess.length == 2) {
+                        return xScale(d.name)+xScale.rangeBand()/2.5;
+                    }else{
+                        return xScale(d.name);
+                    }
                 })
                 .attr("fill", function (d) {
                     return color(d.currentPopulation);
@@ -424,7 +437,23 @@ var initBarChart;
                     d3.select(this)
                         .transition()
                         .duration(250)
-                        .attr("width", (xScale.rangeBand() + 3))
+                        .attr("fill", function (d) {
+                            return "rgb(107, 153, 185)";
+                        })
+                        .attr("width", function(){
+                            if(dataToProcess.length == 2){
+                                return xScale.rangeBand()/4;
+                            }else {
+                                return xScale.rangeBand();
+                            }
+                        })
+                        .attr("x", function (d) {
+                            if(dataToProcess.length == 2) {
+                                return xScale(d.name)+xScale.rangeBand()/2.5;
+                            }else{
+                                return xScale(d.name);
+                            }
+                        })
                         .attr("height", function (d) {
                             return height - yScale(d.currentPopulation);
                         })
@@ -436,7 +465,23 @@ var initBarChart;
                     d3.select(this)
                         .transition()
                         .duration(250)
-                        .attr("width", xScale.rangeBand())
+                        .attr("fill", function (d) {
+                            return "rgb(31, 119, 180)";
+                        })
+                        .attr("width", function(){
+                            if(dataToProcess.length == 2){
+                                return xScale.rangeBand()/4;
+                            }else {
+                                return xScale.rangeBand();
+                            }
+                        })
+                        .attr("x", function (d) {
+                            if(dataToProcess.length == 2) {
+                                return xScale(d.name)+xScale.rangeBand()/2.5;
+                            }else{
+                                return xScale(d.name);
+                            }
+                        })
                         .attr("height", function (d) {
                             return height - yScale(d.currentPopulation);
                         })

@@ -26,7 +26,7 @@
 
 #map-keys {
     list-style-type: none;
-    margin: 10px 0 0 0;
+    margin: 0;
     padding: 0;
 }
 
@@ -60,4 +60,10 @@
     border: 1px solid #ccc;
     padding: 2px;
     border-radius: 8px;
+}
+
+#well {
+    margin-bottom: 0px;
+    height: 30px;
+    width: 550px;
 }

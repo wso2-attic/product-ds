@@ -77,6 +77,12 @@ var initLineChart = null;
             line = createALine(xScale,yScale);
             tooltip = createToolTip();
 
+            var dataBundle = {
+                data: "US",
+                state: "US"
+            };
+            callbackForSubscribers(dataBundle);
+
             // Initialize the subscriber to listen to the subscribed channel.
             gadgets.HubSettings.onConnect = function () {
                 // Subscribe to the state channel
