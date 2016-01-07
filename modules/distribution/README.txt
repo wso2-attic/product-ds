@@ -34,11 +34,11 @@ System Requirements
 3. Portal app requires full Javascript enablement of the Web browser
 
 For more details see
-http://docs.wso2.org/wiki/display/UES100/Installation+Prerequisites
+http://docs.wso2.org/wiki/display/DS200/Installation+Prerequisites
 
 Known Issues
 ------------
-https://wso2.org/jira/issues/?filter=11174
+https://wso2.org/jira/issues/?filter=12618
 
 
 WSO2 Dashboard Server Binary Distribution Directory Structure
@@ -214,8 +214,8 @@ Apache Santuario : http://santuario.apache.org/
 Bouncycastle     : http://www.bouncycastle.org/
 
 
-For further details, see the WSO2 Application Server documentation at
-http://docs.wso2.org/wiki/application-server-documentation
+For further details, see the WSO2 Dashboard Server documentation at
+https://docs.wso2.com/display/DS200/WSO2+Dashboard+Server+Documentation.
 
 ---------------------------------------------------------------------------
-(c) Copyright 2013 WSO2 Inc.
+(c) Copyright 2016 WSO2 Inc.
