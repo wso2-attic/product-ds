@@ -15,11 +15,13 @@
  ~ specific language governing permissions and limitations
  ~ under the License.
  -->
-<product xmlns="http://products.wso2.org/carbon">
-    <properties>
-        <property name="userforum">http://stackoverflow.com/questions/tagged/wso2/</property>
-        <property name="userguide">https://docs.wso2.com/display/DS200/WSO2+Dashboard+Server+Documentation</property>
-        <property name="mailinglist">http://wso2.org/mail</property>
-        <property name="issuetracker">https://wso2.org/jira/browse/UES</property>
-    </properties>
-</product>
+<component xmlns="http://products.wso2.org/carbon">
+    <contexts>
+        <context>
+            <context-id>default-context</context-id>
+            <context-name>portal</context-name>
+            <protocol>https</protocol>
+            <description>Dashboard Designer</description>
+        </context>
+    </contexts>
+</component>

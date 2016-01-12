@@ -11,10 +11,12 @@
         <![CDATA[
 
              <!-- Load the Style sheet -->
+             <link rel="stylesheet" href="/portal/css/bootstrap.min.css">
              <link rel="stylesheet" type="text/css" href="content/index.css">
 
              <!-- Calling the Common libraries -->
              <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+             <script language="javascript" type="text/javascript" src="/portal/js/bootstrap.min.js"></script>
              <script type="text/javascript" src="js/d3.min.js"></script>
              <script type="text/javascript" src="js/topojson.js"></script>
 
@@ -25,8 +27,9 @@
              <!-- Container to contain the map visualization elements-->
              <div id="container"></div>
              <label for="map-keys" style="font-size: 11px;">Density of People</label>
-             <ul id="map-keys"></ul>
-
+             <div id="well" class="well well-sm">
+                <ul id="map-keys"></ul>
+             </div>
              <!-- Hover label for the map to show the name of the state-->
              <div class="datamaps-hoverover"></div>
 
@@ -35,7 +38,6 @@
                 // Page state properties to pass in to the script.
 	            var properties = {
 	                mapContainer_id: "container",
-	                map_keys: $("#map-keys"),
 	                hoverOver_class: "datamaps-hoverover",
 	                width: window.document.body.scrollWidth,
                     height: window.document.body.scrollHeight - 60

@@ -1,4 +1,4 @@
-(1) Installing  WSO2 User Engagement Server 1.0.0
+(1) Installing  WSO2 Dashboard Server 2.0.0
 
 Running the server
 ---------------
@@ -41,7 +41,7 @@ System Requirements
      level in Internet Explorer 6.x.
 
 For more details see
-http://docs.wso2.org/wiki/display/UES100/Installation+Prerequisites
+http://docs.wso2.org/wiki/display/DS200/Installation+Prerequisites
 
 
 

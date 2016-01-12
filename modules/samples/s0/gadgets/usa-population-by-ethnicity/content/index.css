@@ -1,5 +1,6 @@
 #donutDetails {
     list-style: none;
+    margin-bottom: 0px;
 }
 
 #donutDetails li {
@@ -13,10 +14,10 @@ svg {
 
 #back {
     float: left;
-    background: linear-gradient(#9fbfe7, #6e84a0) repeat scroll 0 0 #87a2c4;
+    background: linear-gradient(#356BAF, #6e84a0) repeat scroll 0 0 #87a2c4;
     border: #000000;
-    font-size: 12px;
-    color: antiquewhite;
+    font-size: 10px;
+    color: #FFFFFF;
 }
 
 #path-container {
@@ -27,7 +28,7 @@ svg {
     margin: 20px;
     font-size: 12px;
     font-family: monospace;
-    color:#610796
+    color:#5F5963;
 }
 
 #donutDetails div {
@@ -41,4 +42,11 @@ svg {
 #donutDetails span {
     position: relative;
     margin-left: 10px;
+}
+
+#well {
+    width: 100%;
+    margin-top: 2px;
+    margin-bottom: 0px;
+    display: none;
 }
