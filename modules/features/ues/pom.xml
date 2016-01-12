@@ -25,7 +25,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>wso2ds-features</artifactId>
     <packaging>pom</packaging>
-    <name>WSO2 Carbon - Dashboard Server Feature Module</name>
+    <name>WSO2 Dashboard Server - Feature Module</name>
     <url>http://wso2.org</url>
     <modules>
         <module>org.wso2.ds.feature</module>

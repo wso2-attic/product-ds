@@ -26,7 +26,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>org.wso2.ds.integration.common.utils</artifactId>
     <packaging>jar</packaging>
-    <name>integration-test-utils</name>
+    <name>WSO2 Dashboard Server - Integration Test Common Utils</name>
 
     <dependencies>
         <dependency>

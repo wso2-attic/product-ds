@@ -71,21 +71,6 @@
             </directory>
             <outputDirectory>wso2ds-${pom.version}/repository/conf/multitenancy</outputDirectory>
         </fileSet>
-        <fileSet>
-            <directory>../styles/service/src/main/resources/web/styles/css</directory>
-            <outputDirectory>wso2ds-${pom.version}/resources/allthemes/Default/admin</outputDirectory>
-            <includes>
-                <include>**/**.css</include>
-            </includes>
-        </fileSet>
-        <fileSet>
-            <directory>../styles/service/src/main/resources/web/styles/images</directory>
-            <outputDirectory>wso2ds-${pom.version}/resources/allthemes/Default/images</outputDirectory>
-            <includes>
-                <include>**/**.gif</include>
-                <include>**/**.png</include>
-            </includes>
-        </fileSet>
         <!-- copy documentation -->
         <fileSet>
             <directory>target/site</directory>
@@ -251,6 +236,20 @@
             <outputDirectory>${project.artifactId}-${product.ds.version}/samples/</outputDirectory>
             <includes>
                 <include>**/s0/**</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>../components/ues-admin/src/main/resources/web/styles/css</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/resources/allthemes/Default/admin</outputDirectory>
+            <includes>
+                <include>**/**</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>../components/ues-admin/src/main/resources/web/styles/images</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/resources/allthemes/Default/images</outputDirectory>
+            <includes>
+                <include>**/**</include>
             </includes>
         </fileSet>
     </fileSets>

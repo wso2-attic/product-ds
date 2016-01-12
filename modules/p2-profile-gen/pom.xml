@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>wso2ds-profile-gen</artifactId>
     <packaging>pom</packaging>
-    <name>DS - Profile Generation</name>
+    <name>WSO2 Dashboard Server - Profile Generation</name>
     <build>
         <plugins>
             <plugin>

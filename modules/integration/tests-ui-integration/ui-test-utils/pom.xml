@@ -26,6 +26,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>ui-test-utils</artifactId>
+    <name>WSO2 Dashboard Server - UI Integration Tests Utils</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>

@@ -25,7 +25,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>org.wso2.ds.admin.styles</artifactId>
     <packaging>bundle</packaging>
-    <name>DS Server - UI styles</name>
+    <name>WSO2 Dashboard Server - UI styles</name>
     <url>http://wso2.org</url>
     <build>
         <plugins>

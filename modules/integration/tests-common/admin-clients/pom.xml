@@ -27,7 +27,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>org.wso2.ds.integration.common.clients</artifactId>
     <packaging>jar</packaging>
-    <name>admin-clients</name>
+    <name>WSO2 Dashboard Server - Integration Test Admin Client</name>
     <dependencies>
         <dependency>
             <groupId>org.wso2.carbon.automationutils</groupId>
