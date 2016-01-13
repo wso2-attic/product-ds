@@ -112,9 +112,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
         String dashboardId = dashboardTitle.toLowerCase();
 
-        driver.findElement(By.id("ues-back")).click();
-
-
+        redirectToLocation("portal", "dashboards");
         WebElement dashboard = getDriver().findElement(By.id(dashboardId));
         assertEquals(DASHBOARD_TITLE, dashboard.findElement(By.id("ues-dashboard-title")).getText());
         assertEquals(DASHBOARD_DESCRIPTION, dashboard.findElement(By.id("ues-dashboard-description")).getText());
@@ -148,7 +146,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         String dashboardId = dashboardTitle.toLowerCase();
 
         login(USERNAME_VIEWER, PASSWORD_VIEWER);
-        driver.get(getBaseUrl()+"/portal/dashboards");
+        driver.get(getBaseUrl() + "/portal/dashboards");
 
         WebElement dashboard = driver.findElement(By.id(dashboardId));
 
@@ -159,7 +157,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
                 "view element is present in the current UI");
         assertFalse(driver.isElementPresent(By.cssSelector("#" + dashboardId + " .ues-edit")),
                 "design element is present in the current UI");
-        assertFalse(driver.isElementPresent(By.cssSelector("#" + dashboardId +  " .ues-settings")),
+        assertFalse(driver.isElementPresent(By.cssSelector("#" + dashboardId + " .ues-settings")),
                 "settings element is present in the current UI");
         dashboard.findElement(By.cssSelector(".ues-view")).click();
 
