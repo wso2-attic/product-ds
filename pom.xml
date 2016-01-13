@@ -278,7 +278,7 @@
             </dependency>
             <dependency>
                 <groupId>org.wso2.ds</groupId>
-                <artifactId>org.wso2.ds.styles</artifactId>
+                <artifactId>org.wso2.ds.admin.styles</artifactId>
                 <version>${product.ds.version}</version>
             </dependency>
             <dependency>
