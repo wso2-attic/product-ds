@@ -31,13 +31,30 @@
 # -----------------------------------------------------------------------------
 
 # Get application Home path.
-script=$(readlink -f "$0")
-path=$(dirname "$script")
-pathEdited=$(dirname "$path")
+
+PRG="$0"
+
+while [ -h "$PRG" ]; do
+  ls=`ls -ld "$PRG"`
+  link=`expr "$ls" : '.*-> \(.*\)$'`
+  if expr "$link" : '.*/.*' > /dev/null; then
+    PRG="$link"
+  else
+    PRG=`dirname "$PRG"`/"$link"
+  fi
+done
+
+# Get standard environment variables
+PRGDIR=`dirname "$PRG"`
+
+# Only set pathEdited
+pathEdited=`cd "$PRGDIR/.." ; pwd`
+
+binPath=$pathEdited/bin
 
 # Defining Sample data and directories' paths
-gadgetDropLocation="$pathEdited/repository/deployment/server/jaggeryapps/portal/store/carbon.super/gadget"
-dashboardDropLocation="$pathEdited/repository/deployment/server/jaggeryapps/portal/extensions/dashboards"
+gadgetDropLocation="$pathEdited/repository/deployment/server/jaggeryapps/portal/store/carbon.super/"
+dashboardDropLocation="$pathEdited/repository/deployment/server/jaggeryapps/portal/extensions/"
 
 # Process the user input
 sample=""
@@ -71,9 +88,9 @@ if [ -z $validate ]; then
 fi
 
 # Coping the sample files
-cp -r "$sampleFolder/gadgets"/* "$gadgetDropLocation"
-cp -r "$sampleFolder/scripts"/* "$dashboardDropLocation"
+cp -r "$sampleFolder/gadget" "$gadgetDropLocation"
+cp -r "$sampleFolder/dashboards" "$dashboardDropLocation"
 
 echo "Starting the dashboard server with sample dashboard"
-sh "$path/wso2server.sh"
+sh "$binPath/wso2server.sh"
 
