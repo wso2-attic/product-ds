@@ -25,12 +25,16 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>org.wso2.ds.feature</artifactId>
     <packaging>pom</packaging>
-    <name>WSO2 Carbon - DS feature</name>
+    <name>WSO2 Dashboard Server - UI Feature</name>
     <url>http://wso2.org</url>
     <dependencies>
         <dependency>
             <groupId>org.wso2.ds</groupId>
-            <artifactId>org.wso2.ds.admin.styles</artifactId>
+            <artifactId>org.wso2.ds.styles</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.ds</groupId>
+            <artifactId>org.wso2.ds.multitenancy.dashboard.ui</artifactId>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -67,7 +71,8 @@
                                 </properties>
                             </adviceFile>
                             <bundles>
-                                <bundleDef>org.wso2.ds:org.wso2.ds.admin.styles</bundleDef>
+                                <bundleDef>org.wso2.ds:org.wso2.ds.styles</bundleDef>
+                                <bundleDef>org.wso2.ds:org.wso2.ds.multitenancy.dashboard.ui</bundleDef>
                                 <bundleDef>org.slf4j:slf4j-log4j12</bundleDef>
                                 <bundleDef>org.slf4j:slf4j-api</bundleDef>
                                 <bundleDef>net.sf.ehcache.wso2:ehcache</bundleDef>
