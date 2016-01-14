@@ -62,7 +62,7 @@ WSO2 Dashboard Server Binary Distribution Directory Structure
                                 ├── jaggeryapps
                                         ├── portal
                                                 ├── configs
-                                                    ├── designer.json
+                                                        ├── designer.json
                 ├── logs
                 ├── resources
         ├── samples
