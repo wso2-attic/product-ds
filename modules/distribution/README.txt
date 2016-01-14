@@ -52,6 +52,19 @@ WSO2 Dashboard Server Binary Distribution Directory Structure
         ├── README.txt
         ├── release-notes.html
         ├── repository
+                ├── carbonapps
+                ├── components
+                ├── conf
+                ├── data
+                ├── database
+                ├── deployment
+                        ├── server
+                                ├── jaggeryapps
+                                        ├── portal
+                                                ├── configs
+                                                    ├── designer.json
+                ├── logs
+                ├── resources
         ├── samples
         ├── tmp
 
@@ -91,6 +104,13 @@ WSO2 Dashboard Server Binary Distribution Directory Structure
           Contains server side and client side Axis2 repositories. All 
           deployment artifacts should go into this directory.
 
+            - portal
+              Contains the portal application.
+
+                - designer.json
+                  Contains configurations related to Dashboard Server portal.
+                  (Ex. Authentication, Caching, Themes)
+
         - logs
           Contains all log files created during execution.
 
@@ -98,8 +118,8 @@ WSO2 Dashboard Server Binary Distribution Directory Structure
           Contains additional resources that may be required.
 
 	- tenants
-	  Directory will contain relevant tenant artifacts
-	  in the case of a multitenant deployment.
+	  Directory will contain relevant tenant artifacts in the case of a
+	  multitenant deployment.
 	
     - samples
       Contains samples that demonstrate the functionality and capabilities of 
