@@ -34,8 +34,8 @@ rem ---------------------------------------------------------------------------
 SET script=%~dp0
 
 rem Defining Sample data and directories' paths
-set gadgetDropLocation=%script%..\repository\deployment\server\jaggeryapps\portal\store\carbon.super\
-set dashboardDropLocation=%script%..\repository\deployment\server\jaggeryapps\portal\extensions\
+set gadgetDropLocation=%script%..\repository\deployment\server\jaggeryapps\portal\store\carbon.super\gadget
+set dashboardDropLocation=%script%..\repository\deployment\server\jaggeryapps\portal\extensions\dashboards
 
 set cn=%1
 set UserInputValue=%2
@@ -60,8 +60,8 @@ goto exitWithoutClosing
 :validArgument
 set sampleFolder=%script%..\samples\s%UserInputValue%
 
-xcopy "%sampleFolder%\gadget" "%gadgetDropLocation%" /e /i /h /Y
-xcopy "%sampleFolder%\dashboards" "%dashboardDropLocation%" /Y
+xcopy "%sampleFolder%\gadget\*" "%gadgetDropLocation%" /e /i /h /Y
+xcopy "%sampleFolder%\dashboards\*" "%dashboardDropLocation%" /Y
 
 echo "Starting the dashboard server with sample dashboard"
 wso2server.bat
