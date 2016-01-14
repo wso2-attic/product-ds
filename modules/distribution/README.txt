@@ -1,5 +1,6 @@
+================================================================================
 WSO2 Dashboard Server ${product.version}
-----------------------
+================================================================================
 
 ${buildNumber}
 
@@ -7,19 +8,16 @@ Welcome to the WSO2 Dashboard Server ${product.version} release
 
 Key Features
 ------------
-[1] Creating & Sharing Dashboards
-[2] Creating & Sharing Microsites
-[3] Creating & Sharing Gadgets
-[4] Adding external gadgets by URL
-[5] Pre-built graph gadgets
-[6] Store integration to dashboard creation flow
-[7] Enterprise store aspect
-[8] Sample microsites
-
+[1] Creating and sharing dashboards
+[2] Visual dashboard designer to design dashboards
+[3] Visually link pub/sub gadgets
+[4] Design dashboards for anonymous viewers
+[5] Single Sign-On (SSO)
+[6] Secure dashboards with role-based security
 
 Installation & Running
 ----------------------
-1. extract the downloaded zip file
+1. Extract the downloaded zip file
 2. Run the wso2server.sh or wso2server.bat file in the bin directory
 3. Once the server starts, point your Web browser to
    https://localhost:9443/portal/
@@ -31,7 +29,7 @@ System Requirements
 
 1. Minimum memory - 1GB
 2. Processor      - Pentium 800MHz or equivalent at minimum
-3. Portal app requires full Javascript enablement of the Web browser
+3. Portal app requires full JavaScript enablement of the Web browser
 
 For more details see
 http://docs.wso2.org/wiki/display/DS200/Installation+Prerequisites
@@ -40,41 +38,39 @@ Known Issues
 ------------
 https://wso2.org/jira/issues/?filter=12618
 
-
 WSO2 Dashboard Server Binary Distribution Directory Structure
------------------------------------------------------
+-------------------------------------------------------------
 
 	DS_HOME
         .
-        ├── bin   //executables
-        ├── dbscripts        //DBScripts
+        ├── bin
+        ├── dbscripts
         ├── INSTALL.txt
         ├── lib
         ├── LICENSE.txt
-        ├── modules          //Jaggery Modules
+        ├── modules
         ├── README.txt
         ├── release-notes.html
-        ├── repository       // repository
+        ├── repository
+        ├── samples
         ├── tmp
-        ├── webapp-mode
 
 
     - bin
-      Contains various scripts .sh & .bat scripts.
+      Contains various .sh & .bat scripts.
 
     - dbscripts
       Contains the database creation & seed data population SQL scripts for
       various supported databases.
 
     - lib
-      Contains the basic set of libraries required to startup Application Server
+      Contains the basic set of libraries required to startup Dashboard Server
       in standalone mode
 
     - repository
-      The repository where Carbon artifacts & Axis2 services and
-      modules deployed in WSO2 Carbon are stored.
-      In addition to this other custom deployers such as
-      dataservices and axis1services are also stored.
+      The repository where Carbon artifacts & Axis2 services and modules 
+      deployed in WSO2 Carbon are stored. In addition to this other custom 
+      deployers such as dataservices and axis1services are also stored.
 
         - carbonapps
           Carbon Application hot deployment directory.
@@ -92,8 +88,8 @@ WSO2 Dashboard Server Binary Distribution Directory Structure
           Contains the WSO2 Registry & User Manager database.
 
         - deployment
-          Contains server side and client side Axis2 repositories.
-	      All deployment artifacts should go into this directory.
+          Contains server side and client side Axis2 repositories. All 
+          deployment artifacts should go into this directory.
 
         - logs
           Contains all log files created during execution.
@@ -104,14 +100,14 @@ WSO2 Dashboard Server Binary Distribution Directory Structure
 	- tenants
 	  Directory will contain relevant tenant artifacts
 	  in the case of a multitenant deployment.
+	
+    - samples
+      Contains samples that demonstrate the functionality and capabilities of 
+      WSO2 Dashboard Server.
 
     - tmp
-      Used for storing temporary files, and is pointed to by the
-      java.io.tmpdir System property.
-
-    - webapp-mode
-      The user has the option of running WSO2 Carbon in webapp mode (hosted as a web-app in an application server).
-      This directory contains files required to run Carbon in webapp mode.
+      Used for storing temporary files, and is pointed to by the java.io.tmpdir 
+      System property.
 
     - LICENSE.txt
       Apache License 2.0 under which WSO2 Carbon is distributed.
@@ -120,43 +116,45 @@ WSO2 Dashboard Server Binary Distribution Directory Structure
       This document.
 
     - INSTALL.txt
-      This document contains information on installing WSO2 Application Server.
+      This document contains information on installing WSO2 Dashboard Server.
 
     - release-notes.html
-      Release information for WSO2 Application Server ${appserver.version}
+      Release information for WSO2 Dashboard Server ${product.version}
 
-Secure sensitive information in carbon configuration files
+Secure Sensitive Information in Carbon Configuration Files
 ----------------------------------------------------------
 
 There are sensitive information such as passwords in the carbon configuration.
 You can secure them by using secure vault. Please go through following steps to
 secure them with default mode.
 
-1. Configure secure vault with default configurations by running ciphertool
-	script from bin directory.
+1. Configure secure vault with default configurations by running ciphertool 
+   script from bin directory.
 
-> ciphertool.sh -Dconfigure   (in UNIX)
+    > ciphertool.sh -Dconfigure   (in UNIX)
 
-This script would do following configurations that you need to do by manually
+   This script would do following configurations that you need to do by manually
 
-(i) Replaces sensitive elements in configuration files,  that have been defined in
-		 cipher-tool.properties, with alias token values.
-(ii) Encrypts plain text password which is defined in cipher-text.properties file.
-(iii) Updates secret-conf.properties file with default keystore and callback class.
+      (i) Replaces sensitive elements in configuration files,  that have been 
+          defined in cipher-tool.properties, with alias token values.
+     (ii) Encrypts plain text password which is defined in 
+          cipher-text.properties file.
+    (iii) Updates secret-conf.properties file with default keystore and callback 
+          class.
 
-cipher-tool.properties, cipher-text.properties and secret-conf.properties files
-			can be found at repository/conf/security directory.
+   cipher-tool.properties, cipher-text.properties and secret-conf.properties 
+   files can be found at repository/conf/security directory.
 
 2. Start server by running wso2server script from bin directory
 
-> wso2server.sh   (in UNIX)
+    > wso2server.sh   (in UNIX)
 
-By default mode, it would ask you to enter the master password
-(By default, master password is the password of carbon keystore and private key)
+   By default mode, it would ask you to enter the master password (By default, 
+   master password is the password of carbon keystore and private key)
 
 3. Change any password by running ciphertool script from bin directory.
 
-> ciphertool -Dchange  (in UNIX)
+    > ciphertool -Dchange   (in UNIX)
 
 For more details see
 http://docs.wso2.org/wiki/display/Carbon410/WSO2+Carbon+Secure+Vault
@@ -164,24 +162,24 @@ http://docs.wso2.org/wiki/display/Carbon410/WSO2+Carbon+Secure+Vault
 Training
 --------
 
-WSO2 Inc. offers a variety of professional Training Programs, including
-training on general Web services as well as WSO2 Dashboard Server, Apache Axis2,
-Data Services and a number of other products.
+WSO2 Inc. offers a variety of professional Training Programs, including training 
+on general Web services as well as WSO2 Dashboard Server, Apache Axis2, Data 
+Services and a number of other products.
 
-For additional support information please refer to
-http://wso2.com/training/
-
+For additional support information please refer to http://wso2.com/training/
 
 Support
 -------
 
-We are committed to ensuring that your enterprise middleware deployment is completely supported
-from evaluation to production. Our unique approach ensures that all support leverages our open
-development methodology and is provided by the very same engineers who build the technology.
+We are committed to ensuring that your enterprise middleware deployment is 
+completely supported from evaluation to production. Our unique approach ensures 
+that all support leverages our open development methodology and is provided by 
+the very same engineers who build the technology.
 
 For additional support information please refer to http://wso2.com/support/
 
-For more information on WSO2 Application Server, visit the WSO2 Oxygen Tank (http://wso2.org)
+For more information on WSO2 Dashboard Server, visit the WSO2 Oxygen Tank 
+(http://wso2.org)
 
 Crypto Notice
 -------------
