@@ -22,12 +22,9 @@ import ds.integration.tests.common.domain.DSIntegrationTestConstants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
-
-import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -83,7 +80,6 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         getDriver().findElement(By.cssSelector("a[data-id='landing']")).click();
         getDriver().findElement(By.cssSelector("input[name='landing']")).click();
         getDriver().findElement(By.cssSelector("input[name='anon']")).click();
-        getDriver().findElement(By.className("toggle-group")).click();
         getDriver().findElement(By.cssSelector("a[data-type='gadget']")).click();
         getDriver().executeScript(anonViewGadgetAddScript);
 
@@ -123,7 +119,6 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
 
         addPageToDashboard();
         getDriver().findElement(By.cssSelector("input[name='anon']")).click();
-        getDriver().findElement(By.className("toggle-group")).click();
         getDriver().executeScript(anonViewGadgetAddScript);
 
         assertEquals(GADGET_4, getAttributeValue("iframe", "title"));
