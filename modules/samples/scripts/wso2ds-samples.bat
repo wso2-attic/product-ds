@@ -44,7 +44,7 @@ if "%cn%"=="-sn" goto sample
 if "%cn%"=="sn" goto sample
 if "%cn%"=="" (
 	echo "*** Sample number to be started is not specified *** Please specify a sample number to be started with the -sn option"
-	echo "Example, to run sample 0: wso2ds-samples.sh -sn 0"
+	echo "Example, to run sample 0: wso2ds-samples.bat -sn 0"
 	goto exitWithoutClosing
 )
 
@@ -54,14 +54,14 @@ if %UserInputValue% GEQ 0 goto validArgument
 
 :invalidArgument
 echo "*** Sample number to be started is not specified *** Please specify a sample number to be started with the -sn option"
-echo "Example, to run sample 0: wso2ds-samples.sh -sn 0"
+echo "Example, to run sample 0: wso2ds-samples.bat -sn 0"
 goto exitWithoutClosing
 
 :validArgument
 set sampleFolder=%script%..\samples\s%UserInputValue%
 
-xcopy "%sampleFolder%\gadgets\*" "%gadgetDropLocation%" /e /i /h /Y
-xcopy "%sampleFolder%\scripts\*" "%dashboardDropLocation%" /Y
+xcopy "%sampleFolder%\gadget\*" "%gadgetDropLocation%" /e /i /h /Y
+xcopy "%sampleFolder%\dashboards\*" "%dashboardDropLocation%" /Y
 
 echo "Starting the dashboard server with sample dashboard"
 wso2server.bat
