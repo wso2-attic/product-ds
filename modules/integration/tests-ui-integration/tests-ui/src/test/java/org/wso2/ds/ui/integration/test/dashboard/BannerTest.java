@@ -269,8 +269,7 @@ public class BannerTest extends DSUIIntegrationTest {
                 ".ues-shared-role[data-role=\"Internal/everyone\"] span.remove-button")).click();
         driver.findElement(By.cssSelector(".ues-shared-edit " +
                 ".ues-shared-role[data-role=\"Internal/everyone\"] span.remove-button")).click();
-
-        driver.findElement(By.id("ues-back")).click();
+        redirectToLocation("portal", "dashboards");
     }
 
     /**
@@ -280,8 +279,7 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      */
     private void goToDesigner() throws Exception {
-
-        getDriver().get(getBaseUrl() + "/portal/dashboards");
+        redirectToLocation("portal", "dashboards");
         getDriver().findElement(By.cssSelector(".ues-dashboard[data-id='" + dashboardId + "'] a" + ".ues-edit"))
                 .click();
     }
