@@ -609,7 +609,7 @@
         <!-- jaggery versions -->
         <jaggery.feature.version>0.12.0</jaggery.feature.version>
         <handlebars.feature.version>1.0.0</handlebars.feature.version>
-        <carbon.feature.version>1.5.1</carbon.feature.version>
+        <carbon.feature.version>1.5.2-SNAPSHOT</carbon.feature.version>
         <process.feature.version>1.5.1</process.feature.version>
         <uuid.feature.version>1.5.1</uuid.feature.version>
         <sso.feature.version>1.5.1</sso.feature.version>
