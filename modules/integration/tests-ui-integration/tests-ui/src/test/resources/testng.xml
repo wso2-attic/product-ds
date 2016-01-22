@@ -38,6 +38,7 @@
         <classes>
             <class name="org.wso2.ds.ui.integration.test.login.LoginAdminTest"/>
             <class name="org.wso2.ds.ui.integration.test.login.LoginPortalTest"/>
+            <class name="org.wso2.ds.ui.integration.test.login.LoginPortalSSOTest"/>
             <class name="org.wso2.ds.ui.integration.test.common.AddUserTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.AddDeleteDashboardTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.AddGadgetToDashboardTest"/>
