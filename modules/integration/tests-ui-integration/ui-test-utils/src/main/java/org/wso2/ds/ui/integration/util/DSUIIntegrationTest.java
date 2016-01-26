@@ -232,7 +232,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         driver.findElement(By.id("ues-dashboard-description")).clear();
         driver.findElement(By.id("ues-dashboard-description")).sendKeys(description);
         driver.findElement(By.id("ues-dashboard-create")).click();
-        selectLayout("single-column");
+        selectLayout("default-grid");
         redirectToLocation("portal", "dashboards");
     }
 
