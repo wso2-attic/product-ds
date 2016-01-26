@@ -154,6 +154,26 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     }
 
     /**
+     * To login to Dashboard server when SSO is enabled
+     *
+     * @param userName user name
+     * @param pwd      password
+     * @throws javax.xml.xpath.XPathExpressionException,InterruptedException
+     */
+    public void loginWithSSO(String userName, String pwd) throws Exception {
+        String fullUrl = "";
+        fullUrl = getBaseUrl() + DS_SUFFIX;
+        driver = getDriver();
+
+        driver.get(fullUrl);
+        driver.findElement(By.name("username")).clear();
+        driver.findElement(By.name("username")).sendKeys(userName);
+        driver.findElement(By.name("password")).clear();
+        driver.findElement(By.name("password")).sendKeys(pwd);
+        driver.findElement(By.tagName("button")).click();
+    }
+
+    /**
      * To logout from Dashboard server
      *
      * @throws javax.xml.xpath.XPathExpressionException
@@ -212,7 +232,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         driver.findElement(By.id("ues-dashboard-description")).clear();
         driver.findElement(By.id("ues-dashboard-description")).sendKeys(description);
         driver.findElement(By.id("ues-dashboard-create")).click();
-        selectLayout("single-column");
+        selectLayout("default-grid");
         redirectToLocation("portal", "dashboards");
     }
 

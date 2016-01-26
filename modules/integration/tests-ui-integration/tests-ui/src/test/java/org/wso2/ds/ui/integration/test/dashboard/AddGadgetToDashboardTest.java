@@ -16,14 +16,19 @@
 
 package org.wso2.ds.ui.integration.test.dashboard;
 
+import ds.integration.tests.common.domain.DSIntegrationTestConstants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.*;
+import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
+import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
+import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 import org.wso2.ds.ui.integration.util.DSWebDriver;
 
 import javax.xml.xpath.XPathExpressionException;
+import java.io.File;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -35,6 +40,8 @@ import static org.testng.Assert.*;
  * and toggle fluid layout
  */
 public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
+    private String carbonHome;
+    private String systemResourceLocation;
     private static final String DASHBOARD_TITLE = "sampledashboard1";
 
     @Factory(dataProvider = "userMode")
@@ -49,8 +56,22 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
+        this.carbonHome = FrameworkPathUtil.getCarbonHome();
+        this.systemResourceLocation = FrameworkPathUtil.getSystemResourceLocation();
+        String pathToTestGadget = systemResourceLocation + "gadgets" + File.separator + "user-claims-gadget.zip";
+        String pathToTarget = carbonHome + File.separator + "repository" + File.separator + "deployment" + File
+                .separator + "server" + File.separator + "jaggeryapps" + File.separator + "portal" + File.separator +
+                "store" + File.separator + "carbon.super" + File.separator + "gadget" + File.separator +
+                "user-claims-gadget.zip" ;
+
+        AutomationContext automationContext = new AutomationContext(DSIntegrationTestConstants.DS_PRODUCT_NAME, this.userMode);
+        ServerConfigurationManager serverConfigurationManager = new ServerConfigurationManager(automationContext);
+
+        serverConfigurationManager.applyConfigurationWithoutRestart(new File(pathToTestGadget),
+                new File(pathToTarget), false);
         login(getCurrentUsername(), getCurrentPassword());
         addDashBoard(DASHBOARD_TITLE, "This is a test dashboard");
+
     }
 
     @AfterClass(alwaysRun = true)
@@ -97,7 +118,6 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         popWindow();
     }
 
-
     @Test(groups = "wso2.ds.dashboard", description = "Adding gadgets to an existing dashboard from dashboard server",
             dependsOnMethods = "testRemoveBlock")
     public void testAddGadgetToDashboard() throws Exception {
@@ -129,8 +149,67 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         popWindow();
     }
 
+    @Test(groups = "wso2.ds.dashboard", description = "Checking gadget user-pref's in view mode from dashboard " +
+            "server", dependsOnMethods = "testAddGadgetToDashboard")
+    public void testGadgetUserPrefs() throws Exception {
+        DSWebDriver driver = getDriver();
+        String[][] gadgetMappings = {{"textbox", "d"}};
+        String script = generateAddGadgetScript(gadgetMappings);
+        driver.findElement(By.cssSelector("i.fw.fw-pie-chart")).click();
+        driver.executeScript(script);
+        // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
+        Thread.sleep(500);
+        driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
+        pushWindow();
+
+        String showToolbarScript =
+                "for(i = 0; i < document.getElementsByClassName('ues-component-toolbar').length; i++) {" +
+                        "    document.getElementsByClassName('ues-component-toolbar')[i].style.display = 'inline';" +
+                        "}";
+
+        driver.executeScript(showToolbarScript);
+        driver.findElement(By.cssSelector("#d i.fw.fw-settings")).click();
+        assertEquals("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut " +
+                "labore et dolore magna aliqua.", driver.findElement(By.name("content")).getAttribute("value"));
+        driver.findElement(By.name("content")).clear();
+        driver.findElement(By.name("content")).sendKeys("New Value");
+        driver.findElement(By.cssSelector("#d i.fw.fw-settings")).click();
+        // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
+        Thread.sleep(500);
+        Object txt = driver.executeScript(
+                "var iframe = $(\"iframe[title='Text Box']\")[0];" +
+                        "var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);" +
+                        "return innerDoc.getElementsByClassName('col-md-12')[0].textContent;"
+        );
+        assertEquals("New Value",txt.toString());
+        driver.close();
+        popWindow();
+    }
+
+    @Test(groups = "wso2.ds.dashboard", description = "Accessing user claims from a gadget deployed in dashboard " +
+            "server",dependsOnMethods = "testGadgetUserPrefs")
+    public void testUserClaimsInGadget() throws Exception {
+        DSWebDriver driver = getDriver();
+        String[][] gadgetMappings = {{"user-claims-gadget", "e"}};
+        String script = generateAddGadgetScript(gadgetMappings);
+        driver.findElement(By.cssSelector("i.fw.fw-pie-chart")).click();
+        driver.executeScript(script);
+        // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
+        Thread.sleep(1000);
+        driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
+        pushWindow();
+        Object txt = driver.executeScript(
+                "var iframe = $(\"iframe[title='User Claims']\")[0];" +
+                        "var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);" +
+                        "return innerDoc.getElementById('output').textContent;"
+        );
+        assertEquals("admin", txt.toString());
+        driver.close();
+        popWindow();
+    }
+
     @Test(groups = "wso2.ds.dashboard", description = "maximizing gadget which added to dashboard", dependsOnMethods
-            = "testAddGadgetToDashboard")
+            = "testUserClaimsInGadget")
     public void testMaximizeGadgetInView() throws Exception {
         DSWebDriver driver = getDriver();
 

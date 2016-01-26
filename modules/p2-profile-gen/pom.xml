@@ -152,6 +152,7 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.provider.server.feature:${carbon.identity.version}
                                 </featureArtifactDef>
+
                                 <featureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.security.mgt.feature:${carbon.identity.version}
                                 </featureArtifactDef>
@@ -212,6 +213,9 @@
                                 </featureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.ciphertool:org.wso2.ciphertool.feature:${cipher.tool.version}
+                                </featureArtifactDef>
+								<featureArtifactDef>
+                                    org.wso2.carbon.deployment:org.wso2.carbon.as.runtimes.cxf.feature:${carbon.deployment.version}
                                 </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
@@ -459,6 +463,10 @@
                                 <feature>
                                     <id>org.wso2.ciphertool.feature.group</id>
                                     <version>${cipher.tool.version}</version>
+                                </feature>
+								<feature>
+                                     <id>org.wso2.carbon.as.runtimes.cxf.feature.group</id>
+                                     <version>${carbon.deployment.version}</version>
                                 </feature>
                             </features>
                         </configuration>
