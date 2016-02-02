@@ -141,36 +141,21 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @throws javax.xml.xpath.XPathExpressionException,InterruptedException
      */
     public void login(String userName, String pwd) throws Exception {
-        String fullUrl = "";
+        String fullUrl = "", currentUrl = "";
         fullUrl = getBaseUrl() + DS_SUFFIX;
         driver = getDriver();
 
         driver.get(fullUrl);
+        currentUrl = driver.getCurrentUrl();
         driver.findElement(By.name("username")).clear();
         driver.findElement(By.name("username")).sendKeys(userName);
         driver.findElement(By.name("password")).clear();
         driver.findElement(By.name("password")).sendKeys(pwd);
-        driver.findElement(By.cssSelector(".ues-signin")).click();
-    }
-
-    /**
-     * To login to Dashboard server when SSO is enabled
-     *
-     * @param userName user name
-     * @param pwd      password
-     * @throws javax.xml.xpath.XPathExpressionException,InterruptedException
-     */
-    public void loginWithSSO(String userName, String pwd) throws Exception {
-        String fullUrl = "";
-        fullUrl = getBaseUrl() + DS_SUFFIX;
-        driver = getDriver();
-
-        driver.get(fullUrl);
-        driver.findElement(By.name("username")).clear();
-        driver.findElement(By.name("username")).sendKeys(userName);
-        driver.findElement(By.name("password")).clear();
-        driver.findElement(By.name("password")).sendKeys(pwd);
-        driver.findElement(By.tagName("button")).click();
+        if (currentUrl.contains("authenticationendpoint/login.do")) { // sso login enabled
+            driver.findElement(By.tagName("button")).click();
+        } else { // basic login enabled
+            driver.findElement(By.cssSelector(".ues-signin")).click();
+        }
     }
 
     /**
@@ -184,7 +169,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         driver = getDriver();
 
         driver.get(fullUrl);
-        driver.findElement(By.cssSelector(".dropdown-toggle")).click();
+        driver.findElement(By.cssSelector(".dropdown")).click();
         driver.findElement(By.cssSelector(".dropdown-menu > li > a")).click();
     }
 
