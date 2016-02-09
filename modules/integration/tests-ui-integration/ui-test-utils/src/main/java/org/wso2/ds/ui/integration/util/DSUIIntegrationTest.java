@@ -229,7 +229,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     public void selectLayout(String layout) throws Exception {
         driver = getDriver();
 
-        driver.findElement(By.cssSelector("a[data-id='" + layout + "']")).click();
+        driver.findElement(By.cssSelector("div[data-id='" + layout + "']")).click();
     }
 
     /**
@@ -269,10 +269,10 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      */
     public void addPageToDashboard() throws Exception {
         driver = getDriver();
-        driver.findElement(By.cssSelector("a.ues-pages-toggle")).click();
-        driver.findElement(By.cssSelector(".ues-page-add")).click();
+        driver.findElement(By.cssSelector("#btn-pages-sidebar")).click();
+        driver.findElement(By.cssSelector("button[rel='createPage']")).click();
         selectLayout("single-column");
-        driver.findElement(By.cssSelector(".ues-page-item.active")).findElement(By.cssSelector("a.accordion-toggle")).click();
+        //driver.findElement(By.cssSelector(".ues-page-item.active")).findElement(By.cssSelector("a.accordion-toggle")).click();
     }
 
     /**
@@ -282,7 +282,17 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      */
     public void switchPage(String pageID) throws Exception {
         driver = getDriver();
-        driver.findElement(By.cssSelector("a[data-id='" + pageID + "']")).click();
+        driver.findElement(By.cssSelector("div[data-id='" + pageID + "']")).click();
+    }
+
+    /**
+     * Switch to the given view
+     * @param view Name of the view. Valid names are {@code default} and {@code anon}
+     * @throws Exception
+     */
+    public void switchView(String view) throws Exception {
+        driver = getDriver();
+        driver.findElement(By.cssSelector("ul#designer-view-mode li[data-view-mode='" + view + "']")).click();
     }
 
     /**
