@@ -129,7 +129,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         pushWindow();
 
         //it will go to view page as editor
-        assertEquals(USERNAME_EDITOR, driver.findElement(By.cssSelector(".dropdown")).getText(),
+        assertEquals(USERNAME_EDITOR, driver.findElement(By.cssSelector(".auth .hidden-xs.add-padding-left-3x")).getText(),
                 "Expected Username is not matched");
 
         assertEquals("Edit", driver.findElement(By.cssSelector("a.ues-copy")).getAttribute("title"), "Unable to find the edit button");
@@ -165,10 +165,10 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         pushWindow();
 
         //it will go to view page as viewer
-        assertEquals(USERNAME_VIEWER, driver.findElement(By.cssSelector(".dropdown")).getText(),
+        assertEquals(USERNAME_VIEWER, driver.findElement(By.cssSelector(".auth .hidden-xs.add-padding-left-3x")).getText(),
                 "Expected Username is not matched");
-//        assertEquals("Personalize", getDriver().findElement(By.cssSelector("a.ues-copy")).getText(),
-//                "Unable to find the personalize button");
+        String personalizeStr = driver.findElement(By.cssSelector("a.ues-copy")).getAttribute("title").trim().substring(0, 11);
+        assertEquals("Personalize", personalizeStr, "Unable to find the personalize button");
     }
 
     @Test(groups = "wso2.ds.dashboard", description = "Per user dashboard settings", dependsOnMethods =
@@ -178,7 +178,6 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
 
         driver.findElement(By.cssSelector("a.ues-copy")).click();
         driver.findElement(By.cssSelector("a#btn-pages-sidebar")).click();
-        //driver.findElement(By.cssSelector("#ues-dashboard-pages .ues-page-item.active .accordion-toggle")).click();
 
         driver.findElement(By.cssSelector("[name=title]")).clear();
         driver.findElement(By.cssSelector("[name=title]")).sendKeys(DASHBOARD_PAGE_NAME);
