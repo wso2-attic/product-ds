@@ -22,6 +22,7 @@ import ds.integration.tests.common.domain.DSIntegrationTestConstants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
@@ -76,16 +77,17 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
 
         addDashBoard(dashboardTitle, DASHBOARD_DESCRIPTION);
         getDriver().findElement(By.cssSelector("#" + dashboardTitle.toLowerCase() + " .ues-edit")).click();
-        getDriver().findElement(By.cssSelector("a.ues-pages-toggle")).click();
-        getDriver().findElement(By.cssSelector("a[data-id='landing']")).click();
+        getDriver().findElement(By.cssSelector("a#btn-pages-sidebar")).click();
         getDriver().findElement(By.cssSelector("input[name='landing']")).click();
         getDriver().findElement(By.cssSelector("input[name='anon']")).click();
-        getDriver().findElement(By.cssSelector("a[data-type='gadget']")).click();
+        getDriver().findElement(By.cssSelector("a#btn-sidebar-gadgets")).click();
+
+        switchView("anon");
         getDriver().executeScript(anonViewGadgetAddScript);
 
         assertEquals(GADGET_2, getAttributeValue("iframe", "title"));
 
-        getDriver().findElement(By.className("toggle-group")).click();
+        switchView("default");
         getDriver().executeScript(defaultViewGadgetAddScript);
 
         assertEquals(GADGET_1, getAttributeValue("iframe", "title"));
@@ -97,7 +99,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         getDriver().close();
         popWindow();
 
-        getDriver().findElement(By.className("toggle-group")).click();
+        switchView("anon");
         getDriver().findElement(By.className("ues-dashboard-preview")).click();
 
         pushWindow();
@@ -119,11 +121,12 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
 
         addPageToDashboard();
         getDriver().findElement(By.cssSelector("input[name='anon']")).click();
+        switchView("anon");
         getDriver().executeScript(anonViewGadgetAddScript);
 
         assertEquals(GADGET_4, getAttributeValue("iframe", "title"));
 
-        getDriver().findElement(By.className("toggle-group")).click();
+        switchView("default");
         getDriver().executeScript(defaultViewGadgetAddScript);
 
         assertEquals(GADGET_3, getAttributeValue("iframe", "title"));
@@ -133,11 +136,11 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
 
         assertEquals(GADGET_3, getAttributeValue("iframe", "title"));
 
-        getDriver().findElement(By.className("toggle-group")).click();
+        switchView("anon");
 
         assertEquals(GADGET_4, getAttributeValue("iframe", "title"));
 
-        getDriver().findElement(By.className("toggle-group")).click();
+        switchView("default");
         getDriver().findElement(By.className("ues-dashboard-preview")).click();
 
         pushWindow();
@@ -145,7 +148,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         getDriver().close();
         popWindow();
 
-        getDriver().findElement(By.className("toggle-group")).click();
+        switchView("anon");
         getDriver().findElement(By.className("ues-dashboard-preview")).click();
 
         pushWindow();
@@ -162,9 +165,14 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
     public void testAnonDashboardPageRemove() throws Exception {
         switchPage("page0");
         getDriver().findElement(By.cssSelector("input[name='anon']")).click();
-        boolean isToggleButtonHidden = getDriver().findElements(By.cssSelector(".toggle-design-view.hide")).size() > 0;
+        boolean isAnonViewHidden = false;
+        WebElement element = getDriver().findElement(By.cssSelector("ul#designer-view-mode li[data-view-mode='anon']"));
+        String attrValue = element.getAttribute("class");
+        if (attrValue.equals("hide")) {
+            isAnonViewHidden = true;
+        }
 
-        assertTrue(isToggleButtonHidden, "Anonymous toggle button is not hidden");
+        assertTrue(isAnonViewHidden, "Anonymous toggle button is not hidden");
         assertEquals(GADGET_3, getAttributeValue("iframe", "title"));
 
         redirectToLocation("portal", "dashboards/" + dashboardTitle + "/landing?isAnonView=true");
@@ -178,16 +186,21 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
     /**
      * Test case for removing anonymous view from dashboard.
      */
-    @Test(groups = "wso2.ds.dashboard", description = "Remove anonymous view mode form dashboard",
+    @Test(groups = "wso2.ds.dashboard", description = "Remove anonymous view mode from dashboard",
             dependsOnMethods = "testAnonDashboardPageRemove")
     public void testRemoveAnonModeFromDashboard() throws Exception {
         redirectToLocation("portal", "dashboards/" + dashboardTitle + "?editor=true");
-        getDriver().findElement(By.cssSelector("a.ues-pages-toggle")).click();
+        getDriver().findElement(By.cssSelector("a#btn-pages-sidebar")).click();
         switchPage("landing");
         getDriver().findElement(By.cssSelector("input[name='anon']")).click();
-        boolean isToggleButtonHidden = getDriver().findElements(By.cssSelector(".toggle-design-view.hide")).size() > 0;
+        boolean isAnonViewHidden = false;// getDriver().findElements(By.cssSelector(".toggle-design-view.hide")).size() > 0;
+        WebElement element = getDriver().findElement(By.cssSelector("ul#designer-view-mode li[data-view-mode='anon']"));
+        String attrValue = element.getAttribute("class");
+        if (attrValue.equals("hide")) {
+            isAnonViewHidden = true;
+        }
 
-        assertTrue(isToggleButtonHidden, "Anonymous toggle button is not hidden");
+        assertTrue(isAnonViewHidden, "Anonymous toggle button is not hidden");
         assertEquals(GADGET_1, getAttributeValue("iframe", "title"));
 
         redirectToLocation("portal", "dashboards/" + dashboardTitle + "/landing?isAnonView=true");

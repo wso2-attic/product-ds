@@ -253,7 +253,7 @@ public class BannerTest extends DSUIIntegrationTest {
         selectLayout("banner");
 
         // Change permissions
-        driver.findElement(By.id("settings-link")).click();
+        driver.findElement(By.id("dashboard-settings")).click();
         driver.executeScript("scroll(0, 200);");
 
         driver.findElement(By.id("ues-share-view")).clear();

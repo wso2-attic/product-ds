@@ -30,6 +30,7 @@ import org.wso2.ds.ui.integration.util.DSWebDriver;
 import javax.xml.xpath.XPathExpressionException;
 import java.io.File;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -89,7 +90,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
 
         redirectToLocation("portal", "dashboards");
         driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
-        driver.findElement(By.cssSelector("#ues-add-block-menu-item > a")).click();
+        driver.findElement(By.cssSelector("#btn-sidebar-layouts")).click();
         driver.findElement(By.id("ues-add-block-btn")).click();
 
         driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
@@ -105,7 +106,8 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
     public void testRemoveBlock() throws Exception {
         DSWebDriver driver = getDriver();
         driver.findElement(By.cssSelector("#a.ues-component-box .ues-trash-handle")).click();
-        driver.findElement(By.id("button-0")).click();
+        driver.findElement(By.cssSelector("input[value='block']")).click();
+        driver.findElement(By.id("btn-delete")).click();
 
         // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
         Thread.sleep(500);
@@ -126,7 +128,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         String script = generateAddGadgetScript(gadgetMappings);
         boolean gadgetsAvailable = true;
 
-        driver.findElement(By.cssSelector("i.fw.fw-pie-chart")).click();
+        driver.findElement(By.cssSelector("i.fw.fw-gadget")).click();
         driver.executeScript(script);
 
         // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
@@ -136,12 +138,16 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
 
         pushWindow();
 
+        List<WebElement> elements = new ArrayList<WebElement>();
         for (String[] mapping : gadgetMappings) {
-            List<WebElement> elements = driver.findElements(By.cssSelector("div#" + mapping[1] + ".ues-component-box " +
-                    ".ues-component"));
-            if (elements.size() == 0) {
-                gadgetsAvailable = false;
+            WebElement element = driver.findElement(By.cssSelector("div#" + mapping[1] + ".ues-component-box .ues-component"));
+            if (element != null) {
+                elements.add(element);
             }
+        }
+
+        if (elements.size() != gadgetMappings.length) {
+            gadgetsAvailable = false;
         }
 
         assertTrue(gadgetsAvailable, "The gadget(s) not found");
@@ -155,7 +161,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
         String[][] gadgetMappings = {{"textbox", "d"}};
         String script = generateAddGadgetScript(gadgetMappings);
-        driver.findElement(By.cssSelector("i.fw.fw-pie-chart")).click();
+        driver.findElement(By.cssSelector("i.fw.fw-gadget")).click();
         driver.executeScript(script);
         // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
         Thread.sleep(500);
@@ -192,7 +198,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
         String[][] gadgetMappings = {{"user-claims-gadget", "e"}};
         String script = generateAddGadgetScript(gadgetMappings);
-        driver.findElement(By.cssSelector("i.fw.fw-pie-chart")).click();
+        driver.findElement(By.cssSelector("i.fw.fw-gadget")).click();
         driver.executeScript(script);
         // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
         Thread.sleep(1000);
@@ -233,7 +239,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
                         "}";
 
         driver.executeScript(showToolbarScript);
-        driver.findElement(By.cssSelector("#c i.fw.fw-laptop")).click();
+        driver.findElement(By.cssSelector("#c button.ues-component-full-handle")).click();
 
         // This sleep is used to wait until the content of the iframe appears
         Thread.sleep(200);
@@ -245,7 +251,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
                         "return innerDoc.getElementById('fullViewLabel').textContent;"
         );
 
-        assertEquals("USA MAP(this is full screen view)", txtMax.toString());
+        assertEquals("USA MAP (this is full screen view)", txtMax.toString());
 
         driver.close();
         popWindow();
@@ -257,14 +263,14 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         boolean isFluidLayout = false;
         DSWebDriver driver = getDriver();
 
-        driver.findElement(By.cssSelector("a.ues-pages-toggle")).click();
-        driver.findElement(By.cssSelector("a[data-id='landing']")).click();
-        driver.findElement(By.cssSelector("#ues-page-properties input[name=fluidLayout]")).click();
+        driver.findElement(By.cssSelector("a#btn-pages-sidebar")).click();
+        driver.findElement(By.cssSelector("[name=landing]")).click();
+        driver.findElement(By.cssSelector("[name=fluidLayout]")).click();
 
         driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
         pushWindow();
 
-        List<WebElement> elements = getDriver().findElements(By.cssSelector("#wrapper > .container-fluid"));
+        List<WebElement> elements = getDriver().findElements(By.cssSelector(".page-content-wrapper > .container-fluid"));
         if (elements.size() > 0) {
             isFluidLayout = true;
         }
