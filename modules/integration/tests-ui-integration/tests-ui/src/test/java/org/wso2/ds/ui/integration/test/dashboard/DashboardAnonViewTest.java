@@ -80,7 +80,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         getDriver().findElement(By.cssSelector("a#btn-pages-sidebar")).click();
         getDriver().findElement(By.cssSelector("input[name='landing']")).click();
         getDriver().findElement(By.cssSelector("input[name='anon']")).click();
-        getDriver().findElement(By.cssSelector("a#btn-sidebar-gadgets")).click();
+        selectPane("gadgets");
 
         switchView("anon");
         getDriver().executeScript(anonViewGadgetAddScript);

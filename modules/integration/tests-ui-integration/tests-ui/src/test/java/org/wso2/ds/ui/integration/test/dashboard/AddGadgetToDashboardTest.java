@@ -90,7 +90,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
 
         redirectToLocation("portal", "dashboards");
         driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
-        driver.findElement(By.cssSelector("#btn-sidebar-layouts")).click();
+        selectPane("layouts");
         driver.findElement(By.id("ues-add-block-btn")).click();
 
         driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
@@ -127,8 +127,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         String[][] gadgetMappings = {{"publisher", "b"}, {"usa-map", "c"}};
         String script = generateAddGadgetScript(gadgetMappings);
         boolean gadgetsAvailable = true;
-
-        driver.findElement(By.cssSelector("i.fw.fw-gadget")).click();
+        selectPane("gadgets");
         driver.executeScript(script);
 
         // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
@@ -161,7 +160,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
         String[][] gadgetMappings = {{"textbox", "d"}};
         String script = generateAddGadgetScript(gadgetMappings);
-        driver.findElement(By.cssSelector("i.fw.fw-gadget")).click();
+        selectPane("gadgets");
         driver.executeScript(script);
         // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
         Thread.sleep(500);
@@ -198,12 +197,14 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
         String[][] gadgetMappings = {{"user-claims-gadget", "e"}};
         String script = generateAddGadgetScript(gadgetMappings);
-        driver.findElement(By.cssSelector("i.fw.fw-gadget")).click();
+        driver.navigate().refresh();
+        selectPane("gadgets");
         driver.executeScript(script);
         // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
         pushWindow();
+        Thread.sleep(3000);
         Object txt = driver.executeScript(
                 "var iframe = $(\"iframe[title='User Claims']\")[0];" +
                         "var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);" +
