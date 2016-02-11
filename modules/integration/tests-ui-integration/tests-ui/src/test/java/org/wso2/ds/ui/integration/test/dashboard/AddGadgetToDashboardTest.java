@@ -57,8 +57,8 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
-        this.carbonHome = FrameworkPathUtil.getCarbonHome();
-        this.systemResourceLocation = FrameworkPathUtil.getSystemResourceLocation();
+        String carbonHome = FrameworkPathUtil.getCarbonHome();
+        String systemResourceLocation = FrameworkPathUtil.getSystemResourceLocation();
         String pathToTestGadget = systemResourceLocation + "gadgets" + File.separator + "user-claims-gadget.zip";
         String pathToTarget = carbonHome + File.separator + "repository" + File.separator + "deployment" + File
                 .separator + "server" + File.separator + "jaggeryapps" + File.separator + "portal" + File.separator +
@@ -154,48 +154,11 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         popWindow();
     }
 
-    @Test(groups = "wso2.ds.dashboard", description = "Checking gadget user-pref's in view mode from dashboard " +
-            "server", dependsOnMethods = "testAddGadgetToDashboard")
-    public void testGadgetUserPrefs() throws Exception {
-        DSWebDriver driver = getDriver();
-        String[][] gadgetMappings = {{"textbox", "d"}};
-        String script = generateAddGadgetScript(gadgetMappings);
-        selectPane("gadgets");
-        driver.executeScript(script);
-        // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
-        Thread.sleep(500);
-        driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
-        pushWindow();
-
-        String showToolbarScript =
-                "for(i = 0; i < document.getElementsByClassName('ues-component-toolbar').length; i++) {" +
-                        "    document.getElementsByClassName('ues-component-toolbar')[i].style.display = 'inline';" +
-                        "}";
-
-        driver.executeScript(showToolbarScript);
-        driver.findElement(By.cssSelector("#d i.fw.fw-settings")).click();
-        assertEquals("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut " +
-                "labore et dolore magna aliqua.", driver.findElement(By.name("content")).getAttribute("value"));
-        driver.findElement(By.name("content")).clear();
-        driver.findElement(By.name("content")).sendKeys("New Value");
-        driver.findElement(By.cssSelector("#d i.fw.fw-settings")).click();
-        // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
-        Thread.sleep(500);
-        Object txt = driver.executeScript(
-                "var iframe = $(\"iframe[title='Text Box']\")[0];" +
-                        "var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);" +
-                        "return innerDoc.getElementsByClassName('col-md-12')[0].textContent;"
-        );
-        assertEquals("New Value",txt.toString());
-        driver.close();
-        popWindow();
-    }
-
     @Test(groups = "wso2.ds.dashboard", description = "Accessing user claims from a gadget deployed in dashboard " +
-            "server",dependsOnMethods = "testGadgetUserPrefs")
+            "server",dependsOnMethods = "testAddGadgetToDashboard")
     public void testUserClaimsInGadget() throws Exception {
         DSWebDriver driver = getDriver();
-        String[][] gadgetMappings = {{"user-claims-gadget", "e"}};
+        String[][] gadgetMappings = {{"user-claims-gadget", "d"}};
         String script = generateAddGadgetScript(gadgetMappings);
         driver.navigate().refresh();
         Thread.sleep(2000);
