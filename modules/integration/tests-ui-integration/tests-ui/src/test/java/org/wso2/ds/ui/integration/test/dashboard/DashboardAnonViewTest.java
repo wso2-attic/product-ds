@@ -163,7 +163,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
     @Test(groups = "wso2.ds.dashboard", description = "Remove anonymous view mode from added dashboard page in dashboard",
             dependsOnMethods = "testAnonDashboardPages")
     public void testAnonDashboardPageRemove() throws Exception {
-        switchPage("page0");
+        //switchPage("page0");
         getDriver().findElement(By.cssSelector("input[name='anon']")).click();
         boolean isAnonViewHidden = false;
         WebElement element = getDriver().findElement(By.cssSelector("ul#designer-view-mode li[data-view-mode='anon']"));
