@@ -191,9 +191,8 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
     public void testRemoveAnonModeFromDashboard() throws Exception {
         redirectToLocation("portal", "dashboards/" + dashboardTitle + "?editor=true");
         selectPane("pages");
-        switchPage("landing");
         getDriver().findElement(By.cssSelector("input[name='anon']")).click();
-        boolean isAnonViewHidden = false;// getDriver().findElements(By.cssSelector(".toggle-design-view.hide")).size() > 0;
+        boolean isAnonViewHidden = false;
         WebElement element = getDriver().findElement(By.cssSelector("ul#designer-view-mode li[data-view-mode='anon']"));
         String attrValue = element.getAttribute("class");
         if (attrValue.equals("hide")) {
