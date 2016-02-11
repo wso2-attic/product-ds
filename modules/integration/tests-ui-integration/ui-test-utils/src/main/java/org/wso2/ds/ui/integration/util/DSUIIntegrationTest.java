@@ -272,7 +272,6 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         selectPane("pages");
         driver.findElement(By.cssSelector("button[rel='createPage']")).click();
         selectLayout("single-column");
-        //driver.findElement(By.cssSelector(".ues-page-item.active")).findElement(By.cssSelector("a.accordion-toggle")).click();
     }
 
     /**
