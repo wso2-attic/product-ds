@@ -177,7 +177,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
 
         driver.findElement(By.cssSelector("a.ues-copy")).click();
-        driver.findElement(By.cssSelector("a#btn-pages-sidebar")).click();
+        selectPane("pages");
 
         driver.findElement(By.cssSelector("[name=title]")).clear();
         driver.findElement(By.cssSelector("[name=title]")).sendKeys(DASHBOARD_PAGE_NAME);

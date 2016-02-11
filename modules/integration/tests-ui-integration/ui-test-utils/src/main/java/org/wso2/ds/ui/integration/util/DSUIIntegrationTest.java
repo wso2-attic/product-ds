@@ -269,7 +269,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      */
     public void addPageToDashboard() throws Exception {
         driver = getDriver();
-        driver.findElement(By.cssSelector("#btn-pages-sidebar")).click();
+        selectPane("pages");
         driver.findElement(By.cssSelector("button[rel='createPage']")).click();
         selectLayout("single-column");
         //driver.findElement(By.cssSelector(".ues-page-item.active")).findElement(By.cssSelector("a.accordion-toggle")).click();
@@ -290,7 +290,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @param view Name of the view. Valid names are {@code default} and {@code anon}
      * @throws Exception
      */
-    public void switchView(String view) throws Exception {
+    public void switchView(String view) throws MalformedURLException, XPathExpressionException {
         driver = getDriver();
         driver.findElement(By.cssSelector("ul#designer-view-mode li[data-view-mode='" + view + "']")).click();
     }
@@ -300,7 +300,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @param pane Name of the pane. Valid names are {@code pages}, {@code layouts} and {@code gadgets}
      * @throws Exception
      */
-    public void selectPane(String pane) throws Exception {
+    public void selectPane(String pane) throws MalformedURLException, XPathExpressionException {
         driver = getDriver();
         pane = pane.trim().toLowerCase();
         if (pane.equals("pages")) {
