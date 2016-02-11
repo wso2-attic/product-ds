@@ -77,7 +77,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
 
         addDashBoard(dashboardTitle, DASHBOARD_DESCRIPTION);
         getDriver().findElement(By.cssSelector("#" + dashboardTitle.toLowerCase() + " .ues-edit")).click();
-        getDriver().findElement(By.cssSelector("a#btn-pages-sidebar")).click();
+        selectPane("pages");
         getDriver().findElement(By.cssSelector("input[name='landing']")).click();
         getDriver().findElement(By.cssSelector("input[name='anon']")).click();
         selectPane("gadgets");
@@ -190,7 +190,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
             dependsOnMethods = "testAnonDashboardPageRemove")
     public void testRemoveAnonModeFromDashboard() throws Exception {
         redirectToLocation("portal", "dashboards/" + dashboardTitle + "?editor=true");
-        getDriver().findElement(By.cssSelector("a#btn-pages-sidebar")).click();
+        selectPane("pages");
         switchPage("landing");
         getDriver().findElement(By.cssSelector("input[name='anon']")).click();
         boolean isAnonViewHidden = false;// getDriver().findElements(By.cssSelector(".toggle-design-view.hide")).size() > 0;

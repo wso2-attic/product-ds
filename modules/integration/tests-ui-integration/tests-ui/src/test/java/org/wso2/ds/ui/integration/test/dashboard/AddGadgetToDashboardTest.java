@@ -70,6 +70,8 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
 
         serverConfigurationManager.applyConfigurationWithoutRestart(new File(pathToTestGadget),
                 new File(pathToTarget), false);
+        serverConfigurationManager.restartGracefully();
+
         login(getCurrentUsername(), getCurrentPassword());
         addDashBoard(DASHBOARD_TITLE, "This is a test dashboard");
 
@@ -161,7 +163,9 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         String[][] gadgetMappings = {{"user-claims-gadget", "d"}};
         String script = generateAddGadgetScript(gadgetMappings);
         driver.navigate().refresh();
+        Thread.sleep(2000);
         selectPane("gadgets");
+        Thread.sleep(2000);
         driver.executeScript(script);
         // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
         Thread.sleep(2000);
@@ -227,7 +231,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         boolean isFluidLayout = false;
         DSWebDriver driver = getDriver();
 
-        driver.findElement(By.cssSelector("a#btn-pages-sidebar")).click();
+        selectPane("pages");
         driver.findElement(By.cssSelector("[name=landing]")).click();
         driver.findElement(By.cssSelector("[name=fluidLayout]")).click();
 
