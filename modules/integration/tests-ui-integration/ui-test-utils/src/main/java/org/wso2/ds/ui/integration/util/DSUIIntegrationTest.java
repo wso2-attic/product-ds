@@ -296,6 +296,21 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     }
 
     /**
+     * Select specified pane in designer mode
+     * @param pane Name of the pane. Valid names are {@code pages}, {@code layouts} and {@code gadgets}
+     * @throws Exception
+     */
+    public void selectPane(String pane) throws Exception {
+        driver = getDriver();
+        pane = pane.trim().toLowerCase();
+        if (pane.equals("pages")) {
+            driver.findElement(By.cssSelector("a#btn-" + pane + "-sidebar")).click();
+        } else {
+            driver.findElement(By.cssSelector("a#btn-sidebar-" + pane)).click();
+        }
+    }
+
+    /**
      * Add dashboard to DashboardServer
      *
      * @param username       username of user
