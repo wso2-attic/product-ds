@@ -187,7 +187,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
     }
 
     @Test(groups = "wso2.ds.dashboard", description = "Accessing user claims from a gadget deployed in dashboard " +
-            "server",dependsOnMethods = "testGadgetUserPrefs")
+            "server",dependsOnMethods = "testGadgetUserPrefs", enabled = false)
     public void testUserClaimsInGadget() throws Exception {
         DSWebDriver driver = getDriver();
         String[][] gadgetMappings = {{"user-claims-gadget", "e"}};
@@ -209,7 +209,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
     }
 
     @Test(groups = "wso2.ds.dashboard", description = "maximizing gadget which added to dashboard", dependsOnMethods
-            = "testUserClaimsInGadget")
+            = "testUserClaimsInGadget", enabled = false)
     public void testMaximizeGadgetInView() throws Exception {
         DSWebDriver driver = getDriver();
 
@@ -252,7 +252,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
     }
 
     @Test(groups = "wso2.ds.dashboard", description = "Test fluid layout",
-            dependsOnMethods = "testMaximizeGadgetInView")
+            dependsOnMethods = "testMaximizeGadgetInView", enabled = false)
     public void testFluidLayout() throws MalformedURLException, XPathExpressionException {
         boolean isFluidLayout = false;
         DSWebDriver driver = getDriver();
