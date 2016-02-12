@@ -94,7 +94,7 @@ public class AddPageToDashboard extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
 
         driver.findElement(By.cssSelector("[name=landing]")).click();
-        driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
+        clickViewButton();
         pushWindow();
 
         String fullUrl = driver.getCurrentUrl();

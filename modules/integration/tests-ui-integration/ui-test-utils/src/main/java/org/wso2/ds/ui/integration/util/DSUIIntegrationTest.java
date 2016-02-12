@@ -285,9 +285,10 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     }
 
     /**
-     * Switch to the given view
+     * Switch to the given view in designer mode
      * @param view Name of the view. Valid names are {@code default} and {@code anon}
-     * @throws Exception
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
      */
     public void switchView(String view) throws MalformedURLException, XPathExpressionException {
         driver = getDriver();
@@ -297,7 +298,8 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     /**
      * Select specified pane in designer mode
      * @param pane Name of the pane. Valid names are {@code pages}, {@code layouts} and {@code gadgets}
-     * @throws Exception
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
      */
     public void selectPane(String pane) throws MalformedURLException, XPathExpressionException {
         driver = getDriver();
@@ -307,6 +309,16 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         } else {
             driver.findElement(By.cssSelector("a#btn-sidebar-" + pane)).click();
         }
+    }
+
+    /**
+     * Clicks the View link in designer mode
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    public void clickViewButton() throws MalformedURLException, XPathExpressionException {
+        driver = getDriver();
+        driver.findElement(By.className("ues-dashboard-preview")).click();
     }
 
     /**

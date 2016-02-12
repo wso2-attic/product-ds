@@ -95,7 +95,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         selectPane("layouts");
         driver.findElement(By.id("ues-add-block-btn")).click();
 
-        driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
+        clickViewButton();
         pushWindow();
 
         assertTrue(isBlockPresent("a"), "The block 'a' does not exist");
@@ -114,7 +114,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
         Thread.sleep(500);
 
-        driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
+        clickViewButton();
         pushWindow();
 
         assertFalse(isBlockPresent("a"), "The block 'a' exists after deletion");
@@ -135,7 +135,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
         Thread.sleep(500);
 
-        driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
+        clickViewButton();
 
         pushWindow();
 
@@ -169,7 +169,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         driver.executeScript(script);
         // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
         Thread.sleep(2000);
-        driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
+        clickViewButton();
         pushWindow();
         Thread.sleep(3000);
         Object txt = driver.executeScript(
@@ -187,7 +187,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
     public void testMaximizeGadgetInView() throws Exception {
         DSWebDriver driver = getDriver();
 
-        driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
+        clickViewButton();
         pushWindow();
 
         // This sleep is used to wait until the content of the iframe appears
@@ -235,7 +235,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("[name=landing]")).click();
         driver.findElement(By.cssSelector("[name=fluidLayout]")).click();
 
-        driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
+        clickViewButton();
         pushWindow();
 
         List<WebElement> elements = getDriver().findElements(By.cssSelector(".page-content-wrapper > .container-fluid"));
