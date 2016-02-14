@@ -28,6 +28,7 @@ import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
 
 /**
@@ -84,15 +85,21 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
 
         switchView("anon");
         getDriver().executeScript(anonViewGadgetAddScript);
-
+        // verifying gadget is rendered correctly in anon view
         assertEquals(GADGET_2, getAttributeValue("iframe", "title"));
 
         switchView("default");
         getDriver().executeScript(defaultViewGadgetAddScript);
-
+        // verifying gadget is rendered correctly in default view
         assertEquals(GADGET_1, getAttributeValue("iframe", "title"));
 
-        getDriver().findElement(By.className("ues-dashboard-preview")).click();
+        // verifying correct pages are displayed when toggle views
+        switchView("anon");
+        assertEquals(GADGET_2, getAttributeValue("iframe", "title"));
+        switchView("default");
+        assertEquals(GADGET_1, getAttributeValue("iframe", "title"));
+
+        clickViewButton();
 
         pushWindow();
         assertEquals(GADGET_1, getAttributeValue("iframe", "title"));
@@ -100,7 +107,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         popWindow();
 
         switchView("anon");
-        getDriver().findElement(By.className("ues-dashboard-preview")).click();
+        clickViewButton();
 
         pushWindow();
         assertEquals(GADGET_2, getAttributeValue("iframe", "title"));
@@ -141,7 +148,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         assertEquals(GADGET_4, getAttributeValue("iframe", "title"));
 
         switchView("default");
-        getDriver().findElement(By.className("ues-dashboard-preview")).click();
+        clickViewButton();
 
         pushWindow();
         assertEquals(GADGET_3, getAttributeValue("iframe", "title"));
@@ -149,21 +156,59 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         popWindow();
 
         switchView("anon");
-        getDriver().findElement(By.className("ues-dashboard-preview")).click();
+        clickViewButton();
 
         pushWindow();
         assertEquals(GADGET_4, getAttributeValue("iframe", "title"));
         getDriver().close();
         popWindow();
+
+        switchPage("landing");
+        getDriver().findElement(By.cssSelector("input[name='anon']")).click();
+        WebElement element = getDriver().findElement(By.cssSelector("button#ues-modal-info-ok"));
+
+        boolean hasWarning = false;
+        if (element != null) {
+            hasWarning = true;
+        }
+        assertEquals(true, hasWarning, "Can remove the anonymous view of landing page when there are pages with anonymous views");
+
+        getDriver().findElement(By.cssSelector("button.close")).click();
+    }
+
+    /**
+     * Test case for verifying only anon pages are displayed to viewers
+     * @throws Exception
+     */
+    @Test(groups = "wso2.ds.dashboard", description = "Verify only anon pages are displayed to viewers",
+            dependsOnMethods = "testAnonDashboardPages")
+    public void testAnonPagesViews() throws Exception {
+        logout();
+
+        redirectToLocation("portal", "dashboards/" + dashboardTitle + "/landing");
+        //check anon view gadgets are there
+        assertEquals(GADGET_2, getAttributeValue("iframe", "title"));
+        //check default view gadgets are not there
+        assertNotEquals(GADGET_1, getAttributeValue("iframe", "title"));
+
+        redirectToLocation("portal", "dashboards/" + dashboardTitle + "/page0");
+        //check anon view gadgets are there
+        assertEquals(GADGET_4, getAttributeValue("iframe", "title"));
+        //check default view gadgets are not there
+        assertNotEquals(GADGET_3, getAttributeValue("iframe", "title"));
     }
 
     /**
      * Test case for removing anonymous view from newly added page of dashboard
      */
     @Test(groups = "wso2.ds.dashboard", description = "Remove anonymous view mode from added dashboard page in dashboard",
-            dependsOnMethods = "testAnonDashboardPages")
+            dependsOnMethods = "testAnonPagesViews")
     public void testAnonDashboardPageRemove() throws Exception {
-        //switchPage("page0");
+        login(getCurrentUsername(), getCurrentPassword());
+        getDriver().findElement(By.cssSelector("#" + dashboardTitle.toLowerCase() + " .ues-edit")).click();
+        selectPane("pages");
+
+        switchPage("page0");
         getDriver().findElement(By.cssSelector("input[name='anon']")).click();
         boolean isAnonViewHidden = false;
         WebElement element = getDriver().findElement(By.cssSelector("ul#designer-view-mode li[data-view-mode='anon']"));
