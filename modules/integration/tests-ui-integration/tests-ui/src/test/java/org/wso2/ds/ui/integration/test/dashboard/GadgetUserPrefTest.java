@@ -27,10 +27,13 @@ import org.wso2.carbon.integration.common.admin.client.UserManagementClient;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 import org.wso2.ds.ui.integration.util.DSWebDriver;
 
+import javax.xml.xpath.XPathExpressionException;
+import java.net.MalformedURLException;
+
 import static org.testng.Assert.*;
 
 /**
- * Tests the dashboard user-pref related functionality
+ * Tests the dashboard personalization / user-pref related functionality
  */
 public class GadgetUserPrefTest extends DSUIIntegrationTest {
     private static final String DASHBOARD_TITLE = "userPrefDashboard";
@@ -102,21 +105,11 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         String script = generateAddGadgetScript(gadgetMappings);
         driver.findElement(By.cssSelector("i.fw.fw-gadget")).click();
         driver.executeScript(script);
-        driver.findElement(By.name("content"));
-        driver.findElement(By.name("content")).clear();
-        driver.findElement(By.name("content")).sendKeys("Editor Mode");
-        String fireEvent = "$('textarea[name=content]').change();";
-        driver.executeScript(fireEvent);
-        driver.findElement(By.cssSelector("a.ues-dashboard-preview"));
+        setTextBoxValue("Editor Mode", true);
         driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
         // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
         Thread.sleep(500);
-        Object txt = driver.executeScript(
-                "var iframe = $(\"iframe[title='Text Box']\")[0];" +
-                        "var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);" +
-                        "return innerDoc.getElementsByClassName('col-md-12')[0].textContent;"
-        );
-        assertEquals(txt.toString(),"Editor Mode");
+        assertEquals(getTextBoxValue(),"Editor Mode");
     }
 
     @Test(groups = "wso2.ds.dashboard", description = "Change the settings of gadgets in the View mode by an Editor",
@@ -126,26 +119,14 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         redirectToLocation("portal", "dashboards");
         driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
         pushWindow();
-        String showToolbarScript =
-                "for(i = 0; i < document.getElementsByClassName('ues-component-toolbar').length; i++) {" +
-                        "    document.getElementsByClassName('ues-component-toolbar')[i].style.display = 'inline';" +
-                        "}";
-
-        driver.executeScript(showToolbarScript);
+        showGadgetConfigurationIcons();
         driver.findElement(By.cssSelector("#a i.fw.fw-settings"));
         driver.findElement(By.cssSelector("#a i.fw.fw-settings")).click();
-        driver.findElement(By.name("content")).clear();
-        driver.findElement(By.name("content")).sendKeys("Editor Value");
+        setTextBoxValue("Editor Value", false);
         driver.findElement(By.cssSelector("#a i.fw.fw-settings")).click();
-        // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
+        //TODO: element is inside an iframe and driver.findElement cannot be used directly. Hence an alternative is needed
         Thread.sleep(500);
-        //driver.findElement(By.cssSelector("div.col-md-12.textbox"));
-        Object txt = driver.executeScript(
-                "var iframe = $(\"iframe[title='Text Box']\")[0];" +
-                        "var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);" +
-                        "return innerDoc.getElementsByClassName('col-md-12')[0].textContent;"
-        );
-        assertEquals(txt.toString(),"Editor Value");
+        assertEquals(getTextBoxValue(),"Editor Value");
         driver.close();
         popWindow();
         logout();
@@ -159,26 +140,13 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         redirectToLocation("portal", "dashboards");
         driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
         pushWindow();
-
-        String showToolbarScript =
-                "for(i = 0; i < document.getElementsByClassName('ues-component-toolbar').length; i++) {" +
-                        "    document.getElementsByClassName('ues-component-toolbar')[i].style.display = 'inline';" +
-                        "}";
-
-        driver.executeScript(showToolbarScript);
+        showGadgetConfigurationIcons();
         driver.findElement(By.cssSelector("#a i.fw.fw-settings")).click();
-        driver.findElement(By.name("content")).clear();
-        driver.findElement(By.name("content")).sendKeys("Viewer Value");
+        setTextBoxValue("Viewer Value", false);
         driver.findElement(By.cssSelector("#a i.fw.fw-settings")).click();
-        // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
+        //TODO: element is inside an iframe and driver.findElement cannot be used directly. Hence an alternative is needed
         Thread.sleep(500);
-        //driver.findElement(By.cssSelector("div.col-md-12.textbox"));
-        Object txt = driver.executeScript(
-                "var iframe = $(\"iframe[title='Text Box']\")[0];" +
-                        "var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);" +
-                        "return innerDoc.getElementsByClassName('col-md-12')[0].textContent;"
-        );
-        assertEquals(txt.toString(),"Viewer Value");
+        assertEquals(getTextBoxValue(),"Viewer Value");
     }
 
     @Test(groups = "wso2.ds.dashboard", description = "Change the settings of gadgets in the Personalize mode by Viewer",
@@ -188,26 +156,50 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("i.fw.fw-edit")).click();
         driver.findElement(By.className("ues-component-properties-handle"));
         driver.findElement(By.className("ues-component-properties-handle")).click();
-        driver.findElement(By.name("content"));
-        driver.findElement(By.name("content")).clear();
-        driver.findElement(By.name("content")).sendKeys("Personalize Mode");
-        String fireEvent = "$('textarea[name=content]').change();";
-        driver.executeScript(fireEvent);
-        driver.findElement(By.cssSelector("a.ues-dashboard-preview"));
+        setTextBoxValue("Personalize Mode", true);
         driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
-        //pushWindow();
-        // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
-        Thread.sleep(1000);
-        Object txt = driver.executeScript(
-                "var iframe = $(\"iframe[title='Text Box']\")[0];" +
-                        "var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);" +
-                        "return innerDoc.getElementsByClassName('col-md-12')[0].textContent;"
-        );
-        assertEquals(txt.toString(),"Personalize Mode");
+        //TODO: element is inside an iframe and driver.findElement cannot be used directly. Hence an alternative is needed
+        Thread.sleep(500);
+        assertEquals(getTextBoxValue(),"Personalize Mode");
         driver.close();
         popWindow();
         logout();
     }
+
+    @Test(groups = "wso2.ds.dashboard", description = "Verify the original dashboard is not changed after personalizing " +
+            "a dashboard",dependsOnMethods = "personalizeGadgetPrefsByViewer")
+    public void testOriginalDashboardAfterPersonalizing() throws Exception {
+        login(editor.getUserName(), editor.getPassword());
+        DSWebDriver driver = getDriver();
+        redirectToLocation("portal", "dashboards");
+        driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
+        pushWindow();
+        assertEquals(getTextBoxValue(),"Editor Value");
+        driver.close();
+        popWindow();
+        logout();
+    }
+
+    @Test(groups = "wso2.ds.dashboard", description = "Reset the personalized dashboard by a viewer",
+            dependsOnMethods = "testOriginalDashboardAfterPersonalizing")
+    public void resetDashboardByViewer() throws Exception {
+        login(viewer.getUserName(), viewer.getPassword());
+        DSWebDriver driver = getDriver();
+        redirectToLocation("portal", "dashboards");
+        driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
+        pushWindow();
+
+        driver.findElement(By.cssSelector("i.fw.fw-edit")).click();
+        driver.findElement(By.className("ues-copy")).click();
+        driver.findElement(By.id("ues-modal-confirm-yes")).click();
+        //TODO: element is inside an iframe and driver.findElement cannot be used directly. Hence an alternative is needed
+        Thread.sleep(500);
+        assertEquals(getTextBoxValue(),"Editor Value");
+        driver.close();
+        popWindow();
+        logout();
+    }
+
 
     /**
      * Create the dashboard, select the layout template and change editor and viewer permissions
@@ -248,4 +240,54 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         redirectToLocation("portal", "dashboards");
     }
 
+    /**
+     * Set the value for the text area in the textbox gadget
+     *
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    private void setTextBoxValue(String value, Boolean isEditMode) throws MalformedURLException,
+            XPathExpressionException {
+        DSWebDriver driver = getDriver();
+        driver.findElement(By.name("content"));
+        driver.findElement(By.name("content")).clear();
+        driver.findElement(By.name("content")).sendKeys(value);
+        if(isEditMode){
+          String fireEvent = "$('textarea[name=content]').change();";
+          driver.executeScript(fireEvent);
+        }
+    }
+
+    /**
+     * Get value of the text area in the textbox gadget
+     *
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    private String getTextBoxValue() throws MalformedURLException, XPathExpressionException {
+        DSWebDriver driver = getDriver();
+        Object txt = driver.executeScript(
+                "var iframe = $(\"iframe[title='Text Box']\")[0];" +
+                        "var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);" +
+                        "return innerDoc.getElementsByClassName('col-md-12')[0].textContent;"
+        );
+        return txt.toString();
+    }
+
+    /**
+     * By default gadget configuration icons are hidden. A user needs to hover to make them visible.This script make
+     * the configuration icons visible
+     *
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    private void showGadgetConfigurationIcons() throws MalformedURLException, XPathExpressionException {
+        DSWebDriver driver = getDriver();
+        String showToolbarScript =
+                "for(i = 0; i < document.getElementsByClassName('ues-component-toolbar').length; i++) {" +
+                        "    document.getElementsByClassName('ues-component-toolbar')[i].style.display = 'inline';" +
+                        "}";
+
+        driver.executeScript(showToolbarScript);
+    }
 }
