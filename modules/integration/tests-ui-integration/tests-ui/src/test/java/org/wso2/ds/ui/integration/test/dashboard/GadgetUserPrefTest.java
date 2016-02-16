@@ -119,6 +119,9 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         redirectToLocation("portal", "dashboards");
         driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
         pushWindow();
+        //verify that an editor can't personalize a dashboard but edit
+        String toolTip = driver.findElement(By.className("ues-copy")).getAttribute("title");
+        assertEquals(toolTip, "Edit");
         showGadgetConfigurationIcons();
         driver.findElement(By.cssSelector("#a i.fw.fw-settings"));
         driver.findElement(By.cssSelector("#a i.fw.fw-settings")).click();
@@ -127,9 +130,20 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         //TODO: element is inside an iframe and driver.findElement cannot be used directly. Hence an alternative is needed
         Thread.sleep(500);
         assertEquals(getTextBoxValue(),"Editor Value");
+        popWindow();
+        logout();
+        //login with admin (another editor) to verify that editor can't personalize a dashboard
+        login(getCurrentUsername(),getCurrentPassword());
+        redirectToLocation("portal", "dashboards");
+        driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
+        pushWindow();
+        //TODO: element is inside an iframe and driver.findElement cannot be used directly. Hence an alternative is needed
+        Thread.sleep(500);
+        assertEquals(getTextBoxValue(),"Editor Value");
         driver.close();
         popWindow();
         logout();
+
     }
 
     @Test(groups = "wso2.ds.dashboard", description = "Change the settings of gadgets in the View mode by a Viewer",
@@ -199,7 +213,6 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         popWindow();
         logout();
     }
-
 
     /**
      * Create the dashboard, select the layout template and change editor and viewer permissions
