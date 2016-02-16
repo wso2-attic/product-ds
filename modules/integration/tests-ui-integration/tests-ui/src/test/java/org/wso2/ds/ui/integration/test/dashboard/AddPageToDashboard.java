@@ -71,21 +71,21 @@ public class AddPageToDashboard extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("[name=id]")).sendKeys(DASHBOARD_URL);
         driver.executeScript("$('[name=id]').change();");
 
-        assertEquals(driver.findElement(By.cssSelector("h4.ues-page-title")).
-                        findElement(By.cssSelector("span.page-title")).getText(), DASHBOARD_PAGENAME,
+        assertEquals(driver.findElement(By.cssSelector("div.page-title")).
+                        findElement(By.cssSelector("p.lead")).getText(), DASHBOARD_PAGENAME,
                 "error occurred while edit the new page name");
 
         //checks the name of added newest page under pages drop list
         int count = 0;
-        WebElement pageList = driver.findElement(By.cssSelector("#ues-page-properties"));
-        List<WebElement> pages = pageList.findElements(By.cssSelector("a.accordion-toggle"));
+        WebElement pageList = driver.findElement(By.cssSelector("#ues-dashboard-pages"));
+        List<WebElement> pages = pageList.findElements(By.cssSelector("h4.panel-title"));
         for (WebElement we : pages) {
             if (we.getText().equalsIgnoreCase(DASHBOARD_PAGENAME)) {
                 count++;
             }
         }
 
-        assertEquals(count, 1, "some errors occurred when editing the new page Title in dashboard App");
+        assertEquals(count, 1, "Dashboard has zero or multiple newly added pages with the same name");
     }
 
     @Test(groups = "wso2.ds.dashboard", description = "Test the checkbox of landing view", dependsOnMethods =
@@ -93,9 +93,8 @@ public class AddPageToDashboard extends DSUIIntegrationTest {
     public void testLandingCheckBox() throws Exception {
         DSWebDriver driver = getDriver();
 
-        switchPage(DASHBOARD_URL.toLowerCase());
         driver.findElement(By.cssSelector("[name=landing]")).click();
-        driver.findElement(By.cssSelector("i.fw.fw-view")).click();
+        clickViewButton();
         pushWindow();
 
         String fullUrl = driver.getCurrentUrl();
@@ -112,21 +111,19 @@ public class AddPageToDashboard extends DSUIIntegrationTest {
     public void testDeletePageDashboardNew() throws Exception {
         DSWebDriver driver = getDriver();
 
-        WebElement pageList = driver.findElement(By.cssSelector("#ues-page-properties"));
-        WebElement newPageElement = driver.findElement(By.
-                cssSelector("a[data-id='" + DASHBOARD_URL.toLowerCase() + "']"));
-        newPageElement.findElement(By.cssSelector(".ues-trash")).click();
-        driver.findElement(By.id("button-0")).click();
+        driver.findElement(By.cssSelector("button.ues-delete-page")).click();
+        driver.findElement(By.id("ues-modal-confirm-yes")).click();
 
         int count = 0;
-        List<WebElement> pages = pageList.findElements(By.cssSelector("a.accordion-toggle"));
+        WebElement pageList = driver.findElement(By.cssSelector("#ues-dashboard-pages"));
+        List<WebElement> pages = pageList.findElements(By.cssSelector("h4.panel-title"));
         for (WebElement we : pages) {
             if (we.getText().equalsIgnoreCase(DASHBOARD_PAGENAME)) {
                 count++;
             }
         }
 
-        assertEquals(count, 0, "some errors occurred when deleting the newly added page to dashboard App");
+        assertEquals(count, 0, "Newly added page didn't get deleted to dashboard App");
     }
 
     @AfterClass(alwaysRun = true)

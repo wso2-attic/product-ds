@@ -91,7 +91,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
 
         WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
         webElement.findElement(By.cssSelector(".ues-edit")).click();
-        driver.findElement(By.id("settings-link")).click();
+        driver.findElement(By.id("dashboard-settings")).click();
         driver.executeScript("scroll(0, 200);");
 
         WebElement element = driver.findElement(By.id("ues-share-view"));
@@ -129,10 +129,10 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         pushWindow();
 
         //it will go to view page as editor
-        assertEquals(USERNAME_EDITOR, driver.findElement(By.cssSelector(".dropdown-toggle")).getText(),
+        assertEquals(USERNAME_EDITOR, driver.findElement(By.cssSelector(".auth .hidden-xs.add-padding-left-3x")).getText(),
                 "Expected Username is not matched");
 
-        assertEquals("Edit", driver.findElement(By.cssSelector("a.ues-copy")).getText(), "Unable to find the edit button");
+        assertEquals("Edit", driver.findElement(By.cssSelector("a.ues-copy")).getAttribute("title"), "Unable to find the edit button");
 
         driver.close();
         popWindow();
@@ -165,10 +165,10 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         pushWindow();
 
         //it will go to view page as viewer
-        assertEquals(USERNAME_VIEWER, driver.findElement(By.cssSelector(".dropdown-toggle")).getText(),
+        assertEquals(USERNAME_VIEWER, driver.findElement(By.cssSelector(".auth .hidden-xs.add-padding-left-3x")).getText(),
                 "Expected Username is not matched");
-        assertEquals("Personalize", getDriver().findElement(By.cssSelector("a.ues-copy")).getText(),
-                "Unable to find the personalize button");
+        String personalizeStr = driver.findElement(By.cssSelector("a.ues-copy")).getAttribute("title").trim().substring(0, 11);
+        assertEquals("Personalize", personalizeStr, "Unable to find the personalize button");
     }
 
     @Test(groups = "wso2.ds.dashboard", description = "Per user dashboard settings", dependsOnMethods =
@@ -177,14 +177,13 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
 
         driver.findElement(By.cssSelector("a.ues-copy")).click();
-        driver.findElement(By.cssSelector("a.ues-pages-toggle")).click();
-        driver.findElement(By.cssSelector("#ues-dashboard-pages .ues-page-item.active .accordion-toggle")).click();
+        selectPane("pages");
 
         driver.findElement(By.cssSelector("[name=title]")).clear();
         driver.findElement(By.cssSelector("[name=title]")).sendKeys(DASHBOARD_PAGE_NAME);
-        driver.findElement(By.cssSelector("h4.ues-page-title")).click();
+        driver.findElement(By.cssSelector("div.page-title")).click();
 
-        assertEquals(DASHBOARD_PAGE_NAME, driver.findElement(By.cssSelector("h4.ues-page-title")).getText(),
+        assertEquals(DASHBOARD_PAGE_NAME, driver.findElement(By.cssSelector("div.page-title p.lead")).getText(),
                 "error occurred while edit the new page name");
     }
 

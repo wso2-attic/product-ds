@@ -57,7 +57,7 @@ public class AddUserTest extends DSUIIntegrationTest {
 
         login(USER_NAME, PASSWORD);
 
-        assertEquals(USER_NAME, getDriver().findElement(By.cssSelector(".dropdown-toggle")).getText(), "Expected " +
+        assertEquals(USER_NAME, getDriver().findElement(By.cssSelector(".dropdown")).getText(), "Expected " +
                 "Username is not matched");
 
     }

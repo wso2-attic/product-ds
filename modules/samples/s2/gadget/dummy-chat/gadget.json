@@ -1,0 +1,13 @@
+{
+    "id": "dummy-chat",
+    "title": "Dummy Chat",
+    "type": "gadget",
+    "thumbnail": "store://gadget/dummy-chat/index.png",
+    "settings": {
+        "personalize": true
+    },
+    "data": {
+        "url": "store://gadget/dummy-chat/index.xml"
+    },
+    "description": "This shows the integration with websockets"
+}

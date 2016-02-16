@@ -55,6 +55,7 @@ binPath=$pathEdited/bin
 # Defining Sample data and directories' paths
 gadgetDropLocation="$pathEdited/repository/deployment/server/jaggeryapps/portal/store/carbon.super/"
 dashboardDropLocation="$pathEdited/repository/deployment/server/jaggeryapps/portal/extensions/"
+jaggeryAppsDropLocation="$pathEdited/repository/deployment/server/"
 
 # Process the user input
 sample=""
@@ -90,6 +91,7 @@ fi
 # Coping the sample files
 cp -r "$sampleFolder/gadget" "$gadgetDropLocation"
 cp -r "$sampleFolder/dashboards" "$dashboardDropLocation"
+[ -d "$sampleFolder/jaggeryapps" ] && cp -r "$sampleFolder/jaggeryapps" "$jaggeryAppsDropLocation"
 
 echo "Starting the dashboard server with sample dashboard"
 sh "$binPath/wso2server.sh"
