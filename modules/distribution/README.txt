@@ -52,7 +52,6 @@ WSO2 Dashboard Server Binary Distribution Directory Structure
         ├── README.txt
         ├── release-notes.html
         ├── repository
-                ├── carbonapps
                 ├── components
                 ├── conf
                 ├── data
@@ -65,7 +64,10 @@ WSO2 Dashboard Server Binary Distribution Directory Structure
                                                         ├── designer.json
                 ├── logs
                 ├── resources
+                ├── tenants 
+        ├── resources
         ├── samples
+        ├── solr
         ├── tmp
 
 
@@ -84,9 +86,6 @@ WSO2 Dashboard Server Binary Distribution Directory Structure
       The repository where Carbon artifacts & Axis2 services and modules 
       deployed in WSO2 Carbon are stored. In addition to this other custom 
       deployers such as dataservices and axis1services are also stored.
-
-        - carbonapps
-          Carbon Application hot deployment directory.
 
     	- components
           Contains all OSGi related libraries and configurations.
@@ -117,9 +116,9 @@ WSO2 Dashboard Server Binary Distribution Directory Structure
         - resources
           Contains additional resources that may be required.
 
-	- tenants
-	  Directory will contain relevant tenant artifacts in the case of a
-	  multitenant deployment.
+	    - tenants
+	      Directory will contain relevant tenant artifacts in the case of a
+	      multitenant deployment.
 	
     - samples
       Contains samples that demonstrate the functionality and capabilities of 
