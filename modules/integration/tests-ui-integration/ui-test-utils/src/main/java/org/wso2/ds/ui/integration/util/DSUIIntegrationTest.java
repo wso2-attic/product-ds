@@ -141,36 +141,21 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @throws javax.xml.xpath.XPathExpressionException,InterruptedException
      */
     public void login(String userName, String pwd) throws Exception {
-        String fullUrl = "";
+        String fullUrl = "", currentUrl = "";
         fullUrl = getBaseUrl() + DS_SUFFIX;
         driver = getDriver();
 
         driver.get(fullUrl);
+        currentUrl = driver.getCurrentUrl();
         driver.findElement(By.name("username")).clear();
         driver.findElement(By.name("username")).sendKeys(userName);
         driver.findElement(By.name("password")).clear();
         driver.findElement(By.name("password")).sendKeys(pwd);
-        driver.findElement(By.cssSelector(".ues-signin")).click();
-    }
-
-    /**
-     * To login to Dashboard server when SSO is enabled
-     *
-     * @param userName user name
-     * @param pwd      password
-     * @throws javax.xml.xpath.XPathExpressionException,InterruptedException
-     */
-    public void loginWithSSO(String userName, String pwd) throws Exception {
-        String fullUrl = "";
-        fullUrl = getBaseUrl() + DS_SUFFIX;
-        driver = getDriver();
-
-        driver.get(fullUrl);
-        driver.findElement(By.name("username")).clear();
-        driver.findElement(By.name("username")).sendKeys(userName);
-        driver.findElement(By.name("password")).clear();
-        driver.findElement(By.name("password")).sendKeys(pwd);
-        driver.findElement(By.tagName("button")).click();
+        if (currentUrl.contains("authenticationendpoint/login.do")) { // sso login enabled
+            driver.findElement(By.tagName("button")).click();
+        } else { // basic login enabled
+            driver.findElement(By.cssSelector(".ues-signin")).click();
+        }
     }
 
     /**
@@ -184,7 +169,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         driver = getDriver();
 
         driver.get(fullUrl);
-        driver.findElement(By.cssSelector(".dropdown-toggle")).click();
+        driver.findElement(By.cssSelector(".dropdown")).click();
         driver.findElement(By.cssSelector(".dropdown-menu > li > a")).click();
     }
 
@@ -244,7 +229,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     public void selectLayout(String layout) throws Exception {
         driver = getDriver();
 
-        driver.findElement(By.cssSelector("a[data-id='" + layout + "']")).click();
+        driver.findElement(By.cssSelector("div[data-id='" + layout + "']")).click();
     }
 
     /**
@@ -284,10 +269,9 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      */
     public void addPageToDashboard() throws Exception {
         driver = getDriver();
-        driver.findElement(By.cssSelector("a.ues-pages-toggle")).click();
-        driver.findElement(By.cssSelector(".ues-page-add")).click();
+        selectPane("pages");
+        driver.findElement(By.cssSelector("button[rel='createPage']")).click();
         selectLayout("single-column");
-        driver.findElement(By.cssSelector(".ues-page-item.active")).findElement(By.cssSelector("a.accordion-toggle")).click();
     }
 
     /**
@@ -297,7 +281,44 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      */
     public void switchPage(String pageID) throws Exception {
         driver = getDriver();
-        driver.findElement(By.cssSelector("a[data-id='" + pageID + "']")).click();
+        driver.findElement(By.cssSelector("div[data-id='" + pageID + "']")).click();
+    }
+
+    /**
+     * Switch to the given view in designer mode
+     * @param view Name of the view. Valid names are {@code default} and {@code anon}
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    public void switchView(String view) throws MalformedURLException, XPathExpressionException {
+        driver = getDriver();
+        driver.findElement(By.cssSelector("ul#designer-view-mode li[data-view-mode='" + view + "']")).click();
+    }
+
+    /**
+     * Select specified pane in designer mode
+     * @param pane Name of the pane. Valid names are {@code pages}, {@code layouts} and {@code gadgets}
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    public void selectPane(String pane) throws MalformedURLException, XPathExpressionException {
+        driver = getDriver();
+        pane = pane.trim().toLowerCase();
+        if (pane.equals("pages")) {
+            driver.findElement(By.cssSelector("a#btn-" + pane + "-sidebar")).click();
+        } else {
+            driver.findElement(By.cssSelector("a#btn-sidebar-" + pane)).click();
+        }
+    }
+
+    /**
+     * Clicks the View link in designer mode
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    public void clickViewButton() throws MalformedURLException, XPathExpressionException {
+        driver = getDriver();
+        driver.findElement(By.className("ues-dashboard-preview")).click();
     }
 
     /**

@@ -42,6 +42,7 @@
             <class name="org.wso2.ds.ui.integration.test.common.AddUserTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.AddDeleteDashboardTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.AddGadgetToDashboardTest"/>
+            <class name="org.wso2.ds.ui.integration.test.dashboard.GadgetUserPrefTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.AddPageToDashboard"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.RoleBasedDashboardAccess"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.CreateCustomDashboardPerUser"/>

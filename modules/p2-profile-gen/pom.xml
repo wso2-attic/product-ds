@@ -192,9 +192,6 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.store:store.feature:${carbon.store.version}
                                 </featureArtifactDef>
-                                <!-- <feaureArtifactDef>
-                                    org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.sso.feature:${carbon.dashboards.version}
-                                </feaureArtifactDef> -->
                                 <feaureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.core.ui.feature:${carbon.identity.version}
                                 </feaureArtifactDef>
@@ -216,6 +213,9 @@
                                 </featureArtifactDef>
 								<featureArtifactDef>
                                     org.wso2.carbon.deployment:org.wso2.carbon.as.runtimes.cxf.feature:${carbon.deployment.version}
+                                </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.commons:org.wso2.carbon.application.mgt.feature:${carbon.commons.version}
                                 </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
@@ -467,6 +467,10 @@
 								<feature>
                                      <id>org.wso2.carbon.as.runtimes.cxf.feature.group</id>
                                      <version>${carbon.deployment.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.application.mgt.feature.group</id>
+                                    <version>${carbon.commons.version}</version>
                                 </feature>
                             </features>
                         </configuration>

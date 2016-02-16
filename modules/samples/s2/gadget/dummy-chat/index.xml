@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--Gadget definition start-->
+<Module>
+<!--Gadget name, description, tags etc.. goes here-->
+    <ModulePrefs title="WS Dummy chat application"
+                height="350"
+                description="This is a dummy sample gadget to showcase Websocket capability"
+                tags="chat">
+        <Require feature="dynamic-height"/>
+    </ModulePrefs>
+<!--HTML to render chat UI -->
+    <Content type="html">
+        <![CDATA[
+     <script src="js/dummy-chat.js" type="text/javascript"></script>
+     <div id="gadget-wrapper">
+             <div id="msg-content"></div>
+             <div id="gadget-area-div">
+             <textarea rows="4" cols="50" id="msg"></textarea><br/>
+             <button type="button" onclick="send()">Send Me!</button>
+             </div>
+     </div>
+     ]]>
+    </Content>
+</Module>
+<!--Gadget definition end-->
