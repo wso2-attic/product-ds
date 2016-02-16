@@ -149,6 +149,7 @@ public class BannerTest extends DSUIIntegrationTest {
 
         clickEditBannerButton(0);
         clickSaveBannerButton();
+        Thread.sleep(500);
         assertTrue(isResourceExist(ROOT_RESOURCE_PATH + dashboardId + "/banner"), "Unable to find the resource");
 
         logout();
