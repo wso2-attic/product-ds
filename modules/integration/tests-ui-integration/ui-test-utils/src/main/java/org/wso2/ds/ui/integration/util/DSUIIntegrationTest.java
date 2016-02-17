@@ -467,10 +467,11 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         }
         // delete dashboards
         for (String dashboardId: dashboardIds) {
-            List<WebElement> trashElements = driver.findElements(By.cssSelector("#" + dashboardId + " a.ues-dashboard-trash-handle"));
+            WebElement elem = driver.findElement(By.id(dashboardId));
+            List<WebElement> trashElements = elem.findElements(By.cssSelector("a.ues-dashboard-trash-handle"));
             if (trashElements.size() == 1) {
-                driver.findElement(By.cssSelector("#" + dashboardId + " a.ues-dashboard-trash-handle")).click();
-                driver.findElement(By.cssSelector("#" + dashboardId + " a.ues-dashboard-trash-confirm")).click();
+                elem.findElement(By.cssSelector("a.ues-dashboard-trash-handle")).click();
+                elem.findElement(By.cssSelector("a.ues-dashboard-trash-confirm")).click();
             }
         }
     }
