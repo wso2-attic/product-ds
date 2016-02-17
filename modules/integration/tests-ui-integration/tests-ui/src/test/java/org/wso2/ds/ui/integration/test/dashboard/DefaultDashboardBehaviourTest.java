@@ -19,7 +19,6 @@ package org.wso2.ds.ui.integration.test.dashboard;
 import ds.integration.tests.common.domain.DSIntegrationTestConstants;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
@@ -28,13 +27,10 @@ import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 import org.wso2.ds.ui.integration.util.DSWebDriver;
 
-import javax.xml.xpath.XPathExpressionException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -70,7 +66,7 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
     public void setUp() throws Exception {
         login(getCurrentUsername(), getCurrentPassword());
         // delete all dashboards if exists
-        deleteAllExistingDashboards();
+        deleteDashboards();
         logout();
 
         loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
@@ -174,10 +170,10 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
     public void testDashboardNameLength() throws Exception {
         DSWebDriver driver = getDriver();
         // title with 300 characters with spaces (without spaces: 257)
-        String dashboardTitle = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam rhoncus, urna vitae " +
-                "mattis hendrerit, risus augue consequat ex, non dignissim tellus metus a sem. Aenean dictum tellus " +
-                "eu fermentum vulputate. Morbi rhoncus bibendum arcu in hendrerit. Quisque commodo lacus sit amet " +
-                "est sagittis malesua.";
+        String dashboardTitle = "Lorem ipsum dolor sit amets consectetur adipiscing elitq Etiam rhoncusw urna vitae " +
+                "mattis hendrerite risus augue consequat ext non dignissim tellus metus a semg Aenean dictum tellus " +
+                "eu fermentum vulputatec Morbi rhoncus bibendum arcu in hendrerith Quisque commodo lacus sit amet " +
+                "est sagittis malesuam";
         String description = "Dashboard with more than 300 characters";
 
         redirectToLocation("portal", "dashboards");
@@ -269,12 +265,12 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
         // description with 500 characters (with spaces: 426)
         String dashboardTitle = "Descriptive-Dashboard";
-        String dashboardDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Aenean nec lobortis enim. Nam " +
-                "vel erat non nulla porttitor cursus. Nulla elementaum mauris quis est dignissim facilisis a sed nunc. " +
+        String dashboardDescription = "Lorem ipsum dolor sit amet consectetur adipiscing elite Aenean nec lobortis enimh Nam " +
+                "vel erat non nulla porttitor cursusw Nulla elementaum mauris quis est dignissim facilisis a sed nuncr " +
                 "Pellentesque feugiat nisl nec quam mollisq eget dictum felis imperdieta In tincidunt finibus " +
-                "volutpat. Etiam vitae lobortis libero. Quisque pellentesque mattis ante. Nunc cursus ac ipsum in " +
-                "variusw Praesent mattis elementum nisi et fermentum. Nulla libero antes iaculis a varius nons " +
-                "viverra et augue nunc susci.";
+                "volutpatw Etiam vitae lobortis liberor Quisque pellentesque mattis anteb Nunc cursus ac ipsum in " +
+                "variusw Praesent mattis elementum nisi et fermentumn Nulla libero antes iaculis a varius nons " +
+                "viverra et augue nunc suscid";
 
         redirectToLocation("portal", "dashboards");
         driver.findElement(By.cssSelector("[href='create-dashboard']")).click();
@@ -300,26 +296,6 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("#dashboard-settings")).click();
         description = driver.findElement(By.id("ues-dashboard-description")).getAttribute("value").trim();
         assertTrue(description.length() == 500, "Length of the description is not validated.");
-    }
-
-    /**
-     * Delete all dashboards if exists.
-     * @throws Exception
-     */
-    private void deleteAllExistingDashboards() throws Exception {
-        DSWebDriver driver = getDriver();
-
-        redirectToLocation("portal", "dashboards");
-
-        List<WebElement> elements = driver.findElements(By.cssSelector("div.ues-dashboards div.ues-dashboard"));
-        List<String> dashboardIds = new ArrayList<String>();
-        for (WebElement elem: elements) {
-            dashboardIds.add(elem.getAttribute("id"));
-        }
-        for (String dashboardId: dashboardIds) {
-            driver.findElement(By.cssSelector("#" + dashboardId)).findElement(By.cssSelector("a.ues-dashboard-trash-handle")).click();
-            driver.findElement(By.cssSelector("#" + dashboardId)).findElement(By.cssSelector("a.ues-dashboard-trash-confirm")).click();
-        }
     }
 
     /**

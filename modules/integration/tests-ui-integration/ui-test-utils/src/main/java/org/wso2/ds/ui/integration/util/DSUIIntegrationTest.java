@@ -23,6 +23,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.extensions.selenium.BrowserManager;
@@ -30,6 +31,8 @@ import org.wso2.ds.integration.common.clients.ResourceAdminServiceClient;
 
 import javax.xml.xpath.XPathExpressionException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 import java.util.concurrent.TimeUnit;
 
@@ -275,6 +278,17 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     }
 
     /**
+     * Add a page to the dashboard with specified layout
+     * @param layout Name for the newly added page's layout
+     */
+    public void addPageToDashboard(String layout) throws Exception {
+        driver = getDriver();
+        selectPane("pages");
+        driver.findElement(By.cssSelector("button[rel='createPage']")).click();
+        selectLayout(layout);
+    }
+
+    /**
      * Switch to the given page
      *
      * @param pageID ID of the page to be switched to
@@ -434,6 +448,31 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
             isResourceExist = false;
         }
         return isResourceExist;
+    }
+
+    /**
+     * Delete dashboards according to the permissions of logged in user.
+     * @throws Exception
+     */
+    public void deleteDashboards() throws Exception {
+        DSWebDriver driver = getDriver();
+
+        redirectToLocation("portal", "dashboards");
+
+        List<WebElement> elements = driver.findElements(By.cssSelector("div.ues-dashboards div.ues-dashboard"));
+        List<String> dashboardIds = new ArrayList<String>();
+        // get all dashboard ids from list
+        for (WebElement elem: elements) {
+            dashboardIds.add(elem.getAttribute("id"));
+        }
+        // delete dashboards
+        for (String dashboardId: dashboardIds) {
+            List<WebElement> trashElements = driver.findElements(By.cssSelector("#" + dashboardId + " a.ues-dashboard-trash-handle"));
+            if (trashElements.size() == 1) {
+                driver.findElement(By.cssSelector("#" + dashboardId + " a.ues-dashboard-trash-handle")).click();
+                driver.findElement(By.cssSelector("#" + dashboardId + " a.ues-dashboard-trash-confirm")).click();
+            }
+        }
     }
 
 }
