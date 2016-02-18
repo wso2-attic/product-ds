@@ -167,6 +167,8 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
     public void personalizeGadgetPrefsByViewer() throws Exception {
         DSWebDriver driver = getDriver();
         driver.findElement(By.cssSelector("i.fw.fw-settings")).click();
+        //Verify "Settings" is not available in personalized dashboard edit mode
+        assertFalse(driver.isElementPresent(By.id("dashboard-settings")));
         driver.findElement(By.className("ues-component-properties-handle"));
         driver.findElement(By.className("ues-component-properties-handle")).click();
         setTextBoxValue("Personalize Mode", true);
