@@ -471,6 +471,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
             List<WebElement> trashElements = elem.findElements(By.cssSelector("a.ues-dashboard-trash-handle"));
             if (trashElements.size() == 1) {
                 elem.findElement(By.cssSelector("a.ues-dashboard-trash-handle")).click();
+                Thread.sleep(500);
                 elem.findElement(By.cssSelector("a.ues-dashboard-trash-confirm")).click();
             }
         }
