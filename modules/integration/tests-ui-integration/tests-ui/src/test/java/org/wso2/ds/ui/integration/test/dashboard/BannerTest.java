@@ -152,8 +152,12 @@ public class BannerTest extends DSUIIntegrationTest {
         clickSaveBannerButton();
         Thread.sleep(500);
         assertTrue(isResourceExist(ROOT_RESOURCE_PATH + dashboardId + "/banner"), "Unable to find the resource");
+        //Verify an editor can view the uploaded banner
         assertTrue(isBannerPresent(),"Banner is not visible to the editor");
-        popWindow();
+        //Verify an uploaded banner is loaded into the anonymous view
+        createAnonView();
+        assertTrue(isBannerPresentInDesignerMode(),"Banner is not loaded into the anonymous view");
+        //popWindow();
         logout();
     }
 
@@ -384,5 +388,37 @@ public class BannerTest extends DSUIIntegrationTest {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Checks whether the banner is available in designer mode
+     *
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    private Boolean isBannerPresentInDesignerMode () throws MalformedURLException, XPathExpressionException,
+            InterruptedException {
+        DSWebDriver driver = getDriver();
+        WebElement bannerElem = driver.findElement(By.className("banner-image"));
+        String imageUrl = bannerElem.getCssValue("background-image");
+        if(imageUrl != null && !imageUrl.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * create anononymous page from the designer
+     *
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    private void createAnonView() throws MalformedURLException, XPathExpressionException{
+        DSWebDriver driver = getDriver();
+        popWindow();
+        driver.findElement(By.cssSelector("a#btn-pages-sidebar")).click();
+        driver.findElement(By.cssSelector("input[name='anon']")).click();
+        String fireEvent = "$('a[aria-controls=anonymousDashboardView]').click();";
+        driver.executeScript(fireEvent);
     }
 }
