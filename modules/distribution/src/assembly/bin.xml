@@ -238,6 +238,8 @@
             <outputDirectory>${project.artifactId}-${product.ds.version}/samples/</outputDirectory>
             <includes>
                 <include>**/s0/**</include>
+                <include>**/s1/**</include>
+                <include>**/s2/**</include>
             </includes>
         </fileSet>
         <fileSet>
