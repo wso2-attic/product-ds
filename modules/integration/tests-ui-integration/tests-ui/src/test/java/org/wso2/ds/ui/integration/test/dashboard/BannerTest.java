@@ -21,6 +21,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
@@ -151,7 +152,8 @@ public class BannerTest extends DSUIIntegrationTest {
         clickSaveBannerButton();
         Thread.sleep(500);
         assertTrue(isResourceExist(ROOT_RESOURCE_PATH + dashboardId + "/banner"), "Unable to find the resource");
-
+        assertTrue(isBannerPresent(),"Banner is not visible to the editor");
+        popWindow();
         logout();
     }
 
@@ -300,7 +302,6 @@ public class BannerTest extends DSUIIntegrationTest {
 
         // Switch the driver to the new window and click on the edit/personalize link
         pushWindow();
-
         driver.findElement(By.cssSelector(".ues-copy")).click();
     }
 
@@ -363,5 +364,25 @@ public class BannerTest extends DSUIIntegrationTest {
      */
     private void clickRemoveBannerButton() throws MalformedURLException, XPathExpressionException {
         getDriver().findElement(By.id("btn-remove-banner")).click();
+    }
+
+    /**
+     * Checks whether the banner is available in view mode
+     *
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    private Boolean isBannerPresent () throws MalformedURLException, XPathExpressionException, InterruptedException {
+        DSWebDriver driver = getDriver();
+        driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
+        pushWindow();
+        Thread.sleep(500);
+        WebElement bannerElem = driver.findElement(By.className("ues-banner-placeholder"));
+        String imageUrl = bannerElem.getCssValue("background-image");
+        driver.close();
+        if(imageUrl != null && !imageUrl.isEmpty()) {
+            return true;
+        }
+        return false;
     }
 }
