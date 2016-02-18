@@ -157,7 +157,9 @@ public class BannerTest extends DSUIIntegrationTest {
         //Verify an uploaded banner is loaded into the anonymous view
         createAnonView();
         assertTrue(isBannerPresentInDesignerMode(),"Banner is not loaded into the anonymous view");
-        //popWindow();
+        //Verify the same banner is uploaded to a new page added with banner layout
+        addPageWithBannerLayout();
+        assertTrue(isBannerPresentInDesignerMode(),"Banner is not loaded into new pages");
         logout();
     }
 
@@ -421,4 +423,19 @@ public class BannerTest extends DSUIIntegrationTest {
         String fireEvent = "$('a[aria-controls=anonymousDashboardView]').click();";
         driver.executeScript(fireEvent);
     }
+
+    /**
+     * Add a page with banner layout
+     *
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    private void addPageWithBannerLayout() throws Exception {
+        DSWebDriver driver = getDriver();
+        driver.findElement(By.cssSelector("button[rel='createPage']")).click();
+        selectLayout("banner");
+    }
+
+
+
 }
