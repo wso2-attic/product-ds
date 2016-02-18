@@ -243,6 +243,13 @@
             </includes>
         </fileSet>
         <fileSet>
+            <directory>../jmeter-scripts</directory>
+            <outputDirectory>${project.artifactId}-${product.ds.version}/jmeter-scripts/</outputDirectory>
+            <includes>
+                <include>**/**</include>
+            </includes>
+        </fileSet>
+        <fileSet>
             <directory>../components/ues-admin/src/main/resources/web/styles/css</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/resources/allthemes/Default/admin</outputDirectory>
             <includes>
