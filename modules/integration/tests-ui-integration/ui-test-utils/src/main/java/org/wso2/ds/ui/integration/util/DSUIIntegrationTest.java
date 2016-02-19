@@ -284,6 +284,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     public void addPageToDashboard(String layout) throws Exception {
         driver = getDriver();
         selectPane("pages");
+        Thread.sleep(500);
         driver.findElement(By.cssSelector("button[rel='createPage']")).click();
         selectLayout(layout);
     }

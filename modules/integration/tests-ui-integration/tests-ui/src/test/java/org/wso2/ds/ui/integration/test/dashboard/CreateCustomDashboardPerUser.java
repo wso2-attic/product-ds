@@ -129,7 +129,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         pushWindow();
 
         //it will go to view page as editor
-        assertEquals(USERNAME_EDITOR, driver.findElement(By.cssSelector(".auth .hidden-xs.add-padding-left-3x")).getText(),
+        assertEquals(USERNAME_EDITOR, driver.findElement(By.cssSelector(".auth .username")).getText(),
                 "Expected Username is not matched");
 
         assertEquals("Edit", driver.findElement(By.cssSelector("a.ues-copy")).getAttribute("title"), "Unable to find the edit button");
@@ -165,7 +165,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         pushWindow();
 
         //it will go to view page as viewer
-        assertEquals(USERNAME_VIEWER, driver.findElement(By.cssSelector(".auth .hidden-xs.add-padding-left-3x")).getText(),
+        assertEquals(USERNAME_VIEWER, driver.findElement(By.cssSelector(".auth .username")).getText(),
                 "Expected Username is not matched");
         String personalizeStr = driver.findElement(By.cssSelector("a.ues-copy")).getAttribute("title").trim().substring(0, 11);
         assertEquals("Personalize", personalizeStr, "Unable to find the personalize button");
