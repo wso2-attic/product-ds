@@ -1,7 +1,7 @@
 {
   "id": "demographics-of-usa",
   "title": "Demographics of USA",
-  "description": "Statistical details about Demographics of USA.",
+  "description": "Statistical details of USA demographics.",
   "permissions": {
     "viewers": [
       "Internal/everyone"
@@ -13,49 +13,41 @@
   "pages": [
     {
       "id": "landing",
-      "title": "Welcome",
+      "title": "Home",
       "layout": {
         "content": {
           "loggedIn": {
             "blocks": [
               {
                 "id": "b",
-                "col": 1,
-                "row": 1,
-                "size_x": 12,
-                "size_y": 6,
-                "banner": false
-              },
-              {
-                "id": "c",
-                "col": 9,
-                "row": 8,
-                "size_x": 4,
-                "size_y": 4,
+                "x": 0,
+                "y": 0,
+                "width": 12,
+                "height": 4,
                 "banner": false
               },
               {
                 "id": "d",
-                "col": 1,
-                "row": 8,
-                "size_x": 4,
-                "size_y": 4,
+                "x": 0,
+                "y": 4,
+                "width": 4,
+                "height": 3,
                 "banner": false
               },
               {
                 "id": "e",
-                "col": 5,
-                "row": 8,
-                "size_x": 4,
-                "size_y": 4,
+                "x": 4,
+                "y": 4,
+                "width": 4,
+                "height": 3,
                 "banner": false
               },
               {
-                "id": "5112e14a2019deb9525208824a829233",
-                "col": 1,
-                "row": 7,
-                "size_x": 12,
-                "size_y": 1,
+                "id": "f",
+                "x": 8,
+                "y": 4,
+                "width": 4,
+                "height": 3,
                 "banner": false
               }
             ]
@@ -68,7 +60,7 @@
         "default": {
           "b": [
             {
-              "id": "7o9ej0l3vnjc3di",
+              "id": "fcsygsrsb8l1sjor",
               "content": {
                 "id": "usa-states",
                 "title": "Population Density Of USA",
@@ -90,7 +82,7 @@
                     "description": "Listen to the age channel",
                     "on": [
                       {
-                        "from": "o58pzmczyou323xr",
+                        "from": "4tnykml222h2gldi",
                         "event": "age"
                       }
                     ]
@@ -100,7 +92,7 @@
                     "description": "Listen to the ethnicity channel",
                     "on": [
                       {
-                        "from": "kj199fnshpk3xr",
+                        "from": "0sio6r9vwg8bmx6r",
                         "event": "ethnicity"
                       }
                     ]
@@ -110,7 +102,7 @@
                     "description": "Listen to the gender channel",
                     "on": [
                       {
-                        "from": "o58pzmczyou323xr",
+                        "from": "4tnykml222h2gldi",
                         "event": "gender"
                       }
                     ]
@@ -120,15 +112,14 @@
                     "description": "Listen to the history channel",
                     "on": [
                       {
-                        "from": "cd1uodl772satt9",
+                        "from": "baaqg42xirudi",
                         "event": "history"
                       }
                     ]
                   }
                 },
                 "styles": {
-                  "height": "",
-                  "borders": true,
+                  "no_heading": true,
                   "titlePosition": "left",
                   "title": "Population Density Of USA"
                 },
@@ -141,7 +132,7 @@
           ],
           "e": [
             {
-              "id": "kj199fnshpk3xr",
+              "id": "0sio6r9vwg8bmx6r",
               "content": {
                 "id": "donutchart",
                 "title": "Population by Ethnicity",
@@ -163,7 +154,7 @@
                     "description": "Used to filter based on state",
                     "on": [
                       {
-                        "from": "o58pzmczyou323xr",
+                        "from": "4tnykml222h2gldi",
                         "event": "age"
                       }
                     ]
@@ -173,15 +164,14 @@
                     "description": "Used to filter based on state",
                     "on": [
                       {
-                        "from": "7o9ej0l3vnjc3di",
+                        "from": "fcsygsrsb8l1sjor",
                         "event": "state"
                       }
                     ]
                   }
                 },
                 "styles": {
-                  "height": "",
-                  "borders": true,
+                  "no_heading": true,
                   "titlePosition": "left",
                   "title": "Population by Ethnicity"
                 },
@@ -194,7 +184,7 @@
           ],
           "d": [
             {
-              "id": "o58pzmczyou323xr",
+              "id": "4tnykml222h2gldi",
               "content": {
                 "id": "barchart",
                 "title": "Population by Age and Gender",
@@ -220,15 +210,14 @@
                     "description": "Used to listen to state channel",
                     "on": [
                       {
-                        "from": "7o9ej0l3vnjc3di",
+                        "from": "fcsygsrsb8l1sjor",
                         "event": "state"
                       }
                     ]
                   }
                 },
                 "styles": {
-                  "height": "",
-                  "borders": true,
+                  "no_heading": true,
                   "titlePosition": "left",
                   "title": "Population by Age and Gender"
                 },
@@ -239,9 +228,9 @@
               }
             }
           ],
-          "c": [
+          "f": [
             {
-              "id": "cd1uodl772satt9",
+              "id": "baaqg42xirudi",
               "content": {
                 "id": "linechart",
                 "title": "Population History",
@@ -263,15 +252,14 @@
                     "description": "Used to filter based on state",
                     "on": [
                       {
-                        "from": "7o9ej0l3vnjc3di",
+                        "from": "fcsygsrsb8l1sjor",
                         "event": "state"
                       }
                     ]
                   }
                 },
                 "styles": {
-                  "height": "",
-                  "borders": true,
+                  "no_heading": true,
                   "titlePosition": "left",
                   "title": "Population History"
                 },
@@ -291,12 +279,14 @@
   "accessTokenUrl": "",
   "apiKey": "",
   "apiSecret": "",
+  "theme": "",
+  "isUserCustom": false,
+  "theme": "usa-demographics",
+  "isEditorEnable": true,
   "banner": {
-    "globalBannerExists": null,
-    "customBannerExists": null
+    "globalBannerExists": false,
+    "customBannerExists": false
   },
   "landing": "landing",
-  "isanon": false,
-  "isUserCustom": false,
-  "theme": "usa-demographics"
+  "isanon": false
 }

@@ -21,6 +21,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
@@ -156,6 +157,7 @@ public class BannerTest extends DSUIIntegrationTest {
         assertTrue(isBannerPresent(),"Banner is not visible to the editor");
         //Verify an uploaded banner is loaded into the anonymous view
         createAnonView();
+        navigateToAnonView();
         assertTrue(isBannerPresentInDesignerMode(),"Banner is not loaded into the anonymous view");
         //Verify the same banner is uploaded to a new page added with banner layout
         addPageWithBannerLayout();
@@ -229,7 +231,11 @@ public class BannerTest extends DSUIIntegrationTest {
 
         clickRemoveBannerButton();
         assertFalse(isResourceExist(ROOT_RESOURCE_PATH + dashboardId + "/banner"), "Unable to remove the resource");
-
+        assertFalse(isBannerPresentInDesignerMode(),"Banner is not removed from the default mode");
+        navigateToAnonView();
+        assertFalse(isBannerPresentInDesignerMode(),"Banner is not removed from the anonymous mode");
+        navigateToPage("page0");
+        assertFalse(isBannerPresentInDesignerMode(),"Banner is not removed from page 0");
         logout();
     }
 
@@ -398,15 +404,20 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    private Boolean isBannerPresentInDesignerMode () throws MalformedURLException, XPathExpressionException,
-            InterruptedException {
+    private Boolean isBannerPresentInDesignerMode() throws MalformedURLException, XPathExpressionException{
+        Boolean isBannerPresent = false;
         DSWebDriver driver = getDriver();
-        WebElement bannerElem = driver.findElement(By.className("banner-image"));
-        String imageUrl = bannerElem.getCssValue("background-image");
-        if(imageUrl != null && !imageUrl.isEmpty()) {
-            return true;
+        if(driver.isElementPresent(By.className("banner-image"))) {
+            WebElement bannerElem = driver.findElement(By.className("banner-image"));
+            String imageUrl = bannerElem.getCssValue("background-image");
+            if (imageUrl != null && !imageUrl.isEmpty()) {
+                isBannerPresent = true;
+            }
         }
-        return false;
+        else{
+            isBannerPresent = false;
+        }
+        return isBannerPresent;
     }
 
     /**
@@ -420,6 +431,16 @@ public class BannerTest extends DSUIIntegrationTest {
         popWindow();
         driver.findElement(By.cssSelector("a#btn-pages-sidebar")).click();
         driver.findElement(By.cssSelector("input[name='anon']")).click();
+    }
+
+    /**
+     * Navigate to anononymous page from the designer
+     *
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    private void navigateToAnonView() throws MalformedURLException, XPathExpressionException{
+        DSWebDriver driver = getDriver();
         String fireEvent = "$('a[aria-controls=anonymousDashboardView]').click();";
         driver.executeScript(fireEvent);
     }
@@ -427,13 +448,23 @@ public class BannerTest extends DSUIIntegrationTest {
     /**
      * Add a page with banner layout
      *
-     * @throws MalformedURLException
-     * @throws XPathExpressionException
+     * @throws Exception
      */
     private void addPageWithBannerLayout() throws Exception {
         DSWebDriver driver = getDriver();
         driver.findElement(By.cssSelector("button[rel='createPage']")).click();
         selectLayout("banner");
+    }
+
+    /**
+     * Navigate to a page
+     *
+     * @throws Exception
+     */
+    private void navigateToPage(String page) throws Exception {
+        DSWebDriver driver = getDriver();
+        driver.findElement(By.cssSelector("a#btn-pages-sidebar")).click();
+        switchPage(page);
     }
 
 

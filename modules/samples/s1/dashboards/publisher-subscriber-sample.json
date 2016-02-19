@@ -13,25 +13,25 @@
   "pages": [
     {
       "id": "landing",
-      "title": "Welcome",
+      "title": "Home",
       "layout": {
         "content": {
           "loggedIn": {
             "blocks": [
               {
                 "id": "a",
-                "col": 1,
-                "row": 1,
-                "size_x": 6,
-                "size_y": 3,
+                "x": 0,
+                "y": 0,
+                "width": 6,
+                "height": 3,
                 "banner": false
               },
               {
                 "id": "c",
-                "col": 7,
-                "row": 1,
-                "size_x": 6,
-                "size_y": 3,
+                "x": 6,
+                "y": 0,
+                "width": 6,
+                "height": 3,
                 "banner": false
               }
             ]
@@ -44,7 +44,7 @@
         "default": {
           "a": [
             {
-              "id": "miguift0pco9a4i",
+              "id": "hmjv4b5c6nbl0udi",
               "content": {
                 "id": "publisher",
                 "title": "Publisher",
@@ -71,7 +71,7 @@
           ],
           "c": [
             {
-              "id": "n7g2sdi7yq1if6r",
+              "id": "zoj4voyn2rorbe29",
               "content": {
                 "id": "subscriber",
                 "title": "Subscriber",
@@ -87,14 +87,14 @@
                     "description": "Used to listen to Any message of type address",
                     "on": [
                       {
-                        "from": "miguift0pco9a4i",
+                        "from": "hmjv4b5c6nbl0udi",
                         "event": "publisher"
                       }
                     ]
                   }
                 },
                 "styles": {
-                  "borders": true,
+                  "no_heading": false,
                   "titlePosition": "left",
                   "title": "Subscriber"
                 },
@@ -115,11 +115,13 @@
   "accessTokenUrl": "",
   "apiKey": "",
   "apiSecret": "",
+  "theme": "",
+  "isUserCustom": false,
+  "isEditorEnable": true,
   "banner": {
-    "globalBannerExists": null,
-    "customBannerExists": null
+    "globalBannerExists": false,
+    "customBannerExists": false
   },
   "landing": "landing",
-  "isanon": false,
-  "isUserCustom": false
+  "isanon": false
 }

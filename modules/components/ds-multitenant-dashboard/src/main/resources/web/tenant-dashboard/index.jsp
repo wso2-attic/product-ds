@@ -60,7 +60,7 @@
         background-image: url(../../carbon/tenant-dashboard/images/security1.png);
     }
 </style>
- <h2 class="dashboard-title">WSO2 DS Quick Start Dashboard</h2>
+ <h2 class="dashboard-title">WSO2 Dashoard Server Quick Start Dashboard</h2>
         <table class="tip-table">
             <tr>
                 <td class="tip-top create-dashboard"></td>
@@ -75,27 +75,32 @@
                 <td class="tip-content">
                     <div class="tip-content-lifter">
                         <h3 class="tip-title">Create Your Own Dashboard </h3> <br/>
-                        <p>Create your own dashboard with any amount of pages you would like to expose in the dashboard to meet your business requirement.
+                        <p align="justify">Create your own dashboard with any amount of pages you would like to expose in the dashboard to meet your business requirement.
                             You can create your gadgets which can connect with the systems that you have data,
-                            and then plug that in the dashboard and enable different types of users to visualize it.</p>
+                            and then plug that in the dashboard and enable different types of users to visualize it.
+                            <a href="https://docs.wso2.com/display/DS200/Creating+a+Dashboard"> More..</a>
+                        </p>
                     </div>
                 </td>
                 <td class="tip-empty"></td>
                 <td class="tip-content">
                     <div class="tip-content-lifter">
                         <h3 class="tip-title">Integrate with Data Analytics</h3> <br/>
-                        <p>You can integrate the dashboards, and create the gadgets to visualize your analytics results.
+                        <p align="justify">You can integrate the dashboards, and create the gadgets to visualize your analytics results.
                             In the current world, you need to analyze big data which was collected from various places,
-                            and you can use WSO2 DS to visualize the results.</p>
+                            and you can use WSO2 Dashboard Server to visualize the results.
+                            <a href="https://docs.wso2.com/display/DS200/Creating+a+Gadget"> More..</a>
+                        </p>
                     </div>
                 </td>
                 <td class="tip-empty"></td>
                 <td class="tip-content">
                     <div class="tip-content-lifter">
                          <h3 class="tip-title">Personalize Your Dashboard</h3><br/>
-                        <p>Every users have their own interests and would like to see the view of the dashboard in meeting their expectations.
+                        <p align="justify">Every users have their own interests and would like to see the view of the dashboard in meeting their expectations.
                             Therefore the dashboards created can be customized and
                             re-arranged in the way the current user would like to view it without affecting the other users view.
+                            <a href="https://docs.wso2.com/display/DS200/Personalizing+a+Viewer+Dashboard"> More..</a>
                         </p>
 
                     </div>
@@ -104,10 +109,12 @@
                 <td class="tip-content">
                     <div class="tip-content-lifter">
                         <h3 class="tip-title">Secure Your Dashboard</h3> <br/>
-                        <p>Securing your dashboard is very important aspect,
+                        <p align="justify">Securing your dashboard is very important aspect,
                             and you would like to show the content only to the relevant and authorized users in your organization.
-                            WSO2 DS facilitates this, and also further provides you the way to connect the dashboards
-                            with the Identity Provider which already existing in your organization.</p>
+                            WSO2 Dashboard Server facilitates this, and also further provides you the way to connect the dashboards
+                            with the Identity Provider which already existing in your organization.
+                            <a link="https://docs.wso2.com/display/DS200/Creating+a+Dashboard"> More..</a>
+                        </p>
                     </div>
                 </td>
             </tr>
