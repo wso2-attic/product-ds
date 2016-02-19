@@ -127,6 +127,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
 
         addDashBoard(dashboardTitle, "This is a test dashboard");
 
+        Thread.sleep(500);
         WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
         webElement.findElement(By.cssSelector(".ues-edit")).click();
 
