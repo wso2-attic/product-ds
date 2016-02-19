@@ -46,13 +46,13 @@ WSO2 Dashboard Server Binary Distribution Directory Structure
         ├── bin
         ├── dbscripts
         ├── INSTALL.txt
+        ├── jmeter-scripts
         ├── lib
         ├── LICENSE.txt
         ├── modules
         ├── README.txt
         ├── release-notes.html
         ├── repository
-                ├── carbonapps
                 ├── components
                 ├── conf
                 ├── data
@@ -65,6 +65,8 @@ WSO2 Dashboard Server Binary Distribution Directory Structure
                                                         ├── designer.json
                 ├── logs
                 ├── resources
+                ├── tenants 
+        ├── resources
         ├── samples
         ├── tmp
 
@@ -75,6 +77,9 @@ WSO2 Dashboard Server Binary Distribution Directory Structure
     - dbscripts
       Contains the database creation & seed data population SQL scripts for
       various supported databases.
+      
+    - jmeter-scripts
+      Contains Apache JMeter scripts.
 
     - lib
       Contains the basic set of libraries required to startup Dashboard Server
@@ -84,9 +89,6 @@ WSO2 Dashboard Server Binary Distribution Directory Structure
       The repository where Carbon artifacts & Axis2 services and modules 
       deployed in WSO2 Carbon are stored. In addition to this other custom 
       deployers such as dataservices and axis1services are also stored.
-
-        - carbonapps
-          Carbon Application hot deployment directory.
 
     	- components
           Contains all OSGi related libraries and configurations.
@@ -136,7 +138,7 @@ WSO2 Dashboard Server Binary Distribution Directory Structure
       This document.
 
     - INSTALL.txt
-      This document contains information on installing WSO2 Dashboard Server.
+      Contains information on installing WSO2 Dashboard Server.
 
     - release-notes.html
       Release information for WSO2 Dashboard Server ${product.version}
