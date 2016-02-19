@@ -46,6 +46,7 @@ WSO2 Dashboard Server Binary Distribution Directory Structure
         ├── bin
         ├── dbscripts
         ├── INSTALL.txt
+        ├── jmeter-scripts
         ├── lib
         ├── LICENSE.txt
         ├── modules
@@ -67,7 +68,6 @@ WSO2 Dashboard Server Binary Distribution Directory Structure
                 ├── tenants 
         ├── resources
         ├── samples
-        ├── solr
         ├── tmp
 
 
@@ -77,6 +77,9 @@ WSO2 Dashboard Server Binary Distribution Directory Structure
     - dbscripts
       Contains the database creation & seed data population SQL scripts for
       various supported databases.
+      
+    - jmeter-scripts
+      Contains Apache JMeter scripts.
 
     - lib
       Contains the basic set of libraries required to startup Dashboard Server
@@ -116,9 +119,9 @@ WSO2 Dashboard Server Binary Distribution Directory Structure
         - resources
           Contains additional resources that may be required.
 
-	    - tenants
-	      Directory will contain relevant tenant artifacts in the case of a
-	      multitenant deployment.
+	- tenants
+	  Directory will contain relevant tenant artifacts in the case of a
+	  multitenant deployment.
 	
     - samples
       Contains samples that demonstrate the functionality and capabilities of 
@@ -135,7 +138,7 @@ WSO2 Dashboard Server Binary Distribution Directory Structure
       This document.
 
     - INSTALL.txt
-      This document contains information on installing WSO2 Dashboard Server.
+      Contains information on installing WSO2 Dashboard Server.
 
     - release-notes.html
       Release information for WSO2 Dashboard Server ${product.version}
