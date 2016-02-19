@@ -21,6 +21,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
@@ -151,7 +152,14 @@ public class BannerTest extends DSUIIntegrationTest {
         clickSaveBannerButton();
         Thread.sleep(500);
         assertTrue(isResourceExist(ROOT_RESOURCE_PATH + dashboardId + "/banner"), "Unable to find the resource");
-
+        //Verify an editor can view the uploaded banner
+        assertTrue(isBannerPresent(),"Banner is not visible to the editor");
+        //Verify an uploaded banner is loaded into the anonymous view
+        createAnonView();
+        assertTrue(isBannerPresentInDesignerMode(),"Banner is not loaded into the anonymous view");
+        //Verify the same banner is uploaded to a new page added with banner layout
+        addPageWithBannerLayout();
+        assertTrue(isBannerPresentInDesignerMode(),"Banner is not loaded into new pages");
         logout();
     }
 
@@ -300,7 +308,6 @@ public class BannerTest extends DSUIIntegrationTest {
 
         // Switch the driver to the new window and click on the edit/personalize link
         pushWindow();
-
         driver.findElement(By.cssSelector(".ues-copy")).click();
     }
 
@@ -364,4 +371,71 @@ public class BannerTest extends DSUIIntegrationTest {
     private void clickRemoveBannerButton() throws MalformedURLException, XPathExpressionException {
         getDriver().findElement(By.id("btn-remove-banner")).click();
     }
+
+    /**
+     * Checks whether the banner is available in view mode
+     *
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    private Boolean isBannerPresent () throws MalformedURLException, XPathExpressionException, InterruptedException {
+        DSWebDriver driver = getDriver();
+        driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
+        pushWindow();
+        Thread.sleep(500);
+        WebElement bannerElem = driver.findElement(By.className("ues-banner-placeholder"));
+        String imageUrl = bannerElem.getCssValue("background-image");
+        driver.close();
+        if(imageUrl != null && !imageUrl.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Checks whether the banner is available in designer mode
+     *
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    private Boolean isBannerPresentInDesignerMode () throws MalformedURLException, XPathExpressionException,
+            InterruptedException {
+        DSWebDriver driver = getDriver();
+        WebElement bannerElem = driver.findElement(By.className("banner-image"));
+        String imageUrl = bannerElem.getCssValue("background-image");
+        if(imageUrl != null && !imageUrl.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * create anononymous page from the designer
+     *
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    private void createAnonView() throws MalformedURLException, XPathExpressionException{
+        DSWebDriver driver = getDriver();
+        popWindow();
+        driver.findElement(By.cssSelector("a#btn-pages-sidebar")).click();
+        driver.findElement(By.cssSelector("input[name='anon']")).click();
+        String fireEvent = "$('a[aria-controls=anonymousDashboardView]').click();";
+        driver.executeScript(fireEvent);
+    }
+
+    /**
+     * Add a page with banner layout
+     *
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    private void addPageWithBannerLayout() throws Exception {
+        DSWebDriver driver = getDriver();
+        driver.findElement(By.cssSelector("button[rel='createPage']")).click();
+        selectLayout("banner");
+    }
+
+
+
 }
