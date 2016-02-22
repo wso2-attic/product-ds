@@ -569,7 +569,7 @@
         <carbon.automation.version>4.4.2</carbon.automation.version>
         <carbon.automationutils.version>4.4.2</carbon.automationutils.version>
 
-        <carbon.dashboards.version>1.0.12-SNAPSHOT</carbon.dashboards.version>
+        <carbon.dashboards.version>1.0.12</carbon.dashboards.version>
         <product.ds.version>2.0.0-SNAPSHOT</product.ds.version>
 
         <test.framework.version>4.4.2</test.framework.version>
@@ -609,15 +609,15 @@
         <!-- jaggery versions -->
         <jaggery.feature.version>0.12.0</jaggery.feature.version>
         <handlebars.feature.version>1.0.0</handlebars.feature.version>
-        <carbon.feature.version>1.5.2-SNAPSHOT</carbon.feature.version>
-        <process.feature.version>1.5.2-SNAPSHOT</process.feature.version>
-        <uuid.feature.version>1.5.2-SNAPSHOT</uuid.feature.version>
-        <sso.feature.version>1.5.2-SNAPSHOT</sso.feature.version>
-        <oauth.feature.version>1.5.2-SNAPSHOT</oauth.feature.version>
-        <ws.feature.version>1.5.2-SNAPSHOT</ws.feature.version>
+        <carbon.feature.version>1.5.2</carbon.feature.version>
+        <process.feature.version>1.5.2</process.feature.version>
+        <uuid.feature.version>1.5.2</uuid.feature.version>
+        <sso.feature.version>1.5.2</sso.feature.version>
+        <oauth.feature.version>1.5.2</oauth.feature.version>
+        <ws.feature.version>1.5.2</ws.feature.version>
         <slf4j.version>1.6.6</slf4j.version>
         <ehcache.wso2.version>1.5.0.wso2v3</ehcache.wso2.version>
-        <i18n.feature.version>1.5.2-SNAPSHOT</i18n.feature.version>
+        <i18n.feature.version>1.5.2</i18n.feature.version>
         <javax.mail.version>1.4.4</javax.mail.version>
         <log4j.version>1.2.17</log4j.version>
         <commons-io.version>2.2</commons-io.version>
