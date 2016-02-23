@@ -1,7 +1,7 @@
 var url,ws;
   
 window.onload = function WindowLoad(event) {
-    url = 'wss://localhost:9443/ws-chat/server.jag';
+    url = 'wss://'+window.location.hostname+':'+window.location.port+'/ws-chat/server.jag';
     ws = new WebSocket(url);
   
     //event handler for the message event in the case of text frames
