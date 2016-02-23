@@ -63,7 +63,7 @@ set sampleFolder=%script%..\samples\s%UserInputValue%
 
 xcopy "%sampleFolder%\gadget\*" "%gadgetDropLocation%" /e /i /h /Y
 xcopy "%sampleFolder%\dashboards\*" "%dashboardDropLocation%" /Y
-if exists %sampleFolder%\jaggeryapps  (xcopy "%sampleFolder%\jaggeryapps\*" "%jaggeryappDropLocation%" /e /i /h /Y)
+xcopy "%sampleFolder%\jaggeryapps\*" "%jaggeryappDropLocation%" /e /i /h /Y
 
 echo "Starting the dashboard server with sample dashboard"
 wso2server.bat
