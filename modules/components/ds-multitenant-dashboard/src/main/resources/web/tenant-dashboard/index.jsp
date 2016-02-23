@@ -113,7 +113,7 @@
                             and you would like to show the content only to the relevant and authorized users in your organization.
                             WSO2 Dashboard Server facilitates this, and also further provides you the way to connect the dashboards
                             with the Identity Provider which already existing in your organization.
-                            <a link="https://docs.wso2.com/display/DS200/Creating+a+Dashboard"> More..</a>
+                            <a href="https://docs.wso2.com/display/DS200/Securing+a+Dashboard"> More..</a>
                         </p>
                     </div>
                 </td>
