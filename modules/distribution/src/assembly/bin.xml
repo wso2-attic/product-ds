@@ -340,6 +340,11 @@
             <fileMode>644</fileMode>
         </file>
         <file>
+            <source>src/repository/conf/log4j.properties</source>
+            <outputDirectory>wso2ds-${pom.version}/repository/conf/</outputDirectory>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
             <source>src/repository/conf/multitenancy/cloud-services-desc.xml</source>
             <outputDirectory>wso2ds-${pom.version}/repository/conf/multitenancy/</outputDirectory>
             <filtered>true</filtered>
