@@ -108,7 +108,6 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
     public void testRemoveBlock() throws Exception {
         DSWebDriver driver = getDriver();
         driver.findElement(By.cssSelector("#a.ues-component-box .ues-trash-handle")).click();
-        driver.findElement(By.cssSelector("input[value='block']")).click();
         driver.findElement(By.id("btn-delete")).click();
 
         // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
