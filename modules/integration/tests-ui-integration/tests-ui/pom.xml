@@ -56,7 +56,7 @@
                         <property>
                             <name>carbon.zip</name>
                             <value>
-                                ${basedir}/../../../distribution/target/wso2ds-2.0.0-SNAPSHOT.zip
+                                ${basedir}/../../../distribution/target/wso2ds-${project.version}.zip
                             </value>
                         </property>
                         <property>
@@ -165,7 +165,7 @@
                                 <artifactItem>
                                     <groupId>org.wso2.ds</groupId>
                                     <artifactId>wso2ds</artifactId>
-                                    <version>2.0.0-SNAPSHOT</version>
+                                    <version>${project.version}</version>
                                     <type>zip</type>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>${basedir}/target/tobeCopied/</outputDirectory>
@@ -203,7 +203,7 @@
                             <resources>
                                 <resource>
                                     <directory>
-                                        ${basedir}/target/tobeCopied/wso2ds-2.0.0-SNAPSHOT/repository/resources/security/
+                                        ${basedir}/target/tobeCopied/wso2ds-${project.version}/repository/resources/security/
                                     </directory>
                                     <includes>
                                         <include>**/*.jks</include>
@@ -224,7 +224,7 @@
                             <resources>
                                 <resource>
                                     <directory>
-                                        ${basedir}/target/tobeCopied/wso2ds-2.0.0-SNAPSHOT/repository/deployment/client/modules
+                                        ${basedir}/target/tobeCopied/wso2ds-${project.version}/repository/deployment/client/modules
                                     </directory>
                                     <includes>
                                         <include>**/*.mar</include>
