@@ -32,8 +32,11 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
 
+/**
+ * Test class to test the Adding pages to the dashboard functionality.
+ * This extends the DSUIIntegrationTest class.
+ */
 public class AddPageToDashboard extends DSUIIntegrationTest {
     private static final String DASHBOARD_TITLE = "sampleDashBoard";
     private static final String DASHBOARD_DESCRIPTION = "This is description about " + DASHBOARD_TITLE;
@@ -71,8 +74,8 @@ public class AddPageToDashboard extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("[name=id]")).sendKeys(DASHBOARD_URL);
         driver.executeScript("$('[name=id]').change();");
 
-        assertEquals(driver.findElement(By.cssSelector("div.page-title")).
-                        findElement(By.cssSelector("p.lead")).getText(), DASHBOARD_PAGENAME,
+        assertEquals(driver.findElement(By.cssSelector("div.page-title")).findElement(By.cssSelector("p.lead")).getText(),
+                DASHBOARD_PAGENAME,
                 "error occurred while edit the new page name");
 
         //checks the name of added newest page under pages drop list
@@ -92,7 +95,6 @@ public class AddPageToDashboard extends DSUIIntegrationTest {
             "testAddEditPageDashboardNew")
     public void testLandingCheckBox() throws Exception {
         DSWebDriver driver = getDriver();
-
         driver.findElement(By.cssSelector("[name=landing]")).click();
         clickViewButton();
         pushWindow();
@@ -110,7 +112,6 @@ public class AddPageToDashboard extends DSUIIntegrationTest {
             "name for dashboard server", dependsOnMethods = "testLandingCheckBox")
     public void testDeletePageDashboardNew() throws Exception {
         DSWebDriver driver = getDriver();
-
         driver.findElement(By.cssSelector("button.ues-delete-page")).click();
         driver.findElement(By.id("ues-modal-confirm-yes")).click();
 

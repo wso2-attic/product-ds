@@ -112,7 +112,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
         String dashboardId = dashboardTitle.toLowerCase();
 
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         WebElement dashboard = getDriver().findElement(By.id(dashboardId));
         assertEquals(DASHBOARD_TITLE, dashboard.findElement(By.id("ues-dashboard-title")).getText());
         assertEquals(DASHBOARD_DESCRIPTION, dashboard.findElement(By.id("ues-dashboard-description")).getText());
@@ -146,7 +146,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         String dashboardId = dashboardTitle.toLowerCase();
 
         login(USERNAME_VIEWER, PASSWORD_VIEWER);
-        driver.get(getBaseUrl() + "/portal/dashboards");
+        driver.get(getBaseUrl() + "/" + DS_HOME_CONTEXT + "/" + DS_DASHBOARDS_CONTEXT);
 
         WebElement dashboard = driver.findElement(By.id(dashboardId));
 
@@ -193,7 +193,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         Boolean isResourceExist;
 
         isResourceExist = isResourceExist(DSIntegrationTestConstants.DASHBOARD_REGISTRY_PATH_CUSTOM_DASHBOARD_PERUSER
-                + "/" + USERNAME_VIEWER + "/dashboards/" + dashboardTitle.toLowerCase());
+                + "/" + USERNAME_VIEWER + "/" + DS_DASHBOARDS_CONTEXT + "/" + dashboardTitle.toLowerCase());
 
         assertTrue(isResourceExist,
                 "Registry resource could not be created for personalize dashboard per user due to some errors");

@@ -99,7 +99,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
     public void changeGadgetPrefsInEditMode() throws Exception {
         login(editor.getUserName(), editor.getPassword());
         DSWebDriver driver = getDriver();
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
         String[][] gadgetMappings = {{"textbox", "a"}};
         String script = generateAddGadgetScript(gadgetMappings);
@@ -109,14 +109,14 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
         // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
         Thread.sleep(500);
-        assertEquals(getTextBoxValue(),"Editor Mode");
+        assertEquals(getTextBoxValue(), "Editor Mode");
     }
 
     @Test(groups = "wso2.ds.dashboard", description = "Change the settings of gadgets in the View mode by an Editor",
             dependsOnMethods = "changeGadgetPrefsInEditMode")
     public void changeGadgetPrefsByEditor() throws Exception {
         DSWebDriver driver = getDriver();
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
         pushWindow();
         //verify that an editor can't personalize a dashboard but edit
@@ -128,17 +128,17 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("#a i.fw.fw-configarations")).click();
         //TODO: element is inside an iframe and driver.findElement cannot be used directly. Hence an alternative is needed
         Thread.sleep(500);
-        assertEquals(getTextBoxValue(),"Editor Value");
+        assertEquals(getTextBoxValue(), "Editor Value");
         popWindow();
         logout();
         //login with admin (another editor) to verify that editor can't personalize a dashboard
-        login(getCurrentUsername(),getCurrentPassword());
-        redirectToLocation("portal", "dashboards");
+        login(getCurrentUsername(), getCurrentPassword());
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
         pushWindow();
         //TODO: element is inside an iframe and driver.findElement cannot be used directly. Hence an alternative is needed
         Thread.sleep(500);
-        assertEquals(getTextBoxValue(),"Editor Value");
+        assertEquals(getTextBoxValue(), "Editor Value");
         driver.close();
         popWindow();
         logout();
@@ -150,7 +150,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
     public void changeGadgetPrefsByViewer() throws Exception {
         login(viewer.getUserName(), viewer.getPassword());
         DSWebDriver driver = getDriver();
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
         pushWindow();
         showGadgetConfigurationIcons();
@@ -159,7 +159,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("#a i.fw.fw-configarations")).click();
         //TODO: element is inside an iframe and driver.findElement cannot be used directly. Hence an alternative is needed
         Thread.sleep(500);
-        assertEquals(getTextBoxValue(),"Viewer Value");
+        assertEquals(getTextBoxValue(), "Viewer Value");
     }
 
     @Test(groups = "wso2.ds.dashboard", description = "Change the settings of gadgets in the Personalize mode by Viewer",
@@ -175,21 +175,21 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
         //TODO: element is inside an iframe and driver.findElement cannot be used directly. Hence an alternative is needed
         Thread.sleep(500);
-        assertEquals(getTextBoxValue(),"Personalize Mode");
+        assertEquals(getTextBoxValue(), "Personalize Mode");
         driver.close();
         popWindow();
         logout();
     }
 
     @Test(groups = "wso2.ds.dashboard", description = "Verify the original dashboard is not changed after personalizing " +
-            "a dashboard",dependsOnMethods = "personalizeGadgetPrefsByViewer")
+            "a dashboard", dependsOnMethods = "personalizeGadgetPrefsByViewer")
     public void testOriginalDashboardAfterPersonalizing() throws Exception {
         login(editor.getUserName(), editor.getPassword());
         DSWebDriver driver = getDriver();
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
         pushWindow();
-        assertEquals(getTextBoxValue(),"Editor Value");
+        assertEquals(getTextBoxValue(), "Editor Value");
         driver.close();
         popWindow();
         logout();
@@ -200,7 +200,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
     public void resetDashboardByViewer() throws Exception {
         login(viewer.getUserName(), viewer.getPassword());
         DSWebDriver driver = getDriver();
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
         pushWindow();
 
@@ -209,7 +209,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         driver.findElement(By.id("ues-modal-confirm-yes")).click();
         //TODO: element is inside an iframe and driver.findElement cannot be used directly. Hence an alternative is needed
         Thread.sleep(500);
-        assertEquals(getTextBoxValue(),"Editor Value");
+        assertEquals(getTextBoxValue(), "Editor Value");
         driver.close();
         popWindow();
         logout();
@@ -224,7 +224,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
 
         DSWebDriver driver = getDriver();
 
-        driver.get(getBaseUrl() + "/portal/dashboards");
+        driver.get(getBaseUrl() + "/" + DS_HOME_CONTEXT + "/" + DS_DASHBOARDS_CONTEXT);
 
         // Create dashboard
         driver.findElement(By.cssSelector("a[href='create-dashboard']")).click();
@@ -251,7 +251,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
                 ".ues-shared-role[data-role=\"Internal/everyone\"] span.remove-button")).click();
         driver.findElement(By.cssSelector(".ues-shared-edit " +
                 ".ues-shared-role[data-role=\"Internal/everyone\"] span.remove-button")).click();
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
     }
 
     /**
@@ -266,9 +266,9 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         driver.findElement(By.name("content"));
         driver.findElement(By.name("content")).clear();
         driver.findElement(By.name("content")).sendKeys(value);
-        if(isEditMode){
-          String fireEvent = "$('textarea[name=content]').change();";
-          driver.executeScript(fireEvent);
+        if (isEditMode) {
+            String fireEvent = "$('textarea[name=content]').change();";
+            driver.executeScript(fireEvent);
         }
     }
 

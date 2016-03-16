@@ -36,12 +36,18 @@ import java.util.List;
 import java.util.Stack;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * This contains the common functionality for the DS integration tests.
+ * This extends DSIntegrationTest parent class.
+ */
 public abstract class DSUIIntegrationTest extends DSIntegrationTest {
 
     private static final Log LOG = LogFactory.getLog(DSUIIntegrationTest.class);
     private static final String DS_SUFFIX = "/portal/login-controller?destination=%2Fportal%2F";
     private static final String DS_HOME_SUFFIX = "/portal/dashboards";
     private static final String ADMIN_CONSOLE_SUFFIX = "/carbon/admin/index.jsp";
+    protected static final String DS_HOME_CONTEXT = "portal";
+    protected static final String DS_DASHBOARDS_CONTEXT = "dashboards";
 
     protected String resourcePath;
     private DSWebDriver driver = null;
@@ -144,10 +150,9 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @throws javax.xml.xpath.XPathExpressionException,InterruptedException
      */
     public void login(String userName, String pwd) throws Exception {
-        String fullUrl = "", currentUrl = "";
-        fullUrl = getBaseUrl() + DS_SUFFIX;
+        String fullUrl = getBaseUrl() + DS_SUFFIX,
+                currentUrl = "";
         driver = getDriver();
-
         driver.get(fullUrl);
         currentUrl = driver.getCurrentUrl();
         driver.findElement(By.name("username")).clear();
@@ -167,10 +172,8 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @throws javax.xml.xpath.XPathExpressionException
      */
     public void logout() throws Exception {
-        String fullUrl = "";
-        fullUrl = getBaseUrl() + DS_HOME_SUFFIX;
+        String fullUrl = getBaseUrl() + DS_HOME_SUFFIX;
         driver = getDriver();
-
         driver.get(fullUrl);
         driver.findElement(By.cssSelector(".dropdown")).click();
         driver.findElement(By.cssSelector(".dropdown-menu > li > a")).click();
@@ -213,7 +216,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     public void addDashBoard(String dashBoardTitle, String description) throws Exception {
         driver = getDriver();
 
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         driver.findElement(By.cssSelector("[href='create-dashboard']")).click();
         driver.findElement(By.id("ues-dashboard-title")).clear();
         driver.findElement(By.id("ues-dashboard-title")).sendKeys(dashBoardTitle);
@@ -221,7 +224,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         driver.findElement(By.id("ues-dashboard-description")).sendKeys(description);
         driver.findElement(By.id("ues-dashboard-create")).click();
         selectLayout("default-grid");
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
     }
 
     /**
@@ -279,6 +282,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
 
     /**
      * Add a page to the dashboard with specified layout
+     *
      * @param layout Name for the newly added page's layout
      */
     public void addPageToDashboard(String layout) throws Exception {
@@ -301,6 +305,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
 
     /**
      * Switch to the given view in designer mode
+     *
      * @param view Name of the view. Valid names are {@code default} and {@code anon}
      * @throws MalformedURLException
      * @throws XPathExpressionException
@@ -312,6 +317,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
 
     /**
      * Select specified pane in designer mode
+     *
      * @param pane Name of the pane. Valid names are {@code pages}, {@code layouts} and {@code gadgets}
      * @throws MalformedURLException
      * @throws XPathExpressionException
@@ -328,6 +334,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
 
     /**
      * Clicks the View link in designer mode
+     *
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
@@ -453,21 +460,22 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
 
     /**
      * Delete dashboards according to the permissions of logged in user.
+     *
      * @throws Exception
      */
     public void deleteDashboards() throws Exception {
         DSWebDriver driver = getDriver();
 
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
 
         List<WebElement> elements = driver.findElements(By.cssSelector("div.ues-dashboards div.ues-dashboard"));
         List<String> dashboardIds = new ArrayList<String>();
         // get all dashboard ids from list
-        for (WebElement elem: elements) {
+        for (WebElement elem : elements) {
             dashboardIds.add(elem.getAttribute("id"));
         }
         // delete dashboards
-        for (String dashboardId: dashboardIds) {
+        for (String dashboardId : dashboardIds) {
             WebElement elem = driver.findElement(By.id(dashboardId));
             List<WebElement> trashElements = elem.findElements(By.cssSelector("a.ues-dashboard-trash-handle"));
             if (trashElements.size() == 1) {

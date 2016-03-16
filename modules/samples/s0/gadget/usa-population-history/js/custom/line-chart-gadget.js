@@ -36,7 +36,7 @@ var initLineChart = null;
             height = state.height - margin.top - margin.bottom,
 
             svg, xScale, yScale, xAxis, yAxis,
-            xGroup, yGroup, line, tooltip,
+            xGroup, yGroup, line, toolTip,
             subscribeData,
 
             STATE_CHANNEL = "state",
@@ -74,8 +74,8 @@ var initLineChart = null;
             xAxis = createXAxis(xScale);
             yAxis = createYAxis(yScale);
             svg = createSVG();
-            line = createALine(xScale,yScale);
-            tooltip = createToolTip();
+            line = createALine(xScale, yScale);
+            toolTip = createToolTip();
 
             var dataBundle = {
                 data: "US",
@@ -158,7 +158,7 @@ var initLineChart = null;
          * Create the line.
          * @private
          * */
-        var createALine = function (scaleX,scaleY) {
+        var createALine = function (scaleX, scaleY) {
             return d3.svg.line()
                 .x(function (d) {
                     return scaleX(d.year);
@@ -236,7 +236,7 @@ var initLineChart = null;
 
             d3.select("svg").remove();
             svg = createSVG();
-            line = createALine(xScale,yScale);
+            line = createALine(xScale, yScale);
 
             xScale.domain(d3.extent(dataToProcess, function (d) {
                 return d.year;
@@ -252,8 +252,8 @@ var initLineChart = null;
             yGroup = createYAxisGroup(svg);
 
             d3.select(".x.axis").append("text")
-                .attr("x",width)
-                .attr("y",-2)
+                .attr("x", width)
+                .attr("y", -2)
                 .style("text-anchor", "end")
                 .text("Year");
 
@@ -287,10 +287,10 @@ var initLineChart = null;
                         .duration(200)
                         .attr("r", 10);
 
-                    tooltip.transition()
+                    toolTip.transition()
                         .duration(200)
                         .style("opacity", .9);
-                    tooltip.html("Year: " + d.year.getFullYear() + "<br/>" + "Pop: " + this.__data__.currentPopulation)
+                    toolTip.html("Year: " + d.year.getFullYear() + "<br/>" + "Pop: " + this.__data__.currentPopulation)
                         .style("left", function () {
                             if ((d3.event.pageX + 100) > state.width) {
                                 return (d3.event.pageX - 100) + "px";
@@ -313,7 +313,7 @@ var initLineChart = null;
                         .duration(200)
                         .attr("r", 5);
 
-                    tooltip.transition()
+                    toolTip.transition()
                         .duration(200)
                         .style("opacity", 0);
                 })
@@ -325,8 +325,7 @@ var initLineChart = null;
             var totalLength = path.node().getTotalLength();
 
             // Animate the drawing of the path.
-            path
-                .attr("stroke-dasharray", totalLength + " " + totalLength)
+            path.attr("stroke-dasharray", totalLength + " " + totalLength)
                 .attr("stroke-dashoffset", totalLength)
                 .transition()
                 .duration(500)

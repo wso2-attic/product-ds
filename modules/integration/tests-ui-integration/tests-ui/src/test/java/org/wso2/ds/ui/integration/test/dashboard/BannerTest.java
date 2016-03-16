@@ -154,14 +154,14 @@ public class BannerTest extends DSUIIntegrationTest {
         Thread.sleep(500);
         assertTrue(isResourceExist(ROOT_RESOURCE_PATH + dashboardId + "/banner"), "Unable to find the resource");
         //Verify an editor can view the uploaded banner
-        assertTrue(isBannerPresent(),"Banner is not visible to the editor");
+        assertTrue(isBannerPresent(), "Banner is not visible to the editor");
         //Verify an uploaded banner is loaded into the anonymous view
         createAnonView();
         navigateToAnonView();
-        assertTrue(isBannerPresentInDesignerMode(),"Banner is not loaded into the anonymous view");
+        assertTrue(isBannerPresentInDesignerMode(), "Banner is not loaded into the anonymous view");
         //Verify the same banner is uploaded to a new page added with banner layout
         addPageWithBannerLayout();
-        assertTrue(isBannerPresentInDesignerMode(),"Banner is not loaded into new pages");
+        assertTrue(isBannerPresentInDesignerMode(), "Banner is not loaded into new pages");
         logout();
     }
 
@@ -231,11 +231,11 @@ public class BannerTest extends DSUIIntegrationTest {
 
         clickRemoveBannerButton();
         assertFalse(isResourceExist(ROOT_RESOURCE_PATH + dashboardId + "/banner"), "Unable to remove the resource");
-        assertFalse(isBannerPresentInDesignerMode(),"Banner is not removed from the default mode");
+        assertFalse(isBannerPresentInDesignerMode(), "Banner is not removed from the default mode");
         navigateToAnonView();
-        assertFalse(isBannerPresentInDesignerMode(),"Banner is not removed from the anonymous mode");
+        assertFalse(isBannerPresentInDesignerMode(), "Banner is not removed from the anonymous mode");
         navigateToPage("page0");
-        assertFalse(isBannerPresentInDesignerMode(),"Banner is not removed from page 0");
+        assertFalse(isBannerPresentInDesignerMode(), "Banner is not removed from page 0");
         logout();
     }
 
@@ -258,7 +258,7 @@ public class BannerTest extends DSUIIntegrationTest {
 
         DSWebDriver driver = getDriver();
 
-        driver.get(getBaseUrl() + "/portal/dashboards");
+        driver.get(getBaseUrl() + "/" + DS_HOME_CONTEXT + "/" + DS_DASHBOARDS_CONTEXT);
 
         // Create dashboard
         driver.findElement(By.cssSelector("a[href='create-dashboard']")).click();
@@ -294,7 +294,7 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      */
     private void goToDesigner() throws Exception {
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector(".ues-dashboard[data-id='" + dashboardId + "'] a" + ".ues-edit"))
                 .click();
     }
@@ -309,7 +309,7 @@ public class BannerTest extends DSUIIntegrationTest {
 
         DSWebDriver driver = getDriver();
 
-        driver.get(getBaseUrl() + "/portal/dashboards");
+        driver.get(getBaseUrl() + "/" + DS_HOME_CONTEXT + "/" + DS_DASHBOARDS_CONTEXT);
         driver.findElement(By.cssSelector(".ues-dashboard[data-id='" + dashboardId + "'] a" + ".ues-view")).click();
 
         // Switch the driver to the new window and click on the edit/personalize link
@@ -384,7 +384,7 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    private Boolean isBannerPresent () throws MalformedURLException, XPathExpressionException, InterruptedException {
+    private Boolean isBannerPresent() throws MalformedURLException, XPathExpressionException, InterruptedException {
         DSWebDriver driver = getDriver();
         driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
         pushWindow();
@@ -392,7 +392,7 @@ public class BannerTest extends DSUIIntegrationTest {
         WebElement bannerElem = driver.findElement(By.className("ues-banner-placeholder"));
         String imageUrl = bannerElem.getCssValue("background-image");
         driver.close();
-        if(imageUrl != null && !imageUrl.isEmpty()) {
+        if (imageUrl != null && !imageUrl.isEmpty()) {
             return true;
         }
         return false;
@@ -404,17 +404,16 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    private Boolean isBannerPresentInDesignerMode() throws MalformedURLException, XPathExpressionException{
+    private Boolean isBannerPresentInDesignerMode() throws MalformedURLException, XPathExpressionException {
         Boolean isBannerPresent = false;
         DSWebDriver driver = getDriver();
-        if(driver.isElementPresent(By.className("banner-image"))) {
+        if (driver.isElementPresent(By.className("banner-image"))) {
             WebElement bannerElem = driver.findElement(By.className("banner-image"));
             String imageUrl = bannerElem.getCssValue("background-image");
             if (imageUrl != null && !imageUrl.isEmpty()) {
                 isBannerPresent = true;
             }
-        }
-        else{
+        } else {
             isBannerPresent = false;
         }
         return isBannerPresent;
@@ -426,7 +425,7 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    private void createAnonView() throws MalformedURLException, XPathExpressionException{
+    private void createAnonView() throws MalformedURLException, XPathExpressionException {
         DSWebDriver driver = getDriver();
         popWindow();
         driver.findElement(By.cssSelector("a#btn-pages-sidebar")).click();
@@ -439,7 +438,7 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    private void navigateToAnonView() throws MalformedURLException, XPathExpressionException{
+    private void navigateToAnonView() throws MalformedURLException, XPathExpressionException {
         DSWebDriver driver = getDriver();
         String fireEvent = "$('a[aria-controls=anonymousDashboardView]').click();";
         driver.executeScript(fireEvent);
@@ -466,7 +465,6 @@ public class BannerTest extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("a#btn-pages-sidebar")).click();
         switchPage(page);
     }
-
 
 
 }

@@ -46,6 +46,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
 
     /**
      * Provides user modes
+     *
      * @return
      */
     @DataProvider(name = "userMode")
@@ -72,6 +73,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
 
     /**
      * Test whether the user is redirected to dashboard creation page
+     *
      * @throws Exception
      */
     @Test(groups = "wso2.ds.dashboard.pages", description = "testing whether multiple pages allow multiple layouts")
@@ -108,13 +110,14 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
         selectPane("pages");
         addPageToDashboard(pageDesc[5][1]);// page4
 
-        for (String[] page: pageDesc) {
+        for (String[] page : pageDesc) {
             assertTrue(isLayoutValid(page[0], page[1]), (page[1] + errorMsg + page[0]));
         }
     }
 
     /**
      * Test whether the user is redirected to dashboard page
+     *
      * @throws Exception
      */
     @Test(groups = "wso2.ds.dashboard.pages", description = "Tests the same layout can be added more than once in a " +
@@ -140,13 +143,14 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
         selectPane("pages");
         addPageToDashboard(gridId); // page2
 
-        for (String page: pageIds) {
+        for (String page : pageIds) {
             assertTrue(isLayoutValid(page, gridId), (gridId + errorMsg + page));
         }
     }
 
     /**
      * Test whether the editor can view all the pages when there are multiple pages in a dashboard
+     *
      * @throws Exception
      */
     @Test(groups = "wso2.ds.dashboard.pages", description = "Tests an editor can view all the pages when there are " +
@@ -198,7 +202,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
 
         List<WebElement> elements = driver.findElements(By.cssSelector("div.page-actions a"));
         for (int i = 0; i < elements.size(); i++) {
-            driver.findElement(By.cssSelector("div.page-actions a:nth-child(" + (i+1) + ")")).click();
+            driver.findElement(By.cssSelector("div.page-actions a:nth-child(" + (i + 1) + ")")).click();
             String gTitle = driver.findElement(By.cssSelector("iframe")).getAttribute("title").trim().substring(0, 7);
             assertEquals(gadgetTitle, gTitle);
         }
@@ -209,6 +213,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
 
     /**
      * Test whether the fluid layout is working on multiple pages
+     *
      * @throws Exception
      */
     @Test(groups = "wso2.ds.dashboard.pages", description = "Tests fluid layout in pages",
@@ -236,7 +241,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
         addPageToDashboard(pageDesc[2][1]); // page1
 
         // select "full width" and add gadgets in all pages
-        for (String[] page: pageDesc) {
+        for (String[] page : pageDesc) {
             driver.findElement(By.cssSelector("div[data-id='" + page[0] + "']")).click();
             driver.findElement(By.cssSelector("input[name='fluidLayout']")).click();
 
@@ -252,7 +257,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
 
         List<WebElement> elements = driver.findElements(By.cssSelector("div.page-actions a"));
         for (int i = 0; i < elements.size(); i++) {
-            driver.findElement(By.cssSelector("div.page-actions a:nth-child(" + (i+1) + ")")).click();
+            driver.findElement(By.cssSelector("div.page-actions a:nth-child(" + (i + 1) + ")")).click();
             List<WebElement> fluidElems = driver.findElements(By.cssSelector("div.page-content-wrapper div.container-fluid"));
             assertTrue(fluidElems.size() > 0, "Page is not in full width");
         }
@@ -263,6 +268,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
 
     /**
      * Test whether the landing page can be seen in view, when there are multiple pages
+     *
      * @throws Exception
      */
     @Test(groups = "wso2.ds.dashboard.pages", description = "Tests landing page when there are multiple pages",
@@ -294,7 +300,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
         driver.executeScript(script);
         Thread.sleep(500);
 
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         driver.findElement(By.cssSelector(".ues-dashboard[data-id='" + dashboardTitle + "'] a.ues-view")).click();
 
         pushWindow();
@@ -308,6 +314,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
 
     /**
      * Test whether the title and the URL can be customized in each page when there are multiple pages
+     *
      * @throws Exception
      */
     @Test(groups = "wso2.ds.dashboard.pages", description = "Tests customization of title and url in pages",
@@ -343,7 +350,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
         addPageToDashboard(); // page2
         setPageTitleAndUrl(pageDesc[3][0], pageDesc[3][1]);
 
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         driver.findElement(By.cssSelector(".ues-dashboard[data-id='" + dashboardTitle + "'] a.ues-view")).click();
 
         pushWindow();
@@ -351,10 +358,10 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
         List<WebElement> elements = driver.findElements(By.cssSelector("div.page-actions a"));
         String pTitle, pUrl;
         for (int i = 0; i < elements.size(); i++) {
-            driver.findElement(By.cssSelector("div.page-actions a:nth-child(" + (i+1) + ")")).click();
+            driver.findElement(By.cssSelector("div.page-actions a:nth-child(" + (i + 1) + ")")).click();
 
             // checking page title
-            pTitle = driver.findElement(By.cssSelector("div.page-actions a:nth-child(" + (i+1) + ")")).getText();
+            pTitle = driver.findElement(By.cssSelector("div.page-actions a:nth-child(" + (i + 1) + ")")).getText();
             assertEquals(pTitle, pageDesc[i][0], "Page title is not correct");
 
             // checking url
@@ -368,8 +375,9 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
 
     /**
      * Set title and url to page
+     *
      * @param pageTitle new title of the page
-     * @param pageUrl new url of the page
+     * @param pageUrl   new url of the page
      * @throws Exception
      */
     private void setPageTitleAndUrl(String pageTitle, String pageUrl) throws Exception {
@@ -382,6 +390,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
 
     /**
      * Checks whether the page has specified layout
+     *
      * @param pageID Page id of the page
      * @param layout Name of the layout
      * @return true if the page contains specified layout. Otherwise returns false
@@ -472,6 +481,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
 
     /**
      * Clean up after running tests
+     *
      * @throws Exception
      */
     @AfterClass(alwaysRun = true)

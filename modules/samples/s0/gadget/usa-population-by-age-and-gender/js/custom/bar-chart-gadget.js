@@ -61,19 +61,19 @@ var initBarChart;
                     data: dataToAdd,
                     next: null
                 },
-                next_node;
+                nextNode;
 
             if (!head) {
                 head = node;
                 current = head;
                 length++;
             } else {
-                next_node = head;
-                while (next_node.next) {
-                    next_node = next_node.next;
+                nextNode = head;
+                while (nextNode.next) {
+                    nextNode = nextNode.next;
                 }
-                node.previous = next_node;
-                next_node.next = node;
+                node.previous = nextNode;
+                nextNode.next = node;
                 current = node;
                 length++;
             }
@@ -84,9 +84,9 @@ var initBarChart;
          * @private
          * */
         var removeCurrent = function () {
-            var prev_node = current.previous;
-            prev_node.next = null;
-            current = prev_node;
+            var prevNode = current.previous;
+            prevNode.next = null;
+            current = prevNode;
         };
 
         /*
@@ -115,15 +115,15 @@ var initBarChart;
          * Get the name of state by state id.
          * @private
          * */
-        var getStateNameByStateId = function(stateId){
+        var getStateNameByStateId = function (stateId) {
             var name = "";
 
-            $.each(USA_DEMOGRAPHICS_SAMPLE_DATA,function(index,element){
-               if(element.id == stateId){
-                   var history = element.populationHistory[0];
-                   name = history.name;
-                   return false;
-               }
+            $.each(USA_DEMOGRAPHICS_SAMPLE_DATA, function (index, element) {
+                if (element.id == stateId) {
+                    var history = element.populationHistory[0];
+                    name = history.name;
+                    return false;
+                }
             });
 
             return name;
@@ -193,7 +193,7 @@ var initBarChart;
          * @private
          * */
         var createColor = function () {
-            var getColor = function(){
+            var getColor = function () {
                 return "rgb(31, 119, 180)";
             };
             return getColor;
@@ -377,9 +377,9 @@ var initBarChart;
 
             svg.select(".x.axis")
                 .append("text")
-                .attr("class","axis-label")
-                .attr("x",width+10)
-                .attr("y",15)
+                .attr("class", "axis-label")
+                .attr("x", width + 10)
+                .attr("y", 15)
                 .style("text-anchor", "end")
                 .text("age");
 
@@ -393,17 +393,17 @@ var initBarChart;
             rectangles = barGroup.selectAll(".bar").data(dataToProcess);
             rectangles.enter().append("rect")
                 .attr("class", "bar")
-                .attr("width", function(){
-                    if(dataToProcess.length == 2){
-                        return xScale.rangeBand()/4;
-                    }else {
+                .attr("width", function () {
+                    if (dataToProcess.length == 2) {
+                        return xScale.rangeBand() / 4;
+                    } else {
                         return xScale.rangeBand();
                     }
                 })
                 .attr("x", function (d) {
-                    if(dataToProcess.length == 2) {
-                        return xScale(d.name)+xScale.rangeBand()/2.5;
-                    }else{
+                    if (dataToProcess.length == 2) {
+                        return xScale(d.name) + xScale.rangeBand() / 2.5;
+                    } else {
                         return xScale(d.name);
                     }
                 })
@@ -440,17 +440,17 @@ var initBarChart;
                         .attr("fill", function (d) {
                             return "rgb(107, 153, 185)";
                         })
-                        .attr("width", function(){
-                            if(dataToProcess.length == 2){
-                                return xScale.rangeBand()/4;
-                            }else {
+                        .attr("width", function () {
+                            if (dataToProcess.length == 2) {
+                                return xScale.rangeBand() / 4;
+                            } else {
                                 return xScale.rangeBand();
                             }
                         })
                         .attr("x", function (d) {
-                            if(dataToProcess.length == 2) {
-                                return xScale(d.name)+xScale.rangeBand()/2.5;
-                            }else{
+                            if (dataToProcess.length == 2) {
+                                return xScale(d.name) + xScale.rangeBand() / 2.5;
+                            } else {
                                 return xScale(d.name);
                             }
                         })
@@ -468,17 +468,17 @@ var initBarChart;
                         .attr("fill", function (d) {
                             return "rgb(31, 119, 180)";
                         })
-                        .attr("width", function(){
-                            if(dataToProcess.length == 2){
-                                return xScale.rangeBand()/4;
-                            }else {
+                        .attr("width", function () {
+                            if (dataToProcess.length == 2) {
+                                return xScale.rangeBand() / 4;
+                            } else {
                                 return xScale.rangeBand();
                             }
                         })
                         .attr("x", function (d) {
-                            if(dataToProcess.length == 2) {
-                                return xScale(d.name)+xScale.rangeBand()/2.5;
-                            }else{
+                            if (dataToProcess.length == 2) {
+                                return xScale(d.name) + xScale.rangeBand() / 2.5;
+                            } else {
                                 return xScale(d.name);
                             }
                         })

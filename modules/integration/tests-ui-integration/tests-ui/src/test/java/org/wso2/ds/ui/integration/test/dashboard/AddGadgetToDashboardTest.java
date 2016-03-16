@@ -63,7 +63,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         String pathToTarget = carbonHome + File.separator + "repository" + File.separator + "deployment" + File
                 .separator + "server" + File.separator + "jaggeryapps" + File.separator + "portal" + File.separator +
                 "store" + File.separator + "carbon.super" + File.separator + "gadget" + File.separator +
-                "user-claims-gadget.zip" ;
+                "user-claims-gadget.zip";
 
         AutomationContext automationContext = new AutomationContext(DSIntegrationTestConstants.DS_PRODUCT_NAME, this.userMode);
         ServerConfigurationManager serverConfigurationManager = new ServerConfigurationManager(automationContext);
@@ -74,7 +74,6 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
 
         login(getCurrentUsername(), getCurrentPassword());
         addDashBoard(DASHBOARD_TITLE, "This is a test dashboard");
-
     }
 
     @AfterClass(alwaysRun = true)
@@ -90,7 +89,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
     public void testAddBlocks() throws Exception {
         DSWebDriver driver = getDriver();
 
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
         selectPane("layouts");
         driver.findElement(By.id("ues-add-block-btn")).click();
@@ -112,10 +111,8 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
 
         // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
         Thread.sleep(500);
-
         clickViewButton();
         pushWindow();
-
         assertFalse(isBlockPresent("a"), "The block 'a' exists after deletion");
         driver.close();
         popWindow();
@@ -128,16 +125,14 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         String[][] gadgetMappings = {{"publisher", "b"}, {"usa-map", "c"}};
         String script = generateAddGadgetScript(gadgetMappings);
         boolean gadgetsAvailable = true;
+
         selectPane("gadgets");
         driver.executeScript(script);
 
         // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
         Thread.sleep(500);
-
         clickViewButton();
-
         pushWindow();
-
         List<WebElement> elements = new ArrayList<WebElement>();
         for (String[] mapping : gadgetMappings) {
             WebElement element = driver.findElement(By.cssSelector("div#" + mapping[1] + ".ues-component-box .ues-component"));
@@ -156,7 +151,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
     }
 
     @Test(groups = "wso2.ds.dashboard", description = "Accessing user claims from a gadget deployed in dashboard " +
-    "server",dependsOnMethods = "testAddGadgetToDashboard")
+            "server", dependsOnMethods = "testAddGadgetToDashboard")
     public void testUserClaimsInGadget() throws Exception {
         DSWebDriver driver = getDriver();
         String[][] gadgetMappings = {{"user-claims-gadget", "d"}};
@@ -171,11 +166,9 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         clickViewButton();
         pushWindow();
         Thread.sleep(3000);
-        Object txt = driver.executeScript(
-                "var iframe = $(\"iframe[title='User Claims']\")[0];" +
-                        "var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);" +
-                        "return innerDoc.getElementById('output').textContent;"
-        );
+        Object txt = driver.executeScript("var iframe = $(\"iframe[title='User Claims']\")[0];" +
+                "var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);" +
+                "return innerDoc.getElementById('output').textContent;");
         assertEquals("admin", txt.toString());
         driver.close();
         popWindow();
@@ -192,18 +185,15 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         // This sleep is used to wait until the content of the iframe appears
         Thread.sleep(200);
 
-        Object txt = driver.executeScript(
-                "var iframe = $(\"iframe[title='USA Map']\")[0];" +
-                        "var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);" +
-                        "return innerDoc.getElementById('defaultViewLabel').textContent;"
-        );
+        Object txt = driver.executeScript("var iframe = $(\"iframe[title='USA Map']\")[0];" +
+                "var innerDoc = iframe.contentDocument || (iframe.contentWindow &&" +
+                "iframe.contentWindow.document);" +
+                "return innerDoc.getElementById('defaultViewLabel').textContent;");
 
         assertEquals("USA MAP (This is default view)", txt.toString());
 
-        String showToolbarScript =
-                "for(i = 0; i < document.getElementsByClassName('ues-component-toolbar').length; i++) {" +
-                        "    document.getElementsByClassName('ues-component-toolbar')[i].style.display = 'inline';" +
-                        "}";
+        String showToolbarScript = "for(i = 0; i < document.getElementsByClassName('ues-component-toolbar').length;" +
+                " i++) {document.getElementsByClassName('ues-component-toolbar')[i].style.display = 'inline';}";
 
         driver.executeScript(showToolbarScript);
         driver.findElement(By.cssSelector("#c button.ues-component-full-handle")).click();
@@ -212,11 +202,10 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         Thread.sleep(200);
 
         //maximized Window view
-        Object txtMax = driver.executeScript(
-                "var iframe = $(\"iFrame[title='USA Map']\")[0];" +
-                        "var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);" +
-                        "return innerDoc.getElementById('fullViewLabel').textContent;"
-        );
+        Object txtMax = driver.executeScript("var iframe = $(\"iFrame[title='USA Map']\")[0];" +
+                "var innerDoc = iframe.contentDocument || (iframe.contentWindow &&" +
+                "iframe.contentWindow.document);" +
+                "return innerDoc.getElementById('fullViewLabel').textContent;");
 
         assertEquals("USA MAP (this is full screen view)", txtMax.toString());
 

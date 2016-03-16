@@ -6,7 +6,7 @@
     "data": {
         "url": "store://gadget/usa-social/index.xml"
     },
-    "description": "Allows to view Social website statistics by state",
+    "description": "Allows to view social website statistics by state",
     "listen": {
         "state-selected": {
             "type": "address",
