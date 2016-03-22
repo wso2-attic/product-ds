@@ -45,6 +45,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     private static final String DS_HOME_SUFFIX = "/portal/dashboards";
     private static final String ADMIN_CONSOLE_SUFFIX = "/carbon/admin/index.jsp";
 
+    protected String resourcePath;
     private DSWebDriver driver = null;
     private WebDriverWait wait = null;
     private Stack<String> windowHandles = new Stack<String>();
@@ -455,8 +456,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         try {
             String backendURL = getBackEndUrl();
             ResourceAdminServiceClient resourceAdminServiceClient = new ResourceAdminServiceClient(backendURL,
-                    getCurrentUsername(),
-                    getCurrentPassword());
+                    getCurrentUsername(), getCurrentPassword());
             resourceAdminServiceClient.getResourceContent(resourcePath);
         } catch (ResourceAdminServiceExceptionException ex) {
             isResourceExist = false;
