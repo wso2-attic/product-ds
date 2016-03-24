@@ -41,8 +41,6 @@ import static org.testng.Assert.*;
  * maximization and toggling fluid layout.
  */
 public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
-    //    private String carbonHome;
-//    private String systemResourceLocation;
     private static final String DASHBOARD_TITLE = "sampledashboard1";
 
     /**
@@ -141,8 +139,6 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
     public void testRemoveBlock() throws MalformedURLException, XPathExpressionException, InterruptedException {
         getDriver().findElement(By.cssSelector("#a.ues-component-box .ues-trash-handle")).click();
         getDriver().findElement(By.id("btn-delete")).click();
-        // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep.
-        Thread.sleep(500);
         clickViewButton();
         pushWindow();
         assertFalse(isBlockPresent("a"), "The block 'a' exists after deletion");
@@ -165,8 +161,6 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         String script = generateAddGadgetScript(gadgetMappings);
         selectPane("gadgets");
         getDriver().executeScript(script);
-        // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep.
-        Thread.sleep(500);
         clickViewButton();
         pushWindow();
 
@@ -202,12 +196,9 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         String[][] gadgetMappings = {{"user-claims-gadget", "d"}};
         String script = generateAddGadgetScript(gadgetMappings);
         getDriver().navigate().refresh();
-        Thread.sleep(2000);
         selectPane("gadgets");
         Thread.sleep(2000);
         getDriver().executeScript(script);
-        // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep.
-        Thread.sleep(2000);
         clickViewButton();
         pushWindow();
         Thread.sleep(3000);
@@ -229,7 +220,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
      * @throws InterruptedException
      */
     @Test(groups = "wso2.ds.dashboard", description = "maximizing gadget which added to dashboard",
-            dependsOnMethods = "testUserClaimsInGadget", enabled = false)
+            dependsOnMethods = "testUserClaimsInGadget")
     public void testMaximizeGadgetInView() throws MalformedURLException, XPathExpressionException, InterruptedException {
         clickViewButton();
         pushWindow();

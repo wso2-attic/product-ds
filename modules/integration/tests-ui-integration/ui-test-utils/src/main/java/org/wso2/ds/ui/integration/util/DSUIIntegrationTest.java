@@ -17,6 +17,7 @@
 package org.wso2.ds.ui.integration.util;
 
 import ds.integration.tests.common.domain.DSIntegrationTest;
+import org.apache.axis2.AxisFault;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
@@ -291,7 +292,6 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     public void addPageToDashboard(String layout)
             throws MalformedURLException, XPathExpressionException, InterruptedException {
         selectPane("pages");
-        Thread.sleep(500);
         getDriver().findElement(By.cssSelector("button[rel='createPage']")).click();
         selectLayout(layout);
     }
@@ -460,6 +460,8 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
             resourceAdminServiceClient.getResourceContent(resourcePath);
         } catch (ResourceAdminServiceExceptionException ex) {
             isResourceExist = false;
+        } catch(AxisFault ex) {
+            isResourceExist = false;
         } catch (Exception ex) {
             LOG.error(ex);
         }
@@ -487,7 +489,6 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
             List<WebElement> trashElements = dashboardElement.findElements(By.cssSelector("a.ues-dashboard-trash-handle"));
             if (trashElements.size() == 1) {
                 dashboardElement.findElement(By.cssSelector("a.ues-dashboard-trash-handle")).click();
-                Thread.sleep(500);
                 dashboardElement.findElement(By.cssSelector("a.ues-dashboard-trash-confirm")).click();
             }
         }
