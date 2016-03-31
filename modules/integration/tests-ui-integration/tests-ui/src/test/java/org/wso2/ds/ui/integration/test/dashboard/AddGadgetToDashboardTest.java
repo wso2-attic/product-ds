@@ -207,7 +207,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
                         "var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);" +
                         "return innerDoc.getElementById('output').textContent;"
         );
-        assertEquals("admin", txt.toString());
+        assertEquals(txt.toString(), "admin");
         getDriver().close();
         popWindow();
     }
