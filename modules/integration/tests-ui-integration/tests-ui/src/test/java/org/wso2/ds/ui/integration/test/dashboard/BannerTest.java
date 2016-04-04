@@ -370,7 +370,7 @@ public class BannerTest extends DSUIIntegrationTest {
     private Boolean isBannerPresent() throws MalformedURLException, XPathExpressionException, InterruptedException {
         getDriver().findElement(By.cssSelector("a.ues-dashboard-preview")).click();
         pushWindow();
-        WebElement bannerElem = getDriver().findElement(By.className("ues-banner-placeholder"));
+        WebElement bannerElem = getDriver().findElement(By.cssSelector("[data-banner=true]"));
         String imageUrl = bannerElem.getCssValue("background-image");
         getDriver().close();
         if (imageUrl != null && !imageUrl.isEmpty()) {
