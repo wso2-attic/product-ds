@@ -150,6 +150,7 @@ public class BannerTest extends DSUIIntegrationTest {
     public void addBannerByEditor() throws MalformedURLException, XPathExpressionException, InterruptedException {
         clickEditBannerButton(0);
         clickSaveBannerButton();
+        Thread.sleep(500);
         assertTrue(isResourceExist(ROOT_RESOURCE_PATH + dashboardId + "/banner"), "Unable to find the resource");
 
         //Verify an editor can view the uploaded banner
