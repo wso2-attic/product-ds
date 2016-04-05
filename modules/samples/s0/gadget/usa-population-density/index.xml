@@ -23,6 +23,7 @@
              <!-- Calling the Custom javascript file -->
              <script type="text/javascript" src="js/custom/data.js"></script>
              <script type="text/javascript" src="js/custom/map-gadget.js"></script>
+             <script type="text/javascript" src="/portal/ajax/apis/dashboard.js"></script>
 
              <!-- Container to contain the map visualization elements-->
              <div id="container"></div>

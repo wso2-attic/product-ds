@@ -20,6 +20,7 @@
              <!-- Load the custom javascript -->
              <script type="text/javascript" src="js/custom/data.js"></script>
              <script type="text/javascript" src="js/custom/line-chart-gadget.js"></script>
+             <script type="text/javascript" src="/portal/ajax/apis/dashboard.js"></script>
 
              <!-- Container for the line chart -->
             <div id="linechart"></div>

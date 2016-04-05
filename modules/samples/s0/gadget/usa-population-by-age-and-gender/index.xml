@@ -22,6 +22,7 @@
             <!-- Loading custom javascript files -->
             <script type="text/javascript" src="js/custom/data.js"></script>
             <script type="text/javascript" src="js/custom/bar-chart-gadget.js"></script>
+            <script type="text/javascript" src="/portal/ajax/apis/dashboard.js"></script>
 
             <button id="back" class="btn btn-primary" type="button"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></button>
             <div id="path-container"><text id="path">US</text></div>
