@@ -16,16 +16,16 @@
 
 package org.wso2.ds.ui.integration.test.dashboard;
 
-import ds.integration.tests.common.domain.DSIntegrationTestConstants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.*;
-import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
 import org.wso2.carbon.integration.common.utils.exceptions.AutomationUtilException;
-import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
+import org.wso2.ds.ui.integration.util.DSWebDriver;
+
+import org.apache.commons.io.FileUtils;
 
 import javax.xml.xpath.XPathExpressionException;
 import java.io.File;
@@ -72,23 +72,8 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
      * @throws AutomationUtilException
      */
     @BeforeClass(alwaysRun = true)
-    public void setUp() throws XPathExpressionException, IOException, AutomationUtilException {
-        String carbonHome = FrameworkPathUtil.getCarbonHome();
-        String systemResourceLocation = FrameworkPathUtil.getSystemResourceLocation();
-        String pathToTestGadget = systemResourceLocation + "gadgets" + File.separator + "user-claims-gadget.zip";
-        String pathToTarget = carbonHome + File.separator + "repository" + File.separator + "deployment" +
-                File.separator + "server" + File.separator + "jaggeryapps" + File.separator + "portal" +
-                File.separator + "store" + File.separator + "carbon.super" + File.separator + "gadget" +
-                File.separator + "user-claims-gadget.zip";
-
-        AutomationContext automationContext =
-                new AutomationContext(DSIntegrationTestConstants.DS_PRODUCT_NAME, this.userMode);
-        ServerConfigurationManager serverConfigurationManager =
-                new ServerConfigurationManager(automationContext);
-        serverConfigurationManager.applyConfigurationWithoutRestart(new File(pathToTestGadget),
-                new File(pathToTarget), false);
-        serverConfigurationManager.restartGracefully();
-
+    public void setUp() throws AutomationUtilException, XPathExpressionException, IOException {
+        copyTestGadgets();
         login(getCurrentUsername(), getCurrentPassword());
         addDashBoard(DASHBOARD_TITLE, "This is a test dashboard");
     }
@@ -213,6 +198,42 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
     }
 
     /**
+     * Tests gadget hide and show feature
+     *
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     * @throws InterruptedException
+     */
+    @Test(groups = "wso2.ds.dashboard", description = "Using hide-show gadget feature " +
+            "server", dependsOnMethods = "testUserClaimsInGadget")
+    public void testShowHideGadget() throws MalformedURLException, XPathExpressionException, InterruptedException {
+        DSWebDriver driver = getDriver();
+        String[][] gadgetMappings = {{"show-hide-subscriber", "e"}};
+        String script = generateAddGadgetScript(gadgetMappings);
+        driver.navigate().refresh();
+        selectPane("gadgets");
+        Thread.sleep(2000);
+        driver.executeScript(script);
+        driver.findElement(By.id("optionsButtonEvents")).click();
+        driver.findElement(By.linkText("subscriber")).click();
+        driver.findElement(By.className("notifier")).click();
+
+        driver.findElement(By.name("hide_gadget")).click();
+        clickViewButton();
+        pushWindow();
+        assertFalse(driver.findElement(By.id("show-hide-subscriber-0")).isDisplayed());
+        driver.executeScript(
+                "var iframe = $(\"iframe[title='Publisher']\")[0];" +
+                        "var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);" +
+                        "innerDoc.getElementById('txtMessage').value =\"test\";" +
+                        "innerDoc.getElementById('btnSend').click();"
+        );
+        assertTrue(driver.findElement(By.id("show-hide-subscriber-0")).isDisplayed());
+        driver.close();
+        popWindow();
+    }
+
+    /**
      * Tests gadget maximization in the view mode.
      *
      * @throws MalformedURLException
@@ -220,7 +241,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
      * @throws InterruptedException
      */
     @Test(groups = "wso2.ds.dashboard", description = "maximizing gadget which added to dashboard",
-            dependsOnMethods = "testUserClaimsInGadget")
+            dependsOnMethods = "testShowHideGadget")
     public void testMaximizeGadgetInView() throws MalformedURLException, XPathExpressionException, InterruptedException {
         clickViewButton();
         pushWindow();
@@ -290,4 +311,25 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         resetTimeOut();
         return (elements.size() > 0);
     }
+
+    /**
+     * Copy all the test gadgets located at resources directory to the pack used for testing
+     * @throws XPathExpressionException
+     * @throws AutomationUtilException
+     * @throws IOException
+     */
+    public void copyTestGadgets() throws XPathExpressionException, AutomationUtilException, IOException {
+
+        String carbonHome = FrameworkPathUtil.getCarbonHome();
+        String systemResourceLocation = FrameworkPathUtil.getSystemResourceLocation();
+        String pathToGadgets = systemResourceLocation + "gadgets";
+        String DestinationPath = carbonHome + File.separator + "repository" + File.separator + "deployment" +
+                File.separator + "server" + File.separator + "jaggeryapps" + File.separator + "portal" +
+                File.separator + "store" + File.separator + "carbon.super" + File.separator + "gadget";
+
+        File source = new File(pathToGadgets);
+        File destination = new File(DestinationPath);
+        FileUtils.copyDirectory(source, destination);
+    }
+
 }
