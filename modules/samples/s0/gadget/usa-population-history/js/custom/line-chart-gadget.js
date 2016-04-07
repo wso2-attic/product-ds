@@ -79,7 +79,7 @@ var initLineChart = null;
             tooltip = createToolTip();
 
             // Get the state from the gadget state if possible.
-            gadgets.dsapi.getGadgetState(function(gadgetState) {
+            wso2.gadgets.state.getGadgetState(function(gadgetState) {
                 gadgetState = gadgetState || { };
                 gadgetState.state = gadgetState.state || 'US';
                 callbackForSubscribers(gadgetState);
@@ -90,7 +90,7 @@ var initLineChart = null;
                 // Subscribe to the state channel
                 gadgets.Hub.subscribe(STATE_CHANNEL, function (topic, message) {
                     callbackForSubscribers(message);
-                    gadgets.dsapi.setGadgetState({state: message.state});
+                    wso2.gadgets.state.setGadgetState({state: message.state});
                 });
             };
         };

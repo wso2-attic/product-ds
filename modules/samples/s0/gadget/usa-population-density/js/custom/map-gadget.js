@@ -215,7 +215,7 @@ var initMap;
             appendKeyScale();
             
             // restore gadget state
-            gadgets.dsapi.getGadgetState(function(gadgetState) {
+            wso2.gadgets.state.getGadgetState(function(gadgetState) {
                 gadgetState = gadgetState || { };
                 gadgetState.state = gadgetState.state ? gadgetState.state.toUpperCase() : 'US';
                 
@@ -286,7 +286,7 @@ var initMap;
          * @private
          */
         var updateGadgetState = function(s) {
-            gadgets.dsapi.getGadgetState(function(gadgetState) {
+            wso2.gadgets.state.getGadgetState(function(gadgetState) {
                 gadgetState = gadgetState || { }
                 gadgetState.state = gadgetState.state || 'US';
                 var newState = { 
@@ -302,7 +302,7 @@ var initMap;
                 } else if (s.year) {
                     newState.year = s.year;
                 }
-                gadgets.dsapi.setGadgetState(newState);
+                wso2.gadgets.state.setGadgetState(newState);
             });
         }
         

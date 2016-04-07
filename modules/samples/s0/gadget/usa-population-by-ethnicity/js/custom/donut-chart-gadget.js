@@ -176,7 +176,7 @@ var initDonutChart;
             totalUnits = createUnitsLabel(centerGroup);
             
             // restore the gadget state
-            gadgets.dsapi.getGadgetState(function(gadgetState) {
+            wso2.gadgets.state.getGadgetState(function(gadgetState) {
                 gadgetState = gadgetState || { };
                 gadgetState.state = gadgetState.state || 'US';
                 
@@ -209,7 +209,7 @@ var initDonutChart;
          * @private
          */
         var updateGadgetState = function(s) {
-            gadgets.dsapi.getGadgetState(function(gadgetState) {
+            wso2.gadgets.state.getGadgetState(function(gadgetState) {
                 gadgetState = gadgetState || { };
                 gadgetState.state = gadgetState.state || 'US';
                 var newState = {
@@ -218,7 +218,7 @@ var initDonutChart;
                 if (s.age) {
                     newState.age = s.age;
                 }
-                gadgets.dsapi.setGadgetState(newState);
+                wso2.gadgets.state.setGadgetState(newState);
             });
         }
 

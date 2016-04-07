@@ -6,6 +6,7 @@
                  tags="drilldown">
         <Require feature="dynamic-height"/>
         <Require feature="pubsub-2"/>
+        <Require feature="wso2-gadgets-state"/>
     </ModulePrefs>
     <Content type="html">
         <![CDATA[
@@ -20,7 +21,6 @@
              <!-- Load the custom javascript -->
              <script type="text/javascript" src="js/custom/data.js"></script>
              <script type="text/javascript" src="js/custom/line-chart-gadget.js"></script>
-             <script type="text/javascript" src="/portal/ajax/apis/dashboard.js"></script>
 
              <!-- Container for the line chart -->
             <div id="linechart"></div>

@@ -6,6 +6,7 @@
                  tags="drill_down">
         <Require feature="dynamic-height"/>
         <Require feature="pubsub-2"/>
+        <Require feature="wso2-gadgets-state"/>
     </ModulePrefs>
     <Content type="html">
         <![CDATA[
@@ -23,7 +24,6 @@
              <!-- Calling the Custom javascript file -->
              <script type="text/javascript" src="js/custom/data.js"></script>
              <script type="text/javascript" src="js/custom/map-gadget.js"></script>
-             <script type="text/javascript" src="/portal/ajax/apis/dashboard.js"></script>
 
              <!-- Container to contain the map visualization elements-->
              <div id="container"></div>

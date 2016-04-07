@@ -151,7 +151,7 @@ var initBarChart;
             barGroup = createBarGroup(chartGroup, USA_DEMOGRAPHICS_SAMPLE_DATA[0].populationAgeGender);
             
             // restore the gadget state if available
-            gadgets.dsapi.getGadgetState(function(gadgetState) {
+            wso2.gadgets.state.getGadgetState(function(gadgetState) {
                 gadgetState = gadgetState || { };
                 gadgetState.state = gadgetState.state ? gadgetState.state.toUpperCase() : 'US';
                 
@@ -366,7 +366,7 @@ var initBarChart;
          * @private
          */
         var updateGadgetState = function(s) {
-            gadgets.dsapi.getGadgetState(function(gadgetState) {
+            wso2.gadgets.state.getGadgetState(function(gadgetState) {
                 gadgetState = gadgetState || { };
                 gadgetState.state = gadgetState.state || 'US';
                 var newState = {
@@ -380,7 +380,7 @@ var initBarChart;
                     newState.gender = s.gender;
                 }
                 // Update the gadget state
-                gadgets.dsapi.setGadgetState(newState);
+                wso2.gadgets.state.setGadgetState(newState);
             })
         }
 
