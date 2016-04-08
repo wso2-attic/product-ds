@@ -66,8 +66,9 @@ var initLineChart = null;
 
         /*
          * Initialize the user interface functionality.
+		 * @return {null}
          * @private
-         * */
+         */
         var initUI = function () {
             xScale = createXScale();
             yScale = createYScale();
@@ -77,29 +78,33 @@ var initLineChart = null;
             line = createALine(xScale,yScale);
             tooltip = createToolTip();
 
-            var dataBundle = {
-                data: "US",
-                state: "US"
-            };
-            callbackForSubscribers(dataBundle);
+            // Get the state from the gadget state if possible.
+            wso2.gadgets.state.getGadgetState(function(gadgetState) {
+                gadgetState = gadgetState || { };
+                gadgetState.state = gadgetState.state || 'US';
+                callbackForSubscribers(gadgetState);
+            });
 
             // Initialize the subscriber to listen to the subscribed channel.
             gadgets.HubSettings.onConnect = function () {
                 // Subscribe to the state channel
                 gadgets.Hub.subscribe(STATE_CHANNEL, function (topic, message) {
                     callbackForSubscribers(message);
+                    wso2.gadgets.state.setGadgetState({state: message.state});
                 });
             };
         };
 
         /*
          * Callback for the subscriber.
+		 * @param {Object} message Message received
+		 * @return {null}
          * @private
-         * */
+         */
         var callbackForSubscribers = function (message) {
             if (message) {
                 subscribeData = message;
-                var populationHistoryData = getPopulationHistoryByState(message.data);
+                var populationHistoryData = getPopulationHistoryByState(message.state);
                 update(populationHistoryData);
             }
         };
@@ -211,11 +216,13 @@ var initLineChart = null;
 
         /*
          * Publish history data.
+		 * @param {Number} year Year to be published
+		 * @return {null}
          * @private
-         * */
+         */
         var publishHistoryData = function (year) {
             var dataBundle = {
-                data: year,
+                year: year,
                 state: subscribeData.state
             };
 

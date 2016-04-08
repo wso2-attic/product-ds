@@ -47,6 +47,8 @@ var initMap;
             GENDER_CHANNEL = "gender",
             HISTORY_CHANNEL = "history",
             STATE_CHANNEL = "state";
+        
+        var currentState;
 
         /*
          * Get the state details by id.
@@ -189,6 +191,7 @@ var initMap;
 
         /*
          * Initialize the User Interface functionality and styles.
+		 * @return {null}
          * @private
          */
         var initUI = function () {
@@ -210,32 +213,104 @@ var initMap;
             path = createGeoPath();
             createMap(svg);
             appendKeyScale();
-
+            
+            // restore gadget state
+            wso2.gadgets.state.getGadgetState(function(gadgetState) {
+                gadgetState = gadgetState || { };
+                gadgetState.state = gadgetState.state ? gadgetState.state.toUpperCase() : 'US';
+                
+                if (gadgetState.ethnicity) {
+                    callbackForChannel(ETHNICITY_CHANNEL, 
+                        { state: gadgetState.state, ethnicity: gadgetState.ethnicity });
+                    return;
+                }
+                
+                if (gadgetState.age) {
+                    callbackForChannel(AGE_CHANNEL, { state: gadgetState.state, age: gadgetState.age });
+                    return;
+                }
+                
+                if (gadgetState.gender) {
+                    callbackForChannel(GENDER_CHANNEL, { state: gadgetState.state, gender: gadgetState.gender });
+                    return;
+                }
+                
+                if (gadgetState.year) {
+                    callbackForChannel(HISTORY_CHANNEL, { state: gadgetState.state, year: gadgetState.year });
+                    return;
+                }
+                
+                // zoom in the selected state
+                if (gadgetState.state != 'US') {
+                    var paths = d3.selectAll('path')[0];
+                    for(var i = 0; i < paths.length; i++) {
+                        if (paths[i].__data__.id == gadgetState.state) {
+                            onStateClick(paths[i].__data__, svg, true);
+                            break;
+                        }
+                    }
+                }
+            });
+            
             gadgets.HubSettings.onConnect = function () {
                 // Subscribe to Ethnicity channel
                 gadgets.Hub.subscribe(ETHNICITY_CHANNEL, function (topic, message) {
+                    updateGadgetState({ethnicity: message.ethnicity});
                     callbackForChannel(ETHNICITY_CHANNEL, message);
                 });
 
                 // Subscribe to Age channel
                 gadgets.Hub.subscribe(AGE_CHANNEL, function (topic, message) {
+                    updateGadgetState({age: message.age});
                     callbackForChannel(AGE_CHANNEL, message);
                 });
 
                 // Subscribe to gender channel
                 gadgets.Hub.subscribe(GENDER_CHANNEL, function (topic, message) {
+                    updateGadgetState({gender: message.gender});
                     callbackForChannel(GENDER_CHANNEL, message);
                 });
 
                 // Subscribe to History channel
                 gadgets.Hub.subscribe(HISTORY_CHANNEL, function (topic, message) {
+                    updateGadgetState({year: message.year});
                     callbackForChannel(HISTORY_CHANNEL, message);
                 });
             };
         };
-
+        
+        /**
+         * Update gadget state.
+         * @param {Object} s Gadget state
+         * @return {null}
+         * @private
+         */
+        var updateGadgetState = function(s) {
+            wso2.gadgets.state.getGadgetState(function(gadgetState) {
+                gadgetState = gadgetState || { }
+                gadgetState.state = gadgetState.state || 'US';
+                var newState = { 
+					state: s.state || gadgetState.state
+				};
+                
+                if (s.ethnicity) {
+                    newState.ethnicity = s.ethnicity;
+                } else if (s.age) {
+                    newState.age = s.age;
+                } else if (s.gender) {
+                    newState.gender = s.gender;
+                } else if (s.year) {
+                    newState.year = s.year;
+                }
+                wso2.gadgets.state.setGadgetState(newState);
+            });
+        }
+        
         /*
          * Callback of channel subscriber.
+		 * @param {String} channel Received channel
+		 * @param {Object} message Message received
+		 * @return {null}
          * @private
          */
         var callbackForChannel = function (channel, message) {
@@ -243,7 +318,15 @@ var initMap;
                 subscribeData = message;
                 previousColors = [];
 
-                changeColorByDensity(channel, message.data);
+                if (channel == AGE_CHANNEL) {
+                    changeColorByDensity(channel, message.age);
+                } else if (channel == GENDER_CHANNEL) {
+                    changeColorByDensity(channel, message.gender);
+                } else if (channel == ETHNICITY_CHANNEL) {
+                    changeColorByDensity(channel, message.ethnicity);
+                } else if (channel == HISTORY_CHANNEL) {
+                    changeColorByDensity(channel, message.year);
+                }
                 zoomOutMap();
             }
         };
@@ -403,9 +486,14 @@ var initMap;
 
         /*
          * Clicked event on a state of usa.
+         * @param {Object} d D3 selected context
+         * @param {Object} svg SVG
+         * @param {Boolean} noPublish Flag to indicate no publish via pubsub or gadget state
+         * @return {null}
          * @private
          */
-        var onStateClick = function (d, svg) {
+        var onStateClick = function (d, svg, noPublish) {
+            noPublish = noPublish || false;
             var x, y, scale;
 
             selectColorByDataType(STATE_CHANNEL);
@@ -418,8 +506,8 @@ var initMap;
                 y = centroid[1];
                 scale = 4;
                 centered = d;
-
-                publishStateData(d.id);
+                currentState = d.id
+                
             } else {
                 x = width / 2;
                 y = height / 2;
@@ -427,8 +515,12 @@ var initMap;
                 centered = null;
 
                 d3.select(svg[0][0].parentNode.parentNode).select('.datamaps-hoverover').style('display', 'none');
-
-                publishStateData("US");
+                currentState = 'US'
+            }
+            
+            if (!noPublish) {
+                updateGadgetState({state: currentState});
+                publishStateData(currentState);
             }
 
             // Change the path classes back.
@@ -454,9 +546,11 @@ var initMap;
 
         /*
          * Zoom out the map.
+		 * @return {null}
          * @private
          */
         var zoomOutMap = function () {
+            var scale = 1;
             centered = null;
             stateGroup.transition()
                 .duration(750)
@@ -584,7 +678,6 @@ var initMap;
          */
         var publishStateData = function (stateId) {
             var dataBundle = {
-                data: stateId,
                 state: stateId
             };
             gadgets.Hub.publish(STATE_CHANNEL, dataBundle);
