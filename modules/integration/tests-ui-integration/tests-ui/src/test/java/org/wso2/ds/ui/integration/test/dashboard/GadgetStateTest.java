@@ -16,18 +16,13 @@
 
 package org.wso2.ds.ui.integration.test.dashboard;
 
-import ds.integration.tests.common.domain.DSIntegrationTestConstants;
 import org.openqa.selenium.By;
 import org.testng.annotations.*;
-import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
-import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
 import org.wso2.carbon.integration.common.utils.exceptions.AutomationUtilException;
-import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 
 import javax.xml.xpath.XPathExpressionException;
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
@@ -69,22 +64,6 @@ public class GadgetStateTest extends DSUIIntegrationTest {
      */
     @BeforeClass(alwaysRun = true)
     public void setUp() throws XPathExpressionException, IOException, AutomationUtilException {
-        String carbonHome = FrameworkPathUtil.getCarbonHome();
-        String systemResourceLocation = FrameworkPathUtil.getSystemResourceLocation();
-        String pathToTestGadget = systemResourceLocation + "gadgets" + File.separator + "gadget-state.zip";
-        String pathToTarget = carbonHome + File.separator + "repository" + File.separator + "deployment" +
-                File.separator + "server" + File.separator + "jaggeryapps" + File.separator + "portal" +
-                File.separator + "store" + File.separator + "carbon.super" + File.separator + "gadget" +
-                File.separator + "gadget-state.zip";
-
-        AutomationContext automationContext =
-                new AutomationContext(DSIntegrationTestConstants.DS_PRODUCT_NAME, this.userMode);
-        ServerConfigurationManager serverConfigurationManager =
-                new ServerConfigurationManager(automationContext);
-        serverConfigurationManager.applyConfigurationWithoutRestart(new File(pathToTestGadget),
-                new File(pathToTarget), false);
-        serverConfigurationManager.restartGracefully();
-
         login(getCurrentUsername(), getCurrentPassword());
         addDashBoard(DASHBOARD_TITLE, "This is a gadget state test dashboard");
     }
