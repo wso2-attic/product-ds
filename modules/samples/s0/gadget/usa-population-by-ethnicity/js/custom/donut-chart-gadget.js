@@ -146,7 +146,9 @@ var initDonutChart;
 
         /*
          * Initialize the user interface functionalities.
-         * */
+		 * @return {null}
+		 * @private
+         */
         var initUI = function () {
 
             state.btnBack.click(bindBackEvent);
@@ -172,27 +174,53 @@ var initDonutChart;
             totalLabel = createTotalLable(centerGroup);
             totalValue = createTotalTrafficValueLabel(centerGroup);
             totalUnits = createUnitsLabel(centerGroup);
-
-            var dataBundle = {
-                data: "US",
-                state: "US"
-            };
-
-            callbackForChannel(STATE_CHANNEL, dataBundle);
+            
+            // restore the gadget state
+            wso2.gadgets.state.getGadgetState(function(gadgetState) {
+                gadgetState = gadgetState || { };
+                gadgetState.state = gadgetState.state || 'US';
+                
+                callbackForChannel(STATE_CHANNEL, { state: gadgetState.state});
+                if (gadgetState.age) {
+                    callbackForChannel(AGE_CHANNEL, gadgetState);
+                }
+            });
 
             // Initialize the subscriber to listen to the subscribed chanel.
             gadgets.HubSettings.onConnect = function () {
                 // Subscribe to the age channel.
                 gadgets.Hub.subscribe(AGE_CHANNEL, function (topic, message) {
                     callbackForChannel(AGE_CHANNEL, message);
+                    updateGadgetState({ age: message.age });
                 });
 
                 // Subscribe to the state channel.
                 gadgets.Hub.subscribe(STATE_CHANNEL, function (topic, message) {
                     callbackForChannel(STATE_CHANNEL, message);
+                    updateGadgetState({ state: message.state });
                 });
             };
         };
+        
+        /**
+         * Update the gadget state.
+         * @param {Object} s Gadget state
+         * @return {null}
+         * @private
+         */
+        var updateGadgetState = function(s) {
+            wso2.gadgets.state.getGadgetState(function(gadgetState) {
+                gadgetState = gadgetState || { };
+                gadgetState.state = gadgetState.state || 'US';
+                var newState = {
+                    state: s.state || gadgetState.state
+                };
+                if (s.age) {
+                    newState.age = s.age;
+                }
+                wso2.gadgets.state.setGadgetState(newState);
+            });
+        }
 
         /*
          * Callback for channel subscriber.
@@ -220,20 +248,22 @@ var initDonutChart;
 
         /*
          * Update the donut chart according to the incoming message from State channel.
+		 * @param {Object} message Message received
          * @private
-         * */
+         */
         var updateChartAccordingToState = function (message) {
-            var ethnicityData = getPopulationByState(message.data);
+            var ethnicityData = getPopulationByState(message.state);
             update(ethnicityData, null, null, false);
         };
 
         /*
          * Update the donut chart according to the incoming message from the Age channel.
+		 * @param {Object} message Message received
          * @private
-         * */
+         */
         var updateChartAccordingToAge = function (message) {
             var stateDetails = getStateDetailsById(message.state);
-            var genderData = getPopulationByGender(stateDetails.populationAgeGender, message.data);
+            var genderData = getPopulationByGender(stateDetails.populationAgeGender, message.age);
             update(genderData, null, null, false);
         };
 
@@ -444,11 +474,14 @@ var initDonutChart;
         };
 
         /*
-         * Publish Ethnicity data.
-         * */
+         * Publish ethnicity data.
+		 * @param {String} ethnicityId Ethnicity ID
+		 * @return {null}
+		 * @private
+         */
         var publishEthnicityData = function (ethnicityId) {
             var dataBundle = {
-                data: ethnicityId,
+                ethnicity: ethnicityId,
                 state: subscribeData.state
             };
             gadgets.Hub.publish(ETHNICITY_CHANNEL, dataBundle);

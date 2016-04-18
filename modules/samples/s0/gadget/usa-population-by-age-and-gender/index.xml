@@ -23,6 +23,7 @@
                  tags="drill-down">
         <Require feature="dynamic-height"/>
         <Require feature="pubsub-2"/>
+        <Require feature="wso2-gadgets-state"/>
     </ModulePrefs>
     <Content type="html">
         <![CDATA[

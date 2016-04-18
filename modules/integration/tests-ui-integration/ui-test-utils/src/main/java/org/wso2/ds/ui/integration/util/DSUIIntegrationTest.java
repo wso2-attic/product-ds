@@ -1,24 +1,23 @@
 /*
-*Copyright (c) 2015​, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
-*WSO2 Inc. licenses this file to you under the Apache License,
-*Version 2.0 (the "License"); you may not use this file except
-*in compliance with the License.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
 *You may obtain a copy of the License at
 *
 *http://www.apache.org/licenses/LICENSE-2.0
 *
-*Unless required by applicable law or agreed to in writing,
-*software distributed under the License is distributed on an
-*"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-*KIND, either express or implied.  See the License for the
-*specific language governing permissions and limitations
-*under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
 */
 
 package org.wso2.ds.ui.integration.util;
 
 import ds.integration.tests.common.domain.DSIntegrationTest;
+import org.apache.axis2.AxisFault;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
@@ -27,6 +26,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.extensions.selenium.BrowserManager;
+import org.wso2.carbon.registry.resource.stub.ResourceAdminServiceExceptionException;
 import org.wso2.ds.integration.common.clients.ResourceAdminServiceClient;
 
 import javax.xml.xpath.XPathExpressionException;
@@ -37,8 +37,7 @@ import java.util.Stack;
 import java.util.concurrent.TimeUnit;
 
 /**
- * This contains the common functionality for the DS integration tests.
- * This extends DSIntegrationTest parent class.
+ * Defines base class for UI integration tests.
  */
 public abstract class DSUIIntegrationTest extends DSIntegrationTest {
 
@@ -46,8 +45,6 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     private static final String DS_SUFFIX = "/portal/login-controller?destination=%2Fportal%2F";
     private static final String DS_HOME_SUFFIX = "/portal/dashboards";
     private static final String ADMIN_CONSOLE_SUFFIX = "/carbon/admin/index.jsp";
-    protected static final String DS_HOME_CONTEXT = "portal";
-    protected static final String DS_DASHBOARDS_CONTEXT = "dashboards";
 
     protected String resourcePath;
     private DSWebDriver driver = null;
@@ -55,14 +52,14 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     private Stack<String> windowHandles = new Stack<String>();
 
     /**
-     * Constructor for the DSUIIntegrationTest
+     * Constructor for the DSUIIntegrationTest.
      */
     public DSUIIntegrationTest() {
         super();
     }
 
     /**
-     * Constructor for the DSUIIntegrationTest
+     * Constructor for the DSUIIntegrationTest.
      *
      * @param userMode user mode to initiate the class
      */
@@ -71,14 +68,13 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     }
 
     /**
-     * Get JS script to simulate adding gadgets to the page
+     * Get JS script to simulate adding gadgets to the page.
      *
      * @param mappings array of gadget mappings in { gadget id, target id} format
      * @return JS script
      */
     public String generateAddGadgetScript(String[][] mappings) {
-        String script =
-                "$('.ues-thumbnail').draggable({" +
+        String script = "$('.ues-thumbnail').draggable({" +
                         "    cancel: false," +
                         "    appendTo: 'body'," +
                         "    helper: 'clone'," +
@@ -92,46 +88,42 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
                         "function performDrag(id, targetId) {" +
                         "    var gadget = $('[data-id=' + id + ']');" +
                         "    var target = $('#' + targetId);" +
-                        "    " +
                         "    var gadgetOffset = gadget.offset();" +
                         "    var targetOffset = target.offset();" +
-                        "    " +
                         "    var dx = targetOffset.left - gadgetOffset.left;" +
                         "    var dy = targetOffset.top - gadgetOffset.top;" +
-                        "    " +
                         "    gadget.simulate('drag', { dx: dx, dy: dy});" +
                         "}";
 
         for (String[] mapping : mappings) {
             script += "performDrag('" + mapping[0] + "', '" + mapping[1] + "');";
         }
-
         return script;
     }
 
     /**
-     * Switch to a child window while remembering the parent window
+     * Switch to a child window while remembering the parent window.
      *
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
     public void pushWindow() throws MalformedURLException, XPathExpressionException {
-        driver = getDriver();
-        String currentWindowHandle = driver.getWindowHandle();
-
-        for (String windowHandle : driver.getWindowHandles()) {
+        String currentWindowHandle = getDriver().getWindowHandle();
+        // Switch to the other window
+        for (String windowHandle : getDriver().getWindowHandles()) {
             if (!windowHandle.equals(currentWindowHandle)) {
-                driver.switchTo().window(windowHandle);
-                driver.manage().window().setSize(new Dimension(1920, 1080));
+                getDriver().switchTo().window(windowHandle);
+                getDriver().manage().window().setSize(new Dimension(1920, 1080));
                 break;
             }
         }
 
+        // Push the parent window to the window list
         windowHandles.push(currentWindowHandle);
     }
 
     /**
-     * Switch to the parent window (while is remembered previously) from a child window
+     * Switch to the parent window (which was remembered previously) from a child window.
      *
      * @throws MalformedURLException
      * @throws XPathExpressionException
@@ -143,266 +135,284 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     }
 
     /**
-     * To login to Dashboard server
+     * To login to Dashboard server.
      *
      * @param userName user name
      * @param pwd      password
-     * @throws javax.xml.xpath.XPathExpressionException,InterruptedException
+     * @throws XPathExpressionException
+     * @throws MalformedURLException
      */
-    public void login(String userName, String pwd) throws Exception {
-        String fullUrl = getBaseUrl() + DS_SUFFIX,
-                currentUrl = "";
-        driver = getDriver();
-        driver.get(fullUrl);
-        currentUrl = driver.getCurrentUrl();
-        driver.findElement(By.name("username")).clear();
-        driver.findElement(By.name("username")).sendKeys(userName);
-        driver.findElement(By.name("password")).clear();
-        driver.findElement(By.name("password")).sendKeys(pwd);
-        if (currentUrl.contains("authenticationendpoint/login.do")) { // sso login enabled
-            driver.findElement(By.tagName("button")).click();
-        } else { // basic login enabled
-            driver.findElement(By.cssSelector(".ues-signin")).click();
+    public void login(String userName, String pwd) throws XPathExpressionException, MalformedURLException {
+        getDriver().get(getBaseUrl() + DS_SUFFIX);
+        getDriver().findElement(By.name("username")).clear();
+        getDriver().findElement(By.name("username")).sendKeys(userName);
+        getDriver().findElement(By.name("password")).clear();
+        getDriver().findElement(By.name("password")).sendKeys(pwd);
+
+        String currentUrl = getDriver().getCurrentUrl();
+        if (currentUrl.contains("authenticationendpoint/login.do")) {
+            // SSO login enabled
+            getDriver().findElement(By.tagName("button")).click();
+        } else {
+            // Basic login enabled
+            getDriver().findElement(By.cssSelector(".ues-signin")).click();
         }
     }
 
     /**
-     * To logout from Dashboard server
+     * To logout from Dashboard server.
      *
-     * @throws javax.xml.xpath.XPathExpressionException
+     * @throws XPathExpressionException
+     * @throws MalformedURLException
      */
-    public void logout() throws Exception {
-        String fullUrl = getBaseUrl() + DS_HOME_SUFFIX;
-        driver = getDriver();
-        driver.get(fullUrl);
-        driver.findElement(By.cssSelector(".dropdown")).click();
-        driver.findElement(By.cssSelector(".dropdown-menu > li > a")).click();
+    public void logout() throws XPathExpressionException, MalformedURLException {
+        getDriver().get(getBaseUrl() + DS_HOME_SUFFIX);
+        getDriver().findElement(By.cssSelector(".dropdown")).click();
+        getDriver().findElement(By.cssSelector(".dropdown-menu > li > a")).click();
     }
 
     /**
-     * To login to admin console DashBoard server
+     * To login to admin console DashBoard server.
      *
      * @param userName user name
      * @param pwd      password
-     * @throws javax.xml.xpath.XPathExpressionException
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
      */
-    public void loginToAdminConsole(String userName, String pwd) throws Exception {
-        driver = getDriver();
-
-        driver.get(getBaseUrl() + ADMIN_CONSOLE_SUFFIX);
-        driver.findElement(By.id("txtUserName")).clear();
-        driver.findElement(By.id("txtUserName")).sendKeys(userName);
-        driver.findElement(By.id("txtPassword")).clear();
-        driver.findElement(By.id("txtPassword")).sendKeys(pwd);
-        driver.findElement(By.cssSelector("input.button")).click();
+    public void loginToAdminConsole(String userName, String pwd)
+            throws MalformedURLException, XPathExpressionException {
+        getDriver().get(getBaseUrl() + ADMIN_CONSOLE_SUFFIX);
+        getDriver().findElement(By.id("txtUserName")).clear();
+        getDriver().findElement(By.id("txtUserName")).sendKeys(userName);
+        getDriver().findElement(By.id("txtPassword")).clear();
+        getDriver().findElement(By.id("txtPassword")).sendKeys(pwd);
+        getDriver().findElement(By.cssSelector("input.button")).click();
     }
 
     /**
-     * To logout from admin console dashboard server
+     * To logout from admin console dashboard server.
+     *
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
      */
-    public void logoutFromAdminConsole() throws Exception {
-        driver = getDriver();
-
-        driver.get(getBaseUrl() + ADMIN_CONSOLE_SUFFIX);
-        driver.findElement(By.cssSelector(".right > a")).click();
+    public void logoutFromAdminConsole() throws MalformedURLException, XPathExpressionException {
+        getDriver().get(getBaseUrl() + ADMIN_CONSOLE_SUFFIX);
+        getDriver().findElement(By.cssSelector(".right > a")).click();
     }
 
     /**
      * Add dashboard to DashboardServer
      *
-     * @param dashBoardTitle the title of a dashboard
-     * @param description    the description about dashboard
+     * @param dashBoardTitle title of the dashboard
+     * @param description    description of the dashboard
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
      */
-    public void addDashBoard(String dashBoardTitle, String description) throws Exception {
-        driver = getDriver();
+    public void addDashBoard(String dashBoardTitle, String description)
+            throws MalformedURLException, XPathExpressionException {
 
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
-        driver.findElement(By.cssSelector("[href='create-dashboard']")).click();
-        driver.findElement(By.id("ues-dashboard-title")).clear();
-        driver.findElement(By.id("ues-dashboard-title")).sendKeys(dashBoardTitle);
-        driver.findElement(By.id("ues-dashboard-description")).clear();
-        driver.findElement(By.id("ues-dashboard-description")).sendKeys(description);
-        driver.findElement(By.id("ues-dashboard-create")).click();
+        getDriver().findElement(By.cssSelector("[href='create-dashboard']")).click();
+        getDriver().findElement(By.id("ues-dashboard-title")).clear();
+        getDriver().findElement(By.id("ues-dashboard-title")).sendKeys(dashBoardTitle);
+        getDriver().findElement(By.id("ues-dashboard-description")).clear();
+        getDriver().findElement(By.id("ues-dashboard-description")).sendKeys(description);
+        getDriver().findElement(By.id("ues-dashboard-create")).click();
         selectLayout("default-grid");
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
     }
 
     /**
-     * Select the given layout
+     * Select the given layout.
      *
      * @param layout name of the layout to be selected
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
      */
-    public void selectLayout(String layout) throws Exception {
-        driver = getDriver();
-
-        driver.findElement(By.cssSelector("div[data-id='" + layout + "']")).click();
+    public void selectLayout(String layout) throws MalformedURLException, XPathExpressionException {
+        WebElement defaultGridElem = getDriver().findElement(By.cssSelector("div[data-id='" + layout + "']"));
+        defaultGridElem.click();
     }
 
     /**
-     * Redirect user to given location
+     * Redirect user to the given location.
      *
      * @param domain   name of the domain where user wants to direct in to
      * @param location name of the location to be directed to
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
      */
-    public void redirectToLocation(String domain, String location) throws Exception {
-        driver = getDriver();
+    public void redirectToLocation(String domain, String location)
+            throws MalformedURLException, XPathExpressionException {
         String url = getBaseUrl() + "/" + domain;
-
         if (location != null && !location.isEmpty()) {
             url += "/" + location;
         }
-        driver.get(url);
+        getDriver().get(url);
     }
 
     /**
-     * Modify the timeout as to the given value
+     * Modify the timeout as to the given value.
      *
-     * @param seconds Time to replace the default timeout of selenium
+     * @param seconds time to replace the default timeout of selenium
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
      */
-    public void modifyTimeOut(int seconds) throws Exception {
+    public void modifyTimeOut(int seconds) throws MalformedURLException, XPathExpressionException {
         getDriver().manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
     }
 
     /**
-     * Reset the timeout of selenium back to default
+     * Reset the timeout of selenium back to default.
+     *
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
      */
-    public void resetTimeOut() throws Exception {
+    public void resetTimeOut() throws MalformedURLException, XPathExpressionException {
         getDriver().manage().timeouts().implicitlyWait(getMaxWaitTime(), TimeUnit.SECONDS);
     }
 
     /**
-     * Add a page to the dashboard
+     * Add a page to the dashboard.
+     *
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
      */
-    public void addPageToDashboard() throws Exception {
-        driver = getDriver();
+    public void addPageToDashboard() throws MalformedURLException, XPathExpressionException {
         selectPane("pages");
-        driver.findElement(By.cssSelector("button[rel='createPage']")).click();
+        getDriver().findElement(By.cssSelector("button[rel='createPage']")).click();
         selectLayout("single-column");
     }
 
     /**
-     * Add a page to the dashboard with specified layout
+     * Add a page to the dashboard with specified layout.
      *
-     * @param layout Name for the newly added page's layout
+     * @param layout name for the newly added page's layout
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     * @throws InterruptedException
      */
-    public void addPageToDashboard(String layout) throws Exception {
-        driver = getDriver();
+    public void addPageToDashboard(String layout)
+            throws MalformedURLException, XPathExpressionException, InterruptedException {
         selectPane("pages");
-        Thread.sleep(500);
-        driver.findElement(By.cssSelector("button[rel='createPage']")).click();
+        getDriver().findElement(By.cssSelector("button[rel='createPage']")).click();
         selectLayout(layout);
     }
 
     /**
-     * Switch to the given page
+     * Switch to the given page.
      *
      * @param pageID ID of the page to be switched to
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
      */
-    public void switchPage(String pageID) throws Exception {
-        driver = getDriver();
-        driver.findElement(By.cssSelector("div[data-id='" + pageID + "']")).click();
+    public void switchPage(String pageID) throws MalformedURLException, XPathExpressionException {
+        getDriver().findElement(By.cssSelector("div[data-id='" + pageID + "']")).click();
     }
 
     /**
-     * Switch to the given view in designer mode
+     * Switch to the given view in designer mode.
      *
      * @param view Name of the view. Valid names are {@code default} and {@code anon}
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
     public void switchView(String view) throws MalformedURLException, XPathExpressionException {
-        driver = getDriver();
-        driver.findElement(By.cssSelector("ul#designer-view-mode li[data-view-mode='" + view + "']")).click();
+        getDriver().findElement(By.cssSelector("ul#designer-view-mode li[data-view-mode='" + view + "']")).click();
     }
 
     /**
-     * Select specified pane in designer mode
+     * Select specified pane in designer mode.
      *
      * @param pane Name of the pane. Valid names are {@code pages}, {@code layouts} and {@code gadgets}
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
     public void selectPane(String pane) throws MalformedURLException, XPathExpressionException {
-        driver = getDriver();
         pane = pane.trim().toLowerCase();
         if (pane.equals("pages")) {
-            driver.findElement(By.cssSelector("a#btn-" + pane + "-sidebar")).click();
+            getDriver().findElement(By.cssSelector("a#btn-" + pane + "-sidebar")).click();
         } else {
-            driver.findElement(By.cssSelector("a#btn-sidebar-" + pane)).click();
+            getDriver().findElement(By.cssSelector("a#btn-sidebar-" + pane)).click();
         }
     }
 
     /**
-     * Clicks the View link in designer mode
+     * Clicks the View link in designer mode.
      *
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
     public void clickViewButton() throws MalformedURLException, XPathExpressionException {
-        driver = getDriver();
-        driver.findElement(By.className("ues-dashboard-preview")).click();
+        getDriver().findElement(By.className("ues-dashboard-preview")).click();
     }
 
     /**
-     * Add dashboard to DashboardServer
+     * Add dashboard to Dashboard Server.
      *
-     * @param username       username of user
-     * @param password       password of user
-     * @param retypePassword retype password of user
+     * @param username       username of the user
+     * @param password       password of the user
+     * @param retypePassword retype password of the user
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
      */
-    public void addUser(String username, String password, String retypePassword) throws Exception {
-        driver = getDriver();
+    public void addUser(String username, String password, String retypePassword)
+            throws MalformedURLException, XPathExpressionException {
 
-        driver.findElement(By.cssSelector("a[href=\"../userstore/add-user-role" +
-                ".jsp?region=region1&item=user_mgt_menu_add\"]")).click();
-        driver.findElement(By.cssSelector("a[href=\"../user/add-step1.jsp\"]")).click();
-        driver.findElement(By.name("username")).clear();
-        driver.findElement(By.name("username")).sendKeys(username);
-        driver.findElement(By.name("password")).clear();
-        driver.findElement(By.name("password")).sendKeys(password);
-        driver.findElement(By.name("retype")).clear();
-        driver.findElement(By.name("retype")).sendKeys(retypePassword);
-        //get a way to next button
-        driver.findElement(By.cssSelector("input.button")).click();
-        driver.findElement(By.cssSelector("td.buttonRow > input.button")).click();
-        driver.findElement(By.cssSelector("button[type=\"button\"]")).click();
+        getDriver().findElement(By.cssSelector("a[href=\"../userstore/add-user-role.jsp" +
+                "?region=region1&item=user_mgt_menu_add\"]")).click();
+        getDriver().findElement(By.cssSelector("a[href=\"../user/add-step1.jsp\"]")).click();
+        getDriver().findElement(By.name("username")).clear();
+        getDriver().findElement(By.name("username")).sendKeys(username);
+        getDriver().findElement(By.name("password")).clear();
+        getDriver().findElement(By.name("password")).sendKeys(password);
+        getDriver().findElement(By.name("retype")).clear();
+        getDriver().findElement(By.name("retype")).sendKeys(retypePassword);
+        // Get a way to next button
+        getDriver().findElement(By.cssSelector("input.button")).click();
+        getDriver().findElement(By.cssSelector("td.buttonRow > input.button")).click();
+        getDriver().findElement(By.cssSelector("button[type=\"button\"]")).click();
     }
 
     /**
-     * Add dashboard to DashboardServer
+     * Add dashboard to Dashboard Server.
      *
      * @param roleName name of role
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
      */
-    public void addRole(String roleName) throws Exception {
-        driver = getDriver();
-        driver.findElement(By.cssSelector("a[href=\"../userstore/add-user-role" +
-                ".jsp?region=region1&item=user_mgt_menu_add\"]")).click();
-        driver.findElement(By.cssSelector("a[href=\"../role/add-step1.jsp\"]")).click();
-        driver.findElement(By.name("roleName")).clear();
-        driver.findElement(By.name("roleName")).sendKeys(roleName);
-        driver.findElement(By.cssSelector("input.button")).click();
-        driver.findElement(By.cssSelector("td.buttonRow > input.button")).click();
+    public void addRole(String roleName) throws MalformedURLException, XPathExpressionException {
+        getDriver().findElement(By.cssSelector("a[href=\"../userstore/add-user-role.jsp" +
+                "?region=region1&item=user_mgt_menu_add\"]")).click();
+        getDriver().findElement(By.cssSelector("a[href=\"../role/add-step1.jsp\"]")).click();
+        getDriver().findElement(By.name("roleName")).clear();
+        getDriver().findElement(By.name("roleName")).sendKeys(roleName);
+        getDriver().findElement(By.cssSelector("input.button")).click();
+        getDriver().findElement(By.cssSelector("td.buttonRow > input.button")).click();
     }
 
     /**
-     * Assign roles for users
+     * Assign roles for users.
      *
-     * @param userNames array fo userNames
+     * @param userNames array fo usernames
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
      */
-    public void assignRoleToUser(String[] userNames) throws Exception {
-        driver = getDriver();
+    public void assignRoleToUser(String[] userNames) throws MalformedURLException, XPathExpressionException {
 
         for (String userName : userNames) {
-            driver.findElement(By.cssSelector("input[value='" + userName + "']")).click();
+            getDriver().findElement(By.cssSelector("input[value='" + userName + "']")).click();
         }
-        driver.findElement(By.cssSelector("input.button[value='Finish']")).click();
-        driver.findElement(By.cssSelector("div.ui-dialog-buttonpane button")).click();
+        getDriver().findElement(By.cssSelector("input.button[value='Finish']")).click();
+        getDriver().findElement(By.cssSelector("div.ui-dialog-buttonpane button")).click();
     }
 
     /**
-     * This method returns the web driver instance
+     * This method returns the web driver instance.
      *
      * @return DSWebDriver - the driver instance of DSWebDriver
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
      */
     public DSWebDriver getDriver() throws MalformedURLException, XPathExpressionException {
         if (driver == null) {
@@ -412,9 +422,11 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     }
 
     /**
-     * This method returns the we driver wait instance
+     * This method returns the we driver wait instance.
      *
-     * @return DSWEbDriverWait - the webDriverWait instance of DSWebDriverWait
+     * @return DSWebDriverWait - the webDriverWait instance of DSWebDriverWait
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
      */
     public WebDriverWait getWebDriverWait() throws MalformedURLException, XPathExpressionException {
         if (wait == null) {
@@ -424,36 +436,38 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     }
 
     /**
-     * final method for each test classes
+     * Final method for each test classes.
      *
-     * @throws Exception
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
      */
-    public void dsUITestTearDown() throws Exception {
-        driver = getDriver();
+    public void dsUITestTearDown() throws MalformedURLException, XPathExpressionException {
         try {
             logout();
         } finally {
-            driver.quit();
+            getDriver().quit();
         }
     }
 
     /**
-     * This method will check the resource is exist or not in registry
+     * Check whether the registry resource exists or not
      *
-     * @param resourcePath - the path of resource
-     * @return isResourceExist - true/false
+     * @param resourcePath path to the resource
+     * @return a flag saying the resource exists or not
      */
     public boolean isResourceExist(String resourcePath) {
-        boolean isResourceExist;
+        boolean isResourceExist = true;
         try {
             String backendURL = getBackEndUrl();
             ResourceAdminServiceClient resourceAdminServiceClient = new ResourceAdminServiceClient(backendURL,
-                    getCurrentUsername(),
-                    getCurrentPassword());
+                    getCurrentUsername(), getCurrentPassword());
             resourceAdminServiceClient.getResourceContent(resourcePath);
-            isResourceExist = true;
-        } catch (Exception ex) {
+        } catch (ResourceAdminServiceExceptionException ex) {
             isResourceExist = false;
+        } catch(AxisFault ex) {
+            isResourceExist = false;
+        } catch (Exception ex) {
+            LOG.error(ex);
         }
         return isResourceExist;
     }
@@ -461,27 +475,26 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     /**
      * Delete dashboards according to the permissions of logged in user.
      *
-     * @throws Exception
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     * @throws InterruptedException
      */
-    public void deleteDashboards() throws Exception {
-        DSWebDriver driver = getDriver();
+    public void deleteDashboards() throws MalformedURLException, XPathExpressionException, InterruptedException {
 
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
-
-        List<WebElement> elements = driver.findElements(By.cssSelector("div.ues-dashboards div.ues-dashboard"));
+        List<WebElement> dashboardElements = getDriver().findElements(By.cssSelector("div.ues-dashboards div.ues-dashboard"));
         List<String> dashboardIds = new ArrayList<String>();
-        // get all dashboard ids from list
-        for (WebElement elem : elements) {
-            dashboardIds.add(elem.getAttribute("id"));
+        // Get all dashboard ids from list
+        for (WebElement dashboardElement : dashboardElements) {
+            dashboardIds.add(dashboardElement.getAttribute("id"));
         }
-        // delete dashboards
-        for (String dashboardId : dashboardIds) {
-            WebElement elem = driver.findElement(By.id(dashboardId));
-            List<WebElement> trashElements = elem.findElements(By.cssSelector("a.ues-dashboard-trash-handle"));
+        // Delete dashboards
+        for (String dashboardId: dashboardIds) {
+            WebElement dashboardElement = getDriver().findElement(By.id(dashboardId));
+            List<WebElement> trashElements = dashboardElement.findElements(By.cssSelector("a.ues-dashboard-trash-handle"));
             if (trashElements.size() == 1) {
-                elem.findElement(By.cssSelector("a.ues-dashboard-trash-handle")).click();
-                Thread.sleep(500);
-                elem.findElement(By.cssSelector("a.ues-dashboard-trash-confirm")).click();
+                dashboardElement.findElement(By.cssSelector("a.ues-dashboard-trash-handle")).click();
+                dashboardElement.findElement(By.cssSelector("a.ues-dashboard-trash-confirm")).click();
             }
         }
     }

@@ -131,8 +131,9 @@ var initBarChart;
 
         /*
          * Initialize the user interface functionality.
+		 * @return {null}
          * @private
-         * */
+         */
         var initUI = function () {
             state.btnBack.click(backEvent);
             state.btnBack.hide();
@@ -148,12 +149,34 @@ var initBarChart;
             xAxisGroup = createXAxisGroup(chartGroup, xAxis);
             yAxisGroup = createYAxisGroup(chartGroup, yAxis);
             barGroup = createBarGroup(chartGroup, USA_DEMOGRAPHICS_SAMPLE_DATA[0].populationAgeGender);
-
-            createBarChart(USA_DEMOGRAPHICS_SAMPLE_DATA[0].populationAgeGender, null, "US", false);
+            
+            // restore the gadget state if available
+            wso2.gadgets.state.getGadgetState(function(gadgetState) {
+                gadgetState = gadgetState || { };
+                gadgetState.state = gadgetState.state ? gadgetState.state.toUpperCase() : 'US';
+                
+                var ageData = getAgeDetailsByState(gadgetState.state);
+                createBarChart(ageData, null, gadgetState.state, false);
+                
+                if (gadgetState.age) {
+                    var rects = d3.selectAll('rect')[0];
+                    for(var i = 0; i < rects.length; i++) {
+                        if (rects[i].__data__.name == gadgetState.age) {
+                            var rect = rects[i].__data__;
+                            if (rect.category.length > 0) {
+                                $("#back").show();
+                                createBarChart(rect.category, rect.name, gadgetState.state, false);
+                            }
+                            break;
+                        }
+                    }
+                }
+            });
 
             gadgets.HubSettings.onConnect = function () {
                 // Subscribe to the state channel.
                 gadgets.Hub.subscribe(STATE_CHANNEL, function (topic, message) {
+                    updateGadgetState({ state: message.state });
                     callbackForChannels(message);
                 });
             };
@@ -161,14 +184,16 @@ var initBarChart;
 
         /*
          * Callback function for channels.
+		 * @param {Object} message Message received
+		 * @return {null}
          * @private
-         * */
+         */
         var callbackForChannels = function (message) {
             if (message) {
                 subscribeData = message;
                 initLinkedList();
                 $("#back").hide();
-                var ageData = getAgeDetailsByState(message.data);
+                var ageData = getAgeDetailsByState(message.state);
                 createBarChart(ageData, null, message.state, false);
             }
         };
@@ -309,24 +334,55 @@ var initBarChart;
         };
 
         /*
-         * Publish the age details
+         * Publish the age details.
+         * @param {String} dataToSend Data to be sent
+         * @param {String} age Age range if available
+         * @return {null}
          * @private
-         * */
+         */
         var publishAgeDetails = function (dataToSend, age) {
-            var dataBundle = {
-                data: dataToSend,
-                age: age,
-                state: subscribeData ? subscribeData.state : "US"
-            };
-
             if (age) {
                 // Publish the selected Gender details.
-                gadgets.Hub.publish(GENDER_CHANNEL, dataBundle);
+                gadgets.Hub.publish(GENDER_CHANNEL, {
+                    gender: dataToSend,
+                    age: dataToSend,
+                    state: subscribeData ? subscribeData.state : 'US'
+                });
+                updateGadgetState({ gender: dataToSend })
             } else {
                 // Publish the selected Age details.
-                gadgets.Hub.publish(AGE_CHANNEL, dataBundle);
+                gadgets.Hub.publish(AGE_CHANNEL, {
+                    age: dataToSend,
+                    state: subscribeData ? subscribeData.state : 'US'
+                });
+                updateGadgetState({ age: dataToSend })
             }
         };
+        
+        /**
+         * Update gadget state.
+         * @param {Object} s Gadget state
+         * @return {null}
+         * @private
+         */
+        var updateGadgetState = function(s) {
+            wso2.gadgets.state.getGadgetState(function(gadgetState) {
+                gadgetState = gadgetState || { };
+                gadgetState.state = gadgetState.state || 'US';
+                var newState = {
+                    state: s.state || gadgetState.state
+                };
+                
+                if (s.age) {
+                    newState.age = s.age;
+                } else if (s.gender) {
+                    newState.age = gadgetState.age;
+                    newState.gender = s.gender;
+                }
+                // Update the gadget state
+                wso2.gadgets.state.setGadgetState(newState);
+            })
+        }
 
         /*
          * Create Bar chart.
