@@ -23,6 +23,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
+
 import javax.xml.xpath.XPathExpressionException;
 import java.net.MalformedURLException;
 
@@ -229,7 +230,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
             dependsOnMethods = "testCustomizeButtonDashboard")
     public void checkRegistrySourceForCustomizeDashboard() {
         Boolean isResourceExist = isResourceExist(
-                DSIntegrationTestConstants.DASHBOARD_REGISTRY_PATH_CUSTOM_DASHBOARD_PERUSER + "/" + USERNAME_VIEWER +
+                DSIntegrationTestConstants.DASHBOARD_REGISTRY_PATH_CUSTOM_DASHBOARD_PERUSER + "/" + USERNAME_VIEWER
                         + "/" + DS_DASHBOARDS_CONTEXT + "/" + dashboardTitle.toLowerCase());
 
         assertTrue(isResourceExist,

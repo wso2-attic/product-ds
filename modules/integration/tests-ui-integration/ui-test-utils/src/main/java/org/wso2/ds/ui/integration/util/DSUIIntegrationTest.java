@@ -45,6 +45,8 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     private static final String DS_SUFFIX = "/portal/login-controller?destination=%2Fportal%2F";
     private static final String DS_HOME_SUFFIX = "/portal/dashboards";
     private static final String ADMIN_CONSOLE_SUFFIX = "/carbon/admin/index.jsp";
+    public static final String DS_HOME_CONTEXT = "portal";
+    public static final String DS_DASHBOARDS_CONTEXT = "dashboards";
 
     protected String resourcePath;
     private DSWebDriver driver = null;
@@ -75,25 +77,25 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      */
     public String generateAddGadgetScript(String[][] mappings) {
         String script = "$('.ues-thumbnail').draggable({" +
-                        "    cancel: false," +
-                        "    appendTo: 'body'," +
-                        "    helper: 'clone'," +
-                        "    start: function (event, ui) {" +
-                        "        ui.helper.addClass('ues-store-thumbnail');" +
-                        "    }," +
-                        "    stop: function (event, ui) {" +
-                        "        ui.helper.removeClass('ues-store-thumbnail');" +
-                        "    }" +
-                        "});" +
-                        "function performDrag(id, targetId) {" +
-                        "    var gadget = $('[data-id=' + id + ']');" +
-                        "    var target = $('#' + targetId);" +
-                        "    var gadgetOffset = gadget.offset();" +
-                        "    var targetOffset = target.offset();" +
-                        "    var dx = targetOffset.left - gadgetOffset.left;" +
-                        "    var dy = targetOffset.top - gadgetOffset.top;" +
-                        "    gadget.simulate('drag', { dx: dx, dy: dy});" +
-                        "}";
+                "    cancel: false," +
+                "    appendTo: 'body'," +
+                "    helper: 'clone'," +
+                "    start: function (event, ui) {" +
+                "        ui.helper.addClass('ues-store-thumbnail');" +
+                "    }," +
+                "    stop: function (event, ui) {" +
+                "        ui.helper.removeClass('ues-store-thumbnail');" +
+                "    }" +
+                "});" +
+                "function performDrag(id, targetId) {" +
+                "    var gadget = $('[data-id=' + id + ']');" +
+                "    var target = $('#' + targetId);" +
+                "    var gadgetOffset = gadget.offset();" +
+                "    var targetOffset = target.offset();" +
+                "    var dx = targetOffset.left - gadgetOffset.left;" +
+                "    var dy = targetOffset.top - gadgetOffset.top;" +
+                "    gadget.simulate('drag', { dx: dx, dy: dy});" +
+                "}";
 
         for (String[] mapping : mappings) {
             script += "performDrag('" + mapping[0] + "', '" + mapping[1] + "');";
@@ -464,7 +466,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
             resourceAdminServiceClient.getResourceContent(resourcePath);
         } catch (ResourceAdminServiceExceptionException ex) {
             isResourceExist = false;
-        } catch(AxisFault ex) {
+        } catch (AxisFault ex) {
             isResourceExist = false;
         } catch (Exception ex) {
             LOG.error(ex);
@@ -489,7 +491,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
             dashboardIds.add(dashboardElement.getAttribute("id"));
         }
         // Delete dashboards
-        for (String dashboardId: dashboardIds) {
+        for (String dashboardId : dashboardIds) {
             WebElement dashboardElement = getDriver().findElement(By.id(dashboardId));
             List<WebElement> trashElements = dashboardElement.findElements(By.cssSelector("a.ues-dashboard-trash-handle"));
             if (trashElements.size() == 1) {

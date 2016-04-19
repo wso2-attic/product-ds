@@ -177,7 +177,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
      * @throws InterruptedException
      */
     @Test(groups = "wso2.ds.dashboard", description = "Accessing user claims from a gadget deployed in dashboard " +
-    "server",dependsOnMethods = "testAddGadgetToDashboard")
+            "server", dependsOnMethods = "testAddGadgetToDashboard")
     public void testUserClaimsInGadget() throws MalformedURLException, XPathExpressionException, InterruptedException {
         String[][] gadgetMappings = {{"user-claims-gadget", "d"}};
         String script = generateAddGadgetScript(gadgetMappings);
@@ -311,8 +311,10 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         resetTimeOut();
         return (elements.size() > 0);
     }
+
     /**
      * Copy all the test gadgets located at resources directory to the pack used for testing
+     *
      * @throws XPathExpressionException
      * @throws AutomationUtilException
      * @throws IOException
@@ -334,5 +336,5 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
                 new AutomationContext(DSIntegrationTestConstants.DS_PRODUCT_NAME, this.userMode);
         ServerConfigurationManager serverConfigurationManager = new ServerConfigurationManager(automationContext);
         serverConfigurationManager.restartGracefully();
-	}
+    }
 }
