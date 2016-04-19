@@ -209,7 +209,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
             "server", dependsOnMethods = "testUserClaimsInGadget")
     public void testShowHideGadget() throws MalformedURLException, XPathExpressionException, InterruptedException {
         DSWebDriver driver = getDriver();
-        String[][] gadgetMappings = {{"show-hide-subscriber", "e"}};
+        String[][] gadgetMappings = {{"subscriber", "e"}};
         String script = generateAddGadgetScript(gadgetMappings);
         driver.navigate().refresh();
         selectPane("gadgets");
@@ -222,14 +222,14 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         driver.findElement(By.name("hide_gadget")).click();
         clickViewButton();
         pushWindow();
-        assertFalse(driver.findElement(By.id("show-hide-subscriber-0")).isDisplayed());
+        assertFalse(driver.findElement(By.id("subscriber-0")).isDisplayed());
         driver.executeScript(
                 "var iframe = $(\"iframe[title='Publisher']\")[0];" +
                         "var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);" +
                         "innerDoc.getElementById('txtMessage').value =\"test\";" +
                         "innerDoc.getElementById('btnSend').click();"
         );
-        assertTrue(driver.findElement(By.id("show-hide-subscriber-0")).isDisplayed());
+        assertTrue(driver.findElement(By.id("subscriber-0")).isDisplayed());
         driver.close();
         popWindow();
     }

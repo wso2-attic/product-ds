@@ -159,7 +159,7 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
 
         Thread.sleep(500);
         String message = driver.findElement(By.cssSelector("div.modal-body")).getText().trim();
-        assertEquals(message, "A dashboard with same URL already exists. Please select a different dashboard URL.",
+        assertEquals(message, "A dashboard with same URL already exists. Please enter a different dashboard URL.",
                 "Dashboard name is not case insensitive.");
 
         driver.findElement(By.cssSelector("button#ues-modal-info-ok")).click();
