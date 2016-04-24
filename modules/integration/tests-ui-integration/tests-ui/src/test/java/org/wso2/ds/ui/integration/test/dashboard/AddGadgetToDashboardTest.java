@@ -1,5 +1,5 @@
-/*
- * Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+/**
+ * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.wso2.ds.ui.integration.test.dashboard;
 
 import ds.integration.tests.common.domain.DSIntegrationTestConstants;
@@ -218,7 +217,6 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         driver.findElement(By.id("optionsButtonEvents")).click();
         driver.findElement(By.linkText("subscriber")).click();
         driver.findElement(By.className("notifier")).click();
-
         driver.findElement(By.name("hide_gadget")).click();
         clickViewButton();
         pushWindow();
@@ -254,7 +252,6 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
                         "return innerDoc.getElementById('defaultViewLabel').textContent;"
         );
         assertEquals("USA MAP (This is default view)", txt.toString());
-
         getDriver().findElement(By.cssSelector("#c button.ues-component-full-handle")).click();
         // This sleep is used to wait until the content of the iframe appears
         Thread.sleep(200);
@@ -284,12 +281,10 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         getDriver().findElement(By.cssSelector("[name=fluidLayout]")).click();
         clickViewButton();
         pushWindow();
-
         List<WebElement> elements = getDriver().findElements(By.cssSelector(".page-content-wrapper > .container-fluid"));
         if (elements.size() > 0) {
             isFluidLayout = true;
         }
-
         assertTrue(isFluidLayout, "The layout is not fluid");
         getDriver().close();
         popWindow();
@@ -327,11 +322,9 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         String DestinationPath = carbonHome + File.separator + "repository" + File.separator + "deployment" +
                 File.separator + "server" + File.separator + "jaggeryapps" + File.separator + "portal" +
                 File.separator + "store" + File.separator + "carbon.super" + File.separator + "gadget";
-
         File source = new File(pathToGadgets);
         File destination = new File(DestinationPath);
         FileUtils.copyDirectory(source, destination);
-
         AutomationContext automationContext =
                 new AutomationContext(DSIntegrationTestConstants.DS_PRODUCT_NAME, this.userMode);
         ServerConfigurationManager serverConfigurationManager = new ServerConfigurationManager(automationContext);

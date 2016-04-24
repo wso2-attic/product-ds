@@ -1,5 +1,5 @@
-/*
- * Copyright 2005-2015 WSO2, Inc. (http://wso2.com)
+/**
+ * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.wso2.ds.ui.integration.test.dashboard;
 
 import ds.integration.tests.common.domain.DSIntegrationTestConstants;
@@ -43,18 +42,14 @@ import static org.testng.Assert.assertTrue;
  * Tests the dashboard banner uploading functionality for super tenant and tenant user scenarios.
  */
 public class BannerTest extends DSUIIntegrationTest {
-
     private static final Log LOG = LogFactory.getLog(BannerTest.class);
-
     private static final String ROOT_RESOURCE_PATH = "/_system/config/ues/customizations/";
     private static final String[] IMAGES = {"orange.png", "silver.png"};
-
     private static final String SUPER_TENANT_EDITOR_ROLE = "editor";
     private static final String SUPER_TENANT_VIEWER_ROLE = "viewer";
     private static final String TENANT_EDITOR_ROLE = "t_editor";
     private static final String TENANT_VIEWER_ROLE = "t_viewer";
     private static final String ADMIN_ROLE = "admin";
-
     private String dashboardId, dashboardTitle;
     private User editor, viewer;
 
@@ -72,28 +67,22 @@ public class BannerTest extends DSUIIntegrationTest {
     public BannerTest(TestUserMode userMode, String dashboardId, String dashboardTitle)
             throws XPathExpressionException, RemoteException, UserAdminUserAdminException {
         super(TestUserMode.SUPER_TENANT_ADMIN);
-
         this.dashboardId = dashboardId;
         this.dashboardTitle = dashboardTitle;
-
         boolean isTenant = userMode.equals(TestUserMode.TENANT_ADMIN);
-
         // Read the editor and viewer users from the automation.xml file.
         AutomationContext automationContext =
                 new AutomationContext(DSIntegrationTestConstants.DS_PRODUCT_NAME, this.userMode);
         editor = automationContext.getContextTenant().getTenantUser("editor");
         viewer = automationContext.getContextTenant().getTenantUser("viewer");
-
         // Manage user roles
         UserManagementClient userManagementClient = new UserManagementClient(
                 getBackEndUrl(), getCurrentUsername(), getCurrentPassword());
-
         // Create editor and viewer user roles (separate user roles are created for super tenant and tenant users)
         userManagementClient.addRole(isTenant ? TENANT_EDITOR_ROLE : SUPER_TENANT_EDITOR_ROLE,
                 new String[]{editor.getUserName()}, null);
         userManagementClient.addRole(isTenant ? TENANT_VIEWER_ROLE : SUPER_TENANT_VIEWER_ROLE,
                 new String[]{viewer.getUserName()}, null);
-
         // Remove the admin role from the editors and viewers
         String[] rolesToRemove = new String[]{ADMIN_ROLE};
         userManagementClient.addRemoveRolesOfUser(editor.getUserName(), null, rolesToRemove);
@@ -255,26 +244,21 @@ public class BannerTest extends DSUIIntegrationTest {
      */
     private void initDashboard() throws MalformedURLException, XPathExpressionException {
         getDriver().get(getBaseUrl() + "/portal/dashboards");
-
         // Create dashboard
         getDriver().findElement(By.cssSelector("a[href='create-dashboard']")).click();
         getDriver().findElement(By.id("ues-dashboard-title")).clear();
         getDriver().findElement(By.id("ues-dashboard-title")).sendKeys(dashboardTitle);
         getDriver().findElement(By.id("ues-dashboard-create")).click();
         selectLayout("banner");
-
         // Change permissions
         getDriver().findElement(By.id("dashboard-settings")).click();
         getDriver().executeScript("scroll(0, 200);");
-
         getDriver().findElement(By.id("ues-share-view")).clear();
         getDriver().findElement(By.id("ues-share-view")).sendKeys("view");
         getDriver().findElement(By.id("ues-share-view")).sendKeys(Keys.TAB);
-
         getDriver().findElement(By.id("ues-share-edit")).clear();
         getDriver().findElement(By.id("ues-share-edit")).sendKeys("edit");
         getDriver().findElement(By.id("ues-share-edit")).sendKeys(Keys.TAB);
-
         // Remove other permissions
         getDriver().findElement(By.cssSelector(
                 ".ues-shared-view .ues-shared-role[data-role=\"Internal/everyone\"] span.remove-button")).click();
@@ -318,20 +302,16 @@ public class BannerTest extends DSUIIntegrationTest {
     private void clickEditBannerButton(int imageIndex) throws MalformedURLException, XPathExpressionException {
         // Temporary display the HTML form which is used to upload the image
         getDriver().executeScript("document.getElementById('ues-dashboard-upload-banner-form').className='';");
-
         // Get the sample_images directory
         ClassLoader classLoader = BannerTest.class.getClassLoader();
         File classPathRoot = new File(classLoader.getResource("").getPath());
-
         String filePath = Paths.get(classPathRoot.getAbsolutePath(), "sample_images", IMAGES[imageIndex]).toString();
-
         if (LOG.isDebugEnabled()) {
             File file = new File(filePath);
             if (!file.exists()) {
                 LOG.debug("Unable to find the sample image file at " + filePath);
             }
         }
-
         getDriver().findElement(By.id("file-banner")).sendKeys(Keys.DELETE);
         getDriver().findElement(By.id("file-banner")).sendKeys(filePath);
     }

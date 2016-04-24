@@ -1,21 +1,18 @@
-/*
-*Copyright (c) 2015​, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
-*
-*WSO2 Inc. licenses this file to you under the Apache License,
-*Version 2.0 (the "License"); you may not use this file except
-*in compliance with the License.
-*You may obtain a copy of the License at
-*
-*http://www.apache.org/licenses/LICENSE-2.0
-*
-*Unless required by applicable law or agreed to in writing,
-*software distributed under the License is distributed on an
-*"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-*KIND, either express or implied.  See the License for the
-*specific language governing permissions and limitations
-*under the License.
-*/
-
+/**
+ * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.wso2.ds.ui.integration.test.dashboard;
 
 import ds.integration.tests.common.domain.DSIntegrationTestConstants;
@@ -119,54 +116,39 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         String[][] defaultViewGadgetMappings = {{GADGET_3_ID, CONTAINER_A}};
         String anonViewGadgetAddScript = generateAddGadgetScript(anonViewGadgetMappings);
         String defaultViewGadgetAddScript = generateAddGadgetScript(defaultViewGadgetMappings);
-
         addPageToDashboard();
         getDriver().findElement(By.cssSelector("input[name='anon']")).click();
         switchView("anon");
         getDriver().executeScript(anonViewGadgetAddScript);
-
         assertEquals(GADGET_4, getAttributeValue("iframe", "title"));
-
         switchView("default");
         getDriver().executeScript(defaultViewGadgetAddScript);
-
         assertEquals(GADGET_3, getAttributeValue("iframe", "title"));
-
         switchPage("landing");
         switchPage("page0");
-
         assertEquals(GADGET_3, getAttributeValue("iframe", "title"));
-
         switchView("anon");
-
         assertEquals(GADGET_4, getAttributeValue("iframe", "title"));
-
         switchView("default");
         clickViewButton();
-
         pushWindow();
         assertEquals(GADGET_3, getAttributeValue("iframe", "title"));
         getDriver().close();
         popWindow();
-
         switchView("anon");
         clickViewButton();
-
         pushWindow();
         assertEquals(GADGET_4, getAttributeValue("iframe", "title"));
         getDriver().close();
         popWindow();
-
         switchPage("landing");
         getDriver().findElement(By.cssSelector("input[name='anon']")).click();
         WebElement element = getDriver().findElement(By.cssSelector("button#ues-modal-info-ok"));
-
         boolean hasWarning = false;
         if (element != null) {
             hasWarning = true;
         }
         assertEquals(true, hasWarning, "Can remove the anonymous view of landing page when there are pages with anonymous views");
-
         getDriver().findElement(By.cssSelector("button.close")).click();
     }
 
@@ -179,13 +161,11 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
             dependsOnMethods = "testAnonDashboardPages")
     public void testAnonPagesViews() throws Exception {
         logout();
-
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT + "/" + dashboardTitle + "/landing");
         //check anon view gadgets are there
         assertEquals(GADGET_2, getAttributeValue("iframe", "title"));
         //check default view gadgets are not there
         assertNotEquals(GADGET_1, getAttributeValue("iframe", "title"));
-
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT + "/" + dashboardTitle + "/page0");
         //check anon view gadgets are there
         assertEquals(GADGET_4, getAttributeValue("iframe", "title"));
@@ -202,7 +182,6 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         login(getCurrentUsername(), getCurrentPassword());
         getDriver().findElement(By.cssSelector("#" + dashboardTitle.toLowerCase() + " .ues-edit")).click();
         selectPane("pages");
-
         switchPage("page0");
         getDriver().findElement(By.cssSelector("input[name='anon']")).click();
         boolean isAnonViewHidden = false;
@@ -211,10 +190,8 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         if (attrValue.equals("hide")) {
             isAnonViewHidden = true;
         }
-
         assertTrue(isAnonViewHidden, "Anonymous toggle button is not hidden");
         assertEquals(GADGET_3, getAttributeValue("iframe", "title"));
-
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT + "/" + dashboardTitle + "/landing?isAnonView=true");
         modifyTimeOut(2);
         boolean isLinkForNonAnonPageNotExist = getDriver().findElements(By.cssSelector("a[href='" + getBaseUrl() +
@@ -238,10 +215,8 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         if (attrValue.equals("hide")) {
             isAnonViewHidden = true;
         }
-
         assertTrue(isAnonViewHidden, "Anonymous toggle button is not hidden");
         assertEquals(GADGET_1, getAttributeValue("iframe", "title"));
-
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT + "/" + dashboardTitle + "/landing?isAnonView=true");
         modifyTimeOut(2);
         boolean noIFramesAvailable = getDriver().findElements(By.cssSelector("iframe")).size() <= 0;

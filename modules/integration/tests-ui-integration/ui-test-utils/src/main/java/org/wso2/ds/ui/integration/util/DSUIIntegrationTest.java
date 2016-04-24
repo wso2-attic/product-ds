@@ -1,19 +1,18 @@
-/*
- * Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
-*
+/**
+ * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
-*You may obtain a copy of the License at
-*
-*http://www.apache.org/licenses/LICENSE-2.0
-*
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-*/
-
+ */
 package org.wso2.ds.ui.integration.util;
 
 import ds.integration.tests.common.domain.DSIntegrationTest;
@@ -40,7 +39,6 @@ import java.util.concurrent.TimeUnit;
  * Defines base class for UI integration tests.
  */
 public abstract class DSUIIntegrationTest extends DSIntegrationTest {
-
     private static final Log LOG = LogFactory.getLog(DSUIIntegrationTest.class);
     private static final String DS_SUFFIX = "/portal/login-controller?destination=%2Fportal%2F";
     private static final String DS_HOME_SUFFIX = "/portal/dashboards";
@@ -119,7 +117,6 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
                 break;
             }
         }
-
         // Push the parent window to the window list
         windowHandles.push(currentWindowHandle);
     }
@@ -150,7 +147,6 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         getDriver().findElement(By.name("username")).sendKeys(userName);
         getDriver().findElement(By.name("password")).clear();
         getDriver().findElement(By.name("password")).sendKeys(pwd);
-
         String currentUrl = getDriver().getCurrentUrl();
         if (currentUrl.contains("authenticationendpoint/login.do")) {
             // SSO login enabled
@@ -212,7 +208,6 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      */
     public void addDashBoard(String dashBoardTitle, String description)
             throws MalformedURLException, XPathExpressionException {
-
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("[href='create-dashboard']")).click();
         getDriver().findElement(By.id("ues-dashboard-title")).clear();
@@ -360,7 +355,6 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      */
     public void addUser(String username, String password, String retypePassword)
             throws MalformedURLException, XPathExpressionException {
-
         getDriver().findElement(By.cssSelector("a[href=\"../userstore/add-user-role.jsp" +
                 "?region=region1&item=user_mgt_menu_add\"]")).click();
         getDriver().findElement(By.cssSelector("a[href=\"../user/add-step1.jsp\"]")).click();
@@ -401,7 +395,6 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @throws XPathExpressionException
      */
     public void assignRoleToUser(String[] userNames) throws MalformedURLException, XPathExpressionException {
-
         for (String userName : userNames) {
             getDriver().findElement(By.cssSelector("input[value='" + userName + "']")).click();
         }
@@ -482,7 +475,6 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @throws InterruptedException
      */
     public void deleteDashboards() throws MalformedURLException, XPathExpressionException, InterruptedException {
-
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         List<WebElement> dashboardElements = getDriver().findElements(By.cssSelector("div.ues-dashboards div.ues-dashboard"));
         List<String> dashboardIds = new ArrayList<String>();
@@ -500,5 +492,4 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
             }
         }
     }
-
 }
