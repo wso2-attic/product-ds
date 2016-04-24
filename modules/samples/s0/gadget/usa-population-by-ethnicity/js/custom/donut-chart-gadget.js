@@ -74,19 +74,19 @@ var initDonutChart;
                     data: dataToAdd,
                     next: null
                 },
-                next_node;
+                nextNode;
 
             if (!head) {
                 head = node;
                 current = head;
                 length++;
             } else {
-                next_node = head;
-                while (next_node.next) {
-                    next_node = next_node.next;
+                nextNode = head;
+                while (nextNode.next) {
+                    nextNode = nextNode.next;
                 }
-                node.previous = next_node;
-                next_node.next = node;
+                node.previous = nextNode;
+                nextNode.next = node;
                 current = node;
                 length++;
             }
@@ -96,9 +96,9 @@ var initDonutChart;
          * Remove the current node.
          * */
         var removeCurrent = function () {
-            var prev_node = current.previous;
-            prev_node.next = null;
-            current = prev_node;
+            var prevNode = current.previous;
+            prevNode.next = null;
+            current = prevNode;
         };
 
         /*
@@ -301,7 +301,7 @@ var initDonutChart;
          * */
         var createColorScale = function () {
 
-            var getColor = function(d){
+            var getColor = function (d) {
                 return COLORS[d.name];
             };
 
@@ -467,7 +467,8 @@ var initDonutChart;
         var updateChartDetails = function (data) {
             $("#donutDetails").empty();
             data.forEach(function (element, index) {
-                var html = "<li>" + "<div style='background-color:" + color(element) + ";'></div><span>" + element.name + " - " + element.currentPopulation + "</span></li>";
+                var html = "<li>" + "<div style='background-color:" + color(element) +
+                    ";'></div><span>" + element.name + " - " + element.currentPopulation + "</span></li>";
                 $("#donutDetails").append(html);
             });
         };
@@ -553,7 +554,6 @@ var initDonutChart;
                 .attr("stroke", "white")
                 .attr("stroke-width", 0.5)
                 .attr("fill", function (d, i) {
-                    console.log(d);
                     return color(d);
                 })
                 .transition()
