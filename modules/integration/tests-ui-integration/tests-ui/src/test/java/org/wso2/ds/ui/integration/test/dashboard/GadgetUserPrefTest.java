@@ -241,16 +241,18 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         driver.findElement(By.id("ues-share-view")).clear();
         driver.findElement(By.id("ues-share-view")).sendKeys("viewer_userPr");
         driver.findElement(By.id("ues-share-view")).sendKeys(Keys.TAB);
+        //driver.findElement(By.id("ues-dashboard-saveBtn")).click();
 
         driver.findElement(By.id("ues-share-edit")).clear();
         driver.findElement(By.id("ues-share-edit")).sendKeys("editor_userPr");
         driver.findElement(By.id("ues-share-edit")).sendKeys(Keys.TAB);
-
+        //driver.findElement(By.id("ues-dashboard-saveBtn")).click();
         // Remove other permissions
         driver.findElement(By.cssSelector(".ues-shared-view " +
                 ".ues-shared-role[data-role=\"Internal/everyone\"] span.remove-button")).click();
         driver.findElement(By.cssSelector(".ues-shared-edit " +
                 ".ues-shared-role[data-role=\"Internal/everyone\"] span.remove-button")).click();
+        driver.findElement(By.id("ues-dashboard-saveBtn")).click();
         redirectToLocation("portal", "dashboards");
     }
 

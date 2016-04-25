@@ -72,6 +72,7 @@ public class RoleBasedDashboardAccess extends DSUIIntegrationTest {
 
         driver.findElement(By.cssSelector("#" + dashboardId + " .ues-settings")).click();
         driver.findElement(By.cssSelector(".ues-shared-edit")).findElement(By.cssSelector(".remove-button")).click();
+        driver.findElement(By.id("ues-dashboard-saveBtn")).click();
         logout();
 
         loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
