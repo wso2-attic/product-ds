@@ -1,5 +1,5 @@
-/*
- * Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+/**
+ * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.wso2.ds.ui.integration.util;
 
 import ds.integration.tests.common.domain.DSIntegrationTest;
@@ -40,11 +39,12 @@ import java.util.concurrent.TimeUnit;
  * Defines base class for UI integration tests.
  */
 public abstract class DSUIIntegrationTest extends DSIntegrationTest {
-
     private static final Log LOG = LogFactory.getLog(DSUIIntegrationTest.class);
     private static final String DS_SUFFIX = "/portal/login-controller?destination=%2Fportal%2F";
     private static final String DS_HOME_SUFFIX = "/portal/dashboards";
     private static final String ADMIN_CONSOLE_SUFFIX = "/carbon/admin/index.jsp";
+    public static final String DS_HOME_CONTEXT = "portal";
+    public static final String DS_DASHBOARDS_CONTEXT = "dashboards";
 
     protected String resourcePath;
     private DSWebDriver driver = null;
@@ -136,7 +136,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     /**
      * To login to Dashboard server.
      *
-     * @param userName username
+     * @param userName user name
      * @param pwd      password
      * @throws XPathExpressionException
      * @throws MalformedURLException
@@ -147,7 +147,6 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         getDriver().findElement(By.name("username")).sendKeys(userName);
         getDriver().findElement(By.name("password")).clear();
         getDriver().findElement(By.name("password")).sendKeys(pwd);
-
         String currentUrl = getDriver().getCurrentUrl();
         if (currentUrl.contains("authenticationendpoint/login.do")) {
             // SSO login enabled
@@ -173,7 +172,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     /**
      * To login to admin console DashBoard server.
      *
-     * @param userName username
+     * @param userName user name
      * @param pwd      password
      * @throws MalformedURLException
      * @throws XPathExpressionException
@@ -209,7 +208,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      */
     public void addDashBoard(String dashBoardTitle, String description)
             throws MalformedURLException, XPathExpressionException {
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("[href='create-dashboard']")).click();
         getDriver().findElement(By.id("ues-dashboard-title")).clear();
         getDriver().findElement(By.id("ues-dashboard-title")).sendKeys(dashBoardTitle);
@@ -217,7 +216,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         getDriver().findElement(By.id("ues-dashboard-description")).sendKeys(description);
         getDriver().findElement(By.id("ues-dashboard-create")).click();
         selectLayout("default-grid");
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
     }
 
     /**
@@ -235,7 +234,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     /**
      * Redirect user to the given location.
      *
-     * @param domain   name of the domain where user wants to direct into
+     * @param domain   name of the domain where user wants to direct in to
      * @param location name of the location to be directed to
      * @throws MalformedURLException
      * @throws XPathExpressionException
@@ -356,7 +355,6 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      */
     public void addUser(String username, String password, String retypePassword)
             throws MalformedURLException, XPathExpressionException {
-
         getDriver().findElement(By.cssSelector("a[href=\"../userstore/add-user-role.jsp" +
                 "?region=region1&item=user_mgt_menu_add\"]")).click();
         getDriver().findElement(By.cssSelector("a[href=\"../user/add-step1.jsp\"]")).click();
@@ -461,7 +459,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
             resourceAdminServiceClient.getResourceContent(resourcePath);
         } catch (ResourceAdminServiceExceptionException ex) {
             isResourceExist = false;
-        } catch(AxisFault ex) {
+        } catch (AxisFault ex) {
             isResourceExist = false;
         } catch (Exception ex) {
             LOG.error(ex);
@@ -477,7 +475,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @throws InterruptedException
      */
     public void deleteDashboards() throws MalformedURLException, XPathExpressionException, InterruptedException {
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         List<WebElement> dashboardElements = getDriver().findElements(By.cssSelector("div.ues-dashboards div.ues-dashboard"));
         List<String> dashboardIds = new ArrayList<String>();
         // Get all dashboard ids from list
