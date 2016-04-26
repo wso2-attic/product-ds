@@ -122,6 +122,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         // Remove all other roles
         getDriver().findElement(By.cssSelector(".ues-shared-view > .ues-shared-role > .remove-button")).click();
         getDriver().findElement(By.cssSelector(".ues-shared-edit > .ues-shared-role > .remove-button")).click();
+        getDriver().findElement(By.id("ues-dashboard-saveBtn")).click();
     }
 
     /**

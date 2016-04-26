@@ -231,6 +231,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
                 ".ues-shared-role[data-role=\"Internal/everyone\"] span.remove-button")).click();
         driver.findElement(By.cssSelector(".ues-shared-edit " +
                 ".ues-shared-role[data-role=\"Internal/everyone\"] span.remove-button")).click();
+        driver.findElement(By.id("ues-dashboard-saveBtn")).click();
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
     }
 
