@@ -108,9 +108,9 @@
     ]]>
     </Content>
 
-    <Content type="html" view="settings">
-        <![CDATA[
+ <Content type="html" view="settings">
+       <![CDATA[
         This is settings
       ]]>
-    </Content>
+  </Content>
 </Module>

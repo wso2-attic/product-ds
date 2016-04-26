@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+/*
+ * Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.wso2.ds.ui.integration.test.dashboard;
 
 import ds.integration.tests.common.domain.DSIntegrationTestConstants;
@@ -102,7 +103,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
      */
     @Test(groups = "wso2.ds.dashboard", description = "Adding blocks to an existing dashboard")
     public void testAddBlocks() throws MalformedURLException, XPathExpressionException {
-        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
+        redirectToLocation("portal", "dashboards");
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
         selectPane("layouts");
         getDriver().findElement(By.id("ues-add-block-btn")).click();
@@ -145,11 +146,11 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
             throws MalformedURLException, XPathExpressionException, InterruptedException {
         String[][] gadgetMappings = {{"publisher", "b"}, {"usa-map", "c"}};
         String script = generateAddGadgetScript(gadgetMappings);
-        boolean gadgetsAvailable = true;
         selectPane("gadgets");
         getDriver().executeScript(script);
         clickViewButton();
         pushWindow();
+
         List<WebElement> elements = new ArrayList<WebElement>();
         for (String[] mapping : gadgetMappings) {
             WebElement element = getDriver().findElement(
@@ -159,6 +160,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
             }
         }
 
+        boolean gadgetsAvailable = true;
         if (elements.size() != gadgetMappings.length) {
             gadgetsAvailable = false;
         }
@@ -217,6 +219,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         driver.findElement(By.id("optionsButtonEvents")).click();
         driver.findElement(By.linkText("subscriber")).click();
         driver.findElement(By.className("notifier")).click();
+
         driver.findElement(By.name("hide_gadget")).click();
         clickViewButton();
         pushWindow();
@@ -252,6 +255,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
                         "return innerDoc.getElementById('defaultViewLabel').textContent;"
         );
         assertEquals("USA MAP (This is default view)", txt.toString());
+
         getDriver().findElement(By.cssSelector("#c button.ues-component-full-handle")).click();
         // This sleep is used to wait until the content of the iframe appears
         Thread.sleep(200);
@@ -262,6 +266,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
                         "return innerDoc.getElementById('fullViewLabel').textContent;"
         );
         assertEquals("USA MAP (this is full screen view)", txtMax.toString());
+
         getDriver().close();
         popWindow();
     }
@@ -275,16 +280,18 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
     @Test(groups = "wso2.ds.dashboard", description = "Test fluid layout",
             dependsOnMethods = "testMaximizeGadgetInView")
     public void testFluidLayout() throws MalformedURLException, XPathExpressionException {
-        boolean isFluidLayout = false;
         selectPane("pages");
         getDriver().findElement(By.cssSelector("[name=landing]")).click();
         getDriver().findElement(By.cssSelector("[name=fluidLayout]")).click();
         clickViewButton();
         pushWindow();
+
+        boolean isFluidLayout = false;
         List<WebElement> elements = getDriver().findElements(By.cssSelector(".page-content-wrapper > .container-fluid"));
         if (elements.size() > 0) {
             isFluidLayout = true;
         }
+
         assertTrue(isFluidLayout, "The layout is not fluid");
         getDriver().close();
         popWindow();
@@ -309,7 +316,6 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
 
     /**
      * Copy all the test gadgets located at resources directory to the pack used for testing
-     *
      * @throws XPathExpressionException
      * @throws AutomationUtilException
      * @throws IOException
@@ -321,10 +327,13 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         String pathToGadgets = systemResourceLocation + "gadgets";
         String DestinationPath = carbonHome + File.separator + "repository" + File.separator + "deployment" +
                 File.separator + "server" + File.separator + "jaggeryapps" + File.separator + "portal" +
-                File.separator + "store" + File.separator + "carbon.super" + File.separator + "gadget";
+                File.separator + "store" + File.separator + "carbon.super" + File.separator + "fs" +
+                File.separator + "gadget";
+
         File source = new File(pathToGadgets);
         File destination = new File(DestinationPath);
         FileUtils.copyDirectory(source, destination);
+
         AutomationContext automationContext =
                 new AutomationContext(DSIntegrationTestConstants.DS_PRODUCT_NAME, this.userMode);
         ServerConfigurationManager serverConfigurationManager = new ServerConfigurationManager(automationContext);
