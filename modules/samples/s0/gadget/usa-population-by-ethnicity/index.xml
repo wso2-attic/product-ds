@@ -34,7 +34,7 @@
 
             <!-- Load the common libraries-->
             <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
-            <script language="javascript" type="text/javascript" src="/portal/libs/bootstrap_3.3.5/js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="/portal/libs/bootstrap_3.3.5/js/bootstrap.min.js"></script>
             <script type="text/javascript" src="js/d3.min.js"></script>
 
             <!-- Load the gadget java script-->

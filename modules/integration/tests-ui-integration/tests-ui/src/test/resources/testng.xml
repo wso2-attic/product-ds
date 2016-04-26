@@ -29,9 +29,6 @@
         <listener class-name="org.wso2.carbon.integration.common.extensions.selenium.UIManagementListener"/>
     </listeners>
     <test name="DS-UI-tests" parallel="false" verbose="2" preserve-order="true">
-        <!--<packages>-->
-        <!--<package name="org.wso2.ds.ui.integration.test.login.*"/>-->
-        <!--</packages>>-->
         <classes>
             <class name="org.wso2.ds.ui.integration.test.login.LoginAdminTest"/>
             <class name="org.wso2.ds.ui.integration.test.login.LoginPortalTest"/>
