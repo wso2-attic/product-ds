@@ -47,6 +47,7 @@
             <class name="org.wso2.ds.ui.integration.test.dashboard.BannerTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.DefaultDashboardBehaviourTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.GadgetStateTest"/>
+            <class name="org.wso2.ds.ui.integration.test.dashboard.AddRemoveCustomButtonsTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.WidgetSupportTest"/>
         </classes>
     </test>
