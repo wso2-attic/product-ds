@@ -3,9 +3,9 @@
   "title": "Date Picker Widget",
   "type": "widget",
   "category": "Widgets",
-  "thumbnail": "store://gadget/date-picker-widget/index.png",
+  "thumbnail": "gadget/date-picker-widget/index.png",
   "data": {
-    "url": "store://gadget/date-picker-widget/index.xml"
+    "url": "gadget/date-picker-widget/index.xml"
   },
   "options": {
   },

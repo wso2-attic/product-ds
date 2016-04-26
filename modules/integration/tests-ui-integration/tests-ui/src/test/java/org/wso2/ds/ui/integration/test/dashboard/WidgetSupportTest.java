@@ -16,21 +16,15 @@
 
 package org.wso2.ds.ui.integration.test.dashboard;
 
-import ds.integration.tests.common.domain.DSIntegrationTestConstants;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.testng.annotations.*;
-import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
-import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
 import org.wso2.carbon.integration.common.utils.exceptions.AutomationUtilException;
-import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 import org.wso2.ds.ui.integration.util.DSWebDriver;
 
 import javax.xml.xpath.XPathExpressionException;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
@@ -140,24 +134,5 @@ public class WidgetSupportTest extends DSUIIntegrationTest {
         } finally {
             getDriver().quit();
         }
-    }
-
-    @BeforeSuite
-    public void copyTestGadgets() throws XPathExpressionException, AutomationUtilException, IOException {
-        String carbonHome = FrameworkPathUtil.getCarbonHome();
-        String systemResourceLocation = FrameworkPathUtil.getSystemResourceLocation();
-        String pathToGadgets = systemResourceLocation + "gadgets";
-        String DestinationPath = carbonHome + File.separator + "repository" + File.separator + "deployment" +
-                File.separator + "server" + File.separator + "jaggeryapps" + File.separator + "portal" +
-                File.separator + "store" + File.separator + "carbon.super" + File.separator + "gadget";
-
-        File source = new File(pathToGadgets);
-        File destination = new File(DestinationPath);
-        FileUtils.copyDirectory(source, destination);
-
-        AutomationContext automationContext =
-                new AutomationContext(DSIntegrationTestConstants.DS_PRODUCT_NAME, this.userMode);
-        ServerConfigurationManager serverConfigurationManager = new ServerConfigurationManager(automationContext);
-        serverConfigurationManager.restartGracefully();
     }
 }
