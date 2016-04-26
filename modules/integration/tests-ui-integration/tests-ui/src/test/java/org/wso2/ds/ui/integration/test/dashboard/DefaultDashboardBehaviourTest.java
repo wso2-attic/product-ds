@@ -1,5 +1,5 @@
-/*
- * Copyright 2005-2015 WSO2, Inc. (http://wso2.com)
+/**
+ * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.wso2.ds.ui.integration.test.dashboard;
 
 import ds.integration.tests.common.domain.DSIntegrationTestConstants;
@@ -39,7 +38,6 @@ import static org.testng.Assert.assertTrue;
  * Tests the default behaviour of the dashboard
  */
 public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
-
     private static final String USERNAME_EDITOR = "editor1";
     private static final String PASSWORD_EDITOR = "editor123";
     private static final String RETYPE_PASSWORD_EDITOR = "editor123";
@@ -55,6 +53,7 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
 
     /**
      * Provides user modes
+     *
      * @return
      */
     @DataProvider(name = "userMode")
@@ -68,24 +67,20 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
         // delete all dashboards if exists
         deleteDashboards();
         logout();
-
         loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
-
         addUser(USERNAME_EDITOR, PASSWORD_EDITOR, RETYPE_PASSWORD_EDITOR);
         addRole(EDITOR_ROLE);
         assignRoleToUser(new String[]{USERNAME_EDITOR});
-
         logoutFromAdminConsole();
-
         // set default dashboard behaviour from designer.json file
         setDefaultDashboardBehaviour(true);
         restartServer();
-
         login(USERNAME_EDITOR, PASSWORD_EDITOR);
     }
 
     /**
      * Test whether the user is redirected to dashboard creation page
+     *
      * @throws Exception
      */
     @Test(groups = "wso2.ds.default.dashboard", description = "redirecting user to dashboard creation page when there " +
@@ -93,12 +88,12 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
     public void testWithNoDashboards() throws Exception {
         DSWebDriver driver = getDriver();
         String currentUrl = driver.getCurrentUrl();
-
-        assertTrue(currentUrl.contains("portal/create-dashboard"), "User didn't directed to dashboard creation page.");
+        assertTrue(currentUrl.contains(DS_HOME_CONTEXT + "/create-dashboard"), "User didn't directed to dashboard creation page.");
     }
 
     /**
      * Test whether the user is redirected to dashboard page
+     *
      * @throws Exception
      */
     @Test(groups = "wso2.ds.default.dashboard", description = "redirecting user to dashboard when there is only one " +
@@ -108,15 +103,14 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
         String dashboardName = "dashboard-1";
         addDashBoard(dashboardName, "This is first dashboard in default behaviour");
         logout();
-
         login(USERNAME_EDITOR, PASSWORD_EDITOR);
         String currentUrl = driver.getCurrentUrl();
-
-        assertTrue(currentUrl.contains("portal/dashboards/" + dashboardName), "User didn't directed to existing dashboard.");
+        assertTrue(currentUrl.contains(DS_HOME_CONTEXT + "/" + DS_DASHBOARDS_CONTEXT + "/" + dashboardName), "User didn't directed to existing dashboard.");
     }
 
     /**
      * Test whether the user is redirected to dashboard list page when there are multiple dashboards
+     *
      * @throws Exception
      */
     @Test(groups = "wso2.ds.default.dashboard", description = "redirecting user to dashboard list when there are " +
@@ -126,15 +120,14 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
         String dashboardName = "sales";
         addDashBoard(dashboardName, "This is second dashboard in default behaviour.");
         logout();
-
         login(USERNAME_EDITOR, PASSWORD_EDITOR);
         String currentUrl = driver.getCurrentUrl();
-
-        assertTrue(currentUrl.endsWith("portal/dashboards/"), "User didn't directed to dashboard list page.");
+        assertTrue(currentUrl.endsWith(DS_HOME_CONTEXT + "/" + DS_DASHBOARDS_CONTEXT + "/"), "User didn't directed to dashboard list page.");
     }
 
     /**
      * Test whether the name of the dashboard is not case sensitive
+     *
      * @throws Exception
      */
     @Test(groups = "wso2.ds.default.dashboard", description = "Testing whether the name of the dashboard is not case " +
@@ -143,26 +136,24 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
         String dashboardTitle = "SALES";
         String description = "Dashboard with uppercase title";
-
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         driver.findElement(By.cssSelector("[href='create-dashboard']")).click();
         driver.findElement(By.id("ues-dashboard-title")).clear();
         driver.findElement(By.id("ues-dashboard-title")).sendKeys(dashboardTitle);
         driver.findElement(By.id("ues-dashboard-description")).clear();
         driver.findElement(By.id("ues-dashboard-description")).sendKeys(description);
         driver.findElement(By.id("ues-dashboard-create")).click();
-
         Thread.sleep(500);
         String message = driver.findElement(By.cssSelector("div.modal-body")).getText().trim();
         assertEquals(message, "A dashboard with same URL already exists. Please enter a different dashboard URL.",
                 "Dashboard name is not case insensitive.");
-
         driver.findElement(By.cssSelector("button#ues-modal-info-ok")).click();
         driver.findElement(By.cssSelector("a[href='./dashboards']")).click();
     }
 
     /**
      * Test whether the length of the dashboard name is valid
+     *
      * @throws Exception
      */
     @Test(groups = "wso2.ds.default.dashboard", description = "Testing the length of the dashboard name",
@@ -175,21 +166,17 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
                 "eu fermentum vulputatec Morbi rhoncus bibendum arcu in hendrerith Quisque commodo lacus sit amet " +
                 "est sagittis malesuam";
         String description = "Dashboard with more than 300 characters";
-
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         driver.findElement(By.cssSelector("[href='create-dashboard']")).click();
         driver.findElement(By.id("ues-dashboard-title")).clear();
         driver.findElement(By.id("ues-dashboard-title")).sendKeys(dashboardTitle);
         driver.findElement(By.id("ues-dashboard-description")).clear();
         driver.findElement(By.id("ues-dashboard-description")).sendKeys(description);
-
         String title = driver.findElement(By.id("ues-dashboard-title")).getAttribute("value");
         // verifying entered title to text box has valid number of characters
         assertTrue(title.length() <= 250, "Length of the title is not validated");
-
         driver.findElement(By.id("ues-dashboard-create")).click();
         selectLayout("default-grid");
-
         title = driver.findElement(By.cssSelector("div.page-title h1")).getText();
         // verifying saved name has valid number of characters
         assertTrue(title.length() <= 250, "Length of the saved title is not correct");
@@ -197,6 +184,7 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
 
     /**
      * Test whether the dashboard name has invalid characters
+     *
      * @throws Exception
      */
     @Test(groups = "wso2.ds.default.dashboard", description = "Testing invalid characters are allowed in dashboard name",
@@ -206,27 +194,23 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
         // title with invalid characters
         String dashboardTitle = "`~!@#$%^&*()_+=|}{[]?><";
         String description = "Dashboard name with invalid characters";
-
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         driver.findElement(By.cssSelector("[href='create-dashboard']")).click();
         driver.findElement(By.id("ues-dashboard-title")).clear();
         driver.findElement(By.id("ues-dashboard-title")).sendKeys(dashboardTitle);
         driver.findElement(By.id("ues-dashboard-description")).clear();
         driver.findElement(By.id("ues-dashboard-description")).sendKeys(description);
-
         String title = driver.findElement(By.id("ues-dashboard-title")).getAttribute("value");
         // verifying entered title to text box has valid characters
         assertTrue(title.length() == 0, "Title has invalid characters");
-
         driver.findElement(By.id("ues-dashboard-create")).click();
-
         String message = driver.findElement(By.cssSelector("#title-error")).getText().trim();
-
         assertEquals(message, "Required", "Title has invalid characters");
     }
 
     /**
      * Test whether the dashboard name allow numbers
+     *
      * @throws Exception
      */
     @Test(groups = "wso2.ds.default.dashboard", description = "Testing numbers are allowed in dashboard name",
@@ -235,21 +219,17 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
         String dashboardTitle = "0123456789";
         String description = "Dashboard name with numbers";
-
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         driver.findElement(By.cssSelector("[href='create-dashboard']")).click();
         driver.findElement(By.id("ues-dashboard-title")).clear();
         driver.findElement(By.id("ues-dashboard-title")).sendKeys(dashboardTitle);
         driver.findElement(By.id("ues-dashboard-description")).clear();
         driver.findElement(By.id("ues-dashboard-description")).sendKeys(description);
-
         String title = driver.findElement(By.id("ues-dashboard-title")).getAttribute("value");
         // verifying entered title to text box has exact characters
         assertEquals(title, dashboardTitle, "Name of the dashboard does not allow numbers");
-
         driver.findElement(By.id("ues-dashboard-create")).click();
         selectLayout("default-grid");
-
         title = driver.findElement(By.cssSelector("div.page-title h1")).getText();
         // verifying saved name has exact name entered
         assertEquals(title, dashboardTitle, "Name of the dashboard does not allow numbers");
@@ -257,6 +237,7 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
 
     /**
      * Test whether the length of the dashboard name is valid
+     *
      * @throws Exception
      */
     @Test(groups = "wso2.ds.default.dashboard", description = "Testing the length of the dashboard description",
@@ -271,28 +252,23 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
                 "volutpatw Etiam vitae lobortis liberor Quisque pellentesque mattis anteb Nunc cursus ac ipsum in " +
                 "variusw Praesent mattis elementum nisi et fermentumn Nulla libero antes iaculis a varius nons " +
                 "viverra et augue nunc suscid";
-
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         driver.findElement(By.cssSelector("[href='create-dashboard']")).click();
         driver.findElement(By.id("ues-dashboard-title")).clear();
         driver.findElement(By.id("ues-dashboard-title")).sendKeys(dashboardTitle);
         driver.findElement(By.id("ues-dashboard-description")).clear();
         driver.findElement(By.id("ues-dashboard-description")).sendKeys(dashboardDescription);
-
         String description = driver.findElement(By.id("ues-dashboard-description")).getAttribute("value").trim();
         // verifying entered title to text box has valid number of characters
         assertTrue(description.length() == 500, "Length of the description is not validated.");
-
         // add more characters to description
         dashboardDescription += "abc";
         driver.findElement(By.id("ues-dashboard-description")).clear();
         driver.findElement(By.id("ues-dashboard-description")).sendKeys(dashboardDescription);
         description = driver.findElement(By.id("ues-dashboard-description")).getAttribute("value").trim();
         assertTrue(description.length() == 500, "Length of the description is not validated.");
-
         driver.findElement(By.id("ues-dashboard-create")).click();
         selectLayout("default-grid");
-
         driver.findElement(By.cssSelector("#dashboard-settings")).click();
         description = driver.findElement(By.id("ues-dashboard-description")).getAttribute("value").trim();
         assertTrue(description.length() == 500, "Length of the description is not validated.");
@@ -300,6 +276,7 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
 
     /**
      * Set default dashboard behaviour by configuring designer json file.
+     *
      * @param behaviour
      * @throws Exception
      */
@@ -313,19 +290,15 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
             File f = new File(designerFilePath);
             BufferedReader br = new BufferedReader(new FileReader(f));
             StringBuilder sb = new StringBuilder();
-
             JSONObject designerJson;
-
             while (br.ready()) {
                 sb.append(br.readLine());
             }
             br.close();
-
             // convert json string to json object
             designerJson = new JSONObject(sb.toString());
             // set active method
             designerJson.put("defaultDashboardRedirect", behaviour);
-
             pw = new PrintWriter(f);
             pw.println(designerJson.toString());
             pw.flush();
@@ -338,6 +311,7 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
 
     /**
      * Restarts the server gracefully
+     *
      * @throws Exception
      */
     public void restartServer() throws Exception {
@@ -348,13 +322,13 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
 
     /**
      * Clean up after running tests
+     *
      * @throws Exception
      */
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
         setDefaultDashboardBehaviour(false);
         restartServer();
-
         getDriver().quit();
     }
 }

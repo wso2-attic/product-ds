@@ -1,5 +1,5 @@
-/*
- * Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+/**
+ * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.wso2.ds.ui.integration.test.dashboard;
 
 import ds.integration.tests.common.domain.DSIntegrationTestConstants;
@@ -44,7 +43,6 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
     private static final String DASHBOARD_TITLE = "perUserCustomDashboard";
     private static final String DASHBOARD_DESCRIPTION = "This is sample description for dashboard";
     private static final String DASHBOARD_PAGE_NAME = "PersonalizeDashBoardTitle";
-
     private String dashboardTitle;
 
     /**
@@ -92,11 +90,9 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         addUser(USERNAME_EDITOR, PASSWORD_EDITOR, RETYPE_PASSWORD_EDITOR);
         addRole(EDITOR_ROLE);
         assignRoleToUser(new String[]{USERNAME_EDITOR});
-
         addUser(USERNAME_VIEWER, PASSWORD_VIEWER, RETYPE_PASSWORD_VIEWER);
         addRole(VIEWER_ROLE);
         assignRoleToUser(new String[]{USERNAME_VIEWER});
-
         logoutFromAdminConsole();
     }
 
@@ -126,6 +122,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         // Remove all other roles
         getDriver().findElement(By.cssSelector(".ues-shared-view > .ues-shared-role > .remove-button")).click();
         getDriver().findElement(By.cssSelector(".ues-shared-edit > .ues-shared-role > .remove-button")).click();
+        getDriver().findElement(By.id("ues-dashboard-saveBtn")).click();
     }
 
     /**
@@ -138,28 +135,23 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
             "testAddDashboardAndAssignRolesBySetting")
     public void testForEditorRole() throws MalformedURLException, XPathExpressionException {
         String dashboardId = dashboardTitle.toLowerCase();
-        // Go to the dashboards page
-        redirectToLocation("portal", "dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         WebElement dashboard = getDriver().findElement(By.id(dashboardId));
         assertEquals(DASHBOARD_TITLE, dashboard.findElement(By.id("ues-dashboard-title")).getText());
         assertEquals(DASHBOARD_DESCRIPTION, dashboard.findElement(By.id("ues-dashboard-description")).getText());
-
         assertTrue(getDriver().isElementPresent(By.cssSelector("#" + dashboardId + " .ues-view")),
                 "view element is present in the current UI");
         assertTrue(getDriver().isElementPresent(By.cssSelector("#" + dashboardId + " .ues-edit")),
                 "design element is present in the current UI");
         assertTrue(getDriver().isElementPresent(By.cssSelector("#" + dashboardId + " .ues-settings")),
                 "settings element is present in the current UI");
-
         dashboard.findElement(By.cssSelector(".ues-view")).click();
         // Switch the driver to the new window and click on the edit/personalize link
         pushWindow();
-
         assertEquals(USERNAME_EDITOR, getDriver().findElement(By.cssSelector(".auth .username")).getText(),
                 "Expected Username is not matched");
         assertEquals("Edit", getDriver().findElement(By.cssSelector("a.ues-copy")).getAttribute("title"),
                 "Unable to find the edit button");
-
         getDriver().close();
         popWindow();
         logout();
@@ -177,23 +169,19 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         String dashboardId = dashboardTitle.toLowerCase();
         login(USERNAME_VIEWER, PASSWORD_VIEWER);
         // Go to the dashboards page
-        redirectToLocation("portal", "dashboards");
-
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         WebElement dashboard = getDriver().findElement(By.id(dashboardId));
         assertEquals(DASHBOARD_TITLE, dashboard.findElement(By.id("ues-dashboard-title")).getText());
         assertEquals(DASHBOARD_DESCRIPTION, dashboard.findElement(By.id("ues-dashboard-description")).getText());
-
         assertTrue(getDriver().isElementPresent(By.cssSelector("#" + dashboardId + " .ues-view")),
                 "view element is present in the current UI");
         assertFalse(getDriver().isElementPresent(By.cssSelector("#" + dashboardId + " .ues-edit")),
                 "design element is present in the current UI");
         assertFalse(getDriver().isElementPresent(By.cssSelector("#" + dashboardId + " .ues-settings")),
                 "settings element is present in the current UI");
-
         dashboard.findElement(By.cssSelector(".ues-view")).click();
         // Switch the driver to the new window and click on the edit/personalize link
         pushWindow();
-
         assertEquals(USERNAME_VIEWER, getDriver().findElement(By.cssSelector(".auth .username")).getText(),
                 "Expected Username is not matched");
         String personalizeText = getDriver().findElement(By.cssSelector("a.ues-copy")).getAttribute("title").trim()
@@ -214,7 +202,6 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         getDriver().findElement(By.cssSelector("[name=title]")).clear();
         getDriver().findElement(By.cssSelector("[name=title]")).sendKeys(DASHBOARD_PAGE_NAME);
         getDriver().findElement(By.cssSelector("div.page-title")).click();
-
         assertEquals(DASHBOARD_PAGE_NAME, getDriver().findElement(By.cssSelector("div.page-title p.lead")).getText(),
                 "error occurred while edit the new page name");
     }
@@ -226,8 +213,8 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
             dependsOnMethods = "testCustomizeButtonDashboard")
     public void checkRegistrySourceForCustomizeDashboard() {
         Boolean isResourceExist = isResourceExist(
-                DSIntegrationTestConstants.DASHBOARD_REGISTRY_PATH_CUSTOM_DASHBOARD_PERUSER + "/" + USERNAME_VIEWER +
-                        "/dashboards/" + dashboardTitle.toLowerCase());
+                DSIntegrationTestConstants.DASHBOARD_REGISTRY_PATH_CUSTOM_DASHBOARD_PERUSER + "/" + USERNAME_VIEWER
+                        + "/" + DS_DASHBOARDS_CONTEXT + "/" + dashboardTitle.toLowerCase());
         assertTrue(isResourceExist,
                 "Registry resource could not be created for personalize dashboard per user due to some errors");
     }

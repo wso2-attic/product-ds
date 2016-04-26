@@ -1,5 +1,5 @@
 {
-    "blocks": [
+    "blocks": [        
         { "id": "a", "x": 0, "y": 0, "width": 4, "height": 3 },
         { "id": "b", "x": 4, "y": 0, "width": 4, "height": 3 },
         { "id": "c", "x": 8, "y": 0, "width": 4, "height": 3 },

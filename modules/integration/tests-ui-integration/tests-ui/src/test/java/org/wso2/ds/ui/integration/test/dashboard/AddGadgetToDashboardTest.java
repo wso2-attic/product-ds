@@ -327,7 +327,8 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         String pathToGadgets = systemResourceLocation + "gadgets";
         String DestinationPath = carbonHome + File.separator + "repository" + File.separator + "deployment" +
                 File.separator + "server" + File.separator + "jaggeryapps" + File.separator + "portal" +
-                File.separator + "store" + File.separator + "carbon.super" + File.separator + "gadget";
+                File.separator + "store" + File.separator + "carbon.super" + File.separator + "fs" +
+                File.separator + "gadget";
 
         File source = new File(pathToGadgets);
         File destination = new File(DestinationPath);

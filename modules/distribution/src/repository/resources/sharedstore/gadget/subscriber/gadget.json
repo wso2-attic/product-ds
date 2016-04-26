@@ -3,9 +3,9 @@
     "title": "Subscriber",
     "type": "gadget",
     "category": "Subscribers",
-    "thumbnail": "store://gadget/usa-business-revenue/index.png",
+    "thumbnail": "gadget/usa-business-revenue/index.png",
     "data": {
-        "url": "store://gadget/subscriber/index.xml"
+        "url": "gadget/subscriber/index.xml"
     },
     "listen": {
         "subscriber": {

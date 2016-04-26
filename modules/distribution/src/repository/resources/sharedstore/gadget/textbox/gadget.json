@@ -3,9 +3,9 @@
   "title": "Text Box",
   "type": "gadget",
   "category": "Widgets",
-  "thumbnail": "store://gadget/textbox/index.png",
+  "thumbnail": "gadget/textbox/index.png",
   "data": {
-    "url": "store://gadget/textbox/index.xml"
+    "url": "gadget/textbox/index.xml"
   },
   "options": {
     "content": {

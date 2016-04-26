@@ -2,12 +2,12 @@
     "id": "usa-map",
     "title": "USA Map",
     "type": "gadget",
-    "thumbnail": "store://gadget/usa-map/index.png",
+    "thumbnail": "gadget/usa-map/index.png",
     "settings": {
         "personalize": true
     },
     "data": {
-        "url": "store://gadget/usa-map/index.xml"
+        "url": "gadget/usa-map/index.xml"
     },
     "description": "Allows to view and select US states",
     "notify": {
