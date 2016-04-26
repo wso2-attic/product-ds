@@ -183,6 +183,13 @@
                 <exclude>**/shindig/features/**</exclude>
 	       </excludes>
         </fileSet>
+        <fileSet>
+            <directory>src/repository/resources/sharedstore/gadget/date-picker-widget</directory>
+            <outputDirectory>wso2ds-${pom.version}/repository/deployment/server/jaggeryapps/portal/store/carbon.super/fs/gadget/date-picker-widget</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
         <!--data-bridge configuration-->
         <fileSet>
             <directory>src/repository/conf/data-bridge</directory>
