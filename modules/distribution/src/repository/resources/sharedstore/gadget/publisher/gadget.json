@@ -2,10 +2,10 @@
     "id": "publisher",
     "title": "Publisher",
     "type": "gadget",
-    "thumbnail": "store://gadget/usa-business-revenue/index.png",
+    "thumbnail": "gadget/usa-business-revenue/index.png",
     "category": "Publishers",
     "data": {
-        "url": "store://gadget/publisher/index.xml"
+        "url": "gadget/publisher/index.xml"
     },
     "notify": {
         "publisher": {

@@ -6,7 +6,7 @@
         </Require>
         <Require feature="setprefs"/>
     </ModulePrefs>
-    <UserPref name="gadget-status" default_value="not-wired" datatype="hidden"/>
+    <UserPref name="gadget-status" default_value="not-wired" datatype="hidden" />
     <Content type="html">
         <![CDATA[
 <html>
