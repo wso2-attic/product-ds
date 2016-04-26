@@ -149,8 +149,8 @@ public class AddRemoveCustomButtonsTest extends DSUIIntegrationTest {
         String carbonHome = FrameworkPathUtil.getCarbonHome();
         String fileName = carbonHome + File.separator + "repository" + File.separator + "deployment" +
                 File.separator + "server" + File.separator + "jaggeryapps" + File.separator + "portal" +
-                File.separator + "store" + File.separator + "carbon.super" + File.separator + "gadget" + File
-                .separator + GADGET_NAME + File.separator + "gadget.json";
+                File.separator + "store" + File.separator + "carbon.super" +  File.separator + "fs" + File.separator  +
+                "gadget" + File.separator + GADGET_NAME + File.separator + "gadget.json";
         JSONParser parser = new JSONParser();
         Object fileObj = parser.parse(new FileReader(fileName));
         return (JSONObject) fileObj;
