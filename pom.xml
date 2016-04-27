@@ -569,7 +569,7 @@
         <carbon.automation.version>4.4.2</carbon.automation.version>
         <carbon.automationutils.version>4.4.2</carbon.automationutils.version>
 
-        <carbon.dashboards.version>1.0.16-SNAPSHOT</carbon.dashboards.version>
+        <carbon.dashboards.version>1.0.17-SNAPSHOT</carbon.dashboards.version>
         <product.ds.version>2.1.0-SNAPSHOT</product.ds.version>
 
         <test.framework.version>4.4.2</test.framework.version>

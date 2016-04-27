@@ -84,7 +84,7 @@ public class AddRemoveCustomButtonsTest extends DSUIIntegrationTest {
      *
      * @throws Exception
      */
-    @Test(groups = "wso2.ds.dashboard", description = "Adding custom functions to gadget title bar")
+    @Test(groups = "wso2.ds.dashboard", description = "Adding custom functions to gadget title bar", enabled = false)
     public void testCustomButtonsGadgeTitlebar() throws Exception {
         DSWebDriver driver = getDriver();
         addDashBoard(DASHBOARD_TITLE, DASHBOARD_DESCRIPTION);
@@ -119,7 +119,7 @@ public class AddRemoveCustomButtonsTest extends DSUIIntegrationTest {
      */
     @Test(groups = "wso2.ds.dashboard", description = "Hide dafault buttons on gadget title-bar on view mode of " +
             "dashboard",
-            dependsOnMethods = "testCustomButtonsGadgeTitlebar")
+            dependsOnMethods = "testCustomButtonsGadgeTitlebar", enabled = false)
     public void testDefaultButtonsGadgetTitlebar() throws Exception {
         DSWebDriver driver = getDriver();
         JSONObject gadgetJsonObj = getGadgetJSONObject();
