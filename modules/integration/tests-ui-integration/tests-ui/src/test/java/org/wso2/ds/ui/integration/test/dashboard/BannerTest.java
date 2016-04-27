@@ -264,6 +264,7 @@ public class BannerTest extends DSUIIntegrationTest {
                 ".ues-shared-view .ues-shared-role[data-role=\"Internal/everyone\"] span.remove-button")).click();
         getDriver().findElement(By.cssSelector(
                 ".ues-shared-edit .ues-shared-role[data-role=\"Internal/everyone\"] span.remove-button")).click();
+        getDriver().findElement(By.id("ues-dashboard-saveBtn")).click();
         redirectToLocation("portal", "dashboards");
     }
 

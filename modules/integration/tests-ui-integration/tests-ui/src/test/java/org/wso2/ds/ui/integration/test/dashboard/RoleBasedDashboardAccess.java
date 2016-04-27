@@ -65,6 +65,7 @@ public class RoleBasedDashboardAccess extends DSUIIntegrationTest {
                 "settings element is present in the current UI");
         driver.findElement(By.cssSelector("#" + dashboardId + " .ues-settings")).click();
         driver.findElement(By.cssSelector(".ues-shared-edit")).findElement(By.cssSelector(".remove-button")).click();
+        driver.findElement(By.id("ues-dashboard-saveBtn")).click();
         logout();
         loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
         addUser(USER_NAME, PASSWORD, RETYPE_PASSWORD);
