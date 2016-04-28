@@ -1,0 +1,92 @@
+{
+  "id": "toolbarButtons-dashboard",
+  "title": "ToolbarButtons dashboard",
+  "description": "Sample application to demonstrate how to add custom button to gadget title bar and hide default button in view mode of dashboard.",
+  "permissions": {
+    "viewers": [
+      "Internal/everyone"
+    ],
+    "editors": [
+      "Internal/everyone"
+    ]
+  },
+  "pages": [
+    {
+      "id": "landing",
+      "title": "Home",
+      "layout": {
+        "content": {
+          "loggedIn": {
+            "blocks": [
+              {
+                "id": "b",
+                "x": 3,
+                "y": 0,
+                "width": 6,
+                "height": 3,
+                "banner": false
+              }
+            ]
+          }
+        },
+        "fluidLayout": false
+      },
+      "isanon": false,
+      "content": {
+        "default": {
+          "b": [
+            {
+              "id": "gadget-toolbar-buttons-0",
+              "content": {
+                "id": "gadget-toolbar-buttons",
+                "title": "Gadget Toolbar Buttons",
+                "type": "gadget",
+                "thumbnail": "fs://gadget-toolbar-buttons/index.png",
+                "settings": {
+                  "personalize": true
+                },
+                "data": {
+                  "url": "fs://gadget/gadget-toolbar-buttons/index.xml"
+                },
+                "description": "Sample application to demonstrate how to add custom button to gadget title bar and hide default button in view mode of dashboard.",
+                "styles": {
+                  "title": "ToolbarButtons Dashboard",
+                  "borders": true
+                },
+                "options": {},
+                "locale_titles": {},
+                "toolbarButtons":{
+                  "custom":[
+                    {
+                      "action": "REFRESH",
+                      "iconType": "css",
+                      "iconClass": "fw-refresh",
+                      "toolTip": "Refresh"
+                    }
+                  ],
+                  "default":{
+                    "maximize": false
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "anon": {}
+      }
+    }
+  ],
+  "identityServerUrl": "",
+  "accessTokenUrl": "",
+  "apiKey": "",
+  "apiSecret": "",
+  "theme": "",
+  "isUserCustom": false,
+  "isEditorEnable": true,
+  "banner": {
+    "globalBannerExists": false,
+    "customBannerExists": false
+  },
+  "landing": "landing",
+  "isanon": false
+}

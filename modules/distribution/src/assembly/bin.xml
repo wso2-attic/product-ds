@@ -248,6 +248,7 @@
                 <include>**/s0/**</include>
                 <include>**/s1/**</include>
                 <include>**/s2/**</include>
+                <include>**/s3/**</include>
             </includes>
         </fileSet>
         <fileSet>

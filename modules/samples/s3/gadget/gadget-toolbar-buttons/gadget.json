@@ -1,0 +1,29 @@
+{
+  "id": "gadget-toolbar-buttons",
+  "title": "Gadget Toolbar Buttons",
+  "type": "gadget",
+  "category": "Gadget",
+  "thumbnail": "gadget/gadget-toolbar-buttons/index.png",
+  "data": {
+    "url": "gadget/gadget-toolbar-buttons/index.xml"
+  },
+  "options": {
+  },
+  "styles": {
+    "borders": false,
+    "title": false
+  },
+  "toolbarButtons":{
+    "custom":[
+      {
+        "action": "REFRESH",
+        "iconType": "css",
+        "iconClass": "fw-refresh",
+        "toolTip": "Refresh"
+      }
+    ],
+    "default":{
+      "maximize": false
+    }
+  }
+}
