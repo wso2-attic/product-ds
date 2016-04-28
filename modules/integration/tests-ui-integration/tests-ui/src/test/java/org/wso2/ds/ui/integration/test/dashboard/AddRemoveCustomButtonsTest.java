@@ -40,7 +40,7 @@ import static org.testng.Assert.assertTrue;
  * buttons in view mode of dashboard in gadget title bar
  */
 public class AddRemoveCustomButtonsTest extends DSUIIntegrationTest {
-    private static final String DASHBOARD_TITLE = "sampledashboard1";
+    private static final String DASHBOARD_TITLE = "customButtonDashBoard";
     private static final String DASHBOARD_DESCRIPTION = "This is sample description for dashboard";
     private static final String GADGET_NAME = "gadget-sample";
 
@@ -84,7 +84,7 @@ public class AddRemoveCustomButtonsTest extends DSUIIntegrationTest {
      *
      * @throws Exception
      */
-    @Test(groups = "wso2.ds.dashboard", description = "Adding custom functions to gadget title bar", enabled = false)
+    @Test(groups = "wso2.ds.dashboard", description = "Adding custom functions to gadget title bar")
     public void testCustomButtonsGadgeTitlebar() throws Exception {
         DSWebDriver driver = getDriver();
         addDashBoard(DASHBOARD_TITLE, DASHBOARD_DESCRIPTION);
@@ -119,7 +119,7 @@ public class AddRemoveCustomButtonsTest extends DSUIIntegrationTest {
      */
     @Test(groups = "wso2.ds.dashboard", description = "Hide dafault buttons on gadget title-bar on view mode of " +
             "dashboard",
-            dependsOnMethods = "testCustomButtonsGadgeTitlebar", enabled = false)
+            dependsOnMethods = "testCustomButtonsGadgeTitlebar")
     public void testDefaultButtonsGadgetTitlebar() throws Exception {
         DSWebDriver driver = getDriver();
         JSONObject gadgetJsonObj = getGadgetJSONObject();
