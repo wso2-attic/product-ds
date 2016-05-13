@@ -86,6 +86,10 @@ public class GadgetStateTest extends DSUIIntegrationTest {
         clickViewButton();
         pushWindow();
         Thread.sleep(3000);
+
+        // This will add a wait until the iframe appears
+        getDriver().findElement(By.cssSelector("iframe[title='Gadget State']"));
+
         getDriver().executeScript("var iframe = $(\"iframe[title='Gadget State']\")[0];" +
                 "var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);" +
                 "innerDoc.getElementById('btn-change-state').click();");
