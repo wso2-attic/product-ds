@@ -248,7 +248,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         clickViewButton();
         pushWindow();
         // This sleep is used to wait until the content of the IFRAME appears.
-        Thread.sleep(200);
+        Thread.sleep(1000);
         Object txt = getDriver().executeScript(
                 "var iframe = $(\"iframe[title='USA Map']\")[0];" +
                         "var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);" +
@@ -258,7 +258,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
 
         getDriver().findElement(By.cssSelector("#c button.ues-component-full-handle")).click();
         // This sleep is used to wait until the content of the iframe appears
-        Thread.sleep(200);
+        Thread.sleep(1000);
         //maximized Window view
         Object txtMax = getDriver().executeScript(
                 "var iframe = $(\"iFrame[title='USA Map']\")[0];" +
