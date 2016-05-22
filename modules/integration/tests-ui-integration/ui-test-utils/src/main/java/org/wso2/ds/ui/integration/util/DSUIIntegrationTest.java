@@ -199,32 +199,6 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     }
 
     /**
-     * To login using login api
-     *
-     * @param method HTTP request method
-     * @throws MalformedURLException
-     * @throws XPathExpressionException
-     */
-    public void loginToApi(String method) throws MalformedURLException, XPathExpressionException {
-        if (method.equalsIgnoreCase("get")) {
-            getDriver().get(getBaseUrl() + "/portal/apis/login?username=" + getCurrentUsername() + "&password="
-                    + getCurrentPassword());
-        } else {
-            String url = getBaseUrl() + "/portal/apis/login";
-            String html =
-                    "<form method=post action=" + url + "<input type=hidden name=username value=" + getCurrentUsername()
-                            + ">" + "<input type=hidden name=password value=" + getCurrentPassword() + ">" +
-                            "<input type=submit name=METHOD value=mysubmitbutton>" +
-                            "</form>";
-
-            String script = "var h1 = document.createElement('div'); " + "h1.innerHTML=\"" + html
-                    + "\"; document.body.appendChild(h1)";
-            getDriver().executeScript(script);
-        }
-
-    }
-
-    /**
      * Add dashboard to DashboardServer
      *
      * @param dashBoardTitle title of the dashboard

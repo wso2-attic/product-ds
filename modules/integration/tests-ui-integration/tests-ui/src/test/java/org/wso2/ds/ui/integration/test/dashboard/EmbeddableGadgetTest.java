@@ -24,9 +24,11 @@ import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.engine.context.beans.User;
 import org.wso2.carbon.integration.common.utils.exceptions.AutomationUtilException;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
+
 import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 import java.net.MalformedURLException;
+
 import static org.testng.Assert.*;
 
 /**
@@ -38,11 +40,9 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
     /**
      * Initializes the class.
      *
-     * @param userMode       user mode
-     * @param dashboardTitle title of the dashboard
+     * @param userMode user mode
      */
-    @Factory(dataProvider = "userMode")
-    public EmbeddableGadgetTest(TestUserMode userMode, String dashboardTitle) {
+    @Factory(dataProvider = "userMode") public EmbeddableGadgetTest(TestUserMode userMode) {
         super(userMode);
     }
 
@@ -51,8 +51,7 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
      *
      * @return user modes
      */
-    @DataProvider(name = "userMode")
-    public static Object[][] userModeProvider() {
+    @DataProvider(name = "userMode") public static Object[][] userModeProvider() {
         return new Object[][] { { TestUserMode.SUPER_TENANT_ADMIN, DASHBOARD1_TITLE } };
     }
 
@@ -63,8 +62,7 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
      * @throws IOException
      * @throws AutomationUtilException
      */
-    @BeforeClass(alwaysRun = true)
-    public void setUp()
+    @BeforeClass(alwaysRun = true) public void setUp()
             throws AutomationUtilException, XPathExpressionException, IOException {
         login(getCurrentUsername(), getCurrentPassword());
         addDashBoard(DASHBOARD1_TITLE, "This is a test dashboard");
@@ -76,8 +74,7 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      * @throws MalformedURLException
      */
-    @AfterClass(alwaysRun = true)
-    public void tearDown() throws XPathExpressionException, MalformedURLException {
+    @AfterClass(alwaysRun = true) public void tearDown() throws XPathExpressionException, MalformedURLException {
         logout();
         getDriver().quit();
 
@@ -92,8 +89,7 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
      * @throws InterruptedException
      */
     @Test(groups = "wso2.ds.dashboard", description = "Embedding a page outside dashboard")
-    public void testEmbeddingPage()
-            throws MalformedURLException, XPathExpressionException, InterruptedException {
+    public void testEmbeddingPage() throws MalformedURLException, XPathExpressionException, InterruptedException {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD1_TITLE + " a.ues-edit")).click();
         String[][] gadgetMappings = { { "publisher", "b" }, { "usa-map", "c" } };
@@ -103,7 +99,7 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
         Thread.sleep(2000);
         getDriver().executeScript(script);
         Thread.sleep(2000);
-        redirectToLocation("portal", "gadgets/" + DASHBOARD1_TITLE + "/landing");
+        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/landing");
         Thread.sleep(2000);
         assertTrue(getDriver().findElement(By.id("publisher-0")).isDisplayed(),
                 "Publisher gadget is not displayed in the page");
@@ -115,15 +111,15 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
 
     /**
      * Checks whether only one gadget exist when embedding single gadget
+     *
      * @throws MalformedURLException
      * @throws XPathExpressionException
      * @throws InterruptedException
      */
-    @Test(groups = "wso2.ds.dashboard", description = "Embedding a page outside dashboard",
+    @Test(groups = "wso2.ds.dashboard", description = "Embedding a gadget outside dashboard",
             dependsOnMethods = "testEmbeddingPage")
-    public void testEmbeddingGadget()
-            throws MalformedURLException, XPathExpressionException, InterruptedException {
-        redirectToLocation("portal", "gadgets/" + DASHBOARD1_TITLE + "/landing/usa-map-0");
+    public void testEmbeddingGadget() throws MalformedURLException, XPathExpressionException, InterruptedException {
+        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/landing/usa-map-0");
         Thread.sleep(2000);
         assertTrue(getDriver().findElement(By.id("usa-map-0")).isDisplayed(),
                 "USA map gadget is not displayed in the page");
@@ -136,46 +132,47 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
 
     /**
      * Checks whether the gadgets are shown after proper authentication
+     *
      * @throws MalformedURLException
      * @throws XPathExpressionException
      * @throws InterruptedException
      */
-    @Test(groups = "wso2.ds.dashboard", description = "Embedding a page outside dashboard",
-            dependsOnMethods = "testEmbeddingGadget")
-    public void testAuthentication()
-            throws MalformedURLException, XPathExpressionException, InterruptedException {
+    @Test(groups = "wso2.ds.dashboard", description = "Verify gadgets are displayed after proper authentication",
+            dependsOnMethods = "testEmbeddingPage")
+    public void testAuthentication() throws MalformedURLException, XPathExpressionException, InterruptedException {
         logout();
         Thread.sleep(2000);
-        redirectToLocation("portal", "gadgets/" + DASHBOARD1_TITLE + "/landing/usa-map-0");
+        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/landing/usa-map-0");
         assertTrue(getDriver().findElements(By.id("usa-map-0")).size() < 1,
                 "USA map gadget is displayed in the page without proper authentication");
 
-        String errorMessage = "You do not have permission to access this page.Please contact your administrator and request permission.";
-
+        String errorMessage = "You do not have permission to access this page.Please contact your administrator and "
+                + "request permission.";
         String bodyText = getDriver().findElement(By.tagName("body")).getText();
         assertTrue(bodyText.contains(errorMessage), "Un authorized error message is not correctly displayed");
-        login(getCurrentUsername(),getCurrentPassword());
+        login(getCurrentUsername(), getCurrentPassword());
     }
 
     /**
      * Checks whether the correct error message is displayed when the request cannot be served.
+     *
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    @Test(groups = "wso2.ds.dashboard", description = "Verfiy the error messages for different fauly requests",
-            dependsOnMethods = "testEmbeddingPage")
-    public void testErrorMessages() throws MalformedURLException, XPathExpressionException {
-        redirectToLocation("portal", "gadgets/" + DASHBOARD1_TITLE);
+    @Test(groups = "wso2.ds.dashboard", description = "Verify the error messages for different faulty requests",
+            dependsOnMethods = "testEmbeddingPage") public void testErrorMessages()
+            throws MalformedURLException, XPathExpressionException {
+        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE);
         String errorMessage = "We are unable to understand the request and process it. Please re-check your request.";
         String bodyText = getDriver().findElement(By.tagName("body")).getText();
         assertTrue(bodyText.contains(errorMessage), "Bad request error message is not correctly displayed");
 
-        redirectToLocation("portal", "gadgets/" + DASHBOARD1_TITLE + "/landing/usa");
+        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/landing/usa");
         errorMessage = "We can't find what you are looking for.";
         bodyText = getDriver().findElement(By.tagName("body")).getText();
         assertTrue(bodyText.contains(errorMessage), "Page not found error message is not correctly displayed");
 
-        redirectToLocation("portal", "gadgets/" + DASHBOARD1_TITLE + "/page0");
+        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/page0");
         errorMessage = "We can't find what you are looking for.";
         bodyText = getDriver().findElement(By.tagName("body")).getText();
         assertTrue(bodyText.contains(errorMessage), "Page not found error message is not correctly displayed");
@@ -183,14 +180,18 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
 
     /**
      * Checks whether embeddable gadget feature works in multi-tenant scenario
+     *
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
     @Test(groups = "wso2.ds.dashboard", description = "Verify embedding functionality in muti-tenant scenario")
-    public void testMultiTenant() throws MalformedURLException, XPathExpressionException, InterruptedException {
+    public void testMultiTenant()
+            throws MalformedURLException, XPathExpressionException, InterruptedException {
         logout();
-        AutomationContext automationContext =
-                new AutomationContext(DSIntegrationTestConstants.DS_PRODUCT_NAME, TestUserMode.TENANT_USER);
+
+        // Login as a tenant user and create dashboard with some gadgets
+        AutomationContext automationContext = new AutomationContext(DSIntegrationTestConstants.DS_PRODUCT_NAME,
+                TestUserMode.TENANT_USER);
         User editor = automationContext.getContextTenant().getTenantUser("editor");
         login(editor.getUserName(), editor.getPassword());
 
@@ -209,19 +210,21 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
         getDriver().executeScript(script);
         Thread.sleep(2000);
 
-        redirectToLocation("portal", "t/" +editor.getUserDomain() +"/gadgets/" + DASHBOARD1_TITLE + "/landing");
+        // Go to a page embedding URL and check whether gadgets are displayed in the page
+        redirectToLocation(DS_HOME_CONTEXT, "t/" + editor.getUserDomain() + "/gadgets/" + DASHBOARD1_TITLE + "/landing");
         Thread.sleep(2000);
         assertTrue(getDriver().findElement(By.id("publisher-0")).isDisplayed(),
                 "Publisher gadget is not displayed in the page");
         assertTrue(getDriver().findElement(By.id("subscriber-0")).isDisplayed(),
                 "Subscriber gadget is not displayed in the page");
 
-        redirectToLocation("portal", "gadgets/" + DASHBOARD1_TITLE + "/landing");
+        // Go to a gadget embedding URL of super domain user and verify whether the tenant user is not allowed to view it
+        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/landing");
         String errorMessage = "You do not have permission to access this page.Please contact your administrator "
                 + "and request permission.";
         String bodyText = getDriver().findElement(By.tagName("body")).getText();
         assertTrue(bodyText.contains(errorMessage), "Un authorized error message is not correctly displayed");
-        redirectToLocation("portal", "t/" +editor.getUserDomain() +"/dashboards");
+        redirectToLocation(DS_HOME_CONTEXT, "t/" + editor.getUserDomain() + "/dashboards");
         getDriver().findElement(By.cssSelector(".dropdown")).click();
         getDriver().findElement(By.cssSelector(".dropdown-menu > li > a")).click();
         login(getCurrentUsername(), getCurrentPassword());
