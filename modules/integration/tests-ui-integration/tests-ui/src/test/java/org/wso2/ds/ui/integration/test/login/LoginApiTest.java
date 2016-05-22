@@ -59,8 +59,7 @@ public class LoginApiTest extends DSUIIntegrationTest {
      */
     @Test(groups = "wso2.ds.login", description = "verify login api only processes the post request and the "
             + "session is maintained")
-    public void testLoginApi()
-            throws IOException, XPathExpressionException, InterruptedException {
+    public void testLoginApi() throws IOException, XPathExpressionException, InterruptedException {
         redirectToLocation("portal",
                 "apis/login?username=" + getCurrentUsername() + "&password=" + getCurrentPassword());
         String errorMessage = "We cannot process this request.";
@@ -87,7 +86,8 @@ public class LoginApiTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      * @throws MalformedURLException
      */
-    @AfterClass(alwaysRun = true) public void tearDown() throws XPathExpressionException, MalformedURLException {
+    @AfterClass(alwaysRun = true)
+    public void tearDown() throws XPathExpressionException, MalformedURLException {
         logout();
         getDriver().quit();
     }

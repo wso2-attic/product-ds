@@ -54,7 +54,7 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
      */
     @DataProvider(name = "userMode")
     public static Object[][] userModeProvider() {
-        return new Object[][] { { TestUserMode.SUPER_TENANT_ADMIN, DASHBOARD1_TITLE } };
+        return new Object[][] { { TestUserMode.SUPER_TENANT_ADMIN} };
     }
 
     /**
@@ -65,8 +65,7 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
      * @throws AutomationUtilException
      */
     @BeforeClass(alwaysRun = true)
-    public void setUp()
-            throws AutomationUtilException, XPathExpressionException, IOException {
+    public void setUp() throws AutomationUtilException, XPathExpressionException, IOException {
         login(getCurrentUsername(), getCurrentPassword());
         addDashBoard(DASHBOARD1_TITLE, "This is a test dashboard");
     }
@@ -81,7 +80,6 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
     public void tearDown() throws XPathExpressionException, MalformedURLException {
         logout();
         getDriver().quit();
-
     }
 
     /**
@@ -164,8 +162,8 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      */
     @Test(groups = "wso2.ds.dashboard", description = "Verify the error messages for different faulty requests",
-            dependsOnMethods = "testEmbeddingPage") public void testErrorMessages()
-            throws MalformedURLException, XPathExpressionException {
+            dependsOnMethods = "testEmbeddingPage")
+    public void testErrorMessages() throws MalformedURLException, XPathExpressionException {
         redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE);
         String errorMessage = "We are unable to understand the request and process it. Please re-check your request.";
         String bodyText = getDriver().findElement(By.tagName("body")).getText();
@@ -189,8 +187,7 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      */
     @Test(groups = "wso2.ds.dashboard", description = "Verify embedding functionality in muti-tenant scenario")
-    public void testMultiTenant()
-            throws MalformedURLException, XPathExpressionException, InterruptedException {
+    public void testMultiTenant() throws MalformedURLException, XPathExpressionException, InterruptedException {
         logout();
 
         // Login as a tenant user and create dashboard with some gadgets
