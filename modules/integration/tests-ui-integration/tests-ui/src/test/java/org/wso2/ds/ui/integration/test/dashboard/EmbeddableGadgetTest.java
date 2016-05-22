@@ -42,7 +42,8 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
      *
      * @param userMode user mode
      */
-    @Factory(dataProvider = "userMode") public EmbeddableGadgetTest(TestUserMode userMode) {
+    @Factory(dataProvider = "userMode")
+    public EmbeddableGadgetTest(TestUserMode userMode) {
         super(userMode);
     }
 
@@ -51,7 +52,8 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
      *
      * @return user modes
      */
-    @DataProvider(name = "userMode") public static Object[][] userModeProvider() {
+    @DataProvider(name = "userMode")
+    public static Object[][] userModeProvider() {
         return new Object[][] { { TestUserMode.SUPER_TENANT_ADMIN, DASHBOARD1_TITLE } };
     }
 
@@ -62,7 +64,8 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
      * @throws IOException
      * @throws AutomationUtilException
      */
-    @BeforeClass(alwaysRun = true) public void setUp()
+    @BeforeClass(alwaysRun = true)
+    public void setUp()
             throws AutomationUtilException, XPathExpressionException, IOException {
         login(getCurrentUsername(), getCurrentPassword());
         addDashBoard(DASHBOARD1_TITLE, "This is a test dashboard");
@@ -74,7 +77,8 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      * @throws MalformedURLException
      */
-    @AfterClass(alwaysRun = true) public void tearDown() throws XPathExpressionException, MalformedURLException {
+    @AfterClass(alwaysRun = true)
+    public void tearDown() throws XPathExpressionException, MalformedURLException {
         logout();
         getDriver().quit();
 
