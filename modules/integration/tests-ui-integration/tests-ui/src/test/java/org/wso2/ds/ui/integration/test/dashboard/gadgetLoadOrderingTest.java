@@ -96,19 +96,6 @@ public class gadgetLoadOrderingTest extends DSUIIntegrationTest {
     }
 
     /**
-     * Get the full path to a file within the portal.
-     *
-     * @param relativePath Relative path to the file within a portal
-     * @return Full qualified path
-     */
-    private String getPortalFilePath(String relativePath) {
-        String carbonHome = FrameworkPathUtil.getCarbonHome();
-        return carbonHome + File.separator + "repository" + File.separator + "deployment" +
-                File.separator + "server" + File.separator + "jaggeryapps" + File.separator + "portal" +
-                File.separator + relativePath;
-    }
-
-    /**
      * Clean up after running tests.
      *
      * @throws XPathExpressionException
@@ -145,23 +132,17 @@ public class gadgetLoadOrderingTest extends DSUIIntegrationTest {
         Date timeBeforeLoadingHighPriority = new Date();
         (new WebDriverWait(getDriver(), 10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.id("textbox-TestGadgetHighPriority-0")));
-
         Date timeBeforeLoadingMediumPriority = new Date();
         (new WebDriverWait(getDriver(), 10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.id("textbox-TestGadgetMediumPriority-0")));
-
         Date timeBeforeLoadingLowPriority = new Date();
         (new WebDriverWait(getDriver(), 10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.id("textbox-TestGadgetLowPriority-0")));
-
         Date timeAfterLoading = new Date();
-
         if (timeBeforeLoadingMediumPriority.getTime() - timeBeforeLoadingHighPriority.getTime() < 5000 &&
                 timeBeforeLoadingLowPriority.getTime() - timeBeforeLoadingMediumPriority.getTime() >= 5000 &&
                 timeAfterLoading.getTime() - timeBeforeLoadingLowPriority.getTime() >= 5000) {
             correctLoadOrder = true;
-
-
         }
         Assert.assertEquals(correctLoadOrder, true);
     }
