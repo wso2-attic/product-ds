@@ -24,11 +24,13 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
+import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
 import org.wso2.carbon.automation.extensions.selenium.BrowserManager;
 import org.wso2.carbon.registry.resource.stub.ResourceAdminServiceExceptionException;
 import org.wso2.ds.integration.common.clients.ResourceAdminServiceClient;
 
 import javax.xml.xpath.XPathExpressionException;
+import java.io.File;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -491,5 +493,17 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
                 dashboardElement.findElement(By.cssSelector("a.ues-dashboard-trash-confirm")).click();
             }
         }
+    }
+
+    /**
+     * Get the full path to a file within the portal.
+     *
+     * @param relativePath Relative path to the file within a portal
+     * @return Full qualified path
+     */
+    public String getPortalFilePath(String relativePath) {
+        return FrameworkPathUtil.getCarbonHome() + File.separator + "repository" + File.separator + "deployment" +
+                File.separator + "server" + File.separator + "jaggeryapps" + File.separator + "portal" +
+                File.separator + relativePath;
     }
 }
