@@ -1,0 +1,27 @@
+<html>
+<head>
+    <head>
+        <iframe id="hidden_iframe" name="hidden_iframe" style="visibility: hidden;" width=0 height=0></iframe>
+        <form
+                id="loginform" method="post" action="https://localhost:9443/portal/apis/login" target="hidden_iframe"
+                style="visibility: hidden; display: none; ..">
+            <input type="hidden" name="username" value="admin"/>
+            <input type="hidden" name="password" value="admin"/>
+        </form>
+        <script type="text/javascript">
+            window.onload = function () {
+                document.getElementById('loginform').submit();
+            };
+
+            var hiddenFrame = document.getElementById('hidden_iframe');
+            hiddenFrame.addEventListener('load', loadFinish);
+
+            function loadFinish() {
+                document.getElementById('iframe').src = 'https://localhost:9443/portal/dashboards';
+            }
+        </script>
+    </head>
+<body>
+<iframe id="iframe" width=500px height=500px/>
+</body>
+</html>
