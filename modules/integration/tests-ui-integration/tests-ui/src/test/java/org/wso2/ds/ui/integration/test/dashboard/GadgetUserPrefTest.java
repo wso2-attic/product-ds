@@ -110,6 +110,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
         pushWindow();
         //verify that an editor can't personalize a dashboard but edit
+        driver.findElement(By.linkText(editor.getUserNameWithoutDomain())).click();
         String toolTip = driver.findElement(By.className("ues-copy")).getAttribute("title");
         assertEquals(toolTip, "Edit");
         showGadgetConfigurationIcons();
