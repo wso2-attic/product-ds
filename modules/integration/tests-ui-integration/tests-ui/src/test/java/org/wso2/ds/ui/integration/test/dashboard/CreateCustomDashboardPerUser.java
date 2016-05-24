@@ -134,29 +134,28 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
     @Test(groups = "wso2.ds.dashboard", description = "test for editor role", dependsOnMethods =
             "testAddDashboardAndAssignRolesBySetting")
     public void testForEditorRole() throws MalformedURLException, XPathExpressionException {
-
-            String dashboardId = dashboardTitle.toLowerCase();
-            redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
-            WebElement dashboard = getDriver().findElement(By.id(dashboardId));
-            assertEquals(DASHBOARD_TITLE, dashboard.findElement(By.id("ues-dashboard-title")).getText());
-            assertEquals(DASHBOARD_DESCRIPTION, dashboard.findElement(By.id("ues-dashboard-description")).getText());
-            assertTrue(getDriver().isElementPresent(By.cssSelector("#" + dashboardId + " .ues-view")),
-                    "view element is present in the current UI");
-            assertTrue(getDriver().isElementPresent(By.cssSelector("#" + dashboardId + " .ues-edit")),
-                    "design element is present in the current UI");
-            assertTrue(getDriver().isElementPresent(By.cssSelector("#" + dashboardId + " .ues-settings")),
-                    "settings element is present in the current UI");
-            dashboard.findElement(By.cssSelector(".ues-view")).click();
-            // Switch the driver to the new window and click on the edit/personalize link
-            pushWindow();
-            String bodyText = getDriver().findElement(By.tagName("body")).getText();
-            assertTrue(bodyText.contains(USERNAME_EDITOR), "Expected Username is not matched");
-            getDriver().findElement(By.linkText(USERNAME_EDITOR)).click();
-            assertEquals("Edit", getDriver().findElement(By.cssSelector("i.ues-copy")).getAttribute("title"),
-                    "Unable to find the edit button");
-            getDriver().close();
-            popWindow();
-            logout();
+        String dashboardId = dashboardTitle.toLowerCase();
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
+        WebElement dashboard = getDriver().findElement(By.id(dashboardId));
+        assertEquals(DASHBOARD_TITLE, dashboard.findElement(By.id("ues-dashboard-title")).getText());
+        assertEquals(DASHBOARD_DESCRIPTION, dashboard.findElement(By.id("ues-dashboard-description")).getText());
+        assertTrue(getDriver().isElementPresent(By.cssSelector("#" + dashboardId + " .ues-view")),
+                "view element is present in the current UI");
+        assertTrue(getDriver().isElementPresent(By.cssSelector("#" + dashboardId + " .ues-edit")),
+                "design element is present in the current UI");
+        assertTrue(getDriver().isElementPresent(By.cssSelector("#" + dashboardId + " .ues-settings")),
+                "settings element is present in the current UI");
+        dashboard.findElement(By.cssSelector(".ues-view")).click();
+        // Switch the driver to the new window and click on the edit/personalize link
+        pushWindow();
+        String bodyText = getDriver().findElement(By.tagName("body")).getText();
+        assertTrue(bodyText.contains(USERNAME_EDITOR), "Expected Username is not matched");
+        getDriver().findElement(By.linkText(USERNAME_EDITOR)).click();
+        assertEquals("Edit", getDriver().findElement(By.cssSelector("i.ues-copy")).getAttribute("title"),
+                "Unable to find the edit button");
+        getDriver().close();
+        popWindow();
+        logout();
     }
 
     /**
