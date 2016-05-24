@@ -52,6 +52,7 @@
             <class name="org.wso2.ds.ui.integration.test.dashboard.WidgetSupportTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.CarbonServerAddressTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.EmbeddableGadgetTest"/>
+            <class name="org.wso2.ds.ui.integration.test.dashboard.GadgetLoadOrderingTest"/>
         </classes>
     </test>
 </suite>
