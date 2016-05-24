@@ -50,6 +50,7 @@
             <class name="org.wso2.ds.ui.integration.test.dashboard.AddRemoveCustomButtonsTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.WidgetSupportTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.CarbonServerAddressTest"/>
+            <class name="org.wso2.ds.ui.integration.test.dashboard.gadgetLoadOrderingTest"/>
         </classes>
     </test>
 </suite>
