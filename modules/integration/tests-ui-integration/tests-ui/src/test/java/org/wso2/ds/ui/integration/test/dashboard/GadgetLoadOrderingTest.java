@@ -39,9 +39,9 @@ import java.util.Date;
 /**
  * Test load ordering for gadgets with various priorities
  */
-public class gadgetLoadOrderingTest extends DSUIIntegrationTest {
+public class GadgetLoadOrderingTest extends DSUIIntegrationTest {
 
-    private static final String DASHBOARD_TITLE = "sampledashboard1";
+    private static final String DASHBOARD_TITLE = "sampledashboardPriorityTest";
 
     private static final String UESDASHBOARDS_GADGETSTORE_PATH = "/store" + File.separator + "carbon.super" + File.separator + "fs" + File.separator + "gadget";
 
@@ -52,7 +52,7 @@ public class gadgetLoadOrderingTest extends DSUIIntegrationTest {
      * @param dashboardTitle title of the dashboard
      */
     @Factory(dataProvider = "userMode")
-    public gadgetLoadOrderingTest(TestUserMode userMode, String dashboardTitle) {
+    public GadgetLoadOrderingTest(TestUserMode userMode, String dashboardTitle) {
         super(userMode);
     }
 
@@ -92,6 +92,7 @@ public class gadgetLoadOrderingTest extends DSUIIntegrationTest {
         serverConfigurationManager.restartGracefully();
 
         login(getCurrentUsername(), getCurrentPassword());
+
         addDashBoard(DASHBOARD_TITLE, "This is a test dashboard");
     }
 
