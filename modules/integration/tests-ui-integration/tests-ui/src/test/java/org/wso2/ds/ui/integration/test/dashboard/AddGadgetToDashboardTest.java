@@ -95,12 +95,12 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         }
     }
 
-   /* *//**
+    /**
      * Adds a new block and check whether the block presents in the view mode.
      *
      * @throws MalformedURLException
      * @throws XPathExpressionException
-     *//*
+     */
     @Test(groups = "wso2.ds.dashboard", description = "Adding blocks to an existing dashboard")
     public void testAddBlocks() throws MalformedURLException, XPathExpressionException {
         redirectToLocation("portal", "dashboards");
@@ -114,13 +114,13 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         popWindow();
     }
 
-    *//**
+    /**
      * Removes a block and check whether the block presents in the view mode.
      *
      * @throws MalformedURLException
      * @throws XPathExpressionException
      * @throws InterruptedException
-     *//*
+     */
     @Test(groups = "wso2.ds.dashboard", description = "Removing blocks from an existing dashboard",
             dependsOnMethods = "testAddBlocks")
     public void testRemoveBlock() throws MalformedURLException, XPathExpressionException, InterruptedException {
@@ -133,13 +133,13 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         popWindow();
     }
 
-    *//**
+    /**
      * Adds gadgets to the designer and check whether the gadgets available in the view mode.
      *
      * @throws MalformedURLException
      * @throws XPathExpressionException
      * @throws InterruptedException
-     *//*
+     */
     @Test(groups = "wso2.ds.dashboard", description = "Adding gadgets to an existing dashboard from dashboard server",
             dependsOnMethods = "testRemoveBlock")
     public void testAddGadgetToDashboard()
@@ -170,13 +170,13 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         popWindow();
     }
 
-    *//**
+    /**
      * Tests accessing user claims from a gadget
      *
      * @throws MalformedURLException
      * @throws XPathExpressionException
      * @throws InterruptedException
-     *//*
+     */
     @Test(groups = "wso2.ds.dashboard", description = "Accessing user claims from a gadget deployed in dashboard " +
             "server", dependsOnMethods = "testAddGadgetToDashboard")
     public void testUserClaimsInGadget() throws MalformedURLException, XPathExpressionException, InterruptedException {
@@ -199,13 +199,13 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         popWindow();
     }
 
-    *//**
+    /**
      * Tests gadget hide and show feature
      *
      * @throws MalformedURLException
      * @throws XPathExpressionException
      * @throws InterruptedException
-     *//*
+     */
     @Test(groups = "wso2.ds.dashboard", description = "Using hide-show gadget feature " +
             "server", dependsOnMethods = "testUserClaimsInGadget")
     public void testShowHideGadget() throws MalformedURLException, XPathExpressionException, InterruptedException {
@@ -235,13 +235,13 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         popWindow();
     }
 
-    *//**
+    /**
      * Tests gadget maximization in the view mode.
      *
      * @throws MalformedURLException
      * @throws XPathExpressionException
      * @throws InterruptedException
-     *//*
+     */
     @Test(groups = "wso2.ds.dashboard", description = "maximizing gadget which added to dashboard",
             dependsOnMethods = "testShowHideGadget")
     public void testMaximizeGadgetInView() throws MalformedURLException, XPathExpressionException, InterruptedException {
@@ -271,12 +271,12 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         popWindow();
     }
 
-    *//**
+    /**
      * Toggle fluid layout in the dashboard and check for the fluid layout in the view mode.
      *
      * @throws MalformedURLException
      * @throws XPathExpressionException
-     *//*
+     */
     @Test(groups = "wso2.ds.dashboard", description = "Test fluid layout",
             dependsOnMethods = "testMaximizeGadgetInView")
     public void testFluidLayout() throws MalformedURLException, XPathExpressionException {
@@ -297,14 +297,14 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         popWindow();
     }
 
-    *//**
+    /**
      * Check whether a block exists
      *
      * @param id ID of the block
      * @return
      * @throws MalformedURLException
      * @throws XPathExpressionException
-     *//*
+     */
     private boolean isBlockPresent(String id) throws MalformedURLException, XPathExpressionException {
         // reduce the timeout to 2 seconds
         modifyTimeOut(2);
@@ -313,7 +313,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         resetTimeOut();
         return (elements.size() > 0);
     }
-*/
+
     /**
      * Copy all the test gadgets located at resources directory to the pack used for testing
      * @throws XPathExpressionException
