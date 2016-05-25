@@ -110,6 +110,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
         pushWindow();
         //verify that an editor can't personalize a dashboard but edit
+        driver.findElement(By.linkText(editor.getUserNameWithoutDomain())).click();
         String toolTip = driver.findElement(By.className("ues-copy")).getAttribute("title");
         assertEquals(toolTip, "Edit");
         showGadgetConfigurationIcons();
@@ -155,6 +156,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
             dependsOnMethods = "changeGadgetPrefsByViewer")
     public void personalizeGadgetPrefsByViewer() throws Exception {
         DSWebDriver driver = getDriver();
+        getDriver().findElement(By.cssSelector("a.dropdown")).click();
         driver.findElement(By.cssSelector("i.fw.fw-settings")).click();
         //Verify "Settings" is not available in personalized dashboard edit mode
         assertFalse(driver.isElementPresent(By.id("dashboard-settings")));
@@ -192,6 +194,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
         pushWindow();
+        getDriver().findElement(By.cssSelector("a.dropdown")).click();
         driver.findElement(By.cssSelector("i.fw.fw-settings")).click();
         driver.findElement(By.className("ues-copy")).click();
         driver.findElement(By.id("ues-modal-confirm-yes")).click();

@@ -291,6 +291,7 @@ public class BannerTest extends DSUIIntegrationTest {
                 .click();
         // Switch the driver to the new window and click on the edit/personalize link
         pushWindow();
+        getDriver().findElement(By.linkText(viewer.getUserNameWithoutDomain())).click();
         getDriver().findElement(By.cssSelector(".ues-copy")).click();
     }
 
@@ -427,7 +428,7 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      */
     private void navigateToPage(String page) throws MalformedURLException, XPathExpressionException {
-        getDriver().findElement(By.cssSelector("a#btn-pages-sidebar")).click();
+        selectPane("pages");
         switchPage(page);
     }
 
