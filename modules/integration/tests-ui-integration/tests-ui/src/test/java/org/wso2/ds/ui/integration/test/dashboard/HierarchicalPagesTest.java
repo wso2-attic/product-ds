@@ -60,8 +60,7 @@ public class HierarchicalPagesTest extends DSUIIntegrationTest {
 		String gridId = "default-grid";
 		addDashBoard(dashboardTitle, "This is a test dashboard");
 		Thread.sleep(500);
-		WebElement webElement = driver.findElement(By.id(dashboardTitle
-				.toLowerCase()));
+		WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
 		webElement.findElement(By.cssSelector(".ues-edit")).click();
 
 		addPageToDashboard(gridId); // page0
@@ -77,10 +76,8 @@ public class HierarchicalPagesTest extends DSUIIntegrationTest {
 		selectPane("menu");
 
 		// .menu-customize should have 5 + 2 (7 in total) <li>'s
-		List<WebElement> totalLinks = driver.findElements(By
-				.cssSelector(".menu-customize li"));
+		List<WebElement> totalLinks = driver.findElements(By.cssSelector(".menu-customize li"));
 		int totalLinkSize = totalLinks.size();
-		System.out.println("Total Links inside UL is : " + totalLinkSize);
 		assertEquals(totalLinkSize, 7);
 	}
 
@@ -96,8 +93,7 @@ public class HierarchicalPagesTest extends DSUIIntegrationTest {
 		String gridId = "default-grid";
 		addDashBoard(dashboardTitle, "This is a test dashboard");
 		Thread.sleep(500);
-		WebElement webElement = driver.findElement(By.id(dashboardTitle
-				.toLowerCase()));
+		WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
 		webElement.findElement(By.cssSelector(".ues-edit")).click();
 
 		addPageToDashboard(gridId); // page0
@@ -121,10 +117,8 @@ public class HierarchicalPagesTest extends DSUIIntegrationTest {
 
 		// check page1 li inside page2 ul
 
-		List<WebElement> totalLinks = driver.findElements(By
-				.cssSelector("ul#page2"));
+		List<WebElement> totalLinks = driver.findElements(By.cssSelector("ul#page2"));
 		int totalLinkSize = totalLinks.size();
-		System.out.println("Total Links inside page2 UL is : " + totalLinkSize);
 		assertEquals(totalLinkSize, 1);
 	}
 
@@ -140,8 +134,7 @@ public class HierarchicalPagesTest extends DSUIIntegrationTest {
 		String gridId = "default-grid";
 		addDashBoard(dashboardTitle, "This is a test dashboard");
 		Thread.sleep(500);
-		WebElement webElement = driver.findElement(By.id(dashboardTitle
-				.toLowerCase()));
+		WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
 		webElement.findElement(By.cssSelector(".ues-edit")).click();
 
 		addPageToDashboard(gridId); // page0
@@ -168,10 +161,8 @@ public class HierarchicalPagesTest extends DSUIIntegrationTest {
 
 		(new Actions(driver)).dragAndDrop(element1, target1).perform();
 
-		List<WebElement> totalLinks = driver.findElements(By
-				.cssSelector(".menu-customize li"));
+		List<WebElement> totalLinks = driver.findElements(By.cssSelector(".menu-customize li"));
 		int totalLinkSize = totalLinks.size();
-		System.out.println("Total Links inside UL is : " + totalLinkSize);
 		assertEquals(totalLinkSize, 6);
 	}
 
@@ -187,8 +178,7 @@ public class HierarchicalPagesTest extends DSUIIntegrationTest {
 		String gridId = "default-grid";
 		addDashBoard(dashboardTitle, "This is a test dashboard");
 		Thread.sleep(500);
-		WebElement webElement = driver.findElement(By.id(dashboardTitle
-				.toLowerCase()));
+		WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
 		webElement.findElement(By.cssSelector(".ues-edit")).click();
 
 		addPageToDashboard(gridId); // home and landing page
@@ -209,12 +199,8 @@ public class HierarchicalPagesTest extends DSUIIntegrationTest {
 		clickViewButton();
 		pushWindow();
 
-		List<WebElement> totalLinks = driver.findElements(By
-				.cssSelector("#ues-pages .menu-customize li"));
+		List<WebElement> totalLinks = driver.findElements(By.cssSelector("#ues-pages .menu-customize li"));
 		int totalLinkSize = totalLinks.size();
-		System.out
-				.println("***** Test hide all menu items **** Total Links inside UL is : "
-						+ totalLinkSize);
 		assertEquals(totalLinkSize, 1);
 		driver.close();
 		popWindow();
@@ -232,8 +218,7 @@ public class HierarchicalPagesTest extends DSUIIntegrationTest {
 		String gridId = "default-grid";
 		addDashBoard(dashboardTitle, "This is a test dashboard");
 		Thread.sleep(500);
-		WebElement webElement = driver.findElement(By.id(dashboardTitle
-				.toLowerCase()));
+		WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
 		webElement.findElement(By.cssSelector(".ues-edit")).click();
 
 		addPageToDashboard(gridId); // home and landing page
@@ -254,8 +239,7 @@ public class HierarchicalPagesTest extends DSUIIntegrationTest {
 		clickViewButton();
 		pushWindow();
 
-		List<WebElement> totalLinks = driver.findElements(By
-				.cssSelector("#ues-pages .menu-customize li"));
+		List<WebElement> totalLinks = driver.findElements(By.cssSelector("#ues-pages .menu-customize li"));
 		int totalLinkSize = totalLinks.size();
 		assertEquals(totalLinkSize, 4);
 		driver.close();
