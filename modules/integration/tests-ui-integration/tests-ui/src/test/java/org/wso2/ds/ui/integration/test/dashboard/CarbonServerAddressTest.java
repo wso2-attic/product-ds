@@ -96,19 +96,6 @@ public class CarbonServerAddressTest extends DSUIIntegrationTest {
     }
 
     /**
-     * Get the full path to a file within the portal.
-     *
-     * @param relativePath Relative path to the file within a portal
-     * @return Full qualified path
-     */
-    private String getPortalFilePath(String relativePath) {
-        String carbonHome = FrameworkPathUtil.getCarbonHome();
-        return carbonHome + File.separator + "repository" + File.separator + "deployment" +
-                File.separator + "server" + File.separator + "jaggeryapps" + File.separator + "portal" +
-                File.separator + relativePath;
-    }
-
-    /**
      * Cleanup the testing environment.
      *
      * @throws XPathExpressionException

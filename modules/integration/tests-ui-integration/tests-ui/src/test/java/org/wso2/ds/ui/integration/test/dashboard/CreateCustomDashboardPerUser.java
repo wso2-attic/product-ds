@@ -148,9 +148,10 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         dashboard.findElement(By.cssSelector(".ues-view")).click();
         // Switch the driver to the new window and click on the edit/personalize link
         pushWindow();
-        assertEquals(USERNAME_EDITOR, getDriver().findElement(By.cssSelector(".auth .username")).getText(),
-                "Expected Username is not matched");
-        assertEquals("Edit", getDriver().findElement(By.cssSelector("a.ues-copy")).getAttribute("title"),
+        String bodyText = getDriver().findElement(By.tagName("body")).getText();
+        assertTrue(bodyText.contains(USERNAME_EDITOR), "Expected Username is not matched");
+        getDriver().findElement(By.linkText(USERNAME_EDITOR)).click();
+        assertEquals("Edit", getDriver().findElement(By.cssSelector("i.ues-copy")).getAttribute("title"),
                 "Unable to find the edit button");
         getDriver().close();
         popWindow();
@@ -182,9 +183,10 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         dashboard.findElement(By.cssSelector(".ues-view")).click();
         // Switch the driver to the new window and click on the edit/personalize link
         pushWindow();
-        assertEquals(USERNAME_VIEWER, getDriver().findElement(By.cssSelector(".auth .username")).getText(),
-                "Expected Username is not matched");
-        String personalizeText = getDriver().findElement(By.cssSelector("a.ues-copy")).getAttribute("title").trim()
+        String bodyText = getDriver().findElement(By.tagName("body")).getText();
+        assertTrue(bodyText.contains(USERNAME_VIEWER), "Expected Username is not matched");
+        getDriver().findElement(By.linkText(USERNAME_VIEWER)).click();
+        String personalizeText = getDriver().findElement(By.cssSelector("i.ues-copy")).getAttribute("title").trim()
                 .substring(0, 11);
         assertEquals("Personalize", personalizeText, "Unable to find the personalize button");
     }
@@ -197,11 +199,10 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
      */
     @Test(groups = "wso2.ds.dashboard", description = "Tests dashboard personalization", dependsOnMethods = "testForViewer")
     public void testCustomizeButtonDashboard() throws MalformedURLException, XPathExpressionException {
-        getDriver().findElement(By.cssSelector("a.ues-copy")).click();
+        getDriver().findElement(By.cssSelector("i.ues-copy")).click();
         selectPane("pages");
         getDriver().findElement(By.cssSelector("[name=title]")).clear();
-        getDriver().findElement(By.cssSelector("[name=title]")).sendKeys(DASHBOARD_PAGE_NAME);
-        getDriver().findElement(By.cssSelector("div.page-title")).click();
+        getDriver().findElement(By.cssSelector("[name=title]")).sendKeys(DASHBOARD_PAGE_NAME+"\n");
         assertEquals(DASHBOARD_PAGE_NAME, getDriver().findElement(By.cssSelector("div.page-title p.lead")).getText(),
                 "error occurred while edit the new page name");
     }
