@@ -95,8 +95,8 @@ public class AddCustomThemeToDashboardTest extends DSUIIntegrationTest {
         getDriver().findElement(By.cssSelector("[href='create-dashboard']")).click();
         getDriver().findElement(By.id("ues-dashboard-title")).clear();
         getDriver().findElement(By.id("ues-dashboard-title")).sendKeys(DASHBOARD_TITLE);
-        getDriver().findElement(By.id("ues-dashboard-DESCRIPTION")).clear();
-        getDriver().findElement(By.id("ues-dashboard-DESCRIPTION")).sendKeys(DESCRIPTION);
+        getDriver().findElement(By.id("ues-dashboard-description")).clear();
+        getDriver().findElement(By.id("ues-dashboard-description")).sendKeys(DESCRIPTION);
 
         //select the custom theme for the dashboard
         new Select(getDriver().findElement(By.id("ues-theme-list"))).selectByVisibleText("custom-theme-sample");
@@ -120,7 +120,7 @@ public class AddCustomThemeToDashboardTest extends DSUIIntegrationTest {
         getDriver().findElement(By.xpath("(//button[@type='button'])[2]")).click();
         getDriver().findElement(By.linkText("Default Theme")).click();
         getDriver().findElement(By.id("ues-dashboard-saveBtn")).click();
-        Thread.sleep(10000);
+        Thread.sleep(2000);
         redirectToLocation(DS_HOME_CONTEXT, "dashboards/" + DASHBOARD_TITLE + "/landing");
 
         //check for the name in the default theme
@@ -138,7 +138,7 @@ public class AddCustomThemeToDashboardTest extends DSUIIntegrationTest {
             throws MalformedURLException, XPathExpressionException, InterruptedException {
 
         try {
-            //log ot form the portal
+            //log out form the portal
             logout();
         } finally {
             //log in to admin console
