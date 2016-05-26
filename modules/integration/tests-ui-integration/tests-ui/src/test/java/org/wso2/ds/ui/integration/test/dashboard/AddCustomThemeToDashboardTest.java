@@ -40,7 +40,8 @@ public class AddCustomThemeToDashboardTest extends DSUIIntegrationTest {
      *
      * @param userMode user mode
      */
-    @Factory(dataProvider = "userMode") public AddCustomThemeToDashboardTest(TestUserMode userMode) {
+    @Factory(dataProvider = "userMode")
+    public AddCustomThemeToDashboardTest(TestUserMode userMode) {
         super(userMode);
     }
 
@@ -49,7 +50,8 @@ public class AddCustomThemeToDashboardTest extends DSUIIntegrationTest {
      *
      * @return user modes
      */
-    @DataProvider(name = "userMode") public static Object[][] userModeProvider() {
+    @DataProvider(name = "userMode")
+    public static Object[][] userModeProvider() {
         return new Object[][] { { TestUserMode.SUPER_TENANT_ADMIN } };
     }
 
@@ -60,8 +62,8 @@ public class AddCustomThemeToDashboardTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      * @throws InterruptedException
      */
-    @BeforeClass(alwaysRun = true) public void setUp()
-            throws MalformedURLException, XPathExpressionException, InterruptedException {
+    @BeforeClass(alwaysRun = true)
+    public void setUp() throws MalformedURLException, XPathExpressionException, InterruptedException {
         //log in to admin console
         loginToAdminConsole(USER_NAME, PASSWORD);
 
@@ -85,8 +87,9 @@ public class AddCustomThemeToDashboardTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws InterruptedException
      */
-    @Test(groups = "wso2.ds.dashboard", description = "Adding a custom theme when creating a dashboard") public void addCustomThemeToDashboard()
-            throws XPathExpressionException, MalformedURLException, InterruptedException {
+    @Test(groups = "wso2.ds.dashboard", description = "Adding a custom theme when creating a dashboard")
+    public void addCustomThemeToDashboard() throws XPathExpressionException, MalformedURLException,
+            InterruptedException {
         //log in to portal
         login(getCurrentUsername(), getCurrentPassword());
 
@@ -134,8 +137,8 @@ public class AddCustomThemeToDashboardTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    @AfterClass(alwaysRun = true) public void tearDown()
-            throws MalformedURLException, XPathExpressionException, InterruptedException {
+    @AfterClass(alwaysRun = true)
+    public void tearDown() throws MalformedURLException, XPathExpressionException, InterruptedException {
 
         try {
             //log out form the portal
