@@ -447,16 +447,6 @@
         <tag>HEAD</tag>
     </scm>
     <repositories>
-       <repository>
-            <id>dashboard-staging</id>
-            <name>Dashboard Staging Repository</name>            
-            <url>http://maven.wso2.org/nexus/content/repositories/orgwso2carbondashboards-1004/</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
-                <checksumPolicy>ignore</checksumPolicy>
-            </releases>
-</repository>
         <repository>
             <id>wso2-nexus</id>
             <name>WSO2 Internal Repository</name>
@@ -579,7 +569,7 @@
         <carbon.automation.version>4.4.2</carbon.automation.version>
         <carbon.automationutils.version>4.4.2</carbon.automationutils.version>
 
-        <carbon.dashboards.version>1.0.19-SNAPSHOT</carbon.dashboards.version>
+        <carbon.dashboards.version>1.0.18-SNAPSHOT</carbon.dashboards.version>
         <product.ds.version>2.1.0-SNAPSHOT</product.ds.version>
 
         <test.framework.version>4.4.2</test.framework.version>
