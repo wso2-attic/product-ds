@@ -29,7 +29,7 @@
         <!--
          Change this to edit wait time for findElement
         -->
-        <maximumWaitingTime>5000</maximumWaitingTime>
+        <maximumWaitingTime>30000</maximumWaitingTime>
         <!--
          Change this to standalone|platform|all to execute test on specific environment
         -->
