@@ -1,6 +1,16 @@
 WSO2 Dashboard Server - (WSO2 DS)
 ===========================
 
+---
+
+|  Branch | Build Status |
+| :------------ |:-------------
+| Java 7      | [![Build Status](https://wso2.org/jenkins/job/product-ds/badge/icon)](https://wso2.org/jenkins/job/product-ds/) |
+| Java 8 | [![Build Status](https://wso2.org/jenkins/job/product-ds__java8/badge/icon)](https://wso2.org/jenkins/job/product-ds__java8/) |
+
+
+---
+
 Everybody can agree on that "Data is worthless if you don't communicate It correctly". It needs to be presented in a meaningful manner. 
 
 DS helps to achieve this with two focused tasks
