@@ -56,6 +56,7 @@
             <class name="org.wso2.ds.ui.integration.test.dashboard.EmbeddableGadgetTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.GadgetLoadOrderingTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.HierarchicalPagesTest"/>
+            <class name="org.wso2.ds.ui.integration.test.dashboard.SharedDashboardTest" />
         </classes>
     </test>
 </suite>
