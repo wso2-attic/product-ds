@@ -35,7 +35,7 @@ import static org.testng.Assert.*;
  * Tests related with the embeddable gadget feature
  */
 public class EmbeddableGadgetTest extends DSUIIntegrationTest {
-    private static final String DASHBOARD1_TITLE = "sampledashboard1";
+    private static final String DASHBOARD1_TITLE = "embeddabledashboard";
 
     /**
      * Initializes the class.
