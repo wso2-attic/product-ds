@@ -389,6 +389,65 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         getDriver().findElement(By.cssSelector("td.buttonRow > input.button")).click();
     }
 
+    public  void addLoginRole(String username) throws MalformedURLException, XPathExpressionException {
+        getDriver().get(getBaseUrl() + "/carbon/admin/login.jsp");
+        getDriver().findElement(By.id("txtUserName")).clear();
+        getDriver().findElement(By.id("txtUserName")).sendKeys("admin");
+        getDriver().findElement(By.id("txtPassword")).clear();
+        getDriver().findElement(By.id("txtPassword")).sendKeys("admin");
+        getDriver().findElement(By.cssSelector("input.button")).click();
+        getDriver().findElement(By.linkText("Add")).click();
+        getDriver().findElement(By.linkText("Add New Role")).click();
+        getDriver().findElement(By.name("roleName")).clear();
+        getDriver().findElement(By.name("roleName")).sendKeys("login-"+username);
+        getDriver().findElement(By.cssSelector("input.button")).click();
+        getDriver().findElement(By.cssSelector("#ygtvcheck27 > div.ygtvspacer")).click();
+        getDriver().findElement(By.cssSelector("input.button")).click();
+        getDriver().findElement(By.xpath("//input[@name='roleUsers' and @value='"+username+"']")).click();
+        getDriver().findElement(By.cssSelector("td.buttonRow > input.button")).click();
+        getDriver().findElement(By.cssSelector("button[type=\"button\"]")).click();
+
+    }
+
+    public  void addCreateRole(String username) throws MalformedURLException, XPathExpressionException {
+        getDriver().get(getBaseUrl() + "/carbon/admin/login.jsp");
+        getDriver().findElement(By.id("txtUserName")).clear();
+        getDriver().findElement(By.id("txtUserName")).sendKeys("admin");
+        getDriver().findElement(By.id("txtPassword")).clear();
+        getDriver().findElement(By.id("txtPassword")).sendKeys("admin");
+        getDriver().findElement(By.cssSelector("input.button")).click();
+        getDriver().findElement(By.linkText("Add")).click();
+        getDriver().findElement(By.linkText("Add New Role")).click();
+        getDriver().findElement(By.name("roleName")).clear();
+        getDriver().findElement(By.name("roleName")).sendKeys("create-"+username);
+        getDriver().findElement(By.cssSelector("input.button")).click();
+        getDriver().findElement(By.cssSelector("#ygtvcheck25 > div.ygtvspacer")).click();
+        getDriver().findElement(By.cssSelector("input.button")).click();
+        getDriver().findElement(By.xpath("//input[@name='roleUsers' and @value='"+username+"']")).click();
+        getDriver().findElement(By.cssSelector("td.buttonRow > input.button")).click();
+        getDriver().findElement(By.cssSelector("button[type=\"button\"]")).click();
+
+    }
+    public  void addOwnernRole(String username) throws MalformedURLException, XPathExpressionException {
+        getDriver().get(getBaseUrl() + "/carbon/admin/login.jsp");
+        getDriver().findElement(By.id("txtUserName")).clear();
+        getDriver().findElement(By.id("txtUserName")).sendKeys("admin");
+        getDriver().findElement(By.id("txtPassword")).clear();
+        getDriver().findElement(By.id("txtPassword")).sendKeys("admin");
+        getDriver().findElement(By.cssSelector("input.button")).click();
+        getDriver().findElement(By.linkText("Add")).click();
+        getDriver().findElement(By.linkText("Add New Role")).click();
+        getDriver().findElement(By.name("roleName")).clear();
+        getDriver().findElement(By.name("roleName")).sendKeys("owner-"+username);
+        getDriver().findElement(By.cssSelector("input.button")).click();
+        getDriver().findElement(By.cssSelector("#ygtvcheck26 > div.ygtvspacer")).click();
+        getDriver().findElement(By.cssSelector("input.button")).click();
+        getDriver().findElement(By.xpath("//input[@name='roleUsers' and @value='"+username+"']")).click();
+        getDriver().findElement(By.cssSelector("td.buttonRow > input.button")).click();
+        getDriver().findElement(By.cssSelector("button[type=\"button\"]")).click();
+
+    }
+
     /**
      * Assign roles for users.
      *

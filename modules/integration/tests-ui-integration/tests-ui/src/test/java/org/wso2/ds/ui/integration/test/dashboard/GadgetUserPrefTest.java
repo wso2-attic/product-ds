@@ -87,6 +87,8 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
 
     @Test(groups = "wso2.ds.dashboard", description = "Change the settings of gadgets in the Edit mode by an Editor")
     public void changeGadgetPrefsInEditMode() throws Exception {
+        addLoginRole(editor.getUserName());
+        addOwnernRole(editor.getUserName());
         login(editor.getUserName(), editor.getPassword());
         DSWebDriver driver = getDriver();
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
@@ -138,6 +140,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
     @Test(groups = "wso2.ds.dashboard", description = "Change the settings of gadgets in the View mode by a Viewer",
             dependsOnMethods = "changeGadgetPrefsByEditor")
     public void changeGadgetPrefsByViewer() throws Exception {
+        addLoginRole(viewer.getUserName());
         login(viewer.getUserName(), viewer.getPassword());
         DSWebDriver driver = getDriver();
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
@@ -229,11 +232,6 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         driver.findElement(By.id("ues-share-edit")).clear();
         driver.findElement(By.id("ues-share-edit")).sendKeys("editor_userPr");
         driver.findElement(By.id("ues-share-edit")).sendKeys(Keys.TAB);
-        // Remove other permissions
-        driver.findElement(By.cssSelector(".ues-shared-view " +
-                ".ues-shared-role[data-role=\"Internal/everyone\"] span.remove-button")).click();
-        driver.findElement(By.cssSelector(".ues-shared-edit " +
-                ".ues-shared-role[data-role=\"Internal/everyone\"] span.remove-button")).click();
         driver.findElement(By.id("ues-dashboard-saveBtn")).click();
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
     }

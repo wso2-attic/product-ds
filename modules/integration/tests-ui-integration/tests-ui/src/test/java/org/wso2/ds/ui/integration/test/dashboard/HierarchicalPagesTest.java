@@ -15,7 +15,7 @@ import org.wso2.ds.ui.integration.util.DSWebDriver;
 public class HierarchicalPagesTest extends DSUIIntegrationTest {
 	private static final String USERNAME_EDITOR = "pageeditor";
 	private static final String PASSWORD_EDITOR = "editor123";
-	private static final String EDITOR_ROLE = "dashboardEditorRole";
+	private static final String EDITOR_ROLE = "dashboardEditorRole1";
 
 	/**
 	 * Initialize the class
@@ -45,6 +45,9 @@ public class HierarchicalPagesTest extends DSUIIntegrationTest {
 		addRole(EDITOR_ROLE);
 		assignRoleToUser(new String[] { USERNAME_EDITOR });
 		logoutFromAdminConsole();
+		addLoginRole(USERNAME_EDITOR);
+		addCreateRole(USERNAME_EDITOR);
+		addOwnernRole(USERNAME_EDITOR);
 		login(USERNAME_EDITOR, PASSWORD_EDITOR);
 	}
 

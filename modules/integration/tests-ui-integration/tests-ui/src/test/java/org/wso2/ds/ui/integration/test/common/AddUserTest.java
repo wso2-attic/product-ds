@@ -46,7 +46,8 @@ public class AddUserTest extends DSUIIntegrationTest {
         getDriver().findElement(By.cssSelector("input.button")).click();
         getDriver().findElement(By.cssSelector("td.buttonRow > input.button")).click();
         getDriver().findElement(By.cssSelector("button[type=\"button\"]")).click();
-        getDriver().findElement(By.cssSelector(".right > a")).click();
+        getDriver().findElement(By.linkText("Sign-out")).click();
+        addLoginRole(USER_NAME);
         login(USER_NAME, PASSWORD);
         assertEquals(USER_NAME, getDriver().findElement(By.cssSelector(".dropdown")).getText(), "Expected " +
                 "Username is not matched");

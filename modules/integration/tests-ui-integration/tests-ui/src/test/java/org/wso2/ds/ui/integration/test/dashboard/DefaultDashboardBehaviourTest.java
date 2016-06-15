@@ -75,6 +75,8 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
         // set default dashboard behaviour from designer.json file
         setDefaultDashboardBehaviour(true);
         restartServer();
+        addLoginRole(USERNAME_EDITOR);
+        addOwnernRole(USERNAME_EDITOR);
         login(USERNAME_EDITOR, PASSWORD_EDITOR);
     }
 

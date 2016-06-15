@@ -57,6 +57,10 @@ public class RoleBasedDashboardAccess extends DSUIIntegrationTest {
     public void testRoleBasedDashboardAccessNew() throws Exception {
         DSWebDriver driver = getDriver();
         String dashboardId = dashboardTitle.toLowerCase();
+        loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
+        addUser(USER_NAME, PASSWORD, RETYPE_PASSWORD);
+        addLoginRole(USER_NAME);
+        login(getCurrentUsername(), getCurrentPassword());
         assertTrue(driver.isElementPresent(By.cssSelector("#" + dashboardId + " .ues-view")),
                 "view element is present in the current UI");
         assertTrue(driver.isElementPresent(By.cssSelector("#" + dashboardId + " .ues-edit")),
@@ -65,10 +69,11 @@ public class RoleBasedDashboardAccess extends DSUIIntegrationTest {
                 "settings element is present in the current UI");
         driver.findElement(By.cssSelector("#" + dashboardId + " .ues-settings")).click();
         driver.findElement(By.cssSelector(".ues-shared-edit")).findElement(By.cssSelector(".remove-button")).click();
+        driver.findElement(By.id("ues-share-view")).clear();
+        driver.findElement(By.id("ues-share-view")).sendKeys("login-"+USER_NAME);
+        driver.findElement(By.xpath("//div[@id='ues-dashboard-settings']/div[3]/div/form/div/div/span/div/div/div")).click();
         driver.findElement(By.id("ues-dashboard-saveBtn")).click();
         logout();
-        loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
-        addUser(USER_NAME, PASSWORD, RETYPE_PASSWORD);
         // login with new user
         login(USER_NAME, PASSWORD);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
