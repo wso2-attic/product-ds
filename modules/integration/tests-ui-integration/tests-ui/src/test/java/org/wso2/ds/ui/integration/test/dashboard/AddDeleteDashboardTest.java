@@ -105,11 +105,12 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
     public void testRolesCreationWithDashboard() throws Exception{
         DSWebDriver driver = getDriver();
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
-        driver.findElement(By.id("ues-settings")).click();
-        System.out.print(driver.findElement(By.className("ues-shared-view")).getText());
-        assertEquals(INTERNAL_ROLE+"sampledashboard1"+INTERNAL_ROLE_VIEWER,driver.findElement(By.className("ues-shared-view")).getText());
-        assertEquals(INTERNAL_ROLE+"sampledashboard1"+INTERNAL_ROLE_EDITOR,driver.findElement(By.className("ues-shared-edit")).getText());
-        assertEquals(INTERNAL_ROLE+"sampledashboard1"+INTERNAL_ROLE_OWNER,driver.findElement(By.className("ues-shared-owner")).getText());
+        WebElement dashboardItem = getDriver().findElement(By.id(dashboardTitle.toLowerCase()));
+        dashboardItem.findElement(By.cssSelector(".ues-edit")).click();
+        getDriver().findElement(By.id("dashboard-settings")).click();
+        assertEquals(INTERNAL_ROLE+dashboardTitle+INTERNAL_ROLE_VIEWER,driver.findElement(By.className("ues-shared-view")).getText());
+        assertEquals(INTERNAL_ROLE+dashboardTitle+INTERNAL_ROLE_EDITOR,driver.findElement(By.className("ues-shared-edit")).getText());
+        assertEquals(INTERNAL_ROLE+dashboardTitle+INTERNAL_ROLE_OWNER,driver.findElement(By.className("ues-shared-owner")).getText());
     }
 
     @AfterClass(alwaysRun = true)
