@@ -58,6 +58,10 @@
             <class name="org.wso2.ds.ui.integration.test.dashboard.HierarchicalPagesTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.SharedDashboardTest" />
             <class name="org.wso2.ds.ui.integration.test.dashboard.DashboardAccessLevelTest" />
+            <class name="org.wso2.ds.ui.integration.test.gadget.DeleteGadgetTest" />
+            <class name="org.wso2.ds.ui.integration.test.gadget.UploadGadgetTest" />
+            <class name="org.wso2.ds.ui.integration.test.layout.DeleteLayoutTest" />
+            <class name="org.wso2.ds.ui.integration.test.layout.UploadLayoutTest" />
         </classes>
     </test>
 </suite>
