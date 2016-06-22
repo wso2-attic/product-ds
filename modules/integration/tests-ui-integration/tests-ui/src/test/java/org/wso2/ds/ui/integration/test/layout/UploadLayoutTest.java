@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.wso2.ds.ui.integration.test.gadget;
+package org.wso2.ds.ui.integration.test.layout;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -33,15 +33,15 @@ import java.net.MalformedURLException;
 import static org.testng.Assert.assertTrue;
 
 /**
- * This is used to test the upload gadget functionality using portal
+ * This is used to test the upload layout functionality using portal
  */
-public class UploadGadgetTest extends DSUIIntegrationTest {
+public class UploadLayoutTest extends DSUIIntegrationTest {
     /**
      * Initializes the class.
      *
      * @param userMode user mode
      */
-    @Factory(dataProvider = "userMode") public UploadGadgetTest(TestUserMode userMode) {
+    @Factory(dataProvider = "userMode") public UploadLayoutTest(TestUserMode userMode) {
         super(userMode);
     }
 
@@ -82,7 +82,7 @@ public class UploadGadgetTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    @Test(groups = "wso2.ds.gadget", description = "Verifying the validation check when uploading the gadget zip file from portal")
+    @Test(groups = "wso2.ds.layout", description = "Verifying the validation check when uploading the layout zip file from portal")
     public void testValidation() throws MalformedURLException, XPathExpressionException {
         String systemResourceLocation = FrameworkPathUtil.getSystemResourceLocation();
         String wrongFilePath = systemResourceLocation + "files" + File.separator + "testLoginAPI.html";
@@ -90,10 +90,10 @@ public class UploadGadgetTest extends DSUIIntegrationTest {
         String errorMessage = "Please select a zip file to upload.";
 
         getDriver().findElement(By.xpath("//nav/div/div/a/span/i")).click();
-        getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
-        getDriver().findElement(By.cssSelector("a[href*='upload-gadget']")).click();
+        getDriver().findElement(By.cssSelector("i.fw.fw-layout")).click();
+        getDriver().findElement(By.cssSelector("a[href*='upload-layout']")).click();
 
-        // Without selecting the gadget zip file, just click the upload button and verify the error message
+        // Without selecting the layout zip file, just click the upload button and verify the error message
         getDriver().findElement(By.xpath("(//button[@type='button'])[4]")).click();
         bodyText = getDriver().findElement(By.tagName("body")).getText();
         assertTrue(bodyText.contains(errorMessage), "Zip file not found error message is not correctly displayed");
@@ -106,57 +106,57 @@ public class UploadGadgetTest extends DSUIIntegrationTest {
         getDriver().findElement(By.xpath("(//button[@type='button'])[4]")).click();
         bodyText = getDriver().findElement(By.tagName("body")).getText();
         errorMessage = "file format is not supported";
-        assertTrue(bodyText.contains(errorMessage), "File format ot supported is not correctly displayed");
+        assertTrue(bodyText.contains(errorMessage), "File format not supported is not correctly displayed");
 
-        // Select a dummy zip file without gadget.json and verify the error message
+        // Select a dummy zip file without layout.json and verify the error message
         inputElement = getDriver().findElement(By.id("selected-file"));
         wrongFilePath = systemResourceLocation + "files" + File.separator + "dummy.zip";
         inputElement.sendKeys(wrongFilePath);
         getDriver().findElement(By.xpath("(//button[@type='button'])[4]")).click();
         bodyText = getDriver().findElement(By.tagName("body")).getText();
-        errorMessage = "Configuration file is not found in the zip. Please make sure your zip file contains gadget.json";
+        errorMessage = "Configuration file is not found in the zip. Please make sure your zip file contains layout.json";
         assertTrue(bodyText.contains(errorMessage), "Configuration file missing in zip is not correctly displayed");
 
-        // Select a gadget which already exists and verify the error message
+        // Select a layout which already exists and verify the error message
         inputElement = getDriver().findElement(By.id("selected-file"));
         ((JavascriptExecutor) getDriver())
                 .executeScript("document.getElementById('selected-file').style.display='block';");
-        wrongFilePath = systemResourceLocation + "gadgets" + File.separator + "publisher.zip";
+        wrongFilePath = systemResourceLocation + "layouts" + File.separator + "banner.zip";
         inputElement.sendKeys(wrongFilePath);
         getDriver().findElement(By.xpath("(//button[@type='button'])[4]")).click();
         bodyText = getDriver().findElement(By.tagName("body")).getText();
-        errorMessage = "A gadget with same id already exists.";
-        assertTrue(bodyText.contains(errorMessage), "Error message for having the same gadget in store is not correctly "
+        errorMessage = "A layout with same id already exists.";
+        assertTrue(bodyText.contains(errorMessage), "Error message for having the same layout in store is not correctly "
                 + "displayed");
         ((JavascriptExecutor) getDriver())
                 .executeScript("document.getElementById('selected-file').style.display='none';");
     }
 
     /**
-     * Upload the correct gadget zip fle and verify whether it is uploaded correctly
+     * Upload the correct layout zip fle and verify whether it is uploaded correctly
      * @throws MalformedURLException
      * @throws XPathExpressionException
      * @throws InterruptedException
      */
-    @Test(groups = "wso2.ds.gadget", description = "Verifying the validation check when uploading the gadget zip file from portal",
+    @Test(groups = "wso2.ds.layout", description = "Verifying the validation check when uploading the layout zip file from portal",
             dependsOnMethods = "testValidation")
-    public void testGadgetUpload() throws MalformedURLException, XPathExpressionException, InterruptedException {
+    public void testLayoutUpload() throws MalformedURLException, XPathExpressionException, InterruptedException {
         String systemResourceLocation = FrameworkPathUtil.getSystemResourceLocation();
-        String gadgetFilePath = systemResourceLocation + "gadgets" + File.separator + "user-claims-gadget.zip";
+        String layoutFilePath = systemResourceLocation + "layouts" + File.separator + "banner-copy.zip";
         String bodyText;
-        String successMessage = "You have successfully uploaded the gadget.";
+        String successMessage = "You have successfully uploaded the layout.";
 
-        // Select the correct gadget zip file and upload
+        // Select the correct layout zip file and upload
         WebElement inputElement = getDriver().findElement(By.id("selected-file"));
         ((JavascriptExecutor) getDriver())
                 .executeScript("document.getElementById('selected-file').style.display='block';");
-        inputElement.sendKeys(gadgetFilePath);
+        inputElement.sendKeys(layoutFilePath);
         getDriver().findElement(By.xpath("(//button[@type='button'])[4]")).click();
         bodyText = getDriver().findElement(By.tagName("body")).getText();
-        assertTrue(bodyText.contains(successMessage), "Gadget upload failed");
+        assertTrue(bodyText.contains(successMessage), "Layout upload failed");
         Thread.sleep(10000);
-        getDriver().get(getBaseUrl() + "/portal/gadget");
-        assertTrue(getDriver().findElement(By.id("user-claims-gadget")).isDisplayed(),
-                "Uploaded gadget is not displayed in the listing page");
+        getDriver().get(getBaseUrl() + "/portal/layout");
+        assertTrue(getDriver().findElement(By.id("banner-copy")).isDisplayed(),
+                "Uploaded layout is not displayed in the listing page");
     }
 }
