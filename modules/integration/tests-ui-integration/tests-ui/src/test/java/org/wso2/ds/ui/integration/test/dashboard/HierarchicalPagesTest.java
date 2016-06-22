@@ -2,6 +2,7 @@ package org.wso2.ds.ui.integration.test.dashboard;
 
 import java.util.List;
 
+
 import static org.testng.Assert.assertEquals;
 
 import org.openqa.selenium.By;
@@ -12,11 +13,12 @@ import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 import org.wso2.ds.ui.integration.util.DSWebDriver;
 
-public class HierarchicalPagesTest extends DSUIIntegrationTest {
-	private static final String USERNAME_EDITOR = "pageeditor";
-	private static final String PASSWORD_EDITOR = "editor123";
-	private static final String EDITOR_ROLE = "dashboardEditorRole";
 
+public class HierarchicalPagesTest extends DSUIIntegrationTest {
+
+	private static  final String USERNAME_EDITOR = "pageeditor";
+	private static final String PASSWORD_EDITOR = "editor123";
+	private static final String EDITOR_ROLE = "dashboardEditorRole1";
 	/**
 	 * Initialize the class
 	 */
@@ -45,6 +47,9 @@ public class HierarchicalPagesTest extends DSUIIntegrationTest {
 		addRole(EDITOR_ROLE);
 		assignRoleToUser(new String[] { USERNAME_EDITOR });
 		logoutFromAdminConsole();
+		addLoginRole(USERNAME_EDITOR);
+		addCreateRole(USERNAME_EDITOR);
+		addOwnernRole(USERNAME_EDITOR);
 		login(USERNAME_EDITOR, PASSWORD_EDITOR);
 	}
 

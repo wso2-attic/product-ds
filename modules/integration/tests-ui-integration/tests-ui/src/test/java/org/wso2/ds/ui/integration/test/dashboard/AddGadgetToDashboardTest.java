@@ -44,7 +44,7 @@ import static org.testng.Assert.*;
  * maximization and toggling fluid layout.
  */
 public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
-    private static final String DASHBOARD_TITLE = "sampledashboard1";
+    private static final String DASHBOARD_TITLE = "SampleGadgetDashboard";
 
     /**
      * Initializes the class.
