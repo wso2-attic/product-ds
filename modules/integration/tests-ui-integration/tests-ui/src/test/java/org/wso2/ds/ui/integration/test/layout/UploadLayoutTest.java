@@ -154,7 +154,7 @@ public class UploadLayoutTest extends DSUIIntegrationTest {
         getDriver().findElement(By.xpath("(//button[@type='button'])[4]")).click();
         bodyText = getDriver().findElement(By.tagName("body")).getText();
         assertTrue(bodyText.contains(successMessage), "Layout upload failed");
-        Thread.sleep(10000);
+        Thread.sleep(30000);
         getDriver().get(getBaseUrl() + "/portal/layout");
         assertTrue(getDriver().findElement(By.id("banner-copy")).isDisplayed(),
                 "Uploaded layout is not displayed in the listing page");

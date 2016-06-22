@@ -121,7 +121,7 @@ public class UploadGadgetTest extends DSUIIntegrationTest {
         inputElement = getDriver().findElement(By.id("selected-file"));
         ((JavascriptExecutor) getDriver())
                 .executeScript("document.getElementById('selected-file').style.display='block';");
-        wrongFilePath = systemResourceLocation + "gadgets" + File.separator + "publisher.zip";
+        wrongFilePath = systemResourceLocation + "files" + File.separator + "publisher.zip";
         inputElement.sendKeys(wrongFilePath);
         getDriver().findElement(By.xpath("(//button[@type='button'])[4]")).click();
         bodyText = getDriver().findElement(By.tagName("body")).getText();
@@ -142,7 +142,7 @@ public class UploadGadgetTest extends DSUIIntegrationTest {
             dependsOnMethods = "testValidation")
     public void testGadgetUpload() throws MalformedURLException, XPathExpressionException, InterruptedException {
         String systemResourceLocation = FrameworkPathUtil.getSystemResourceLocation();
-        String gadgetFilePath = systemResourceLocation + "gadgets" + File.separator + "user-claims-gadget.zip";
+        String gadgetFilePath = systemResourceLocation + "files" + File.separator + "date-picker-copy.zip";
         String bodyText;
         String successMessage = "You have successfully uploaded the gadget.";
 
@@ -154,9 +154,9 @@ public class UploadGadgetTest extends DSUIIntegrationTest {
         getDriver().findElement(By.xpath("(//button[@type='button'])[4]")).click();
         bodyText = getDriver().findElement(By.tagName("body")).getText();
         assertTrue(bodyText.contains(successMessage), "Gadget upload failed");
-        Thread.sleep(10000);
+        Thread.sleep(30000);
         getDriver().get(getBaseUrl() + "/portal/gadget");
-        assertTrue(getDriver().findElement(By.id("user-claims-gadget")).isDisplayed(),
+        assertTrue(getDriver().findElement(By.id("date-picker-copy")).isDisplayed(),
                 "Uploaded gadget is not displayed in the listing page");
     }
 }
