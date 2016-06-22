@@ -23,13 +23,13 @@
     <!--  =================================================  -->
     <configurations>
         <!--
-         Change this to edit wait time for test artifact deployment
+         Change this to edit wait time in seconds for test artifact deployment
         -->
-        <deploymentDelay>60000</deploymentDelay>
+        <deploymentDelay>60</deploymentDelay>
         <!--
-         Change this to edit wait time for findElement
+         Change this to edit wait time in seconds for findElement
         -->
-        <maximumWaitingTime>5000</maximumWaitingTime>
+        <maximumWaitingTime>15</maximumWaitingTime>
         <!--
          Change this to standalone|platform|all to execute test on specific environment
         -->
