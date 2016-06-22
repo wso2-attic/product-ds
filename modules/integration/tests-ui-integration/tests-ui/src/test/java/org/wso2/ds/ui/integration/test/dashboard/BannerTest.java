@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -44,7 +44,7 @@ import static org.testng.Assert.assertTrue;
 public class BannerTest extends DSUIIntegrationTest {
     private static final Log LOG = LogFactory.getLog(BannerTest.class);
     private static final String ROOT_RESOURCE_PATH = "/_system/config/ues/customizations/";
-    private static final String[] IMAGES = {"orange.png", "silver.png"};
+    private static final String[] IMAGES = { "orange.png", "silver.png" };
     private static final String SUPER_TENANT_EDITOR_ROLE = "editor";
     private static final String SUPER_TENANT_VIEWER_ROLE = "viewer";
     private static final String TENANT_EDITOR_ROLE = "t_editor";
@@ -63,28 +63,28 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws RemoteException
      * @throws UserAdminUserAdminException
      */
-    @Factory(dataProvider = "userMode")
-    public BannerTest(TestUserMode userMode, String dashboardId, String dashboardTitle)
-            throws XPathExpressionException, RemoteException, UserAdminUserAdminException {
+    @Factory(dataProvider = "userMode") public BannerTest(TestUserMode userMode, String dashboardId,
+            String dashboardTitle)
+            throws XPathExpressionException, RemoteException, UserAdminUserAdminException, MalformedURLException {
         super(TestUserMode.SUPER_TENANT_ADMIN);
         this.dashboardId = dashboardId;
         this.dashboardTitle = dashboardTitle;
         boolean isTenant = userMode.equals(TestUserMode.TENANT_ADMIN);
         // Read the editor and viewer users from the automation.xml file.
-        AutomationContext automationContext =
-                new AutomationContext(DSIntegrationTestConstants.DS_PRODUCT_NAME, this.userMode);
+        AutomationContext automationContext = new AutomationContext(DSIntegrationTestConstants.DS_PRODUCT_NAME,
+                this.userMode);
         editor = automationContext.getContextTenant().getTenantUser("editor");
         viewer = automationContext.getContextTenant().getTenantUser("viewer");
         // Manage user roles
-        UserManagementClient userManagementClient = new UserManagementClient(
-                getBackEndUrl(), getCurrentUsername(), getCurrentPassword());
+        UserManagementClient userManagementClient = new UserManagementClient(getBackEndUrl(), getCurrentUsername(),
+                getCurrentPassword());
         // Create editor and viewer user roles (separate user roles are created for super tenant and tenant users)
         userManagementClient.addRole(isTenant ? TENANT_EDITOR_ROLE : SUPER_TENANT_EDITOR_ROLE,
-                new String[]{editor.getUserName()}, null);
+                new String[] { editor.getUserName() }, null);
         userManagementClient.addRole(isTenant ? TENANT_VIEWER_ROLE : SUPER_TENANT_VIEWER_ROLE,
-                new String[]{viewer.getUserName()}, null);
+                new String[] { viewer.getUserName() }, null);
         // Remove the admin role from the editors and viewers
-        String[] rolesToRemove = new String[]{ADMIN_ROLE};
+        String[] rolesToRemove = new String[] { ADMIN_ROLE };
         userManagementClient.addRemoveRolesOfUser(editor.getUserName(), null, rolesToRemove);
         userManagementClient.addRemoveRolesOfUser(viewer.getUserName(), null, rolesToRemove);
     }
@@ -94,12 +94,9 @@ public class BannerTest extends DSUIIntegrationTest {
      *
      * @return
      */
-    @DataProvider(name = "userMode")
-    private static Object[][] userModeProvider() {
-        return new Object[][]{
-                {TestUserMode.SUPER_TENANT_ADMIN, "banner-dashboard", "Banner Dashboard"},
-                {TestUserMode.TENANT_ADMIN, "tenanted-banner-dashboard", "Tenanted Banner Dashboard"},
-        };
+    @DataProvider(name = "userMode") private static Object[][] userModeProvider() {
+        return new Object[][] { { TestUserMode.SUPER_TENANT_ADMIN, "banner-dashboard", "Banner Dashboard" },
+                { TestUserMode.TENANT_ADMIN, "tenanted-banner-dashboard", "Tenanted Banner Dashboard" }, };
     }
 
     /**
@@ -108,9 +105,11 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      * @throws MalformedURLException
      */
-    @BeforeClass(alwaysRun = true)
-    public void setUp() throws XPathExpressionException, MalformedURLException {
+    @BeforeClass(alwaysRun = true) public void setUp() throws XPathExpressionException, MalformedURLException {
         // Login to the portal and create the dashboard as the admin user
+        addOwnernRole(editor.getUserName());
+        addLoginRole(editor.getUserName());
+        addLoginRole(viewer.getUserName());
         login(getCurrentUsername(), getCurrentPassword());
         initDashboard();
         logout();
@@ -122,8 +121,8 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      * @throws MalformedURLException
      */
-    @Test(groups = "wso2.ds.dashboard", description = "Cancel adding banner by editor")
-    public void cancelAddingBannerByEditor() throws XPathExpressionException, MalformedURLException {
+    @Test(groups = "wso2.ds.dashboard", description = "Cancel adding banner by editor") public void cancelAddingBannerByEditor()
+            throws XPathExpressionException, MalformedURLException {
         login(editor.getUserName(), editor.getPassword());
         goToDesigner();
         clickEditBannerButton(0);
@@ -140,21 +139,21 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws InterruptedException
      */
     @Test(groups = "wso2.ds.dashboard", description = "Add banner by editor",
-            dependsOnMethods = "cancelAddingBannerByEditor")
-    public void addBannerByEditor() throws MalformedURLException, XPathExpressionException, InterruptedException {
+            dependsOnMethods = "cancelAddingBannerByEditor") public void addBannerByEditor()
+            throws MalformedURLException, XPathExpressionException, InterruptedException {
         clickEditBannerButton(0);
         clickSaveBannerButton();
         Thread.sleep(500);
         assertTrue(isResourceExist(ROOT_RESOURCE_PATH + dashboardId + "/banner"), "Unable to find the resource");
         //Verify an editor can view the uploaded banner
-        assertTrue(isBannerPresent(),"Banner is not visible to the editor");
+        assertTrue(isBannerPresent(), "Banner is not visible to the editor");
         //Verify an uploaded banner is loaded into the anonymous view
         createAnonView();
         navigateToAnonView();
-        assertTrue(isBannerPresentInDesignerMode(),"Banner is not loaded into the anonymous view");
+        assertTrue(isBannerPresentInDesignerMode(), "Banner is not loaded into the anonymous view");
         //Verify the same banner is uploaded to a new page added with banner layout
         addPageWithBannerLayout();
-        assertTrue(isBannerPresentInDesignerMode(),"Banner is not loaded into new pages");
+        assertTrue(isBannerPresentInDesignerMode(), "Banner is not loaded into new pages");
         logout();
     }
 
@@ -165,8 +164,8 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      */
     @Test(groups = "wso2.ds.dashboard", description = "Cancel adding banner by viewer",
-            dependsOnMethods = "addBannerByEditor")
-    public void cancelAddingBannerByViewer() throws XPathExpressionException, MalformedURLException {
+            dependsOnMethods = "addBannerByEditor") public void cancelAddingBannerByViewer()
+            throws XPathExpressionException, MalformedURLException {
         login(viewer.getUserName(), viewer.getPassword());
         customizeDashboard();
         clickEditBannerButton(1);
@@ -182,8 +181,8 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      */
     @Test(groups = "wso2.ds.dashboard", description = "Add banner by viewer",
-            dependsOnMethods = "cancelAddingBannerByViewer")
-    public void addBannerByViewer() throws MalformedURLException, XPathExpressionException {
+            dependsOnMethods = "cancelAddingBannerByViewer") public void addBannerByViewer()
+            throws MalformedURLException, XPathExpressionException {
         clickEditBannerButton(1);
         clickSaveBannerButton();
         assertTrue(isResourceExist(ROOT_RESOURCE_PATH + dashboardId + "/" + viewer.getUserName() + "/banner"),
@@ -196,8 +195,8 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    @Test(groups = "wso2.ds.dashboard", description = "Reset banner by viewer", dependsOnMethods = "addBannerByViewer")
-    public void resetBannerByViewer() throws MalformedURLException, XPathExpressionException {
+    @Test(groups = "wso2.ds.dashboard", description = "Reset banner by viewer", dependsOnMethods = "addBannerByViewer") public void resetBannerByViewer()
+            throws MalformedURLException, XPathExpressionException {
         clickRemoveBannerButton();
         assertFalse(isResourceExist(dashboardId + "/" + viewer.getUserName() + "/banner"),
                 "Unable to remove the resource");
@@ -211,17 +210,17 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      */
     @Test(groups = "wso2.ds.dashboard", description = "Remove banner by editor",
-            dependsOnMethods = "resetBannerByViewer")
-    public void removeBannerByEditor() throws XPathExpressionException, MalformedURLException {
+            dependsOnMethods = "resetBannerByViewer") public void removeBannerByEditor()
+            throws XPathExpressionException, MalformedURLException {
         login(editor.getUserName(), editor.getPassword());
         goToDesigner();
         clickRemoveBannerButton();
         assertFalse(isResourceExist(ROOT_RESOURCE_PATH + dashboardId + "/banner"), "Unable to remove the resource");
-        assertFalse(isBannerPresentInDesignerMode(),"Banner is not removed from the default mode");
+        assertFalse(isBannerPresentInDesignerMode(), "Banner is not removed from the default mode");
         navigateToAnonView();
-        assertFalse(isBannerPresentInDesignerMode(),"Banner is not removed from the anonymous mode");
+        assertFalse(isBannerPresentInDesignerMode(), "Banner is not removed from the anonymous mode");
         navigateToPage("page0");
-        assertFalse(isBannerPresentInDesignerMode(),"Banner is not removed from page 0");
+        assertFalse(isBannerPresentInDesignerMode(), "Banner is not removed from page 0");
         logout();
     }
 
@@ -231,8 +230,7 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    @AfterClass(alwaysRun = true)
-    public void tearDown() throws MalformedURLException, XPathExpressionException {
+    @AfterClass(alwaysRun = true) public void tearDown() throws MalformedURLException, XPathExpressionException {
         getDriver().quit();
     }
 
@@ -259,11 +257,6 @@ public class BannerTest extends DSUIIntegrationTest {
         getDriver().findElement(By.id("ues-share-edit")).clear();
         getDriver().findElement(By.id("ues-share-edit")).sendKeys("edit");
         getDriver().findElement(By.id("ues-share-edit")).sendKeys(Keys.TAB);
-        // Remove other permissions
-        getDriver().findElement(By.cssSelector(
-                ".ues-shared-view .ues-shared-role[data-role=\"Internal/everyone\"] span.remove-button")).click();
-        getDriver().findElement(By.cssSelector(
-                ".ues-shared-edit .ues-shared-role[data-role=\"Internal/everyone\"] span.remove-button")).click();
         getDriver().findElement(By.id("ues-dashboard-saveBtn")).click();
         redirectToLocation("portal", "dashboards");
     }
@@ -354,13 +347,13 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    private Boolean isBannerPresent () throws MalformedURLException, XPathExpressionException, InterruptedException {
+    private Boolean isBannerPresent() throws MalformedURLException, XPathExpressionException, InterruptedException {
         getDriver().findElement(By.cssSelector("a.ues-dashboard-preview")).click();
         pushWindow();
         WebElement bannerElem = getDriver().findElement(By.cssSelector("[data-banner=true]"));
         String imageUrl = bannerElem.getCssValue("background-image");
         getDriver().close();
-        if(imageUrl != null && !imageUrl.isEmpty()) {
+        if (imageUrl != null && !imageUrl.isEmpty()) {
             return true;
         }
         return false;
@@ -372,7 +365,7 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    private Boolean isBannerPresentInDesignerMode() throws MalformedURLException, XPathExpressionException{
+    private Boolean isBannerPresentInDesignerMode() throws MalformedURLException, XPathExpressionException {
         Boolean isBannerPresent = false;
         if (getDriver().isElementPresent(By.className("banner-image"))) {
             WebElement bannerElem = getDriver().findElement(By.className("banner-image"));
@@ -392,7 +385,7 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    private void createAnonView() throws MalformedURLException, XPathExpressionException{
+    private void createAnonView() throws MalformedURLException, XPathExpressionException {
         popWindow();
         getDriver().findElement(By.cssSelector("a#btn-pages-sidebar")).click();
         getDriver().findElement(By.cssSelector("input[name='anon']")).click();
@@ -404,7 +397,7 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    private void navigateToAnonView() throws MalformedURLException, XPathExpressionException{
+    private void navigateToAnonView() throws MalformedURLException, XPathExpressionException {
         String fireEvent = "$('a[aria-controls=anonymousDashboardView]').click();";
         getDriver().executeScript(fireEvent);
     }
@@ -430,8 +423,7 @@ public class BannerTest extends DSUIIntegrationTest {
     private void navigateToPage(String page) throws MalformedURLException, XPathExpressionException {
         selectPane("pages");
         switchPage(page);
+
     }
-
-
 
 }
