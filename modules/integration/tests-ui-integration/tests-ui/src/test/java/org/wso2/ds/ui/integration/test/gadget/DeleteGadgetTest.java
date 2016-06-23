@@ -83,12 +83,14 @@ public class DeleteGadgetTest extends DSUIIntegrationTest {
      *
      * @throws MalformedURLException
      * @throws XPathExpressionException
+     * @throws InterruptedException
      */
     @Test(groups = "wso2.ds.gadget", description = "Deleting a gadget in gadget listing page")
-    public void testDeleteGadget() throws MalformedURLException, XPathExpressionException {
+    public void testDeleteGadget() throws MalformedURLException, XPathExpressionException, InterruptedException {
         getDriver().get(getBaseUrl() + "/portal/gadget/");
         getDriver().findElement(By.cssSelector("#usa-social > a.ds-asset-trash-handle")).click();
         getDriver().findElement(By.cssSelector("span.ladda-label")).click();
+        Thread.sleep(3000);
         assertFalse(getDriver().isElementPresent(By.cssSelector("#usa-social")), "Gadget is not deleted");
         getDriver().findElement(By.cssSelector("#usa-business-revenue > a.ds-asset-trash-handle")).click();
         getDriver().findElement(By.cssSelector("a.btn.btn-default.ds-asset-trash-cancel")).click();

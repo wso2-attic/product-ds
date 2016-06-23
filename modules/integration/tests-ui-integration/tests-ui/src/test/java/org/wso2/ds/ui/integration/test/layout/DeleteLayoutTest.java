@@ -83,12 +83,14 @@ public class DeleteLayoutTest extends DSUIIntegrationTest {
      *
      * @throws MalformedURLException
      * @throws XPathExpressionException
+     * @throws InterruptedException
      */
     @Test(groups = "wso2.ds.layout", description = "Deleting a layout in layout listing page")
-    public void testDeletelayout() throws MalformedURLException, XPathExpressionException {
+    public void testDeletelayout() throws MalformedURLException, XPathExpressionException, InterruptedException {
         getDriver().get(getBaseUrl() + "/portal/layout/");
         getDriver().findElement(By.cssSelector("#blank > a.ds-asset-trash-handle")).click();
         getDriver().findElement(By.cssSelector("span.ladda-label")).click();
+        Thread.sleep(3000);
         assertFalse(getDriver().isElementPresent(By.cssSelector("#blank")), "layout is not deleted");
         getDriver().findElement(By.cssSelector("#default-grid > a.ds-asset-trash-handle")).click();
         getDriver().findElement(By.cssSelector("a.btn.btn-default.ds-asset-trash-cancel")).click();
