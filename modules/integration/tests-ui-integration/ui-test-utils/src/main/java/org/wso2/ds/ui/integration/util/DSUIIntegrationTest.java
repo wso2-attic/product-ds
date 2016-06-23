@@ -280,7 +280,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     public void addPageToDashboard() throws MalformedURLException, XPathExpressionException {
         selectPane("pages");
         getDriver().findElement(By.cssSelector("button[rel='createPage']")).click();
-        selectLayout("single-column");
+        selectLayout("default-grid");
     }
 
     /**

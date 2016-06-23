@@ -87,16 +87,19 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
             dependsOnMethods = "testAddDashboardNew")
     public void testDeleteDashboardNew() throws Exception {
         DSWebDriver driver = getDriver();
-        Boolean isResourceExist;
+        boolean isResourceExist = true;
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         webElement = driver.findElement(By.id(dashboardTitle));
         webElement.findElement(By.cssSelector("i.fw-delete")).click();
         driver.findElement(By.cssSelector("span.ladda-label")).click();
-        modifyTimeOut(2);
+//        modifyTimeOut(2);
         assertFalse(driver.isElementPresent(By.id(dashboardTitle)), "Error occurred while deleting dashboard" +
                 dashboardTitle);
-        resetTimeOut();
-        isResourceExist = isResourceExist(resourcePath);
+//        resetTimeOut();
+        for (int i=0; i<10 && isResourceExist; i++) {
+            Thread.sleep(1000);
+            isResourceExist = isResourceExist(resourcePath);
+        }
         assertFalse(isResourceExist, "Registry resource could not be deleted due to some errors");
     }
 
