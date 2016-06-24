@@ -75,24 +75,7 @@ public class GadgetLoadOrderingTest extends DSUIIntegrationTest {
      */
     @BeforeClass(alwaysRun = true)
     public void setUp() throws AutomationUtilException, XPathExpressionException, IOException {
-        String systemResourceLocation = FrameworkPathUtil.getSystemResourceLocation();
-        String gadgetStorePath = getPortalFilePath(UESDASHBOARDS_GADGETSTORE_PATH);
-        String testGadgetPathLowPriority = systemResourceLocation + "gadgets/textbox-testGadgetLowPriority.zip";
-        String testGadgetPathMediumPriority = systemResourceLocation + "gadgets/textbox-testGadgetMediumPriority.zip";
-        String testGadgetPathHighPriority = systemResourceLocation + "gadgets/textbox-testGadgetHighPriority.zip";
-
-        FileUtils.copyFileToDirectory(new File(testGadgetPathLowPriority), new File(gadgetStorePath));
-        FileUtils.copyFileToDirectory(new File(testGadgetPathMediumPriority), new File(gadgetStorePath));
-        FileUtils.copyFileToDirectory(new File(testGadgetPathHighPriority), new File(gadgetStorePath));
-
-        // Restart the server after the custom gadgets are loaded
-        AutomationContext automationContext =
-                new AutomationContext(DSIntegrationTestConstants.DS_PRODUCT_NAME, this.userMode);
-        ServerConfigurationManager serverConfigurationManager = new ServerConfigurationManager(automationContext);
-        serverConfigurationManager.restartGracefully();
-
         login(getCurrentUsername(), getCurrentPassword());
-
         addDashBoard(DASHBOARD_TITLE, "This is a test dashboard");
     }
 
@@ -121,7 +104,7 @@ public class GadgetLoadOrderingTest extends DSUIIntegrationTest {
     public void testGadgetLoadOrder() throws MalformedURLException, XPathExpressionException {
         redirectToLocation("portal", "dashboards");
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
-        String[][] gadgetMappings = {{"textbox-TestGadgetLowPriority", "a"}, {"textbox-TestGadgetMediumPriority", "b"}, {"textbox-TestGadgetHighPriority", "c"}};
+        String[][] gadgetMappings = {{"test3", "a"}, {"test1", "b"}, {"test2", "c"}};
         String script = generateAddGadgetScript(gadgetMappings);
         selectPane("gadgets");
         getDriver().executeScript(script);
@@ -132,13 +115,13 @@ public class GadgetLoadOrderingTest extends DSUIIntegrationTest {
         boolean correctLoadOrder = false;
         Date timeBeforeLoadingHighPriority = new Date();
         (new WebDriverWait(getDriver(), 10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.id("textbox-TestGadgetHighPriority-0")));
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("test2-0")));
         Date timeBeforeLoadingMediumPriority = new Date();
         (new WebDriverWait(getDriver(), 10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.id("textbox-TestGadgetMediumPriority-0")));
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("test1-0")));
         Date timeBeforeLoadingLowPriority = new Date();
         (new WebDriverWait(getDriver(), 10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.id("textbox-TestGadgetLowPriority-0")));
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("test3-0")));
         Date timeAfterLoading = new Date();
         if (timeBeforeLoadingMediumPriority.getTime() - timeBeforeLoadingHighPriority.getTime() < 5000 &&
                 timeBeforeLoadingLowPriority.getTime() - timeBeforeLoadingMediumPriority.getTime() >= 5000 &&
