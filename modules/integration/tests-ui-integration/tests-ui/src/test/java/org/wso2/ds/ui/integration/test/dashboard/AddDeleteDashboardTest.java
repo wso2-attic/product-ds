@@ -38,6 +38,10 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
     private static final String DASHBOARD_TITLE1 = "sampledashboard1";
     private static final String DASHBOARD_TITLE2 = "sampledashboard2";
     private static final String DASHBOARD_DESCRIPTION = "This is sample description for dashboard";
+    private static final String INTERNAL_ROLE = "Internal/";
+    private static final String INTERNAL_ROLE_VIEWER = "-viewer";
+    private static final String INTERNAL_ROLE_EDITOR = "-editor";
+    private static final String INTERNAL_ROLE_OWNER = "-owner";
     private String dashboardTitle;
     private WebElement webElement = null;
 
@@ -79,20 +83,37 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
         assertEquals(DASHBOARD_DESCRIPTION, webElement.findElement(By.id("ues-dashboard-description")).getText());
     }
 
-    @Test(groups = "wso2.ds.dashboard", description = "Deleting the existing dashboard from dashboard server",
+    @Test(groups = "wso2.ds.dashboard", priority = 2,description = "Deleting the existing dashboard from dashboard server",
             dependsOnMethods = "testAddDashboardNew")
     public void testDeleteDashboardNew() throws Exception {
         DSWebDriver driver = getDriver();
-        Boolean isResourceExist;
+        boolean isResourceExist = true;
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         webElement = driver.findElement(By.id(dashboardTitle));
         webElement.findElement(By.cssSelector("i.fw-delete")).click();
         driver.findElement(By.cssSelector("span.ladda-label")).click();
-        modifyTimeOut(2);
+//        modifyTimeOut(2);
         assertFalse(driver.isElementPresent(By.id(dashboardTitle)), "Error occurred while deleting dashboard" +
                 dashboardTitle);
-        resetTimeOut();
-        isResourceExist = isResourceExist(resourcePath);
+//        resetTimeOut();
+        for (int i=0; i<10 && isResourceExist; i++) {
+            Thread.sleep(1000);
+            isResourceExist = isResourceExist(resourcePath);
+        }
         assertFalse(isResourceExist, "Registry resource could not be deleted due to some errors");
+    }
+
+    @Test(groups = "wso2.ds.dashboard", priority = 1, description = "Checking internal role creation at the dashboard creation",
+            dependsOnMethods = "testAddDashboardNew")
+    public void testRolesCreationWithDashboard() throws Exception{
+        DSWebDriver driver = getDriver();
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
+        WebElement dashboardItem = getDriver().findElement(By.id(dashboardTitle.toLowerCase()));
+        dashboardItem.findElement(By.cssSelector(".ues-edit")).click();
+        getDriver().findElement(By.id("dashboard-settings")).click();
+        assertEquals(INTERNAL_ROLE+dashboardTitle+INTERNAL_ROLE_VIEWER,driver.findElement(By.className("ues-shared-view")).getText());
+        assertEquals(INTERNAL_ROLE+dashboardTitle+INTERNAL_ROLE_EDITOR,driver.findElement(By.className("ues-shared-edit")).getText());
+        assertEquals(INTERNAL_ROLE+dashboardTitle+INTERNAL_ROLE_OWNER,driver.findElement(By.className("ues-shared-owner")).getText());
     }
 
     @AfterClass(alwaysRun = true)

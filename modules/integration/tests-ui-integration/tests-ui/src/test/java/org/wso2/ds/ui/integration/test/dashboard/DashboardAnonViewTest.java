@@ -143,12 +143,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         popWindow();
         switchPage("landing");
         getDriver().findElement(By.cssSelector("input[name='anon']")).click();
-        WebElement element = getDriver().findElement(By.cssSelector("button#ues-modal-info-ok"));
-        boolean hasWarning = false;
-        if (element != null) {
-            hasWarning = true;
-        }
-        assertEquals(true, hasWarning, "Can remove the anonymous view of landing page when there are pages with anonymous views");
+        assertTrue(getDriver().findElement(By.cssSelector("button#ues-modal-info-ok")) != null, "Can remove the anonymous view of landing page when there are pages with anonymous views");
         getDriver().findElement(By.cssSelector("button.close")).click();
     }
 

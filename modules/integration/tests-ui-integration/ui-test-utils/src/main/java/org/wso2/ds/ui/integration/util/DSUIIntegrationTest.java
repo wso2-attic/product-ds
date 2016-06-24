@@ -229,8 +229,8 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @throws XPathExpressionException
      */
     public void selectLayout(String layout) throws MalformedURLException, XPathExpressionException {
-        WebElement defaultGridElem = getDriver().findElement(By.cssSelector("div[data-id='" + layout + "']"));
-        defaultGridElem.click();
+        //WebElement defaultGridElem = getDriver().findElement(By.cssSelector("div[data-id='" + layout + "']"));
+    	getDriver().findElement(By.cssSelector("div[data-id='" + layout + "']")).click();
     }
 
     /**
@@ -280,7 +280,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     public void addPageToDashboard() throws MalformedURLException, XPathExpressionException {
         selectPane("pages");
         getDriver().findElement(By.cssSelector("button[rel='createPage']")).click();
-        selectLayout("single-column");
+        selectLayout("default-grid");
     }
 
     /**

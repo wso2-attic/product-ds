@@ -44,7 +44,7 @@ import static org.testng.Assert.*;
  * maximization and toggling fluid layout.
  */
 public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
-    private static final String DASHBOARD_TITLE = "sampledashboard1";
+    private static final String DASHBOARD_TITLE = "SampleGadgetDashboard";
 
     /**
      * Initializes the class.
@@ -223,14 +223,21 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         driver.findElement(By.name("hide_gadget")).click();
         clickViewButton();
         pushWindow();
+        driver.findElement(By.id("publisher-0"));
         assertFalse(driver.findElement(By.id("subscriber-0")).isDisplayed());
+        Thread.sleep(3000);
         driver.executeScript(
                 "var iframe = $(\"iframe[title='Publisher']\")[0];" +
                         "var innerDoc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);" +
                         "innerDoc.getElementById('txtMessage').value =\"test\";" +
                         "innerDoc.getElementById('btnSend').click();"
         );
-        assertTrue(driver.findElement(By.id("subscriber-0")).isDisplayed());
+        boolean displayed = false;
+        for (int i=0; i < 10 && !displayed; i++){
+            Thread.sleep(1000);
+            displayed = driver.findElement(By.id("subscriber-0")).isDisplayed();
+        }
+        assertTrue(displayed);
         driver.close();
         popWindow();
     }

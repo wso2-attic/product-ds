@@ -58,9 +58,9 @@ public class AddPageToDashboard extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
         login(getCurrentUsername(), getCurrentPassword());
         addDashBoard(DASHBOARD_TITLE, DASHBOARD_DESCRIPTION);
-        WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
-        webElement.findElement(By.cssSelector(".ues-edit")).click();
-        addPageToDashboard();
+        Thread.sleep(2000);
+        driver.findElement(By.id(dashboardTitle.toLowerCase())).findElement(By.cssSelector(".ues-edit")).click();
+        addPageToDashboard("default-grid");
         driver.findElement(By.cssSelector("[name=title]")).clear();
         driver.findElement(By.cssSelector("[name=title]")).sendKeys(DASHBOARD_PAGENAME);
         driver.executeScript("$('[name=title]').change();");
