@@ -57,17 +57,15 @@ public class BannerTest extends DSUIIntegrationTest {
      * Initializes the class.
      *
      * @param userMode       user mode
-     * @param dashboardId    id of the dashboard
      * @param dashboardTitle title of the dashboard
      * @throws XPathExpressionException
      * @throws RemoteException
      * @throws UserAdminUserAdminException
      */
-    @Factory(dataProvider = "userMode") public BannerTest(TestUserMode userMode, String dashboardId,
-            String dashboardTitle)
+    @Factory(dataProvider = "userMode") public BannerTest(TestUserMode userMode, String dashboardTitle)
             throws XPathExpressionException, RemoteException, UserAdminUserAdminException, MalformedURLException {
         super(TestUserMode.SUPER_TENANT_ADMIN);
-        this.dashboardId = dashboardId;
+        this.dashboardId = dashboardTitle.toLowerCase();
         this.dashboardTitle = dashboardTitle;
         boolean isTenant = userMode.equals(TestUserMode.TENANT_ADMIN);
         // Read the editor and viewer users from the automation.xml file.
@@ -95,8 +93,8 @@ public class BannerTest extends DSUIIntegrationTest {
      * @return
      */
     @DataProvider(name = "userMode") private static Object[][] userModeProvider() {
-        return new Object[][] { { TestUserMode.SUPER_TENANT_ADMIN, "banner-dashboard", "Banner Dashboard" },
-                { TestUserMode.TENANT_ADMIN, "tenanted-banner-dashboard", "Tenanted Banner Dashboard" }, };
+        return new Object[][] {{ TestUserMode.SUPER_TENANT_ADMIN, "BannerDashboard" },
+                { TestUserMode.TENANT_ADMIN, "TenantedBannerDashboard" }};
     }
 
     /**
@@ -269,7 +267,7 @@ public class BannerTest extends DSUIIntegrationTest {
      */
     private void goToDesigner() throws MalformedURLException, XPathExpressionException {
         redirectToLocation("portal", "dashboards");
-        getDriver().findElement(By.cssSelector(".ues-dashboard[data-id='" + dashboardId + "'] a.ues-edit")).click();
+        getDriver().findElement(By.cssSelector("#" + dashboardId + " a.ues-edit")).click();
     }
 
     /**
@@ -296,7 +294,9 @@ public class BannerTest extends DSUIIntegrationTest {
      */
     private void clickEditBannerButton(int imageIndex) throws MalformedURLException, XPathExpressionException {
         // Temporary display the HTML form which is used to upload the image
-        getDriver().executeScript("document.getElementById('ues-dashboard-upload-banner-form').className='';");
+        String formId = "ues-dashboard-upload-banner-form";
+        getDriver().findElement(By.id(formId));
+        getDriver().executeScript("document.getElementById('"+ formId + "').className='';");
         // Get the sample_images directory
         ClassLoader classLoader = BannerTest.class.getClassLoader();
         File classPathRoot = new File(classLoader.getResource("").getPath());
