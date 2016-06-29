@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="TestGadget-toolbarFunction" description="this is a test gadget for check functionality of new feature">
+        <Require feature="wso2-gadgets-controls"/>
+    </ModulePrefs>
+    <Content type="html">
+        <![CDATA[
+        <head>
+            <meta charset="utf-8">
+            <title>Sample Test Gadget</title>
+	    <script>
+                wso2.gadgets.controls.addButtonListener('REFRESH', function(e) {
+		    alert("refresh button was clicked");
+                    window.location.reload();
+                });
+            </script>
+        </head>
+        <body>
+            <div class="container-fluid">
+                <h3>Test Gadget</h3>
+            </div>
+        </body>
+        ]]>
+    </Content>
+</Module>
