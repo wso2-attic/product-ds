@@ -36,6 +36,8 @@
                 <exclude>**/axis2services/version/**</exclude>
                 <exclude>**/pom.xml</exclude>
                 <exclude>**/version.txt</exclude>
+                <exclude>**/wso2server.bat</exclude>
+                <exclude>**/conf/security/Owasp.CsrfGuard.Carbon.properties</exclude>
                 <exclude>**/carbon.xml</exclude>
                 <exclude>**/registry.xml</exclude>
                 <exclude>**/log4j.properties</exclude>
@@ -52,6 +54,9 @@
             <includes>
                 <include>**/*.sh</include>
             </includes>
+            <excludes>
+                <exclude>**/wso2server.sh</exclude>
+            </excludes>
             <fileMode>755</fileMode>
         </fileSet>
         <!--Multitenancy related file -->
@@ -322,6 +327,22 @@
             <source>src/repository/conf/carbon.xml</source>
             <outputDirectory>wso2ds-${pom.version}/repository/conf/</outputDirectory>
             <filtered>true</filtered>
+        </file>
+        <file>
+            <source>src/repository/conf/wso2server.sh</source>
+            <outputDirectory>wso2ds-${pom.version}/bin</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/repository/conf/wso2server.bat</source>
+            <outputDirectory>wso2ds-${pom.version}/bin</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>755</fileMode>
+        </file>
+        <file>
+            <source>src/repository/conf/Owasp.CsrfGuard.Carbon.properties</source>
+            <outputDirectory>wso2ds-${pom.version}/repository/conf/security</outputDirectory>
         </file>
         <file>
             <source>src/repository/conf/registry.xml</source>
