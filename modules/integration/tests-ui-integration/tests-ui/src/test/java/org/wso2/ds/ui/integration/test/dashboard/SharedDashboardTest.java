@@ -89,7 +89,7 @@ public class SharedDashboardTest extends DSUIIntegrationTest {
     public void testSharingDashboard() throws MalformedURLException, XPathExpressionException, InterruptedException {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
-        String[][] gadgetMappings = { { "publisher", "b" }, { "usa-map", "c" } };
+        String[][] gadgetMappings = { { "test1", "b" }, { "test2", "c" } };
         String script = generateAddGadgetScript(gadgetMappings);
         getDriver().navigate().refresh();
         selectPane("gadgets");
@@ -107,9 +107,9 @@ public class SharedDashboardTest extends DSUIIntegrationTest {
         login(editor.getUserName(), editor.getPassword());
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
         pushWindow();
-        assertTrue(getDriver().findElement(By.id("publisher-0")).isDisplayed(),
+        assertTrue(getDriver().findElement(By.id("test1-0")).isDisplayed(),
                 "Publisher gadget is not displayed in the page");
-        assertTrue(getDriver().findElement(By.id("usa-map-0")).isDisplayed(),
+        assertTrue(getDriver().findElement(By.id("test2-0")).isDisplayed(),
                 "USA map gadget is not displayed in the page");
         redirectToLocation(DS_HOME_CONTEXT, "t/" + editor.getUserDomain() + "/dashboards");
     }
