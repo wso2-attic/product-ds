@@ -75,7 +75,7 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
         driver.findElement(By.id("ues-dashboard-description")).clear();
         driver.findElement(By.id("ues-dashboard-description")).sendKeys(DASHBOARD_DESCRIPTION);
         driver.findElement(By.id("ues-dashboard-create")).click();
-        driver.findElement(By.cssSelector("div[data-id='single-column']")).click();
+        selectLayout("single-column");
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.id(dashboardTitle)));
         webElement = driver.findElement(By.id(dashboardTitle));

@@ -35,14 +35,14 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
     private static final Log LOG = LogFactory.getLog(DashboardAnonViewTest.class);
     private static final String DASHBOARD_TITLE = "anondashboard";
     private static final String DASHBOARD_DESCRIPTION = "This is sample description for dashboard";
-    private static final String GADGET_1 = "USA Map";
-    private static final String GADGET_1_ID = "usa-map";
-    private static final String GADGET_2 = "Publisher";
-    private static final String GADGET_2_ID = "publisher";
-    private static final String GADGET_3 = "USA Social";
-    private static final String GADGET_3_ID = "usa-social";
-    private static final String GADGET_4 = "Subscriber";
-    private static final String GADGET_4_ID = "subscriber";
+    private static final String GADGET_1 = "Gadget Resize";
+    private static final String GADGET_1_ID = "gadget-resize";
+    private static final String GADGET_2 = "Gadget Sample";
+    private static final String GADGET_2_ID = "gadget-sample";
+    private static final String GADGET_3 = "Gadget State";
+    private static final String GADGET_3_ID = "gadget-state";
+    private static final String GADGET_4 = "Text Box - Test Gadget Medium Priority";
+    private static final String GADGET_4_ID = "test1";
     private static final String CONTAINER_A = "a";
     private String dashboardTitle;
 
@@ -74,23 +74,27 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         String defaultViewGadgetAddScript = generateAddGadgetScript(defaultViewGadgetMappings);
         addDashBoard(dashboardTitle, DASHBOARD_DESCRIPTION);
         getDriver().findElement(By.cssSelector("#" + dashboardTitle.toLowerCase() + " .ues-edit")).click();
-        selectPane("pages");
-        getDriver().findElement(By.cssSelector("input[name='landing']")).click();
-        getDriver().findElement(By.cssSelector("input[name='anon']")).click();
-        selectPane("gadgets");
-        switchView("anon");
+        getDriver().findElement(By.xpath("(//button[@type='button'])[10]")).click();
+        getDriver().findElement(By.id("ds-view-roles")).click();
+        getDriver().findElement(By.id("ds-view-roles")).sendKeys("anonymous");
+        getDriver().findElement(By.className("tt-highlight")).click();
+        getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
+        Thread.sleep(3000);
         getDriver().executeScript(anonViewGadgetAddScript);
 
         // verifying gadget is rendered correctly in anon view
-        assertEquals(GADGET_2, getAttributeValue("iframe", "title"));
-        switchView("default");
+        assertTrue(getDriver().findElement(By.id(GADGET_2_ID+"-0")).isDisplayed(), "Gadget is not displayed in anonymous view");
+        getDriver().findElement(By.id("add-view")).click();
+        getDriver().findElement(By.id("new-view")).click();
+        selectViewLayout("default-grid");
+        Thread.sleep(3000);
         getDriver().executeScript(defaultViewGadgetAddScript);
         // verifying gadget is rendered correctly in default view
         assertEquals(GADGET_1, getAttributeValue("iframe", "title"));
         // verifying correct pages are displayed when toggle views
-        switchView("anon");
+        getDriver().findElement(By.id("default")).click();
         assertEquals(GADGET_2, getAttributeValue("iframe", "title"));
-        switchView("default");
+        getDriver().findElement(By.id("view0")).click();
         assertEquals(GADGET_1, getAttributeValue("iframe", "title"));
 
         clickViewButton();

@@ -145,10 +145,11 @@ public class BannerTest extends DSUIIntegrationTest {
         assertTrue(isResourceExist(ROOT_RESOURCE_PATH + dashboardId + "/banner"), "Unable to find the resource");
         //Verify an editor can view the uploaded banner
         assertTrue(isBannerPresent(), "Banner is not visible to the editor");
-        //Verify an uploaded banner is loaded into the anonymous view
-        createAnonView();
-        navigateToAnonView();
-        assertTrue(isBannerPresentInDesignerMode(), "Banner is not loaded into the anonymous view");
+        popWindow();
+//        //Verify an uploaded banner is loaded into the anonymous view
+//        createAnonView();
+//        navigateToAnonView();
+//        assertTrue(isBannerPresentInDesignerMode(), "Banner is not loaded into the anonymous view");
         //Verify the same banner is uploaded to a new page added with banner layout
         addPageWithBannerLayout();
         assertTrue(isBannerPresentInDesignerMode(), "Banner is not loaded into new pages");
@@ -215,8 +216,8 @@ public class BannerTest extends DSUIIntegrationTest {
         clickRemoveBannerButton();
         assertFalse(isResourceExist(ROOT_RESOURCE_PATH + dashboardId + "/banner"), "Unable to remove the resource");
         assertFalse(isBannerPresentInDesignerMode(), "Banner is not removed from the default mode");
-        navigateToAnonView();
-        assertFalse(isBannerPresentInDesignerMode(), "Banner is not removed from the anonymous mode");
+   //     navigateToAnonView();
+     //   assertFalse(isBannerPresentInDesignerMode(), "Banner is not removed from the anonymous mode");
         navigateToPage("page0");
         assertFalse(isBannerPresentInDesignerMode(), "Banner is not removed from page 0");
         logout();
@@ -409,6 +410,7 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      */
     private void addPageWithBannerLayout() throws MalformedURLException, XPathExpressionException {
+        getDriver().findElement(By.id("btn-pages-sidebar")).click();
         getDriver().findElement(By.cssSelector("button[rel='createPage']")).click();
         selectLayout("banner");
     }
