@@ -116,7 +116,7 @@ public class GadgetGenerationFrameworkTest extends DSUIIntegrationTest {
             dependsOnMethods = "testGadgetPreview")
     public void testAddGadgetToStore() throws MalformedURLException, XPathExpressionException, InterruptedException {
         DSWebDriver driver = getDriver();
-        driver.findElement(By.linkText("Add to Gadget Store")).click();
+        driver.findElement(By.linkText("Add to store")).click();
         assertEquals(driver.findElement(By.className("alert")).getText(), "Success!! Gadget is added to the store successfully",
                 "Adding gadget to gadget store failed");
     }

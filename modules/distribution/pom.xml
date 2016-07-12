@@ -168,6 +168,20 @@
                             <goal>run</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>owasp-properties-file-location</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <!-- Update Owasp.CsrfGuard.properties file location to fix IBM JDK and DevStudio issue-->
+                                <replace file="target/wso2carbon-core-${carbon.kernel.version}/repository/conf/tomcat/carbon/WEB-INF/web.xml"
+                                         token="/repository/conf/security/Owasp.CsrfGuard.Carbon.properties" value="repository/conf/security/Owasp.CsrfGuard.Carbon.properties"/>
+                            </tasks>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>

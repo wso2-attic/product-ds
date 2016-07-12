@@ -560,7 +560,11 @@
         <carbon.registry.version>4.5.4</carbon.registry.version>
         <carbon.governance.version>4.6.3</carbon.governance.version>
         <carbon.deployment.version>4.7.0</carbon.deployment.version>
-        <carbon.identity.version>5.1.1-SNAPSHOT</carbon.identity.version>
+        <carbon.identity.framework.version>5.2.0</carbon.identity.framework.version>
+        <carbon.identity.inbound.auth.oauth.version>5.1.1</carbon.identity.inbound.auth.oauth.version>
+        <carbon.identity.inbound.auth.openid.version>5.1.1</carbon.identity.inbound.auth.openid.version>
+        <carbon.identity.application.auth.basicauth.version>5.1.1</carbon.identity.application.auth.basicauth.version>
+        <carbon.identity.carbon.auth.saml2.version>5.1.1</carbon.identity.carbon.auth.saml2.version>
         <carbon.multitenancy.version>4.5.2</carbon.multitenancy.version>
         <carbon.store.version>2.3.1</carbon.store.version>
         <cipher.tool.version>1.0.0-wso2v3</cipher.tool.version>
@@ -609,12 +613,12 @@
         <!-- jaggery versions -->
         <jaggery.feature.version>0.12.6</jaggery.feature.version>
         <handlebars.feature.version>1.0.0</handlebars.feature.version>
-        <carbon.feature.version>1.5.3-SNAPSHOT</carbon.feature.version>
-        <process.feature.version>1.5.3-SNAPSHOT</process.feature.version>
-        <uuid.feature.version>1.5.3-SNAPSHOT</uuid.feature.version>
-        <sso.feature.version>1.5.3-SNAPSHOT</sso.feature.version>
-        <oauth.feature.version>1.5.3-SNAPSHOT</oauth.feature.version>
-        <ws.feature.version>1.5.3-SNAPSHOT</ws.feature.version>
+        <carbon.feature.version>1.5.3</carbon.feature.version>
+        <process.feature.version>1.5.3</process.feature.version>
+        <uuid.feature.version>1.5.3</uuid.feature.version>
+        <sso.feature.version>1.5.3</sso.feature.version>
+        <oauth.feature.version>1.5.3</oauth.feature.version>
+        <ws.feature.version>1.5.3</ws.feature.version>
         <slf4j.version>1.6.6</slf4j.version>
         <ehcache.wso2.version>1.5.0.wso2v3</ehcache.wso2.version>
         <i18n.feature.version>1.5.2</i18n.feature.version>
