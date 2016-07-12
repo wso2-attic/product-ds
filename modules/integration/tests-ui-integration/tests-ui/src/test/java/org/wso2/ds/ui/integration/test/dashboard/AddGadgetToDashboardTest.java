@@ -223,8 +223,8 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         driver.findElement(By.name("hide_gadget")).click();
         clickViewButton();
         pushWindow();
-        driver.findElement(By.id("publisher-0"));
-        assertFalse(driver.findElement(By.id("subscriber-0")).isDisplayed());
+        driver.findElement(By.id("publisher-default-0"));
+        assertFalse(driver.findElement(By.id("subscriber-default-0")).isDisplayed());
         Thread.sleep(3000);
         driver.executeScript(
                 "var iframe = $(\"iframe[title='Publisher']\")[0];" +
@@ -235,7 +235,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         boolean displayed = false;
         for (int i=0; i < 10 && !displayed; i++){
             Thread.sleep(1000);
-            displayed = driver.findElement(By.id("subscriber-0")).isDisplayed();
+            displayed = driver.findElement(By.id("subscriber-default-0")).isDisplayed();
         }
         assertTrue(displayed);
         driver.close();

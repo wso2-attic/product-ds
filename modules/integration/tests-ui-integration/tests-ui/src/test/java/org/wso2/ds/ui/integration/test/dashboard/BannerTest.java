@@ -146,10 +146,12 @@ public class BannerTest extends DSUIIntegrationTest {
         //Verify an editor can view the uploaded banner
         assertTrue(isBannerPresent(), "Banner is not visible to the editor");
         popWindow();
-//        //Verify an uploaded banner is loaded into the anonymous view
-//        createAnonView();
-//        navigateToAnonView();
-//        assertTrue(isBannerPresentInDesignerMode(), "Banner is not loaded into the anonymous view");
+        //Verify an uploaded banner is loaded into the anonymous view
+        getDriver().findElement(By.id("add-view")).click();
+        getDriver().findElement(By.id("copy-view")).click();
+        getDriver().findElement(By.cssSelector("#view-layout-select > .btn-default")).click();
+        getDriver().findElement(By.xpath("//div[2]/div[2]/div/div/label[2]")).click();
+        assertTrue(isBannerPresentInDesignerMode(), "Banner is not loaded into the anonymous view");
         //Verify the same banner is uploaded to a new page added with banner layout
         addPageWithBannerLayout();
         assertTrue(isBannerPresentInDesignerMode(), "Banner is not loaded into new pages");
@@ -423,7 +425,6 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      */
     private void navigateToPage(String page) throws MalformedURLException, XPathExpressionException {
-        selectPane("pages");
         switchPage(page);
 
     }

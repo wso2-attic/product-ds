@@ -115,13 +115,13 @@ public class GadgetLoadOrderingTest extends DSUIIntegrationTest {
         boolean correctLoadOrder = false;
         Date timeBeforeLoadingHighPriority = new Date();
         (new WebDriverWait(getDriver(), 10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.id("test2-0")));
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("test2-default-0")));
         Date timeBeforeLoadingMediumPriority = new Date();
         (new WebDriverWait(getDriver(), 10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.id("test1-0")));
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("test1-default-0")));
         Date timeBeforeLoadingLowPriority = new Date();
         (new WebDriverWait(getDriver(), 10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.id("test3-0")));
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("test3-default-0")));
         Date timeAfterLoading = new Date();
         if (timeBeforeLoadingMediumPriority.getTime() - timeBeforeLoadingHighPriority.getTime() < 5000 &&
                 timeBeforeLoadingLowPriority.getTime() - timeBeforeLoadingMediumPriority.getTime() >= 5000 &&

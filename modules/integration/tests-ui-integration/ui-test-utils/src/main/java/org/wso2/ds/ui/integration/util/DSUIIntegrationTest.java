@@ -315,7 +315,9 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @throws XPathExpressionException
      */
     public void switchPage(String pageID) throws MalformedURLException, XPathExpressionException {
+        selectPane("pages");
         getDriver().findElement(By.cssSelector("div[data-id='" + pageID + "']")).click();
+        getDriver().findElement(By.cssSelector("a#btn-pages-sidebar")).click();
     }
 
     /**
