@@ -16,10 +16,7 @@
 package org.wso2.ds.ui.integration.test.dashboard;
 
 import ds.integration.tests.common.domain.DSIntegrationTestConstants;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
@@ -33,7 +30,6 @@ import static org.testng.Assert.assertFalse;
  * Test Anonymous Mode for Dashboard with Various Scenarios
  */
 public class DashboardAnonViewTest extends DSUIIntegrationTest {
-    private static final Log LOG = LogFactory.getLog(DashboardAnonViewTest.class);
     private static final String DASHBOARD_TITLE = "anondashboard";
     private static final String DASHBOARD_DESCRIPTION = "This is sample description for dashboard";
     private static final String GADGET_1 = "User Claims";

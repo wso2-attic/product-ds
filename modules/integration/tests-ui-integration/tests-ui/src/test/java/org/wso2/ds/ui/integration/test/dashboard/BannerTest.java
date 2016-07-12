@@ -21,6 +21,7 @@ import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
@@ -149,8 +150,8 @@ public class BannerTest extends DSUIIntegrationTest {
         //Verify an uploaded banner is loaded into the anonymous view
         getDriver().findElement(By.id("add-view")).click();
         getDriver().findElement(By.id("copy-view")).click();
-        getDriver().findElement(By.cssSelector("#view-layout-select > .btn-default")).click();
-        getDriver().findElement(By.xpath("//div[2]/div[2]/div/div/label[2]")).click();
+        Select dropdown = new Select(getDriver().findElement(By.id("page-views-menu")));
+        dropdown.selectByIndex(1);
         assertTrue(isBannerPresentInDesignerMode(), "Banner is not loaded into the anonymous view");
         //Verify the same banner is uploaded to a new page added with banner layout
         addPageWithBannerLayout();
@@ -218,8 +219,6 @@ public class BannerTest extends DSUIIntegrationTest {
         clickRemoveBannerButton();
         assertFalse(isResourceExist(ROOT_RESOURCE_PATH + dashboardId + "/banner"), "Unable to remove the resource");
         assertFalse(isBannerPresentInDesignerMode(), "Banner is not removed from the default mode");
-   //     navigateToAnonView();
-     //   assertFalse(isBannerPresentInDesignerMode(), "Banner is not removed from the anonymous mode");
         navigateToPage("page0");
         assertFalse(isBannerPresentInDesignerMode(), "Banner is not removed from page 0");
         logout();
@@ -380,29 +379,6 @@ public class BannerTest extends DSUIIntegrationTest {
             isBannerPresent = false;
         }
         return isBannerPresent;
-    }
-
-    /**
-     * Create anonymous page from the designer.
-     *
-     * @throws MalformedURLException
-     * @throws XPathExpressionException
-     */
-    private void createAnonView() throws MalformedURLException, XPathExpressionException {
-        popWindow();
-        getDriver().findElement(By.cssSelector("a#btn-pages-sidebar")).click();
-        getDriver().findElement(By.cssSelector("input[name='anon']")).click();
-    }
-
-    /**
-     * Navigate to anonymous page from the designer.
-     *
-     * @throws MalformedURLException
-     * @throws XPathExpressionException
-     */
-    private void navigateToAnonView() throws MalformedURLException, XPathExpressionException {
-        String fireEvent = "$('a[aria-controls=anonymousDashboardView]').click();";
-        getDriver().executeScript(fireEvent);
     }
 
     /**
