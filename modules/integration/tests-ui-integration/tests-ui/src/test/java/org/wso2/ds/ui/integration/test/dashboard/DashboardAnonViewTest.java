@@ -16,10 +16,7 @@
 package org.wso2.ds.ui.integration.test.dashboard;
 
 import ds.integration.tests.common.domain.DSIntegrationTestConstants;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
@@ -27,22 +24,22 @@ import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertFalse;
 
 /**
  * Test Anonymous Mode for Dashboard with Various Scenarios
  */
 public class DashboardAnonViewTest extends DSUIIntegrationTest {
-    private static final Log LOG = LogFactory.getLog(DashboardAnonViewTest.class);
     private static final String DASHBOARD_TITLE = "anondashboard";
     private static final String DASHBOARD_DESCRIPTION = "This is sample description for dashboard";
-    private static final String GADGET_1 = "USA Map";
-    private static final String GADGET_1_ID = "usa-map";
-    private static final String GADGET_2 = "Publisher";
-    private static final String GADGET_2_ID = "publisher";
-    private static final String GADGET_3 = "USA Social";
-    private static final String GADGET_3_ID = "usa-social";
-    private static final String GADGET_4 = "Subscriber";
-    private static final String GADGET_4_ID = "subscriber";
+    private static final String GADGET_1 = "User Claims";
+    private static final String GADGET_1_ID = "user-claims-gadget";
+    private static final String GADGET_2 = "Gadget Resize";
+    private static final String GADGET_2_ID = "gadget-resize";
+    private static final String GADGET_3 = "Gadget State";
+    private static final String GADGET_3_ID = "gadget-state";
+    private static final String GADGET_4 = "Text Box - Test Gadget MediumPriority";
+    private static final String GADGET_4_ID = "test1";
     private static final String CONTAINER_A = "a";
     private String dashboardTitle;
 
@@ -74,23 +71,25 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         String defaultViewGadgetAddScript = generateAddGadgetScript(defaultViewGadgetMappings);
         addDashBoard(dashboardTitle, DASHBOARD_DESCRIPTION);
         getDriver().findElement(By.cssSelector("#" + dashboardTitle.toLowerCase() + " .ues-edit")).click();
-        selectPane("pages");
-        getDriver().findElement(By.cssSelector("input[name='landing']")).click();
-        getDriver().findElement(By.cssSelector("input[name='anon']")).click();
-        selectPane("gadgets");
-        switchView("anon");
+        getDriver().findElement(By.xpath("(//button[@type='button'])[10]")).click();
+        getDriver().findElement(By.id("ds-view-roles")).click();
+        getDriver().findElement(By.id("ds-view-roles")).sendKeys("anonymous");
+        getDriver().findElement(By.className("tt-highlight")).click();
+        getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
         getDriver().executeScript(anonViewGadgetAddScript);
 
         // verifying gadget is rendered correctly in anon view
-        assertEquals(GADGET_2, getAttributeValue("iframe", "title"));
-        switchView("default");
+        assertTrue(getDriver().findElement(By.id(GADGET_2_ID+"-0")).isDisplayed(), "Gadget is not displayed in anonymous view");
+        getDriver().findElement(By.id("add-view")).click();
+        getDriver().findElement(By.id("new-view")).click();
+        selectViewLayout("default-grid");
         getDriver().executeScript(defaultViewGadgetAddScript);
         // verifying gadget is rendered correctly in default view
         assertEquals(GADGET_1, getAttributeValue("iframe", "title"));
         // verifying correct pages are displayed when toggle views
-        switchView("anon");
+        getDriver().findElement(By.id("default")).click();
         assertEquals(GADGET_2, getAttributeValue("iframe", "title"));
-        switchView("default");
+        getDriver().findElement(By.id("view0")).click();
         assertEquals(GADGET_1, getAttributeValue("iframe", "title"));
 
         clickViewButton();
@@ -98,7 +97,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         assertEquals(GADGET_1, getAttributeValue("iframe", "title"));
         getDriver().close();
         popWindow();
-        switchView("anon");
+        getDriver().findElement(By.id("default")).click();
         clickViewButton();
         pushWindow();
         assertEquals(GADGET_2, getAttributeValue("iframe", "title"));
@@ -117,34 +116,36 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         String anonViewGadgetAddScript = generateAddGadgetScript(anonViewGadgetMappings);
         String defaultViewGadgetAddScript = generateAddGadgetScript(defaultViewGadgetMappings);
         addPageToDashboard();
-        getDriver().findElement(By.cssSelector("input[name='anon']")).click();
-        switchView("anon");
+        getDriver().findElement(By.xpath("(//button[@type='button'])[13]")).click();
+        getDriver().findElement(By.id("ds-view-roles")).click();
+        getDriver().findElement(By.id("ds-view-roles")).sendKeys("anonymous");
+        getDriver().findElement(By.className("tt-highlight")).click();
+        getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
         getDriver().executeScript(anonViewGadgetAddScript);
         assertEquals(GADGET_4, getAttributeValue("iframe", "title"));
-        switchView("default");
+        getDriver().findElement(By.id("add-view")).click();
+        getDriver().findElement(By.id("new-view")).click();
+        selectViewLayout("default-grid");
         getDriver().executeScript(defaultViewGadgetAddScript);
         assertEquals(GADGET_3, getAttributeValue("iframe", "title"));
         switchPage("landing");
         switchPage("page0");
         assertEquals(GADGET_3, getAttributeValue("iframe", "title"));
-        switchView("anon");
+        getDriver().findElement(By.id("default")).click();
         assertEquals(GADGET_4, getAttributeValue("iframe", "title"));
-        switchView("default");
+        getDriver().findElement(By.id("view0")).click();
         clickViewButton();
         pushWindow();
         assertEquals(GADGET_3, getAttributeValue("iframe", "title"));
         getDriver().close();
         popWindow();
-        switchView("anon");
+        getDriver().findElement(By.id("default")).click();
         clickViewButton();
         pushWindow();
         assertEquals(GADGET_4, getAttributeValue("iframe", "title"));
         getDriver().close();
         popWindow();
         switchPage("landing");
-        getDriver().findElement(By.cssSelector("input[name='anon']")).click();
-        assertTrue(getDriver().findElement(By.cssSelector("button#ues-modal-info-ok")) != null, "Can remove the anonymous view of landing page when there are pages with anonymous views");
-        getDriver().findElement(By.cssSelector("button.close")).click();
     }
 
     /**
@@ -176,23 +177,17 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
     public void testAnonDashboardPageRemove() throws Exception {
         login(getCurrentUsername(), getCurrentPassword());
         getDriver().findElement(By.cssSelector("#" + dashboardTitle.toLowerCase() + " .ues-edit")).click();
-        selectPane("pages");
         switchPage("page0");
-        getDriver().findElement(By.cssSelector("input[name='anon']")).click();
-        boolean isAnonViewHidden = false;
-        WebElement element = getDriver().findElement(By.cssSelector("ul#designer-view-mode li[data-view-mode='anon']"));
-        String attrValue = element.getAttribute("class");
-        if (attrValue.equals("hide")) {
-            isAnonViewHidden = true;
-        }
-        assertTrue(isAnonViewHidden, "Anonymous toggle button is not hidden");
+        getDriver().findElement(By.xpath("(//button[@type='button'])[11]")).click();
+        getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
+        switchPage("page0");
+        assertFalse(getDriver().isElementPresent(By.id("default")), "Anonymous view is not deleted");
         assertEquals(GADGET_3, getAttributeValue("iframe", "title"));
+        logout();
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT + "/" + dashboardTitle + "/landing?isAnonView=true");
         modifyTimeOut(2);
-        boolean isLinkForNonAnonPageNotExist = getDriver().findElements(By.cssSelector("a[href='" + getBaseUrl() +
-                "/" + DS_HOME_CONTEXT + "/" + DS_DASHBOARDS_CONTEXT + "/" + dashboardTitle + "/page0?isAnonView=true']")).size() <= 0;
-        resetTimeOut();
-        assertTrue(isLinkForNonAnonPageNotExist, "Link for the non anon page is still available");
+        assertNotEquals(GADGET_1, getAttributeValue("iframe", "title"));
+        login(getCurrentUsername(), getCurrentPassword());
     }
 
     /**
@@ -202,21 +197,9 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
             dependsOnMethods = "testAnonDashboardPageRemove")
     public void testRemoveAnonModeFromDashboard() throws Exception {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT + "/" + dashboardTitle + "?editor=true");
-        selectPane("pages");
-        getDriver().findElement(By.cssSelector("input[name='anon']")).click();
-        boolean isAnonViewHidden = false;
-        WebElement element = getDriver().findElement(By.cssSelector("ul#designer-view-mode li[data-view-mode='anon']"));
-        String attrValue = element.getAttribute("class");
-        if (attrValue.equals("hide")) {
-            isAnonViewHidden = true;
-        }
-        assertTrue(isAnonViewHidden, "Anonymous toggle button is not hidden");
-        assertEquals(GADGET_1, getAttributeValue("iframe", "title"));
-        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT + "/" + dashboardTitle + "/landing?isAnonView=true");
-        modifyTimeOut(2);
-        boolean noIFramesAvailable = getDriver().findElements(By.cssSelector("iframe")).size() <= 0;
-        resetTimeOut();
-        assertTrue(noIFramesAvailable, "There are gadgets available for anonymous view when no anonymous view available");
+        getDriver().findElement(By.xpath("(//button[@type='button'])[11]")).click();
+        getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
+        assertFalse(getDriver().isElementPresent(By.id("default")), "Anonymous view is not deleted");
     }
 
     /**

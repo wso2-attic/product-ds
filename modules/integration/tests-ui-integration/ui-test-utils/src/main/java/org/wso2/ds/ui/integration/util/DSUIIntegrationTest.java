@@ -229,10 +229,25 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @throws XPathExpressionException
      */
     public void selectLayout(String layout) throws MalformedURLException, XPathExpressionException {
-        //WebElement defaultGridElem = getDriver().findElement(By.cssSelector("div[data-id='" + layout + "']"));
-    	getDriver().findElement(By.cssSelector("div[data-id='" + layout + "']")).click();
+    	getDriver().findElement(By.cssSelector("#ues-page-layouts > div[data-id='" + layout + "']")).click();
     }
 
+    /**
+     * Select the given layout for the view
+     *
+     * @param layout name of the layout to be selected
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    public void selectViewLayout(String layout) throws MalformedURLException, XPathExpressionException {
+        getDriver().findElement(By.cssSelector("#ues-view-layouts > div[data-id='" + layout + "']")).click();
+    }
+
+    public void allowPersonalizeDashboard() throws MalformedURLException, XPathExpressionException {
+        getDriver().findElement(By.cssSelector("a#dashboard-settings")).click();
+        getDriver().findElement(By.id("personalize-dashboard")).click();
+        getDriver().findElement(By.id("ues-dashboard-saveBtn")).click();
+    }
     /**
      * Redirect user to the given location.
      *
@@ -306,7 +321,9 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @throws XPathExpressionException
      */
     public void switchPage(String pageID) throws MalformedURLException, XPathExpressionException {
+        selectPane("pages");
         getDriver().findElement(By.cssSelector("div[data-id='" + pageID + "']")).click();
+        getDriver().findElement(By.cssSelector("a#btn-pages-sidebar")).click();
     }
 
     /**

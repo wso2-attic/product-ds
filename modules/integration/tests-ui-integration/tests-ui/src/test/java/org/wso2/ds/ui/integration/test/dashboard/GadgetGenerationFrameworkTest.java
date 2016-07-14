@@ -130,7 +130,7 @@ public class GadgetGenerationFrameworkTest extends DSUIIntegrationTest {
         driver.findElement(By.id("ues-dashboard-title")).clear();
         driver.findElement(By.id("ues-dashboard-title")).sendKeys("Gadget Gen Dashboard");
         driver.findElement(By.id("ues-dashboard-create")).click();
-        driver.findElement(By.cssSelector("div[data-id='single-column']")).click();
+        selectLayout("single-column");
         String[][] gadgetMappings = {{"test_gadget", "a"}};
         String script = generateAddGadgetScript(gadgetMappings);
         selectPane("gadgets");

@@ -101,7 +101,7 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
         Thread.sleep(2000);
         getDriver().executeScript(script);
         Thread.sleep(2000);
-        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/landing");
+        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/landing/default");
         Thread.sleep(2000);
         assertTrue(getDriver().findElement(By.id("publisher-0")).isDisplayed(),
                 "Publisher gadget is not displayed in the page");
@@ -121,7 +121,7 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
     @Test(groups = "wso2.ds.dashboard", description = "Embedding a gadget outside dashboard",
             dependsOnMethods = "testEmbeddingPage")
     public void testEmbeddingGadget() throws MalformedURLException, XPathExpressionException, InterruptedException {
-        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/landing/usa-map-0");
+        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/landing/default/usa-map-0");
         Thread.sleep(2000);
         assertTrue(getDriver().findElement(By.id("usa-map-0")).isDisplayed(),
                 "USA map gadget is not displayed in the page");
@@ -144,7 +144,7 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
     public void testAuthentication() throws MalformedURLException, XPathExpressionException, InterruptedException {
         logout();
         Thread.sleep(2000);
-        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/landing/usa-map-0");
+        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/landing/default/usa-map-0");
         assertTrue(getDriver().findElements(By.id("usa-map-0")).size() < 1,
                 "USA map gadget is displayed in the page without proper authentication");
 
@@ -169,12 +169,12 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
         String bodyText = getDriver().findElement(By.tagName("body")).getText();
         assertTrue(bodyText.contains(errorMessage), "Bad request error message is not correctly displayed");
 
-        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/landing/usa");
+        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/landing/default/usa");
         errorMessage = "We can't find what you are looking for.";
         bodyText = getDriver().findElement(By.tagName("body")).getText();
         assertTrue(bodyText.contains(errorMessage), "Page not found error message is not correctly displayed");
 
-        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/page0");
+        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/page0/default");
         errorMessage = "We can't find what you are looking for.";
         bodyText = getDriver().findElement(By.tagName("body")).getText();
         assertTrue(bodyText.contains(errorMessage), "Page not found error message is not correctly displayed");
@@ -212,7 +212,7 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
         Thread.sleep(2000);
 
         // Go to a page embedding URL and check whether gadgets are displayed in the page
-        redirectToLocation(DS_HOME_CONTEXT, "t/" + editor.getUserDomain() + "/gadgets/" + DASHBOARD1_TITLE + "/landing");
+        redirectToLocation(DS_HOME_CONTEXT, "t/" + editor.getUserDomain() + "/gadgets/" + DASHBOARD1_TITLE + "/landing/default");
         Thread.sleep(2000);
         assertTrue(getDriver().findElement(By.id("publisher-0")).isDisplayed(),
                 "Publisher gadget is not displayed in the page");
@@ -220,7 +220,7 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
                 "Subscriber gadget is not displayed in the page");
 
         // Go to a gadget embedding URL of super domain user and verify whether the tenant user is not allowed to view it
-        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/landing");
+        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/landing/default");
         String errorMessage = "You do not have permission to access this page.Please contact your administrator "
                 + "and request permission.";
         String bodyText = getDriver().findElement(By.tagName("body")).getText();

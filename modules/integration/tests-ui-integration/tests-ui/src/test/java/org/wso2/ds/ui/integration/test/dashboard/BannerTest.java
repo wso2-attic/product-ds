@@ -21,6 +21,7 @@ import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
@@ -110,6 +111,8 @@ public class BannerTest extends DSUIIntegrationTest {
         addLoginRole(viewer.getUserName());
         login(getCurrentUsername(), getCurrentPassword());
         initDashboard();
+        goToDesigner();
+        allowPersonalizeDashboard();
         logout();
     }
 
@@ -145,9 +148,12 @@ public class BannerTest extends DSUIIntegrationTest {
         assertTrue(isResourceExist(ROOT_RESOURCE_PATH + dashboardId + "/banner"), "Unable to find the resource");
         //Verify an editor can view the uploaded banner
         assertTrue(isBannerPresent(), "Banner is not visible to the editor");
+        popWindow();
         //Verify an uploaded banner is loaded into the anonymous view
-        createAnonView();
-        navigateToAnonView();
+        getDriver().findElement(By.id("add-view")).click();
+        getDriver().findElement(By.id("copy-view")).click();
+        Select dropdown = new Select(getDriver().findElement(By.id("page-views-menu")));
+        dropdown.selectByIndex(1);
         assertTrue(isBannerPresentInDesignerMode(), "Banner is not loaded into the anonymous view");
         //Verify the same banner is uploaded to a new page added with banner layout
         addPageWithBannerLayout();
@@ -215,8 +221,6 @@ public class BannerTest extends DSUIIntegrationTest {
         clickRemoveBannerButton();
         assertFalse(isResourceExist(ROOT_RESOURCE_PATH + dashboardId + "/banner"), "Unable to remove the resource");
         assertFalse(isBannerPresentInDesignerMode(), "Banner is not removed from the default mode");
-        navigateToAnonView();
-        assertFalse(isBannerPresentInDesignerMode(), "Banner is not removed from the anonymous mode");
         navigateToPage("page0");
         assertFalse(isBannerPresentInDesignerMode(), "Banner is not removed from page 0");
         logout();
@@ -380,35 +384,13 @@ public class BannerTest extends DSUIIntegrationTest {
     }
 
     /**
-     * Create anonymous page from the designer.
-     *
-     * @throws MalformedURLException
-     * @throws XPathExpressionException
-     */
-    private void createAnonView() throws MalformedURLException, XPathExpressionException {
-        popWindow();
-        getDriver().findElement(By.cssSelector("a#btn-pages-sidebar")).click();
-        getDriver().findElement(By.cssSelector("input[name='anon']")).click();
-    }
-
-    /**
-     * Navigate to anonymous page from the designer.
-     *
-     * @throws MalformedURLException
-     * @throws XPathExpressionException
-     */
-    private void navigateToAnonView() throws MalformedURLException, XPathExpressionException {
-        String fireEvent = "$('a[aria-controls=anonymousDashboardView]').click();";
-        getDriver().executeScript(fireEvent);
-    }
-
-    /**
      * Add a page with banner layout.
      *
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
     private void addPageWithBannerLayout() throws MalformedURLException, XPathExpressionException {
+        getDriver().findElement(By.id("btn-pages-sidebar")).click();
         getDriver().findElement(By.cssSelector("button[rel='createPage']")).click();
         selectLayout("banner");
     }
@@ -421,7 +403,6 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      */
     private void navigateToPage(String page) throws MalformedURLException, XPathExpressionException {
-        selectPane("pages");
         switchPage(page);
 
     }
