@@ -107,9 +107,9 @@ public class SharedDashboardTest extends DSUIIntegrationTest {
         login(editor.getUserName(), editor.getPassword());
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
         pushWindow();
-        assertTrue(getDriver().findElement(By.id("test1-default-0")).isDisplayed(),
+        assertTrue(getDriver().findElement(By.id("test1-0")).isDisplayed(),
                 "Publisher gadget is not displayed in the page");
-        assertTrue(getDriver().findElement(By.id("test2-default-0")).isDisplayed(),
+        assertTrue(getDriver().findElement(By.id("test2-0")).isDisplayed(),
                 "USA map gadget is not displayed in the page");
         redirectToLocation(DS_HOME_CONTEXT, "t/" + editor.getUserDomain() + "/dashboards");
     }
@@ -141,9 +141,9 @@ public class SharedDashboardTest extends DSUIIntegrationTest {
         Thread.sleep(2000);
         clickViewButton();
         Thread.sleep(3000);
-        assertTrue(getDriver().findElement(By.id("publisher-default-0")).isDisplayed(),
+        assertTrue(getDriver().findElement(By.id("publisher-0")).isDisplayed(),
                 "Publisher gadget is not displayed in the page");
-        assertTrue(getDriver().findElement(By.id("subscriber-default-0")).isDisplayed(),
+        assertTrue(getDriver().findElement(By.id("subscriber-0")).isDisplayed(),
                 "Subscriber is not displayed in the page");
         redirectToLocation(DS_HOME_CONTEXT, "t/" + editor.getUserDomain() + "/dashboards");
     }

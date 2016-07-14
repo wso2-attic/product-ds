@@ -103,11 +103,11 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
         Thread.sleep(2000);
         redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/landing/default");
         Thread.sleep(2000);
-        assertTrue(getDriver().findElement(By.id("publisher-default-0")).isDisplayed(),
+        assertTrue(getDriver().findElement(By.id("publisher-0")).isDisplayed(),
                 "Publisher gadget is not displayed in the page");
-        assertTrue(getDriver().findElement(By.id("usa-map-default-0")).isDisplayed(),
+        assertTrue(getDriver().findElement(By.id("usa-map-0")).isDisplayed(),
                 "USA map gadget is not displayed in the page");
-        assertTrue(getDriver().findElements(By.id("subscriber-default-0")).size() < 1,
+        assertTrue(getDriver().findElements(By.id("subscriber-0")).size() < 1,
                 "Subscriber gadget is displayed in the page");
     }
 
@@ -121,13 +121,13 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
     @Test(groups = "wso2.ds.dashboard", description = "Embedding a gadget outside dashboard",
             dependsOnMethods = "testEmbeddingPage")
     public void testEmbeddingGadget() throws MalformedURLException, XPathExpressionException, InterruptedException {
-        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/landing/default/usa-map-default-0");
+        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/landing/default/usa-map-0");
         Thread.sleep(2000);
-        assertTrue(getDriver().findElement(By.id("usa-map-default-0")).isDisplayed(),
+        assertTrue(getDriver().findElement(By.id("usa-map-0")).isDisplayed(),
                 "USA map gadget is not displayed in the page");
-        assertTrue(getDriver().findElements(By.id("subscriber-default-0")).size() < 1,
+        assertTrue(getDriver().findElements(By.id("subscriber-0")).size() < 1,
                 "Subscriber gadget is displayed in the page");
-        assertTrue(getDriver().findElements(By.id("publisher-default-0")).size() < 1,
+        assertTrue(getDriver().findElements(By.id("publisher-0")).size() < 1,
                 "Publisher gadget is displayed in the page");
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
     }
@@ -144,8 +144,8 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
     public void testAuthentication() throws MalformedURLException, XPathExpressionException, InterruptedException {
         logout();
         Thread.sleep(2000);
-        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/landing/default/usa-map-default-0");
-        assertTrue(getDriver().findElements(By.id("usa-map-default-0")).size() < 1,
+        redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/landing/default/usa-map-0");
+        assertTrue(getDriver().findElements(By.id("usa-map-0")).size() < 1,
                 "USA map gadget is displayed in the page without proper authentication");
 
         String errorMessage = "You do not have permission to access this page.Please contact your administrator and "
@@ -214,9 +214,9 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
         // Go to a page embedding URL and check whether gadgets are displayed in the page
         redirectToLocation(DS_HOME_CONTEXT, "t/" + editor.getUserDomain() + "/gadgets/" + DASHBOARD1_TITLE + "/landing/default");
         Thread.sleep(2000);
-        assertTrue(getDriver().findElement(By.id("publisher-default-0")).isDisplayed(),
+        assertTrue(getDriver().findElement(By.id("publisher-0")).isDisplayed(),
                 "Publisher gadget is not displayed in the page");
-        assertTrue(getDriver().findElement(By.id("subscriber-default-0")).isDisplayed(),
+        assertTrue(getDriver().findElement(By.id("subscriber-0")).isDisplayed(),
                 "Subscriber gadget is not displayed in the page");
 
         // Go to a gadget embedding URL of super domain user and verify whether the tenant user is not allowed to view it
