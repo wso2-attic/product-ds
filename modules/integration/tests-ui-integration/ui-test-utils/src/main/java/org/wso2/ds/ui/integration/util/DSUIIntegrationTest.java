@@ -242,6 +242,12 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     public void selectViewLayout(String layout) throws MalformedURLException, XPathExpressionException {
         getDriver().findElement(By.cssSelector("#ues-view-layouts > div[data-id='" + layout + "']")).click();
     }
+
+    public void allowPersonalizeDashboard() throws MalformedURLException, XPathExpressionException {
+        getDriver().findElement(By.cssSelector("a#dashboard-settings")).click();
+        getDriver().findElement(By.id("personalize-dashboard")).click();
+        getDriver().findElement(By.id("ues-dashboard-saveBtn")).click();
+    }
     /**
      * Redirect user to the given location.
      *

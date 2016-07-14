@@ -111,6 +111,8 @@ public class BannerTest extends DSUIIntegrationTest {
         addLoginRole(viewer.getUserName());
         login(getCurrentUsername(), getCurrentPassword());
         initDashboard();
+        goToDesigner();
+        allowPersonalizeDashboard();
         logout();
     }
 

@@ -1,3 +1,18 @@
+/**
+ * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.wso2.ds.ui.integration.test.dashboard;
 
 import org.openqa.selenium.By;
@@ -15,7 +30,7 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 /**
- * This is the class to test the multiple view support for page based on roles
+ * This class tests the multiple view support for page based on roles
  */
 public class MultipleViewSupportTest extends DSUIIntegrationTest {
     private static final String DASHBOARD_TITLE = "multipleviewdashboard";
@@ -103,7 +118,7 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
         assertTrue(getDriver().findElement(By.id("usa-map-0")).isDisplayed(),
                 "USA map gadget is not displayed in the page");
         copyView(2);
-        clickOnView("view0");
+        clickOnView("view1");
         assertTrue(getDriver().findElement(By.id("publisher-0")).isDisplayed(),
                 "Publisher gadget is not displayed in the page");
         assertTrue(getDriver().findElement(By.id("usa-map-0")).isDisplayed(),
@@ -155,22 +170,16 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
         getDriver().findElement(By.id("btn-sidebar-dashboard-layout")).click();
         selectViewLayout("single-column");
         getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
-        assertFalse(getDriver().isElementPresent(By.id("publisher-0")), "Gadgets that are on existing layout is not replaced");
-        assertFalse(getDriver().isElementPresent(By.id("usa-map-0")), "Gadgets that are on existing layout is not replaced");
+        assertFalse(getDriver().isElementPresent(By.id("publisher-0")),
+                "Gadgets that are on existing layout is not replaced");
+        assertFalse(getDriver().isElementPresent(By.id("usa-map-0")),
+                "Gadgets that are on existing layout is not replaced");
         clickOnView("view0");
-        assertTrue(getDriver().isElementPresent(By.id("publisher-0")), "When replacing the layout of a view other views are affected");
-        assertTrue(getDriver().isElementPresent(By.id("usa-map-0")), "When replacing the layout of a view other views are affected");
+        assertTrue(getDriver().isElementPresent(By.id("publisher-0")),
+                "When replacing the layout of a view other views are affected");
+        assertTrue(getDriver().isElementPresent(By.id("usa-map-0")),
+                "When replacing the layout of a view other views are affected");
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
-    }
-
-    /**
-     * To test the functionality of deleting a particular view
-     */
-    @Test(groups = "wso2.ds.dashboard", description = "Checking the functionality of replacing layout of a particular view", dependsOnMethods = "testReplaceLayout")
-    public void testDeleteView() throws MalformedURLException, XPathExpressionException{
-        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
-        getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-edit")).click();
-
     }
 
     /**

@@ -77,6 +77,8 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
     public void setUp() throws Exception {
         login(getCurrentUsername(), getCurrentPassword());
         initDashboard();
+        getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
+        allowPersonalizeDashboard();
         logout();
     }
 
@@ -160,7 +162,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
     public void personalizeGadgetPrefsByViewer() throws Exception {
         DSWebDriver driver = getDriver();
         getDriver().findElement(By.cssSelector("a.dropdown")).click();
-        driver.findElement(By.cssSelector("i.fw.fw-settings")).click();
+        getDriver().findElement(By.cssSelector(".ues-copy")).click();
         //Verify "Settings" is not available in personalized dashboard edit mode
         assertFalse(driver.isElementPresent(By.id("dashboard-settings")));
         driver.findElement(By.className("ues-component-properties-handle"));
@@ -198,7 +200,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
         pushWindow();
         getDriver().findElement(By.cssSelector("a.dropdown")).click();
-        driver.findElement(By.cssSelector("i.fw.fw-settings")).click();
+        getDriver().findElement(By.cssSelector(".ues-copy")).click();
         driver.findElement(By.className("ues-copy")).click();
         driver.findElement(By.id("ues-modal-confirm-yes")).click();
         //TODO: element is inside an iframe and driver.findElement cannot be used directly. Hence an alternative is needed
