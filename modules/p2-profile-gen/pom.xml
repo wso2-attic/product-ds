@@ -335,7 +335,6 @@
                                     <version>${carbon.identity.framework.version}</version>
                                 </feature>
 
-
                                 <!-- multitenancy features -->
                                 <feature>
                                     <id>org.wso2.carbon.tenant.common.feature.group</id>
