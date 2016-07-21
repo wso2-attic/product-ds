@@ -41,6 +41,8 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest{
     private static final String PASSWORD_ROLE1 = "role1";
     private static final String USERNAME_ROLE2 = "role2";
     private static final String PASSWORD_ROLE2 = "role2";
+    private static final String USERNAME_EDITOR1 = "editormultiple";
+    private static final String PASSWORD_EDITOR1 = "editormultiple";
 
 
     /**
@@ -80,13 +82,16 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest{
         loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
         addUser(USERNAME_ROLE1, PASSWORD_ROLE1, PASSWORD_ROLE1);
         addUser(USERNAME_ROLE2, PASSWORD_ROLE2, PASSWORD_ROLE2);
+        addUser(USERNAME_EDITOR1, PASSWORD_EDITOR1, PASSWORD_EDITOR1);
         addRole(ROLE1);
         assignRoleToUser(userListForRole1);
         addRole(ROLE2);
         assignRoleToUser(userListForRole2);
         assignInternalRoleToUser(DASHBOARD_TITLE + "-viewer", userList);
+        assignInternalRoleToUser(DASHBOARD_TITLE + "-editor", new String[] {USERNAME_EDITOR1});
         addLoginRole(USERNAME_ROLE1);
         addLoginRole(USERNAME_ROLE2);
+        addLoginRole(USERNAME_EDITOR1);
     }
 
     /**
@@ -116,7 +121,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest{
         getDriver().findElement(By.xpath("(//button[@type='button'])[10]")).click();
         getDriver().findElement(By.id("ds-view-roles")).click();
         getDriver().findElement(By.id("ds-view-roles")).sendKeys("anonymous");
-        getDriver().findElement(By.className("tt-highlight")).click();
+        getDriver().findElement(By.className("tt-suggestion")).click();
         getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
         selectPane("gadgets");
         getDriver().executeScript(script);
@@ -151,17 +156,19 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest{
      */
     @Test(groups = "wso2.ds.dashboard", description = "Checking the view based on roles", dependsOnMethods = "testAnonView")
     public void testViewRole() throws MalformedURLException, XPathExpressionException {
-        String[][] gadgetMappings = { { "publisherrole1", "a" } };
+        String[][] gadgetMappings = { { "publisherrole1", "a" }, { "publisher", "b" } };
         String script = generateAddGadgetScript(gadgetMappings);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " .ues-edit")).click();
+
+        // Create a view for only role 1 and check whether it is displayed only for relevant users
         assertFalse(getDriver().isElementPresent(By.id("publisherrole1")),
                 "Gadgets that do not have internal role are visible in gadget pane");
         createNewView("single-column");
         getDriver().findElement(By.xpath("(//button[@type='button'])[13]")).click();
         getDriver().findElement(By.id("ds-view-roles")).click();
         getDriver().findElement(By.id("ds-view-roles")).sendKeys(ROLE1);
-        getDriver().findElement(By.className("tt-highlight")).click();
+        getDriver().findElement(By.className("tt-suggestion")).click();
         getDriver().findElement(By.cssSelector("div[data-role=\"Internal/everyone\"] .remove-button")).click();
         clickOnView("view0");
         assertTrue(getDriver().isElementPresent(By.id("publisherrole1")),
@@ -169,13 +176,14 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest{
         selectPane("gadgets");
         getDriver().executeScript(script);
         assertTrue(getDriver().isElementPresent(By.id("publisherrole1-0")),
-                "Gadgets that have role1 is not visible in gadgets pane");
+                "Gadgets that have role1 is not added to the dashboard");
+        assertTrue(getDriver().isElementPresent(By.id("publisher-0")), "Gadgets addition to the dashboard failed");
         clickViewButton();
         pushWindow();
         assertTrue(getDriver().findElement(By.id("publisherrole1-0")).isDisplayed(),
                 "Gadget is displayed in view mode");
         assertTrue(getDriver().findElement(By.id("ds-allowed-view-list")).isDisplayed(),
-                "Gadget is displayed in view mode");
+                "Drop down is displayed when there are more than 1 views are available for user");
         Select dropdown = new Select(getDriver().findElement(By.id("ds-allowed-view-list")));
         dropdown.selectByIndex(0);
         assertTrue(getDriver().findElement(By.id("gadget-resize-0")).isDisplayed(),
@@ -187,10 +195,85 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest{
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " .ues-view")).click();
         pushWindow();
         assertTrue(getDriver().findElement(By.id("publisherrole1-0")).isDisplayed(),
-                "Gadget is displayed in view mode");
+                "Gadget not is displayed in view mode");
         assertFalse(getDriver().findElement(By.id("ds-allowed-view-list")).isDisplayed(),
                 "When only one view is viewable drop down is displayed");
         getDriver().close();
         popWindow();
+        logout();
+        login(USERNAME_ROLE2, PASSWORD_ROLE2);
+        assertTrue(
+                getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " #ues-view")).getAttribute("disabled")
+                        .equalsIgnoreCase("true"),
+                "When there" + "are no views available for a user, view button is not disabled");
+        logout();
+
+        // Create a new view for internal/everyone and check whether that view is visible for all the users
+        login(USERNAME_EDITOR1, PASSWORD_EDITOR1);
+        getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
+        createNewView("default-grid");
+        logout();
+        login(USERNAME_ROLE2, PASSWORD_ROLE2);
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
+        getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " .ues-view")).click();
+        pushWindow();
+        assertFalse(getDriver().findElement(By.id("ds-allowed-view-list")).isDisplayed(),
+                "When only one view is viewable drop down is displayed");
+        getDriver().close();
+        popWindow();
+        logout();
+        login(USERNAME_EDITOR1, PASSWORD_EDITOR1);
+    }
+
+    /**
+     * Check whether the restricted gadgets are displayed in designer mode for the user who doen`t have access to it
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    @Test(groups = "wso2.ds.dashboard", description = "Checking the functionality of restricting gadgets based on roles",
+            dependsOnMethods = "testViewRole")
+    public void testRestrictedGadgets() throws MalformedURLException, XPathExpressionException, InterruptedException {
+        getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
+        clickOnView("view0");
+        Thread.sleep(1000);
+        assertFalse(getDriver().isElementPresent(By.id("publisherrole1-0")), "Restricted gadget is "
+                + "displayed in designer mode to the user who does not have the permission to view it");
+        assertTrue(getDriver().isElementPresent(By.id("publisher-0")),
+                "Not restricted gadgets are also not " + "rendering correctly.");
+        logout();
+    }
+
+    /**
+     * To test the functionalit of adding new roles to the view
+     * @throws XPathExpressionException
+     * @throws MalformedURLException
+     */
+    @Test(groups = "wso2.ds.dashboard", description = "Checking the functionality of adding roles",
+            dependsOnMethods = "testRestrictedGadgets")
+    public void testRoleAddition() throws XPathExpressionException, MalformedURLException {
+        login(getCurrentUsername(), getCurrentPassword());
+        getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
+        clickOnView("view0");
+        getDriver().findElement(By.xpath("(//button[@type='button'])[13]")).click();
+        getDriver().findElement(By.id("ds-view-roles")).click();
+        getDriver().findElement(By.id("ds-view-roles")).sendKeys("Internal everyone");
+        getDriver().findElement(By.className("tt-suggestion")).click();
+        getDriver().findElement(By.id("ues-modal-confirm-no")).click();
+        clickOnView("view0");
+        getDriver().findElement(By.xpath("(//button[@type='button'])[13]")).click();
+        assertFalse(getDriver().isElementPresent(By.cssSelector("div[data-role=\"Internal/everyone\"]")),
+                "New role is " + "added without user confirmation");
+        clickOnView("view0");
+        assertTrue(getDriver().isElementPresent(By.id("publisherrole1-0")), "Gadgets are removed mistakenly");
+        getDriver().findElement(By.xpath("(//button[@type='button'])[13]")).click();
+        getDriver().findElement(By.id("ds-view-roles")).click();
+        getDriver().findElement(By.id("ds-view-roles")).sendKeys("Internal everyone");
+        getDriver().findElement(By.className("tt-suggestion")).click();
+        getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
+        clickOnView("view0");
+        assertTrue(getDriver().isElementPresent(By.cssSelector("div[data-role=\"Internal/everyone\"]")),
+                "New role " + "addition failed");
+        assertFalse(getDriver().isElementPresent(By.id("publisherrole1-0")),
+                "Restricted gadgets are not removed " + "correctly after role addition");
     }
 }

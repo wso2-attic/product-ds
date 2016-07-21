@@ -132,8 +132,7 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
         getDriver().findElement(By.cssSelector("#publisher-0 .ues-trash-handle")).click();
         getDriver().findElement(By.id("btn-delete")).click();
         Thread.sleep(2000);
-        assertFalse(getDriver().isElementPresent(By.id("publisher-0")),
-                "Publisher gadget is not deleted");
+        assertFalse(getDriver().isElementPresent(By.id("publisher-0")), "Publisher gadget is not deleted");
         clickOnView("default");
         assertTrue(getDriver().findElement(By.id("publisher-0")).isDisplayed(),
                 "Publisher gadget is deleted when the same gadget is deleted from copied view");
@@ -218,11 +217,9 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-edit")).click();
         deleteView("default");
-        assertFalse(getDriver().isElementPresent(By.id("default")),
-                "View is not deleted even when after deleting it");
+        assertFalse(getDriver().isElementPresent(By.id("default")), "View is not deleted even when after deleting it");
         deleteView("view0");
-        assertFalse(getDriver().isElementPresent(By.id("view0")),
-                "View is not deleted even when after deleting it");
+        assertFalse(getDriver().isElementPresent(By.id("view0")), "View is not deleted even when after deleting it");
     }
 
     /**
@@ -286,7 +283,8 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
         deleteView("view2");
         clickOnView("view3");
         getDriver().findElement(By.cssSelector("li#nav-tab-view3.active .ues-trash-handle")).click();
-        assertTrue(getDriver().isElementPresent(By.className("modal-content")), "Deleting of last view is also allowed");
+        assertTrue(getDriver().isElementPresent(By.className("modal-content")),
+                "Deleting of last view is also allowed");
         getDriver().findElement(By.id("ues-modal-info-ok")).click();
         assertTrue(getDriver().isElementPresent(By.id("view3")), "Deleting of last view is also allowed");
         assertFalse(getDriver().isElementPresent(By.id("view1")), "Deleted views are still visible");
@@ -304,7 +302,8 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-edit")).click();
         addPageToDashboard("default-grid");
-        assertTrue(getDriver().isElementPresent(By.id("default")), "When creating new page default view is not created");
+        assertTrue(getDriver().isElementPresent(By.id("default")),
+                "When creating new page default view is not created");
         // Create a new add some gadgets
         createNewView("single-column");
         assertTrue(getDriver().isElementPresent(By.id("view0")), "Second view is not created in second page");
@@ -313,7 +312,8 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-edit")).click();
         getDriver().findElement(By.className("ues-switch-page-next")).click();
-        assertTrue(getDriver().isElementPresent(By.id("default")), "When creating new page default view is not created");
+        assertTrue(getDriver().isElementPresent(By.id("default")),
+                "When creating new page default view is not created");
         assertTrue(getDriver().isElementPresent(By.id("view0")), "Second view is not created in second page");
     }
 }
