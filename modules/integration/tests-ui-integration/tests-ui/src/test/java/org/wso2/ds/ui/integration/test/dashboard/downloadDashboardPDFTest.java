@@ -24,7 +24,7 @@ import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 import javax.xml.xpath.XPathExpressionException;
 import java.net.MalformedURLException;
 
-public class downloadDashboardPDFTest extends DSUIIntegrationTest {
+public class DownloadDashboardPDFTest extends DSUIIntegrationTest {
     private static final String DASHBOARD_TITLE = "downloadDashboardPDF";
     private static final String DASHBOARD_DESCRIPTION = "This is description about " + DASHBOARD_TITLE;
     private static final String ADMIN_USERNAME = "admin";
@@ -44,11 +44,10 @@ public class downloadDashboardPDFTest extends DSUIIntegrationTest {
         for (String winHandle : getDriver().getWindowHandles()) {
             getDriver().switchTo().window(winHandle);
         }
-        getDriver().findElement(By.id("downloadPDF")).click();
-        getDriver().findElement(By.id("generatePDF")).click();
+        getDriver().findElement(By.id("download-pdf-panel")).click();
+        getDriver().findElement(By.id("generate-pdf")).click();
         Thread.sleep(10000);
-        Assert.assertEquals(getDriver().findElement(By.id("downloadPDF")).getAttribute("val"), "success");
-
+        Assert.assertEquals(getDriver().findElement(By.id("download-pdf-panel")).getAttribute("val"), "success");
     }
 
     /**
