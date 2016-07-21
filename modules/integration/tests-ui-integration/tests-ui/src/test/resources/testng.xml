@@ -66,7 +66,6 @@
             <class name="org.wso2.ds.ui.integration.test.layout.UploadLayoutTest" />
             <class name ="org.wso2.ds.ui.integration.test.dashboard.MultipleViewSupportTest" />
             <class name="org.wso2.ds.ui.integration.test.dashboard.DownloadDashboardPDFTest"/>
-
         </classes>
     </test>
 </suite>
