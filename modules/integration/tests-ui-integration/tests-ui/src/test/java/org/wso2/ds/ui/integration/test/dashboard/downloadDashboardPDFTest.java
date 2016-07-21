@@ -24,7 +24,7 @@ import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 import javax.xml.xpath.XPathExpressionException;
 import java.net.MalformedURLException;
 
-public class DownloadDashboardPDFTest extends DSUIIntegrationTest {
+public class DownloadDashboardPdfTest extends DSUIIntegrationTest {
     private static final String DASHBOARD_TITLE = "downloadDashboardPDF";
     private static final String DASHBOARD_DESCRIPTION = "This is description about " + DASHBOARD_TITLE;
     private static final String ADMIN_USERNAME = "admin";
