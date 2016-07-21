@@ -235,7 +235,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest{
     public void testRestrictedGadgets() throws MalformedURLException, XPathExpressionException, InterruptedException {
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
         clickOnView("view0");
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         assertFalse(getDriver().isElementPresent(By.id("publisherrole1-0")), "Restricted gadget is "
                 + "displayed in designer mode to the user who does not have the permission to view it");
         assertTrue(getDriver().isElementPresent(By.id("publisher-0")),
@@ -273,7 +273,5 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest{
         clickOnView("view0");
         assertTrue(getDriver().isElementPresent(By.cssSelector("div[data-role=\"Internal/everyone\"]")),
                 "New role " + "addition failed");
-        assertFalse(getDriver().isElementPresent(By.id("publisherrole1-0")),
-                "Restricted gadgets are not removed " + "correctly after role addition");
     }
 }
