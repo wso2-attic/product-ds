@@ -22,6 +22,7 @@ import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
@@ -88,7 +89,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
                 "    }" +
                 "});" +
                 "function performDrag(id, targetId) {" +
-                "    var gadget = $('[data-id=' + id + ']');" +
+                "    var gadget = $('div[data-id=' + id + ']');" +
                 "    var target = $('#' + targetId);" +
                 "    var gadgetOffset = gadget.offset();" +
                 "    var targetOffset = target.offset();" +
@@ -406,7 +407,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         getDriver().findElement(By.cssSelector("td.buttonRow > input.button")).click();
     }
 
-    public  void addLoginRole(String username) throws MalformedURLException, XPathExpressionException {
+    public void addLoginRole(String username) throws MalformedURLException, XPathExpressionException {
         getDriver().get(getBaseUrl() + "/carbon/admin/login.jsp");
         getDriver().findElement(By.id("txtUserName")).clear();
         getDriver().findElement(By.id("txtUserName")).sendKeys("admin");
@@ -581,5 +582,75 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         return FrameworkPathUtil.getCarbonHome() + File.separator + "repository" + File.separator + "deployment" +
                 File.separator + "server" + File.separator + "jaggeryapps" + File.separator + "portal" +
                 File.separator + relativePath;
+    }
+
+    /**
+     * To create a new view by copying existing view
+     *
+     * @param index Index of the view to be copied
+     */
+    public void copyView(int index) throws MalformedURLException, XPathExpressionException {
+        getDriver().findElement(By.id("add-view")).click();
+        getDriver().findElement(By.id("copy-view")).click();
+        Select dropdown = new Select(getDriver().findElement(By.id("page-views-menu")));
+        dropdown.selectByIndex(index);
+    }
+
+    /**
+     * To click on the particular view
+     * @param viewId View id of the view to be clicked
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    public void clickOnView(String viewId) throws MalformedURLException, XPathExpressionException {
+        getDriver().findElement(By.id(viewId)).click();
+    }
+
+    /**
+     * To create a new view with new layout
+     * @param layout Layout to be added to new view
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    public void createNewView (String layout) throws MalformedURLException, XPathExpressionException{
+        getDriver().findElement(By.id("add-view")).click();
+        getDriver().findElement(By.id("new-view")).click();
+        selectViewLayout(layout);
+    }
+
+    /**
+     * To delete a particular view
+     * @param viewId View Id of the view that need to be deleted
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    public void deleteView (String viewId) throws MalformedURLException, XPathExpressionException{
+        clickOnView(viewId);
+        getDriver().findElement(By.cssSelector("li#nav-tab-" + viewId + ".active .ues-trash-handle")).click();
+        getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
+    }
+
+    /**
+     * To close a particular view
+     * @param viewId View Id of the view that need to be closed
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    public void closeView (String viewId) throws MalformedURLException, XPathExpressionException {
+        clickOnView(viewId);
+        getDriver().findElement(By.cssSelector("li#nav-tab-" + viewId + ".active .ues-close-view")).click();
+    }
+
+    public void assignInternalRoleToUser(String roleName, String[] userList)
+            throws MalformedURLException, XPathExpressionException {
+        loginToAdminConsole(getCurrentUsername(),getCurrentPassword());
+        getDriver().findElement(By.linkText("List")).click();
+        getDriver().findElement(By.linkText("Roles")).click();
+        getDriver().findElement(By.cssSelector("a[href=\"edit-users.jsp?roleName=Internal%2F" + roleName+ "&org.wso2.carbon.role.read.only=false\"]")).click();
+        for (int i = 0; i < userList.length; i++) {
+            getDriver().findElement(By.cssSelector("input[value=" + userList[i] + "]")).click();
+        }
+        getDriver().findElement(By.xpath("//input[@value='Finish']")).click();
+        getDriver().findElement(By.cssSelector("button[type=\"button\"]")).click();
     }
 }
