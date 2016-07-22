@@ -85,6 +85,8 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
 
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
+        deleteDashboards();
         getDriver().quit();
     }
 
