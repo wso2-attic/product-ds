@@ -244,6 +244,11 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         getDriver().findElement(By.cssSelector("#ues-view-layouts > div[data-id='" + layout + "']")).click();
     }
 
+    /**
+     * To allow the user to personalize the dashboard
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
     public void allowPersonalizeDashboard() throws MalformedURLException, XPathExpressionException {
         getDriver().findElement(By.cssSelector("a#dashboard-settings")).click();
         getDriver().findElement(By.id("personalize-dashboard")).click();

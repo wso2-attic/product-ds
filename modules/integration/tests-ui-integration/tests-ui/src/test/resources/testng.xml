@@ -40,6 +40,7 @@
             <class name="org.wso2.ds.ui.integration.test.common.AddUserTest"/>
             <class name="org.wso2.ds.ui.integration.test.common.CustomThemeDeployerTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.MultipleViewRoleTest" />
+            <class name="org.wso2.ds.ui.integration.test.dashboard.EditInViewModeTest" />
             <class name="org.wso2.ds.ui.integration.test.dashboard.AddCustomThemeToDashboardTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.AddDeleteDashboardTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.AddGadgetToDashboardTest"/>
