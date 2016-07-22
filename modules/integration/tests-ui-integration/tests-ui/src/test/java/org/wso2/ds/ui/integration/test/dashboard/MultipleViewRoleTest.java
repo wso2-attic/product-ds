@@ -44,6 +44,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
     private static final String USERNAME_EDITOR1 = "editormultiple";
     private static final String PASSWORD_EDITOR1 = "editormultiple";
 
+
     /**
      * Initializes the class.
      *
@@ -61,7 +62,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
      */
     @DataProvider(name = "userMode")
     public static Object[][] userModeProvider() {
-        return new Object[][] { { TestUserMode.SUPER_TENANT_ADMIN } };
+        return new Object[][]{{TestUserMode.SUPER_TENANT_ADMIN}};
     }
 
     /**
@@ -73,9 +74,9 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
      */
     @BeforeClass(alwaysRun = true)
     public void setUp() throws AutomationUtilException, XPathExpressionException, IOException {
-        String[] userListForRole1 = { getCurrentUsername(), USERNAME_ROLE1 };
-        String[] userListForRole2 = { getCurrentUsername(), USERNAME_ROLE2 };
-        String[] userList = { USERNAME_ROLE1, USERNAME_ROLE2 };
+        String[] userListForRole1 = {getCurrentUsername(), USERNAME_ROLE1};
+        String[] userListForRole2 = {getCurrentUsername(), USERNAME_ROLE2};
+        String[] userList = {USERNAME_ROLE1, USERNAME_ROLE2};
         login(getCurrentUsername(), getCurrentPassword());
         addDashBoard(DASHBOARD_TITLE, "This is a test dashboard");
         loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
@@ -87,7 +88,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
         addRole(ROLE2);
         assignRoleToUser(userListForRole2);
         assignInternalRoleToUser(DASHBOARD_TITLE + "-viewer", userList);
-        assignInternalRoleToUser(DASHBOARD_TITLE + "-editor", new String[] { USERNAME_EDITOR1 });
+        assignInternalRoleToUser(DASHBOARD_TITLE + "-editor", new String[]{USERNAME_EDITOR1});
         addLoginRole(USERNAME_ROLE1);
         addLoginRole(USERNAME_ROLE2);
         addLoginRole(USERNAME_EDITOR1);
@@ -113,7 +114,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
      */
     @Test(groups = "wso2.ds.dashboard", description = "Checking the creation of anon view")
     public void testAnonView() throws MalformedURLException, XPathExpressionException {
-        String[][] gadgetMappings = { { "gadget-resize", "b" } };
+        String[][] gadgetMappings = {{"gadget-resize", "b"}};
         String script = generateAddGadgetScript(gadgetMappings);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " .ues-edit")).click();
@@ -153,7 +154,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
     @Test(groups = "wso2.ds.dashboard", description = "Checking the view based on roles",
             dependsOnMethods = "testAnonView")
     public void testViewRole() throws MalformedURLException, XPathExpressionException {
-        String[][] gadgetMappings = { { "publisherrole1", "a" }, { "publisher", "b" } };
+        String[][] gadgetMappings = {{"publisherrole1", "a"}, {"publisher", "b"}};
         String script = generateAddGadgetScript(gadgetMappings);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " .ues-edit")).click();

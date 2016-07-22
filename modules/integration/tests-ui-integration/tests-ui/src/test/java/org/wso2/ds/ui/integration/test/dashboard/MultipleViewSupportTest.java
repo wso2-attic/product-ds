@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.wso2.ds.ui.integration.test.dashboard;
 
 import org.openqa.selenium.By;
@@ -51,7 +52,7 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
      */
     @DataProvider(name = "userMode")
     public static Object[][] userModeProvider() {
-        return new Object[][] { { TestUserMode.SUPER_TENANT_ADMIN } };
+        return new Object[][]{{TestUserMode.SUPER_TENANT_ADMIN}};
     }
 
     /**
@@ -89,7 +90,7 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
     public void testSingleView() throws MalformedURLException, XPathExpressionException {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-edit")).click();
-        String[][] gadgetMappings = { { "publisher", "b" }, { "usa-map", "c" } };
+        String[][] gadgetMappings = {{"publisher", "b"}, {"usa-map", "c"}};
         String script = generateAddGadgetScript(gadgetMappings);
         getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
         getDriver().executeScript(script);
@@ -154,8 +155,8 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
         getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-edit")).click();
         createNewView("default-grid");
         clickOnView("view2");
-        String[][] gadgetMappings = { { "usa-business-revenue", "a" }, { "subscriber", "d" } };
-        String[][] gadgetMappingForNewView = { { "publisher", "a" }, { "subscriber", "b" } };
+        String[][] gadgetMappings = {{"usa-business-revenue", "a"}, {"subscriber", "d"}};
+        String[][] gadgetMappingForNewView = {{"publisher", "a"}, {"subscriber", "b"}};
         String script = generateAddGadgetScript(gadgetMappings);
         getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
         getDriver().executeScript(script);

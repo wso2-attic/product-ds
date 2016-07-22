@@ -233,7 +233,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
                         "innerDoc.getElementById('btnSend').click();"
         );
         boolean displayed = false;
-        for (int i=0; i < 10 && !displayed; i++){
+        for (int i = 0; i < 10 && !displayed; i++) {
             Thread.sleep(1000);
             displayed = driver.findElement(By.id("subscriber-0")).isDisplayed();
         }
@@ -323,6 +323,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
 
     /**
      * Copy all the test gadgets located at resources directory to the pack used for testing
+     *
      * @throws XPathExpressionException
      * @throws AutomationUtilException
      * @throws IOException

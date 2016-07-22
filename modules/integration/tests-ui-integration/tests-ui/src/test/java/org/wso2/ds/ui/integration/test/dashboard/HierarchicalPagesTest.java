@@ -1,6 +1,22 @@
+/**
+ * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.wso2.ds.ui.integration.test.dashboard;
 
-//import java.util.List;
+
 import static org.testng.Assert.assertEquals;
 
 import org.openqa.selenium.By;
@@ -14,249 +30,250 @@ import org.wso2.ds.ui.integration.util.DSWebDriver;
 
 public class HierarchicalPagesTest extends DSUIIntegrationTest {
 
-	private static  final String USERNAME_EDITOR = "pageeditor";
-	private static final String PASSWORD_EDITOR = "editor123";
-	private static final String EDITOR_ROLE = "dashboardEditorRole1";
-	/**
-	 * Initialize the class
-	 */
-	@Factory(dataProvider = "userMode")
-	public HierarchicalPagesTest(TestUserMode userMode) throws Exception {
-		super(userMode);
-	}
+    private static final String USERNAME_EDITOR = "pageeditor";
+    private static final String PASSWORD_EDITOR = "editor123";
+    private static final String EDITOR_ROLE = "dashboardEditorRole1";
 
-	/**
-	 * Provides user modes
-	 *
-	 * @return
-	 */
-	@DataProvider(name = "userMode")
-	private static Object[][] userModeProvider() {
-		return new Object[][] { { TestUserMode.SUPER_TENANT_ADMIN } };
-	}
+    /**
+     * Initialize the class
+     */
+    @Factory(dataProvider = "userMode")
+    public HierarchicalPagesTest(TestUserMode userMode) throws Exception {
+        super(userMode);
+    }
 
-	@BeforeClass(alwaysRun = true)
-	public void setUp() throws Exception {
-		login(getCurrentUsername(), getCurrentPassword());
-		deleteDashboards();
-		logout();
-		loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
-		addUser(USERNAME_EDITOR, PASSWORD_EDITOR, PASSWORD_EDITOR);
-		addRole(EDITOR_ROLE);
-		assignRoleToUser(new String[] { USERNAME_EDITOR });
-		logoutFromAdminConsole();
-		addLoginRole(USERNAME_EDITOR);
-		addCreateRole(USERNAME_EDITOR);
-		addOwnernRole(USERNAME_EDITOR);
-		login(USERNAME_EDITOR, PASSWORD_EDITOR);
-	}
+    /**
+     * Provides user modes
+     *
+     * @return
+     */
+    @DataProvider(name = "userMode")
+    private static Object[][] userModeProvider() {
+        return new Object[][]{{TestUserMode.SUPER_TENANT_ADMIN}};
+    }
 
-	/**
-	 * Tests availability of all pages within the menu creator
-	 *
-	 * @throws Exception
-	 */
-	@Test(groups = "wso2.ds.dashboard.pages", description = "Tests availability of all pages within menu creator.")
-	public void testAllPagesVisibilityInMenuCreator() throws Exception {
-		DSWebDriver driver = getDriver();
-		String dashboardTitle = "dashboardmenu";
-		String gridId = "default-grid";
-		addDashBoard(dashboardTitle, "This is a test dashboard");
-		Thread.sleep(500);
-		//WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
-		driver.findElement(By.id(dashboardTitle.toLowerCase())).findElement(By.cssSelector(".ues-edit")).click();
+    @BeforeClass(alwaysRun = true)
+    public void setUp() throws Exception {
+        login(getCurrentUsername(), getCurrentPassword());
+        deleteDashboards();
+        logout();
+        loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
+        addUser(USERNAME_EDITOR, PASSWORD_EDITOR, PASSWORD_EDITOR);
+        addRole(EDITOR_ROLE);
+        assignRoleToUser(new String[]{USERNAME_EDITOR});
+        logoutFromAdminConsole();
+        addLoginRole(USERNAME_EDITOR);
+        addCreateRole(USERNAME_EDITOR);
+        addOwnernRole(USERNAME_EDITOR);
+        login(USERNAME_EDITOR, PASSWORD_EDITOR);
+    }
 
-		addPageToDashboard(gridId); // page0
-		// deselect pages pane, first
-		selectPane("pages");
-		addPageToDashboard(gridId); // page1
-		selectPane("pages");
-		addPageToDashboard(gridId); // page2
-		selectPane("pages");
-		addPageToDashboard(gridId); // page3
+    /**
+     * Tests availability of all pages within the menu creator
+     *
+     * @throws Exception
+     */
+    @Test(groups = "wso2.ds.dashboard.pages", description = "Tests availability of all pages within menu creator.")
+    public void testAllPagesVisibilityInMenuCreator() throws Exception {
+        DSWebDriver driver = getDriver();
+        String dashboardTitle = "dashboardmenu";
+        String gridId = "default-grid";
+        addDashBoard(dashboardTitle, "This is a test dashboard");
+        Thread.sleep(500);
+        //WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
+        driver.findElement(By.id(dashboardTitle.toLowerCase())).findElement(By.cssSelector(".ues-edit")).click();
 
-		// goto menu creation page
-		selectPane("menu");
+        addPageToDashboard(gridId); // page0
+        // deselect pages pane, first
+        selectPane("pages");
+        addPageToDashboard(gridId); // page1
+        selectPane("pages");
+        addPageToDashboard(gridId); // page2
+        selectPane("pages");
+        addPageToDashboard(gridId); // page3
 
-		// .menu-customize should have 5 + 2 (7 in total) <li>'s
-		//List<WebElement> totalLinks = driver.findElements(By.cssSelector(".menu-customize li"));
-		int totalLinkSize = driver.findElements(By.cssSelector(".menu-customize li")).size();
-		assertEquals(totalLinkSize, 7);
-	}
+        // goto menu creation page
+        selectPane("menu");
 
-	/**
-	 * Tests creating a page hierachy
-	 *
-	 * @throws Exception
-	 */
-	@Test(groups = "wso2.ds.dashboard.pages", description = "Tests creating a page hierachy.", dependsOnMethods = "testAllPagesVisibilityInMenuCreator")
-	public void testHierachicalMenuCreation() throws Exception {
-		DSWebDriver driver = getDriver();
-		String dashboardTitle = "dashboardmenu1";
-		String gridId = "default-grid";
-		addDashBoard(dashboardTitle, "This is a test dashboard");
-		Thread.sleep(500);
-		//WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
-		driver.findElement(By.id(dashboardTitle.toLowerCase())).findElement(By.cssSelector(".ues-edit")).click();
+        // .menu-customize should have 5 + 2 (7 in total) <li>'s
+        //List<WebElement> totalLinks = driver.findElements(By.cssSelector(".menu-customize li"));
+        int totalLinkSize = driver.findElements(By.cssSelector(".menu-customize li")).size();
+        assertEquals(totalLinkSize, 7);
+    }
 
-		addPageToDashboard(gridId); // page0
-		// deselect pages pane, first
-		selectPane("pages");
-		addPageToDashboard(gridId); // page1
-		selectPane("pages");
-		addPageToDashboard(gridId); // page2
-		selectPane("pages");
-		addPageToDashboard(gridId); // page3
+    /**
+     * Tests creating a page hierachy
+     *
+     * @throws Exception
+     */
+    @Test(groups = "wso2.ds.dashboard.pages", description = "Tests creating a page hierachy.", dependsOnMethods = "testAllPagesVisibilityInMenuCreator")
+    public void testHierachicalMenuCreation() throws Exception {
+        DSWebDriver driver = getDriver();
+        String dashboardTitle = "dashboardmenu1";
+        String gridId = "default-grid";
+        addDashBoard(dashboardTitle, "This is a test dashboard");
+        Thread.sleep(500);
+        //WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
+        driver.findElement(By.id(dashboardTitle.toLowerCase())).findElement(By.cssSelector(".ues-edit")).click();
 
-		// goto menu creation page
-		selectPane("menu");
+        addPageToDashboard(gridId); // page0
+        // deselect pages pane, first
+        selectPane("pages");
+        addPageToDashboard(gridId); // page1
+        selectPane("pages");
+        addPageToDashboard(gridId); // page2
+        selectPane("pages");
+        addPageToDashboard(gridId); // page3
 
-		// drag li with page id page1 and drop on to page id page0
+        // goto menu creation page
+        selectPane("menu");
 
-		//WebElement element = driver.findElement(By.id("page1"));
-		//WebElement target = driver.findElement(By.id("page2"));
+        // drag li with page id page1 and drop on to page id page0
 
-		(new Actions(driver)).dragAndDrop(driver.findElement(By.id("page1")), driver.findElement(By.id("page2"))).perform();
+        //WebElement element = driver.findElement(By.id("page1"));
+        //WebElement target = driver.findElement(By.id("page2"));
 
-		// check page1 li inside page2 ul
+        (new Actions(driver)).dragAndDrop(driver.findElement(By.id("page1")), driver.findElement(By.id("page2"))).perform();
 
-		//List<WebElement> totalLinks = driver.findElements(By.cssSelector("ul#page2"));
-		int totalLinkSize = driver.findElements(By.cssSelector("ul#page2")).size();
-		assertEquals(totalLinkSize, 1);
-	}
+        // check page1 li inside page2 ul
 
-	/**
-	 * Tests adding a page to root level
-	 *
-	 * @throws Exception
-	 */
-	@Test(groups = "wso2.ds.dashboard.pages", description = "Tests adding a page to root level.", dependsOnMethods = "testHierachicalMenuCreation")
-	public void testHierachicalMenuCreateRoot() throws Exception {
-		DSWebDriver driver = getDriver();
-		String dashboardTitle = "dashboardmenu2";
-		String gridId = "default-grid";
-		addDashBoard(dashboardTitle, "This is a test dashboard");
-		Thread.sleep(500);
-		//WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
-		driver.findElement(By.id(dashboardTitle.toLowerCase())).findElement(By.cssSelector(".ues-edit")).click();
+        //List<WebElement> totalLinks = driver.findElements(By.cssSelector("ul#page2"));
+        int totalLinkSize = driver.findElements(By.cssSelector("ul#page2")).size();
+        assertEquals(totalLinkSize, 1);
+    }
 
-		addPageToDashboard(gridId); // page0
-		// deselect pages pane, first
-		selectPane("pages");
-		addPageToDashboard(gridId); // page1
-		selectPane("pages");
-		addPageToDashboard(gridId); // page2
+    /**
+     * Tests adding a page to root level
+     *
+     * @throws Exception
+     */
+    @Test(groups = "wso2.ds.dashboard.pages", description = "Tests adding a page to root level.", dependsOnMethods = "testHierachicalMenuCreation")
+    public void testHierachicalMenuCreateRoot() throws Exception {
+        DSWebDriver driver = getDriver();
+        String dashboardTitle = "dashboardmenu2";
+        String gridId = "default-grid";
+        addDashBoard(dashboardTitle, "This is a test dashboard");
+        Thread.sleep(500);
+        //WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
+        driver.findElement(By.id(dashboardTitle.toLowerCase())).findElement(By.cssSelector(".ues-edit")).click();
 
-		// goto menu creation page
-		selectPane("menu");
+        addPageToDashboard(gridId); // page0
+        // deselect pages pane, first
+        selectPane("pages");
+        addPageToDashboard(gridId); // page1
+        selectPane("pages");
+        addPageToDashboard(gridId); // page2
 
-		// drag li with page id page1 and drop on to page id page0
+        // goto menu creation page
+        selectPane("menu");
 
-		//WebElement element = driver.findElement(By.id("page1"));
-		//WebElement target = driver.findElement(By.id("page2"));
+        // drag li with page id page1 and drop on to page id page0
 
-		(new Actions(driver)).dragAndDrop(driver.findElement(By.id("page1")), driver.findElement(By.id("page2"))).perform();
+        //WebElement element = driver.findElement(By.id("page1"));
+        //WebElement target = driver.findElement(By.id("page2"));
 
-		// undo above dragDrop
+        (new Actions(driver)).dragAndDrop(driver.findElement(By.id("page1")), driver.findElement(By.id("page2"))).perform();
 
-		//WebElement element1 = driver.findElement(By.id("page2"));
-		//WebElement target1 = driver.findElement(By.id("ds-menu-root"));
+        // undo above dragDrop
 
-		(new Actions(driver)).dragAndDrop(driver.findElement(By.id("page2")), driver.findElement(By.id("ds-menu-root"))).perform();
+        //WebElement element1 = driver.findElement(By.id("page2"));
+        //WebElement target1 = driver.findElement(By.id("ds-menu-root"));
 
-		//List<WebElement> totalLinks = driver.findElements(By.cssSelector(".menu-customize li"));
-		int totalLinkSize = driver.findElements(By.cssSelector(".menu-customize li")).size();
-		assertEquals(totalLinkSize, 6);
-	}
+        (new Actions(driver)).dragAndDrop(driver.findElement(By.id("page2")), driver.findElement(By.id("ds-menu-root"))).perform();
 
-	/**
-	 * Test hide all menu items (excepts landing page)
-	 *
-	 * @throws Exception
-	 */
-	@Test(groups = "wso2.ds.dashboard.pages", description = "Test hide all menu items.", dependsOnMethods = "testHierachicalMenuCreateRoot")
-	public void testHideAllMenuItems() throws Exception {
-		DSWebDriver driver = getDriver();
-		String dashboardTitle = "dashboardmenu3";
-		String gridId = "default-grid";
-		addDashBoard(dashboardTitle, "This is a test dashboard");
-		Thread.sleep(500);
-		//WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
-		driver.findElement(By.id(dashboardTitle.toLowerCase())).findElement(By.cssSelector(".ues-edit")).click();
+        //List<WebElement> totalLinks = driver.findElements(By.cssSelector(".menu-customize li"));
+        int totalLinkSize = driver.findElements(By.cssSelector(".menu-customize li")).size();
+        assertEquals(totalLinkSize, 6);
+    }
 
-		addPageToDashboard(gridId); // home and landing page
-		// deselect pages pane, first
-		selectPane("pages");
-		addPageToDashboard(gridId); // page0
-		selectPane("pages");
-		addPageToDashboard(gridId); // page1
-		selectPane("pages");
-		addPageToDashboard(gridId); // page2
+    /**
+     * Test hide all menu items (excepts landing page)
+     *
+     * @throws Exception
+     */
+    @Test(groups = "wso2.ds.dashboard.pages", description = "Test hide all menu items.", dependsOnMethods = "testHierachicalMenuCreateRoot")
+    public void testHideAllMenuItems() throws Exception {
+        DSWebDriver driver = getDriver();
+        String dashboardTitle = "dashboardmenu3";
+        String gridId = "default-grid";
+        addDashBoard(dashboardTitle, "This is a test dashboard");
+        Thread.sleep(500);
+        //WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
+        driver.findElement(By.id(dashboardTitle.toLowerCase())).findElement(By.cssSelector(".ues-edit")).click();
 
-		// goto menu creation page
-		selectPane("menu");
+        addPageToDashboard(gridId); // home and landing page
+        // deselect pages pane, first
+        selectPane("pages");
+        addPageToDashboard(gridId); // page0
+        selectPane("pages");
+        addPageToDashboard(gridId); // page1
+        selectPane("pages");
+        addPageToDashboard(gridId); // page2
 
-		driver.findElement(By.id("ds-menu-hide-all")).click();
+        // goto menu creation page
+        selectPane("menu");
 
-		// goto dashboard view and check the availability of landing page
-		clickViewButton();
-		pushWindow();
+        driver.findElement(By.id("ds-menu-hide-all")).click();
 
-		//List<WebElement> totalLinks = driver.findElements(By.cssSelector("#ues-pages .menu-customize li"));
-		int totalLinkSize = driver.findElements(By.cssSelector("#ues-pages .menu-customize li")).size();
-		assertEquals(totalLinkSize, 1);
-		driver.close();
-		popWindow();
-	}
+        // goto dashboard view and check the availability of landing page
+        clickViewButton();
+        pushWindow();
 
-	/**
-	 * Test hide one menu item
-	 *
-	 * @throws Exception
-	 */
-	@Test(groups = "wso2.ds.dashboard.pages", description = "Test hide one menu item.", dependsOnMethods = "testHideAllMenuItems")
-	public void testHideSingleMenuItem() throws Exception {
-		DSWebDriver driver = getDriver();
-		String dashboardTitle = "dashboardmenu4";
-		String gridId = "default-grid";
-		addDashBoard(dashboardTitle, "This is a test dashboard");
-		Thread.sleep(500);
-		//WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
-		driver.findElement(By.id(dashboardTitle.toLowerCase())).findElement(By.cssSelector(".ues-edit")).click();
+        //List<WebElement> totalLinks = driver.findElements(By.cssSelector("#ues-pages .menu-customize li"));
+        int totalLinkSize = driver.findElements(By.cssSelector("#ues-pages .menu-customize li")).size();
+        assertEquals(totalLinkSize, 1);
+        driver.close();
+        popWindow();
+    }
 
-		addPageToDashboard(gridId); // home and landing page
-		// deselect pages pane, first
-		selectPane("pages");
-		addPageToDashboard(gridId); // page0
-		selectPane("pages");
-		addPageToDashboard(gridId); // page1
-		selectPane("pages");
-		addPageToDashboard(gridId); // page2
+    /**
+     * Test hide one menu item
+     *
+     * @throws Exception
+     */
+    @Test(groups = "wso2.ds.dashboard.pages", description = "Test hide one menu item.", dependsOnMethods = "testHideAllMenuItems")
+    public void testHideSingleMenuItem() throws Exception {
+        DSWebDriver driver = getDriver();
+        String dashboardTitle = "dashboardmenu4";
+        String gridId = "default-grid";
+        addDashBoard(dashboardTitle, "This is a test dashboard");
+        Thread.sleep(500);
+        //WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
+        driver.findElement(By.id(dashboardTitle.toLowerCase())).findElement(By.cssSelector(".ues-edit")).click();
 
-		// goto menu creation page
-		selectPane("menu");
+        addPageToDashboard(gridId); // home and landing page
+        // deselect pages pane, first
+        selectPane("pages");
+        addPageToDashboard(gridId); // page0
+        selectPane("pages");
+        addPageToDashboard(gridId); // page1
+        selectPane("pages");
+        addPageToDashboard(gridId); // page2
 
-		// hide page2's menu
-		driver.findElement(By.cssSelector("li#page2 .hide-menu-item")).click();
+        // goto menu creation page
+        selectPane("menu");
 
-		clickViewButton();
-		pushWindow();
+        // hide page2's menu
+        driver.findElement(By.cssSelector("li#page2 .hide-menu-item")).click();
 
-		//List<WebElement> totalLinks = driver.findElements(By.cssSelector("#ues-pages .menu-customize li"));
-		int totalLinkSize = driver.findElements(By.cssSelector("#ues-pages .menu-customize li")).size();
-		assertEquals(totalLinkSize, 4);
-		driver.close();
-		popWindow();
-	}
+        clickViewButton();
+        pushWindow();
 
-	/**
-	 * Clean up after running tests
-	 *
-	 * @throws Exception
-	 */
-	@AfterClass(alwaysRun = true)
-	public void tearDown() throws Exception {
-		deleteDashboards();
-		getDriver().quit();
-	}
+        //List<WebElement> totalLinks = driver.findElements(By.cssSelector("#ues-pages .menu-customize li"));
+        int totalLinkSize = driver.findElements(By.cssSelector("#ues-pages .menu-customize li")).size();
+        assertEquals(totalLinkSize, 4);
+        driver.close();
+        popWindow();
+    }
+
+    /**
+     * Clean up after running tests
+     *
+     * @throws Exception
+     */
+    @AfterClass(alwaysRun = true)
+    public void tearDown() throws Exception {
+        deleteDashboards();
+        getDriver().quit();
+    }
 }

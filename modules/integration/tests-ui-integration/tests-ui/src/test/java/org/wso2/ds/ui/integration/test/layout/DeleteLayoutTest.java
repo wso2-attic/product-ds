@@ -50,7 +50,7 @@ public class DeleteLayoutTest extends DSUIIntegrationTest {
      */
     @DataProvider(name = "userMode")
     public static Object[][] userModeProvider() {
-        return new Object[][] { { TestUserMode.SUPER_TENANT_ADMIN } };
+        return new Object[][]{{TestUserMode.SUPER_TENANT_ADMIN}};
     }
 
     /**

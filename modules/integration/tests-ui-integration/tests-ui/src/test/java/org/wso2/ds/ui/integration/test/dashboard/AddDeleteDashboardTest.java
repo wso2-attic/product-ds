@@ -83,7 +83,7 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
         assertEquals(DASHBOARD_DESCRIPTION, webElement.findElement(By.id("ues-dashboard-description")).getText());
     }
 
-    @Test(groups = "wso2.ds.dashboard", priority = 2,description = "Deleting the existing dashboard from dashboard server",
+    @Test(groups = "wso2.ds.dashboard", priority = 2, description = "Deleting the existing dashboard from dashboard server",
             dependsOnMethods = "testAddDashboardNew")
     public void testDeleteDashboardNew() throws Exception {
         DSWebDriver driver = getDriver();
@@ -94,7 +94,7 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("span.ladda-label")).click();
         assertFalse(driver.isElementPresent(By.id(dashboardTitle)), "Error occurred while deleting dashboard" +
                 dashboardTitle);
-        for (int i=0; i<10 && isResourceExist; i++) {
+        for (int i = 0; i < 10 && isResourceExist; i++) {
             Thread.sleep(1000);
             isResourceExist = isResourceExist(resourcePath);
         }
@@ -103,15 +103,15 @@ public class AddDeleteDashboardTest extends DSUIIntegrationTest {
 
     @Test(groups = "wso2.ds.dashboard", priority = 1, description = "Checking internal role creation at the dashboard creation",
             dependsOnMethods = "testAddDashboardNew")
-    public void testRolesCreationWithDashboard() throws Exception{
+    public void testRolesCreationWithDashboard() throws Exception {
         DSWebDriver driver = getDriver();
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         WebElement dashboardItem = getDriver().findElement(By.id(dashboardTitle.toLowerCase()));
         dashboardItem.findElement(By.cssSelector(".ues-edit")).click();
         getDriver().findElement(By.id("dashboard-settings")).click();
-        assertEquals(INTERNAL_ROLE+dashboardTitle+INTERNAL_ROLE_VIEWER,driver.findElement(By.className("ues-shared-view")).getText());
-        assertEquals(INTERNAL_ROLE+dashboardTitle+INTERNAL_ROLE_EDITOR,driver.findElement(By.className("ues-shared-edit")).getText());
-        assertEquals(INTERNAL_ROLE+dashboardTitle+INTERNAL_ROLE_OWNER,driver.findElement(By.className("ues-shared-owner")).getText());
+        assertEquals(INTERNAL_ROLE + dashboardTitle + INTERNAL_ROLE_VIEWER, driver.findElement(By.className("ues-shared-view")).getText());
+        assertEquals(INTERNAL_ROLE + dashboardTitle + INTERNAL_ROLE_EDITOR, driver.findElement(By.className("ues-shared-edit")).getText());
+        assertEquals(INTERNAL_ROLE + dashboardTitle + INTERNAL_ROLE_OWNER, driver.findElement(By.className("ues-shared-owner")).getText());
     }
 
     @AfterClass(alwaysRun = true)

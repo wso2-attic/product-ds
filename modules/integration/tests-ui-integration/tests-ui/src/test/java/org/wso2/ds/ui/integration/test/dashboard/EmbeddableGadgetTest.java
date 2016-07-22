@@ -54,7 +54,7 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
      */
     @DataProvider(name = "userMode")
     public static Object[][] userModeProvider() {
-        return new Object[][] { { TestUserMode.SUPER_TENANT_ADMIN} };
+        return new Object[][]{{TestUserMode.SUPER_TENANT_ADMIN}};
     }
 
     /**
@@ -94,7 +94,7 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
     public void testEmbeddingPage() throws MalformedURLException, XPathExpressionException, InterruptedException {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD1_TITLE + " a.ues-edit")).click();
-        String[][] gadgetMappings = { { "publisher", "b" }, { "usa-map", "c" } };
+        String[][] gadgetMappings = {{"publisher", "b"}, {"usa-map", "c"}};
         String script = generateAddGadgetScript(gadgetMappings);
         getDriver().navigate().refresh();
         selectPane("gadgets");
@@ -203,7 +203,7 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
         getDriver().findElement(By.id("ues-dashboard-description")).sendKeys("This is a test dashboard");
         getDriver().findElement(By.id("ues-dashboard-create")).click();
         selectLayout("default-grid");
-        String[][] gadgetMappings = { { "publisher", "a" }, { "subscriber", "b" } };
+        String[][] gadgetMappings = {{"publisher", "a"}, {"subscriber", "b"}};
         String script = generateAddGadgetScript(gadgetMappings);
         getDriver().navigate().refresh();
         selectPane("gadgets");

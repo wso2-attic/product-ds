@@ -26,6 +26,7 @@ public class AddUserTest extends DSUIIntegrationTest {
     private static final String USER_NAME = "sampleuser1";
     private static final String PASSWORD = "sampleuser1";
     private static final String RETYPE_PASSWORD = "sampleuser1";
+
     public AddUserTest() {
         super();
     }
