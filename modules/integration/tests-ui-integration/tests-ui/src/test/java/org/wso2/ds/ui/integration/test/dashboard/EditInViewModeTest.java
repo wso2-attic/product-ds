@@ -83,7 +83,7 @@ public class EditInViewModeTest extends DSUIIntegrationTest{
         // Create a dashboard and add some gadgets and make the dashboard as personalizable one
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-edit")).click();
-        String[][] gadgetMappings = { { "usa-map", "a" }, { "publisher", "e" } };
+        String[][] gadgetMappings = { { "usa-map", "b" }, { "publisher", "e" } };
         String script = generateAddGadgetScript(gadgetMappings);
         getDriver().navigate().refresh();
         selectPane("gadgets");
@@ -118,14 +118,13 @@ public class EditInViewModeTest extends DSUIIntegrationTest{
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    @Test(groups = "wso2.ds.dashboard", description = "Checking the resize operation in view mode", priority = 2)
+    @Test(groups = "wso2.ds.dashboard", description = "Checking the resize operation in view mode", dependsOnMethods = "testDragGadgetInViewMode")
     public void testResizeGadget() throws MalformedURLException, XPathExpressionException, InterruptedException {
         String oldWidth = getDriver().findElement(By.cssSelector("div[data-id=\"e\"]")).getAttribute("data-gs-width");
         ((JavascriptExecutor) getDriver())
                 .executeScript("document.querySelector(\"div[data-id=\\\"e\\\"] .ui-resizable-handle.ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se\").style.display='block';");
         WebElement resizeableElement = getDriver().findElement(By.cssSelector("div[data-id=\"e\"] .ui-resizable-handle.ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se"));
         resize(resizeableElement, 100, 100);
-        getDriver().findElement(By.cssSelector("div[data-id=\"e\"] .ui-resizable-handle.ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se")).click();
         Thread.sleep(2000);
         String newWidth = getDriver().findElement(By.cssSelector("div[data-id=\"e\"]")).getAttribute("data-gs-width");
         assertFalse(oldWidth.equalsIgnoreCase(newWidth), "Gadget resize failed");
@@ -137,22 +136,18 @@ public class EditInViewModeTest extends DSUIIntegrationTest{
         }
     }
 
-    @Test(groups = "wso2.ds.dashboard", priority = 3, description = "test dashboard restore option ")
+    @Test(groups = "wso2.ds.dashboard", description = "test dashboard restore option ", dependsOnMethods = "testResizeGadget")
     public void testRestoreGadget()throws MalformedURLException, XPathExpressionException,
             InterruptedException {
-        getDriver().findElement(By.cssSelector("a.dropdown")).click();
-        getDriver().findElement(By.id("edit-view-toggler")).click();
         getDriver().findElement(By.xpath("//span[@id='landing']/i")).click();
         assertTrue(getDriver().isElementPresent(By.id("usa-map-0")), "Gadget is not restored in view mode");
     }
 
-    @Test(groups = "wso2.ds.dashboard", priority = 1, description = "test dashboard draggable option")
+    @Test(groups = "wso2.ds.dashboard", description = "test dashboard draggable option", dependsOnMethods = "testDeleteGadgetInViewMode")
     public void testDragGadgetInViewMode()throws MalformedURLException, XPathExpressionException,
             InterruptedException {
         assertTrue(getDriver().isElementPresent(By.id("publisher-0")),
                 "publisher gadget is not displayed in the " + "view mode");
-        getDriver().findElement(By.cssSelector("a.dropdown")).click();
-        getDriver().findElement(By.id("edit-view-toggler")).click();
         WebElement element = getDriver().findElement(By.cssSelector(".gadget-heading"));
         WebElement target = getDriver().findElement(By.xpath("//div[@data-id='a']"));
 
