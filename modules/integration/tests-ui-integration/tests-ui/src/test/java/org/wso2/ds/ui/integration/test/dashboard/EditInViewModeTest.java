@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertFalse;
 
 /**
  * To test the allowing primitive edit operations in
@@ -94,15 +95,21 @@ public class EditInViewModeTest extends DSUIIntegrationTest{
         login(USERNAME_VIEWER, PASSWORD_VIEWER);
         getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-view")).click();
         pushWindow();
-        assertTrue(getDriver().isElementPresent(By.id("usa-map-0")), "usa-map gadget is not displayed in the "
-                + "view mode");
-        assertTrue(getDriver().isElementPresent(By.id("publisher-0")), "publisher gadget is not displayed in the "
-                + "view mode");
-        getDriver().findElement(By.cssSelector(".dropdown")).click();
-        getDriver().findElement(By.cssSelector("a[href*='upload-gadget']")).click();
-        getDriver().findElement(By.cssSelector(".dropdown-menu > li > a")).click();
+        assertTrue(getDriver().isElementPresent(By.id("usa-map-0")),
+                "usa-map gadget is not displayed in the " + "view mode");
+        assertTrue(getDriver().isElementPresent(By.id("publisher-0")),
+                "publisher gadget is not displayed in the " + "view mode");
+        getDriver().findElement(By.cssSelector("a.dropdown")).click();
+        getDriver().findElement(By.id("edit-view-toggler")).click();
+        assertTrue(getDriver().isElementPresent(By.cssSelector("#usa-map-0 .ues-trash-handle")),
+                "Gadgets cannot be" + "deleted as delete button is not visible");
+        assertTrue(getDriver().isElementPresent(By.cssSelector("#publisher-0 .ues-trash-handle")),
+                "Gadgets cannot be" + "deleted as delete button is not visible");
+        getDriver().findElement(By.cssSelector("#usa-map-0 .ues-trash-handle")).click();
+        getDriver().findElement(By.id("btn-delete")).click();
+        Thread.sleep(2000);
+        assertFalse(getDriver().isElementPresent(By.id("usa-map-0")), "Gadget is not deleted in view mode");
         getDriver().close();
         popWindow();
-
     }
 }
