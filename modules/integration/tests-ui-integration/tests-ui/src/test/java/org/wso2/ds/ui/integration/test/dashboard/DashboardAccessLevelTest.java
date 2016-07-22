@@ -9,9 +9,6 @@ import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 
 import static org.testng.Assert.assertEquals;
 
-/**
- * Created by nisala on 6/14/16.
- */
 public class DashboardAccessLevelTest extends DSUIIntegrationTest {
 
     private static final String USER_NAME_WITH_LOGINPERMISSION = "sampleuserWithLogin";
@@ -25,7 +22,8 @@ public class DashboardAccessLevelTest extends DSUIIntegrationTest {
     }
 
     @Test(priority = 0, groups = "wso2.ds.common", description = "trying to login without login permission"
-            + "created user to portal") public void loginWithoutLoginPermission() throws Exception {
+            + "created user to portal")
+    public void loginWithoutLoginPermission() throws Exception {
         loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
         getDriver().findElement(
                 By.cssSelector("a[href=\"../userstore/add-user-role" + ".jsp?region=region1&item=user_mgt_menu_add\"]"))
@@ -46,7 +44,8 @@ public class DashboardAccessLevelTest extends DSUIIntegrationTest {
     }
 
     @Test(priority = 1, groups = "wso2.ds.common", description = "trying to login with login permission"
-            + "created user to portal") public void loginWithLoginPermission() throws Exception {
+            + "created user to portal")
+    public void loginWithLoginPermission() throws Exception {
         loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
         getDriver().findElement(
                 By.cssSelector("a[href=\"../userstore/add-user-role" + ".jsp?region=region1&item=user_mgt_menu_add\"]"))
@@ -71,7 +70,8 @@ public class DashboardAccessLevelTest extends DSUIIntegrationTest {
     }
 
     @Test(priority = 2, groups = "wso2.ds.common", description = "trying to login with login permission"
-            + "created user to portal") public void checkCreateDashboard() throws Exception {
+            + "created user to portal")
+    public void checkCreateDashboard() throws Exception {
         logout();
         addCreateRole(USER_NAME_WITH_LOGINPERMISSION);
         login(USER_NAME_WITH_LOGINPERMISSION, PASSWORD);
@@ -80,7 +80,8 @@ public class DashboardAccessLevelTest extends DSUIIntegrationTest {
     }
 
     @Test(priority = 3, groups = "wso2.ds.common", description = "trying to login with login permission"
-            + "created user to portal") public void checkSettingsDashboard() throws Exception {
+            + "created user to portal")
+    public void checkSettingsDashboard() throws Exception {
         logout();
         initDashboard();
         Assert.assertTrue(
@@ -96,7 +97,8 @@ public class DashboardAccessLevelTest extends DSUIIntegrationTest {
         getDriver().findElement(By.id("ues-dashboard-create")).click();
     }
 
-    @AfterClass(alwaysRun = true) public void tearDown() throws Exception {
+    @AfterClass(alwaysRun = true)
+    public void tearDown() throws Exception {
         getDriver().quit();
     }
 }
