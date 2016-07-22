@@ -91,7 +91,7 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
         getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-edit")).click();
         String[][] gadgetMappings = { { "publisher", "b" }, { "usa-map", "c" } };
         String script = generateAddGadgetScript(gadgetMappings);
-        selectPane("gadgets");
+        getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
         getDriver().executeScript(script);
         assertTrue(getDriver().findElement(By.id("publisher-0")).isDisplayed(),
                 "Publisher gadget is not displayed in the page");
@@ -157,7 +157,7 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
         String[][] gadgetMappings = { { "usa-business-revenue", "a" }, { "subscriber", "d" } };
         String[][] gadgetMappingForNewView = { { "publisher", "a" }, { "subscriber", "b" } };
         String script = generateAddGadgetScript(gadgetMappings);
-        selectPane("gadgets");
+        getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
         getDriver().executeScript(script);
         assertTrue(getDriver().findElement(By.id("usa-business-revenue-0")).isDisplayed(),
                 "Publisher gadget is not displayed in the page");
@@ -166,7 +166,7 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
         createNewView("single-column");
         clickOnView("view3");
         script = generateAddGadgetScript(gadgetMappingForNewView);
-        selectPane("gadgets");
+        getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
         getDriver().executeScript(script);
         assertTrue(getDriver().findElement(By.id("publisher-0")).isDisplayed(),
                 "Publisher gadget is not displayed in the page");

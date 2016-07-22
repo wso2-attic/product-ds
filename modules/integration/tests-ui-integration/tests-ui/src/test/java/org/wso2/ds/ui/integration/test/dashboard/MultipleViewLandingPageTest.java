@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
- * <p>
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -84,6 +84,7 @@ public class MultipleViewLandingPageTest extends DSUIIntegrationTest {
      */
     @Test(groups = "wso2.ds.dashboard", description = "Checking the restrictions when there are only one page")
     public void testSinglePage() throws MalformedURLException, XPathExpressionException {
+        getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " .ues-edit")).click();
         // Try to add anonymous role to first view, it should be allowed as there is only one page
         addARoleToView("default", "anonymous");
         getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
@@ -98,14 +99,13 @@ public class MultipleViewLandingPageTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    @Test(groups = "wso2.ds.dashboard", description = "Checking the restrictions when there are only one page")
+    @Test(groups = "wso2.ds.dashboard", description = "Checking the restrictions when there are only one page", dependsOnMethods = "testSinglePage")
     public void testTwoPages() throws MalformedURLException, XPathExpressionException {
         // Creating a new page should not be allowed to the user as landing page doesn`t contain a view with
         // internal/everyone
-        selectPane("pages");
-        getDriver().findElement(By.cssSelector("button[rel='createPage']")).click();
+        addPageToDashboard();
         assertTrue(getDriver().isElementPresent(By.id("ues-modal-info-ok")),
-                "Creation of second page " + "allowed when landing page doesn`t contain a view with internal everyone");
+                "Creation of second page is allowed when landing page doesn`t contain a view with internal everyone");
         getDriver().findElement(By.id("ues-modal-info-ok")).click();
         // After creating a view with internal/everyone in landing page, creation of another page should be allowed
         createNewView("single-column");
@@ -125,5 +125,4 @@ public class MultipleViewLandingPageTest extends DSUIIntegrationTest {
                 "Deletion of anonymous view from landing page allowed when there is an anonymous view in other page");
         getDriver().findElement(By.id("ues-modal-info-ok")).click();
     }
-
 }

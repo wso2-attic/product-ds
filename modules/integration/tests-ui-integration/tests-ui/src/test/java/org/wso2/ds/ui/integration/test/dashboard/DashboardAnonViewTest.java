@@ -71,10 +71,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         String defaultViewGadgetAddScript = generateAddGadgetScript(defaultViewGadgetMappings);
         addDashBoard(dashboardTitle, DASHBOARD_DESCRIPTION);
         getDriver().findElement(By.cssSelector("#" + dashboardTitle.toLowerCase() + " .ues-edit")).click();
-        getDriver().findElement(By.xpath("(//button[@type='button'])[10]")).click();
-        getDriver().findElement(By.id("ds-view-roles")).click();
-        getDriver().findElement(By.id("ds-view-roles")).sendKeys("anonymous");
-        getDriver().findElement(By.className("tt-highlight")).click();
+        addARoleToView("default", "anonymous");
         getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
         selectPane("gadgets");
         getDriver().executeScript(anonViewGadgetAddScript);
@@ -118,10 +115,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         String anonViewGadgetAddScript = generateAddGadgetScript(anonViewGadgetMappings);
         String defaultViewGadgetAddScript = generateAddGadgetScript(defaultViewGadgetMappings);
         addPageToDashboard();
-        getDriver().findElement(By.xpath("(//button[@type='button'])[13]")).click();
-        getDriver().findElement(By.id("ds-view-roles")).click();
-        getDriver().findElement(By.id("ds-view-roles")).sendKeys("anonymous");
-        getDriver().findElement(By.className("tt-highlight")).click();
+        addARoleToView("default", "anonymous");
         getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
         selectPane("gadgets");
         getDriver().executeScript(anonViewGadgetAddScript);

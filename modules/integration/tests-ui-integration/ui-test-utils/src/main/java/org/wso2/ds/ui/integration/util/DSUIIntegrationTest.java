@@ -598,6 +598,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
 
     /**
      * To click on the particular view
+     *
      * @param viewId View id of the view to be clicked
      * @throws MalformedURLException
      * @throws XPathExpressionException
@@ -608,11 +609,12 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
 
     /**
      * To create a new view with new layout
+     *
      * @param layout Layout to be added to new view
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    public void createNewView (String layout) throws MalformedURLException, XPathExpressionException{
+    public void createNewView(String layout) throws MalformedURLException, XPathExpressionException {
         getDriver().findElement(By.id("add-view")).click();
         getDriver().findElement(By.id("new-view")).click();
         selectViewLayout(layout);
@@ -620,11 +622,12 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
 
     /**
      * To delete a particular view
+     *
      * @param viewId View Id of the view that need to be deleted
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    public void deleteView (String viewId) throws MalformedURLException, XPathExpressionException{
+    public void deleteView(String viewId) throws MalformedURLException, XPathExpressionException {
         clickOnView(viewId);
         getDriver().findElement(By.cssSelector("li#nav-tab-" + viewId + ".active .ues-trash-handle")).click();
         getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
@@ -632,25 +635,63 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
 
     /**
      * To close a particular view
+     *
      * @param viewId View Id of the view that need to be closed
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    public void closeView (String viewId) throws MalformedURLException, XPathExpressionException {
+    public void closeView(String viewId) throws MalformedURLException, XPathExpressionException {
         clickOnView(viewId);
         getDriver().findElement(By.cssSelector("li#nav-tab-" + viewId + ".active .ues-close-view")).click();
     }
 
+    /**
+     * To assign an internal role to the user
+     *
+     * @param roleName Role name to be used in conjunction with internal role
+     * @param userList User list to assign particular user
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
     public void assignInternalRoleToUser(String roleName, String[] userList)
             throws MalformedURLException, XPathExpressionException {
-        loginToAdminConsole(getCurrentUsername(),getCurrentPassword());
+        loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
         getDriver().findElement(By.linkText("List")).click();
         getDriver().findElement(By.linkText("Roles")).click();
-        getDriver().findElement(By.cssSelector("a[href=\"edit-users.jsp?roleName=Internal%2F" + roleName+ "&org.wso2.carbon.role.read.only=false\"]")).click();
+        getDriver().findElement(By.cssSelector(
+                "a[href=\"edit-users.jsp?roleName=Internal%2F" + roleName + "&org.wso2.carbon.role.read.only=false\"]"))
+                .click();
         for (int i = 0; i < userList.length; i++) {
             getDriver().findElement(By.cssSelector("input[value=" + userList[i] + "]")).click();
         }
         getDriver().findElement(By.xpath("//input[@value='Finish']")).click();
         getDriver().findElement(By.cssSelector("button[type=\"button\"]")).click();
+    }
+
+    /**
+     * To add a role to the view
+     *
+     * @param viewId        Id of the view to add role
+     * @param roleToBeAdded Role to add to the view
+     */
+    public void addARoleToView(String viewId, String roleToBeAdded)
+            throws MalformedURLException, XPathExpressionException {
+        clickOnViewSettings(viewId);
+        getDriver().findElement(By.id("ds-view-roles")).click();
+        getDriver().findElement(By.id("ds-view-roles")).sendKeys(roleToBeAdded);
+        getDriver().findElement(By.className("tt-suggestion")).click();
+    }
+
+    /**
+     * To click on settings button of a view
+     *
+     * @param viewId specific view id to click the settings
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    public void clickOnViewSettings(String viewId) throws MalformedURLException, XPathExpressionException {
+        clickOnView(viewId);
+        getDriver().findElement(
+                By.cssSelector("li[data-view-mode=\"" + viewId + "\"] .ues-view-component-properties-handle")).click();
     }
 }
