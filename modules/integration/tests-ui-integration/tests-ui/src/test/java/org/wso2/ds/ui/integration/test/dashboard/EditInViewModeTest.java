@@ -1,6 +1,8 @@
 package org.wso2.ds.ui.integration.test.dashboard;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.integration.common.utils.exceptions.AutomationUtilException;
@@ -10,6 +12,7 @@ import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
+import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.assertFalse;
 
@@ -71,18 +74,18 @@ public class EditInViewModeTest extends DSUIIntegrationTest{
     }
 
     /**
-     * Checks for anon view
+     * To check the delete operation in view mode
      *
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    @Test(groups = "wso2.ds.dashboard", description = "Checking the creation of anon view")
+    @Test(groups = "wso2.ds.dashboard", description = "Checking the delete operation in view mode")
     public void testDeleteGadgetInViewMode() throws MalformedURLException, XPathExpressionException,
             InterruptedException {
         // Create a dashboard and add some gadgets and make the dashboard as personalizable one
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-edit")).click();
-        String[][] gadgetMappings = { { "usa-map", "b" }, { "publisher", "c" } };
+        String[][] gadgetMappings = { { "usa-map", "a" }, { "publisher", "e" } };
         String script = generateAddGadgetScript(gadgetMappings);
         getDriver().navigate().refresh();
         selectPane("gadgets");
@@ -109,7 +112,32 @@ public class EditInViewModeTest extends DSUIIntegrationTest{
         getDriver().findElement(By.id("btn-delete")).click();
         Thread.sleep(2000);
         assertFalse(getDriver().isElementPresent(By.id("usa-map-0")), "Gadget is not deleted in view mode");
+    }
+
+    /**
+     * Checks for resize operation in view mode
+     *
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    @Test(groups = "wso2.ds.dashboard", description = "Checking the resize operation in view mode", dependsOnMethods = "testDeleteGadgetInViewMode")
+    public void testResizeGadget() throws MalformedURLException, XPathExpressionException, InterruptedException {
+        String oldWidth = getDriver().findElement(By.cssSelector("div[data-id=\"e\"]")).getAttribute("data-gs-width");
+        ((JavascriptExecutor) getDriver())
+                .executeScript("document.querySelector(\"div[data-id=\\\"e\\\"] .ui-resizable-handle.ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se\").style.display='block';");
+        WebElement resizeableElement = getDriver().findElement(By.cssSelector("div[data-id=\"e\"] .ui-resizable-handle.ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se"));
+        resize(resizeableElement, 100, 100);
+        getDriver().findElement(By.cssSelector("div[data-id=\"e\"] .ui-resizable-handle.ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se")).click();
+        Thread.sleep(2000);
+        String newWidth = getDriver().findElement(By.cssSelector("div[data-id=\"e\"]")).getAttribute("data-gs-width");
+        assertTrue(oldWidth != newWidth, "Gadget resize failed");
         getDriver().close();
         popWindow();
+    }
+    private void resize(WebElement elementToResize, int xOffset, int yOffset) throws MalformedURLException, XPathExpressionException {
+        if (elementToResize.isDisplayed()) {
+            Actions action = new Actions(getDriver());
+            action.clickAndHold(elementToResize).moveByOffset(xOffset, yOffset).release().build().perform();
+        }
     }
 }
