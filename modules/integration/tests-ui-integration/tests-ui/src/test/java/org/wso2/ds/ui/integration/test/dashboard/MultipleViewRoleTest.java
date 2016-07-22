@@ -71,8 +71,8 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
      * @throws IOException
      * @throws AutomationUtilException
      */
-    @BeforeClass(alwaysRun = true) public void setUp()
-            throws AutomationUtilException, XPathExpressionException, IOException {
+    @BeforeClass(alwaysRun = true)
+    public void setUp() throws AutomationUtilException, XPathExpressionException, IOException {
         String[] userListForRole1 = { getCurrentUsername(), USERNAME_ROLE1 };
         String[] userListForRole2 = { getCurrentUsername(), USERNAME_ROLE2 };
         String[] userList = { USERNAME_ROLE1, USERNAME_ROLE2 };

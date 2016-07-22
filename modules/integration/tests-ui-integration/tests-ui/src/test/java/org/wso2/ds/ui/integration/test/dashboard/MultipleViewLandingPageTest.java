@@ -38,7 +38,8 @@ public class MultipleViewLandingPageTest extends DSUIIntegrationTest {
      *
      * @param userMode user mode
      */
-    @Factory(dataProvider = "userMode") public MultipleViewLandingPageTest(TestUserMode userMode) {
+    @Factory(dataProvider = "userMode")
+    public MultipleViewLandingPageTest(TestUserMode userMode) {
         super(userMode);
     }
 
@@ -82,7 +83,7 @@ public class MultipleViewLandingPageTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    @Test(groups = "wso2.ds.dashboard", description = "Checking the restrictions when there are only one page")
+    @Test(groups = "wso2.ds.dashboard", description = "Checking the restrictions when there is only one page")
     public void testSinglePage() throws MalformedURLException, XPathExpressionException {
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " .ues-edit")).click();
         // Try to add anonymous role to first view, it should be allowed as there is only one page
@@ -99,7 +100,8 @@ public class MultipleViewLandingPageTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    @Test(groups = "wso2.ds.dashboard", description = "Checking the restrictions when there are only one page", dependsOnMethods = "testSinglePage")
+    @Test(groups = "wso2.ds.dashboard", description = "Checking the restrictions when there are two pages",
+            dependsOnMethods = "testSinglePage")
     public void testTwoPages() throws MalformedURLException, XPathExpressionException {
         // Creating a new page should not be allowed to the user as landing page doesn`t contain a view with
         // internal/everyone
