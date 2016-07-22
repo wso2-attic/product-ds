@@ -118,10 +118,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
         String script = generateAddGadgetScript(gadgetMappings);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " .ues-edit")).click();
-        getDriver().findElement(By.xpath("(//button[@type='button'])[10]")).click();
-        getDriver().findElement(By.id("ds-view-roles")).click();
-        getDriver().findElement(By.id("ds-view-roles")).sendKeys("anonymous");
-        getDriver().findElement(By.className("tt-suggestion")).click();
+        addARoleToView("default", "anonymous");
         getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
         selectPane("gadgets");
         getDriver().executeScript(script);
@@ -154,7 +151,8 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    @Test(groups = "wso2.ds.dashboard", description = "Checking the view based on roles", dependsOnMethods = "testAnonView")
+    @Test(groups = "wso2.ds.dashboard", description = "Checking the view based on roles",
+            dependsOnMethods = "testAnonView")
     public void testViewRole() throws MalformedURLException, XPathExpressionException {
         String[][] gadgetMappings = {{"publisherrole1", "a"}, {"publisher", "b"}};
         String script = generateAddGadgetScript(gadgetMappings);
@@ -165,10 +163,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
         assertFalse(getDriver().isElementPresent(By.id("publisherrole1")),
                 "Gadgets that do not have internal role are visible in gadget pane");
         createNewView("single-column");
-        getDriver().findElement(By.xpath("(//button[@type='button'])[13]")).click();
-        getDriver().findElement(By.id("ds-view-roles")).click();
-        getDriver().findElement(By.id("ds-view-roles")).sendKeys(ROLE1);
-        getDriver().findElement(By.className("tt-suggestion")).click();
+        addARoleToView("view0", ROLE1);
         getDriver().findElement(By.cssSelector("div[data-role=\"Internal/everyone\"] .remove-button")).click();
         clickOnView("view0");
         assertTrue(getDriver().isElementPresent(By.id("publisherrole1")),
@@ -253,25 +248,43 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
     public void testRoleAddition() throws XPathExpressionException, MalformedURLException {
         login(getCurrentUsername(), getCurrentPassword());
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
-        clickOnView("view0");
-        getDriver().findElement(By.xpath("(//button[@type='button'])[13]")).click();
-        getDriver().findElement(By.id("ds-view-roles")).click();
-        getDriver().findElement(By.id("ds-view-roles")).sendKeys("Internal everyone");
-        getDriver().findElement(By.className("tt-suggestion")).click();
+        addARoleToView("view0", "Internal everyone");
         getDriver().findElement(By.id("ues-modal-confirm-no")).click();
         clickOnView("view0");
-        getDriver().findElement(By.xpath("(//button[@type='button'])[13]")).click();
+        getDriver().findElement(By.cssSelector("li[data-view-mode=\"view0\"] .ues-view-component-properties-handle"))
+                .click();
         assertFalse(getDriver().isElementPresent(By.cssSelector("div[data-role=\"Internal/everyone\"]")),
-                "New role is " + "added without user confirmation");
+                "New role is added without user confirmation");
         clickOnView("view0");
         assertTrue(getDriver().isElementPresent(By.id("publisherrole1-0")), "Gadgets are removed mistakenly");
-        getDriver().findElement(By.xpath("(//button[@type='button'])[13]")).click();
-        getDriver().findElement(By.id("ds-view-roles")).click();
-        getDriver().findElement(By.id("ds-view-roles")).sendKeys("Internal everyone");
-        getDriver().findElement(By.className("tt-suggestion")).click();
+        addARoleToView("view0", "Internal everyone");
         getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
         clickOnView("view0");
         assertTrue(getDriver().isElementPresent(By.cssSelector("div[data-role=\"Internal/everyone\"]")),
                 "New role " + "addition failed");
+        assertFalse(getDriver().isElementPresent(By.id("publisherrole1-0")),
+                "Restricted gadgets are not removed " + "correctly after role addition");
+    }
+
+    /**
+     * To test the functionality of role removal in multiple view support
+     * @throws XPathExpressionException
+     * @throws MalformedURLException
+     * @throws InterruptedException
+     */
+    @Test(groups = "wso2.ds.dashboard", description = "Checking the functionality of removing roles",
+            dependsOnMethods = "testRoleAddition")
+    public void testRoleDeletion() throws XPathExpressionException, MalformedURLException, InterruptedException {
+        clickOnViewSettings("view0");
+        assertTrue(getDriver().isElementPresent(By.cssSelector("div[data-role=\"Internal/everyone\"]")),
+                "Added role is " + "missing in the view");
+        getDriver().findElement(By.cssSelector("div[data-role=\"Internal/everyone\"] .remove-button")).click();
+        Thread.sleep(1000);
+        assertFalse(getDriver().isElementPresent(By.cssSelector("div[data-role=\"Internal/everyone\"]")),
+                "Removed role " + "is still visible in the view configurations");
+        getDriver().findElement(By.cssSelector("div[data-role=\"" + ROLE1 + "\"] .remove-button")).click();
+        assertTrue(getDriver().isElementPresent(By.cssSelector(".modal-body")),
+                "Removal of last role is allowed in this view");
+        getDriver().findElement(By.id("ues-modal-info-ok")).click();
     }
 }
