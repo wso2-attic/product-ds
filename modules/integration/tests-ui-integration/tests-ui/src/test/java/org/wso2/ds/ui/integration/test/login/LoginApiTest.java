@@ -48,7 +48,7 @@ public class LoginApiTest extends DSUIIntegrationTest {
      */
     @DataProvider(name = "userMode")
     private static Object[][] userModeProvider() {
-        return new Object[][] { { TestUserMode.SUPER_TENANT_ADMIN } };
+        return new Object[][]{{TestUserMode.SUPER_TENANT_ADMIN}};
     }
 
     /**

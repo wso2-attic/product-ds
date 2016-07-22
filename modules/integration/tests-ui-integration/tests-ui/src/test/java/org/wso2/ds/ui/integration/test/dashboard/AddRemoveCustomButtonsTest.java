@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2016​, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -149,7 +149,7 @@ public class AddRemoveCustomButtonsTest extends DSUIIntegrationTest {
         String carbonHome = FrameworkPathUtil.getCarbonHome();
         String fileName = carbonHome + File.separator + "repository" + File.separator + "deployment" +
                 File.separator + "server" + File.separator + "jaggeryapps" + File.separator + "portal" +
-                File.separator + "store" + File.separator + "carbon.super" +  File.separator + "fs" + File.separator  +
+                File.separator + "store" + File.separator + "carbon.super" + File.separator + "fs" + File.separator +
                 "gadget" + File.separator + GADGET_NAME + File.separator + "gadget.json";
         JSONParser parser = new JSONParser();
         Object fileObj = parser.parse(new FileReader(fileName));

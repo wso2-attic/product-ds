@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.wso2.ds.ui.integration.test.dashboard;
 
 import org.openqa.selenium.By;
@@ -70,7 +71,7 @@ public class RoleBasedDashboardAccess extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("#" + dashboardId + " .ues-settings")).click();
         driver.findElement(By.cssSelector(".ues-shared-edit")).findElement(By.cssSelector(".remove-button")).click();
         driver.findElement(By.id("ues-share-view")).clear();
-        driver.findElement(By.id("ues-share-view")).sendKeys("login-"+USER_NAME);
+        driver.findElement(By.id("ues-share-view")).sendKeys("login-" + USER_NAME);
         driver.findElement(By.xpath("//div[@id='ues-dashboard-settings']/div[3]/div/form/div/div/span/div/div/div")).click();
         driver.findElement(By.id("ues-dashboard-saveBtn")).click();
         logout();

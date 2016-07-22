@@ -41,7 +41,8 @@ public class UploadGadgetTest extends DSUIIntegrationTest {
      *
      * @param userMode user mode
      */
-    @Factory(dataProvider = "userMode") public UploadGadgetTest(TestUserMode userMode) {
+    @Factory(dataProvider = "userMode")
+    public UploadGadgetTest(TestUserMode userMode) {
         super(userMode);
     }
 
@@ -50,8 +51,9 @@ public class UploadGadgetTest extends DSUIIntegrationTest {
      *
      * @return user modes
      */
-    @DataProvider(name = "userMode") public static Object[][] userModeProvider() {
-        return new Object[][] { { TestUserMode.SUPER_TENANT_ADMIN } };
+    @DataProvider(name = "userMode")
+    public static Object[][] userModeProvider() {
+        return new Object[][]{{TestUserMode.SUPER_TENANT_ADMIN}};
     }
 
     /**
@@ -61,7 +63,8 @@ public class UploadGadgetTest extends DSUIIntegrationTest {
      * @throws IOException
      * @throws AutomationUtilException
      */
-    @BeforeClass(alwaysRun = true) public void setUp()
+    @BeforeClass(alwaysRun = true)
+    public void setUp()
             throws AutomationUtilException, XPathExpressionException, IOException {
         login(getCurrentUsername(), getCurrentPassword());
     }
@@ -72,7 +75,8 @@ public class UploadGadgetTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      * @throws MalformedURLException
      */
-    @AfterClass(alwaysRun = true) public void tearDown() throws XPathExpressionException, MalformedURLException {
+    @AfterClass(alwaysRun = true)
+    public void tearDown() throws XPathExpressionException, MalformedURLException {
         logout();
         getDriver().quit();
     }

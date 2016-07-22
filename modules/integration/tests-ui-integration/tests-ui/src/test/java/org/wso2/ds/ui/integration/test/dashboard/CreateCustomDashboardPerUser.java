@@ -1,18 +1,19 @@
 /**
  * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
- * <p>
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.wso2.ds.ui.integration.test.dashboard;
 
 import ds.integration.tests.common.domain.DSIntegrationTestConstants;
@@ -51,8 +52,9 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
      * @param userMode       user mode
      * @param dashboardTitle title of the dashboard
      */
-    @Factory(dataProvider = "userMode") public CreateCustomDashboardPerUser(TestUserMode userMode,
-            String dashboardTitle) {
+    @Factory(dataProvider = "userMode")
+    public CreateCustomDashboardPerUser(TestUserMode userMode,
+                                        String dashboardTitle) {
         super(userMode);
         this.dashboardTitle = dashboardTitle;
     }
@@ -62,8 +64,9 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
      *
      * @return
      */
-    @DataProvider(name = "userMode") private static Object[][] userModeProvider() {
-        return new Object[][] { { TestUserMode.SUPER_TENANT_ADMIN, DASHBOARD_TITLE } };
+    @DataProvider(name = "userMode")
+    private static Object[][] userModeProvider() {
+        return new Object[][]{{TestUserMode.SUPER_TENANT_ADMIN, DASHBOARD_TITLE}};
     }
 
     /**
@@ -71,7 +74,8 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
      *
      * @throws Exception
      */
-    @BeforeClass(alwaysRun = true) public void setUp() throws XPathExpressionException, MalformedURLException {
+    @BeforeClass(alwaysRun = true)
+    public void setUp() throws XPathExpressionException, MalformedURLException {
         resourcePath = DSIntegrationTestConstants.DASHBOARD_REGISTRY_BASE_PATH + dashboardTitle.toLowerCase();
         loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
     }
@@ -83,14 +87,15 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      */
     @Test(groups = "wso2.ds.dashboard", description = "Adding user to admin console and assign editor or viewer roles"
-            + " to newly added users") public void testAddUserAssignRoles()
+            + " to newly added users")
+    public void testAddUserAssignRoles()
             throws MalformedURLException, XPathExpressionException {
         addUser(USERNAME_EDITOR, PASSWORD_EDITOR, RETYPE_PASSWORD_EDITOR);
         addRole(EDITOR_ROLE);
-        assignRoleToUser(new String[] { USERNAME_EDITOR });
+        assignRoleToUser(new String[]{USERNAME_EDITOR});
         addUser(USERNAME_VIEWER, PASSWORD_VIEWER, RETYPE_PASSWORD_VIEWER);
         addRole(VIEWER_ROLE);
-        assignRoleToUser(new String[] { USERNAME_VIEWER });
+        assignRoleToUser(new String[]{USERNAME_VIEWER});
         logoutFromAdminConsole();
     }
 
@@ -100,7 +105,8 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      * @throws MalformedURLException
      */
-    @Test(groups = "wso2.ds.dashboard", description = "Assigning dashboard view and edit permission", dependsOnMethods = "testAddUserAssignRoles") public void testAddDashboardAndAssignRolesBySetting()
+    @Test(groups = "wso2.ds.dashboard", description = "Assigning dashboard view and edit permission", dependsOnMethods = "testAddUserAssignRoles")
+    public void testAddDashboardAndAssignRolesBySetting()
             throws XPathExpressionException, MalformedURLException {
         addLoginRole(USERNAME_EDITOR);
         addCreateRole(USERNAME_EDITOR);
@@ -134,7 +140,8 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    @Test(groups = "wso2.ds.dashboard", description = "test for editor role", dependsOnMethods = "testAddDashboardAndAssignRolesBySetting") public void testForEditorRole()
+    @Test(groups = "wso2.ds.dashboard", description = "test for editor role", dependsOnMethods = "testAddDashboardAndAssignRolesBySetting")
+    public void testForEditorRole()
             throws MalformedURLException, XPathExpressionException {
         String dashboardId = dashboardTitle.toLowerCase();
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
@@ -166,7 +173,8 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      * @throws MalformedURLException
      */
-    @Test(groups = "wso2.ds.dashboard", description = "test for viewer role", dependsOnMethods = "testAddDashboardAndAssignRolesBySetting") public void testForViewer()
+    @Test(groups = "wso2.ds.dashboard", description = "test for viewer role", dependsOnMethods = "testAddDashboardAndAssignRolesBySetting")
+    public void testForViewer()
             throws XPathExpressionException, MalformedURLException {
         String dashboardId = dashboardTitle.toLowerCase();
         addLoginRole(USERNAME_VIEWER);
@@ -199,7 +207,8 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    @Test(groups = "wso2.ds.dashboard", description = "Tests dashboard personalization", dependsOnMethods = "testForViewer") public void testCustomizeButtonDashboard()
+    @Test(groups = "wso2.ds.dashboard", description = "Tests dashboard personalization", dependsOnMethods = "testForViewer")
+    public void testCustomizeButtonDashboard()
             throws MalformedURLException, XPathExpressionException {
         getDriver().findElement(By.cssSelector("i.ues-copy")).click();
         selectPane("pages");
@@ -213,7 +222,8 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
      * Check registry source for customized dashboard.
      */
     @Test(groups = "wso2.ds.dashboard", description = "Check registry resource for customized dashboard",
-            dependsOnMethods = "testCustomizeButtonDashboard") public void checkRegistrySourceForCustomizeDashboard() {
+            dependsOnMethods = "testCustomizeButtonDashboard")
+    public void checkRegistrySourceForCustomizeDashboard() {
         Boolean isResourceExist = isResourceExist(
                 DSIntegrationTestConstants.DASHBOARD_REGISTRY_PATH_CUSTOM_DASHBOARD_PERUSER + "/" + USERNAME_VIEWER
                         + "/" + DS_DASHBOARDS_CONTEXT + "/" + dashboardTitle.toLowerCase());
@@ -226,7 +236,8 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
      *
      * @throws Exception
      */
-    @AfterClass(alwaysRun = true) public void tearDown() throws MalformedURLException, XPathExpressionException {
+    @AfterClass(alwaysRun = true)
+    public void tearDown() throws MalformedURLException, XPathExpressionException {
         dsUITestTearDown();
     }
 }

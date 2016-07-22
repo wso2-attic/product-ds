@@ -159,8 +159,6 @@ public class GadgetGenerationFrameworkTest extends DSUIIntegrationTest {
 
     }
 
-
-
     /**
      * Clean up after running tests.
      *

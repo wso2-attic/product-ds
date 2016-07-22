@@ -33,7 +33,7 @@ import static org.testng.Assert.assertTrue;
 /**
  * Tests the multiple view support for various roles
  */
-public class MultipleViewRoleTest extends DSUIIntegrationTest{
+public class MultipleViewRoleTest extends DSUIIntegrationTest {
     private static final String DASHBOARD_TITLE = "multipleviewroledashboard";
     private static final String ROLE1 = "multipleviewrole1";
     private static final String ROLE2 = "multipleviewrole2";
@@ -62,7 +62,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest{
      */
     @DataProvider(name = "userMode")
     public static Object[][] userModeProvider() {
-        return new Object[][] { { TestUserMode.SUPER_TENANT_ADMIN } };
+        return new Object[][]{{TestUserMode.SUPER_TENANT_ADMIN}};
     }
 
     /**
@@ -88,7 +88,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest{
         addRole(ROLE2);
         assignRoleToUser(userListForRole2);
         assignInternalRoleToUser(DASHBOARD_TITLE + "-viewer", userList);
-        assignInternalRoleToUser(DASHBOARD_TITLE + "-editor", new String[] {USERNAME_EDITOR1});
+        assignInternalRoleToUser(DASHBOARD_TITLE + "-editor", new String[]{USERNAME_EDITOR1});
         addLoginRole(USERNAME_ROLE1);
         addLoginRole(USERNAME_ROLE2);
         addLoginRole(USERNAME_EDITOR1);
@@ -113,8 +113,8 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest{
      * @throws XPathExpressionException
      */
     @Test(groups = "wso2.ds.dashboard", description = "Checking the creation of anon view")
-    public void testAnonView() throws MalformedURLException, XPathExpressionException{
-        String[][] gadgetMappings = { { "gadget-resize", "b" } };
+    public void testAnonView() throws MalformedURLException, XPathExpressionException {
+        String[][] gadgetMappings = {{"gadget-resize", "b"}};
         String script = generateAddGadgetScript(gadgetMappings);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " .ues-edit")).click();
@@ -156,7 +156,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest{
      */
     @Test(groups = "wso2.ds.dashboard", description = "Checking the view based on roles", dependsOnMethods = "testAnonView")
     public void testViewRole() throws MalformedURLException, XPathExpressionException {
-        String[][] gadgetMappings = { { "publisherrole1", "a" }, { "publisher", "b" } };
+        String[][] gadgetMappings = {{"publisherrole1", "a"}, {"publisher", "b"}};
         String script = generateAddGadgetScript(gadgetMappings);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " .ues-edit")).click();

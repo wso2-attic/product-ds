@@ -24,9 +24,11 @@ import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.engine.context.beans.User;
 import org.wso2.carbon.integration.common.utils.exceptions.AutomationUtilException;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
+
 import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 import java.net.MalformedURLException;
+
 import static org.testng.Assert.*;
 
 /**
@@ -41,7 +43,8 @@ public class SharedDashboardTest extends DSUIIntegrationTest {
      *
      * @param userMode user mode
      */
-    @Factory(dataProvider = "userMode") public SharedDashboardTest(TestUserMode userMode) {
+    @Factory(dataProvider = "userMode")
+    public SharedDashboardTest(TestUserMode userMode) {
         super(userMode);
     }
 
@@ -50,8 +53,9 @@ public class SharedDashboardTest extends DSUIIntegrationTest {
      *
      * @return user modes
      */
-    @DataProvider(name = "userMode") public static Object[][] userModeProvider() {
-        return new Object[][] { { TestUserMode.SUPER_TENANT_ADMIN } };
+    @DataProvider(name = "userMode")
+    public static Object[][] userModeProvider() {
+        return new Object[][]{{TestUserMode.SUPER_TENANT_ADMIN}};
     }
 
     /**
@@ -61,7 +65,8 @@ public class SharedDashboardTest extends DSUIIntegrationTest {
      * @throws IOException
      * @throws AutomationUtilException
      */
-    @BeforeClass(alwaysRun = true) public void setUp()
+    @BeforeClass(alwaysRun = true)
+    public void setUp()
             throws AutomationUtilException, XPathExpressionException, IOException {
         login(getCurrentUsername(), getCurrentPassword());
         addDashBoard(DASHBOARD_TITLE, "This is a test dashboard");
@@ -73,7 +78,8 @@ public class SharedDashboardTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      * @throws MalformedURLException
      */
-    @AfterClass(alwaysRun = true) public void tearDown() throws XPathExpressionException, MalformedURLException {
+    @AfterClass(alwaysRun = true)
+    public void tearDown() throws XPathExpressionException, MalformedURLException {
         logout();
         getDriver().quit();
     }
@@ -89,7 +95,7 @@ public class SharedDashboardTest extends DSUIIntegrationTest {
     public void testSharingDashboard() throws MalformedURLException, XPathExpressionException, InterruptedException {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
-        String[][] gadgetMappings = { { "test1", "b" }, { "test2", "c" } };
+        String[][] gadgetMappings = {{"test1", "b"}, {"test2", "c"}};
         String script = generateAddGadgetScript(gadgetMappings);
         getDriver().navigate().refresh();
         selectPane("gadgets");
@@ -132,7 +138,7 @@ public class SharedDashboardTest extends DSUIIntegrationTest {
         getDriver().findElement(By.id("ues-dashboard-description")).sendKeys("This is a test dashboard");
         getDriver().findElement(By.id("ues-dashboard-create")).click();
         selectLayout("default-grid");
-        String[][] gadgetMappings = { { "publisher", "a" }, { "subscriber", "b" } };
+        String[][] gadgetMappings = {{"publisher", "a"}, {"subscriber", "b"}};
         String script = generateAddGadgetScript(gadgetMappings);
         getDriver().navigate().refresh();
         selectPane("gadgets");

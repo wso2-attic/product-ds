@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.wso2.ds.ui.integration.test.dashboard;
 
 import ds.integration.tests.common.domain.DSIntegrationTestConstants;
@@ -80,7 +81,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         getDriver().executeScript(anonViewGadgetAddScript);
 
         // verifying gadget is rendered correctly in anon view
-        assertTrue(getDriver().findElement(By.id(GADGET_2_ID+"-0")).isDisplayed(), "Gadget is not displayed in anonymous view");
+        assertTrue(getDriver().findElement(By.id(GADGET_2_ID + "-0")).isDisplayed(), "Gadget is not displayed in anonymous view");
         getDriver().findElement(By.id("add-view")).click();
         getDriver().findElement(By.id("new-view")).click();
         selectViewLayout("default-grid");

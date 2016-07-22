@@ -1,3 +1,19 @@
+/**
+ * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.wso2.ds.ui.integration.test.common;
 
 import org.openqa.selenium.By;
@@ -20,7 +36,7 @@ public class CustomThemeDeployerTest extends DSUIIntegrationTest {
     private static final String USER_NAME = "admin";
     private static final String PASSWORD = "admin";
     private static final String CUSTOM_THEME_NAME = "custom-theme-sample";
-    private static final String THEMES_CARBON_APP_LOCATION = "files"+ File.separator +"Custom_Theme.car";
+    private static final String THEMES_CARBON_APP_LOCATION = "files" + File.separator + "Custom_Theme.car";
     private static final String THEMES_STORE_PATH = "store" + File.separator + "carbon.super" + File.separator + "fs" +
             File.separator + "theme";
 
@@ -79,7 +95,8 @@ public class CustomThemeDeployerTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    @AfterClass(alwaysRun = true) public void tearDown() throws MalformedURLException, XPathExpressionException {
+    @AfterClass(alwaysRun = true)
+    public void tearDown() throws MalformedURLException, XPathExpressionException {
         try {
             logoutFromAdminConsole();
         } finally {

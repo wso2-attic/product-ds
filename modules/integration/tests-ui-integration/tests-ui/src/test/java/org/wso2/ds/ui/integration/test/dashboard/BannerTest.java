@@ -1,18 +1,19 @@
 /**
  * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
- * <p>
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.wso2.ds.ui.integration.test.dashboard;
 
 import ds.integration.tests.common.domain.DSIntegrationTestConstants;
@@ -45,7 +46,7 @@ import static org.testng.Assert.assertTrue;
 public class BannerTest extends DSUIIntegrationTest {
     private static final Log LOG = LogFactory.getLog(BannerTest.class);
     private static final String ROOT_RESOURCE_PATH = "/_system/config/ues/customizations/";
-    private static final String[] IMAGES = { "orange.png", "silver.png" };
+    private static final String[] IMAGES = {"orange.png", "silver.png"};
     private static final String SUPER_TENANT_EDITOR_ROLE = "editor";
     private static final String SUPER_TENANT_VIEWER_ROLE = "viewer";
     private static final String TENANT_EDITOR_ROLE = "t_editor";
@@ -63,7 +64,8 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws RemoteException
      * @throws UserAdminUserAdminException
      */
-    @Factory(dataProvider = "userMode") public BannerTest(TestUserMode userMode, String dashboardTitle)
+    @Factory(dataProvider = "userMode")
+    public BannerTest(TestUserMode userMode, String dashboardTitle)
             throws XPathExpressionException, RemoteException, UserAdminUserAdminException, MalformedURLException {
         super(TestUserMode.SUPER_TENANT_ADMIN);
         this.dashboardId = dashboardTitle.toLowerCase();
@@ -79,11 +81,11 @@ public class BannerTest extends DSUIIntegrationTest {
                 getCurrentPassword());
         // Create editor and viewer user roles (separate user roles are created for super tenant and tenant users)
         userManagementClient.addRole(isTenant ? TENANT_EDITOR_ROLE : SUPER_TENANT_EDITOR_ROLE,
-                new String[] { editor.getUserName() }, null);
+                new String[]{editor.getUserName()}, null);
         userManagementClient.addRole(isTenant ? TENANT_VIEWER_ROLE : SUPER_TENANT_VIEWER_ROLE,
-                new String[] { viewer.getUserName() }, null);
+                new String[]{viewer.getUserName()}, null);
         // Remove the admin role from the editors and viewers
-        String[] rolesToRemove = new String[] { ADMIN_ROLE };
+        String[] rolesToRemove = new String[]{ADMIN_ROLE};
         userManagementClient.addRemoveRolesOfUser(editor.getUserName(), null, rolesToRemove);
         userManagementClient.addRemoveRolesOfUser(viewer.getUserName(), null, rolesToRemove);
     }
@@ -93,9 +95,10 @@ public class BannerTest extends DSUIIntegrationTest {
      *
      * @return
      */
-    @DataProvider(name = "userMode") private static Object[][] userModeProvider() {
-        return new Object[][] {{ TestUserMode.SUPER_TENANT_ADMIN, "BannerDashboard" },
-                { TestUserMode.TENANT_ADMIN, "TenantedBannerDashboard" }};
+    @DataProvider(name = "userMode")
+    private static Object[][] userModeProvider() {
+        return new Object[][]{{TestUserMode.SUPER_TENANT_ADMIN, "BannerDashboard"},
+                {TestUserMode.TENANT_ADMIN, "TenantedBannerDashboard"}};
     }
 
     /**
@@ -104,7 +107,8 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      * @throws MalformedURLException
      */
-    @BeforeClass(alwaysRun = true) public void setUp() throws XPathExpressionException, MalformedURLException {
+    @BeforeClass(alwaysRun = true)
+    public void setUp() throws XPathExpressionException, MalformedURLException {
         // Login to the portal and create the dashboard as the admin user
         addOwnernRole(editor.getUserName());
         addLoginRole(editor.getUserName());
@@ -122,7 +126,8 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      * @throws MalformedURLException
      */
-    @Test(groups = "wso2.ds.dashboard", description = "Cancel adding banner by editor") public void cancelAddingBannerByEditor()
+    @Test(groups = "wso2.ds.dashboard", description = "Cancel adding banner by editor")
+    public void cancelAddingBannerByEditor()
             throws XPathExpressionException, MalformedURLException {
         login(editor.getUserName(), editor.getPassword());
         goToDesigner();
@@ -140,7 +145,8 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws InterruptedException
      */
     @Test(groups = "wso2.ds.dashboard", description = "Add banner by editor",
-            dependsOnMethods = "cancelAddingBannerByEditor") public void addBannerByEditor()
+            dependsOnMethods = "cancelAddingBannerByEditor")
+    public void addBannerByEditor()
             throws MalformedURLException, XPathExpressionException, InterruptedException {
         clickEditBannerButton(0);
         clickSaveBannerButton();
@@ -168,7 +174,8 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      */
     @Test(groups = "wso2.ds.dashboard", description = "Cancel adding banner by viewer",
-            dependsOnMethods = "addBannerByEditor") public void cancelAddingBannerByViewer()
+            dependsOnMethods = "addBannerByEditor")
+    public void cancelAddingBannerByViewer()
             throws XPathExpressionException, MalformedURLException {
         login(viewer.getUserName(), viewer.getPassword());
         customizeDashboard();
@@ -185,7 +192,8 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      */
     @Test(groups = "wso2.ds.dashboard", description = "Add banner by viewer",
-            dependsOnMethods = "cancelAddingBannerByViewer") public void addBannerByViewer()
+            dependsOnMethods = "cancelAddingBannerByViewer")
+    public void addBannerByViewer()
             throws MalformedURLException, XPathExpressionException {
         clickEditBannerButton(1);
         clickSaveBannerButton();
@@ -199,7 +207,8 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    @Test(groups = "wso2.ds.dashboard", description = "Reset banner by viewer", dependsOnMethods = "addBannerByViewer") public void resetBannerByViewer()
+    @Test(groups = "wso2.ds.dashboard", description = "Reset banner by viewer", dependsOnMethods = "addBannerByViewer")
+    public void resetBannerByViewer()
             throws MalformedURLException, XPathExpressionException {
         clickRemoveBannerButton();
         assertFalse(isResourceExist(dashboardId + "/" + viewer.getUserName() + "/banner"),
@@ -214,7 +223,8 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      */
     @Test(groups = "wso2.ds.dashboard", description = "Remove banner by editor",
-            dependsOnMethods = "resetBannerByViewer") public void removeBannerByEditor()
+            dependsOnMethods = "resetBannerByViewer")
+    public void removeBannerByEditor()
             throws XPathExpressionException, MalformedURLException {
         login(editor.getUserName(), editor.getPassword());
         goToDesigner();
@@ -232,7 +242,8 @@ public class BannerTest extends DSUIIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    @AfterClass(alwaysRun = true) public void tearDown() throws MalformedURLException, XPathExpressionException {
+    @AfterClass(alwaysRun = true)
+    public void tearDown() throws MalformedURLException, XPathExpressionException {
         getDriver().quit();
     }
 
@@ -300,7 +311,7 @@ public class BannerTest extends DSUIIntegrationTest {
         // Temporary display the HTML form which is used to upload the image
         String formId = "ues-dashboard-upload-banner-form";
         getDriver().findElement(By.id(formId));
-        getDriver().executeScript("document.getElementById('"+ formId + "').className='';");
+        getDriver().executeScript("document.getElementById('" + formId + "').className='';");
         // Get the sample_images directory
         ClassLoader classLoader = BannerTest.class.getClassLoader();
         File classPathRoot = new File(classLoader.getResource("").getPath());
