@@ -12,9 +12,7 @@ import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import static org.testng.Assert.assertNotEquals;
-import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.*;
 
 /**
  * To test the allowing primitive edit operations in
@@ -120,7 +118,7 @@ public class EditInViewModeTest extends DSUIIntegrationTest{
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    @Test(groups = "wso2.ds.dashboard", description = "Checking the resize operation in view mode", dependsOnMethods = "testDeleteGadgetInViewMode")
+    @Test(groups = "wso2.ds.dashboard", description = "Checking the resize operation in view mode", priority = 2)
     public void testResizeGadget() throws MalformedURLException, XPathExpressionException, InterruptedException {
         String oldWidth = getDriver().findElement(By.cssSelector("div[data-id=\"e\"]")).getAttribute("data-gs-width");
         ((JavascriptExecutor) getDriver())
@@ -130,9 +128,7 @@ public class EditInViewModeTest extends DSUIIntegrationTest{
         getDriver().findElement(By.cssSelector("div[data-id=\"e\"] .ui-resizable-handle.ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se")).click();
         Thread.sleep(2000);
         String newWidth = getDriver().findElement(By.cssSelector("div[data-id=\"e\"]")).getAttribute("data-gs-width");
-        assertTrue(oldWidth != newWidth, "Gadget resize failed");
-        getDriver().close();
-        popWindow();
+        assertFalse(oldWidth.equalsIgnoreCase(newWidth), "Gadget resize failed");
     }
     private void resize(WebElement elementToResize, int xOffset, int yOffset) throws MalformedURLException, XPathExpressionException {
         if (elementToResize.isDisplayed()) {
@@ -140,4 +136,31 @@ public class EditInViewModeTest extends DSUIIntegrationTest{
             action.clickAndHold(elementToResize).moveByOffset(xOffset, yOffset).release().build().perform();
         }
     }
+
+    @Test(groups = "wso2.ds.dashboard", priority = 3, description = "test dashboard restore option ")
+    public void testRestoreGadget()throws MalformedURLException, XPathExpressionException,
+            InterruptedException {
+        getDriver().findElement(By.cssSelector("a.dropdown")).click();
+        getDriver().findElement(By.id("edit-view-toggler")).click();
+        getDriver().findElement(By.xpath("//span[@id='landing']/i")).click();
+        assertTrue(getDriver().isElementPresent(By.id("usa-map-0")), "Gadget is not restored in view mode");
+    }
+
+    @Test(groups = "wso2.ds.dashboard", priority = 1, description = "test dashboard draggable option")
+    public void testDragGadgetInViewMode()throws MalformedURLException, XPathExpressionException,
+            InterruptedException {
+        assertTrue(getDriver().isElementPresent(By.id("publisher-0")),
+                "publisher gadget is not displayed in the " + "view mode");
+        getDriver().findElement(By.cssSelector("a.dropdown")).click();
+        getDriver().findElement(By.id("edit-view-toggler")).click();
+        WebElement element = getDriver().findElement(By.cssSelector(".gadget-heading"));
+        WebElement target = getDriver().findElement(By.xpath("//div[@data-id='a']"));
+
+        (new Actions(getDriver())).dragAndDrop(element, target).perform();
+        assertTrue(getDriver().isElementPresent(By.id("publisher-0")),
+                "publisher gadget is not displayed in the " + "view mode");
+        String datax = getDriver().findElement(By.cssSelector(".grid-stack-item")).getAttribute("data-gs-x");
+        assertEquals("0",datax,"Gadget is not draggable");
+    }
+
 }
