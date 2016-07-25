@@ -140,6 +140,7 @@ public class EditInViewModeTest extends DSUIIntegrationTest{
     public void testRestoreGadget()throws MalformedURLException, XPathExpressionException,
             InterruptedException {
         getDriver().findElement(By.xpath("//span[@id='landing']/i")).click();
+        getDriver().findElement(By.id("btn-revert")).click();
         assertTrue(getDriver().isElementPresent(By.id("usa-map-0")), "Gadget is not restored in view mode");
     }
 
