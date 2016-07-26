@@ -115,13 +115,13 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
     @Test(groups = "wso2.ds.dashboard", description = "Checking the creation of anon view")
     public void testAnonView() throws MalformedURLException, XPathExpressionException {
         String[][] gadgetMappings = {{"gadget-resize", "b"}};
-        String script = generateAddGadgetScript(gadgetMappings);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " .ues-edit")).click();
         addARoleToView("default", "anonymous");
         getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
         selectPane("gadgets");
-        getDriver().executeScript(script);
+        waitTillElementToBeClickable(By.id("gadget-resize"));
+        dragDropGadget(gadgetMappings);
         assertTrue(getDriver().findElement(By.id("gadget-resize-0")).isDisplayed(),
                 "Gadget resize gadget is not displayed in the page");
         selectPane("gadgets");
@@ -155,7 +155,6 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
             dependsOnMethods = "testAnonView")
     public void testViewRole() throws MalformedURLException, XPathExpressionException {
         String[][] gadgetMappings = {{"publisherrole1", "a"}, {"publisher", "b"}};
-        String script = generateAddGadgetScript(gadgetMappings);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " .ues-edit")).click();
 
@@ -169,7 +168,8 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
         assertTrue(getDriver().isElementPresent(By.id("publisherrole1")),
                 "Gadgets that have role1 is not visible in gadgets pane");
         selectPane("gadgets");
-        getDriver().executeScript(script);
+        waitTillElementToBeClickable(By.id("publisher"));
+        dragDropGadget(gadgetMappings);
         assertTrue(getDriver().isElementPresent(By.id("publisherrole1-0")),
                 "Gadgets that have role1 is not added to the dashboard");
         assertTrue(getDriver().isElementPresent(By.id("publisher-0")), "Gadgets addition to the dashboard failed");

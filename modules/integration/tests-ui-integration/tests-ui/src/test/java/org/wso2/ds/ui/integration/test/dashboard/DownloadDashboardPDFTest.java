@@ -38,10 +38,10 @@ public class DownloadDashboardPDFTest extends DSUIIntegrationTest {
         addDashBoard(DASHBOARD_TITLE, DASHBOARD_DESCRIPTION);
         redirectToLocation("portal", "dashboards");
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
-        String[][] gadgetMappings = {{"textbox", "a"}};
-        String script = generateAddGadgetScript(gadgetMappings);
+        String[][] gadgetMappings = {{"usa-map", "a"}};
         selectPane("gadgets");
-        getDriver().executeScript(script);
+        waitTillElementToBeClickable(By.id("usa-map"));
+        dragDropGadget(gadgetMappings);
         clickViewButton();
         for (String winHandle : getDriver().getWindowHandles()) {
             getDriver().switchTo().window(winHandle);

@@ -95,11 +95,10 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD1_TITLE + " a.ues-edit")).click();
         String[][] gadgetMappings = {{"publisher", "b"}, {"usa-map", "c"}};
-        String script = generateAddGadgetScript(gadgetMappings);
         getDriver().navigate().refresh();
         selectPane("gadgets");
-        Thread.sleep(2000);
-        getDriver().executeScript(script);
+        waitTillElementToBeClickable(By.id("publisher"));
+        dragDropGadget(gadgetMappings);
         Thread.sleep(2000);
         redirectToLocation(DS_HOME_CONTEXT, "gadgets/" + DASHBOARD1_TITLE + "/landing/default");
         Thread.sleep(2000);
@@ -204,11 +203,10 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
         getDriver().findElement(By.id("ues-dashboard-create")).click();
         selectLayout("default-grid");
         String[][] gadgetMappings = {{"publisher", "a"}, {"subscriber", "b"}};
-        String script = generateAddGadgetScript(gadgetMappings);
         getDriver().navigate().refresh();
         selectPane("gadgets");
-        Thread.sleep(2000);
-        getDriver().executeScript(script);
+        waitTillElementToBeClickable(By.id("publisher"));
+        dragDropGadget(gadgetMappings);
         Thread.sleep(2000);
 
         // Go to a page embedding URL and check whether gadgets are displayed in the page

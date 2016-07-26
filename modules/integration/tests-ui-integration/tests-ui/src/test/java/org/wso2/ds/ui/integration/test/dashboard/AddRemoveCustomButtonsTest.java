@@ -90,9 +90,9 @@ public class AddRemoveCustomButtonsTest extends DSUIIntegrationTest {
         addDashBoard(DASHBOARD_TITLE, DASHBOARD_DESCRIPTION);
         driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
         String[][] gadgetMappings = {{GADGET_NAME, "a"}};
-        String script = generateAddGadgetScript(gadgetMappings);
         driver.findElement(By.cssSelector("i.fw.fw-gadget")).click();
-        driver.executeScript(script);
+        waitTillElementToBeClickable(By.id(GADGET_NAME));
+        dragDropGadget(gadgetMappings);
         JSONObject gadgetJsonObj = getGadgetJSONObject();
         JSONObject toolbarButtons = (JSONObject) gadgetJsonObj.get("toolbarButtons");
         JSONArray customBtnsArr = (JSONArray) toolbarButtons.get("custom");

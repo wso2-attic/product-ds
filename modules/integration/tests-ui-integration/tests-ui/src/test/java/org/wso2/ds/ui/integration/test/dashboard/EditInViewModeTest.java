@@ -84,11 +84,9 @@ public class EditInViewModeTest extends DSUIIntegrationTest{
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-edit")).click();
         String[][] gadgetMappings = { { "usa-map", "b" }, { "publisher", "e" } };
-        String script = generateAddGadgetScript(gadgetMappings);
-        getDriver().navigate().refresh();
         selectPane("gadgets");
-        Thread.sleep(2000);
-        getDriver().executeScript(script);
+        waitTillElementToBeClickable(By.id("publisher"));
+        dragDropGadget(gadgetMappings);
         Thread.sleep(2000);
         allowPersonalizeDashboard();
         Thread.sleep(2000);
@@ -109,7 +107,7 @@ public class EditInViewModeTest extends DSUIIntegrationTest{
         getDriver().findElement(By.cssSelector("#usa-map-0 .ues-trash-handle")).click();
         getDriver().findElement(By.id("btn-delete")).click();
         Thread.sleep(2000);
-        assertFalse(getDriver().isElementPresent(By.id("usa-map-0")), "Gadget is not deleted in view mode");
+            assertFalse(getDriver().isElementPresent(By.id("usa-map-0")), "Gadget is not deleted in view mode");
     }
 
     /**
