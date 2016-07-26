@@ -107,7 +107,7 @@ public class EditInViewModeTest extends DSUIIntegrationTest{
         getDriver().findElement(By.cssSelector("#usa-map-0 .ues-trash-handle")).click();
         getDriver().findElement(By.id("btn-delete")).click();
         Thread.sleep(2000);
-            assertFalse(getDriver().isElementPresent(By.id("usa-map-0")), "Gadget is not deleted in view mode");
+        assertFalse(getDriver().isElementPresent(By.id("usa-map-0")), "Gadget is not deleted in view mode");
     }
 
     /**

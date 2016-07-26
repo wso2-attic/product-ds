@@ -157,7 +157,6 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
         selectPane("gadgets");
         waitTillElementToBeClickable(By.id("usa-map"));
         dragDropGadget(gadgetMapping);
-        //driver.executeScript(script);
         Thread.sleep(500);
         selectPane("pages");
         driver.findElement(By.cssSelector("div[data-id='" + pageIds[1] + "']")).click();
@@ -166,7 +165,6 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
         selectPane("gadgets");
         waitTillElementToBeClickable(By.id("usa-map"));
         dragDropGadget(gadgetMapping);
-        //driver.executeScript(script);
         Thread.sleep(500);
         clickViewButton();
         pushWindow();
