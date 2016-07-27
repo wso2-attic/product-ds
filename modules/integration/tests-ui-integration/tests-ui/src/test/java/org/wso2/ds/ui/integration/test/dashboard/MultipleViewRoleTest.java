@@ -121,6 +121,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
         addARoleToView("default", "anonymous");
         getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
         selectPane("gadgets");
+        waitTillElementToBeClickable(By.id("gadget-resize"));
         getDriver().executeScript(script);
         assertTrue(getDriver().findElement(By.id("gadget-resize-0")).isDisplayed(),
                 "Gadget resize gadget is not displayed in the page");
@@ -169,6 +170,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
         assertTrue(getDriver().isElementPresent(By.id("publisherrole1")),
                 "Gadgets that have role1 is not visible in gadgets pane");
         selectPane("gadgets");
+        waitTillElementToBeClickable(By.id("publisherrole1"));
         getDriver().executeScript(script);
         assertTrue(getDriver().isElementPresent(By.id("publisherrole1-0")),
                 "Gadgets that have role1 is not added to the dashboard");

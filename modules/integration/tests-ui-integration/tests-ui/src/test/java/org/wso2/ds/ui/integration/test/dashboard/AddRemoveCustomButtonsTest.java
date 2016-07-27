@@ -92,6 +92,7 @@ public class AddRemoveCustomButtonsTest extends DSUIIntegrationTest {
         String[][] gadgetMappings = {{GADGET_NAME, "a"}};
         String script = generateAddGadgetScript(gadgetMappings);
         driver.findElement(By.cssSelector("i.fw.fw-gadget")).click();
+        waitTillElementToBeClickable(By.id(GADGET_NAME));
         driver.executeScript(script);
         JSONObject gadgetJsonObj = getGadgetJSONObject();
         JSONObject toolbarButtons = (JSONObject) gadgetJsonObj.get("toolbarButtons");

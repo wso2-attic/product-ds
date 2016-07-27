@@ -18,6 +18,8 @@ package org.wso2.ds.ui.integration.test.dashboard;
 
 import ds.integration.tests.common.domain.DSIntegrationTestConstants;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;

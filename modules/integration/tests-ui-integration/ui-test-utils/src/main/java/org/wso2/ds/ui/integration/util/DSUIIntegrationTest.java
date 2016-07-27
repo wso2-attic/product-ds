@@ -22,6 +22,7 @@ import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
@@ -698,5 +699,16 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         clickOnView(viewId);
         getDriver().findElement(
                 By.cssSelector("li[data-view-mode=\"" + viewId + "\"] .ues-view-component-properties-handle")).click();
+    }
+
+    /**
+     * wait for element to be clickable
+     *
+     * @param by selector of specific element
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    public void waitTillElementToBeClickable(By by) throws MalformedURLException, XPathExpressionException {
+        (new WebDriverWait(getDriver(), getMaxWaitTime())).until(ExpectedConditions.elementToBeClickable(by));
     }
 }
