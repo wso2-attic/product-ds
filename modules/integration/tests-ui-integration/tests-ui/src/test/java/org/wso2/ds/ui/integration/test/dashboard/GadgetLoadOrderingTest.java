@@ -107,6 +107,7 @@ public class GadgetLoadOrderingTest extends DSUIIntegrationTest {
         String[][] gadgetMappings = {{"test3", "a"}, {"test1", "b"}, {"test2", "c"}};
         String script = generateAddGadgetScript(gadgetMappings);
         selectPane("gadgets");
+        waitTillElementToBeClickable(By.id("test3"));
         getDriver().executeScript(script);
         clickViewButton();
         for (String winHandle : getDriver().getWindowHandles()) {

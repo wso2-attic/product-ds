@@ -156,6 +156,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("input[name='anon']")).click();
         switchView("anon");
         selectPane("gadgets");
+        waitTillElementToBeClickable(By.id("usa-map"));
         driver.executeScript(script);
         Thread.sleep(500);
         selectPane("pages");
@@ -163,6 +164,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("input[name='anon']")).click();
         switchView("anon");
         selectPane("gadgets");
+        waitTillElementToBeClickable(By.id("usa-map"));
         driver.executeScript(script);
         Thread.sleep(500);
         clickViewButton();
@@ -206,6 +208,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
             driver.findElement(By.cssSelector("div[data-id='" + page[0] + "']")).click();
             driver.findElement(By.cssSelector("input[name='fluidLayout']")).click();
             selectPane("gadgets");
+            waitTillElementToBeClickable(By.id("usa-map"));
             driver.executeScript(script);
             Thread.sleep(500);
             selectPane("pages");
@@ -246,6 +249,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
         addPageToDashboard(); // page2
         driver.findElement(By.cssSelector("input[name='landing']")).click();
         selectPane("gadgets");
+        waitTillElementToBeClickable(By.id("usa-map"));
         driver.executeScript(script);
         Thread.sleep(500);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
