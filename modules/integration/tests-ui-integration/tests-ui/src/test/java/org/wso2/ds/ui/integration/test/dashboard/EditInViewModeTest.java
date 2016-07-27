@@ -83,32 +83,32 @@ public class EditInViewModeTest extends DSUIIntegrationTest{
         // Create a dashboard and add some gadgets and make the dashboard as personalizable one
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-edit")).click();
-        String[][] gadgetMappings = { { "usa-social", "b" }, { "publisher", "e" } };
+        String[][] gadgetMappings = { { "usa-map", "b" }, { "publisher", "e" } };
         String script = generateAddGadgetScript(gadgetMappings);
+        getDriver().navigate().refresh();
         selectPane("gadgets");
         waitTillElementToBeClickable(By.id("publisher"));
         getDriver().executeScript(script);
-        Thread.sleep(2000);
         allowPersonalizeDashboard();
         Thread.sleep(2000);
         logout();
         login(USERNAME_VIEWER, PASSWORD_VIEWER);
         getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-view")).click();
         pushWindow();
-        assertTrue(getDriver().isElementPresent(By.id("usa-social-0")),
-                "usa-social gadget is not displayed in the " + "view mode");
+        assertTrue(getDriver().isElementPresent(By.id("usa-map-0")),
+                "usa-map gadget is not displayed in the " + "view mode");
         assertTrue(getDriver().isElementPresent(By.id("publisher-0")),
                 "publisher gadget is not displayed in the " + "view mode");
         getDriver().findElement(By.cssSelector("a.dropdown")).click();
         getDriver().findElement(By.id("edit-view-toggler")).click();
-        assertTrue(getDriver().isElementPresent(By.cssSelector("#usa-social-0 .ues-trash-handle")),
+        assertTrue(getDriver().isElementPresent(By.cssSelector("#usa-map-0 .ues-trash-handle")),
                 "Gadgets cannot be" + "deleted as delete button is not visible");
         assertTrue(getDriver().isElementPresent(By.cssSelector("#publisher-0 .ues-trash-handle")),
                 "Gadgets cannot be" + "deleted as delete button is not visible");
-        getDriver().findElement(By.cssSelector("#usa-social-0 .ues-trash-handle")).click();
+        getDriver().findElement(By.cssSelector("#usa-map-0 .ues-trash-handle")).click();
         getDriver().findElement(By.id("btn-delete")).click();
         Thread.sleep(2000);
-        assertFalse(getDriver().isElementPresent(By.id("usa-social-0")), "Gadget is not deleted in view mode");
+        assertFalse(getDriver().isElementPresent(By.id("usa-map-0")), "Gadget is not deleted in view mode");
     }
 
     /**
@@ -140,7 +140,7 @@ public class EditInViewModeTest extends DSUIIntegrationTest{
             InterruptedException {
         getDriver().findElement(By.xpath("//span[@id='landing']/i")).click();
         getDriver().findElement(By.id("btn-revert")).click();
-        assertTrue(getDriver().isElementPresent(By.id("usa-social-0")), "Gadget is not restored in view mode");
+        assertTrue(getDriver().isElementPresent(By.id("usa-map-0")), "Gadget is not restored in view mode");
     }
 
     @Test(groups = "wso2.ds.dashboard", description = "test dashboard draggable option", dependsOnMethods = "testDeleteGadgetInViewMode")

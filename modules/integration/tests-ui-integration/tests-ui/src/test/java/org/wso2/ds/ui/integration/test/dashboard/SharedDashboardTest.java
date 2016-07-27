@@ -18,6 +18,8 @@ package org.wso2.ds.ui.integration.test.dashboard;
 
 import ds.integration.tests.common.domain.DSIntegrationTestConstants;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
@@ -96,10 +98,11 @@ public class SharedDashboardTest extends DSUIIntegrationTest {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
         String[][] gadgetMappings = {{"test1", "b"}, {"test2", "c"}};
+        String script = generateAddGadgetScript(gadgetMappings);
         getDriver().navigate().refresh();
         selectPane("gadgets");
-        waitTillElementToBeClickable(By.id("test1"));
-        dragDropGadget(gadgetMappings);
+        Thread.sleep(2000);
+        getDriver().executeScript(script);
         Thread.sleep(2000);
         getDriver().findElement(By.cssSelector("a#dashboard-settings")).click();
         getDriver().findElement(By.id("share-dashboard")).click();
@@ -138,10 +141,11 @@ public class SharedDashboardTest extends DSUIIntegrationTest {
         getDriver().findElement(By.id("ues-dashboard-create")).click();
         selectLayout("default-grid");
         String[][] gadgetMappings = {{"publisher", "a"}, {"subscriber", "b"}};
+        String script = generateAddGadgetScript(gadgetMappings);
         getDriver().navigate().refresh();
         selectPane("gadgets");
-        waitTillElementToBeClickable(By.id("publisher"));
-        dragDropGadget(gadgetMappings);
+        Thread.sleep(2000);
+        getDriver().executeScript(script);
         Thread.sleep(2000);
         clickViewButton();
         Thread.sleep(3000);
