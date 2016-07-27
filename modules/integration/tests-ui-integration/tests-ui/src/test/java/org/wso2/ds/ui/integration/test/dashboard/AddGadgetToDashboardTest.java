@@ -145,9 +145,9 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
     public void testAddGadgetToDashboard()
             throws MalformedURLException, XPathExpressionException, InterruptedException {
         String[][] gadgetMappings = {{"publisher", "b"}, {"usa-map", "c"}};
+        String script = generateAddGadgetScript(gadgetMappings);
         selectPane("gadgets");
-        waitTillElementToBeClickable(By.id("usa-map"));
-        dragDropGadget(gadgetMappings);
+        getDriver().executeScript(script);
         clickViewButton();
         pushWindow();
 
@@ -181,10 +181,11 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
             "server", dependsOnMethods = "testAddGadgetToDashboard")
     public void testUserClaimsInGadget() throws MalformedURLException, XPathExpressionException, InterruptedException {
         String[][] gadgetMappings = {{"user-claims-gadget", "d"}};
+        String script = generateAddGadgetScript(gadgetMappings);
         getDriver().navigate().refresh();
         selectPane("gadgets");
-        waitTillElementToBeClickable(By.id("user-claims-gadget"));
-        dragDropGadget(gadgetMappings);
+        Thread.sleep(2000);
+        getDriver().executeScript(script);
         clickViewButton();
         pushWindow();
         Thread.sleep(3000);
@@ -210,10 +211,11 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
     public void testShowHideGadget() throws MalformedURLException, XPathExpressionException, InterruptedException {
         DSWebDriver driver = getDriver();
         String[][] gadgetMappings = {{"subscriber", "e"}};
+        String script = generateAddGadgetScript(gadgetMappings);
         driver.navigate().refresh();
         selectPane("gadgets");
-        waitTillElementToBeClickable(By.id("subscriber"));
-        dragDropGadget(gadgetMappings);
+        Thread.sleep(2000);
+        driver.executeScript(script);
         driver.findElement(By.id("optionsButtonEvents")).click();
         driver.findElement(By.linkText("subscriber")).click();
         driver.findElement(By.className("notifier")).click();

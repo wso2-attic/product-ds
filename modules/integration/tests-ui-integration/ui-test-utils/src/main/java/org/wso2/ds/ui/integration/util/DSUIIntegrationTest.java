@@ -22,8 +22,6 @@ import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
@@ -104,27 +102,6 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
             script += "performDrag('" + mapping[0] + "', '" + mapping[1] + "');";
         }
         return script;
-    }
-
-    /**
-     * drag and drop gadgets from listing page into dashboard page
-     * @param mappings mapping between gadgets and blocks in dashboard page
-     * @throws MalformedURLException
-     * @throws XPathExpressionException
-     */
-    public void dragDropGadget(String[][] mappings) throws MalformedURLException, XPathExpressionException {
-        String script = "$('#sidebarNavGadgets .ues-thumbnails').unbind();"
-                + "$('#sidebarNavGadgets .ues-thumbnails .ues-thumbnail').draggable({" +
-                "    cancel: false," +
-                "    appendTo: 'body'," +
-                "    helper: 'clone'," +
-                "});";
-        getDriver().executeScript(script);
-        for (String[] mapping : mappings) {
-            WebElement element = getDriver().findElement(By.id("" + mapping[0]));
-            WebElement target = getDriver().findElement(By.xpath("//div[@data-id='" + mapping[1] + "']"));
-            (new Actions(getDriver())).dragAndDrop(element, target).perform();
-        }
     }
 
     /**
@@ -721,16 +698,5 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         clickOnView(viewId);
         getDriver().findElement(
                 By.cssSelector("li[data-view-mode=\"" + viewId + "\"] .ues-view-component-properties-handle")).click();
-    }
-
-    /**
-     * wait for element to be clickable
-     *
-     * @param by selector of specific element
-     * @throws MalformedURLException
-     * @throws XPathExpressionException
-     */
-    public void waitTillElementToBeClickable(By by) throws MalformedURLException, XPathExpressionException {
-        (new WebDriverWait(getDriver(), getMaxWaitTime())).until(ExpectedConditions.elementToBeClickable(by));
     }
 }

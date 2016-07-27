@@ -105,9 +105,9 @@ public class GadgetLoadOrderingTest extends DSUIIntegrationTest {
         redirectToLocation("portal", "dashboards");
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
         String[][] gadgetMappings = {{"test3", "a"}, {"test1", "b"}, {"test2", "c"}};
+        String script = generateAddGadgetScript(gadgetMappings);
         selectPane("gadgets");
-        waitTillElementToBeClickable(By.id("test1"));
-        dragDropGadget(gadgetMappings);
+        getDriver().executeScript(script);
         clickViewButton();
         for (String winHandle : getDriver().getWindowHandles()) {
             getDriver().switchTo().window(winHandle);

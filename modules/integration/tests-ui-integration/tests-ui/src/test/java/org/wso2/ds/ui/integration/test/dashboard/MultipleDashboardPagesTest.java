@@ -140,6 +140,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
         String[] pageIds = {"landing", "page0", "page1", "page2", "page3"};
         String gadgetTitle = "USA Map";
         String[][] gadgetMapping = {{"usa-map", "a"}};
+        String script = generateAddGadgetScript(gadgetMapping);
         addDashBoard(dashboardTitle, "This is a test dashboard");
         WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
         webElement.findElement(By.cssSelector(".ues-edit")).click();
@@ -155,16 +156,14 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("input[name='anon']")).click();
         switchView("anon");
         selectPane("gadgets");
-        waitTillElementToBeClickable(By.id("usa-map"));
-        dragDropGadget(gadgetMapping);
+        driver.executeScript(script);
         Thread.sleep(500);
         selectPane("pages");
         driver.findElement(By.cssSelector("div[data-id='" + pageIds[1] + "']")).click();
         driver.findElement(By.cssSelector("input[name='anon']")).click();
         switchView("anon");
         selectPane("gadgets");
-        waitTillElementToBeClickable(By.id("usa-map"));
-        dragDropGadget(gadgetMapping);
+        driver.executeScript(script);
         Thread.sleep(500);
         clickViewButton();
         pushWindow();
@@ -194,6 +193,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
                 {"page1", "single-column"}
         };
         String[][] gadgetMapping = {{"usa-map", "a"}};
+        String script = generateAddGadgetScript(gadgetMapping);
         addDashBoard(dashboardTitle, "This is a test dashboard");
         WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
         webElement.findElement(By.cssSelector(".ues-edit")).click();
@@ -206,8 +206,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
             driver.findElement(By.cssSelector("div[data-id='" + page[0] + "']")).click();
             driver.findElement(By.cssSelector("input[name='fluidLayout']")).click();
             selectPane("gadgets");
-            waitTillElementToBeClickable(By.id("usa-map"));
-            dragDropGadget(gadgetMapping);
+            driver.executeScript(script);
             Thread.sleep(500);
             selectPane("pages");
         }
@@ -235,6 +234,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
         String dashboardTitle = "dashboardpages5";
         String gadgetTitle = "USA Map";
         String[][] gadgetMapping = {{"usa-map", "a"}};
+        String script = generateAddGadgetScript(gadgetMapping);
         addDashBoard(dashboardTitle, "This is a test dashboard");
         WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
         webElement.findElement(By.cssSelector(".ues-edit")).click();
@@ -246,8 +246,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
         addPageToDashboard(); // page2
         driver.findElement(By.cssSelector("input[name='landing']")).click();
         selectPane("gadgets");
-        waitTillElementToBeClickable(By.id("usa-map"));
-        dragDropGadget(gadgetMapping);
+        driver.executeScript(script);
         Thread.sleep(500);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         driver.findElement(By.cssSelector(".ues-dashboard[data-id='" + dashboardTitle + "'] a.ues-view")).click();
