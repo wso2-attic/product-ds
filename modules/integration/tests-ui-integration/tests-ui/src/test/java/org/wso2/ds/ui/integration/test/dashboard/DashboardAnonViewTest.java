@@ -75,6 +75,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         addARoleToView("default", "anonymous");
         getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
         selectPane("gadgets");
+        waitTillElementToBeClickable(By.id(GADGET_2_ID));
         getDriver().executeScript(anonViewGadgetAddScript);
 
         // verifying gadget is rendered correctly in anon view
@@ -83,6 +84,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         getDriver().findElement(By.id("new-view")).click();
         selectViewLayout("default-grid");
         selectPane("gadgets");
+        waitTillElementToBeClickable(By.id(GADGET_1_ID));
         getDriver().executeScript(defaultViewGadgetAddScript);
         // verifying gadget is rendered correctly in default view
         assertEquals(GADGET_1, getAttributeValue("iframe", "title"));
@@ -119,12 +121,14 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         addARoleToView("default", "anonymous");
         getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
         selectPane("gadgets");
+        waitTillElementToBeClickable(By.id(GADGET_4_ID));
         getDriver().executeScript(anonViewGadgetAddScript);
         assertEquals(GADGET_4, getAttributeValue("iframe", "title"));
         getDriver().findElement(By.id("add-view")).click();
         getDriver().findElement(By.id("new-view")).click();
         selectViewLayout("default-grid");
         selectPane("gadgets");
+        waitTillElementToBeClickable(By.id(GADGET_3_ID));
         getDriver().executeScript(defaultViewGadgetAddScript);
         assertEquals(GADGET_3, getAttributeValue("iframe", "title"));
         switchPage("landing");

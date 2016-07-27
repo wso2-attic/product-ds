@@ -147,6 +147,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         String[][] gadgetMappings = {{"publisher", "b"}, {"usa-map", "c"}};
         String script = generateAddGadgetScript(gadgetMappings);
         selectPane("gadgets");
+        waitTillElementToBeClickable(By.id("publisher"));
         getDriver().executeScript(script);
         clickViewButton();
         pushWindow();

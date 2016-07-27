@@ -101,6 +101,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         String[][] gadgetMappings = {{"textbox", "a"}};
         String script = generateAddGadgetScript(gadgetMappings);
         driver.findElement(By.cssSelector("i.fw.fw-gadget")).click();
+        waitTillElementToBeClickable(By.id("textbox"));
         driver.executeScript(script);
         setTextBoxValue("Editor Mode", true);
         driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();

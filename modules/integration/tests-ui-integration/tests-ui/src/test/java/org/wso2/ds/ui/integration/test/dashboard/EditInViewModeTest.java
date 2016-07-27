@@ -87,9 +87,8 @@ public class EditInViewModeTest extends DSUIIntegrationTest{
         String script = generateAddGadgetScript(gadgetMappings);
         getDriver().navigate().refresh();
         selectPane("gadgets");
-        Thread.sleep(2000);
+        waitTillElementToBeClickable(By.id("publisher"));
         getDriver().executeScript(script);
-        Thread.sleep(2000);
         allowPersonalizeDashboard();
         Thread.sleep(2000);
         logout();

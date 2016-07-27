@@ -93,6 +93,7 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
         String[][] gadgetMappings = {{"publisher", "b"}, {"usa-map", "c"}};
         String script = generateAddGadgetScript(gadgetMappings);
         getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
+        waitTillElementToBeClickable(By.id("publisher"));
         getDriver().executeScript(script);
         assertTrue(getDriver().findElement(By.id("publisher-0")).isDisplayed(),
                 "Publisher gadget is not displayed in the page");
@@ -159,6 +160,7 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
         String[][] gadgetMappingForNewView = {{"publisher", "a"}, {"subscriber", "b"}};
         String script = generateAddGadgetScript(gadgetMappings);
         getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
+        waitTillElementToBeClickable(By.id("subscriber"));
         getDriver().executeScript(script);
         assertTrue(getDriver().findElement(By.id("usa-business-revenue-0")).isDisplayed(),
                 "Publisher gadget is not displayed in the page");
@@ -168,6 +170,7 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
         clickOnView("view3");
         script = generateAddGadgetScript(gadgetMappingForNewView);
         getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
+        waitTillElementToBeClickable(By.id("subscriber"));
         getDriver().executeScript(script);
         assertTrue(getDriver().findElement(By.id("publisher-0")).isDisplayed(),
                 "Publisher gadget is not displayed in the page");

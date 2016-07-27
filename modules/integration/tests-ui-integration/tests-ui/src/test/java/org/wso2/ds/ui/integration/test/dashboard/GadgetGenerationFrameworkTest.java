@@ -134,6 +134,7 @@ public class GadgetGenerationFrameworkTest extends DSUIIntegrationTest {
         String[][] gadgetMappings = {{"test_gadget", "a"}};
         String script = generateAddGadgetScript(gadgetMappings);
         selectPane("gadgets");
+        waitTillElementToBeClickable(By.id("test_gadget"));
         getDriver().executeScript(script);
         clickViewButton();
         pushWindow();
