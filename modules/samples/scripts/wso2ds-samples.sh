@@ -53,7 +53,7 @@ pathEdited=`cd "$PRGDIR/.." ; pwd`
 binPath=$pathEdited/bin
 
 # Defining Sample data and directories' paths
-gadgetDropLocation="$pathEdited/repository/deployment/server/jaggeryapps/portal/store/carbon.super/"
+gadgetDropLocation="$pathEdited/repository/deployment/server/jaggeryapps/portal/store/carbon.super/fs/"
 dashboardDropLocation="$pathEdited/repository/deployment/server/jaggeryapps/portal/extensions/"
 jaggeryAppsDropLocation="$pathEdited/repository/deployment/server/"
 

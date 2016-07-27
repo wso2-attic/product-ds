@@ -32,8 +32,8 @@
              <link href="content/index.css" type="text/css" rel="stylesheet">
 
              <!-- Load the common javascript libraries -->
-             <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
-             <script type="text/javascript" src="js/d3.min.js"></script>
+             <script type="text/javascript" src="/portal/libs/jquery_1.11.0/jquery-1.11.3.min.js"></script>
+             <script type="text/javascript" src="/portal/libs/analytics-wso2_5.0.12/d3.min.js"></script>
 
              <!-- Load the custom javascript -->
              <script type="text/javascript" src="js/custom/data.js"></script>
