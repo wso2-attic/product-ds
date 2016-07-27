@@ -79,11 +79,10 @@ public class GadgetStateTest extends DSUIIntegrationTest {
     public void testGadgetState() throws MalformedURLException, XPathExpressionException, InterruptedException {
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
         String[][] gadgetMappings = {{"gadget-state", "a"}};
-        String script = generateAddGadgetScript(gadgetMappings);
         getDriver().navigate().refresh();
         selectPane("gadgets");
-        Thread.sleep(2000);
-        getDriver().executeScript(script);
+        waitTillElementToBeClickable(By.id("gadget-state"));
+        dragDropGadget(gadgetMappings);
         clickViewButton();
         pushWindow();
         Thread.sleep(3000);

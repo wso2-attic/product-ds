@@ -17,6 +17,8 @@
 package org.wso2.ds.ui.integration.test.dashboard;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.integration.common.utils.exceptions.AutomationUtilException;
@@ -87,13 +89,13 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      */
     @Test(groups = "wso2.ds.dashboard", description = "Checking a dashboard with single view")
-    public void testSingleView() throws MalformedURLException, XPathExpressionException {
+    public void testSingleView() throws MalformedURLException, XPathExpressionException, InterruptedException {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-edit")).click();
         String[][] gadgetMappings = {{"publisher", "b"}, {"usa-map", "c"}};
-        String script = generateAddGadgetScript(gadgetMappings);
         getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
-        getDriver().executeScript(script);
+        waitTillElementToBeClickable(By.id("usa-map"));
+        dragDropGadget(gadgetMappings);
         assertTrue(getDriver().findElement(By.id("publisher-0")).isDisplayed(),
                 "Publisher gadget is not displayed in the page");
         assertTrue(getDriver().findElement(By.id("usa-map-0")).isDisplayed(),
@@ -150,25 +152,25 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
      */
     @Test(groups = "wso2.ds.dashboard", description = "Checking a dashboard with multiple view by creating new views",
             dependsOnMethods = "testCopyView")
-    public void testMultipleNewViews() throws MalformedURLException, XPathExpressionException {
+    public void testMultipleNewViews() throws MalformedURLException, XPathExpressionException, InterruptedException {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-edit")).click();
         createNewView("default-grid");
         clickOnView("view2");
         String[][] gadgetMappings = {{"usa-business-revenue", "a"}, {"subscriber", "d"}};
         String[][] gadgetMappingForNewView = {{"publisher", "a"}, {"subscriber", "b"}};
-        String script = generateAddGadgetScript(gadgetMappings);
         getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
-        getDriver().executeScript(script);
+        waitTillElementToBeClickable(By.id("subscriber"));
+        dragDropGadget(gadgetMappings);
         assertTrue(getDriver().findElement(By.id("usa-business-revenue-0")).isDisplayed(),
                 "Publisher gadget is not displayed in the page");
         assertTrue(getDriver().findElement(By.id("subscriber-0")).isDisplayed(),
                 "USA map gadget is not displayed in the page");
         createNewView("single-column");
         clickOnView("view3");
-        script = generateAddGadgetScript(gadgetMappingForNewView);
         getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
-        getDriver().executeScript(script);
+        waitTillElementToBeClickable(By.id("subscriber"));
+        dragDropGadget(gadgetMappingForNewView);
         assertTrue(getDriver().findElement(By.id("publisher-0")).isDisplayed(),
                 "Publisher gadget is not displayed in the page");
         assertTrue(getDriver().findElement(By.id("subscriber-0")).isDisplayed(),

@@ -132,9 +132,9 @@ public class GadgetGenerationFrameworkTest extends DSUIIntegrationTest {
         driver.findElement(By.id("ues-dashboard-create")).click();
         selectLayout("single-column");
         String[][] gadgetMappings = {{"test_gadget", "a"}};
-        String script = generateAddGadgetScript(gadgetMappings);
         selectPane("gadgets");
-        getDriver().executeScript(script);
+        waitTillElementToBeClickable(By.id("test_gadget"));
+        dragDropGadget(gadgetMappings);
         clickViewButton();
         pushWindow();
 

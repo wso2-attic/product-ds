@@ -99,9 +99,9 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
         String[][] gadgetMappings = {{"textbox", "a"}};
-        String script = generateAddGadgetScript(gadgetMappings);
         driver.findElement(By.cssSelector("i.fw.fw-gadget")).click();
-        driver.executeScript(script);
+        waitTillElementToBeClickable(By.id("textbox"));
+        dragDropGadget(gadgetMappings);
         setTextBoxValue("Editor Mode", true);
         driver.findElement(By.cssSelector("a.ues-dashboard-preview")).click();
         // TODO: change the behaviour in the dashboard to reflect the change after saving the change. Then remove sleep
