@@ -34,7 +34,7 @@ rem ---------------------------------------------------------------------------
 SET script=%~dp0
 
 rem Defining Sample data and directories' paths
-set gadgetDropLocation=%script%..\repository\deployment\server\jaggeryapps\portal\store\carbon.super\gadget
+set gadgetDropLocation=%script%..\repository\deployment\server\jaggeryapps\portal\store\carbon.super\fs\gadget
 set dashboardDropLocation=%script%..\repository\deployment\server\jaggeryapps\portal\extensions\dashboards
 set jaggeryappDropLocation=%script%..\repository\deployment\server\jaggeryapps
 

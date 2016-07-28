@@ -62,7 +62,7 @@
             {
               "id": "fcsygsrsb8l1sjor",
               "content": {
-                "id": "usa-states",
+                "id": "usa-population-density",
                 "title": "Population Density Of USA",
                 "type": "gadget",
                 "thumbnail": "store://gadget/usa-population-density/images/index.png",
@@ -134,7 +134,7 @@
             {
               "id": "0sio6r9vwg8bmx6r",
               "content": {
-                "id": "donutchart",
+                "id": "usa-population-by-ethnicity",
                 "title": "Population by Ethnicity",
                 "type": "gadget",
                 "thumbnail": "store://gadget/usa-population-by-ethnicity/images/index.png",
@@ -186,7 +186,7 @@
             {
               "id": "4tnykml222h2gldi",
               "content": {
-                "id": "barchart",
+                "id": "usa-population-by-age-and-gender",
                 "title": "Population by Age and Gender",
                 "type": "gadget",
                 "thumbnail": "store://gadget/usa-population-by-age-and-gender/images/index.png",
@@ -232,7 +232,7 @@
             {
               "id": "baaqg42xirudi",
               "content": {
-                "id": "linechart",
+                "id": "usa-population-history",
                 "title": "Population History",
                 "type": "gadget",
                 "thumbnail": "store://gadget/usa-population-history/images/index.png",
