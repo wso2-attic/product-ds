@@ -226,6 +226,9 @@
                                 <featureArtifactDef>
                                     org.wso2.carbon.commons:org.wso2.carbon.logging.mgt.feature:${carbon.commons.version}
                                 </featureArtifactDef>
+                                <featureArtifactDef>
+                                    org.wso2.carbon.analytics-common:org.wso2.carbon.analytics.gadget.chart.template.feature:${carbon.analytics.common.version}
+                                </featureArtifactDef>
                             </featureArtifacts>
                         </configuration>
                     </execution>
@@ -414,7 +417,7 @@
                                 <feature>
                                     <id>org.wso2.carbon.identity.provider.server.feature.group</id>
                                     <version>${carbon.identity.inbound.auth.openid.version}</version>
-                                </feature> 
+                                </feature>
                                 <!-- <feature>
                                     <id>org.wso2.carbon.identity.relying.party.server.feature.group</id>
                                     <version>${carbon.identity.version}</version>
@@ -491,6 +494,10 @@
                                 <feature>
                                     <id>org.wso2.carbon.logging.mgt.feature.group</id>
                                     <version>${carbon.commons.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.analytics.gadget.chart.template.feature.group</id>
+                                    <version>${carbon.analytics.common.version}</version>
                                 </feature>
                             </features>
                         </configuration>
