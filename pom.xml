@@ -613,12 +613,12 @@
         <!-- jaggery versions -->
         <jaggery.feature.version>0.12.6</jaggery.feature.version>
         <handlebars.feature.version>1.0.0</handlebars.feature.version>
-        <carbon.feature.version>1.5.4-SNAPSHOT</carbon.feature.version>
-        <process.feature.version>1.5.4-SNAPSHOT</process.feature.version>
-        <uuid.feature.version>1.5.4-SNAPSHOT</uuid.feature.version>
-        <sso.feature.version>1.5.4-SNAPSHOT</sso.feature.version>
-        <oauth.feature.version>1.5.4-SNAPSHOT</oauth.feature.version>
-        <ws.feature.version>1.5.4-SNAPSHOT</ws.feature.version>
+        <carbon.feature.version>1.5.4</carbon.feature.version>
+        <process.feature.version>1.5.4</process.feature.version>
+        <uuid.feature.version>1.5.4</uuid.feature.version>
+        <sso.feature.version>1.5.4</sso.feature.version>
+        <oauth.feature.version>1.5.4</oauth.feature.version>
+        <ws.feature.version>1.5.4</ws.feature.version>
         <slf4j.version>1.6.6</slf4j.version>
         <ehcache.wso2.version>1.5.0.wso2v3</ehcache.wso2.version>
         <i18n.feature.version>1.5.2</i18n.feature.version>
