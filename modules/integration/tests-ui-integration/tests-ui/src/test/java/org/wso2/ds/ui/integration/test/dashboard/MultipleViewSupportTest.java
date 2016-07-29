@@ -87,12 +87,15 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      */
     @Test(groups = "wso2.ds.dashboard", description = "Checking a dashboard with single view")
-    public void testSingleView() throws MalformedURLException, XPathExpressionException {
+    public void testSingleView() throws MalformedURLException, XPathExpressionException, InterruptedException {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-edit")).click();
+        clickOnView("default");
+        Thread.sleep(2000);
         String[][] gadgetMappings = {{"publisher", "b"}, {"usa-map", "c"}};
         String script = generateAddGadgetScript(gadgetMappings);
         getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
+        Thread.sleep(2000);
         waitTillElementToBeClickable(By.id("publisher"));
         getDriver().executeScript(script);
         assertTrue(getDriver().findElement(By.id("publisher-0")).isDisplayed(),
@@ -151,7 +154,7 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
      */
     @Test(groups = "wso2.ds.dashboard", description = "Checking a dashboard with multiple view by creating new views",
             dependsOnMethods = "testCopyView")
-    public void testMultipleNewViews() throws MalformedURLException, XPathExpressionException {
+    public void testMultipleNewViews() throws MalformedURLException, XPathExpressionException, InterruptedException {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-edit")).click();
         createNewView("default-grid");
@@ -159,7 +162,9 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
         String[][] gadgetMappings = {{"usa-business-revenue", "a"}, {"subscriber", "d"}};
         String[][] gadgetMappingForNewView = {{"publisher", "a"}, {"subscriber", "b"}};
         String script = generateAddGadgetScript(gadgetMappings);
+        Thread.sleep(2000);
         getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
+        Thread.sleep(2000);
         waitTillElementToBeClickable(By.id("subscriber"));
         getDriver().executeScript(script);
         assertTrue(getDriver().findElement(By.id("usa-business-revenue-0")).isDisplayed(),
@@ -168,8 +173,10 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
                 "USA map gadget is not displayed in the page");
         createNewView("single-column");
         clickOnView("view3");
+        Thread.sleep(2000);
         script = generateAddGadgetScript(gadgetMappingForNewView);
         getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
+        Thread.sleep(2000);
         waitTillElementToBeClickable(By.id("subscriber"));
         getDriver().executeScript(script);
         assertTrue(getDriver().findElement(By.id("publisher-0")).isDisplayed(),
