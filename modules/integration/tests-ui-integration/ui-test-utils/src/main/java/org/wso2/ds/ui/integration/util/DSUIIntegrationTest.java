@@ -220,6 +220,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         getDriver().findElement(By.id("ues-dashboard-description")).sendKeys(description);
         getDriver().findElement(By.id("ues-dashboard-create")).click();
         selectLayout("default-grid");
+        driver.findElement(By.cssSelector("input[name='landing']")).click();
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
     }
 
