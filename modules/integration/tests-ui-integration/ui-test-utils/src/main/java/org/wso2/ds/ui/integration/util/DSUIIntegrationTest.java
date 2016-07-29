@@ -203,14 +203,42 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     }
 
     /**
-     * Add dashboard to DashboardServer
+     * Add dashboard to DashboardServer with a landing page
      *
      * @param dashBoardTitle title of the dashboard
      * @param description    description of the dashboard
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    public void addDashBoard(String dashBoardTitle, String description)
+    public void addDashBoardWithLandingPage(String dashBoardTitle, String description)
+            throws MalformedURLException, XPathExpressionException {
+        createDashboard(dashBoardTitle, description);
+        getDriver().findElement(By.cssSelector("input[name='landing']")).click();
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
+    }
+
+    /**
+     * Add dashboard to DashboardServer without a landing page
+     *
+     * @param dashBoardTitle title of the dashboard
+     * @param description    description of the dashboard
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    public void addDashBoardWithoutLandingPage(String dashBoardTitle, String description)
+            throws MalformedURLException, XPathExpressionException {
+        createDashboard(dashBoardTitle, description);
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
+    }
+
+    /**
+     * To create a dashboard
+     * @param dashBoardTitle title of the dashboard
+     * @param description description of the dashboard
+     * @throws MalformedURLException
+     * @throws XPathExpressionException
+     */
+    private void createDashboard(String dashBoardTitle, String description)
             throws MalformedURLException, XPathExpressionException {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("[href='create-dashboard']")).click();
@@ -220,8 +248,6 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         getDriver().findElement(By.id("ues-dashboard-description")).sendKeys(description);
         getDriver().findElement(By.id("ues-dashboard-create")).click();
         selectLayout("default-grid");
-        driver.findElement(By.cssSelector("input[name='landing']")).click();
-        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
     }
 
     /**

@@ -78,7 +78,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
         String[] userListForRole2 = {getCurrentUsername(), USERNAME_ROLE2};
         String[] userList = {USERNAME_ROLE1, USERNAME_ROLE2};
         login(getCurrentUsername(), getCurrentPassword());
-        addDashBoard(DASHBOARD_TITLE, "This is a test dashboard");
+        addDashBoardWithLandingPage(DASHBOARD_TITLE, "This is a test dashboard");
         loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
         addUser(USERNAME_ROLE1, PASSWORD_ROLE1, PASSWORD_ROLE1);
         addUser(USERNAME_ROLE2, PASSWORD_ROLE2, PASSWORD_ROLE2);

@@ -66,7 +66,7 @@ public class WidgetSupportTest extends DSUIIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setUp() throws XPathExpressionException, IOException, AutomationUtilException {
         login(getCurrentUsername(), getCurrentPassword());
-        addDashBoard(DASHBOARD_TITLE, "This is widget support test dashboard");
+        addDashBoardWithLandingPage(DASHBOARD_TITLE, "This is widget support test dashboard");
     }
 
     /**

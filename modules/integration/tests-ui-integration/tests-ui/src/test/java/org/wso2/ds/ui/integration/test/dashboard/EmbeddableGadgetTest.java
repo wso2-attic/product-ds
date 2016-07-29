@@ -67,7 +67,7 @@ public class EmbeddableGadgetTest extends DSUIIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setUp() throws AutomationUtilException, XPathExpressionException, IOException {
         login(getCurrentUsername(), getCurrentPassword());
-        addDashBoard(DASHBOARD1_TITLE, "This is a test dashboard");
+        addDashBoardWithLandingPage(DASHBOARD1_TITLE, "This is a test dashboard");
     }
 
     /**

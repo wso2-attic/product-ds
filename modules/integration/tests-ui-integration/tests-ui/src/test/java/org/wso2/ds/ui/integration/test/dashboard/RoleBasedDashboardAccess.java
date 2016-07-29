@@ -23,9 +23,6 @@ import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 import org.wso2.ds.ui.integration.util.DSWebDriver;
 
-import java.sql.Time;
-import java.util.concurrent.TimeUnit;
-
 import static org.testng.Assert.*;
 
 public class RoleBasedDashboardAccess extends DSUIIntegrationTest {
@@ -50,7 +47,7 @@ public class RoleBasedDashboardAccess extends DSUIIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
         login(getCurrentUsername(), getCurrentPassword());
-        addDashBoard(DASHBOARD_TITLE, DASHBOARD_DESCRIPTION);
+        addDashBoardWithLandingPage(DASHBOARD_TITLE, DASHBOARD_DESCRIPTION);
     }
 
     @Test(groups = "wso2.ds.dashboard", description = "Adding a dashboard and access it with role base " +

@@ -82,7 +82,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
                 {"page4", "banner"}
         };
         String errorMsg = " is not valid in ";
-        addDashBoard(dashboardTitle, "This is a test dashboard");
+        addDashBoardWithLandingPage(dashboardTitle, "This is a test dashboard");
         WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
         webElement.findElement(By.cssSelector(".ues-edit")).click();
         addPageToDashboard(pageDesc[1][1]); // page0
@@ -112,7 +112,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
         String dashboardTitle = "dashboardpages2";
         String[] pageIds = {"landing", "page0", "page1", "page2"};
         String gridId = "default-grid", errorMsg = " is not valid in ";
-        addDashBoard(dashboardTitle, "This is a test dashboard");
+        addDashBoardWithLandingPage(dashboardTitle, "This is a test dashboard");
         Thread.sleep(500);
         WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
         webElement.findElement(By.cssSelector(".ues-edit")).click();
@@ -141,7 +141,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
         String gadgetTitle = "USA Map";
         String[][] gadgetMapping = {{"usa-map", "a"}};
         String script = generateAddGadgetScript(gadgetMapping);
-        addDashBoard(dashboardTitle, "This is a test dashboard");
+        addDashBoardWithLandingPage(dashboardTitle, "This is a test dashboard");
         WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
         webElement.findElement(By.cssSelector(".ues-edit")).click();
         addPageToDashboard(); // page0
@@ -196,7 +196,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
         };
         String[][] gadgetMapping = {{"usa-map", "a"}};
         String script = generateAddGadgetScript(gadgetMapping);
-        addDashBoard(dashboardTitle, "This is a test dashboard");
+        addDashBoardWithLandingPage(dashboardTitle, "This is a test dashboard");
         WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
         webElement.findElement(By.cssSelector(".ues-edit")).click();
         addPageToDashboard(pageDesc[1][1]); // page0
@@ -238,7 +238,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
         String gadgetTitle = "USA Map";
         String[][] gadgetMapping = {{"usa-map", "a"}};
         String script = generateAddGadgetScript(gadgetMapping);
-        addDashBoard(dashboardTitle, "This is a test dashboard");
+        addDashBoardWithLandingPage(dashboardTitle, "This is a test dashboard");
         WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
         webElement.findElement(By.cssSelector(".ues-edit")).click();
         addPageToDashboard(); // page0
@@ -277,7 +277,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
                 {"Marketing", "marketing"},
                 {"Engineering", "engineering"}
         };
-        addDashBoard(dashboardTitle, "This is a test dashboard");
+        addDashBoardWithLandingPage(dashboardTitle, "This is a test dashboard");
         WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
         webElement.findElement(By.cssSelector(".ues-edit")).click();
         selectPane("pages");

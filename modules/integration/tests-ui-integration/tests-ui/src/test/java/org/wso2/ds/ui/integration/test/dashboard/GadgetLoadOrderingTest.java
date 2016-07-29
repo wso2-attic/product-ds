@@ -15,18 +15,13 @@
  */
 package org.wso2.ds.ui.integration.test.dashboard;
 
-import ds.integration.tests.common.domain.DSIntegrationTestConstants;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import org.wso2.carbon.automation.engine.context.AutomationContext;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
-import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
 import org.wso2.carbon.integration.common.utils.exceptions.AutomationUtilException;
-import org.wso2.carbon.integration.common.utils.mgt.ServerConfigurationManager;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
 
 import javax.xml.xpath.XPathExpressionException;
@@ -76,7 +71,7 @@ public class GadgetLoadOrderingTest extends DSUIIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setUp() throws AutomationUtilException, XPathExpressionException, IOException {
         login(getCurrentUsername(), getCurrentPassword());
-        addDashBoard(DASHBOARD_TITLE, "This is a test dashboard");
+        addDashBoardWithLandingPage(DASHBOARD_TITLE, "This is a test dashboard");
     }
 
     /**

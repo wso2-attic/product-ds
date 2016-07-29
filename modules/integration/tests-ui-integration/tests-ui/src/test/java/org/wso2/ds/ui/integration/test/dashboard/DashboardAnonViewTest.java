@@ -70,7 +70,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         String[][] defaultViewGadgetMappings = {{GADGET_1_ID, CONTAINER_A}};
         String anonViewGadgetAddScript = generateAddGadgetScript(anonViewGadgetMappings);
         String defaultViewGadgetAddScript = generateAddGadgetScript(defaultViewGadgetMappings);
-        addDashBoard(dashboardTitle, DASHBOARD_DESCRIPTION);
+        addDashBoardWithLandingPage(dashboardTitle, DASHBOARD_DESCRIPTION);
         getDriver().findElement(By.cssSelector("#" + dashboardTitle.toLowerCase() + " .ues-edit")).click();
         addARoleToView("default", "anonymous");
         getDriver().findElement(By.id("ues-modal-confirm-yes")).click();

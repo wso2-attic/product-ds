@@ -78,7 +78,7 @@ public class HierarchicalPagesTest extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
         String dashboardTitle = "dashboardmenu";
         String gridId = "default-grid";
-        addDashBoard(dashboardTitle, "This is a test dashboard");
+        addDashBoardWithLandingPage(dashboardTitle, "This is a test dashboard");
         Thread.sleep(500);
         //WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
         driver.findElement(By.id(dashboardTitle.toLowerCase())).findElement(By.cssSelector(".ues-edit")).click();
@@ -111,7 +111,7 @@ public class HierarchicalPagesTest extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
         String dashboardTitle = "dashboardmenu1";
         String gridId = "default-grid";
-        addDashBoard(dashboardTitle, "This is a test dashboard");
+        addDashBoardWithLandingPage(dashboardTitle, "This is a test dashboard");
         Thread.sleep(500);
         //WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
         driver.findElement(By.id(dashboardTitle.toLowerCase())).findElement(By.cssSelector(".ues-edit")).click();
@@ -152,7 +152,7 @@ public class HierarchicalPagesTest extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
         String dashboardTitle = "dashboardmenu2";
         String gridId = "default-grid";
-        addDashBoard(dashboardTitle, "This is a test dashboard");
+        addDashBoardWithLandingPage(dashboardTitle, "This is a test dashboard");
         Thread.sleep(500);
         //WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
         driver.findElement(By.id(dashboardTitle.toLowerCase())).findElement(By.cssSelector(".ues-edit")).click();
@@ -196,7 +196,7 @@ public class HierarchicalPagesTest extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
         String dashboardTitle = "dashboardmenu3";
         String gridId = "default-grid";
-        addDashBoard(dashboardTitle, "This is a test dashboard");
+        addDashBoardWithLandingPage(dashboardTitle, "This is a test dashboard");
         Thread.sleep(500);
         //WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
         driver.findElement(By.id(dashboardTitle.toLowerCase())).findElement(By.cssSelector(".ues-edit")).click();
@@ -236,7 +236,7 @@ public class HierarchicalPagesTest extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
         String dashboardTitle = "dashboardmenu4";
         String gridId = "default-grid";
-        addDashBoard(dashboardTitle, "This is a test dashboard");
+        addDashBoardWithLandingPage(dashboardTitle, "This is a test dashboard");
         Thread.sleep(500);
         //WebElement webElement = driver.findElement(By.id(dashboardTitle.toLowerCase()));
         driver.findElement(By.id(dashboardTitle.toLowerCase())).findElement(By.cssSelector(".ues-edit")).click();

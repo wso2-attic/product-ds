@@ -112,7 +112,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         addCreateRole(USERNAME_EDITOR);
         addOwnernRole(USERNAME_EDITOR);
         login(USERNAME_EDITOR, PASSWORD_EDITOR);
-        addDashBoard(dashboardTitle, DASHBOARD_DESCRIPTION);
+        addDashBoardWithLandingPage(dashboardTitle, DASHBOARD_DESCRIPTION);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
         allowPersonalizeDashboard();
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);

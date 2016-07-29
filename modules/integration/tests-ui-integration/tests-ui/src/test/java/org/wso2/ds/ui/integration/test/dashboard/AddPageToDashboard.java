@@ -57,7 +57,7 @@ public class AddPageToDashboard extends DSUIIntegrationTest {
     public void testAddEditPageDashboardNew() throws Exception {
         DSWebDriver driver = getDriver();
         login(getCurrentUsername(), getCurrentPassword());
-        addDashBoard(DASHBOARD_TITLE, DASHBOARD_DESCRIPTION);
+        addDashBoardWithLandingPage(DASHBOARD_TITLE, DASHBOARD_DESCRIPTION);
         Thread.sleep(2000);
         driver.findElement(By.id(dashboardTitle.toLowerCase())).findElement(By.cssSelector(".ues-edit")).click();
         addPageToDashboard("default-grid");

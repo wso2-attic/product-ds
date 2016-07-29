@@ -105,7 +105,7 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
     public void testWithOneDashboards() throws Exception {
         DSWebDriver driver = getDriver();
         String dashboardName = "dashboard-1";
-        addDashBoard(dashboardName, "This is first dashboard in default behaviour");
+        addDashBoardWithLandingPage(dashboardName, "This is first dashboard in default behaviour");
         logout();
         login(USERNAME_EDITOR, PASSWORD_EDITOR);
         String currentUrl = driver.getCurrentUrl();
@@ -122,7 +122,7 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
     public void testWithMultipleDashboards() throws Exception {
         DSWebDriver driver = getDriver();
         String dashboardName = "sales";
-        addDashBoard(dashboardName, "This is second dashboard in default behaviour.");
+        addDashBoardWithLandingPage(dashboardName, "This is second dashboard in default behaviour.");
         logout();
         login(USERNAME_EDITOR, PASSWORD_EDITOR);
         String currentUrl = driver.getCurrentUrl();

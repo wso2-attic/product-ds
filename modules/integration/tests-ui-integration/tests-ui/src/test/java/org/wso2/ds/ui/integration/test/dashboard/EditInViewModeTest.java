@@ -1,7 +1,6 @@
 package org.wso2.ds.ui.integration.test.dashboard;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
@@ -52,7 +51,7 @@ public class EditInViewModeTest extends DSUIIntegrationTest{
     @BeforeClass(alwaysRun = true)
     public void setUp() throws AutomationUtilException, XPathExpressionException, IOException {
         login(getCurrentUsername(), getCurrentPassword());
-        addDashBoard(DASHBOARD_TITLE, "This is a test dashboard");
+        addDashBoardWithLandingPage(DASHBOARD_TITLE, "This is a test dashboard");
         loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
         addUser(USERNAME_VIEWER, PASSWORD_VIEWER, PASSWORD_VIEWER);
         assignInternalRoleToUser(DASHBOARD_TITLE + "-viewer", new String[] { USERNAME_VIEWER});
