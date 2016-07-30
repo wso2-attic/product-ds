@@ -58,7 +58,7 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
      */
     @DataProvider(name = "userMode")
     public static Object[][] userModeProvider() {
-        return new Object[][]{{TestUserMode.SUPER_TENANT_ADMIN}};
+        return new Object[][] { { TestUserMode.SUPER_TENANT_ADMIN } };
     }
 
     /**
@@ -70,8 +70,8 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
      */
     @BeforeClass(alwaysRun = true)
     public void setUp() throws AutomationUtilException, XPathExpressionException, IOException {
-        String[] userListForRole1 = {getCurrentUsername(), USERNAME_EDITOR};
-        String[] userListForRole2 = {getCurrentUsername(), USERNAME_VIEWER};
+        String[] userListForRole1 = { getCurrentUsername(), USERNAME_EDITOR };
+        String[] userListForRole2 = { getCurrentUsername(), USERNAME_VIEWER };
         login(getCurrentUsername(), getCurrentPassword());
         addDashBoardWithoutLandingPage(DASHBOARD_TITLE, "This is a test dashboard");
         loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
@@ -81,8 +81,8 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
         assignRoleToUser(userListForRole1);
         addRole(ROLE2);
         assignRoleToUser(userListForRole2);
-        assignInternalRoleToUser(DASHBOARD_TITLE + "-viewer", new String[]{USERNAME_VIEWER});
-        assignInternalRoleToUser(DASHBOARD_TITLE + "-editor", new String[]{USERNAME_EDITOR});
+        assignInternalRoleToUser(DASHBOARD_TITLE + "-viewer", new String[] { USERNAME_VIEWER });
+        assignInternalRoleToUser(DASHBOARD_TITLE + "-editor", new String[] { USERNAME_EDITOR });
         addLoginRole(USERNAME_EDITOR);
         addLoginRole(USERNAME_VIEWER);
     }
@@ -101,6 +101,7 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
 
     /**
      * To test the creation of dashboard without landing page and checking the basic flow without landing page
+     *
      * @throws XPathExpressionException
      * @throws MalformedURLException
      */
@@ -110,13 +111,10 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " .ues-edit")).click();
         addARoleToView("default", ROLE1);
-        // Check whether the removal of internal everyone is allowed from the landing page
         getDriver().findElement(By.cssSelector("div[data-role=\"Internal/everyone\"] .remove-button")).click();
         clickOnView("default");
         getDriver().findElement(By.cssSelector("li[data-view-mode=\"default\"] .ues-view-component-properties-handle"))
                 .click();
-        assertTrue(getDriver().isElementPresent(By.cssSelector("div[data-role=\"Internal/everyone\"]")),
-                "Removal of internal everyone is not allowed even though landing page is not there");
 
         // Check the page creation when there is no internal/everyone role in first page
         addPageToDashboard("default-grid");
@@ -126,8 +124,84 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
                 "When creating new page default view is not created");
         addARoleToView("default", ROLE2);
         getDriver().findElement(By.cssSelector("div[data-role=\"Internal/everyone\"] .remove-button")).click();
+        createNewView("single-column");
+        addARoleToView("view0", "anonymous");
+        getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
+        assertTrue(getDriver().isElementPresent(By.cssSelector("div[data-role=\"anonymous\"]")),
+                "Addition of anonymous " + "role not allowed even the landing page is optional");
 
+        // Try to set the first page as a landing page, when the second page contains view with anonymous role
+        getDriver().findElement(By.className("ues-switch-page-prev")).click();
+        getDriver().findElement(By.className("fw-pages")).click();
+        getDriver().findElement(By.cssSelector("input[name='landing']")).click();
+        Thread.sleep(2000);
+        String expected = "Cannot Select This Page As Landing";
+        String message = getDriver().findElement(By.cssSelector(".modal-title")).getText().trim();
+        assertTrue(expected.equalsIgnoreCase(message),
+                "Creating of landing page allowed without checking for required conditions");
+        getDriver().findElement(By.id("ues-modal-info-ok")).click();
+        createNewView("single-column");
+        getDriver().findElement(By.className("fw-pages")).click();
+        getDriver().findElement(By.cssSelector("input[name='landing']")).click();
+        message = getDriver().findElement(By.cssSelector(".modal-title")).getText().trim();
+        assertTrue(expected.equalsIgnoreCase(message),
+                "Creating of landing page allowed without checking for required conditions");
+        getDriver().findElement(By.id("ues-modal-info-ok")).click();
+        createNewView("single-column");
+        addARoleToView("view1", "anonymous");
+        getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
+        getDriver().findElement(By.className("fw-pages")).click();
+        getDriver().findElement(By.cssSelector("input[name='landing']")).click();
+        assertFalse(getDriver().isElementPresent(By.cssSelector("modal-title")),
+                "Creating a landing page is not " + "allowed even the necessary conditions satisfied");
+        getDriver().findElement(By.cssSelector("input[name='landing']")).click();
     }
 
-
+    /**
+     * To test the view mode of the dashoard based on the role of the user
+     *
+     * @throws XPathExpressionException
+     * @throws MalformedURLException
+     * @throws  InterruptedException
+     */
+    @Test(groups = "wso2.ds.dashboard", description = "Checking the view mode and the pages that are shown for each user")
+    public void testViewMode() throws XPathExpressionException, MalformedURLException, InterruptedException {
+        deleteView("view0");
+        deleteView("view1");
+        clickOnView("default");
+        Thread.sleep(2000);
+        String[][] gadgetMappings = { { "publisher", "b" }, { "usa-map", "c" } };
+        String script = generateAddGadgetScript(gadgetMappings);
+        getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
+        Thread.sleep(2000);
+        waitTillElementToBeClickable(By.id("publisher"));
+        getDriver().executeScript(script);
+        assertTrue(getDriver().findElement(By.id("publisher-0")).isDisplayed(), "Publisher gadget is not added");
+        getDriver().findElement(By.className("ues-switch-page-next")).click();
+        deleteView("view0");
+        logout();
+        login(USERNAME_EDITOR, PASSWORD_EDITOR);
+        getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-view")).click();
+        pushWindow();
+        assertTrue(getDriver().isElementPresent(By.cssSelector("a[href=\"landing\"]")),
+                "The page that has the view for " + "the particular user is not visible in view mode");
+        assertTrue(getDriver().isElementPresent(By.id("publisher-0")),
+                "The correct gadgets are not displayed in view mode");
+        assertTrue(getDriver().isElementPresent(By.id("usa-map-0")),
+                "The correct gadgets are not displayed in view mode");
+        assertFalse(getDriver().isElementPresent(By.cssSelector("a[href=\"page0\"]")),
+                "The page that does not has the view for " + "the particular user is visible in view mode");
+        getDriver().close();
+        popWindow();
+        logout();
+        login(USERNAME_VIEWER, PASSWORD_VIEWER);
+        getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-view")).click();
+        pushWindow();
+        assertTrue(getDriver().isElementPresent(By.cssSelector("a[href=\"page0\"]")),
+                "The page that has the view for " + "the particular user is not visible in view mode");
+        assertFalse(getDriver().isElementPresent(By.cssSelector("a[href=\"landing\"]")),
+                "The page that does not has the view for " + "the particular user is visible in view mode");
+        getDriver().close();
+        popWindow();
+    }
 }
