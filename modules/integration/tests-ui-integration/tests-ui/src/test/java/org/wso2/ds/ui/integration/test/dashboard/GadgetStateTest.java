@@ -63,8 +63,9 @@ public class GadgetStateTest extends DSUIIntegrationTest {
      * @throws AutomationUtilException
      */
     @BeforeClass(alwaysRun = true)
-    public void setUp() throws XPathExpressionException, IOException, AutomationUtilException {
+    public void setUp() throws XPathExpressionException, IOException, AutomationUtilException, InterruptedException {
         login(getCurrentUsername(), getCurrentPassword());
+        deleteDashboards();
         addDashBoardWithLandingPage(DASHBOARD_TITLE, "This is a gadget state test dashboard");
     }
 

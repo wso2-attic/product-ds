@@ -69,10 +69,11 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
      * @throws AutomationUtilException
      */
     @BeforeClass(alwaysRun = true)
-    public void setUp() throws AutomationUtilException, XPathExpressionException, IOException {
+    public void setUp() throws AutomationUtilException, XPathExpressionException, IOException, InterruptedException {
         String[] userListForRole1 = { getCurrentUsername(), USERNAME_EDITOR };
         String[] userListForRole2 = { getCurrentUsername(), USERNAME_VIEWER };
         login(getCurrentUsername(), getCurrentPassword());
+        deleteDashboards();
         addDashBoardWithoutLandingPage(DASHBOARD_TITLE, "This is a test dashboard");
         loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
         addUser(USERNAME_EDITOR, PASSWORD_EDITOR, PASSWORD_EDITOR);
@@ -122,6 +123,17 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
                 + "when landing page doesn`t contain internal/everyone role even though landing page is optional");
         assertTrue(getDriver().isElementPresent(By.id("default")),
                 "When creating new page default view is not created");
+    }
+
+    /**
+     * Checks whether anon view is allowed in second page, when first page does not contain anonymous view
+     *
+     * @throws XPathExpressionException
+     * @throws MalformedURLException
+     */
+    @Test(groups = "wso2.ds.dashboard", description = "Checking whether the creation of anonymous view allowed in second page",
+            dependsOnMethods = "testCreateDashboard")
+    public void testAnonViewCreation() throws XPathExpressionException, MalformedURLException {
         addARoleToView("default", ROLE2);
         getDriver().findElement(By.cssSelector("div[data-role=\"Internal/everyone\"] .remove-button")).click();
         createNewView("single-column");
@@ -129,7 +141,11 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
         getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
         assertTrue(getDriver().isElementPresent(By.cssSelector("div[data-role=\"anonymous\"]")),
                 "Addition of anonymous " + "role not allowed even the landing page is optional");
+    }
 
+    @Test(groups = "wso2.ds.dashboard", description = "Checking whether the required conditions checked before "
+            + "making a page as a landing page", dependsOnMethods = "testAnonViewCreation")
+    public void testMakingLandingPage() throws XPathExpressionException, MalformedURLException, InterruptedException {
         // Try to set the first page as a landing page, when the second page contains view with anonymous role
         getDriver().findElement(By.className("ues-switch-page-prev")).click();
         getDriver().findElement(By.className("fw-pages")).click();
@@ -158,13 +174,14 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
     }
 
     /**
-     * To test the view mode of the dashoard based on the role of the user
+     * To test the view mode of the dashboard based on the role of the user
      *
      * @throws XPathExpressionException
      * @throws MalformedURLException
-     * @throws  InterruptedException
+     * @throws InterruptedException
      */
-    @Test(groups = "wso2.ds.dashboard", description = "Checking the view mode and the pages that are shown for each user")
+    @Test(groups = "wso2.ds.dashboard", description = "Checking the view mode and the pages that are shown for each user",
+            dependsOnMethods = "testMakingLandingPage")
     public void testViewMode() throws XPathExpressionException, MalformedURLException, InterruptedException {
         deleteView("view0");
         deleteView("view1");
@@ -183,13 +200,13 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
         login(USERNAME_EDITOR, PASSWORD_EDITOR);
         getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-view")).click();
         pushWindow();
-        assertTrue(getDriver().isElementPresent(By.cssSelector("a[href=\"landing\"]")),
+        assertTrue(getDriver().isElementPresent(By.cssSelector("a[href=\"page0\"]")),
                 "The page that has the view for " + "the particular user is not visible in view mode");
         assertTrue(getDriver().isElementPresent(By.id("publisher-0")),
                 "The correct gadgets are not displayed in view mode");
         assertTrue(getDriver().isElementPresent(By.id("usa-map-0")),
                 "The correct gadgets are not displayed in view mode");
-        assertFalse(getDriver().isElementPresent(By.cssSelector("a[href=\"page0\"]")),
+        assertFalse(getDriver().isElementPresent(By.cssSelector("a[href=\"page1\"]")),
                 "The page that does not has the view for " + "the particular user is visible in view mode");
         getDriver().close();
         popWindow();
@@ -197,9 +214,9 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
         login(USERNAME_VIEWER, PASSWORD_VIEWER);
         getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-view")).click();
         pushWindow();
-        assertTrue(getDriver().isElementPresent(By.cssSelector("a[href=\"page0\"]")),
+        assertTrue(getDriver().isElementPresent(By.cssSelector("a[href=\"page1\"]")),
                 "The page that has the view for " + "the particular user is not visible in view mode");
-        assertFalse(getDriver().isElementPresent(By.cssSelector("a[href=\"landing\"]")),
+        assertFalse(getDriver().isElementPresent(By.cssSelector("a[href=\"page0\"]")),
                 "The page that does not has the view for " + "the particular user is visible in view mode");
         getDriver().close();
         popWindow();

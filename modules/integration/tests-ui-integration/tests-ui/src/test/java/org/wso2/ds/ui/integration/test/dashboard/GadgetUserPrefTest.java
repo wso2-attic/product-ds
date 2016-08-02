@@ -77,6 +77,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
         login(getCurrentUsername(), getCurrentPassword());
+        deleteDashboards();
         initDashboard();
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
         allowPersonalizeDashboard();

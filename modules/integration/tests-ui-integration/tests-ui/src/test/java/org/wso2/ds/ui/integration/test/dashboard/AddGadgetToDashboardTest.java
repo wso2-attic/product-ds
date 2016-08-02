@@ -75,8 +75,9 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
      * @throws AutomationUtilException
      */
     @BeforeClass(alwaysRun = true)
-    public void setUp() throws AutomationUtilException, XPathExpressionException, IOException {
+    public void setUp() throws AutomationUtilException, XPathExpressionException, IOException, InterruptedException {
         login(getCurrentUsername(), getCurrentPassword());
+     //   deleteDashboards();
         addDashBoardWithLandingPage(DASHBOARD_TITLE, "This is a test dashboard");
     }
 

@@ -62,6 +62,7 @@ public class MultipleDashboardPagesTest extends DSUIIntegrationTest {
         assignRoleToUser(new String[]{USERNAME_EDITOR});
         logoutFromAdminConsole();
         login(USERNAME_EDITOR, PASSWORD_EDITOR);
+        deleteDashboards();
     }
 
     /**

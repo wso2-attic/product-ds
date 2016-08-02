@@ -87,6 +87,7 @@ public class AddRemoveCustomButtonsTest extends DSUIIntegrationTest {
     @Test(groups = "wso2.ds.dashboard", description = "Adding custom functions to gadget title bar")
     public void testCustomButtonsGadgeTitlebar() throws Exception {
         DSWebDriver driver = getDriver();
+        deleteDashboards();
         addDashBoardWithLandingPage(DASHBOARD_TITLE, DASHBOARD_DESCRIPTION);
         driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
         String[][] gadgetMappings = {{GADGET_NAME, "a"}};

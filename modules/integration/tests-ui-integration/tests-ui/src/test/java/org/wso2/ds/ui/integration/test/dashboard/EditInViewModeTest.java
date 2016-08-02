@@ -49,8 +49,9 @@ public class EditInViewModeTest extends DSUIIntegrationTest{
      * @throws AutomationUtilException
      */
     @BeforeClass(alwaysRun = true)
-    public void setUp() throws AutomationUtilException, XPathExpressionException, IOException {
+    public void setUp() throws AutomationUtilException, XPathExpressionException, IOException, InterruptedException {
         login(getCurrentUsername(), getCurrentPassword());
+        deleteDashboards();
         addDashBoardWithLandingPage(DASHBOARD_TITLE, "This is a test dashboard");
         loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
         addUser(USERNAME_VIEWER, PASSWORD_VIEWER, PASSWORD_VIEWER);
@@ -137,7 +138,7 @@ public class EditInViewModeTest extends DSUIIntegrationTest{
     @Test(groups = "wso2.ds.dashboard", description = "test dashboard restore option ", dependsOnMethods = "testResizeGadget")
     public void testRestoreGadget()throws MalformedURLException, XPathExpressionException,
             InterruptedException {
-        getDriver().findElement(By.xpath("//span[@id='landing']/i")).click();
+        getDriver().findElement(By.xpath("//span[@id='page0']/i")).click();
         getDriver().findElement(By.id("btn-revert")).click();
         assertTrue(getDriver().isElementPresent(By.id("usa-map-0")), "Gadget is not restored in view mode");
     }

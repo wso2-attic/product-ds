@@ -66,8 +66,9 @@ public class GadgetGenerationFrameworkTest extends DSUIIntegrationTest {
      * @throws org.wso2.carbon.integration.common.utils.exceptions.AutomationUtilException
      */
     @BeforeClass(alwaysRun = true)
-    public void setUp() throws XPathExpressionException, IOException, AutomationUtilException {
+    public void setUp() throws XPathExpressionException, IOException, AutomationUtilException, InterruptedException {
         login(getCurrentUsername(), getCurrentPassword());
+        deleteDashboards();
     }
 
 

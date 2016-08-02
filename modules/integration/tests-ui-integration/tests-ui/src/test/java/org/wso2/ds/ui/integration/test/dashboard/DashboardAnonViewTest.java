@@ -70,6 +70,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         String[][] defaultViewGadgetMappings = {{GADGET_1_ID, CONTAINER_A}};
         String anonViewGadgetAddScript = generateAddGadgetScript(anonViewGadgetMappings);
         String defaultViewGadgetAddScript = generateAddGadgetScript(defaultViewGadgetMappings);
+        deleteDashboards();
         addDashBoardWithLandingPage(dashboardTitle, DASHBOARD_DESCRIPTION);
         getDriver().findElement(By.cssSelector("#" + dashboardTitle.toLowerCase() + " .ues-edit")).click();
         addARoleToView("default", "anonymous");
@@ -131,8 +132,8 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         waitTillElementToBeClickable(By.id(GADGET_3_ID));
         getDriver().executeScript(defaultViewGadgetAddScript);
         assertEquals(GADGET_3, getAttributeValue("iframe", "title"));
-        switchPage("landing");
         switchPage("page0");
+        switchPage("page1");
         assertEquals(GADGET_3, getAttributeValue("iframe", "title"));
         getDriver().findElement(By.id("default")).click();
         assertEquals(GADGET_4, getAttributeValue("iframe", "title"));
@@ -148,7 +149,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         assertEquals(GADGET_4, getAttributeValue("iframe", "title"));
         getDriver().close();
         popWindow();
-        switchPage("landing");
+        switchPage("page0");
     }
 
     /**
@@ -160,12 +161,12 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
             dependsOnMethods = "testAnonDashboardPages")
     public void testAnonPagesViews() throws Exception {
         logout();
-        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT + "/" + dashboardTitle + "/landing");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT + "/" + dashboardTitle + "/page0");
         //check anon view gadgets are there
         assertEquals(GADGET_2, getAttributeValue("iframe", "title"));
         //check default view gadgets are not there
         assertNotEquals(GADGET_1, getAttributeValue("iframe", "title"));
-        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT + "/" + dashboardTitle + "/page0");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT + "/" + dashboardTitle + "/page1");
         //check anon view gadgets are there
         assertEquals(GADGET_4, getAttributeValue("iframe", "title"));
         //check default view gadgets are not there
@@ -180,14 +181,14 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
     public void testAnonDashboardPageRemove() throws Exception {
         login(getCurrentUsername(), getCurrentPassword());
         getDriver().findElement(By.cssSelector("#" + dashboardTitle.toLowerCase() + " .ues-edit")).click();
-        switchPage("page0");
+        switchPage("page1");
         getDriver().findElement(By.xpath("(//button[@type='button'])[11]")).click();
         getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
-        switchPage("page0");
+        switchPage("page1");
         assertFalse(getDriver().isElementPresent(By.id("default")), "Anonymous view is not deleted");
         assertEquals(GADGET_3, getAttributeValue("iframe", "title"));
         logout();
-        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT + "/" + dashboardTitle + "/landing?isAnonView=true");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT + "/" + dashboardTitle + "/page0?isAnonView=true");
         modifyTimeOut(2);
         assertNotEquals(GADGET_1, getAttributeValue("iframe", "title"));
         login(getCurrentUsername(), getCurrentPassword());

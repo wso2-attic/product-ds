@@ -108,7 +108,7 @@ public class AddCustomThemeToDashboardTest extends DSUIIntegrationTest {
             InterruptedException {
         //log in to portal
         login(getCurrentUsername(), getCurrentPassword());
-
+        deleteDashboards();
         //create dashboard
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("[href='create-dashboard']")).click();
@@ -128,7 +128,7 @@ public class AddCustomThemeToDashboardTest extends DSUIIntegrationTest {
         webElement.findElement(By.cssSelector(".ues-edit")).click();
         addPageToDashboard();
 
-        redirectToLocation(DS_HOME_CONTEXT, "dashboards/" + DASHBOARD_TITLE + "/landing");
+        redirectToLocation(DS_HOME_CONTEXT, "dashboards/" + DASHBOARD_TITLE + "/page0");
 
         //check for the dashboard name in the custom theme
         assertEquals(getDriver().findElement(By.cssSelector(".product-name")).getText(),
@@ -140,7 +140,7 @@ public class AddCustomThemeToDashboardTest extends DSUIIntegrationTest {
         getDriver().findElement(By.linkText("Default Theme")).click();
         getDriver().findElement(By.id("ues-dashboard-saveBtn")).click();
         Thread.sleep(2000);
-        redirectToLocation(DS_HOME_CONTEXT, "dashboards/" + DASHBOARD_TITLE + "/landing");
+        redirectToLocation(DS_HOME_CONTEXT, "dashboards/" + DASHBOARD_TITLE + "/page0");
 
         //check for the name in the default theme
         assertEquals(getDriver().findElement(By.cssSelector(".product-name")).getText(), DASHBOARD_TITLE);

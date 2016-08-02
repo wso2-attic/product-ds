@@ -73,11 +73,12 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
      * @throws AutomationUtilException
      */
     @BeforeClass(alwaysRun = true)
-    public void setUp() throws AutomationUtilException, XPathExpressionException, IOException {
+    public void setUp() throws AutomationUtilException, XPathExpressionException, IOException, InterruptedException {
         String[] userListForRole1 = {getCurrentUsername(), USERNAME_ROLE1};
         String[] userListForRole2 = {getCurrentUsername(), USERNAME_ROLE2};
         String[] userList = {USERNAME_ROLE1, USERNAME_ROLE2};
         login(getCurrentUsername(), getCurrentPassword());
+        deleteDashboards();
         addDashBoardWithLandingPage(DASHBOARD_TITLE, "This is a test dashboard");
         loginToAdminConsole(getCurrentUsername(), getCurrentPassword());
         addUser(USERNAME_ROLE1, PASSWORD_ROLE1, PASSWORD_ROLE1);
@@ -139,7 +140,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
         assertTrue(getDriver().findElement(By.id("gadget-resize-0")).isDisplayed(),
                 "Gadget resize gadget is not displayed in view mode");
         logout();
-        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT + "/" + DASHBOARD_TITLE + "/landing");
+        redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT + "/" + DASHBOARD_TITLE + "/page0");
         assertTrue(getDriver().findElement(By.id("gadget-resize-0")).isDisplayed(),
                 "Gadget resize gadget is not displayed in view mode");
         getDriver().close();

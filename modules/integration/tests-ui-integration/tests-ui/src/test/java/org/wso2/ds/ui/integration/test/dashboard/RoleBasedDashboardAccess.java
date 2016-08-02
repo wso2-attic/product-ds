@@ -47,6 +47,7 @@ public class RoleBasedDashboardAccess extends DSUIIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
         login(getCurrentUsername(), getCurrentPassword());
+        deleteDashboards();
         addDashBoardWithLandingPage(DASHBOARD_TITLE, DASHBOARD_DESCRIPTION);
     }
 

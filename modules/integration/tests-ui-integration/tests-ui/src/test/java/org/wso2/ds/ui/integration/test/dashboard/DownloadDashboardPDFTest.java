@@ -35,6 +35,7 @@ public class DownloadDashboardPDFTest extends DSUIIntegrationTest {
     public void testDownloadDashboardPDF()
             throws Exception {
         login(ADMIN_USERNAME, ADMIN_PASSWORD);
+        deleteDashboards();
         addDashBoardWithLandingPage(DASHBOARD_TITLE, DASHBOARD_DESCRIPTION);
         redirectToLocation("portal", "dashboards");
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();

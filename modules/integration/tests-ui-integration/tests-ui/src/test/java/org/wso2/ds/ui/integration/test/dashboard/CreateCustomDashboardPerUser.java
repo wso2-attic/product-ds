@@ -107,11 +107,12 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
      */
     @Test(groups = "wso2.ds.dashboard", description = "Assigning dashboard view and edit permission", dependsOnMethods = "testAddUserAssignRoles")
     public void testAddDashboardAndAssignRolesBySetting()
-            throws XPathExpressionException, MalformedURLException {
+            throws XPathExpressionException, MalformedURLException, InterruptedException {
         addLoginRole(USERNAME_EDITOR);
         addCreateRole(USERNAME_EDITOR);
         addOwnernRole(USERNAME_EDITOR);
         login(USERNAME_EDITOR, PASSWORD_EDITOR);
+        deleteDashboards();
         addDashBoardWithLandingPage(dashboardTitle, DASHBOARD_DESCRIPTION);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
         allowPersonalizeDashboard();
