@@ -600,7 +600,6 @@
 
         <version.equinox.jsp.jasper>1.0.400.v20120522-2049</version.equinox.jsp.jasper>
         <rhino.osgi.version>1.7.0.R4.wso2v1</rhino.osgi.version>
-        <shindig.version>2.5.2</shindig.version>
         <commons-logging.version>1.1.1</commons-logging.version>
         <opensaml2.wso2.version>2.4.1.wso2v1</opensaml2.wso2.version>
         <commons-codec.osgi.version>1.4.0.wso2v1</commons-codec.osgi.version>
