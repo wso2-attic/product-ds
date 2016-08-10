@@ -24,8 +24,9 @@ public class CarbonServerAddressTest extends DSUIIntegrationTest {
 
     private static final String CARBON_SERVER_ADDRESS_API_PATH = "controllers" + File.separator + "apis" +
             File.separator + "carbonserveraddresstest.jag";
-    private static final String DESIGNER_JSON_PATH = "configs" + File.separator + "designer.json";
-    private static final String BACKUP_DESIGNER_JSON_PATH = "configs" + File.separator + "designer.json.backup";
+    private static final String CONFIG_LOCATION = FrameworkPathUtil.getCarbonHome() + File.separator + "repository" + File.separator + "conf" + File.separator + "dashboards" + File.separator;
+    private static final String DESIGNER_JSON_PATH = CONFIG_LOCATION + "portal.json";
+    private static final String BACKUP_DESIGNER_JSON_PATH = "configs" + File.separator + "portal.json.backup";
 
     /**
      * Initializes the class.
@@ -63,16 +64,15 @@ public class CarbonServerAddressTest extends DSUIIntegrationTest {
         String apiDestPath = getPortalFilePath(CARBON_SERVER_ADDRESS_API_PATH);
         FileUtils.copyFile(new File(apiSourcePath), new File(apiDestPath));
 
-        // Backup the designer.json
-        String designerJsonPath = getPortalFilePath(DESIGNER_JSON_PATH);
+        // Backup the portal.json
         String designerJsonBackupPath = getPortalFilePath(BACKUP_DESIGNER_JSON_PATH);
-        FileUtils.copyFile(new File(designerJsonPath), new File(designerJsonBackupPath));
+        FileUtils.copyFile(new File(DESIGNER_JSON_PATH), new File(designerJsonBackupPath));
 
-        // Copy the designer.json
-        String designerJsonSourcePath = systemResourceLocation + "files/designer.json";
-        FileUtils.copyFile(new File(designerJsonSourcePath), new File(designerJsonPath));
+        // Copy the portal.json
+        String designerJsonSourcePath = systemResourceLocation + "files/portal.json";
+        FileUtils.copyFile(new File(designerJsonSourcePath), new File(DESIGNER_JSON_PATH));
 
-        // Restart the server after designer.json is modified
+        // Restart the server after portal.json is modified
         AutomationContext automationContext =
                 new AutomationContext(DSIntegrationTestConstants.DS_PRODUCT_NAME, this.userMode);
         ServerConfigurationManager serverConfigurationManager = new ServerConfigurationManager(automationContext);
@@ -80,14 +80,14 @@ public class CarbonServerAddressTest extends DSUIIntegrationTest {
     }
 
     /**
-     * Tests carbon server address when the designer.json host details are changed.
+     * Tests carbon server address when the portal.json host details are changed.
      *
      * @throws IOException
      * @throws XPathExpressionException
      * @throws AutomationUtilException
      */
     @Test(groups = "wso2.ds.dashboard",
-            description = "Tests carbon server address when the designer.json host details are changed")
+            description = "Tests carbon server address when the portal.json host details are changed")
     public void testCarbonServerAddress() throws IOException, XPathExpressionException, AutomationUtilException {
         login(getCurrentUsername(), getCurrentPassword());
         getDriver().get(getBaseUrl() + "/portal/apis/carbonserveraddresstest");
@@ -103,12 +103,11 @@ public class CarbonServerAddressTest extends DSUIIntegrationTest {
      */
     @AfterClass
     public void tearDown() throws XPathExpressionException, IOException {
-        String designerJsonPath = getPortalFilePath(DESIGNER_JSON_PATH);
         String designerJsonBackupPath = getPortalFilePath(BACKUP_DESIGNER_JSON_PATH);
 
         // Restore the backup and remove the backup copy
-        FileUtils.forceDelete(new File(designerJsonPath));
-        FileUtils.copyFile(new File(designerJsonBackupPath), new File(designerJsonPath));
+        FileUtils.forceDelete(new File(DESIGNER_JSON_PATH));
+        FileUtils.copyFile(new File(designerJsonBackupPath), new File(DESIGNER_JSON_PATH));
         FileUtils.forceDelete(new File(designerJsonBackupPath));
 
         try {

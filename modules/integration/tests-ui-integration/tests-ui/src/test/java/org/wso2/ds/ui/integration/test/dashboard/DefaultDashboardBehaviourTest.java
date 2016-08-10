@@ -76,7 +76,7 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
         addOwnernRole(USERNAME_EDITOR);
         addCreateRole(USERNAME_EDITOR);
         logoutFromAdminConsole();
-        // set default dashboard behaviour from designer.json file
+        // set default dashboard behaviour from portal.json file
         setDefaultDashboardBehaviour(true);
         restartServer();
         login(USERNAME_EDITOR, PASSWORD_EDITOR);
@@ -279,7 +279,7 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
     }
 
     /**
-     * Set default dashboard behaviour by configuring designer json file.
+     * Set default dashboard behaviour by configuring portal json file.
      *
      * @param behaviour
      * @throws Exception
@@ -287,9 +287,8 @@ public class DefaultDashboardBehaviourTest extends DSUIIntegrationTest {
     public void setDefaultDashboardBehaviour(boolean behaviour) throws Exception {
         PrintWriter pw = null;
         try {
-            String designerFilePath = FrameworkPathUtil.getCarbonHome() + File.separator + "repository" + File.separator + "deployment" +
-                    File.separator + "server" + File.separator + "jaggeryapps" + File.separator + "portal" +
-                    File.separator + "configs" + File.separator + "designer.json";
+            String designerFilePath = FrameworkPathUtil.getCarbonHome() + File.separator + "repository" + File.separator + "conf" +
+                    File.separator + "dashboards" + File.separator + "portal.json";
 
             File f = new File(designerFilePath);
             BufferedReader br = new BufferedReader(new FileReader(f));
