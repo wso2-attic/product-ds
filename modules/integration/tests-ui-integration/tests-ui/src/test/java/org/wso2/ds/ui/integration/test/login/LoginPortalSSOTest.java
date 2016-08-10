@@ -116,9 +116,8 @@ public class LoginPortalSSOTest extends DSUIIntegrationTest {
             method = "basic";
         }
         try {
-            String designerFilePath = FrameworkPathUtil.getCarbonHome() + File.separator + "repository" + File.separator + "deployment" +
-                    File.separator + "server" + File.separator + "jaggeryapps" + File.separator + "portal" +
-                    File.separator + "configs" + File.separator + "designer.json";
+            String designerFilePath = FrameworkPathUtil.getCarbonHome() + File.separator + "repository" + File.separator + "conf" +
+                    File.separator + "dashboards" + File.separator + "portal.json";
             File f = new File(designerFilePath);
             BufferedReader br = new BufferedReader(new FileReader(f));
             StringBuilder sb = new StringBuilder();
