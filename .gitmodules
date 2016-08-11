@@ -1,0 +1,3 @@
+[submodule "modules/auto-deployment/dockerfile-ds/common"]
+	path = modules/auto-deployment/dockerfile-ds/common
+	url = https://github.com/wso2/dockerfile-common.git
