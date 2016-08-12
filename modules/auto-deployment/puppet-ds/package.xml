@@ -81,12 +81,6 @@
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
-        <!--<file>-->
-            <!--<source>/.gitmodules</source>-->
-            <!--<outputDirectory>${pom.artifactId}-${pom.version}/</outputDirectory>-->
-            <!--<filtered>true</filtered>-->
-            <!--<fileMode>644</fileMode>-->
-        <!--</file>-->
     </files>
 
 </assembly>

@@ -14,6 +14,12 @@ This repository contains the Puppet Module for installing and configuring WSO2 D
 ## How to Contribute
 Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/wiki) to setup a development environment and update/create new puppet modules.
 
+## Prepare the puppet module
+WSO2 Base Puppet module is added as a submodule. Please run the following command to get the wso2base submodule.
+
+        git submodule init
+        git submodule update
+        
 ## Packs to be Copied
 
 Copy the following files to their corresponding locations.
@@ -33,7 +39,7 @@ No changes to Hiera data are required to run the default profile.  Copy the abov
 
 But feel free to change the properties which available in the following location.  <PUPPET_HOME>/hieradata/dev/wso2/wso2ds/ 2.1.0/ 
 
-If need to add mysql datasource instead of h2 please change the following in default.yaml. 
+1. If need to add mysql datasource instead of h2 please change the following in default.yaml. 
 
 - First add Mysql connector for java (5.1.36) distribution to 
     <PUPPET_HOME>/modules/wso2ds/files/configs/repository/components/lib
@@ -67,7 +73,7 @@ If need to add mysql datasource instead of h2 please change the following in def
         EX:-
            wso2::usermgt_datasource:  wso2_user_db
      
-(Option) Uncomment this to enable registry mounting. To apply this need a datasource for registry added under “wso2::master_datasources:”.
+2. (Option) Uncomment this to enable registry mounting. To apply this need a datasource for registry added under “wso2::master_datasources:”.
 
         EX:-
             wso2::registry_mounts:
@@ -79,7 +85,7 @@ If need to add mysql datasource instead of h2 please change the following in def
                     enable_cache: true
 
 
-If need to add proxy port for http/https please uncomment the following lines in default.yaml
+3. If need to add proxy port for http/https please uncomment the following lines in default.yaml
 
         EX:-
             wso2::ports:
@@ -88,7 +94,7 @@ If need to add proxy port for http/https please uncomment the following lines in
                     https: 443
 
 
-If need to change service provider details please change the details in “wso2::service_provider:” in default.yaml
+4. If need to change service provider details please change the details in “wso2::service_provider:” in default.yaml
 
         Ex:-
             wso2::service_provider:
@@ -97,7 +103,7 @@ If need to change service provider details please change the details in “wso2:
                     acs:  https://ds.dev.wso2.org:9443/portal/acs
 
 
-If need to change the identity provider details please change the details in “wso2::identity_provider:” in default.yaml.
+5. If need to change the identity provider details please change the details in “wso2::identity_provider:” in default.yaml.
 
         EX:-
             wso2::identity_provider:
@@ -106,13 +112,13 @@ If need to change the identity provider details please change the details in “
                     identity_provider_url:  https://ds.dev.wso2.org:9443/samlsso
 
 
-If need to change the authentication method please change the authentication method in “wso2::authentication:” in default.yaml
+6. If need to change the authentication method please change the authentication method in “wso2::authentication:” in default.yaml
 
         EX:-
             wso2::authentication: sso
 
 
-If need to change the authorization please change the details available under “wso2::authorization:” in default.yaml.
+7. If need to change the authorization please change the details available under “wso2::authorization:” in default.yaml.
 
         EX:-
             wso2::authorization:
@@ -130,7 +136,7 @@ If need to change the authorization please change the details available under �
                         token_scope: Production
 
 
-To enable Dep sync please uncomment “wso2::dep_sync:”.
+8. To enable Dep sync please uncomment “wso2::dep_sync:”.
 
         EX:-
             wso2::dep_sync:
@@ -181,7 +187,7 @@ need to be changed for each node.
                            port: 4000
    
    
-   If dep sync is needed then make sure to enable it and add “wso2::dep_sync:” details per each node and make sure to add only one node to be both  auto_checkout and auto_commit enabled. 
+2. If dep sync is needed then make sure to enable it and add “wso2::dep_sync:” details per each node and make sure to add only one node to be both  auto_checkout and auto_commit enabled. 
    EX:-
    
        
