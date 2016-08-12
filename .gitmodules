@@ -1,3 +1,6 @@
 [submodule "modules/auto-deployment/dockerfile-ds/common"]
 	path = modules/auto-deployment/dockerfile-ds/common
 	url = https://github.com/wso2/dockerfile-common.git
+[submodule "modules/auto-deployment/puppet-ds/modules/wso2base"]
+	path = modules/auto-deployment/puppet-ds/modules/wso2base
+	url = https://github.com/wso2/puppet-base.git
