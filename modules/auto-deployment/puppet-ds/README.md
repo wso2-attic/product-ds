@@ -11,6 +11,12 @@ This repository contains the Puppet Module for installing and configuring WSO2 D
 
 - Puppet 2.7, 3 or newer
 
+## Dependency Check
+
+For puppet module to run it needs `ruby` pre-installed in the environment. Please check whether ruby is installed in the environment.
+
+- ruby 1.9.3p484 x86_64-linux or above
+
 ## How to Contribute
 Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/wiki) to setup a development environment and update/create new puppet modules.
 
