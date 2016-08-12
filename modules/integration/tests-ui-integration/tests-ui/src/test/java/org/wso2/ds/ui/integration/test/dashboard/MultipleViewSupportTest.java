@@ -294,6 +294,8 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
         deleteView("view1");
         deleteView("view2");
         clickOnView("view3");
+        getDriver().findElement(
+                By.cssSelector("li[data-view-mode=\"view3\"] .fw-ellipsis")).click();
         getDriver().findElement(By.cssSelector("li#nav-tab-view3.active .ues-trash-handle")).click();
         assertTrue(getDriver().isElementPresent(By.className("modal-content")),
                 "Deleting of last view is also allowed");

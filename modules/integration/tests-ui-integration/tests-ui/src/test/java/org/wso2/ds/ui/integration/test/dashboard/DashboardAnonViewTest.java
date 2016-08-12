@@ -182,8 +182,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
         login(getCurrentUsername(), getCurrentPassword());
         getDriver().findElement(By.cssSelector("#" + dashboardTitle.toLowerCase() + " .ues-edit")).click();
         switchPage("page1");
-        getDriver().findElement(By.xpath("(//button[@type='button'])[11]")).click();
-        getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
+        deleteView("default");
         switchPage("page1");
         assertFalse(getDriver().isElementPresent(By.id("default")), "Anonymous view is not deleted");
         assertEquals(GADGET_3, getAttributeValue("iframe", "title"));
@@ -201,8 +200,7 @@ public class DashboardAnonViewTest extends DSUIIntegrationTest {
             dependsOnMethods = "testAnonDashboardPageRemove")
     public void testRemoveAnonModeFromDashboard() throws Exception {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT + "/" + dashboardTitle + "?editor=true");
-        getDriver().findElement(By.xpath("(//button[@type='button'])[11]")).click();
-        getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
+        deleteView("default");
         assertFalse(getDriver().isElementPresent(By.id("default")), "Anonymous view is not deleted");
     }
 
