@@ -253,9 +253,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
         addARoleToView("view0", "Internal everyone");
         getDriver().findElement(By.id("ues-modal-confirm-no")).click();
-        clickOnView("view0");
-        getDriver().findElement(By.cssSelector("li[data-view-mode=\"view0\"] .ues-view-component-properties-handle"))
-                .click();
+        clickOnViewSettings("view0");
         assertFalse(getDriver().isElementPresent(By.cssSelector("div[data-role=\"Internal/everyone\"]")),
                 "New role is added without user confirmation");
         clickOnView("view0");

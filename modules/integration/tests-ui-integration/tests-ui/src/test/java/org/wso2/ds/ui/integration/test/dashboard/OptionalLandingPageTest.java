@@ -114,8 +114,6 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
         addARoleToView("default", ROLE1);
         getDriver().findElement(By.cssSelector("div[data-role=\"Internal/everyone\"] .remove-button")).click();
         clickOnView("default");
-        getDriver().findElement(By.cssSelector("li[data-view-mode=\"default\"] .ues-view-component-properties-handle"))
-                .click();
 
         // Check the page creation when there is no internal/everyone role in first page
         addPageToDashboard("default-grid");
