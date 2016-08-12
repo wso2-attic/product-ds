@@ -478,7 +478,7 @@
                                     <id>org.wso2.ciphertool.feature.group</id>
                                     <version>${cipher.tool.version}</version>
                                 </feature>
-				<feature>
+				                <feature>
                                      <id>org.wso2.carbon.as.runtimes.cxf.feature.group</id>
                                      <version>${carbon.deployment.version}</version>
                                 </feature>
@@ -505,6 +505,10 @@
                                 <feature>
                                     <id>org.wso2.carbon.analytics.gadget.chart.template.feature.group</id>
                                     <version>${carbon.analytics.common.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.ntask.core.feature.group</id>
+                                    <version>${carbon.commons.version}</version>
                                 </feature>
                             </features>
                         </configuration>
