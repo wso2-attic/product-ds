@@ -69,6 +69,7 @@
             <class name="org.wso2.ds.ui.integration.test.dashboard.MultipleViewSupportTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.DownloadDashboardPDFTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.MultipleViewLandingPageTest" />
+            <class name="org.wso2.ds.ui.integration.test.dashboard.GadgetUsageTest" />
         </classes>
     </test>
 </suite>

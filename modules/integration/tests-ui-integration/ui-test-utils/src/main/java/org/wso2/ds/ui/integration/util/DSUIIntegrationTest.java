@@ -211,8 +211,9 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @throws XPathExpressionException
      */
     public void addDashBoardWithLandingPage(String dashBoardTitle, String description)
-            throws MalformedURLException, XPathExpressionException {
+            throws MalformedURLException, XPathExpressionException, InterruptedException {
         createDashboard(dashBoardTitle, description);
+        Thread.sleep(2000);
         getDriver().findElement(By.cssSelector("input[name='landing']")).click();
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
     }
