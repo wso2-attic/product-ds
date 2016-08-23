@@ -95,11 +95,11 @@ public class GadgetGenerationFrameworkTest extends DSUIIntegrationTest {
         assertEquals(driver.findElement(By.id("test-verification-label")).getAttribute("style"), "display: none;",
                 "valid text is present even before validating");
         driver.findElement(By.id("test-connection")).click();
-        assertEquals(driver.findElement(By.id("test-verification-label")).getAttribute("style"), "",
+        assertEquals(driver.findElement(By.id("test-verification-label")).getAttribute("style"), "display: inline;",
                 "database configuration validation failed");
         driver.findElement(By.id("show-data")).click();
         assertEquals(driver.findElement(By.id("sample-data-message")).getAttribute("style"),
-                "display: inline;", "Data table preview is not shown");
+                "display: block;", "Data table preview is not shown");
         driver.findElement(By.linkText("Next")).click();
         driver.findElement(By.id("gadget-name")).clear();
         driver.findElement(By.id("gadget-name")).sendKeys("test gadget");
