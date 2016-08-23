@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 2016​, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
- *
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p/>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -111,7 +111,6 @@ public class AddRemoveCustomButtonsTest extends DSUIIntegrationTest {
             assertTrue(driver.isElementPresent(By.cssSelector("button[data-action='" + action_id + "']")), action_id
                     + "is not present in the view mode");
         }
-
     }
 
     /**
@@ -143,6 +142,7 @@ public class AddRemoveCustomButtonsTest extends DSUIIntegrationTest {
 
     /**
      * This method will return JSON object of gadget.json file
+     *
      * @return JSONObject
      * @throws IOException
      * @throws ParseException
@@ -160,6 +160,7 @@ public class AddRemoveCustomButtonsTest extends DSUIIntegrationTest {
 
     /**
      * Clean up after running tests.
+     *
      * @throws Exception
      */
     @AfterClass(alwaysRun = true)
