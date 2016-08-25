@@ -452,7 +452,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         getDriver().findElement(By.name("roleName")).clear();
         getDriver().findElement(By.name("roleName")).sendKeys("login-"+username);
         getDriver().findElement(By.cssSelector("input.button")).click();
-        driver.findElement(By.cssSelector("#ygtvcheck33 > div.ygtvspacer")).click();
+        driver.findElement(By.cssSelector("#ygtvcheck35 > div.ygtvspacer")).click();
         getDriver().findElement(By.cssSelector("input.button")).click();
         getDriver().findElement(By.xpath("//input[@name='roleUsers' and @value='"+username+"']")).click();
         getDriver().findElement(By.cssSelector("td.buttonRow > input.button")).click();
