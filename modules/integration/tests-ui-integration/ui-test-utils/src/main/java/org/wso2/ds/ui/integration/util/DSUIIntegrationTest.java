@@ -211,8 +211,9 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @throws XPathExpressionException
      */
     public void addDashBoardWithLandingPage(String dashBoardTitle, String description)
-            throws MalformedURLException, XPathExpressionException {
+            throws MalformedURLException, XPathExpressionException, InterruptedException {
         createDashboard(dashBoardTitle, description);
+        Thread.sleep(2000);
         getDriver().findElement(By.cssSelector("input[name='landing']")).click();
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
     }
@@ -709,7 +710,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @param roleToBeAdded Role to add to the view
      */
     public void addARoleToView(String viewId, String roleToBeAdded)
-            throws MalformedURLException, XPathExpressionException {
+            throws MalformedURLException, XPathExpressionException, InterruptedException {
         clickOnViewSettings(viewId);
         getDriver().findElement(By.id("ds-view-roles")).click();
         getDriver().findElement(By.id("ds-view-roles")).sendKeys(roleToBeAdded);
@@ -723,10 +724,11 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    public void clickOnViewSettings(String viewId) throws MalformedURLException, XPathExpressionException {
+    public void clickOnViewSettings(String viewId)
+            throws MalformedURLException, XPathExpressionException, InterruptedException {
         clickOnView(viewId);
-        getDriver().findElement(
-                By.cssSelector("li[data-view-mode=\"" + viewId + "\"] .fw-ellipsis")).click();
+        Thread.sleep(2000);
+        getDriver().findElement(By.cssSelector("li[data-view-mode=\"" + viewId + "\"] .fw-ellipsis")).click();
         getDriver().findElement(
                 By.cssSelector("li[data-view-mode=\"" + viewId + "\"] .ues-view-component-properties-handle")).click();
     }

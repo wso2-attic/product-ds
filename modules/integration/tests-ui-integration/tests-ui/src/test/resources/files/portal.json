@@ -4,17 +4,25 @@
       "fs"
     ]
   },
+  "gadgetGeneration": {
+    "isCreateGadgetEnable": false,
+    "ignoreProviders": [
+      "rt"
+    ]
+  },
   "authentication": {
     "activeMethod": "basic",
     "methods": {
       "sso": {
         "attributes": {
           "issuer": "portal",
-          "identityProviderURL": "%https.ip%/samlsso",
-          "responseSigningEnabled": "false",
-          "acs": "%https.ip%/portal/acs",
+          "identityProviderURL": "https://localhost:9443/samlsso",
+          "responseSigningEnabled": false,
+          "acs": "https://localhost:9444/portal/acs",
           "identityAlias": "wso2carbon",
-          "useTenantKey": false
+          "defaultNameIDPolicy": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified",
+          "useTenantKey": false,
+          "isPassive": false
         }
       },
       "basic": {
@@ -51,7 +59,16 @@
   "cacheTimeoutSeconds": "5",
   "cacheSizeBytes": "1073741824",
   "defaultDashboardRedirect": false,
-  "isCreateGadgetEnable": false,
+  "isCreateGadgetEnable": true,
+  "isSecureVaultEnabled": false,
+  "assets": {
+    "gadget": {
+      "fileSizeLimit": 5
+    },
+    "layout": {
+      "fileSizeLimit": 1
+    }
+  },
   "oauth": {
     "username": "admin",
     "password": "admin"
@@ -60,5 +77,13 @@
     "hostname": "ds.wso2.com",
     "port": "443",
     "protocol": "https"
+  },
+  "houseKeeping": {
+    "location": "/temp/",
+    "interval": "60",
+    "maxTempFileLifeTime": "120"
+  },
+  "dataSource": {
+    "name": "WSO2_DS_USAGE_STORE_DB"
   }
 }

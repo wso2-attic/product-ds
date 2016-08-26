@@ -114,7 +114,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
      * @throws XPathExpressionException
      */
     @Test(groups = "wso2.ds.dashboard", description = "Checking the creation of anon view")
-    public void testAnonView() throws MalformedURLException, XPathExpressionException {
+    public void testAnonView() throws MalformedURLException, XPathExpressionException, InterruptedException {
         String[][] gadgetMappings = {{"gadget-resize", "b"}};
         String script = generateAddGadgetScript(gadgetMappings);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
@@ -155,7 +155,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
      */
     @Test(groups = "wso2.ds.dashboard", description = "Checking the view based on roles",
             dependsOnMethods = "testAnonView")
-    public void testViewRole() throws MalformedURLException, XPathExpressionException {
+    public void testViewRole() throws MalformedURLException, XPathExpressionException, InterruptedException {
         String[][] gadgetMappings = {{"publisherrole1", "a"}, {"publisher", "b"}};
         String script = generateAddGadgetScript(gadgetMappings);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
@@ -248,7 +248,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
      */
     @Test(groups = "wso2.ds.dashboard", description = "Checking the functionality of adding roles",
             dependsOnMethods = "testRestrictedGadgets")
-    public void testRoleAddition() throws XPathExpressionException, MalformedURLException {
+    public void testRoleAddition() throws XPathExpressionException, MalformedURLException, InterruptedException {
         login(getCurrentUsername(), getCurrentPassword());
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
         addARoleToView("view0", "Internal everyone");

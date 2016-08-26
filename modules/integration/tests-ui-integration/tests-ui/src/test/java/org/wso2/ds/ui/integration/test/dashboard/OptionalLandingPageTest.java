@@ -131,7 +131,7 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
      */
     @Test(groups = "wso2.ds.dashboard", description = "Checking whether the creation of anonymous view allowed in second page",
             dependsOnMethods = "testCreateDashboard")
-    public void testAnonViewCreation() throws XPathExpressionException, MalformedURLException {
+    public void testAnonViewCreation() throws XPathExpressionException, MalformedURLException, InterruptedException {
         addARoleToView("default", ROLE2);
         getDriver().findElement(By.cssSelector("div[data-role=\"Internal/everyone\"] .remove-button")).click();
         createNewView("single-column");
