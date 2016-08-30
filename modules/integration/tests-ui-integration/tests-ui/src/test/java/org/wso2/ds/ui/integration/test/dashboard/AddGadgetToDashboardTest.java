@@ -77,7 +77,6 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setUp() throws AutomationUtilException, XPathExpressionException, IOException, InterruptedException {
         login(getCurrentUsername(), getCurrentPassword());
-     //   deleteDashboards();
         addDashBoardWithLandingPage(DASHBOARD_TITLE, "This is a test dashboard");
     }
 
@@ -105,7 +104,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
     @Test(groups = "wso2.ds.dashboard", description = "Adding blocks to an existing dashboard")
     public void testAddBlocks() throws MalformedURLException, XPathExpressionException {
         redirectToLocation("portal", "dashboards");
-        getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
+        getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE.toLowerCase() + " a.ues-edit")).click();
         selectPane("layouts");
         getDriver().findElement(By.id("ues-add-block-btn")).click();
         clickViewButton();

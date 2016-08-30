@@ -38,7 +38,7 @@ public class DownloadDashboardPDFTest extends DSUIIntegrationTest {
         deleteDashboards();
         addDashBoardWithLandingPage(DASHBOARD_TITLE, DASHBOARD_DESCRIPTION);
         redirectToLocation("portal", "dashboards");
-        getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
+        getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE.toLowerCase() + " a.ues-edit")).click();
         String[][] gadgetMappings = {{"usa-map", "a"}};
         String script = generateAddGadgetScript(gadgetMappings);
         selectPane("gadgets");
