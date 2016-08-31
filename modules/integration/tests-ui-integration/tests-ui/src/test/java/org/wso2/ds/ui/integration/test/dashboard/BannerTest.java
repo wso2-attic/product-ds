@@ -156,10 +156,7 @@ public class BannerTest extends DSUIIntegrationTest {
         assertTrue(isBannerPresent(), "Banner is not visible to the editor");
         popWindow();
         //Verify an uploaded banner is loaded into the anonymous view
-        getDriver().findElement(By.id("add-view")).click();
-        getDriver().findElement(By.id("copy-view")).click();
-        Select dropdown = new Select(getDriver().findElement(By.id("page-views-menu")));
-        dropdown.selectByIndex(1);
+        copyView(1);
         assertTrue(isBannerPresentInDesignerMode(), "Banner is not loaded into the anonymous view");
         //Verify the same banner is uploaded to a new page added with banner layout
         addPageWithBannerLayout();
