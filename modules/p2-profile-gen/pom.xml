@@ -172,7 +172,7 @@
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.authenticator.saml2.sso.ui.feature:${carbon.identity.carbon.auth.saml2.version}
                                 </featureArtifactDef>
                                 <feaureArtifactDef>
-                                    org.wso2.carbon.identity:org.wso2.carbon.identity.sso.saml.feature:${carbon.identity.carbon.auth.saml2.version}
+                                    org.wso2.carbon.identity:org.wso2.carbon.identity.sso.saml.feature:${carbon.identity.inbound.auth.saml2.version}
                                 </feaureArtifactDef>
                                 <feaureArtifactDef>
                                     org.wso2.carbon.identity:org.wso2.carbon.identity.core.feature:${carbon.identity.framework.version}
@@ -333,7 +333,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.sso.saml.server.feature.group</id>
-                                    <version>${carbon.identity.carbon.auth.saml2.version}</version>
+                                    <version>${carbon.identity.inbound.auth.saml2.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.application.mgt.server.feature.group</id>
@@ -410,7 +410,7 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.sso.saml.feature.group</id>
-                                    <version>${carbon.identity.carbon.auth.saml2.version}</version>
+                                    <version>${carbon.identity.inbound.auth.saml2.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.identity.oauth.feature.group</id>
