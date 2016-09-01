@@ -625,8 +625,8 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     public void copyView(int index) throws MalformedURLException, XPathExpressionException {
         getDriver().findElement(By.id("add-view")).click();
         getDriver().findElement(By.id("copy-view")).click();
-        Select dropdown = new Select(getDriver().findElement(By.id("page-views-menu")));
-        dropdown.selectByIndex(index);
+        List<WebElement> links = driver.findElements(By.cssSelector("ul#page-views-menu>li>a"));
+        links.get(index - 1).click();
     }
 
     /**
