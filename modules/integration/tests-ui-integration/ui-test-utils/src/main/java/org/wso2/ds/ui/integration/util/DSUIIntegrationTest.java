@@ -649,9 +649,11 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    public void createNewView(String layout) throws MalformedURLException, XPathExpressionException {
+    public void createNewView(String layout) throws MalformedURLException, XPathExpressionException,
+            InterruptedException {
         getDriver().findElement(By.id("add-view")).click();
         getDriver().findElement(By.id("new-view")).click();
+        Thread.sleep(2000);
         selectViewLayout(layout);
     }
 

@@ -133,6 +133,9 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
             dependsOnMethods = "testCreateDashboard")
     public void testAnonViewCreation() throws XPathExpressionException, MalformedURLException, InterruptedException {
         addARoleToView("default", ROLE2);
+        if (!getDriver().isElementPresent(By.cssSelector("div[data-role=\"Internal/everyone\"]"))) {
+            clickOnViewSettings("default");
+        }
         getDriver().findElement(By.cssSelector("div[data-role=\"Internal/everyone\"] .remove-button")).click();
         createNewView("single-column");
         addARoleToView("view0", "anonymous");
