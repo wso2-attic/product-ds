@@ -209,13 +209,15 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
         // Create a new view for internal/everyone and check whether that view is visible for all the users
         login(USERNAME_EDITOR1, PASSWORD_EDITOR1);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
+        Thread.sleep(2000);
         createNewView("default-grid");
         logout();
         login(USERNAME_ROLE2, PASSWORD_ROLE2);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " .ues-view")).click();
         pushWindow();
-        assertFalse(getDriver().findElement(By.id("ds-allowed-view-list")).isDisplayed(),
+        Thread.sleep(2000);
+        assertFalse(getDriver().findElement(By.cssSelector("#list-user-views")).isDisplayed(),
                 "When only one view is viewable drop down is displayed");
         getDriver().close();
         popWindow();

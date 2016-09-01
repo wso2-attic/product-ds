@@ -88,6 +88,7 @@ public class AddPageToDashboard extends DSUIIntegrationTest {
     public void testLandingCheckBox() throws Exception {
         DSWebDriver driver = getDriver();
         driver.findElement(By.cssSelector("[name=landing]")).click();
+        Thread.sleep(2000);
         clickViewButton();
         pushWindow();
         String fullUrl = driver.getCurrentUrl();
