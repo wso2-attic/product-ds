@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
- *
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p/>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -79,7 +79,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         login(getCurrentUsername(), getCurrentPassword());
         deleteDashboards();
         initDashboard();
-        getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
+        getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE.toLowerCase() + " a.ues-edit")).click();
         allowPersonalizeDashboard();
         logout();
     }
@@ -98,7 +98,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         login(editor.getUserName(), editor.getPassword());
         DSWebDriver driver = getDriver();
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
-        driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
+        driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE.toLowerCase() + " a.ues-edit")).click();
         String[][] gadgetMappings = {{"textbox", "a"}};
         String script = generateAddGadgetScript(gadgetMappings);
         driver.findElement(By.cssSelector("i.fw.fw-gadget")).click();
@@ -116,7 +116,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
     public void changeGadgetPrefsByEditor() throws Exception {
         DSWebDriver driver = getDriver();
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
-        driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
+        driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE.toLowerCase() + " a.ues-view")).click();
         pushWindow();
         //verify that an editor can't personalize a dashboard but edit
         driver.findElement(By.linkText(editor.getUserNameWithoutDomain())).click();
@@ -134,7 +134,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         //login with admin (another editor) to verify that editor can't personalize a dashboard
         login(getCurrentUsername(), getCurrentPassword());
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
-        driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
+        driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE.toLowerCase() + " a.ues-view")).click();
         pushWindow();
         //TODO: element is inside an iframe and driver.findElement cannot be used directly. Hence an alternative is needed
         Thread.sleep(500);
@@ -151,7 +151,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         login(viewer.getUserName(), viewer.getPassword());
         DSWebDriver driver = getDriver();
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
-        driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
+        driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE.toLowerCase() + " a.ues-view")).click();
         pushWindow();
         showGadgetConfigurationIcons();
         driver.findElement(By.cssSelector("#a i.fw.fw-configarations")).click();
@@ -188,7 +188,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         login(editor.getUserName(), editor.getPassword());
         DSWebDriver driver = getDriver();
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
-        driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
+        driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE.toLowerCase() + " a.ues-view")).click();
         pushWindow();
         assertEquals(getTextBoxValue(), "Editor Value");
         driver.close();
@@ -202,7 +202,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         login(viewer.getUserName(), viewer.getPassword());
         DSWebDriver driver = getDriver();
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
-        driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
+        driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE.toLowerCase() + " a.ues-view")).click();
         pushWindow();
         getDriver().findElement(By.cssSelector("a.dropdown")).click();
         getDriver().findElement(By.cssSelector(".ues-copy")).click();

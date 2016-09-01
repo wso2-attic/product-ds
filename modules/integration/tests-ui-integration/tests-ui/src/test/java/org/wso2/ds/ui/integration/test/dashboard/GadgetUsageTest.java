@@ -114,7 +114,7 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
                 "When trying to delete the gadget, " + "warning is not displayed");
         warningMessage = getDriver().findElement(By.cssSelector(("#usa-map .alert"))).getText();
         expectedWarningMessage = "This gadget is used in " + DASHBOARD1_TITLE
-                + " database(s). Deleting this gadget will affect the functionality of those databases";
+                + " dashboard(s). Deleting this gadget will affect the functionality of those dashboard(s)";
         assertTrue(warningMessage.contains(expectedWarningMessage), "Expected warning message is not displayed");
 
         getDriver().findElement(By.cssSelector("#publisher > a.ds-asset-trash-handle")).click();
@@ -123,7 +123,7 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
                 "When trying to delete the gadget, " + "warning is not displayed");
         warningMessage = getDriver().findElement(By.cssSelector(("#publisher .alert"))).getText();
         expectedWarningMessage = "This gadget is used in " + DASHBOARD1_TITLE + "," + DASHBOARD2_TITLE
-                + " database(s). Deleting this gadget will affect the functionality of those databases";
+                + " dashboard(s). Deleting this gadget will affect the functionality of those dashboard(s)";
         assertTrue(warningMessage.contains(expectedWarningMessage), "Expected warning message is not displayed");
 
         getDriver().findElement(By.cssSelector("#subscriber > a.ds-asset-trash-handle")).click();
@@ -131,8 +131,8 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
         assertTrue(getDriver().isElementPresent(By.cssSelector("#subscriber .alert-warning")),
                 "When trying to delete the gadget, " + "warning is not displayed");
         warningMessage = getDriver().findElement(By.cssSelector(("#subscriber .alert"))).getText();
-        expectedWarningMessage = "This gadget is used in " + DASHBOARD2_TITLE + " database(s). "
-                + "Deleting this gadget will affect the functionality of those databases";
+        expectedWarningMessage = "This gadget is used in " + DASHBOARD2_TITLE + " dashboard(s). "
+                + "Deleting this gadget will affect the functionality of those dashboard(s)";
         assertTrue(warningMessage.contains(expectedWarningMessage), "Expected warning message is not displayed");
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
     }

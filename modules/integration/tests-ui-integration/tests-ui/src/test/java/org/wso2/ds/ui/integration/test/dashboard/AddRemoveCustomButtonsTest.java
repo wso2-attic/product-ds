@@ -89,7 +89,7 @@ public class AddRemoveCustomButtonsTest extends DSUIIntegrationTest {
         DSWebDriver driver = getDriver();
         deleteDashboards();
         addDashBoardWithLandingPage(DASHBOARD_TITLE, DASHBOARD_DESCRIPTION);
-        driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
+        driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE.toLowerCase() + " a.ues-edit")).click();
         String[][] gadgetMappings = {{GADGET_NAME, "a"}};
         String script = generateAddGadgetScript(gadgetMappings);
         driver.findElement(By.cssSelector("i.fw.fw-gadget")).click();
