@@ -65,6 +65,9 @@
                 ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/multitenancy
             </directory>
             <outputDirectory>wso2ds-${pom.version}/repository/conf/multitenancy</outputDirectory>
+            <excludes>
+                <exclude>tenant-mgt.xml</exclude>
+            </excludes>
         </fileSet>
         <!-- copy documentation -->
         <fileSet>
@@ -466,6 +469,12 @@
         <file>
             <source>../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/datasources/ds-datasources.xml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/repository/conf/datasources</outputDirectory>
+        </file>
+        <file>
+            <source>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/repository/conf/multitenancy/tenant-mgt.xml
+            </source>
+            <outputDirectory>wso2ds-${pom.version}/repository/conf</outputDirectory>
         </file>
     </files>
 </assembly>
