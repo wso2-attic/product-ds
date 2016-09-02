@@ -280,32 +280,6 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
     }
 
     /**
-     * Toggle fluid layout in the dashboard and check for the fluid layout in the view mode.
-     *
-     * @throws MalformedURLException
-     * @throws XPathExpressionException
-     */
-    @Test(groups = "wso2.ds.dashboard", description = "Test fluid layout",
-            dependsOnMethods = "testMaximizeGadgetInView")
-    public void testFluidLayout() throws MalformedURLException, XPathExpressionException {
-        selectPane("pages");
-        getDriver().findElement(By.cssSelector("[name=landing]")).click();
-        getDriver().findElement(By.cssSelector("[name=fluidLayout]")).click();
-        clickViewButton();
-        pushWindow();
-
-        boolean isFluidLayout = false;
-        List<WebElement> elements = getDriver().findElements(By.cssSelector(".page-content-wrapper > .container-fluid"));
-        if (elements.size() > 0) {
-            isFluidLayout = true;
-        }
-
-        assertTrue(isFluidLayout, "The layout is not fluid");
-        getDriver().close();
-        popWindow();
-    }
-
-    /**
      * Check whether a block exists
      *
      * @param id ID of the block

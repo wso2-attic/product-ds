@@ -133,6 +133,9 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
             dependsOnMethods = "testCreateDashboard")
     public void testAnonViewCreation() throws XPathExpressionException, MalformedURLException, InterruptedException {
         addARoleToView("default", ROLE2);
+        if (!getDriver().isElementPresent(By.cssSelector("div[data-role=\"Internal/everyone\"]"))) {
+            clickOnViewSettings("default");
+        }
         getDriver().findElement(By.cssSelector("div[data-role=\"Internal/everyone\"] .remove-button")).click();
         createNewView("single-column");
         addARoleToView("view0", "anonymous");
@@ -156,6 +159,7 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
         getDriver().findElement(By.id("ues-modal-info-ok")).click();
         createNewView("single-column");
         getDriver().findElement(By.className("fw-pages")).click();
+        Thread.sleep(2000);
         getDriver().findElement(By.cssSelector("input[name='landing']")).click();
         message = getDriver().findElement(By.cssSelector(".modal-title")).getText().trim();
         assertTrue(expected.equalsIgnoreCase(message),
@@ -165,6 +169,7 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
         addARoleToView("view1", "anonymous");
         getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
         getDriver().findElement(By.className("fw-pages")).click();
+        Thread.sleep(2000);
         getDriver().findElement(By.cssSelector("input[name='landing']")).click();
         assertFalse(getDriver().isElementPresent(By.cssSelector("modal-title")),
                 "Creating a landing page is not " + "allowed even the necessary conditions satisfied");

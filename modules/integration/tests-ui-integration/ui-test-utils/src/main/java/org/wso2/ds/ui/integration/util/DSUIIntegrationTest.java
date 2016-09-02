@@ -21,9 +21,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
@@ -647,9 +647,11 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    public void createNewView(String layout) throws MalformedURLException, XPathExpressionException {
+    public void createNewView(String layout) throws MalformedURLException, XPathExpressionException,
+            InterruptedException {
         getDriver().findElement(By.id("add-view")).click();
         getDriver().findElement(By.id("new-view")).click();
+        Thread.sleep(2000);
         selectViewLayout(layout);
     }
 
@@ -712,9 +714,12 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     public void addARoleToView(String viewId, String roleToBeAdded)
             throws MalformedURLException, XPathExpressionException, InterruptedException {
         clickOnViewSettings(viewId);
-        getDriver().findElement(By.id("ds-view-roles")).click();
+        getDriver().findElement(By.id("ds-view-roles")).clear();
         getDriver().findElement(By.id("ds-view-roles")).sendKeys(roleToBeAdded);
+        getDriver().findElement(By.id("ds-view-roles")).click();
+        getDriver().findElement(By.id("ds-view-roles")).sendKeys(Keys.DOWN);
         getDriver().findElement(By.className("tt-suggestion")).click();
+
     }
 
     /**
@@ -729,6 +734,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         clickOnView(viewId);
         Thread.sleep(2000);
         getDriver().findElement(By.cssSelector("li[data-view-mode=\"" + viewId + "\"] .fw-ellipsis")).click();
+        Thread.sleep(2000);
         getDriver().findElement(
                 By.cssSelector("li[data-view-mode=\"" + viewId + "\"] .ues-view-component-properties-handle")).click();
     }

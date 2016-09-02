@@ -68,6 +68,7 @@ public class AddPageToDashboard extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("[name=id]")).clear();
         driver.findElement(By.cssSelector("[name=id]")).sendKeys(DASHBOARD_URL);
         driver.executeScript("$('[name=id]').change();");
+        Thread.sleep(2000);
         assertEquals(driver.findElement(By.cssSelector("div.page-title")).findElement(By.cssSelector("p.lead")).getText(),
                 DASHBOARD_PAGENAME,
                 "error occurred while edit the new page name");
@@ -88,6 +89,7 @@ public class AddPageToDashboard extends DSUIIntegrationTest {
     public void testLandingCheckBox() throws Exception {
         DSWebDriver driver = getDriver();
         driver.findElement(By.cssSelector("[name=landing]")).click();
+        Thread.sleep(2000);
         clickViewButton();
         pushWindow();
         String fullUrl = driver.getCurrentUrl();
