@@ -65,6 +65,7 @@ public class AddPageToDashboard extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("[name=title]")).clear();
         driver.findElement(By.cssSelector("[name=title]")).sendKeys(DASHBOARD_PAGENAME);
         driver.executeScript("$('[name=title]').change();");
+        Thread.sleep(2000);
         driver.findElement(By.cssSelector("[name=id]")).clear();
         driver.findElement(By.cssSelector("[name=id]")).sendKeys(DASHBOARD_URL);
         driver.executeScript("$('[name=id]').change();");
