@@ -156,8 +156,9 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
         // Delete the gadget that is not used in any of the dashboards and check whether warning symbol is displayed
         getDriver().get(getBaseUrl() + "/portal/gadget/");
         JavascriptExecutor js = ((JavascriptExecutor) getDriver());
-
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        if (!getDriver().isElementPresent(By.cssSelector("#usa-business-revenue"))) {
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        }
         getDriver().findElement(By.cssSelector("#usa-business-revenue > a.ds-asset-trash-handle")).click();
         getDriver().findElement(By.cssSelector("span.ladda-label")).click();
         Thread.sleep(2000);
@@ -168,7 +169,9 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
         // Delete the gadgets that is used in the dashboard and check whether danger symbol is displayed
         getDriver().get(getBaseUrl() + "/portal/gadget/");
         js = ((JavascriptExecutor) getDriver());
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        if (!getDriver().isElementPresent(By.cssSelector("#usa-map"))) {
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        }
         getDriver().findElement(By.cssSelector("#usa-map > a.ds-asset-trash-handle")).click();
         getDriver().findElement(By.cssSelector("span.ladda-label")).click();
         Thread.sleep(2000);
@@ -179,7 +182,9 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
                 "Danger symbol is displayed in the " + "dashboard when dashboard has all the gadgets");
         getDriver().get(getBaseUrl() + "/portal/gadget/");
         js = ((JavascriptExecutor) getDriver());
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        if (!getDriver().isElementPresent(By.cssSelector("#publisher"))) {
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        }
         getDriver().findElement(By.cssSelector("#publisher > a.ds-asset-trash-handle")).click();
         getDriver().findElement(By.cssSelector("span.ladda-label")).click();
         Thread.sleep(2000);
