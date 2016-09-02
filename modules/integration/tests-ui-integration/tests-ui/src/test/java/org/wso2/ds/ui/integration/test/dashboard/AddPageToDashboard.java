@@ -95,7 +95,6 @@ public class AddPageToDashboard extends DSUIIntegrationTest {
         pushWindow();
         String fullUrl = driver.getCurrentUrl();
         Boolean status = fullUrl.toLowerCase().contains(DASHBOARD_URL.toLowerCase());
-        System.out.println(fullUrl);
         assertFalse(status, "landing with a newly added page is not configured properly");
         driver.close();
         popWindow();
