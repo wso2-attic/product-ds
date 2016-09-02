@@ -123,9 +123,7 @@ public class HierarchicalPagesTest extends DSUIIntegrationTest {
         // drag li with page id page1 and drop on to page id page0
         WebElement dragItem = driver.findElement(By.id("page1"));
         Point point = dragItem.getLocation();
-        int offsetX = point.getX();
-        int offsetY = point.getY();
-        new Actions(driver).clickAndHold(dragItem).moveByOffset((offsetX + 40), (offsetY + 30)).release().perform();
+        new Actions(driver).clickAndHold(dragItem).moveByOffset((point.getX() + 40), (point.getY() + 30)).release().perform();
         // check page1 li inside page0 ul
         int totalLinkSize = driver.findElements(By.cssSelector("ul#page0")).size();
         assertEquals(totalLinkSize, 1);
@@ -153,11 +151,9 @@ public class HierarchicalPagesTest extends DSUIIntegrationTest {
         // goto menu creation page
         selectPane("menu");
         // drag li with page id page1 and drop on to page id page0
-        WebElement dragItem1 = driver.findElement(By.id("page1"));
-        Point point1 = dragItem1.getLocation();
-        int offsetX1 = point1.getX();
-        int offsetY1 = point1.getY();
-        new Actions(driver).clickAndHold(dragItem1).moveByOffset((offsetX1 + 40), (offsetY1 + 30)).release().perform();
+        WebElement dragItem = driver.findElement(By.id("page1"));
+        Point point = dragItem.getLocation();
+        new Actions(driver).clickAndHold(dragItem).moveByOffset((point.getX() + 40), (point.getY() + 30)).release().perform();
         //Add page 1 back to root level
         (new Actions(driver)).dragAndDrop(driver.findElement(By.id("page1")), driver.findElement(By.id("page0"))).perform();
         int totalLinkSize = driver.findElements(By.cssSelector("#sortable li")).size();
