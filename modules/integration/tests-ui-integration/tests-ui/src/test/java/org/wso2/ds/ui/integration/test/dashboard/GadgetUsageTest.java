@@ -248,5 +248,4 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
         Thread.sleep(2000);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
     }
-
 }
