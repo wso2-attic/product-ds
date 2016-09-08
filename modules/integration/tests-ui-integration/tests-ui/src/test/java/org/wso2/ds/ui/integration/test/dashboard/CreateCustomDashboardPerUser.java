@@ -155,7 +155,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
                 "design element is present in the current UI");
         assertTrue(getDriver().isElementPresent(By.cssSelector("#" + dashboardId + " .ues-settings")),
                 "settings element is present in the current UI");
-        dashboard.findElement(By.cssSelector(".ues-view")).click();
+        dashboard.findElement(By.id(dashboardId)).findElement(By.id("ues-view")).click();
         // Switch the driver to the new window and click on the edit/personalize link
         pushWindow();
         String bodyText = getDriver().findElement(By.tagName("body")).getText();
@@ -191,7 +191,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
                 "design element is present in the current UI");
         assertFalse(getDriver().isElementPresent(By.cssSelector("#" + dashboardId + " .ues-settings")),
                 "settings element is present in the current UI");
-        dashboard.findElement(By.cssSelector(".ues-view")).click();
+        dashboard.findElement(By.id(dashboardId)).findElement(By.id("ues-view")).click();
         // Switch the driver to the new window and click on the edit/personalize link
         pushWindow();
         String bodyText = getDriver().findElement(By.tagName("body")).getText();
