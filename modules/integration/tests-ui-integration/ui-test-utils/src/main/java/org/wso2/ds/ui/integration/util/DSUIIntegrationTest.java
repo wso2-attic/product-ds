@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
- *
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p/>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -259,7 +259,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @throws XPathExpressionException
      */
     public void selectLayout(String layout) throws MalformedURLException, XPathExpressionException {
-    	getDriver().findElement(By.cssSelector("#ues-page-layouts > div[data-id='" + layout + "']")).click();
+        getDriver().findElement(By.cssSelector("#ues-page-layouts > div[data-id='" + layout + "']")).click();
     }
 
     /**
@@ -283,6 +283,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         getDriver().findElement(By.id("personalize-dashboard")).click();
         getDriver().findElement(By.id("ues-dashboard-saveBtn")).click();
     }
+
     /**
      * Redirect user to the given location.
      *
@@ -451,17 +452,17 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         getDriver().findElement(By.linkText("Add")).click();
         getDriver().findElement(By.linkText("Add New Role")).click();
         getDriver().findElement(By.name("roleName")).clear();
-        getDriver().findElement(By.name("roleName")).sendKeys("login-"+username);
+        getDriver().findElement(By.name("roleName")).sendKeys("login-" + username);
         getDriver().findElement(By.cssSelector("input.button")).click();
         driver.findElement(By.cssSelector("#ygtvcheck35 > div.ygtvspacer")).click();
         getDriver().findElement(By.cssSelector("input.button")).click();
-        getDriver().findElement(By.xpath("//input[@name='roleUsers' and @value='"+username+"']")).click();
+        getDriver().findElement(By.xpath("//input[@name='roleUsers' and @value='" + username + "']")).click();
         getDriver().findElement(By.cssSelector("td.buttonRow > input.button")).click();
         getDriver().findElement(By.cssSelector("button[type=\"button\"]")).click();
 
     }
 
-    public  void addCreateRole(String username) throws MalformedURLException, XPathExpressionException {
+    public void addCreateRole(String username) throws MalformedURLException, XPathExpressionException {
         getDriver().get(getBaseUrl() + "/carbon/admin/login.jsp");
         getDriver().findElement(By.id("txtUserName")).clear();
         getDriver().findElement(By.id("txtUserName")).sendKeys("admin");
@@ -471,16 +472,17 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         getDriver().findElement(By.linkText("Add")).click();
         getDriver().findElement(By.linkText("Add New Role")).click();
         getDriver().findElement(By.name("roleName")).clear();
-        getDriver().findElement(By.name("roleName")).sendKeys("create-"+username);
+        getDriver().findElement(By.name("roleName")).sendKeys("create-" + username);
         getDriver().findElement(By.cssSelector("input.button")).click();
         getDriver().findElement(By.cssSelector("#ygtvcheck25 > div.ygtvspacer")).click();
         getDriver().findElement(By.cssSelector("input.button")).click();
-        getDriver().findElement(By.xpath("//input[@name='roleUsers' and @value='"+username+"']")).click();
+        getDriver().findElement(By.xpath("//input[@name='roleUsers' and @value='" + username + "']")).click();
         getDriver().findElement(By.cssSelector("td.buttonRow > input.button")).click();
         getDriver().findElement(By.cssSelector("button[type=\"button\"]")).click();
 
     }
-    public  void addOwnernRole(String username) throws MalformedURLException, XPathExpressionException {
+
+    public void addOwnernRole(String username) throws MalformedURLException, XPathExpressionException {
         getDriver().get(getBaseUrl() + "/carbon/admin/login.jsp");
         getDriver().findElement(By.id("txtUserName")).clear();
         getDriver().findElement(By.id("txtUserName")).sendKeys("admin");
@@ -490,10 +492,10 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         getDriver().findElement(By.linkText("Add")).click();
         getDriver().findElement(By.linkText("Add New Role")).click();
         getDriver().findElement(By.name("roleName")).clear();
-        getDriver().findElement(By.name("roleName")).sendKeys("owner-"+username);
+        getDriver().findElement(By.name("roleName")).sendKeys("owner-" + username);
         getDriver().findElement(By.cssSelector("input.button")).click();
         getDriver().findElement(By.cssSelector("input.button")).click();
-        getDriver().findElement(By.xpath("//input[@name='roleUsers' and @value='"+username+"']")).click();
+        getDriver().findElement(By.xpath("//input[@name='roleUsers' and @value='" + username + "']")).click();
         getDriver().findElement(By.cssSelector("td.buttonRow > input.button")).click();
         getDriver().findElement(By.cssSelector("button[type=\"button\"]")).click();
 
