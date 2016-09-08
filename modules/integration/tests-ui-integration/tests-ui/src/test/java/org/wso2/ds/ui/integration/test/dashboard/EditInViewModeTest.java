@@ -93,7 +93,7 @@ public class EditInViewModeTest extends DSUIIntegrationTest{
         Thread.sleep(2000);
         logout();
         login(USERNAME_VIEWER, PASSWORD_VIEWER);
-        getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-view")).click();
+        getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.id("ues-view")).click();
         pushWindow();
         assertTrue(getDriver().isElementPresent(By.id("usa-map-0")),
                 "usa-map gadget is not displayed in the " + "view mode");

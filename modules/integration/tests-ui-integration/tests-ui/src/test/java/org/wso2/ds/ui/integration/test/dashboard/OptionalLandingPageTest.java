@@ -201,7 +201,7 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
         deleteView("view0");
         logout();
         login(USERNAME_EDITOR, PASSWORD_EDITOR);
-        getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-view")).click();
+        getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " .ues-actions .ues-view")).click();
         pushWindow();
         assertTrue(getDriver().isElementPresent(By.cssSelector("a[href=\"page0\"]")),
                 "The page that has the view for " + "the particular user is not visible in view mode");
@@ -215,7 +215,7 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
         popWindow();
         logout();
         login(USERNAME_VIEWER, PASSWORD_VIEWER);
-        getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-view")).click();
+        getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " .ues-actions .ues-view")).click();
         pushWindow();
         assertTrue(getDriver().isElementPresent(By.cssSelector("a[href=\"page1\"]")),
                 "The page that has the view for " + "the particular user is not visible in view mode");
