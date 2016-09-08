@@ -664,8 +664,9 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      */
     public void deleteView(String viewId) throws MalformedURLException, XPathExpressionException {
         clickOnView(viewId);
-        getDriver().findElement(
-                By.cssSelector("li[data-view-mode=\"" + viewId + "\"] .fw-ellipsis")).click();
+        if (!getDriver().findElement(By.cssSelector("li#nav-tab-" + viewId + ".active .ues-trash-handle")).isDisplayed()) {
+            clickOnView(viewId);
+        }
         getDriver().findElement(By.cssSelector("li#nav-tab-" + viewId + ".active .ues-trash-handle")).click();
         getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
     }
@@ -731,10 +732,9 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      */
     public void clickOnViewSettings(String viewId)
             throws MalformedURLException, XPathExpressionException, InterruptedException {
-        clickOnView(viewId);
-        Thread.sleep(2000);
-        getDriver().findElement(By.cssSelector("li[data-view-mode=\"" + viewId + "\"] .fw-ellipsis")).click();
-        Thread.sleep(2000);
+        if (!getDriver().findElement(By.cssSelector("li[data-view-mode=\"" + viewId + "\"] .ues-view-component-properties-handle")).isDisplayed()) {
+            clickOnView(viewId);
+        }
         getDriver().findElement(
                 By.cssSelector("li[data-view-mode=\"" + viewId + "\"] .ues-view-component-properties-handle")).click();
     }
