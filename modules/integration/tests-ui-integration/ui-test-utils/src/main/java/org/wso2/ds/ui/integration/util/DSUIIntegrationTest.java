@@ -733,8 +733,6 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
             throws MalformedURLException, XPathExpressionException, InterruptedException {
         clickOnView(viewId);
         Thread.sleep(2000);
-        getDriver().findElement(By.cssSelector("li[data-view-mode=\"" + viewId + "\"] .fw-ellipsis")).click();
-        Thread.sleep(2000);
         getDriver().findElement(
                 By.cssSelector("li[data-view-mode=\"" + viewId + "\"] .ues-view-component-properties-handle")).click();
     }
