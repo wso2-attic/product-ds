@@ -290,8 +290,9 @@ public class BannerTest extends DSUIIntegrationTest {
      */
     private void customizeDashboard() throws MalformedURLException, XPathExpressionException {
         getDriver().get(getBaseUrl() + "/portal/dashboards");
-        getDriver().findElement(By.cssSelector(".ues-dashboard[data-id='" + dashboardId + "'] a" + ".ues-view"))
-                .click();
+        //getDriver().findElement(By.cssSelector(".ues-dashboard[data-id='" + dashboardId + "'] a" + ".ues-view"))
+              //  .click();
+        getDriver().findElement(By.id(dashboardId)).findElement(By.id("ues-view")).click();
         // Switch the driver to the new window and click on the edit/personalize link
         pushWindow();
         getDriver().findElement(By.linkText(viewer.getUserNameWithoutDomain())).click();

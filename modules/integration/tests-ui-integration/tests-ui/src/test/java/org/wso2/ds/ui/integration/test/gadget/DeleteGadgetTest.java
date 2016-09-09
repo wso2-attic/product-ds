@@ -17,6 +17,7 @@
 package org.wso2.ds.ui.integration.test.gadget;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.*;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.integration.common.utils.exceptions.AutomationUtilException;
@@ -88,7 +89,10 @@ public class DeleteGadgetTest extends DSUIIntegrationTest {
     @Test(groups = "wso2.ds.gadget", description = "Deleting a gadget in gadget listing page")
     public void testDeleteGadget() throws MalformedURLException, XPathExpressionException, InterruptedException {
         getDriver().get(getBaseUrl() + "/portal/gadget/");
-        getDriver().findElement(By.cssSelector("#usa-social a.ds-asset-trash-handle")).click();
+        JavascriptExecutor jse = (JavascriptExecutor)getDriver();
+        jse.executeScript("window.scrollBy(0,document.body.scrollHeight);");
+        Thread.sleep(1000);
+        getDriver().findElement(By.cssSelector("div#usa-social > div.ds-asset-handles > a.ds-asset-trash-handle")).click();
         getDriver().findElement(By.cssSelector("span.ladda-label")).click();
         Thread.sleep(3000);
         assertFalse(getDriver().isElementPresent(By.cssSelector("#usa-social")), "Gadget is not deleted");
