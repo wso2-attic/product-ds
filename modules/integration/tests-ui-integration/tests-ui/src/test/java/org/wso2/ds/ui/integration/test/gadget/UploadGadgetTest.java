@@ -160,6 +160,9 @@ public class UploadGadgetTest extends DSUIIntegrationTest {
         assertTrue(bodyText.contains(successMessage), "Gadget upload failed");
         Thread.sleep(30000);
         getDriver().get(getBaseUrl() + "/portal/gadget");
+        JavascriptExecutor jse = (JavascriptExecutor)getDriver();
+        jse.executeScript("window.scrollBy(0,document.body.scrollHeight);");
+        Thread.sleep(1000);
         assertTrue(getDriver().findElement(By.id("date-picker-copy")).isDisplayed(),
                 "Uploaded gadget is not displayed in the listing page");
     }
