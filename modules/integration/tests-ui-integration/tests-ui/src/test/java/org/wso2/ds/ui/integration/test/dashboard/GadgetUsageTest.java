@@ -162,7 +162,7 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
         getDriver().findElement(By.cssSelector("span.ladda-label")).click();
         Thread.sleep(2000);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
-        assertFalse(getDriver().isElementPresent(By.cssSelector(".defective-dashboards")),
+        assertFalse(getDriver().isElementPresent(By.cssSelector(".defective-dashboard")),
                 "Danger symbol is displayed in the " + "dashboard when dashboard has all the gadgets");
 
         // Delete the gadgets that is used in the dashboard and check whether danger symbol is displayed
