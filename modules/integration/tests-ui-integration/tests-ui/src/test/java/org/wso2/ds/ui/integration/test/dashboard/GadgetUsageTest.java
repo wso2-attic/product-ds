@@ -101,8 +101,9 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
         Thread.sleep(2000);
         JavascriptExecutor js = ((JavascriptExecutor) getDriver());
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
         // Try to delete the gadget that is not used in any of the dashboards, and check the warning message
-        getDriver().findElement(By.cssSelector("#usa-business-revenue > a.ds-asset-trash-handle")).click();
+        getDriver().findElement(By.cssSelector("#usa-business-revenue .ds-asset-handles .ds-asset-trash-handle")).click();
         Thread.sleep(2000);
         assertTrue(getDriver().isElementPresent(By.cssSelector("#usa-business-revenue .alert-warning")),
                 "When trying to delete the gadget, " + "warning is not displayed");
@@ -111,7 +112,7 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
         assertTrue(warningMessage.contains(expectedWarningMessage), "Expected warning message is not displayed");
 
         // Try to delete the gadgets that is used in the dashboards, and check the warning message
-        getDriver().findElement(By.cssSelector("#usa-map > a.ds-asset-trash-handle")).click();
+        getDriver().findElement(By.cssSelector("#usa-map .ds-asset-handles .ds-asset-trash-handle")).click();
         Thread.sleep(2000);
         assertTrue(getDriver().isElementPresent(By.cssSelector("#usa-map .alert-warning")),
                 "When trying to delete the gadget, " + "warning is not displayed");
@@ -120,7 +121,7 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
                 + " dashboard(s). Deleting this gadget will affect the functionality of those dashboard(s)";
         assertTrue(warningMessage.contains(expectedWarningMessage), "Expected warning message is not displayed");
 
-        getDriver().findElement(By.cssSelector("#publisher > a.ds-asset-trash-handle")).click();
+        getDriver().findElement(By.cssSelector("#publisher .ds-asset-handles .ds-asset-trash-handle")).click();
         Thread.sleep(2000);
         assertTrue(getDriver().isElementPresent(By.cssSelector("#publisher .alert-warning")),
                 "When trying to delete the gadget, " + "warning is not displayed");
@@ -129,7 +130,7 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
                 + " dashboard(s). Deleting this gadget will affect the functionality of those dashboard(s)";
         assertTrue(warningMessage.contains(expectedWarningMessage), "Expected warning message is not displayed");
 
-        getDriver().findElement(By.cssSelector("#subscriber > a.ds-asset-trash-handle")).click();
+        getDriver().findElement(By.cssSelector("#subscriber .ds-asset-handles .ds-asset-trash-handle")).click();
         Thread.sleep(2000);
         assertTrue(getDriver().isElementPresent(By.cssSelector("#subscriber .alert-warning")),
                 "When trying to delete the gadget, " + "warning is not displayed");
@@ -156,33 +157,34 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
         getDriver().get(getBaseUrl() + "/portal/gadget/");
         JavascriptExecutor js = ((JavascriptExecutor) getDriver());
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-        getDriver().findElement(By.cssSelector("#usa-business-revenue > a.ds-asset-trash-handle")).click();
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        getDriver().findElement(By.cssSelector("#usa-business-revenue .ds-asset-handles .ds-asset-trash-handle")).click();
         getDriver().findElement(By.cssSelector("span.ladda-label")).click();
         Thread.sleep(2000);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
-        assertFalse(getDriver().isElementPresent(By.cssSelector(".fw-alert")),
+        assertFalse(getDriver().isElementPresent(By.cssSelector(".defective-dashboard")),
                 "Danger symbol is displayed in the " + "dashboard when dashboard has all the gadgets");
 
         // Delete the gadgets that is used in the dashboard and check whether danger symbol is displayed
         getDriver().get(getBaseUrl() + "/portal/gadget/");
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-        getDriver().findElement(By.cssSelector("#usa-map > a.ds-asset-trash-handle")).click();
+        getDriver().findElement(By.cssSelector("#usa-map .ds-asset-handles .ds-asset-trash-handle")).click();
         getDriver().findElement(By.cssSelector("span.ladda-label")).click();
         Thread.sleep(2000);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
-        assertTrue(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD1_TITLE + " .fw-alert")),
+        assertTrue(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD1_TITLE + " .defective-dashboard")),
                 "Danger symbol " + "is not displayed in the dashboard when some gadgets are deleted from dashboard");
-        assertFalse(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD2_TITLE + " .fw-alert")),
+        assertFalse(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD2_TITLE + " .defective-dashboard")),
                 "Danger symbol is displayed in the " + "dashboard when dashboard has all the gadgets");
         getDriver().get(getBaseUrl() + "/portal/gadget/");
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-        getDriver().findElement(By.cssSelector("#publisher > a.ds-asset-trash-handle")).click();
+        getDriver().findElement(By.cssSelector("#publisher .ds-asset-handles .ds-asset-trash-handle")).click();
         getDriver().findElement(By.cssSelector("span.ladda-label")).click();
         Thread.sleep(2000);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
-        assertTrue(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD2_TITLE + " .fw-alert")),
+        assertTrue(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD2_TITLE + " .defective-dashboard")),
                 "Danger symbol " + "is not displayed in the dashboard when some gadgets are deleted from dashoard");
-        assertTrue(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD2_TITLE + " .fw-alert")),
+        assertTrue(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD2_TITLE + " .defective-dashboard")),
                 "Danger symbol " + "is not displayed in the dashboard when some gadgets are deleted from dashoard");
 
         //Check the page level warnings
@@ -221,9 +223,9 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
         getDriver().findElement(By.xpath("(//button[@type='button'])[4]")).click();
         Thread.sleep(1000);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
-        assertTrue(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD1_TITLE + " .fw-alert")),
+        assertTrue(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD1_TITLE + " .defective-dashboard")),
                 "Danger symbol " + "is not displayed in the dashboard when some gadgets are deleted from dashboard");
-        assertFalse(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD2_TITLE + " .fw-alert")),
+        assertFalse(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD2_TITLE + " .defective-dashboard")),
                 "Danger symbol is displayed in the " + "dashboard when dashboard has all the gadgets");
     }
 
