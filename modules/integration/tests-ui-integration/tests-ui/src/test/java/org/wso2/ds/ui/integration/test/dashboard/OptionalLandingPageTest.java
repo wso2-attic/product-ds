@@ -58,7 +58,7 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
      */
     @DataProvider(name = "userMode")
     public static Object[][] userModeProvider() {
-        return new Object[][] { { TestUserMode.SUPER_TENANT_ADMIN } };
+        return new Object[][]{{TestUserMode.SUPER_TENANT_ADMIN}};
     }
 
     /**
@@ -70,8 +70,8 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
      */
     @BeforeClass(alwaysRun = true)
     public void setUp() throws AutomationUtilException, XPathExpressionException, IOException, InterruptedException {
-        String[] userListForRole1 = { getCurrentUsername(), USERNAME_EDITOR };
-        String[] userListForRole2 = { getCurrentUsername(), USERNAME_VIEWER };
+        String[] userListForRole1 = {getCurrentUsername(), USERNAME_EDITOR};
+        String[] userListForRole2 = {getCurrentUsername(), USERNAME_VIEWER};
         login(getCurrentUsername(), getCurrentPassword());
         deleteDashboards();
         addDashBoardWithoutLandingPage(DASHBOARD_TITLE, "This is a test dashboard");
@@ -82,8 +82,8 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
         assignRoleToUser(userListForRole1);
         addRole(ROLE2);
         assignRoleToUser(userListForRole2);
-        assignInternalRoleToUser(DASHBOARD_TITLE + "-viewer", new String[] { USERNAME_VIEWER });
-        assignInternalRoleToUser(DASHBOARD_TITLE + "-editor", new String[] { USERNAME_EDITOR });
+        assignInternalRoleToUser(DASHBOARD_TITLE + "-viewer", new String[]{USERNAME_VIEWER});
+        assignInternalRoleToUser(DASHBOARD_TITLE + "-editor", new String[]{USERNAME_EDITOR});
         addLoginRole(USERNAME_EDITOR);
         addLoginRole(USERNAME_VIEWER);
     }
@@ -190,9 +190,9 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
         deleteView("view1");
         clickOnView("default");
         Thread.sleep(2000);
-        String[][] gadgetMappings = { { "publisher", "b" }, { "usa-map", "c" } };
+        String[][] gadgetMappings = {{"publisher", "b"}, {"usa-map", "c"}};
         String script = generateAddGadgetScript(gadgetMappings);
-        getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
+        getDriver().findElement(By.cssSelector("#btn-sidebar-gadgets i.fw.fw-gadget")).click();
         Thread.sleep(2000);
         waitTillElementToBeClickable(By.id("publisher"));
         getDriver().executeScript(script);
