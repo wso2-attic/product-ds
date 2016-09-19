@@ -41,7 +41,7 @@
             <class name="org.wso2.ds.ui.integration.test.common.CustomThemeDeployerTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.OptionalLandingPageTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.MultipleViewRoleTest"/>
-            <class name="org.wso2.ds.ui.integration.test.dashboard.EditInViewModeTest" />
+            <class name="org.wso2.ds.ui.integration.test.dashboard.EditInViewModeTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.AddCustomThemeToDashboardTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.AddDeleteDashboardTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.AddGadgetToDashboardTest"/>
@@ -68,8 +68,8 @@
             <class name="org.wso2.ds.ui.integration.test.layout.UploadLayoutTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.MultipleViewSupportTest"/>
             <class name="org.wso2.ds.ui.integration.test.dashboard.DownloadDashboardPDFTest"/>
-            <class name="org.wso2.ds.ui.integration.test.dashboard.MultipleViewLandingPageTest" />
-            <class name="org.wso2.ds.ui.integration.test.dashboard.GadgetUsageTest" />
+            <class name="org.wso2.ds.ui.integration.test.dashboard.MultipleViewLandingPageTest"/>
+            <class name="org.wso2.ds.ui.integration.test.dashboard.GadgetUsageTest"/>
         </classes>
     </test>
 </suite>

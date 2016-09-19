@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
- *
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p/>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -150,13 +150,14 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
 
     /**
      * To test the view based on roles
+     *
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
     @Test(groups = "wso2.ds.dashboard", description = "Checking the view based on roles",
             dependsOnMethods = "testAnonView")
     public void testViewRole() throws MalformedURLException, XPathExpressionException, InterruptedException {
-        String[][] gadgetMappings = {{"publisherrole1", "a"}, {"publisher", "b"}};
+        String[][] gadgetMappings = {{"publisherrole1", "a"}, {"publisher", "c"}};
         String script = generateAddGadgetScript(gadgetMappings);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " .ues-edit")).click();
@@ -172,6 +173,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
                 "Gadgets that have role1 is not visible in gadgets pane");
         selectPane("gadgets");
         waitTillElementToBeClickable(By.id("publisherrole1"));
+        waitTillElementToBeClickable(By.id("publisher"));
         getDriver().executeScript(script);
         assertTrue(getDriver().isElementPresent(By.id("publisherrole1-0")),
                 "Gadgets that have role1 is not added to the dashboard");
@@ -209,13 +211,15 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
         // Create a new view for internal/everyone and check whether that view is visible for all the users
         login(USERNAME_EDITOR1, PASSWORD_EDITOR1);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
+        Thread.sleep(2000);
         createNewView("default-grid");
         logout();
         login(USERNAME_ROLE2, PASSWORD_ROLE2);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " .ues-view")).click();
         pushWindow();
-        assertFalse(getDriver().findElement(By.id("ds-allowed-view-list")).isDisplayed(),
+        Thread.sleep(2000);
+        assertFalse(getDriver().findElement(By.cssSelector("#list-user-views")).isDisplayed(),
                 "When only one view is viewable drop down is displayed");
         getDriver().close();
         popWindow();
@@ -225,6 +229,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
 
     /**
      * Check whether the restricted gadgets are displayed in designer mode for the user who doen`t have access to it
+     *
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
@@ -243,6 +248,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
 
     /**
      * To test the functionalit of adding new roles to the view
+     *
      * @throws XPathExpressionException
      * @throws MalformedURLException
      */
@@ -269,6 +275,7 @@ public class MultipleViewRoleTest extends DSUIIntegrationTest {
 
     /**
      * To test the functionality of role removal in multiple view support
+     *
      * @throws XPathExpressionException
      * @throws MalformedURLException
      * @throws InterruptedException

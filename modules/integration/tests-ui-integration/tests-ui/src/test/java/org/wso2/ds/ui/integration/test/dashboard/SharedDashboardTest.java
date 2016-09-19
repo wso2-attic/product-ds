@@ -111,7 +111,7 @@ public class SharedDashboardTest extends DSUIIntegrationTest {
                 TestUserMode.TENANT_USER);
         editor = automationContext.getContextTenant().getTenantUser("editor");
         login(editor.getUserName(), editor.getPassword());
-        getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-view")).click();
+        getDriver().findElement(By.id(DASHBOARD_TITLE.toLowerCase())).findElement(By.id("ues-view")).click();
         pushWindow();
         assertTrue(getDriver().findElement(By.id("test1-0")).isDisplayed(),
                 "Publisher gadget is not displayed in the page");
@@ -168,12 +168,12 @@ public class SharedDashboardTest extends DSUIIntegrationTest {
         getDriver().findElement(By.cssSelector("button.btn.btn-default")).click();
         getDriver().findElement(By.linkText("Shared Dashboards")).click();
         Thread.sleep(3000);
-        assertTrue(getDriver().findElement(By.cssSelector(".ues-dashboard-share")).isDisplayed(),
+        assertTrue(getDriver().findElement(By.cssSelector(".shared")).isDisplayed(),
                 "Shared Dashboard is not displayed when selecting shared dashboard filter");
         getDriver().findElement(By.cssSelector("button.btn.btn-default")).click();
-        getDriver().findElement(By.linkText("Tenant Specific Dashboards")).click();
+        getDriver().findElement(By.cssSelector("a[data-filter='Tenant']")).click();
         Thread.sleep(3000);
-        assertFalse(getDriver().findElement(By.cssSelector(".ues-dashboard-share")).isDisplayed(),
+        assertFalse(getDriver().findElement(By.cssSelector(".shared")).isDisplayed(),
                 "Shared Dashboard is displayed when selecting tenant-specific dashboard filter");
         getDriver().findElement(By.cssSelector(".dropdown")).click();
         getDriver().findElement(By.cssSelector(".dropdown-menu > li > a")).click();

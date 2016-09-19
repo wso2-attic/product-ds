@@ -77,7 +77,6 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void setUp() throws AutomationUtilException, XPathExpressionException, IOException, InterruptedException {
         login(getCurrentUsername(), getCurrentPassword());
-     //   deleteDashboards();
         addDashBoardWithLandingPage(DASHBOARD_TITLE, "This is a test dashboard");
     }
 
@@ -105,7 +104,7 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
     @Test(groups = "wso2.ds.dashboard", description = "Adding blocks to an existing dashboard")
     public void testAddBlocks() throws MalformedURLException, XPathExpressionException {
         redirectToLocation("portal", "dashboards");
-        getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
+        getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE.toLowerCase() + " a.ues-edit")).click();
         selectPane("layouts");
         getDriver().findElement(By.id("ues-add-block-btn")).click();
         clickViewButton();
@@ -276,32 +275,6 @@ public class AddGadgetToDashboardTest extends DSUIIntegrationTest {
         );
         assertEquals("USA MAP (this is full screen view)", txtMax.toString());
 
-        getDriver().close();
-        popWindow();
-    }
-
-    /**
-     * Toggle fluid layout in the dashboard and check for the fluid layout in the view mode.
-     *
-     * @throws MalformedURLException
-     * @throws XPathExpressionException
-     */
-    @Test(groups = "wso2.ds.dashboard", description = "Test fluid layout",
-            dependsOnMethods = "testMaximizeGadgetInView")
-    public void testFluidLayout() throws MalformedURLException, XPathExpressionException {
-        selectPane("pages");
-        getDriver().findElement(By.cssSelector("[name=landing]")).click();
-        getDriver().findElement(By.cssSelector("[name=fluidLayout]")).click();
-        clickViewButton();
-        pushWindow();
-
-        boolean isFluidLayout = false;
-        List<WebElement> elements = getDriver().findElements(By.cssSelector(".page-content-wrapper > .container-fluid"));
-        if (elements.size() > 0) {
-            isFluidLayout = true;
-        }
-
-        assertTrue(isFluidLayout, "The layout is not fluid");
         getDriver().close();
         popWindow();
     }
