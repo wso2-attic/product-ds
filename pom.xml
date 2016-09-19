@@ -1,5 +1,5 @@
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
         <groupId>org.wso2</groupId>
@@ -249,7 +249,7 @@
                 <version>${slf4j.version}</version>
             </dependency>
             <dependency>
-               <groupId>net.sf.ehcache.wso2</groupId>
+                <groupId>net.sf.ehcache.wso2</groupId>
                 <artifactId>ehcache</artifactId>
                 <version>${ehcache.wso2.version}</version>
             </dependency>
@@ -574,7 +574,7 @@
         <carbon.automation.version>4.4.2</carbon.automation.version>
         <carbon.automationutils.version>4.4.2</carbon.automationutils.version>
 
-        <carbon.dashboards.version>2.1.2-SNAPSHOT</carbon.dashboards.version>
+        <carbon.dashboards.version>2.1.2</carbon.dashboards.version>
         <product.ds.version>2.1.0-SNAPSHOT</product.ds.version>
 
         <test.framework.version>4.4.2</test.framework.version>
