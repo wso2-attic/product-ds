@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
- *
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p/>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,9 +21,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.automation.engine.frameworkutils.FrameworkPathUtil;
@@ -259,7 +259,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @throws XPathExpressionException
      */
     public void selectLayout(String layout) throws MalformedURLException, XPathExpressionException {
-    	getDriver().findElement(By.cssSelector("#ues-page-layouts > div[data-id='" + layout + "']")).click();
+        getDriver().findElement(By.cssSelector("#ues-page-layouts > div[data-id='" + layout + "']")).click();
     }
 
     /**
@@ -283,6 +283,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         getDriver().findElement(By.id("personalize-dashboard")).click();
         getDriver().findElement(By.id("ues-dashboard-saveBtn")).click();
     }
+
     /**
      * Redirect user to the given location.
      *
@@ -451,17 +452,17 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         getDriver().findElement(By.linkText("Add")).click();
         getDriver().findElement(By.linkText("Add New Role")).click();
         getDriver().findElement(By.name("roleName")).clear();
-        getDriver().findElement(By.name("roleName")).sendKeys("login-"+username);
+        getDriver().findElement(By.name("roleName")).sendKeys("login-" + username);
         getDriver().findElement(By.cssSelector("input.button")).click();
         driver.findElement(By.cssSelector("#ygtvcheck35 > div.ygtvspacer")).click();
         getDriver().findElement(By.cssSelector("input.button")).click();
-        getDriver().findElement(By.xpath("//input[@name='roleUsers' and @value='"+username+"']")).click();
+        getDriver().findElement(By.xpath("//input[@name='roleUsers' and @value='" + username + "']")).click();
         getDriver().findElement(By.cssSelector("td.buttonRow > input.button")).click();
         getDriver().findElement(By.cssSelector("button[type=\"button\"]")).click();
 
     }
 
-    public  void addCreateRole(String username) throws MalformedURLException, XPathExpressionException {
+    public void addCreateRole(String username) throws MalformedURLException, XPathExpressionException {
         getDriver().get(getBaseUrl() + "/carbon/admin/login.jsp");
         getDriver().findElement(By.id("txtUserName")).clear();
         getDriver().findElement(By.id("txtUserName")).sendKeys("admin");
@@ -471,16 +472,17 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         getDriver().findElement(By.linkText("Add")).click();
         getDriver().findElement(By.linkText("Add New Role")).click();
         getDriver().findElement(By.name("roleName")).clear();
-        getDriver().findElement(By.name("roleName")).sendKeys("create-"+username);
+        getDriver().findElement(By.name("roleName")).sendKeys("create-" + username);
         getDriver().findElement(By.cssSelector("input.button")).click();
         getDriver().findElement(By.cssSelector("#ygtvcheck25 > div.ygtvspacer")).click();
         getDriver().findElement(By.cssSelector("input.button")).click();
-        getDriver().findElement(By.xpath("//input[@name='roleUsers' and @value='"+username+"']")).click();
+        getDriver().findElement(By.xpath("//input[@name='roleUsers' and @value='" + username + "']")).click();
         getDriver().findElement(By.cssSelector("td.buttonRow > input.button")).click();
         getDriver().findElement(By.cssSelector("button[type=\"button\"]")).click();
 
     }
-    public  void addOwnernRole(String username) throws MalformedURLException, XPathExpressionException {
+
+    public void addOwnernRole(String username) throws MalformedURLException, XPathExpressionException {
         getDriver().get(getBaseUrl() + "/carbon/admin/login.jsp");
         getDriver().findElement(By.id("txtUserName")).clear();
         getDriver().findElement(By.id("txtUserName")).sendKeys("admin");
@@ -490,10 +492,10 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
         getDriver().findElement(By.linkText("Add")).click();
         getDriver().findElement(By.linkText("Add New Role")).click();
         getDriver().findElement(By.name("roleName")).clear();
-        getDriver().findElement(By.name("roleName")).sendKeys("owner-"+username);
+        getDriver().findElement(By.name("roleName")).sendKeys("owner-" + username);
         getDriver().findElement(By.cssSelector("input.button")).click();
         getDriver().findElement(By.cssSelector("input.button")).click();
-        getDriver().findElement(By.xpath("//input[@name='roleUsers' and @value='"+username+"']")).click();
+        getDriver().findElement(By.xpath("//input[@name='roleUsers' and @value='" + username + "']")).click();
         getDriver().findElement(By.cssSelector("td.buttonRow > input.button")).click();
         getDriver().findElement(By.cssSelector("button[type=\"button\"]")).click();
 
@@ -625,8 +627,8 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     public void copyView(int index) throws MalformedURLException, XPathExpressionException {
         getDriver().findElement(By.id("add-view")).click();
         getDriver().findElement(By.id("copy-view")).click();
-        Select dropdown = new Select(getDriver().findElement(By.id("page-views-menu")));
-        dropdown.selectByIndex(index);
+        List<WebElement> links = driver.findElements(By.cssSelector("ul#page-views-menu>li>a"));
+        links.get(index - 1).click();
     }
 
     /**
@@ -647,9 +649,11 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
-    public void createNewView(String layout) throws MalformedURLException, XPathExpressionException {
+    public void createNewView(String layout) throws MalformedURLException, XPathExpressionException,
+            InterruptedException {
         getDriver().findElement(By.id("add-view")).click();
         getDriver().findElement(By.id("new-view")).click();
+        Thread.sleep(2000);
         selectViewLayout(layout);
     }
 
@@ -662,9 +666,11 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      */
     public void deleteView(String viewId) throws MalformedURLException, XPathExpressionException {
         clickOnView(viewId);
-        getDriver().findElement(
-                By.cssSelector("li[data-view-mode=\"" + viewId + "\"] .fw-ellipsis")).click();
+        if (!getDriver().findElement(By.cssSelector("li#nav-tab-" + viewId + ".active .ues-trash-handle")).isDisplayed()) {
+            clickOnView(viewId);
+        }
         getDriver().findElement(By.cssSelector("li#nav-tab-" + viewId + ".active .ues-trash-handle")).click();
+        waitTillElementToBeClickable(By.id("ues-modal-confirm-yes"));
         getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
     }
 
@@ -712,9 +718,12 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
     public void addARoleToView(String viewId, String roleToBeAdded)
             throws MalformedURLException, XPathExpressionException, InterruptedException {
         clickOnViewSettings(viewId);
-        getDriver().findElement(By.id("ds-view-roles")).click();
+        getDriver().findElement(By.id("ds-view-roles")).clear();
         getDriver().findElement(By.id("ds-view-roles")).sendKeys(roleToBeAdded);
+        getDriver().findElement(By.id("ds-view-roles")).click();
+        getDriver().findElement(By.id("ds-view-roles")).sendKeys(Keys.DOWN);
         getDriver().findElement(By.className("tt-suggestion")).click();
+
     }
 
     /**
@@ -726,9 +735,9 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
      */
     public void clickOnViewSettings(String viewId)
             throws MalformedURLException, XPathExpressionException, InterruptedException {
-        clickOnView(viewId);
-        Thread.sleep(2000);
-        getDriver().findElement(By.cssSelector("li[data-view-mode=\"" + viewId + "\"] .fw-ellipsis")).click();
+        if (!getDriver().findElement(By.cssSelector("li[data-view-mode=\"" + viewId + "\"] .ues-view-component-properties-handle")).isDisplayed()) {
+            clickOnView(viewId);
+        }
         getDriver().findElement(
                 By.cssSelector("li[data-view-mode=\"" + viewId + "\"] .ues-view-component-properties-handle")).click();
     }

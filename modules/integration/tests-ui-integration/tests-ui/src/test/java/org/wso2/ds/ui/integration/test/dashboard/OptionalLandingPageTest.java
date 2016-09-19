@@ -58,7 +58,7 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
      */
     @DataProvider(name = "userMode")
     public static Object[][] userModeProvider() {
-        return new Object[][] { { TestUserMode.SUPER_TENANT_ADMIN } };
+        return new Object[][]{{TestUserMode.SUPER_TENANT_ADMIN}};
     }
 
     /**
@@ -70,8 +70,8 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
      */
     @BeforeClass(alwaysRun = true)
     public void setUp() throws AutomationUtilException, XPathExpressionException, IOException, InterruptedException {
-        String[] userListForRole1 = { getCurrentUsername(), USERNAME_EDITOR };
-        String[] userListForRole2 = { getCurrentUsername(), USERNAME_VIEWER };
+        String[] userListForRole1 = {getCurrentUsername(), USERNAME_EDITOR};
+        String[] userListForRole2 = {getCurrentUsername(), USERNAME_VIEWER};
         login(getCurrentUsername(), getCurrentPassword());
         deleteDashboards();
         addDashBoardWithoutLandingPage(DASHBOARD_TITLE, "This is a test dashboard");
@@ -82,8 +82,8 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
         assignRoleToUser(userListForRole1);
         addRole(ROLE2);
         assignRoleToUser(userListForRole2);
-        assignInternalRoleToUser(DASHBOARD_TITLE + "-viewer", new String[] { USERNAME_VIEWER });
-        assignInternalRoleToUser(DASHBOARD_TITLE + "-editor", new String[] { USERNAME_EDITOR });
+        assignInternalRoleToUser(DASHBOARD_TITLE + "-viewer", new String[]{USERNAME_VIEWER});
+        assignInternalRoleToUser(DASHBOARD_TITLE + "-editor", new String[]{USERNAME_EDITOR});
         addLoginRole(USERNAME_EDITOR);
         addLoginRole(USERNAME_VIEWER);
     }
@@ -133,6 +133,9 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
             dependsOnMethods = "testCreateDashboard")
     public void testAnonViewCreation() throws XPathExpressionException, MalformedURLException, InterruptedException {
         addARoleToView("default", ROLE2);
+        if (!getDriver().isElementPresent(By.cssSelector("div[data-role=\"Internal/everyone\"]"))) {
+            clickOnViewSettings("default");
+        }
         getDriver().findElement(By.cssSelector("div[data-role=\"Internal/everyone\"] .remove-button")).click();
         createNewView("single-column");
         addARoleToView("view0", "anonymous");
@@ -156,6 +159,7 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
         getDriver().findElement(By.id("ues-modal-info-ok")).click();
         createNewView("single-column");
         getDriver().findElement(By.className("fw-pages")).click();
+        Thread.sleep(2000);
         getDriver().findElement(By.cssSelector("input[name='landing']")).click();
         message = getDriver().findElement(By.cssSelector(".modal-title")).getText().trim();
         assertTrue(expected.equalsIgnoreCase(message),
@@ -165,6 +169,7 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
         addARoleToView("view1", "anonymous");
         getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
         getDriver().findElement(By.className("fw-pages")).click();
+        Thread.sleep(2000);
         getDriver().findElement(By.cssSelector("input[name='landing']")).click();
         assertFalse(getDriver().isElementPresent(By.cssSelector("modal-title")),
                 "Creating a landing page is not " + "allowed even the necessary conditions satisfied");
@@ -185,9 +190,9 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
         deleteView("view1");
         clickOnView("default");
         Thread.sleep(2000);
-        String[][] gadgetMappings = { { "publisher", "b" }, { "usa-map", "c" } };
+        String[][] gadgetMappings = {{"publisher", "b"}, {"usa-map", "c"}};
         String script = generateAddGadgetScript(gadgetMappings);
-        getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
+        getDriver().findElement(By.cssSelector("#btn-sidebar-gadgets i.fw.fw-gadget")).click();
         Thread.sleep(2000);
         waitTillElementToBeClickable(By.id("publisher"));
         getDriver().executeScript(script);
@@ -196,7 +201,7 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
         deleteView("view0");
         logout();
         login(USERNAME_EDITOR, PASSWORD_EDITOR);
-        getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-view")).click();
+        getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " .ues-actions .ues-view")).click();
         pushWindow();
         assertTrue(getDriver().isElementPresent(By.cssSelector("a[href=\"page0\"]")),
                 "The page that has the view for " + "the particular user is not visible in view mode");
@@ -210,7 +215,7 @@ public class OptionalLandingPageTest extends DSUIIntegrationTest {
         popWindow();
         logout();
         login(USERNAME_VIEWER, PASSWORD_VIEWER);
-        getDriver().findElement(By.id(DASHBOARD_TITLE)).findElement(By.cssSelector(".ues-view")).click();
+        getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " .ues-actions .ues-view")).click();
         pushWindow();
         assertTrue(getDriver().isElementPresent(By.cssSelector("a[href=\"page1\"]")),
                 "The page that has the view for " + "the particular user is not visible in view mode");

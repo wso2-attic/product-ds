@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
- *
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p/>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -114,7 +114,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         login(USERNAME_EDITOR, PASSWORD_EDITOR);
         deleteDashboards();
         addDashBoardWithLandingPage(dashboardTitle, DASHBOARD_DESCRIPTION);
-        getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE + " a.ues-edit")).click();
+        getDriver().findElement(By.cssSelector("#" + DASHBOARD_TITLE.toLowerCase() + " a.ues-edit")).click();
         allowPersonalizeDashboard();
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         WebElement dashboardItem = getDriver().findElement(By.id(dashboardTitle.toLowerCase()));
@@ -155,7 +155,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
                 "design element is present in the current UI");
         assertTrue(getDriver().isElementPresent(By.cssSelector("#" + dashboardId + " .ues-settings")),
                 "settings element is present in the current UI");
-        dashboard.findElement(By.cssSelector(".ues-view")).click();
+        dashboard.findElement(By.id(dashboardId)).findElement(By.id("ues-view")).click();
         // Switch the driver to the new window and click on the edit/personalize link
         pushWindow();
         String bodyText = getDriver().findElement(By.tagName("body")).getText();
@@ -191,7 +191,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
                 "design element is present in the current UI");
         assertFalse(getDriver().isElementPresent(By.cssSelector("#" + dashboardId + " .ues-settings")),
                 "settings element is present in the current UI");
-        dashboard.findElement(By.cssSelector(".ues-view")).click();
+        dashboard.findElement(By.id(dashboardId)).findElement(By.id("ues-view")).click();
         // Switch the driver to the new window and click on the edit/personalize link
         pushWindow();
         String bodyText = getDriver().findElement(By.tagName("body")).getText();
@@ -215,7 +215,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         selectPane("pages");
         getDriver().findElement(By.cssSelector("[name=title]")).clear();
         getDriver().findElement(By.cssSelector("[name=title]")).sendKeys(DASHBOARD_PAGE_NAME + "\n");
-        assertEquals(DASHBOARD_PAGE_NAME, getDriver().findElement(By.cssSelector("div.page-title p.lead")).getText(),
+        assertEquals(DASHBOARD_PAGE_NAME, getDriver().findElement(By.cssSelector("div.page-title h1")).getText(),
                 "error occurred while edit the new page name");
     }
 

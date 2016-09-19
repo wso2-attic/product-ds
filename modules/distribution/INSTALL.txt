@@ -1,4 +1,4 @@
-(1) Installing  WSO2 Dashboard Server 2.0.0
+(1) Installing  WSO2 Dashboard Server 2.1.0
 
 Running the server
 ---------------
