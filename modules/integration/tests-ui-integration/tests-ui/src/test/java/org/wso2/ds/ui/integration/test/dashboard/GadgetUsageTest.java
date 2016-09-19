@@ -231,9 +231,10 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD1_TITLE + " a.ues-edit")).click();
         String[][] gadgetMappings = { { "publisher", "b" }, { "usa-map", "c" } };
+        clickOnView("default");
+        Thread.sleep(2000);
         String script = generateAddGadgetScript(gadgetMappings);
-        getDriver().navigate().refresh();
-        selectPane("gadgets");
+        getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
         Thread.sleep(2000);
         waitTillElementToBeClickable(By.id("publisher"));
         getDriver().executeScript(script);
@@ -241,9 +242,10 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD2_TITLE + " a.ues-edit")).click();
         String[][] gadgetMapping = { { "publisher", "b" }, { "subscriber", "d" } };
+        clickOnView("default");
+        Thread.sleep(2000);
         script = generateAddGadgetScript(gadgetMapping);
-        getDriver().navigate().refresh();
-        selectPane("gadgets");
+        getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
         Thread.sleep(2000);
         waitTillElementToBeClickable(By.id("subscriber"));
         getDriver().executeScript(script);
