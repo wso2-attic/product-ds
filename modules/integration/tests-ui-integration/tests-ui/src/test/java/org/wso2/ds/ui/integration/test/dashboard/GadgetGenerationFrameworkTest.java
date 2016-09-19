@@ -91,6 +91,8 @@ public class GadgetGenerationFrameworkTest extends DSUIIntegrationTest {
         driver.findElement(By.name("password")).clear();
         driver.findElement(By.name("password")).sendKeys("wso2carbon");
         driver.findElement(By.name("query")).clear();
+        driver.findElement(By.name("driver_class_name")).clear();
+        driver.findElement(By.name("driver_class_name")).sendKeys("org.h2.Driver");
         driver.findElement(By.name("query")).sendKeys("select * from IDP_METADATA");
         assertEquals(driver.findElement(By.id("test-verification-label")).getAttribute("style"), "display: none;",
                 "valid text is present even before validating");
@@ -106,10 +108,10 @@ public class GadgetGenerationFrameworkTest extends DSUIIntegrationTest {
         new Select(driver.findElement(By.id("chart-type"))).selectByVisibleText("Line Chart");
         new Select(driver.findElement(By.name("x"))).selectByVisibleText("NAME");
         new Select(driver.findElement(By.name("y"))).selectByVisibleText("IDP_ID");
-        assertEquals(driver.findElement(By.id("preview-pane")).findElements(By.xpath(".//*")).size(), 0,
+        assertEquals(driver.findElement(By.id("preview-pane")).findElements(By.cssSelector("iframe")).size(), 0,
                 "Preview Pane is not empty");
         driver.findElement(By.id("preview")).click();
-        assertEquals(driver.findElement(By.id("preview-pane")).findElements(By.xpath(".//*")).size(), 1,
+        assertEquals(driver.findElement(By.id("preview-pane")).findElements(By.cssSelector("iframe")).size(), 1,
                 "Preview Pane is not rendered");
     }
 
