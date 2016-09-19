@@ -101,7 +101,7 @@ public class GadgetUserPrefTest extends DSUIIntegrationTest {
         driver.findElement(By.cssSelector("#" + DASHBOARD_TITLE.toLowerCase() + " a.ues-edit")).click();
         String[][] gadgetMappings = {{"textbox", "a"}};
         String script = generateAddGadgetScript(gadgetMappings);
-        driver.findElement(By.cssSelector("i.fw.fw-gadget")).click();
+        driver.findElement(By.cssSelector("#btn-sidebar-gadgets i.fw.fw-gadget")).click();
         waitTillElementToBeClickable(By.id("textbox"));
         driver.executeScript(script);
         setTextBoxValue("Editor Mode", true);

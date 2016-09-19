@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
- *
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p/>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -95,7 +95,7 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
         Thread.sleep(2000);
         String[][] gadgetMappings = {{"publisher", "b"}, {"usa-map", "c"}};
         String script = generateAddGadgetScript(gadgetMappings);
-        getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
+        getDriver().findElement(By.cssSelector("#btn-sidebar-gadgets i.fw.fw-gadget")).click();
         Thread.sleep(2000);
         waitTillElementToBeClickable(By.id("publisher"));
         getDriver().executeScript(script);
@@ -164,7 +164,7 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
         String[][] gadgetMappingForNewView = {{"publisher", "a"}, {"subscriber", "b"}};
         String script = generateAddGadgetScript(gadgetMappings);
         Thread.sleep(2000);
-        getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
+        getDriver().findElement(By.cssSelector("#btn-sidebar-gadgets i.fw.fw-gadget")).click();
         Thread.sleep(2000);
         waitTillElementToBeClickable(By.id("subscriber"));
         getDriver().executeScript(script);
@@ -176,7 +176,7 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
         clickOnView("view3");
         Thread.sleep(2000);
         script = generateAddGadgetScript(gadgetMappingForNewView);
-        getDriver().findElement(By.cssSelector("i.fw.fw-gadget")).click();
+        getDriver().findElement(By.cssSelector("#btn-sidebar-gadgets i.fw.fw-gadget")).click();
         Thread.sleep(2000);
         waitTillElementToBeClickable(By.id("subscriber"));
         getDriver().executeScript(script);
@@ -188,6 +188,7 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
 
     /**
      * To test the functionality of getting new layout for a page
+     *
      * @throws MalformedURLException
      * @throws XPathExpressionException
      */
@@ -249,7 +250,7 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
         assertFalse(getDriver().isElementPresent(By.id("view1")), "View is not closed after pressing close button");
         assertTrue(getDriver().isElementPresent(By.id("more-views")), "Drop down for re-opening the view is not "
                 + "visible after closing a view");
-        getDriver().findElement(By.id("more-views")).click();
+        getDriver().findElement(By.cssSelector("#more-views a")).click();
         getDriver().findElement(By.id("view1")).click();
         assertTrue(getDriver().isElementPresent(By.id("view1")), "View is not visible after re-opening the closed view");
         clickOnView("view1");
@@ -294,8 +295,6 @@ public class MultipleViewSupportTest extends DSUIIntegrationTest {
         deleteView("view1");
         deleteView("view2");
         clickOnView("view3");
-        getDriver().findElement(
-                By.cssSelector("li[data-view-mode=\"view3\"] .fw-ellipsis")).click();
         getDriver().findElement(By.cssSelector("li#nav-tab-view3.active .ues-trash-handle")).click();
         assertTrue(getDriver().isElementPresent(By.className("modal-content")),
                 "Deleting of last view is also allowed");

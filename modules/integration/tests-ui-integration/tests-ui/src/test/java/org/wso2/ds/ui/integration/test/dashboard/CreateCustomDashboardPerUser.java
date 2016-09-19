@@ -215,7 +215,7 @@ public class CreateCustomDashboardPerUser extends DSUIIntegrationTest {
         selectPane("pages");
         getDriver().findElement(By.cssSelector("[name=title]")).clear();
         getDriver().findElement(By.cssSelector("[name=title]")).sendKeys(DASHBOARD_PAGE_NAME + "\n");
-        assertEquals(DASHBOARD_PAGE_NAME, getDriver().findElement(By.cssSelector("div.page-title p.lead")).getText(),
+        assertEquals(DASHBOARD_PAGE_NAME, getDriver().findElement(By.cssSelector("div.page-title h1")).getText(),
                 "error occurred while edit the new page name");
     }
 
