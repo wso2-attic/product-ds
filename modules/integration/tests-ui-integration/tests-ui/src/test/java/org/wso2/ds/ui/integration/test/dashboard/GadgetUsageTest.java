@@ -56,7 +56,7 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
      */
     @DataProvider(name = "userMode")
     public static Object[][] userModeProvider() {
-        return new Object[][] { { TestUserMode.SUPER_TENANT_ADMIN } };
+        return new Object[][]{{TestUserMode.SUPER_TENANT_ADMIN}};
     }
 
     /**
@@ -170,9 +170,9 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
         getDriver().findElement(By.cssSelector("span.ladda-label")).click();
         Thread.sleep(2000);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
-        assertTrue(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD1_TITLE + " .fw-warning")),
+        assertTrue(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD1_TITLE + " .fw-alert")),
                 "Danger symbol " + "is not displayed in the dashboard when some gadgets are deleted from dashboard");
-        assertFalse(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD2_TITLE + " .fw-warning")),
+        assertFalse(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD2_TITLE + " .fw-alert")),
                 "Danger symbol is displayed in the " + "dashboard when dashboard has all the gadgets");
         getDriver().get(getBaseUrl() + "/portal/gadget/");
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
@@ -180,9 +180,9 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
         getDriver().findElement(By.cssSelector("span.ladda-label")).click();
         Thread.sleep(2000);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
-        assertTrue(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD2_TITLE + " .fw-warning")),
+        assertTrue(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD2_TITLE + " .fw-alert")),
                 "Danger symbol " + "is not displayed in the dashboard when some gadgets are deleted from dashoard");
-        assertTrue(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD2_TITLE + " .fw-warning")),
+        assertTrue(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD2_TITLE + " .fw-alert")),
                 "Danger symbol " + "is not displayed in the dashboard when some gadgets are deleted from dashoard");
 
         //Check the page level warnings
@@ -221,9 +221,9 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
         getDriver().findElement(By.xpath("(//button[@type='button'])[4]")).click();
         Thread.sleep(1000);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
-        assertTrue(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD1_TITLE + " .fw-warning")),
+        assertTrue(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD1_TITLE + " .fw-alert")),
                 "Danger symbol " + "is not displayed in the dashboard when some gadgets are deleted from dashboard");
-        assertFalse(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD2_TITLE + " .fw-warning")),
+        assertFalse(getDriver().isElementPresent(By.cssSelector("#" + DASHBOARD2_TITLE + " .fw-alert")),
                 "Danger symbol is displayed in the " + "dashboard when dashboard has all the gadgets");
     }
 
@@ -237,7 +237,7 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
     private void createRelevantGadgets() throws MalformedURLException, XPathExpressionException, InterruptedException {
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD1_TITLE + " a.ues-edit")).click();
-        String[][] gadgetMappings = { { "publisher", "b" }, { "usa-map", "c" } };
+        String[][] gadgetMappings = {{"publisher", "b"}, {"usa-map", "c"}};
         String script = generateAddGadgetScript(gadgetMappings);
         getDriver().navigate().refresh();
         selectPane("gadgets");
@@ -246,7 +246,7 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
         Thread.sleep(2000);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
         getDriver().findElement(By.cssSelector("#" + DASHBOARD2_TITLE + " a.ues-edit")).click();
-        String[][] gadgetMapping = { { "publisher", "b" }, { "subscriber", "d" } };
+        String[][] gadgetMapping = {{"publisher", "b"}, {"subscriber", "d"}};
         script = generateAddGadgetScript(gadgetMapping);
         getDriver().navigate().refresh();
         selectPane("gadgets");
