@@ -171,7 +171,7 @@ public class SharedDashboardTest extends DSUIIntegrationTest {
         assertTrue(getDriver().findElement(By.cssSelector(".shared")).isDisplayed(),
                 "Shared Dashboard is not displayed when selecting shared dashboard filter");
         getDriver().findElement(By.cssSelector("button.btn.btn-default")).click();
-        getDriver().findElement(By.linkText("Tenant Specific Dashboards")).click();
+        getDriver().findElement(By.cssSelector("a[data-filter='Tenant']")).click();
         Thread.sleep(3000);
         assertFalse(getDriver().findElement(By.cssSelector(".shared")).isDisplayed(),
                 "Shared Dashboard is displayed when selecting tenant-specific dashboard filter");
