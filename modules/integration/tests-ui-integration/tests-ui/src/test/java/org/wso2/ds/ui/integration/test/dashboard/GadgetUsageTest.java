@@ -235,6 +235,7 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
         getDriver().navigate().refresh();
         selectPane("gadgets");
         Thread.sleep(2000);
+        waitTillElementToBeClickable(By.id("publisher"));
         getDriver().executeScript(script);
         Thread.sleep(2000);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
@@ -244,6 +245,7 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
         getDriver().navigate().refresh();
         selectPane("gadgets");
         Thread.sleep(2000);
+        waitTillElementToBeClickable(By.id("subscriber"));
         getDriver().executeScript(script);
         Thread.sleep(2000);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
