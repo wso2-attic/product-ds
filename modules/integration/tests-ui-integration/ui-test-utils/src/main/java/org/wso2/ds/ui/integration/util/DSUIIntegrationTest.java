@@ -670,6 +670,7 @@ public abstract class DSUIIntegrationTest extends DSIntegrationTest {
             clickOnView(viewId);
         }
         getDriver().findElement(By.cssSelector("li#nav-tab-" + viewId + ".active .ues-trash-handle")).click();
+        waitTillElementToBeClickable(By.id("ues-modal-confirm-yes"));
         getDriver().findElement(By.id("ues-modal-confirm-yes")).click();
     }
 
