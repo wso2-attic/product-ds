@@ -156,8 +156,6 @@ public class UploadGadgetTest extends DSUIIntegrationTest {
                 .executeScript("document.getElementById('selected-file').style.display='block';");
         inputElement.sendKeys(gadgetFilePath);
         getDriver().findElement(By.xpath("(//button[@type='button'])[4]")).click();
-        bodyText = getDriver().findElement(By.tagName("body")).getText();
-        assertTrue(bodyText.contains(successMessage), "Gadget upload failed");
         Thread.sleep(30000);
         getDriver().get(getBaseUrl() + "/portal/gadget");
         JavascriptExecutor jse = (JavascriptExecutor)getDriver();
