@@ -118,7 +118,7 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
                 "When trying to delete the gadget, " + "warning is not displayed");
         warningMessage = getDriver().findElement(By.cssSelector(("#usa-map .alert"))).getText();
         expectedWarningMessage = "This gadget is used in " + DASHBOARD1_TITLE
-                + " dashboard(s). Deleting this gadget will affect the functionality of those dashboard(s)";
+                + " dashboard(s). This action on this gadget will affect the functionality of those dashboard(s)";
         assertTrue(warningMessage.contains(expectedWarningMessage), "Expected warning message is not displayed");
 
         getDriver().findElement(By.cssSelector("#publisher a.ds-asset-trash-handle")).click();
@@ -127,7 +127,7 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
                 "When trying to delete the gadget, " + "warning is not displayed");
         warningMessage = getDriver().findElement(By.cssSelector(("#publisher .alert"))).getText();
         expectedWarningMessage = "This gadget is used in " + DASHBOARD1_TITLE + "," + DASHBOARD2_TITLE
-                + " dashboard(s). Deleting this gadget will affect the functionality of those dashboard(s)";
+                + " dashboard(s). This action on this gadget will affect the functionality of those dashboard(s)";
         assertTrue(warningMessage.contains(expectedWarningMessage), "Expected warning message is not displayed");
 
         getDriver().findElement(By.cssSelector("div#subscriber > div.ds-asset-handles > a.ds-asset-trash-handle")).click();
@@ -136,7 +136,7 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
                 "When trying to delete the gadget, " + "warning is not displayed");
         warningMessage = getDriver().findElement(By.cssSelector(("#subscriber .alert"))).getText();
         expectedWarningMessage = "This gadget is used in " + DASHBOARD2_TITLE + " dashboard(s). "
-                + "Deleting this gadget will affect the functionality of those dashboard(s)";
+                + "This action on this gadget will affect the functionality of those dashboard(s)";
         assertTrue(warningMessage.contains(expectedWarningMessage), "Expected warning message is not displayed");
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
     }
@@ -157,7 +157,7 @@ public class GadgetUsageTest extends DSUIIntegrationTest {
         getDriver().get(getBaseUrl() + "/portal/gadget/");
         JavascriptExecutor js = ((JavascriptExecutor) getDriver());
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-        getDriver().findElement(By.cssSelector("div#usa-business-revenue > div.ds-asset-handles > a.ds-asset-trash-handle")).click();
+        getDriver().findElement(By.cssSelector("#usa-business-revenue a.ds-asset-trash-handle")).click();
         getDriver().findElement(By.cssSelector("span.ladda-label")).click();
         Thread.sleep(2000);
         redirectToLocation(DS_HOME_CONTEXT, DS_DASHBOARDS_CONTEXT);
