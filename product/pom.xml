@@ -23,7 +23,7 @@
     <artifactId>wso2ds</artifactId>
     <packaging>pom</packaging>
 
-    <name>WSO2 UUF Server Distribution</name>
+    <name>WSO2 Dashboard Server Distribution</name>
     <description>WSO2 UUF Server</description>
     <url>http://wso2.org</url>
 
@@ -39,6 +39,12 @@
         <dependency>
             <groupId>org.wso2.carbon.uuf</groupId>
             <artifactId>org.wso2.carbon.uuf.core.feature</artifactId>
+            <version>${carbon.uuf.version}</version>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon.dashboard</groupId>
+            <artifactId>org.wso2.carbon.dashboard.metadata.features</artifactId>
             <version>${carbon.uuf.version}</version>
             <type>zip</type>
         </dependency>
@@ -332,6 +338,10 @@
                                     <id>org.wso2.carbon.uuf.simple-auth.feature</id>
                                     <version>${carbon.uuf.version}</version>
                                 </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.dashboard.metadata.features</id>
+                                    <version>${carbon.uuf.version}</version>
+                                </feature>
                             </features>
                         </configuration>
                     </execution>
@@ -462,6 +472,10 @@
                                     <id>org.wso2.carbon.security.userstore.jdbc.feature.group</id>
                                     <version>${carbon.security.userstore.jdbc.version}</version>
                                 </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.dashboard.metadata.features</id>
+                                    <version>${carbon.uuf.version}</version>
+                                </feature>
                             </features>
                         </configuration>
                     </execution>
@@ -484,6 +498,28 @@
                         <goals>
                             <goal>run</goal>
                         </goals>
+                    </execution>
+                    <execution>
+                        <id>create-dashboard-database</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <path id="h2.classpath">
+                                    <path refid="maven.compile.classpath" />
+                                </path>
+                                <echo message="########### Create HT H2 Database ##############" />
+                                <sql driver="org.h2.Driver" url="jdbc:h2:${basedir}/target/wso2carbon-kernel-${carbon.kernel.version}/database/DASHBOARD;create=true" userid="wso2carbon" password="wso2carbon" autocommit="true" onerror="continue">
+                                    <classpath>
+                                        <path refid="h2.classpath" />
+                                    </classpath>
+                                    <fileset file="${basedir}/carbon-home/dbscripts/h2.sql" />
+                                </sql>
+                                <echo message="##################### END ############################" />
+                            </tasks>
+                        </configuration>
                     </execution>
                     <execution>
                         <id>clean_target</id>

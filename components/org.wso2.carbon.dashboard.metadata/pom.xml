@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ~ Copyright 2016 (c) WSO2 Inc. (http://wso2.org) All Rights Reserved.
+ ~
+ ~ Licensed under the Apache License, Version 2.0 (the "License");
+ ~ you may not use this file except in compliance with the License.
+ ~ You may obtain a copy of the License at
+ ~
+ ~      http://www.apache.org/licenses/LICENSE-2.0
+ ~
+ ~ Unless required by applicable law or agreed to in writing, software
+ ~ distributed under the License is distributed on an "AS IS" BASIS,
+ ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ~ See the License for the specific language governing permissions and
+ ~ limitations under the License.
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.wso2.ds</groupId>
+        <artifactId>ds-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.wso2.carbon.dashboard</groupId>
+    <artifactId>org.wso2.carbon.dashboard.metadata</artifactId>
+    <packaging>bundle</packaging>
+    <name>WSO2 Carbon - Governance - Test</name>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.wso2.carbon.uuf</groupId>
+            <artifactId>org.wso2.carbon.uuf.core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.msf4j</groupId>
+            <artifactId>msf4j-core</artifactId>
+        </dependency>
+        <!-- Test Dependencies -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon.messaging</groupId>
+            <artifactId>org.wso2.carbon.messaging</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon.datasources</groupId>
+            <artifactId>org.wso2.carbon.datasource.core</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Private-Package>org.wso2.carbon.dashboard.metadata.internal.*</Private-Package>
+                        <Import-Package>
+                            org.wso2.carbon.uuf.*;version="${carbon.uuf.version}",
+                            org.osgi.framework.*;version="[1.8.0, 2.0.0)",
+                            <!--org.wso2.carbon.messaging;version="${carbon.messaging.version}",-->
+                            <!--TODO: replace below line with above commented line after carbon-messaging fix export version issue.-->
+                            org.wso2.carbon.messaging;version="1.0.5",
+                            org.wso2.carbon.datasource.core.*;version="${org.wso2.carbon.datasource.version.range}",
+                            org.wso2.msf4j.*,
+                            javax.ws.rs.*,
+                            io.netty.handler.*,
+                            org.osgi.service.component.annotations.*,
+                            org.yaml.snakeyaml,
+                            com.google.common.*;version="${guava.version.range}",
+                            org.slf4j.*;version="${slf4j.version.range}"
+                        </Import-Package>
+                        <Export-Package>
+                            org.wso2.carbon.dashboard.metadata.*;version="${carbon.uuf.version}"
+                        </Export-Package>
+                        <Carbon-Component>
+                            osgi.service;objectClass="org.wso2.carbon.uuf.spi.HttpConnector"
+                        </Carbon-Component>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <properties>
+        <org.wso2.carbon.datasource.version.range>[1.0.0, 1.1.0)</org.wso2.carbon.datasource.version.range>
+    </properties>
+
+</project>

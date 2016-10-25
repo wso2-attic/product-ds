@@ -43,6 +43,8 @@
     </scm>
 
     <modules>
+        <module>components/org.wso2.carbon.dashboard.metadata</module>
+        <module>features/org.wso2.carbon.dashboard.metadata.features</module>
         <module>product</module>
     </modules>
 
