@@ -1,8 +1,14 @@
 package org.wso2.ds.ui.integration.test.dashboard;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Factory;
+import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.integration.common.utils.exceptions.AutomationUtilException;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
@@ -11,10 +17,12 @@ import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 /**
- * To test the allowing primitive edit operations in
+ * To test the primitive edit operations in view mode
  */
 public class EditInViewModeTest extends DSUIIntegrationTest{
     private static final String DASHBOARD_TITLE = "editinviewdashboard";
