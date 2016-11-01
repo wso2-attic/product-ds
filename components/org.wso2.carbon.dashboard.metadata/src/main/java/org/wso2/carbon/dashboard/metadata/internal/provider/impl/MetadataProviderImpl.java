@@ -18,24 +18,88 @@
  */
 package org.wso2.carbon.dashboard.metadata.internal.provider.impl;
 
+import org.osgi.framework.BundleContext;
+import org.osgi.service.component.annotations.Activate;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Deactivate;
+import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ReferenceCardinality;
+import org.osgi.service.component.annotations.ReferencePolicy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.wso2.carbon.dashboard.metadata.bean.Metadata;
 import org.wso2.carbon.dashboard.metadata.bean.PaginationContext;
 import org.wso2.carbon.dashboard.metadata.bean.Query;
-
 import org.wso2.carbon.dashboard.metadata.exception.MetadataException;
 import org.wso2.carbon.dashboard.metadata.internal.dao.MetadataDAO;
+import org.wso2.carbon.dashboard.metadata.internal.dao.impl.MetadataDAOImpl;
+import org.wso2.carbon.dashboard.metadata.internal.dao.utils.DAOUtils;
 import org.wso2.carbon.dashboard.metadata.provider.MetadataProvider;
+import org.wso2.carbon.datasource.core.api.DataSourceService;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This is a core class of the Metadata business logic implementation.
  */
+@Component(name = "org.wso2.carbon.dashboard.metadata.internal.ServiceComponent",
+           service = MetadataProvider.class,
+           immediate = true)
 public class MetadataProviderImpl implements MetadataProvider {
+
+    private static final Logger log = LoggerFactory.getLogger(MetadataProviderImpl.class);
+
     private MetadataDAO dao;
 
     public MetadataProviderImpl(MetadataDAO dao) {
         this.dao = dao;
+    }
+
+    public MetadataProviderImpl() {
+        this(new MetadataDAOImpl());
+    }
+
+    /**
+     * Get called when this osgi component get registered.
+     *
+     * @param bundleContext Context of the osgi component.
+     */
+    @Activate
+    protected void activate(BundleContext bundleContext) {
+        log.info("ServiceComponent activated.");
+        try {
+            test();
+        } catch (Exception e) {
+        }
+    }
+
+    /**
+     * Get called when this osgi component get unregistered.
+     */
+    @Deactivate
+    protected void deactivate() {
+        log.info("ServiceComponent deactivated.");
+    }
+
+    private void test() throws MetadataException {
+        log.info("test()");
+        DAOUtils.getInstance().initialize("WSO2_DASHBOARD_DB");
+        Metadata metadata = new Metadata();
+        metadata.setName("Test");
+        metadata.setContent("sdda fadsf dsf dsf dsaadsf1234353543b543 5");
+        metadata.setDescription("fdsfsdfsdfsdfds");
+        metadata.setOwner("Chandana");
+        metadata.setLastUpdatedBy("Chandana");
+        metadata.setLastUpdatedTime((new Date().getTime()));
+        metadata.setCreatedTime((new Date().getTime()));
+        metadata.setVersion("1.2.3");
+
+        this.add(metadata);
+
+
+        log.info("end test()");
     }
 
     @Override
@@ -108,5 +172,34 @@ public class MetadataProviderImpl implements MetadataProvider {
         if (query == null) {
             throw new MetadataException("Unable to find Metadata. The query is empty");
         }
+    }
+
+    @Reference(
+            name = "org.wso2.carbon.datasource.DataSourceService",
+            service = DataSourceService.class,
+            cardinality = ReferenceCardinality.AT_LEAST_ONE,
+            policy = ReferencePolicy.DYNAMIC,
+            unbind = "unregisterDataSourceService"
+    )
+    protected void registerDataSourceService(DataSourceService service, Map<String, String> properties) {
+
+        if (service == null) {
+            log.error("Data source service is null. Registering data source service is unsuccessful.");
+            return;
+        }
+
+        DAOUtils.getInstance().setDataSourceService(service);
+
+        if (log.isInfoEnabled()) {
+            log.info("Data source service registered successfully.");
+        }
+    }
+
+    protected void unregisterDataSourceService(DataSourceService service) {
+
+        if (log.isInfoEnabled()) {
+            log.info("Data source service unregistered.");
+        }
+        DAOUtils.getInstance().setDataSourceService(null);
     }
 }
