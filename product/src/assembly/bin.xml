@@ -67,6 +67,12 @@
             <fileMode>644</fileMode>
         </fileSet>
 
+        <fileSet>
+            <directory>carbon-home/datasources/</directory>
+            <outputDirectory>conf/datasources/</outputDirectory>
+            <fileMode>644</fileMode>
+        </fileSet>
+
         <!-- Copy the analytics setup -->
         <fileSet>
             <directory>../analytics/das-setup</directory>

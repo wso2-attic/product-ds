@@ -95,9 +95,6 @@
                         <Export-Package>
                             org.wso2.carbon.dashboard.metadata.*;version="${carbon.uuf.version}"
                         </Export-Package>
-                        <Carbon-Component>
-                            osgi.service;objectClass="org.wso2.carbon.uuf.spi.HttpConnector"
-                        </Carbon-Component>
                     </instructions>
                 </configuration>
             </plugin>

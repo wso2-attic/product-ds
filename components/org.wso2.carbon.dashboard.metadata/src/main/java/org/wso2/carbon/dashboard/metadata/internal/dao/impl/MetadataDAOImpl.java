@@ -52,7 +52,7 @@ public class MetadataDAOImpl implements MetadataDAO {
         PreparedStatement ps = null;
         ResultSet result = null;
         try {
-            conn = DAOUtils.getConnection();
+            conn = DAOUtils.getInstance().getConnection();
             ps = conn.prepareStatement(SQLConstants.GET_METADATA_BY_UUID);
             ps.setString(1, uuid);
             result = ps.executeQuery();
@@ -75,7 +75,7 @@ public class MetadataDAOImpl implements MetadataDAO {
         PreparedStatement ps = null;
         ResultSet result = null;
         try {
-            conn = DAOUtils.getConnection();
+            conn = DAOUtils.getInstance().getConnection();
             ps = conn.prepareStatement(SQLConstants.GET_METADATA_BY_NAME_AND_VERSION);
             ps.setString(1, name);
             ps.setString(2, version);
@@ -100,7 +100,7 @@ public class MetadataDAOImpl implements MetadataDAO {
         PreparedStatement ps = null;
         ResultSet result = null;
         try {
-            conn = DAOUtils.getConnection();
+            conn = DAOUtils.getInstance().getConnection();
             ps = conn.prepareStatement(SQLConstants.GET_METADATA_BY_OWNER_AND_NAME);
             ps.setString(1, owner);
             ps.setString(2, name);
@@ -125,7 +125,7 @@ public class MetadataDAOImpl implements MetadataDAO {
         PreparedStatement ps = null;
         ResultSet result = null;
         try {
-            conn = DAOUtils.getConnection();
+            conn = DAOUtils.getInstance().getConnection();
             ps = conn.prepareStatement(SQLConstants.GET_METADATA_QUERY);
             ps.setString(1, owner);
             ps.setString(2, name);
@@ -151,7 +151,7 @@ public class MetadataDAOImpl implements MetadataDAO {
         PreparedStatement ps = null;
         String query = SQLConstants.UPDATE_METADATA_QUERY;
         try {
-            conn = DAOUtils.getConnection();
+            conn = DAOUtils.getInstance().getConnection();
             conn.setAutoCommit(false);
             ps = conn.prepareStatement(query);
             ps.setString(1, metadata.getName());
@@ -187,7 +187,7 @@ public class MetadataDAOImpl implements MetadataDAO {
         PreparedStatement ps = null;
         String query = SQLConstants.ADD_METADATA_QUERY;
         try {
-            conn = DAOUtils.getConnection();
+            conn = DAOUtils.getInstance().getConnection();
             conn.setAutoCommit(false);
             ps = conn.prepareStatement(query);
             ps.setString(1, UUID.randomUUID().toString());
@@ -227,7 +227,7 @@ public class MetadataDAOImpl implements MetadataDAO {
         PreparedStatement ps = null;
         String dbQuery = SQLConstants.DELETE_METADATA_UIID;
         try {
-            conn = DAOUtils.getConnection();
+            conn = DAOUtils.getInstance().getConnection();
             conn.setAutoCommit(false);
             ps = conn.prepareStatement(dbQuery);
             ps.setString(1, uuid);
@@ -256,7 +256,7 @@ public class MetadataDAOImpl implements MetadataDAO {
         PreparedStatement ps = null;
         String dbQuery = SQLConstants.DELETE_METADATA_QUERY;
         try {
-            conn = DAOUtils.getConnection();
+            conn = DAOUtils.getInstance().getConnection();
             conn.setAutoCommit(false);
             ps = conn.prepareStatement(dbQuery);
 
@@ -287,7 +287,7 @@ public class MetadataDAOImpl implements MetadataDAO {
         PreparedStatement ps = null;
         String dbQuery = SQLConstants.DELETE_METADATA_QUERY;
         try {
-            conn = DAOUtils.getConnection();
+            conn = DAOUtils.getInstance().getConnection();
             conn.setAutoCommit(false);
             ps = conn.prepareStatement(dbQuery);
             ps.setString(1, owner);
@@ -321,7 +321,7 @@ public class MetadataDAOImpl implements MetadataDAO {
         ResultSet result = null;
         String dbQuery = SQLConstants.GET_METADATA_BY_UUID;
         try {
-            conn = DAOUtils.getConnection();
+            conn = DAOUtils.getInstance().getConnection();
             ps = conn.prepareStatement(dbQuery);
             result = ps.executeQuery();
             if (result.next()) {
@@ -345,7 +345,7 @@ public class MetadataDAOImpl implements MetadataDAO {
         PreparedStatement ps = null;
         ResultSet result = null;
         try {
-            conn = DAOUtils.getConnection();
+            conn = DAOUtils.getInstance().getConnection();
             ps = conn.prepareStatement(SQLConstants.GET_METADATA_BY_NAME_AND_VERSION);
             ps.setString(1, name);
             ps.setString(2, version);
@@ -370,7 +370,7 @@ public class MetadataDAOImpl implements MetadataDAO {
         PreparedStatement ps = null;
         ResultSet result = null;
         try {
-            conn = DAOUtils.getConnection();
+            conn = DAOUtils.getInstance().getConnection();
             ps = conn.prepareStatement(SQLConstants.GET_METADATA_BY_OWNER_AND_NAME);
             ps.setString(1, owner);
             ps.setString(2, name);
@@ -395,7 +395,7 @@ public class MetadataDAOImpl implements MetadataDAO {
         PreparedStatement ps = null;
         ResultSet result = null;
         try {
-            conn = DAOUtils.getConnection();
+            conn = DAOUtils.getInstance().getConnection();
             ps = conn.prepareStatement(SQLConstants.GET_METADATA_QUERY);
             ps.setString(1, owner);
             ps.setString(2, name);
@@ -420,7 +420,7 @@ public class MetadataDAOImpl implements MetadataDAO {
         PreparedStatement ps = null;
         ResultSet result = null;
         try {
-            conn = DAOUtils.getConnection();
+            conn = DAOUtils.getInstance().getConnection();
             ps = conn.prepareStatement(SQLConstants.GET_METADATA_BY_NAME);
             ps.setString(1, name);
             result = ps.executeQuery();

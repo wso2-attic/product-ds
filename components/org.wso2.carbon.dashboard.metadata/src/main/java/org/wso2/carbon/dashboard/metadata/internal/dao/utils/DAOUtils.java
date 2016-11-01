@@ -24,15 +24,11 @@ import org.wso2.carbon.dashboard.metadata.exception.MetadataException;
 import org.wso2.carbon.datasource.core.api.DataSourceService;
 import org.wso2.carbon.datasource.core.exception.DataSourceException;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 
 /**
  * Util class to define DB related common operation
@@ -43,8 +39,8 @@ public class DAOUtils {
 
     private static final Logger log = LoggerFactory.getLogger(DAOUtils.class);
 
-    private static DataSourceService dataSourceService;
-    private static DataSource dataSource;
+    private DataSourceService dataSourceService;
+    private DataSource dataSource;
 
 
     public DataSource getDataSource(String dataSourceName) throws DataSourceException {
@@ -68,23 +64,20 @@ public class DAOUtils {
         return instance;
     }
 
-    public static void initialize(String dataSourceName) throws MetadataException {
+    public void initialize(String dataSourceName) throws MetadataException {
         if (dataSource != null) {
             return;
         }
+
         try {
-            Context ctx = new InitialContext();
-            try {
-                dataSource = instance.getDataSource(dataSourceName);
-            } catch (DataSourceException e) {
-                e.printStackTrace();
-            }
-        } catch (NamingException e) {
-            throw new MetadataException("Error while looking up the data source: " + dataSourceName, e);
+            dataSource = instance.getDataSource(dataSourceName);
+        } catch (DataSourceException e) {
+            e.printStackTrace();
         }
+
     }
 
-    public static Connection getConnection() throws SQLException {
+    public Connection getConnection() throws SQLException {
         if (dataSource != null) {
             return dataSource.getConnection();
         }

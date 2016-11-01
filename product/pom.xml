@@ -177,15 +177,15 @@
         </dependency>
         <!--Sample bundles-->
         <dependency>
-            <groupId>org.wso2.carbon.uuf.sample</groupId>
-            <artifactId>org.wso2.carbon.uuf.simple-auth.feature</artifactId>
-            <version>${carbon.uuf.version}</version>
-            <type>zip</type>
-        </dependency>
-        <dependency>
             <groupId>org.wso2.carbon.security.userstore</groupId>
             <artifactId>org.wso2.carbon.security.userstore.jdbc.feature</artifactId>
             <version>${carbon.security.userstore.jdbc.version}</version>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon.security.caas</groupId>
+            <artifactId>org.wso2.carbon.security.caas.feature</artifactId>
+            <version>${carbon.security.caas.version}</version>
             <type>zip</type>
         </dependency>
     </dependencies>
@@ -333,11 +333,11 @@
                                     <id>org.wso2.carbon.uuf.sample.Features-app.feature</id>
                                     <version>${carbon.uuf.version}</version>
                                 </feature>
-                                <!--Sample bundles-->
                                 <feature>
-                                    <id>org.wso2.carbon.uuf.simple-auth.feature</id>
-                                    <version>${carbon.uuf.version}</version>
+                                    <id>org.wso2.carbon.security.caas.feature</id>
+                                    <version>${carbon.security.caas.version}</version>
                                 </feature>
+                                <!--Sample bundles-->
                                 <feature>
                                     <id>org.wso2.carbon.dashboard.metadata.features</id>
                                     <version>${carbon.uuf.version}</version>
@@ -465,16 +465,16 @@
                                 </feature>
                                 <!--Sample bundles-->
                                 <feature>
-                                    <id>org.wso2.carbon.uuf.simple-auth.feature.group</id>
-                                    <version>${carbon.uuf.version}</version>
-                                </feature>
-                                <feature>
                                     <id>org.wso2.carbon.security.userstore.jdbc.feature.group</id>
                                     <version>${carbon.security.userstore.jdbc.version}</version>
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.dashboard.metadata.features</id>
                                     <version>${carbon.uuf.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.security.caas.feature.group</id>
+                                    <version>${carbon.security.caas.version}</version>
                                 </feature>
                             </features>
                         </configuration>
@@ -511,6 +511,15 @@
                                     <path refid="maven.compile.classpath" />
                                 </path>
                                 <echo message="########### Create HT H2 Database ##############" />
+                                <sql driver="org.h2.Driver"
+                                     url="jdbc:h2:${basedir}/target/wso2carbon-kernel-${carbon.kernel.version}/database/WSO2CARBON_DB;create=true"
+                                     userid="wso2carbon" password="wso2carbon" autocommit="true" onerror="continue">
+                                    <classpath>
+                                        <path refid="h2.classpath" />
+                                    </classpath>
+                                    <fileset file="${basedir}/carbon-home/dbscripts/WSO2CARBON_DB.sql" />
+                                    <fileset file="${basedir}/carbon-home/dbscripts/h2_test_data.sql" />
+                                </sql>
                                 <sql driver="org.h2.Driver" url="jdbc:h2:${basedir}/target/wso2carbon-kernel-${carbon.kernel.version}/database/DASHBOARD;create=true" userid="wso2carbon" password="wso2carbon" autocommit="true" onerror="continue">
                                     <classpath>
                                         <path refid="h2.classpath" />

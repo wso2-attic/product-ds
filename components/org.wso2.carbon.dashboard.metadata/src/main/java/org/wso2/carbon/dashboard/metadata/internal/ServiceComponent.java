@@ -51,13 +51,19 @@ public class ServiceComponent {
      * @param bundleContext Context of the osgi component.
      */
     @Activate
-    protected void activate(BundleContext bundleContext) {
+    public void registerCarbonSecurityConnectors(BundleContext bundleContext) {
         this.bundleContext = bundleContext;
-        log.info("ServiceComponent activated.");  
+        log.info("ServiceComponent activated.");
+        try {
+            test();
+        } catch (MetadataException e) {
+            e.printStackTrace();
+        }
     }
 
     private void test() throws MetadataException {
-        DAOUtils.getInstance().initialize("jdbc/DASHBOARD_DB");
+        log.info("test()");
+        DAOUtils.getInstance().initialize("WSO2_DASHBOARD_DB");
         Metadata metadata = new Metadata();
         metadata.setName("Test");
         metadata.setContent("sdda fadsf dsf dsf dsaadsf1234353543b543 5");
@@ -70,6 +76,9 @@ public class ServiceComponent {
 
         MetadataProvider provider = MetaDataProviderFactory.getInstance().getProvider();
         provider.add(metadata);
+
+
+        log.info("end test()");
     }
 
     /**
@@ -97,15 +106,15 @@ public class ServiceComponent {
 
         DAOUtils.getInstance().setDataSourceService(service);
 
-        if (log.isDebugEnabled()) {
-            log.debug("Data source service registered successfully.");
+        if (log.isInfoEnabled()) {
+            log.info("Data source service registered successfully.");
         }
     }
 
     protected void unregisterDataSourceService(DataSourceService service) {
 
-        if (log.isDebugEnabled()) {
-            log.debug("Data source service unregistered.");
+        if (log.isInfoEnabled()) {
+            log.info("Data source service unregistered.");
         }
         DAOUtils.getInstance().setDataSourceService(null);
     }
