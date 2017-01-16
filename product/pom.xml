@@ -43,12 +43,6 @@
             <type>zip</type>
         </dependency>
         <dependency>
-            <groupId>org.wso2.carbon.dashboard</groupId>
-            <artifactId>org.wso2.carbon.dashboard.metadata.features</artifactId>
-            <version>${carbon.uuf.version}</version>
-            <type>zip</type>
-        </dependency>
-        <dependency>
             <groupId>org.wso2.carbon.uuf</groupId>
             <artifactId>org.wso2.carbon.uuf.renderablecreator.hbs.feature</artifactId>
             <version>${carbon.uuf.version}</version>
@@ -173,6 +167,18 @@
             <groupId>org.wso2.carbon.uuf.sample</groupId>
             <artifactId>org.wso2.carbon.uuf.sample.Features-app.feature</artifactId>
             <version>${carbon.uuf.version}</version>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon.dashboards</groupId>
+            <artifactId>org.wso2.carbon.dashboards.portal.feature</artifactId>
+            <version>${carbon.dashboard.version}</version>
+            <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon.dashboards</groupId>
+            <artifactId>org.wso2.carbon.dashboards.api.feature</artifactId>
+            <version>${carbon.dashboard.version}</version>
             <type>zip</type>
         </dependency>
         <!--Sample bundles-->
@@ -339,8 +345,12 @@
                                 </feature>
                                 <!--Sample bundles-->
                                 <feature>
-                                    <id>org.wso2.carbon.dashboard.metadata.features</id>
-                                    <version>${carbon.uuf.version}</version>
+                                    <id>org.wso2.carbon.dashboards.api.feature</id>
+                                    <version>${carbon.dashboard.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.dashboards.portal.feature</id>
+                                    <version>${carbon.dashboard.version}</version>
                                 </feature>
                             </features>
                         </configuration>
@@ -469,12 +479,16 @@
                                     <version>${carbon.security.userstore.jdbc.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.dashboard.metadata.features</id>
-                                    <version>${carbon.uuf.version}</version>
-                                </feature>
-                                <feature>
                                     <id>org.wso2.carbon.security.caas.feature.group</id>
                                     <version>${carbon.security.caas.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.dashboards.api.feature</id>
+                                    <version>${carbon.dashboard.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.dashboards.portal.feature</id>
+                                    <version>${carbon.dashboard.version}</version>
                                 </feature>
                             </features>
                         </configuration>
