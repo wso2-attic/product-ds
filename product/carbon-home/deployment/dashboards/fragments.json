@@ -1,0 +1,56 @@
+{
+  "name": "adads Dashboard",
+  "id": "adads",
+  "version": "1.0.2",
+  "description": "",
+  "blocks": [
+    {
+      "height": 10,
+      "id": "a",
+      "width": 3,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "height": 3,
+      "id": "b",
+      "width": 12,
+      "x": 0,
+      "y": 3
+    },
+    {
+      "height": 3,
+      "id": "c",
+      "width": 12,
+      "x": 0,
+      "y": 6
+    }
+  ],
+  "widgets": {
+    "a": {
+      "id": "bar-chart",
+      "url": "\/portal\/fragments\/org.wso2.carbon.dashboards.portal.feature.task-bar",
+      "permission": [
+        
+      ]
+    },
+    "b": {
+      "id": "pie-chart",
+      "url": "\/portal\/fragments\/org.wso2.carbon.dashboards.portal.feature.pie-chart",
+      "permission": [
+        
+      ]
+    }
+  },
+  "permission": {
+    "editor": [
+      
+    ],
+    "viewer": [
+      
+    ],
+    "owner": [
+      
+    ]
+  }
+}
