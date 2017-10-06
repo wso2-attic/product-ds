@@ -272,6 +272,15 @@
                 <include>**/**</include>
             </includes>
         </fileSet>
+        <fileSet>
+            <directory>
+                ../p2-profile-gen/target/wso2carbon-core-${carbon.kernel.version}/migration/
+            </directory>
+            <outputDirectory>${project.artifactId}-${pom.version}/migration/</outputDirectory>
+            <includes>
+                <include>*/**</include>
+            </includes>
+        </fileSet>
     </fileSets>
     <dependencySets>
         <dependencySet>

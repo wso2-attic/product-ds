@@ -113,6 +113,9 @@
                                 <feaureArtifactDef>
                                     org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.portal.feature:${carbon.dashboards.version}
                                 </feaureArtifactDef>
+                                <feaureArtifactDef>
+                                    org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.migration.tool.feature:${carbon.dashboards.version}
+                                </feaureArtifactDef>
                                 <featureArtifactDef>
                                     org.wso2.carbon.dashboards:org.wso2.carbon.dashboards.deployment.feature:${carbon.dashboards.version}
                                 </featureArtifactDef>
@@ -308,6 +311,10 @@
                                 </feature>
                                 <feature>
                                     <id>org.wso2.carbon.dashboard.deployment.feature.group</id>
+                                    <version>${carbon.dashboards.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.dashboards.migration.tool.feature.group</id>
                                     <version>${carbon.dashboards.version}</version>
                                 </feature>
                                 <!-- identity features -->
