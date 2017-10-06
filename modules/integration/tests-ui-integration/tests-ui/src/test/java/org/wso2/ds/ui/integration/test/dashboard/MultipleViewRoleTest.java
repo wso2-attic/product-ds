@@ -18,7 +18,11 @@ package org.wso2.ds.ui.integration.test.dashboard;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Factory;
+import org.testng.annotations.Test;
 import org.wso2.carbon.automation.engine.context.TestUserMode;
 import org.wso2.carbon.integration.common.utils.exceptions.AutomationUtilException;
 import org.wso2.ds.ui.integration.util.DSUIIntegrationTest;
